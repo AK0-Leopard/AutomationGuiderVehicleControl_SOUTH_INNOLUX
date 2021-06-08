@@ -37,6 +37,7 @@ AGV_NODE,35,1,Vehicle is not pause by reserve reject avoid.
 AGV_NODE,36,1,Exception happened in avoid-check.
 AGV_NODE,37,2,Get EMS from AGVC.
 AGV_NODE,38,1,Interlock error when loadunload and retry count = 0.
+AGV_NODE,39,1,Position error when loadunload and retry count = 0.
 AGV_NODE,40,1,SendWaitTimeout
 AGV_NODE,100000,2,MoveControl Exception
 AGV_NODE,100001,1,Send PLC to Stop AGV
@@ -273,7 +274,7 @@ AGV_NODE,200248,2,Hand Servo Off Action Time Out
 AGV_NODE,200249,2,Hand Servo On Action Time Out
 AGV_NODE,200250,2,Shutter Door R Side Rise Action Time Out
 AGV_NODE,200251,2,Shutter Door R Side Fall Action Time Out
-AGV_NODE,200252,2,
+AGV_NODE,200252,2,TRU FORK up/down Sensor error
 AGV_NODE,200253,2,"AGV Car And EQ Handshake,TA4 Time out (L Side)"
 AGV_NODE,200254,2,"EQ ES Signal Off , Hand Stop Action(L Side)"
 AGV_NODE,200255,2,Shutter Door L Side Rise Action Time Out
@@ -298,8 +299,8 @@ AGV_NODE,200273,2,Get Empty Retriev L Side abnormal
 AGV_NODE,200274,2,"Down Position,FORK Hand Sensor On ,CST ON   "
 AGV_NODE,200275,2,Get CST From EQ Double Storag abnormal
 AGV_NODE,200276,2,Put CST To EQ Double Storag abnormal
-AGV_NODE,200277,2,
-AGV_NODE,200278,2,
+AGV_NODE,200277,2,FORK (R Side) Get/Put LiDAR Sensor(L Side) Sensor On
+AGV_NODE,200278,2,FORK (L Side) Get/Put LiDAR Sensor(R Side) Sensor On
 AGV_NODE,200279,2,
 AGV_NODE,200280,2,
 AGV_NODE,200281,2,

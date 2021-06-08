@@ -697,6 +697,7 @@
     <Compile Include="Data\TimerAction\CycleMoveGeneratesCommandTimerActionTiming.cs" />
     <Compile Include="Data\TimerAction\TrafficLightTimerAction.cs" />
     <Compile Include="Data\ValueDefMapAction\SouthInnolux\ColorLightValueDefMapAction.cs" />
+    <Compile Include="Data\ValueDefMapAction\SouthInnolux\QuakeSensorValueDefMapAction.cs" />
     <Compile Include="Data\ValueDefMapAction\SouthInnolux\TrafficLightValueDefMapAction.cs" />
     <Compile Include="Data\ValueDefMapAction\UMTCMCSDefaultMapAction.cs" />
     <Compile Include="Data\ValueDefMapAction\NorthInnolux\SubChargerValueDefMapAction.cs" />
