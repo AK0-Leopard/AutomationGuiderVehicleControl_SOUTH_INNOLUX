@@ -1619,5 +1619,11 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             var report_event = sc.ProtocolFormat.OHTMessage.EventType.Initial;
             McsReportEventTest(report_event);
         }
+
+        private void btn_quake_test_Click(object sender, EventArgs e)
+        {
+            var quake_signal = bcApp.SCApplication.getBCFApplication().tryGetReadValueEventstring("Equipment", "QuakeSensor", "QUAKE_SENSOR_SIGNAL", out bcf.Controller.ValueRead vr);
+            vr.Value = new int[1] { 1 };
+        }
     }
 }

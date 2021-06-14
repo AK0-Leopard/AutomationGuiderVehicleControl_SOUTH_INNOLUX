@@ -52,9 +52,14 @@ namespace com.mirle.ibg3k0.sc.Data.DAO
                                 EQPT_REAL_ID = c.Field<string>("OBJECT_ID"),
                                 ALARM_ID = c.Field<string>("ALARM_ID"),
                                 ALARM_LVL = convertALARM_LVL2Enum(c.Field<string>("ALARM_LVL")),
-                                ALARM_DESC = c.Field<string>("ALARM_DESC")
+                                ALARM_DESC = c.Field<string>("ALARM_DESC"),
+                                POSSIBLE_CAUSES = c.Field<string>("POSSIBLE_CAUSES"),
+                                SUGGESTION = c.Field<string>("SUGGESTION"),
+
                             };
-                return query.ToList();
+                var list = query.ToList();
+                list = list.Where(alarm => !sc.Common.SCUtility.isEmpty(alarm.ALARM_DESC)).ToList();
+                return list;
             }
             catch (Exception ex)
             {
@@ -79,7 +84,10 @@ namespace com.mirle.ibg3k0.sc.Data.DAO
                                 EQPT_REAL_ID = c.Field<string>("OBJECT_ID"),
                                 ALARM_ID = c.Field<string>("ALARM_ID"),
                                 ALARM_LVL = convertALARM_LVL2Enum(c.Field<string>("ALARM_LVL")),
-                                ALARM_DESC = c.Field<string>("ALARM_DESC")
+                                ALARM_DESC = c.Field<string>("ALARM_DESC"),
+                                POSSIBLE_CAUSES = c.Field<string>("POSSIBLE_CAUSES"),
+                                SUGGESTION = c.Field<string>("SUGGESTION"),
+
                             };
                 return query.ToList();
             }
@@ -109,7 +117,10 @@ namespace com.mirle.ibg3k0.sc.Data.DAO
                                 EQPT_REAL_ID = c.Field<string>("OBJECT_ID"),
                                 ALARM_ID = c.Field<string>("ALARM_ID"),
                                 ALARM_LVL = convertALARM_LVL2Enum(c.Field<string>("ALARM_LVL")),
-                                ALARM_DESC = c.Field<string>("ALARM_DESC")
+                                ALARM_DESC = c.Field<string>("ALARM_DESC"),
+                                POSSIBLE_CAUSES = c.Field<string>("POSSIBLE_CAUSES"),
+                                SUGGESTION = c.Field<string>("SUGGESTION"),
+
                             };
                 return query.SingleOrDefault();
             }

@@ -146,6 +146,7 @@
             this.btn_refresf_portsation_info = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.groupBox18 = new System.Windows.Forms.GroupBox();
+            this.btn_initial_test = new System.Windows.Forms.Button();
             this.btn_reposition = new System.Windows.Forms.Button();
             this.checkBox_host_offline = new System.Windows.Forms.CheckBox();
             this.btn_cmp_vh_abort = new System.Windows.Forms.Button();
@@ -352,7 +353,7 @@
             this.label85 = new System.Windows.Forms.Label();
             this.label86 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btn_initial_test = new System.Windows.Forms.Button();
+            this.btn_quake_test = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1590,7 +1591,7 @@
             // 
             this.cb_Cache_data_Name.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cb_Cache_data_Name.FormattingEnabled = true;
-            this.cb_Cache_data_Name.Location = new System.Drawing.Point(210, 8);
+            this.cb_Cache_data_Name.Location = new System.Drawing.Point(210, 3);
             this.cb_Cache_data_Name.Name = "cb_Cache_data_Name";
             this.cb_Cache_data_Name.Size = new System.Drawing.Size(164, 30);
             this.cb_Cache_data_Name.TabIndex = 1;
@@ -1750,6 +1751,16 @@
             this.groupBox18.TabIndex = 37;
             this.groupBox18.TabStop = false;
             this.groupBox18.Text = "MCS Report Test";
+            // 
+            // btn_initial_test
+            // 
+            this.btn_initial_test.Location = new System.Drawing.Point(462, 662);
+            this.btn_initial_test.Name = "btn_initial_test";
+            this.btn_initial_test.Size = new System.Drawing.Size(176, 30);
+            this.btn_initial_test.TabIndex = 55;
+            this.btn_initial_test.Text = "Initial";
+            this.btn_initial_test.UseVisualStyleBackColor = true;
+            this.btn_initial_test.Click += new System.EventHandler(this.btn_initial_test_Click);
             // 
             // btn_reposition
             // 
@@ -3636,6 +3647,7 @@
             // 
             // tabPage7
             // 
+            this.tabPage7.Controls.Add(this.btn_quake_test);
             this.tabPage7.Controls.Add(this.tableLayoutPanel6);
             this.tabPage7.Location = new System.Drawing.Point(4, 31);
             this.tabPage7.Name = "tabPage7";
@@ -3806,15 +3818,15 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // btn_initial_test
+            // btn_quake_test
             // 
-            this.btn_initial_test.Location = new System.Drawing.Point(462, 662);
-            this.btn_initial_test.Name = "btn_initial_test";
-            this.btn_initial_test.Size = new System.Drawing.Size(176, 30);
-            this.btn_initial_test.TabIndex = 55;
-            this.btn_initial_test.Text = "Initial";
-            this.btn_initial_test.UseVisualStyleBackColor = true;
-            this.btn_initial_test.Click += new System.EventHandler(this.btn_initial_test_Click);
+            this.btn_quake_test.Location = new System.Drawing.Point(135, 322);
+            this.btn_quake_test.Name = "btn_quake_test";
+            this.btn_quake_test.Size = new System.Drawing.Size(221, 43);
+            this.btn_quake_test.TabIndex = 2;
+            this.btn_quake_test.Text = "Quake Signal Test";
+            this.btn_quake_test.UseVisualStyleBackColor = true;
+            this.btn_quake_test.Click += new System.EventHandler(this.btn_quake_test_Click);
             // 
             // DebugForm
             // 
@@ -4234,5 +4246,6 @@
         private System.Windows.Forms.Button btn_ForceResetAlarm;
         private System.Windows.Forms.CheckBox ck_isMaunalReportFinishWhenLoadingUnloading;
         private System.Windows.Forms.Button btn_initial_test;
+        private System.Windows.Forms.Button btn_quake_test;
     }
 }

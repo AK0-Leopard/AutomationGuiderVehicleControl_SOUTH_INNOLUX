@@ -84,6 +84,8 @@ namespace com.mirle.ibg3k0.bc.winform
             this.uASToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.operatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transferCommandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.carrierInstalledRemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.engineerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roadControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,11 +95,8 @@ namespace com.mirle.ibg3k0.bc.winform
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sectionDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.transferCommandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.carrierInstalledRemoveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reserveSectionInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.staticsChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zh_twToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,14 +104,18 @@ namespace com.mirle.ibg3k0.bc.winform
             this.tipMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.monitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.communectionStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.queryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.transferCommandHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alarmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.staticsChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.alarmListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.engineerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.engineeringModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cycleRunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.queryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.transferCommandHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alarmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.logout_timer = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             this.CMS_OnLineMode.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -260,8 +263,8 @@ namespace com.mirle.ibg3k0.bc.winform
             this.languageToolStripMenuItem,
             this.tipMessageToolStripMenuItem,
             this.monitorToolStripMenuItem,
-            this.engineerToolStripMenuItem1,
-            this.queryToolStripMenuItem});
+            this.queryToolStripMenuItem,
+            this.engineerToolStripMenuItem1});
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseDoubleClick);
             // 
@@ -347,14 +350,26 @@ namespace com.mirle.ibg3k0.bc.winform
             // operatorToolStripMenuItem
             // 
             this.operatorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.transferCommandToolStripMenuItem,
+            this.carrierInstalledRemoveToolStripMenuItem,
             this.engineerToolStripMenuItem,
             this.languageChangeToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.transferCommandToolStripMenuItem,
-            this.carrierInstalledRemoveToolStripMenuItem});
+            this.toolStripSeparator1});
             this.operatorToolStripMenuItem.Name = "operatorToolStripMenuItem";
             resources.ApplyResources(this.operatorToolStripMenuItem, "operatorToolStripMenuItem");
+            // 
+            // transferCommandToolStripMenuItem
+            // 
+            this.transferCommandToolStripMenuItem.Name = "transferCommandToolStripMenuItem";
+            resources.ApplyResources(this.transferCommandToolStripMenuItem, "transferCommandToolStripMenuItem");
+            this.transferCommandToolStripMenuItem.Click += new System.EventHandler(this.transferCommandToolStripMenuItem_Click);
+            // 
+            // carrierInstalledRemoveToolStripMenuItem
+            // 
+            this.carrierInstalledRemoveToolStripMenuItem.Name = "carrierInstalledRemoveToolStripMenuItem";
+            resources.ApplyResources(this.carrierInstalledRemoveToolStripMenuItem, "carrierInstalledRemoveToolStripMenuItem");
+            this.carrierInstalledRemoveToolStripMenuItem.Click += new System.EventHandler(this.carrierInstalledRemoveToolStripMenuItem_Click);
             // 
             // engineerToolStripMenuItem
             // 
@@ -414,23 +429,10 @@ namespace com.mirle.ibg3k0.bc.winform
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
-            // transferCommandToolStripMenuItem
-            // 
-            this.transferCommandToolStripMenuItem.Name = "transferCommandToolStripMenuItem";
-            resources.ApplyResources(this.transferCommandToolStripMenuItem, "transferCommandToolStripMenuItem");
-            this.transferCommandToolStripMenuItem.Click += new System.EventHandler(this.transferCommandToolStripMenuItem_Click);
-            // 
-            // carrierInstalledRemoveToolStripMenuItem
-            // 
-            this.carrierInstalledRemoveToolStripMenuItem.Name = "carrierInstalledRemoveToolStripMenuItem";
-            resources.ApplyResources(this.carrierInstalledRemoveToolStripMenuItem, "carrierInstalledRemoveToolStripMenuItem");
-            this.carrierInstalledRemoveToolStripMenuItem.Click += new System.EventHandler(this.carrierInstalledRemoveToolStripMenuItem_Click);
-            // 
             // mataToolStripMenuItem
             // 
             this.mataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.reserveSectionInfoToolStripMenuItem,
-            this.staticsChartToolStripMenuItem});
+            this.reserveSectionInfoToolStripMenuItem});
             this.mataToolStripMenuItem.Name = "mataToolStripMenuItem";
             resources.ApplyResources(this.mataToolStripMenuItem, "mataToolStripMenuItem");
             this.mataToolStripMenuItem.Click += new System.EventHandler(this.mataToolStripMenuItem_Click);
@@ -440,12 +442,6 @@ namespace com.mirle.ibg3k0.bc.winform
             this.reserveSectionInfoToolStripMenuItem.Name = "reserveSectionInfoToolStripMenuItem";
             resources.ApplyResources(this.reserveSectionInfoToolStripMenuItem, "reserveSectionInfoToolStripMenuItem");
             this.reserveSectionInfoToolStripMenuItem.Click += new System.EventHandler(this.reserveSectionInfoToolStripMenuItem_Click);
-            // 
-            // staticsChartToolStripMenuItem
-            // 
-            this.staticsChartToolStripMenuItem.Name = "staticsChartToolStripMenuItem";
-            resources.ApplyResources(this.staticsChartToolStripMenuItem, "staticsChartToolStripMenuItem");
-            this.staticsChartToolStripMenuItem.Click += new System.EventHandler(this.staticsChartToolStripMenuItem_Click);
             // 
             // languageToolStripMenuItem
             // 
@@ -493,6 +489,46 @@ namespace com.mirle.ibg3k0.bc.winform
             resources.ApplyResources(this.communectionStatusToolStripMenuItem, "communectionStatusToolStripMenuItem");
             this.communectionStatusToolStripMenuItem.Click += new System.EventHandler(this.communectionStatusToolStripMenuItem_Click);
             // 
+            // queryToolStripMenuItem
+            // 
+            this.queryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.transferCommandHistoryToolStripMenuItem,
+            this.alarmToolStripMenuItem,
+            this.staticsChartToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.alarmListToolStripMenuItem});
+            this.queryToolStripMenuItem.Name = "queryToolStripMenuItem";
+            resources.ApplyResources(this.queryToolStripMenuItem, "queryToolStripMenuItem");
+            // 
+            // transferCommandHistoryToolStripMenuItem
+            // 
+            this.transferCommandHistoryToolStripMenuItem.Name = "transferCommandHistoryToolStripMenuItem";
+            resources.ApplyResources(this.transferCommandHistoryToolStripMenuItem, "transferCommandHistoryToolStripMenuItem");
+            this.transferCommandHistoryToolStripMenuItem.Click += new System.EventHandler(this.transferCommandHistoryToolStripMenuItem_Click);
+            // 
+            // alarmToolStripMenuItem
+            // 
+            this.alarmToolStripMenuItem.Name = "alarmToolStripMenuItem";
+            resources.ApplyResources(this.alarmToolStripMenuItem, "alarmToolStripMenuItem");
+            this.alarmToolStripMenuItem.Click += new System.EventHandler(this.alarmToolStripMenuItem_Click);
+            // 
+            // staticsChartToolStripMenuItem
+            // 
+            this.staticsChartToolStripMenuItem.Name = "staticsChartToolStripMenuItem";
+            resources.ApplyResources(this.staticsChartToolStripMenuItem, "staticsChartToolStripMenuItem");
+            this.staticsChartToolStripMenuItem.Click += new System.EventHandler(this.staticsChartToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
+            // 
+            // alarmListToolStripMenuItem
+            // 
+            this.alarmListToolStripMenuItem.Name = "alarmListToolStripMenuItem";
+            resources.ApplyResources(this.alarmListToolStripMenuItem, "alarmListToolStripMenuItem");
+            this.alarmListToolStripMenuItem.Click += new System.EventHandler(this.alarmListToolStripMenuItem_Click);
+            // 
             // engineerToolStripMenuItem1
             // 
             this.engineerToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -520,30 +556,16 @@ namespace com.mirle.ibg3k0.bc.winform
             resources.ApplyResources(this.cycleRunToolStripMenuItem, "cycleRunToolStripMenuItem");
             this.cycleRunToolStripMenuItem.Click += new System.EventHandler(this.cycleRunToolStripMenuItem_Click);
             // 
-            // queryToolStripMenuItem
-            // 
-            this.queryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.transferCommandHistoryToolStripMenuItem,
-            this.alarmToolStripMenuItem});
-            this.queryToolStripMenuItem.Name = "queryToolStripMenuItem";
-            resources.ApplyResources(this.queryToolStripMenuItem, "queryToolStripMenuItem");
-            // 
-            // transferCommandHistoryToolStripMenuItem
-            // 
-            this.transferCommandHistoryToolStripMenuItem.Name = "transferCommandHistoryToolStripMenuItem";
-            resources.ApplyResources(this.transferCommandHistoryToolStripMenuItem, "transferCommandHistoryToolStripMenuItem");
-            this.transferCommandHistoryToolStripMenuItem.Click += new System.EventHandler(this.transferCommandHistoryToolStripMenuItem_Click);
-            // 
-            // alarmToolStripMenuItem
-            // 
-            this.alarmToolStripMenuItem.Name = "alarmToolStripMenuItem";
-            resources.ApplyResources(this.alarmToolStripMenuItem, "alarmToolStripMenuItem");
-            this.alarmToolStripMenuItem.Click += new System.EventHandler(this.alarmToolStripMenuItem_Click);
-            // 
             // timer1
             // 
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // logout_timer
+            // 
+            this.logout_timer.Enabled = true;
+            this.logout_timer.Interval = 10000;
+            this.logout_timer.Tick += new System.EventHandler(this.logout_timer_Tick);
             // 
             // BCMainForm
             // 
@@ -666,9 +688,11 @@ namespace com.mirle.ibg3k0.bc.winform
         /// The menu strip1
         /// </summary>
         private System.Windows.Forms.MenuStrip menuStrip1;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_MAINTENANCE_FUN)]
         private System.Windows.Forms.ToolStripMenuItem mataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uASToolStripMenuItem;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripMenuItem operatorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logInToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
@@ -681,6 +705,7 @@ namespace com.mirle.ibg3k0.bc.winform
         private System.Windows.Forms.ToolStripMenuItem communectionStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem engineerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_ENGINEER_FUN)]
         private System.Windows.Forms.ToolStripMenuItem engineerToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem engineeringModeToolStripMenuItem;
@@ -701,11 +726,15 @@ namespace com.mirle.ibg3k0.bc.winform
         private System.Windows.Forms.ToolStripMenuItem transferCommandHistoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alarmToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reserveSectionInfoToolStripMenuItem;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripMenuItem hostConnectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem staticsChartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem carrierInstalledRemoveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cycleRunToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem alarmListToolStripMenuItem;
+        private System.Windows.Forms.Timer logout_timer;
     }
 
     /// <summary>

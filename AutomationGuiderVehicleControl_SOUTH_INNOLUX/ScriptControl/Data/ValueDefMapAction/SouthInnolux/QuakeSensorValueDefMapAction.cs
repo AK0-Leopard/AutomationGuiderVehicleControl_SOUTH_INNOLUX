@@ -32,7 +32,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
 {
     public class QuakeSensorValueDefMapAction : IValueDefMapAction
     {
-        public string DEVICE_NAME_TRAFFIC_LIGHT = "EQ";
+        public string DEVICE_NAME_QUAKE_SENSOR = "QuakeSensor";
         Logger logger = NLog.LogManager.GetCurrentClassLogger();
         AEQPT eqpt = null;
         protected SCApplication scApp = null;
@@ -68,11 +68,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 switch (runLevel)
                 {
                     case BCFAppConstants.RUN_LEVEL.ZERO:
-                        DEVICE_NAME_TRAFFIC_LIGHT = eqpt.EQPT_ID;
-                        sendTrafficLightSignal(false, true, false, false, false, true);
-                        initTrafficLight();
-                        //addVirtualVehicle();
-                        //initFireDoorData();
+                        QuakeSignalChange(null, null);
                         break;
                     case BCFAppConstants.RUN_LEVEL.ONE:
                         break;
@@ -88,40 +84,62 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             }
         }
 
-
-
-        private void addVirtualVehicle()
+        object quake_signal_change_loc = new object();
+        private void QuakeSignalChange(object sender, ValueChangedEventArgs e)
         {
-            scApp.ReserveBLL.TryAddVehicleOrUpdate(eqpt.EQPT_ID, "", 99999, 99999,0, 0,
-        sensorDir: Mirle.Hlts.Utils.HltDirection.NS,
-          forkDir: Mirle.Hlts.Utils.HltDirection.None);
-        }
-        private void initTrafficLight()
-        {
-            var function = scApp.getFunBaseObj<TrafficLightWorkTrigger>(eqpt.EQPT_ID) as TrafficLightWorkTrigger;
+            var function = scApp.getFunBaseObj<QuakeSensorSignal>(eqpt.EQPT_ID) as QuakeSensorSignal;
             try
             {
                 //1.建立各個Function物件
                 function.Read(bcfApp, eqpt.EqptObjectCate, eqpt.EQPT_ID);
                 //2.read log
                 function.Timestamp = DateTime.Now;
-                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(TrafficLightValueDefMapAction), Device: DEVICE_NAME_TRAFFIC_LIGHT,
-                         Data: function.ToString(),
-                         VehicleID: eqpt.EQPT_ID);
-
-                //3.logical (include db save)
-                if (function.workButtonSignal)
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(QuakeSensorValueDefMapAction), Device: DEVICE_NAME_QUAKE_SENSOR,
+                         Data: function.ToString());
+                var line = scApp.getEQObjCacheManager().getLine();
+                lock (quake_signal_change_loc)
                 {
-                    if (scApp.LineService.passRequest)
+                    if (function.QuakeSensorSingnal != line.IsEarthquakeHappend)
                     {
-                        scApp.LineService.passRequestCancel = true;
+                        line.IsEarthquakeHappend = function.QuakeSensorSingnal;
+                        var vhs = scApp.VehicleBLL.cache.loadAllVh();
+                        if (function.QuakeSensorSingnal)
+                        {
+                            LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(QuakeSensorValueDefMapAction), Device: DEVICE_NAME_QUAKE_SENSOR,
+                                     Data: "Earthquake happend,start pause vh and force finish charger charging...");
+
+                            line.IsEarthquakeHappend = function.QuakeSensorSingnal;
+                            //呼叫車子暫停
+                            foreach (var vh in vhs)
+                            {
+                                //scApp.VehicleService.PauseRequest(v.VEHICLE_ID, PauseEvent.Pause, SCAppConstants.OHxCPauseType.Normal);
+                                if (!SCUtility.isEmpty(vh))
+                                {
+                                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(QuakeSensorValueDefMapAction), Device: DEVICE_NAME_QUAKE_SENSOR,
+                                             Data: $"send cancel cmd, vh:{vh.VEHICLE_ID} cmd id:{vh.OHTC_CMD} cancel type:{CMDCancelType.CmdEms}...");
+                                    bool result = scApp.VehicleService.doAbortCommand(vh, vh.OHTC_CMD, CMDCancelType.CmdEms);
+                                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(QuakeSensorValueDefMapAction), Device: DEVICE_NAME_QUAKE_SENSOR,
+                                             Data: $"send cancel cmd, vh:{vh.VEHICLE_ID} cmd id:{vh.OHTC_CMD} cancel type:{CMDCancelType.CmdEms},result:{result}");
+                                }
+                            }
+                            //呼叫充電站斷充電
+                            var mtl_mapaction = scApp.getEQObjCacheManager().getEquipmentByEQPTID("MCharger").
+                                getMapActionByIdentityKey(nameof(com.mirle.ibg3k0.sc.Data.ValueDefMapAction.ChargerValueDefMapAction)) as
+                                com.mirle.ibg3k0.sc.Data.ValueDefMapAction.ChargerValueDefMapAction;
+                            mtl_mapaction.AGVCToMChargerAllChargerChargingFinish();
+                            LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(QuakeSensorValueDefMapAction), Device: DEVICE_NAME_QUAKE_SENSOR,
+                                     Data: "Earthquake happend,end pause vh and force finish charger charging ");
+
+                        }
+                        else
+                        {
+                            foreach (var v in vhs)
+                            {
+                                scApp.VehicleService.PauseRequest(v.VEHICLE_ID, PauseEvent.Continue, SCAppConstants.OHxCPauseType.Normal);
+                            }
+                        }
                     }
-                    scApp.LineService.passRequest = true;
-                    //eqpt.passRequest = true;
                 }
-                //sendTrafficLightWorkSignal(function.workButtonSignal);
-                scApp.LineService.CheckTrafficLight();
-                //
             }
             catch (Exception ex)
             {
@@ -129,134 +147,9 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             }
             finally
             {
-                scApp.putFunBaseObj<TrafficLightWorkTrigger>(function);
+                scApp.putFunBaseObj<QuakeSensorSignal>(function);
             }
         }
-
-        private void WorkButtonSignalChange(object sender, ValueChangedEventArgs e)
-        {
-            var function = scApp.getFunBaseObj<TrafficLightWorkTrigger>(eqpt.EQPT_ID) as TrafficLightWorkTrigger;
-            try
-            {
-                //1.建立各個Function物件
-                function.Read(bcfApp, eqpt.EqptObjectCate, eqpt.EQPT_ID);
-                //2.read log
-                function.Timestamp = DateTime.Now;
-                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(TrafficLightValueDefMapAction), Device: DEVICE_NAME_TRAFFIC_LIGHT,
-                         Data: function.ToString(),
-                         VehicleID: eqpt.EQPT_ID);
-
-                //3.logical (include db save)
-                if (function.workButtonSignal)
-                {
-                    if (scApp.LineService.passRequest)
-                    {
-                        scApp.LineService.passRequestCancel = true;
-                    }
-                    scApp.LineService.passRequest = true;
-                    //eqpt.passRequest = true;
-                }
-                //sendTrafficLightWorkSignal(function.workButtonSignal);
-                scApp.LineService.CheckTrafficLight();
-
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Exception");
-            }
-            finally
-            {
-                scApp.putFunBaseObj<TrafficLightWorkTrigger>(function);
-            }
-        }
-
-        public void sendTrafficLightSignal(bool work_signal,bool red_signal, bool yellow_signal, bool green_signal, bool buzzer_signal, bool force_on_signal)
-        {
-            var function =
-                scApp.getFunBaseObj<TrafficLightSignal>(eqpt.EQPT_ID) as TrafficLightSignal;
-            try
-            {
-
-                //1.建立各個Function物件
-                function.workSignal = work_signal;
-                function.redSignal = red_signal;
-                function.yellowSignal = yellow_signal;
-                function.greenSignal = green_signal;
-                function.buzzerSignal = buzzer_signal;
-                function.forceOnSignal = force_on_signal;
-                function.Write(bcfApp, eqpt.EqptObjectCate, eqpt.EQPT_ID);
-                //2.紀錄發送資料的Log
-                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(TrafficLightValueDefMapAction), Device: DEVICE_NAME_TRAFFIC_LIGHT,
-                         Data: function.ToString(),
-                         VehicleID: eqpt.EQPT_ID);
-                //3.logical (include db save)
-
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Exception");
-            }
-            finally
-            {
-                scApp.putFunBaseObj<TrafficLightSignal>(function);
-            }
-        }
-
-
-        public void sendTrafficLightWorkSignal(bool work_signal)
-        {
-            var function =
-                scApp.getFunBaseObj<TrafficLightWorkSignal>(eqpt.EQPT_ID) as TrafficLightWorkSignal;
-            try
-            {
-
-                //1.建立各個Function物件
-                function.workSignal = work_signal;
-                function.Write(bcfApp, eqpt.EqptObjectCate, eqpt.EQPT_ID);
-                //2.紀錄發送資料的Log
-                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(TrafficLightValueDefMapAction), Device: DEVICE_NAME_TRAFFIC_LIGHT,
-                         Data: function.ToString(),
-                         VehicleID: eqpt.EQPT_ID);
-                //3.logical (include db save)
-
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Exception");
-            }
-            finally
-            {
-                scApp.putFunBaseObj<TrafficLightWorkSignal>(function);
-            }
-        }
-
-        public void sendTrafficLightYellowSignal(bool yellow_signal)
-        {
-            var function =
-                scApp.getFunBaseObj<TrafficLightYellowSignal>(eqpt.EQPT_ID) as TrafficLightYellowSignal;
-            try
-            {
-
-                //1.建立各個Function物件
-                function.yellowSignal = yellow_signal;
-                function.Write(bcfApp, eqpt.EqptObjectCate, eqpt.EQPT_ID);
-                //2.紀錄發送資料的Log
-                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(TrafficLightValueDefMapAction), Device: DEVICE_NAME_TRAFFIC_LIGHT,
-                         Data: function.ToString(),
-                         VehicleID: eqpt.EQPT_ID);
-                //3.logical (include db save)
-
-            }
-            catch (Exception ex)
-            {
-                logger.Error(ex, "Exception");
-            }
-            finally
-            {
-                scApp.putFunBaseObj<TrafficLightYellowSignal>(function);
-            }
-        }
-
         string event_id = string.Empty;
         /// <summary>
         /// Does the initialize.
@@ -265,10 +158,10 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
         {
             try
             {
-                ValueRead work_button_signal_vr = null;
-                if (bcfApp.tryGetReadValueEventstring(eqpt.EqptObjectCate, eqpt.EQPT_ID, "TRAFFIC_LIGHT_WORK_BUTTON_SIGNAL", out work_button_signal_vr))
+                ValueRead vr = null;
+                if (bcfApp.tryGetReadValueEventstring(eqpt.EqptObjectCate, eqpt.EQPT_ID, "QUAKE_SENSOR_SIGNAL", out vr))
                 {
-                    work_button_signal_vr.afterValueChange += (_sender, _e) => WorkButtonSignalChange(_sender, _e);
+                    vr.afterValueChange += (_sender, _e) => QuakeSignalChange(_sender, _e);
                 }
             }
             catch (Exception ex)

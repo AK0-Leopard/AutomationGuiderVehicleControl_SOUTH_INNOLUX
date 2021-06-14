@@ -31,8 +31,8 @@ namespace com.mirle.ibg3k0.sc.ObjectRelay
             VehicleBLL = vehicleBLL;
             PortStationBLL = portStationBLL;
         }
-        public string CMD_ID { get { return cmd_mcs.CMD_ID; } }
-        public string CARRIER_ID { get { return cmd_mcs.CARRIER_ID; } }
+        public string CMD_ID { get { return sc.Common.SCUtility.Trim(cmd_mcs.CMD_ID, true); } }
+        public string CARRIER_ID { get { return sc.Common.SCUtility.Trim(cmd_mcs.CARRIER_ID, true); } }
         public string VEHICLE_ID
         {
             get
@@ -79,7 +79,7 @@ namespace com.mirle.ibg3k0.sc.ObjectRelay
             get
             {
                 var portstation = PortStationBLL.OperateCatch.getPortStation(cmd_mcs.HOSTSOURCE);
-                return portstation == null ? cmd_mcs.HOSTSOURCE : portstation.ToString();
+                return portstation == null ? sc.Common.SCUtility.Trim(cmd_mcs.HOSTSOURCE,true) : portstation.ToString();
             }
         }
         public string HOSTDESTINATION
@@ -87,7 +87,7 @@ namespace com.mirle.ibg3k0.sc.ObjectRelay
             get
             {
                 var portstation = PortStationBLL.OperateCatch.getPortStation(cmd_mcs.HOSTDESTINATION);
-                return portstation == null ? cmd_mcs.HOSTDESTINATION : portstation.ToString();
+                return portstation == null ? sc.Common.SCUtility.Trim(cmd_mcs.HOSTDESTINATION,true) : portstation.ToString();
             }
         }
 

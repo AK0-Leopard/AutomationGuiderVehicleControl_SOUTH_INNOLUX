@@ -344,11 +344,17 @@
   <data name="changePasswordToolStripMenuItem.Text" xml:space="preserve">
     <value>Change Password</value>
   </data>
+  <data name="changePasswordToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="uASToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 26</value>
   </data>
   <data name="uASToolStripMenuItem.Text" xml:space="preserve">
     <value>User Authuority</value>
+  </data>
+  <data name="uASToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="systemToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 26</value>
@@ -362,6 +368,18 @@
   </data>
   <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
     <value>12, 26</value>
+  </data>
+  <data name="transferCommandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 26</value>
+  </data>
+  <data name="transferCommandToolStripMenuItem.Text" xml:space="preserve">
+    <value>Transfer Command</value>
+  </data>
+  <data name="carrierInstalledRemoveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 26</value>
+  </data>
+  <data name="carrierInstalledRemoveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Carrier Installed / Remove</value>
   </data>
   <data name="debugToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 26</value>
@@ -423,18 +441,6 @@
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>297, 6</value>
   </data>
-  <data name="transferCommandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 26</value>
-  </data>
-  <data name="transferCommandToolStripMenuItem.Text" xml:space="preserve">
-    <value>Transfer Command</value>
-  </data>
-  <data name="carrierInstalledRemoveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 26</value>
-  </data>
-  <data name="carrierInstalledRemoveToolStripMenuItem.Text" xml:space="preserve">
-    <value>Carrier Installed / Remove</value>
-  </data>
   <data name="operatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 26</value>
   </data>
@@ -446,12 +452,6 @@
   </data>
   <data name="reserveSectionInfoToolStripMenuItem.Text" xml:space="preserve">
     <value>Reserve Info</value>
-  </data>
-  <data name="staticsChartToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 26</value>
-  </data>
-  <data name="staticsChartToolStripMenuItem.Text" xml:space="preserve">
-    <value>Statics Chart</value>
   </data>
   <data name="mataToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 26</value>
@@ -504,6 +504,39 @@
   <data name="monitorToolStripMenuItem.Text" xml:space="preserve">
     <value>Monitor</value>
   </data>
+  <data name="transferCommandHistoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 26</value>
+  </data>
+  <data name="transferCommandHistoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Transfer History Command</value>
+  </data>
+  <data name="alarmToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 26</value>
+  </data>
+  <data name="alarmToolStripMenuItem.Text" xml:space="preserve">
+    <value>Alarm History Query</value>
+  </data>
+  <data name="staticsChartToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 26</value>
+  </data>
+  <data name="staticsChartToolStripMenuItem.Text" xml:space="preserve">
+    <value>Statics Chart</value>
+  </data>
+  <data name="toolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>303, 6</value>
+  </data>
+  <data name="alarmListToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 26</value>
+  </data>
+  <data name="alarmListToolStripMenuItem.Text" xml:space="preserve">
+    <value>Alarm List</value>
+  </data>
+  <data name="queryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 26</value>
+  </data>
+  <data name="queryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Query</value>
+  </data>
   <data name="debugToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 26</value>
   </data>
@@ -527,24 +560,6 @@
   </data>
   <data name="engineerToolStripMenuItem1.Text" xml:space="preserve">
     <value>Engineer</value>
-  </data>
-  <data name="transferCommandHistoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 26</value>
-  </data>
-  <data name="transferCommandHistoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Transfer History Command</value>
-  </data>
-  <data name="alarmToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>306, 26</value>
-  </data>
-  <data name="alarmToolStripMenuItem.Text" xml:space="preserve">
-    <value>Alarm History Query</value>
-  </data>
-  <data name="queryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 26</value>
-  </data>
-  <data name="queryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Query</value>
   </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -575,6 +590,9 @@
   </data>
   <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>735, 17</value>
+  </metadata>
+  <metadata name="logout_timer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>861, 17</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1343,6 +1361,18 @@
   <data name="&gt;&gt;operatorToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;transferCommandToolStripMenuItem.Name" xml:space="preserve">
+    <value>transferCommandToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;transferCommandToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;carrierInstalledRemoveToolStripMenuItem.Name" xml:space="preserve">
+    <value>carrierInstalledRemoveToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;carrierInstalledRemoveToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;engineerToolStripMenuItem.Name" xml:space="preserve">
     <value>engineerToolStripMenuItem</value>
   </data>
@@ -1397,18 +1427,6 @@
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;transferCommandToolStripMenuItem.Name" xml:space="preserve">
-    <value>transferCommandToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;transferCommandToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;carrierInstalledRemoveToolStripMenuItem.Name" xml:space="preserve">
-    <value>carrierInstalledRemoveToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;carrierInstalledRemoveToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;mataToolStripMenuItem.Name" xml:space="preserve">
     <value>mataToolStripMenuItem</value>
   </data>
@@ -1419,12 +1437,6 @@
     <value>reserveSectionInfoToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;reserveSectionInfoToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;staticsChartToolStripMenuItem.Name" xml:space="preserve">
-    <value>staticsChartToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;staticsChartToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;languageToolStripMenuItem.Name" xml:space="preserve">
@@ -1469,6 +1481,42 @@
   <data name="&gt;&gt;communectionStatusToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;queryToolStripMenuItem.Name" xml:space="preserve">
+    <value>queryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;queryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;transferCommandHistoryToolStripMenuItem.Name" xml:space="preserve">
+    <value>transferCommandHistoryToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;transferCommandHistoryToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;alarmToolStripMenuItem.Name" xml:space="preserve">
+    <value>alarmToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;alarmToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;staticsChartToolStripMenuItem.Name" xml:space="preserve">
+    <value>staticsChartToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;staticsChartToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Name" xml:space="preserve">
+    <value>toolStripSeparator3</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;alarmListToolStripMenuItem.Name" xml:space="preserve">
+    <value>alarmListToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;alarmListToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;engineerToolStripMenuItem1.Name" xml:space="preserve">
     <value>engineerToolStripMenuItem1</value>
   </data>
@@ -1493,28 +1541,16 @@
   <data name="&gt;&gt;cycleRunToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;queryToolStripMenuItem.Name" xml:space="preserve">
-    <value>queryToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;queryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;transferCommandHistoryToolStripMenuItem.Name" xml:space="preserve">
-    <value>transferCommandHistoryToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;transferCommandHistoryToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;alarmToolStripMenuItem.Name" xml:space="preserve">
-    <value>alarmToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;alarmToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;timer1.Name" xml:space="preserve">
     <value>timer1</value>
   </data>
   <data name="&gt;&gt;timer1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;logout_timer.Name" xml:space="preserve">
+    <value>logout_timer</value>
+  </data>
+  <data name="&gt;&gt;logout_timer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

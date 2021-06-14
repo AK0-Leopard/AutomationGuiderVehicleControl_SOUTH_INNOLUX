@@ -99,6 +99,7 @@ namespace com.mirle.ibg3k0.bc.winform
         /// </summary>
         ALINE line;
 
+        private DateTime lastMove_DT = DateTime.Now;          //A0.40
 
         public bool isAutoOpenTip = true;
         /// <summary>
@@ -148,7 +149,15 @@ namespace com.mirle.ibg3k0.bc.winform
             BCFApplication.addErrorMsgHandler(errorLogHandler);
             BCFApplication.addWarningMsgHandler(warnLogHandler);
             BCFApplication.addInfoMsgHandler(infoLogHandler);
+
+            GlobalMouseHandler.MouseMovedEvent += GlobalMouseHandler_MouseMovedEvent;
+            Application.AddMessageFilter(new GlobalMouseHandler());
         }
+        private void GlobalMouseHandler_MouseMovedEvent(object sender, MouseEventArgs e)
+        {
+            lastMove_DT = DateTime.Now;
+        }
+
 
         #region Tip Message
         /// <summary>
@@ -394,12 +403,32 @@ namespace com.mirle.ibg3k0.bc.winform
             bcApp.login(BCAppConstants.LOGIN_USER_DEFAULT);
         }
 
+        bool islogin;
+        bool IsLogIn
+        {
+            get { return islogin; }
+            set
+            {
+                islogin = value;
+                if (value)
+                {
+                    logInToolStripMenuItem.Enabled = false;
+                    logOutToolStripMenuItem.Enabled = true;
+                }
+                else
+                {
+                    logInToolStripMenuItem.Enabled = true;
+                    logOutToolStripMenuItem.Enabled = false;
+                }
+            }
+        }
 
         /// <summary>
         /// Updates the UI display by authority.
         /// </summary>
         private void UpdateUIDisplayByAuthority()
         {
+
             BindingFlags flag = BindingFlags.Instance | BindingFlags.NonPublic;
             MemberInfo[] memberInfos = typeof(BCMainForm).GetMembers(flag);
 
@@ -424,6 +453,7 @@ namespace com.mirle.ibg3k0.bc.winform
                     }
                 }
             }
+            IsLogIn = !BCFUtility.isEmpty(bcApp.LoginUserID);
         }
 
 
@@ -683,10 +713,7 @@ namespace com.mirle.ibg3k0.bc.winform
         /// <param name="e">The <see cref="EventArgs"/> instance containing the event data.</param>
         private void stopConnectionToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (!BCUtility.doLogin(this, bcApp, BCAppConstants.FUNC_CONNECTION_MANAGEMENT))
-            {
-                return;
-            }
+
             try
             {
                 DialogResult confirmResult = MessageBox.Show(this, BCApplication.getMessageString("Confirm_STOP_CONNECTING"),
@@ -720,21 +747,25 @@ namespace com.mirle.ibg3k0.bc.winform
         /// <param name="e">The <see cref="FormClosingEventArgs"/> instance containing the event data.</param>
         private void BCMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //TODO 確認Authority
-            //if (!BCUtility.doLogin(this, bcApp, BCAppConstants.FUNC_CLOSE_MASTER_PC))
-            //{
-            //    //e.Cancel = true;
-            //    //return;
-            //}
-            DialogResult confirmResult = MessageBox.Show(this, "Do you want to close OHTC?",
+            //1.初步詢問是否要關閉OHBC
+            DialogResult confirmResult = MessageBox.Show(this, "Do you want to close AGVC?",
                 BCApplication.getMessageString("CONFIRM"), MessageBoxButtons.YesNo);
+            recordAction("Do you want to close AGVC?", confirmResult.ToString());
             if (confirmResult != System.Windows.Forms.DialogResult.Yes)
             {
                 e.Cancel = true;
+                return;
             }
+            if (!BCUtility.doLogin(this, bcApp, BCAppConstants.FUNC_CLOSE_SYSTEM, true))
+            {
+                e.Cancel = true;
+                recordAction("Close Master PC, Authority Check...", "Failed !!");
+                return;
+            }
+            recordAction("Close Master PC, Authority Check...", "Success !!");
+
             if (e.Cancel == false)
             {
-
                 try
                 {
                     ProgressBarDialog progress = new ProgressBarDialog(bcApp);
@@ -750,6 +781,13 @@ namespace com.mirle.ibg3k0.bc.winform
                     logger.Error(ex, "Exception");
                 }
             }
+        }
+        private void recordAction(string tipMessage, string confirmResult)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(tipMessage);
+            sb.AppendLine(string.Format("{0}         ConfirmResult:{1}", new string(' ', 5), confirmResult));
+            bcApp.SCApplication.BCSystemBLL.addOperationHis(bcApp.LoginUserID, this.Name, sb.ToString());
         }
 
 
@@ -1081,7 +1119,7 @@ namespace com.mirle.ibg3k0.bc.winform
 
         private void transferCommandToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openForm(typeof(TransferCommandQureyListForm).Name);
+            openForm(typeof(TransferCommandQureyListForm).Name, true, false);
         }
 
         private void transferCommandHistoryToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1131,5 +1169,66 @@ namespace com.mirle.ibg3k0.bc.winform
         {
             openForm(typeof(CycleRun).Name, true, false);
         }
+
+        private void alarmListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openForm(typeof(AlarmListForm).Name, true, false);
+        }
+
+        const int AUTO_LOG_OUT_TIME_SECONDS = 300;
+        private void logout_timer_Tick(object sender, EventArgs e)
+        {
+            if (IsLogIn)
+            {
+                if (lastMove_DT.AddSeconds(AUTO_LOG_OUT_TIME_SECONDS) < DateTime.Now)
+                {
+                    BCUtility.doLogout(bcApp);
+                    closeAllOpenForm();        //B0.03
+                    closeUasMainForm();      //B0.03
+                }
+            }
+        }
+        private void closeAllOpenForm()
+        {
+            lock (openForms)
+            {
+                Dictionary<String, Form> openformsTemp = new Dictionary<string, Form>(openForms);
+                foreach (KeyValuePair<string, Form> item in openformsTemp)     //A0.19
+                {                                                              //A0.19
+                    if (SCUtility.isMatche(item.Key, nameof(OHT_Form)))        //B0.35
+                        continue;                                              //A0.19
+                    item.Value.Close();                                        //A0.19
+                }                                                              //A0.19
+            }
+        }
     }
+
+    public delegate void MouseMovedEvent();
+
+    public class GlobalMouseHandler : IMessageFilter
+    {
+        private const int WM_MOUSEMOVE = 0x0200;
+        private System.Drawing.Point previousMousePosition = new System.Drawing.Point();
+        public static event EventHandler<MouseEventArgs> MouseMovedEvent = delegate { };
+
+        #region IMessageFilter Members
+
+        public bool PreFilterMessage(ref System.Windows.Forms.Message m)
+        {
+            if (m.Msg == WM_MOUSEMOVE)
+            {
+                System.Drawing.Point currentMousePoint = Control.MousePosition;
+                if (previousMousePosition != currentMousePoint)
+                {
+                    previousMousePosition = currentMousePoint;
+                    MouseMovedEvent(this, new MouseEventArgs(MouseButtons.None, 0, currentMousePoint.X, currentMousePoint.Y, 0));
+                }
+            }
+            // Always allow message to continue to the next filter control
+            return false;
+        }
+
+        #endregion
+    }
+
 }

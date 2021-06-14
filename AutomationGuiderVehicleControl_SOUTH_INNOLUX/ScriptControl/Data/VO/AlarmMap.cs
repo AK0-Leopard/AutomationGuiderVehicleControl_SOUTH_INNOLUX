@@ -27,7 +27,11 @@ namespace com.mirle.ibg3k0.sc.Data.VO
         /// <summary>
         /// The eqp t_ rea l_ identifier
         /// </summary>
-        public String EQPT_REAL_ID, ALARM_ID, ALARM_DESC;
-        public E_ALARM_LVL ALARM_LVL;
+        public String EQPT_REAL_ID { get; set; }
+        public String ALARM_ID { get; set; }
+        public String ALARM_DESC { get; set; }
+        public String POSSIBLE_CAUSES { get; set; }
+        public String SUGGESTION { get; set; }
+        public E_ALARM_LVL ALARM_LVL { get; set; }
     }
 }

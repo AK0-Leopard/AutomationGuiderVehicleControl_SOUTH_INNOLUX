@@ -506,6 +506,12 @@
     <Compile Include="UI\Query\CarrierLocationChooseForm.Designer.cs">
       <DependentUpon>CarrierLocationChooseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Query\AlarmListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Query\AlarmListForm.Designer.cs">
+      <DependentUpon>AlarmListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Query\HistoryAlarmsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1499,6 +1505,7 @@
     </None>
     <None Include="Properties\DataSources\com.mirle.ibg3k0.bc.winform.ObjectRelay.SectionObjToShow.datasource" />
     <None Include="Properties\DataSources\com.mirle.ibg3k0.sc.ACMD_MCS.datasource" />
+    <None Include="Properties\DataSources\com.mirle.ibg3k0.sc.Data.VO.AlarmMap.datasource" />
     <None Include="Properties\DataSources\com.mirle.ibg3k0.sc.ObjectRelay.ALARMObjToShow.datasource" />
     <None Include="Properties\DataSources\com.mirle.ibg3k0.sc.ObjectRelay.CMD_MCSObjToShow.datasource" />
     <None Include="Properties\DataSources\com.mirle.ibg3k0.sc.ObjectRelay.SectionObjToShow.datasource" />
@@ -1770,6 +1777,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Query\CarrierLocationChooseForm.resx">
       <DependentUpon>CarrierLocationChooseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Query\AlarmListForm.resx">
+      <DependentUpon>AlarmListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Query\HistoryAlarmsForm.resx">
       <DependentUpon>HistoryAlarmsForm.cs</DependentUpon>

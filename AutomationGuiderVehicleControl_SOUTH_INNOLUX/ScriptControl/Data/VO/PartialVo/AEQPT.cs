@@ -217,7 +217,7 @@ namespace com.mirle.ibg3k0.sc
         //public bool passGranted { get; set; }
         //public DateTime? passGrantedTime { get; set; }
         object traffic_light_lock = new object();
-        public void setTrafficLight(bool work_signal,bool red_signal, bool yellow_signal, bool green_signal, bool buzzer_signal, bool force_on_signal)
+        public void setTrafficLight(bool work_signal, bool red_signal, bool yellow_signal, bool green_signal, bool buzzer_signal, bool force_on_signal)
         {
             lock (traffic_light_lock)
             {
@@ -254,7 +254,7 @@ namespace com.mirle.ibg3k0.sc
 
         object color_light_lock = new object();
 
-        public void setColorLight( bool red_signal, bool yellow_signal, bool green_signal, bool blue_signal, bool buzzer_signal, bool force_on_signal)
+        public void setColorLight(bool red_signal, bool yellow_signal, bool green_signal, bool blue_signal, bool buzzer_signal, bool force_on_signal)
         {
             lock (color_light_lock)
             {
