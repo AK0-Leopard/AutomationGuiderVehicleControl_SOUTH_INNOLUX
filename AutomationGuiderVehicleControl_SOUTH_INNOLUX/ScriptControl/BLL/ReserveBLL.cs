@@ -129,10 +129,17 @@ namespace com.mirle.ibg3k0.sc.BLL
 
         public virtual void RemoveVehicle(string vhID)
         {
-            var vh = mapAPI.GetVehicleObjectByID(vhID);
-            if (vh != null)
+            try
             {
-                mapAPI.RemoveVehicle(vh);
+                var vh = mapAPI.GetVehicleObjectByID(vhID);
+                if (vh != null)
+                {
+                    mapAPI.RemoveVehicle(vh);
+                }
+            }
+            catch(Exception ex)
+            {
+                logger.Warn(ex, "Exception");
             }
         }
 

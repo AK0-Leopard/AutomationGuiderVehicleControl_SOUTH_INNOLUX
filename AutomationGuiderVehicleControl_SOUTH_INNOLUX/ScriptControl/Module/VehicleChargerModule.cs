@@ -334,7 +334,8 @@ namespace com.mirle.ibg3k0.sc.Module
                 }
                 else
                 {
-                    coupler_addresses.Sort(CouplerCompareForNormalCharge);
+                    //coupler_addresses.Sort(CouplerCompareForNormalCharge);
+                    coupler_addresses.Sort(CouplerCompareForLongCharge);
                 }
             }
             catch { }
@@ -377,7 +378,7 @@ namespace com.mirle.ibg3k0.sc.Module
                 {
                     result = 1;
                 }
-                else if (coupler1.Priority == coupler2.Priority && coupler1.DistanceWithTargetAdr < coupler2.DistanceWithTargetAdr)
+                else if (coupler1.Priority == coupler2.Priority && coupler1.DistanceWithTargetAdr > coupler2.DistanceWithTargetAdr)
                 {
                     result = -1;
                 }

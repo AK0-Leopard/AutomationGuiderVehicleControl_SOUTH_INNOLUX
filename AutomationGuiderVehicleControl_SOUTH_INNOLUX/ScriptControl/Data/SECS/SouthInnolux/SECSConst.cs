@@ -266,6 +266,9 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnolux
                 case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusVehicleAbort:
                 case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusLongTimeInaction:
                 case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusForceFinishByOp:
+                case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusDoubleStorage:
+                case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusEmptyRetrival:
+                case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusPositionError:
                     if (cmd_mcs == null)
                     {
                         return CMD_Result_Unsuccessful;

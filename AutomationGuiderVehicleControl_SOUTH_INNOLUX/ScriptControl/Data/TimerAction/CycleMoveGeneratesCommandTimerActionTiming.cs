@@ -59,7 +59,7 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
                     var selected_vh = scApp.VehicleBLL.cache.getVehicle(DebugParameter.SelectedCycleRunVh);
 
                     if (!selected_vh.isTcpIpConnect ||
-                        selected_vh.MODE_STATUS != VHModeStatus.AutoRemote ||
+                        selected_vh.MODE_STATUS == VHModeStatus.Manual ||
                         scApp.CMDBLL.isCMD_OHTCQueueByVh(selected_vh.VEHICLE_ID))
                     {
                         return;

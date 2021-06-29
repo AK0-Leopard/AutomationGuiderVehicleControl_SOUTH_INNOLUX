@@ -607,6 +607,14 @@ namespace com.mirle.ibg3k0.sc.Service
                 {
                     vh.onModeStatusChange(modeStat);
                 }
+                if (loadCSTStatus == VhLoadCSTStatus.Exist)
+                {
+                    vh.CarrierInstall();
+                }
+                else
+                {
+                    vh.CarrierRemove();
+                }
                 if (!scApp.VehicleBLL.doUpdateVehicleStatus(vh,
                                       cst_id, modeStat, actionStat,
                                        blockingStat, pauseStat, obstacleStat, VhStopSingle.StopSingleOff, errorStat, loadCSTStatus,
@@ -3087,6 +3095,15 @@ namespace com.mirle.ibg3k0.sc.Service
                                 eqpt.BatteryCapacity != batteryCapacity ||
                                 eqpt.STEERINGWHEELANGLE != steeringWheel;
 
+            if (loadCSTStatus == VhLoadCSTStatus.Exist)
+            {
+                eqpt.CarrierInstall();
+            }
+            else
+            {
+                eqpt.CarrierRemove();
+            }
+
             if (modeStat != eqpt.MODE_STATUS)
             {
                 eqpt.onModeStatusChange(modeStat);
@@ -3181,7 +3198,19 @@ namespace com.mirle.ibg3k0.sc.Service
                 if (!is_keep_mcs_cmd_finish)
                 {
                     if (acmd_mcs.isLoading || acmd_mcs.isUnloading)
-                        is_keep_mcs_cmd_finish = true;
+                    {
+                        if (completeStatus == CompleteStatus.CmpStatusInterlockError ||
+                           completeStatus == CompleteStatus.CmpStatusPositionError ||
+                           completeStatus == CompleteStatus.CmpStatusDoubleStorage ||
+                           completeStatus == CompleteStatus.CmpStatusEmptyRetrival)
+                        {
+                            //not thing...還是要把命令直接結束
+                        }
+                        else
+                        {
+                            is_keep_mcs_cmd_finish = true;
+                        }
+                    }
                 }
                 //List<AMCSREPORTQUEUE> reportqueues = new List<AMCSREPORTQUEUE>();
                 using (TransactionScope tx = SCUtility.getTransactionScope())
@@ -3203,6 +3232,9 @@ namespace com.mirle.ibg3k0.sc.Service
                             case CompleteStatus.CmpStatusIdreadFailed:
                             case CompleteStatus.CmpStatusVehicleAbort:
                             case CompleteStatus.CmpStatusInterlockError:
+                            case CompleteStatus.CmpStatusDoubleStorage:
+                            case CompleteStatus.CmpStatusEmptyRetrival:
+                            case CompleteStatus.CmpStatusPositionError:
                                 isSuccess = scApp.ReportBLL.newReportTransferCommandFinish(vh.VEHICLE_ID, reportqueues, is_keep_mcs_cmd_finish);
                                 break;
                             case CompleteStatus.CmpStatusMove:
@@ -3419,6 +3451,9 @@ namespace com.mirle.ibg3k0.sc.Service
                         case CompleteStatus.CmpStatusInterlockError:
                         case CompleteStatus.CmpStatusLongTimeInaction:
                         case CompleteStatus.CmpStatusForceFinishByOp:
+                        case CompleteStatus.CmpStatusDoubleStorage:
+                        case CompleteStatus.CmpStatusEmptyRetrival:
+                        case CompleteStatus.CmpStatusPositionError:
                             isSuccess = scApp.ReportBLL.newReportTransferCommandFinish(vh.VEHICLE_ID, reportqueues);
                             break;
                         case CompleteStatus.CmpStatusMove:

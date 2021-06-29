@@ -494,6 +494,12 @@
     <Compile Include="UI\Operate\RoadControlForm.Designer.cs">
       <DependentUpon>RoadControlForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Operate\VehicleOperationForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Operate\VehicleOperationForm.Designer.cs">
+      <DependentUpon>VehicleOperationForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Operate\VehicleDataSettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1771,6 +1777,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Operate\RoadControlForm.resx">
       <DependentUpon>RoadControlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Operate\VehicleOperationForm.resx">
+      <DependentUpon>VehicleOperationForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Operate\VehicleDataSettingForm.resx">
       <DependentUpon>VehicleDataSettingForm.cs</DependentUpon>

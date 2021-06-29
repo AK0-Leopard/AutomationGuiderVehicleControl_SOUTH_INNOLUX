@@ -1594,25 +1594,6 @@ namespace com.mirle.ibg3k0.sc.BLL
 
             return dicTranTaskSchedule;
         }
-        public E_TRAN_STATUS CompleteStatusToETransferStatus(CompleteStatus completeStatus)
-        {
-            switch (completeStatus)
-            {
-                case CompleteStatus.CmpStatusCancel:
-                    return E_TRAN_STATUS.Canceled;
-                case CompleteStatus.CmpStatusAbort:
-                case CompleteStatus.CmpStatusVehicleAbort:
-                case CompleteStatus.CmpStatusIdmisMatch:
-                case CompleteStatus.CmpStatusIdreadFailed:
-                case CompleteStatus.CmpStatusInterlockError:
-                case CompleteStatus.CmpStatusLongTimeInaction:
-                case CompleteStatus.CmpStatusForceFinishByOp:
-                    return E_TRAN_STATUS.Aborted;
-                default:
-                    return E_TRAN_STATUS.Complete;
-            }
-        }
-
 
         #endregion CMD_MCS
 

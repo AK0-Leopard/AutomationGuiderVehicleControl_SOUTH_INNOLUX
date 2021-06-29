@@ -1534,24 +1534,6 @@ namespace com.mirle.ibg3k0.sc.BLL
 
             return dicTranTaskSchedule;
         }
-        public E_TRAN_STATUS CompleteStatusToETransferStatus(CompleteStatus completeStatus)
-        {
-            switch (completeStatus)
-            {
-                case CompleteStatus.CmpStatusCancel:
-                    return E_TRAN_STATUS.Canceled;
-                case CompleteStatus.CmpStatusAbort:
-                case CompleteStatus.CmpStatusVehicleAbort:
-                case CompleteStatus.CmpStatusIdmisMatch:
-                case CompleteStatus.CmpStatusIdreadFailed:
-                case CompleteStatus.CmpStatusInterlockError:
-                case CompleteStatus.CmpStatusLongTimeInaction:
-                case CompleteStatus.CmpStatusForceFinishByOp:
-                    return E_TRAN_STATUS.Aborted;
-                default:
-                    return E_TRAN_STATUS.Complete;
-            }
-        }
 
         public bool hasCMD_MCSExcuteByFromToPort(string containsPortID)
         {
@@ -2220,26 +2202,6 @@ namespace com.mirle.ibg3k0.sc.BLL
             return isOK;
         }
 
-        public E_CMD_STATUS CompleteStatusToECmdStatus(CompleteStatus completeStatus)
-        {
-            switch (completeStatus)
-            {
-                case CompleteStatus.CmpStatusCancel:
-                    return E_CMD_STATUS.CancelEndByOHTC;
-                case CompleteStatus.CmpStatusAbort:
-                    return E_CMD_STATUS.AbnormalEndByOHTC;
-                case CompleteStatus.CmpStatusVehicleAbort:
-                case CompleteStatus.CmpStatusIdmisMatch:
-                case CompleteStatus.CmpStatusIdreadFailed:
-                case CompleteStatus.CmpStatusInterlockError:
-                case CompleteStatus.CmpStatusLongTimeInaction:
-                    return E_CMD_STATUS.AbnormalEndByOHT;
-                case CompleteStatus.CmpStatusForceFinishByOp:
-                    return E_CMD_STATUS.AbnormalEndByOHTC;
-                default:
-                    return E_CMD_STATUS.NormalEnd;
-            }
-        }
 
         #endregion CMD_OHTC
 
