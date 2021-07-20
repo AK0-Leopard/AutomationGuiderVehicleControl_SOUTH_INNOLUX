@@ -1511,6 +1511,7 @@ namespace com.mirle.ibg3k0.sc.BLL
 
                 if (!SCUtility.isEmpty(mcs_cmd_id))
                 {
+
                     E_TRAN_STATUS mcs_cmd_tran_status = CompleteStatusToETransferStatus(completeStatus);
                     ACMD_MCS acmd_mcs = scApp.CMDBLL.getCMD_MCSByID(mcs_cmd_id);
                     //if (DebugParameter.isManualReportCommandFinishWhenLoadingUnloading && !isDirectFinish && (acmd_mcs.isLoading || acmd_mcs.isUnloading))
@@ -1536,9 +1537,25 @@ namespace com.mirle.ibg3k0.sc.BLL
                             {
                                 case CompleteStatus.CmpStatusPositionError:
                                 case CompleteStatus.CmpStatusInterlockError:
-                                    //要自行將命令改回queue
-                                    isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
-                                    scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(mcs_cmd_id);
+                                    if (scApp.CMDBLL.IsCMD_MCS_RetryOverTimes(mcs_cmd_id))
+                                    {
+                                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleBLL), Device: Service.VehicleService.DEVICE_NAME_AGV,
+                                           Data: $"mcs cmd:{cmd_id} complete status:{completeStatus} when loading," +
+                                                 $"but over retry count:{DebugParameter.InterlockErrorMaxRetryCount} will finish command!");
+                                        //在超過次數後會直接將命令結束，直接結束命令即可。
+                                        isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
+                                        finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                                    }
+                                    else
+                                    {
+                                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleBLL), Device: Service.VehicleService.DEVICE_NAME_AGV,
+                                           Data: $"mcs cmd:{cmd_id} complete status:{completeStatus} when loading," +
+                                                 $"not over retry count:{DebugParameter.InterlockErrorMaxRetryCount} will return to queue!");
+                                        //要自行將命令改回queue
+                                        isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
+                                        scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(mcs_cmd_id);
+                                        scApp.CMDBLL.AddCMD_MCS_RetryTimes(mcs_cmd_id);
+                                    }
                                     break;
                                 case CompleteStatus.CmpStatusEmptyRetrival:
                                     //直接結束命令即可。

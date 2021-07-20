@@ -2080,6 +2080,7 @@ namespace com.mirle.ibg3k0.sc.App
         public static Boolean AdvanceDriveAway = true;
         public static Boolean isPassCouplerHPSafetySignal = false;
         public static Boolean isManualReportCommandFinishWhenLoadingUnloading = true;
+        public static int InterlockErrorMaxRetryCount = 10;
 
     }
 }

@@ -554,7 +554,7 @@ namespace com.mirle.ibg3k0.sc.BLL
 
 
 
-        public  ACMD_MCS getCMD_MCSByID(string cmd_id)
+        public ACMD_MCS getCMD_MCSByID(string cmd_id)
         {
             ACMD_MCS cmd_mcs = null;
             //using (DBConnection_EF con = new DBConnection_EF())
@@ -1040,9 +1040,10 @@ namespace com.mirle.ibg3k0.sc.BLL
                     if (DebugParameter.CanAutoRandomGeneratesCommand || (scApp.getEQObjCacheManager().getLine().SCStats == ALINE.TSCState.AUTO && scApp.getEQObjCacheManager().getLine().MCSCommandAutoAssign))
                     {
                         int idle_vh_count = scApp.VehicleBLL.cache.getVhCurrentStatusInIdleCount(scApp.CMDBLL);
+                        List<ACMD_MCS> ACMD_MCSs = scApp.CMDBLL.loadMCS_Command_Queue();
+
                         if (idle_vh_count > 0)
                         {
-                            List<ACMD_MCS> ACMD_MCSs = scApp.CMDBLL.loadMCS_Command_Queue();
                             checkOnlyOneExcuteWTOCommand(ref ACMD_MCSs);
                             //List<ACMD_MCS> wto_command = null;
                             List<ACMD_MCS> port_priority_max_command = null;
@@ -1314,7 +1315,10 @@ namespace com.mirle.ibg3k0.sc.BLL
                 }
             }
         }
+        private void refreshMCS_CMD_RetryTimes(List<ACMD_MCS> InQueueACMD_MCSs)
+        {
 
+        }
         public virtual bool createWaitingRetryOHTCCmd(string vhID, string mcs_cmd_ID)
         {
             return false;
@@ -3003,5 +3007,23 @@ namespace com.mirle.ibg3k0.sc.BLL
         }
 
 
+        public virtual void AddCMD_MCS_RetryTimes(string cmdID)
+        {
+            if (ACMD_MCS.MCS_CMD_InfoList.TryGetValue(cmdID, out ACMD_MCS cmd_mcs))
+            {
+                cmd_mcs.RetryTimes++;
+            }
+        }
+        public virtual bool IsCMD_MCS_RetryOverTimes(string cmdID)
+        {
+            if (ACMD_MCS.MCS_CMD_InfoList.TryGetValue(cmdID, out ACMD_MCS cmd_mcs))
+            {
+                return cmd_mcs.RetryTimes >= DebugParameter.InterlockErrorMaxRetryCount;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

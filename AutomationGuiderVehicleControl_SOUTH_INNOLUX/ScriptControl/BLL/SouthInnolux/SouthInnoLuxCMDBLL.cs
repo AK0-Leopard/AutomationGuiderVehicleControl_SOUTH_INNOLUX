@@ -1009,6 +1009,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                         != SCAppConstants.AppServiceMode.Active)
                         return;
                     List<ACMD_MCS> unfinish_mcs_cmd = scApp.CMDBLL.loadACMD_MCSIsUnfinished();
+                    refreshACMD_MCSInfoList(unfinish_mcs_cmd);
                     scApp.getEQObjCacheManager().getLine().CurrentExcuteACMD_MCS = unfinish_mcs_cmd;
                     if (DebugParameter.CanAutoRandomGeneratesCommand || (scApp.getEQObjCacheManager().getLine().SCStats == ALINE.TSCState.AUTO && scApp.getEQObjCacheManager().getLine().MCSCommandAutoAssign))
                     {
@@ -1186,6 +1187,58 @@ namespace com.mirle.ibg3k0.sc.BLL
                 {
                     System.Threading.Interlocked.Exchange(ref syncTranCmdPoint, 0);
                 }
+            }
+        }
+
+        private void refreshACMD_MCSInfoList(List<ACMD_MCS> currentExcuteMCSCmd)
+        {
+            List<string> new_current_excute_mcs_cmd = currentExcuteMCSCmd.Select(cmd => SCUtility.Trim(cmd.CMD_ID, true)).ToList();
+            List<string> old_current_excute_mcs_cmd = ACMD_MCS.MCS_CMD_InfoList.Keys.ToList();
+
+            List<string> new_add_mcs_cmds = new_current_excute_mcs_cmd.Except(old_current_excute_mcs_cmd).ToList();
+            foreach (string new_cmd in new_add_mcs_cmds)
+            {
+                ACMD_MCS new_cmd_obj = new ACMD_MCS();
+                var current_cmd = currentExcuteMCSCmd.Where(cmd => SCUtility.isMatche(cmd.CMD_ID, new_cmd)).FirstOrDefault();
+                if (current_cmd == null) continue;
+                new_cmd_obj.put(current_cmd);
+                ACMD_MCS.MCS_CMD_InfoList.TryAdd(new_cmd, new_cmd_obj);
+            }
+            List<string> will_del_mcs_cmds = old_current_excute_mcs_cmd.Except(new_current_excute_mcs_cmd).ToList();
+            foreach (string old_cmd in will_del_mcs_cmds)
+            {
+                ACMD_MCS.MCS_CMD_InfoList.TryRemove(old_cmd, out ACMD_MCS cmd_mcs);
+            }
+
+        }
+
+        public override void AddCMD_MCS_RetryTimes(string cmdID)
+        {
+            if (ACMD_MCS.MCS_CMD_InfoList.TryGetValue(SCUtility.Trim(cmdID, true), out ACMD_MCS cmd_mcs))
+            {
+                cmd_mcs.RetryTimes++;
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(SouthInnoLuxCMDBLL), Device: string.Empty,
+                   Data: $"Cmd id:{cmdID} add retry count,after add count:{cmd_mcs.RetryTimes} ");
+            }
+            else
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(SouthInnoLuxCMDBLL), Device: string.Empty,
+                   Data: $"Cmd id:{cmdID} want to add retry count ,but not exist");
+            }
+        }
+        public override bool IsCMD_MCS_RetryOverTimes(string cmdID)
+        {
+            if (ACMD_MCS.MCS_CMD_InfoList.TryGetValue(SCUtility.Trim(cmdID, true), out ACMD_MCS cmd_mcs))
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(SouthInnoLuxCMDBLL), Device: string.Empty,
+                   Data: $"Cmd id:{cmdID} check retry count ,current count:{cmd_mcs.RetryTimes},max retry count:{DebugParameter.InterlockErrorMaxRetryCount}");
+                return cmd_mcs.RetryTimes >= DebugParameter.InterlockErrorMaxRetryCount;
+            }
+            else
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(SouthInnoLuxCMDBLL), Device: string.Empty,
+                   Data: $"Cmd id:{cmdID} want to check retry count ,but not exist");
+                return false;
             }
         }
 
@@ -1369,7 +1422,7 @@ namespace com.mirle.ibg3k0.sc.BLL
 
             return dicTranTaskSchedule;
         }
-     
+
 
         #endregion CMD_MCS
 
@@ -2065,7 +2118,7 @@ namespace com.mirle.ibg3k0.sc.BLL
             return isOK;
         }
 
-        
+
 
         #endregion CMD_OHTC
 

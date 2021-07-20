@@ -3194,24 +3194,25 @@ namespace com.mirle.ibg3k0.sc.Service
             if (!SCUtility.isEmpty(finish_mcs_cmd))
             {
                 ACMD_MCS acmd_mcs = scApp.CMDBLL.getCMD_MCSByID(finish_mcs_cmd);
-                bool is_keep_mcs_cmd_finish = acmd_mcs != null && acmd_mcs.TRANSFERSTATE < E_TRAN_STATUS.Transferring;
-                if (!is_keep_mcs_cmd_finish)
-                {
-                    if (acmd_mcs.isLoading || acmd_mcs.isUnloading)
-                    {
-                        if (completeStatus == CompleteStatus.CmpStatusInterlockError ||
-                           completeStatus == CompleteStatus.CmpStatusPositionError ||
-                           completeStatus == CompleteStatus.CmpStatusDoubleStorage ||
-                           completeStatus == CompleteStatus.CmpStatusEmptyRetrival)
-                        {
-                            //not thing...還是要把命令直接結束
-                        }
-                        else
-                        {
-                            is_keep_mcs_cmd_finish = true;
-                        }
-                    }
-                }
+                //bool is_keep_mcs_cmd_finish = acmd_mcs != null && acmd_mcs.TRANSFERSTATE < E_TRAN_STATUS.Transferring;
+                //if (!is_keep_mcs_cmd_finish)
+                //{
+                //    if (acmd_mcs.isLoading || acmd_mcs.isUnloading)
+                //    {
+                //        if (completeStatus == CompleteStatus.CmpStatusInterlockError ||
+                //           completeStatus == CompleteStatus.CmpStatusPositionError ||
+                //           completeStatus == CompleteStatus.CmpStatusDoubleStorage ||
+                //           completeStatus == CompleteStatus.CmpStatusEmptyRetrival)
+                //        {
+                //            //not thing...還是要把命令直接結束
+                //        }
+                //        else
+                //        {
+                //            is_keep_mcs_cmd_finish = true;
+                //        }
+                //    }
+                //}
+                bool is_keep_mcs_cmd_dont_finish = IsKeepCMDMCSDontFinish(acmd_mcs, completeStatus);
                 //List<AMCSREPORTQUEUE> reportqueues = new List<AMCSREPORTQUEUE>();
                 using (TransactionScope tx = SCUtility.getTransactionScope())
                 {
@@ -3235,7 +3236,7 @@ namespace com.mirle.ibg3k0.sc.Service
                             case CompleteStatus.CmpStatusDoubleStorage:
                             case CompleteStatus.CmpStatusEmptyRetrival:
                             case CompleteStatus.CmpStatusPositionError:
-                                isSuccess = scApp.ReportBLL.newReportTransferCommandFinish(vh.VEHICLE_ID, reportqueues, is_keep_mcs_cmd_finish);
+                                isSuccess = scApp.ReportBLL.newReportTransferCommandFinish(vh.VEHICLE_ID, reportqueues, is_keep_mcs_cmd_dont_finish);
                                 break;
                             case CompleteStatus.CmpStatusMove:
                             case CompleteStatus.CmpStatusHome:
@@ -3358,6 +3359,60 @@ namespace com.mirle.ibg3k0.sc.Service
                 {
                     scApp.LineService.TSCStateToPause();
                 }
+            }
+        }
+
+        private bool IsKeepCMDMCSDontFinish(ACMD_MCS acmd_mcs, CompleteStatus completeStatus)
+        {
+            string cmd_id = SCUtility.Trim(acmd_mcs.CMD_ID, true);
+            if (acmd_mcs.isLoading)
+            {
+                switch (completeStatus)
+                {
+                    case CompleteStatus.CmpStatusInterlockError:
+                    case CompleteStatus.CmpStatusPositionError:
+                        if (scApp.CMDBLL.IsCMD_MCS_RetryOverTimes(cmd_id))
+                        {
+                            LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                               Data: $"mcs cmd:{cmd_id} complete status:{completeStatus} when loading," +
+                                     $"but over retry count:{DebugParameter.InterlockErrorMaxRetryCount} will finish command!");
+                            return false;//在超過次數後會直接將命令結束
+                        }
+                        else
+                        {
+                            LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                               Data: $"mcs cmd:{cmd_id} complete status:{completeStatus} when loading," +
+                                     $"not over retry count:{DebugParameter.InterlockErrorMaxRetryCount} will return to queue!");
+                            return true;//在還沒超過次數時會將命令改回queue
+                        }
+                    case CompleteStatus.CmpStatusEmptyRetrival:
+                        return false;
+                    default:
+                        return true;//等待initial時，上報cmd finish，以便確認CST 最後位置。
+                }
+            }
+            else if (acmd_mcs.isUnloading)
+            {
+                switch (completeStatus)
+                {
+                    case CompleteStatus.CmpStatusInterlockError:
+                    case CompleteStatus.CmpStatusPositionError:
+                    case CompleteStatus.CmpStatusDoubleStorage:
+                        return false;//在unloading發生時，就直接結束命令
+
+                    default:
+                        return true;//等待initial時，上報cmd finish，以便確認CST 最後位置。
+                }
+            }
+            else
+            {
+                bool is_transferring = acmd_mcs.TRANSFERSTATE >= E_TRAN_STATUS.Transferring;
+                if (completeStatus != CompleteStatus.CmpStatusAbort &&
+                    completeStatus != CompleteStatus.CmpStatusCancel &&
+                    is_transferring == false)
+                    return true; //要將命令改成queue
+                else
+                    return false;  //直接結束掉命令
             }
         }
 

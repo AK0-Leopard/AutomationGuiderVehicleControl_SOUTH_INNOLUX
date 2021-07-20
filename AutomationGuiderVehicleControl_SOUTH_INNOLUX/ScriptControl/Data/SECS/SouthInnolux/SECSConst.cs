@@ -312,6 +312,13 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnolux
         public static readonly string ACK_Not_Accepted = "1";
         #endregion ACK
 
+        #region Port Event Status
+        public const string PORTEvtState_DOWN = "0";
+        public const string PORTEvtState_RTU = "1";
+        public const string PORTEvtState_RTL = "2";
+        public const string PORTEvtState_WAIT = "3";
+        #endregion Port Event Status
+
         public class AlarmStatus
         {
             public static string convert2MCS(ProtocolFormat.OHTMessage.ErrorStatus alarm_status, E_ALARM_LVL alarm_lvl)
