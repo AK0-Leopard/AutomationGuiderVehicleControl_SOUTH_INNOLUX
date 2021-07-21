@@ -4170,6 +4170,7 @@ namespace com.mirle.ibg3k0.sc.Service
                        Data: $"vh id:{vhID} remove success. start release reserved control...",
                        VehicleID: vhID);
                     scApp.ReserveBLL.RemoveAllReservedSectionsByVehicleID(vh_vo.VEHICLE_ID);
+                    scApp.ReserveBLL.RemoveVehicle(vh_vo.VEHICLE_ID);
                     ProcessAlarmReport(vh_vo, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrReset, $"vehicle cannot service");
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                        Data: $"vh id:{vhID} remove success. end release reserved control.",

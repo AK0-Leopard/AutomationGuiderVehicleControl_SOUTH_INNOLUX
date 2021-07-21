@@ -6,11 +6,9 @@
 //
 //(c) Copyright 2014, MIRLE Automation Corporation
 //
-// Date          Author         Request No.    Tag     Description
-// ------------- -------------  -------------  ------  -----------------------------
-// 2019/07/16    Mark Chou      N/A            M0.01   修正回覆S1F4 SVID305會發生Exception的問題
-// 2019/08/26    Kevin Wei      N/A            M0.02   修正原本在只要有From、To命令還是在Wating的狀態時，
-//                                                     此時MCS若下達一筆命令則會拒絕，改成只要是From相同，就會拒絕。
+// Date          Author         Request No.    Tag         Description
+// ------------- -------------  -------------  ------      -----------------------------
+// 2021/06/29    Kevin Wei      N/A            A21.06.29   由於該專案無對應的Port狀態，與MCS確認後皆先上報固定值"RTU"(1)
 //**********************************************************************************
 using com.mirle.ibg3k0.bcf.App;
 using com.mirle.ibg3k0.bcf.Controller;
@@ -1621,7 +1619,8 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 {
                     PORT_ID = port_station[j].PORT_ID
                 };
-                string port_evt_state = ((int)port_station[j].PORT_STATUS).ToString();
+                //A21.06.29 string port_evt_state = ((int)port_station[j].PORT_STATUS).ToString();
+                string port_evt_state = SECSConst.PORTEvtState_RTU;//A21.06.29
                 //if (port_station[j].PORT_SERVICE_STATUS == ProtocolFormat.OHTMessage.PortStationServiceStatus.OutOfService)
                 //{
                 //    port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Disabled).ToString();

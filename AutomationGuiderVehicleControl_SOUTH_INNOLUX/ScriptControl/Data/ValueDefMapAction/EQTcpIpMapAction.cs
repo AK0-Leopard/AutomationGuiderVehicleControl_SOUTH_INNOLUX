@@ -336,11 +336,26 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
         }
         protected void str144_Process(object sender, TcpIpEventArgs e)
         {
+            bool need_process_status = true;
+            int pre_status_seq_num = eqpt.PreStatusSeqNum;
+            int current_seq_num = e.iSeqNum;
+            need_process_status = checkPositionSeqNum(current_seq_num, pre_status_seq_num);
+            eqpt.PreStatusSeqNum = current_seq_num;
+            if (!need_process_status)
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(EQTcpIpMapAction), Device: Service.VehicleService.DEVICE_NAME_AGV,
+                   Data: $"The vehicles updata status report of seq num is old,by pass this one.old seq num;{pre_status_seq_num},current seq num:{current_seq_num}",
+                   VehicleID: eqpt.VEHICLE_ID,
+                   CarrierID: eqpt.CST_ID);
+                return;
+            }
+
             dynamic service = scApp.VehicleService;
             ID_144_STATUS_CHANGE_REP recive_str = (ID_144_STATUS_CHANGE_REP)e.objPacket;
             scApp.VehicleBLL.setAndPublishPositionReportInfo2Redis(eqpt.VEHICLE_ID, recive_str);
             service.StatusReport(bcfApp, eqpt, recive_str, e.iSeqNum);
         }
+
         protected void str152_Receive(object sender, TcpIpEventArgs e)
         {
             ID_152_AVOID_COMPLETE_REPORT recive_str = (ID_152_AVOID_COMPLETE_REPORT)e.objPacket;

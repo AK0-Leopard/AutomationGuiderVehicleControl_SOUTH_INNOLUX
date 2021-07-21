@@ -89,6 +89,9 @@ message Timestamp {
 	CmpStatusVehicleAbort = 22;
 	CmpStatusIDMisMatch = 23;
 	CmpStatusIDReadFailed = 24;
+	CmpStatusDoubleStorage = 26;
+	CmpStatusEmptyRetrival = 27;
+	CmpStatusPositionError = 29;
 	CmpStatusInterlockError = 64;
 
 	CmpStatusLongTimeInaction = 98;

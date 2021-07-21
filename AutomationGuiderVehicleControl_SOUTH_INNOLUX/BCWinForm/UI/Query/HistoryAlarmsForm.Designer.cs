@@ -47,6 +47,8 @@
             this.m_exportBtn = new CCWin.SkinControl.SkinButton();
             this.btnlSearch = new CCWin.SkinControl.SkinButton();
             this.dgv_TransferCommand = new System.Windows.Forms.DataGridView();
+            this.aLARMObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.aLAMCODEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eQPTIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aLAMSTATDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,8 +56,7 @@
             this.rPTDATETIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cLEARDATETIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aLAMDESCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aLARMObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.skinGroupBox2.SuspendLayout();
@@ -345,7 +346,7 @@
             // 
             this.dgv_TransferCommand.AllowUserToAddRows = false;
             this.dgv_TransferCommand.AutoGenerateColumns = false;
-            this.dgv_TransferCommand.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_TransferCommand.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgv_TransferCommand.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgv_TransferCommand.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_TransferCommand.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -355,7 +356,8 @@
             this.aLAMLVLDataGridViewTextBoxColumn,
             this.rPTDATETIMEDataGridViewTextBoxColumn,
             this.cLEARDATETIMEDataGridViewTextBoxColumn,
-            this.aLAMDESCDataGridViewTextBoxColumn});
+            this.aLAMDESCDataGridViewTextBoxColumn,
+            this.Column1});
             this.dgv_TransferCommand.DataSource = this.aLARMObjToShowBindingSource;
             this.dgv_TransferCommand.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_TransferCommand.GridColor = System.Drawing.SystemColors.ControlDarkDark;
@@ -368,61 +370,6 @@
             this.dgv_TransferCommand.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_TransferCommand.Size = new System.Drawing.Size(1596, 594);
             this.dgv_TransferCommand.TabIndex = 9;
-            // 
-            // aLAMCODEDataGridViewTextBoxColumn
-            // 
-            this.aLAMCODEDataGridViewTextBoxColumn.DataPropertyName = "ALAM_CODE";
-            this.aLAMCODEDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.aLAMCODEDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.aLAMCODEDataGridViewTextBoxColumn.Name = "aLAMCODEDataGridViewTextBoxColumn";
-            this.aLAMCODEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // eQPTIDDataGridViewTextBoxColumn
-            // 
-            this.eQPTIDDataGridViewTextBoxColumn.DataPropertyName = "EQPT_ID";
-            this.eQPTIDDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.eQPTIDDataGridViewTextBoxColumn.HeaderText = "Device ID";
-            this.eQPTIDDataGridViewTextBoxColumn.Name = "eQPTIDDataGridViewTextBoxColumn";
-            this.eQPTIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aLAMSTATDataGridViewTextBoxColumn
-            // 
-            this.aLAMSTATDataGridViewTextBoxColumn.DataPropertyName = "ALAM_STAT";
-            this.aLAMSTATDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.aLAMSTATDataGridViewTextBoxColumn.HeaderText = "State";
-            this.aLAMSTATDataGridViewTextBoxColumn.Name = "aLAMSTATDataGridViewTextBoxColumn";
-            this.aLAMSTATDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aLAMLVLDataGridViewTextBoxColumn
-            // 
-            this.aLAMLVLDataGridViewTextBoxColumn.DataPropertyName = "ALAM_LVL";
-            this.aLAMLVLDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.aLAMLVLDataGridViewTextBoxColumn.HeaderText = "Level";
-            this.aLAMLVLDataGridViewTextBoxColumn.Name = "aLAMLVLDataGridViewTextBoxColumn";
-            this.aLAMLVLDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // rPTDATETIMEDataGridViewTextBoxColumn
-            // 
-            this.rPTDATETIMEDataGridViewTextBoxColumn.DataPropertyName = "RPT_DATE_TIME";
-            this.rPTDATETIMEDataGridViewTextBoxColumn.FillWeight = 80F;
-            this.rPTDATETIMEDataGridViewTextBoxColumn.HeaderText = "Happend time";
-            this.rPTDATETIMEDataGridViewTextBoxColumn.Name = "rPTDATETIMEDataGridViewTextBoxColumn";
-            this.rPTDATETIMEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cLEARDATETIMEDataGridViewTextBoxColumn
-            // 
-            this.cLEARDATETIMEDataGridViewTextBoxColumn.DataPropertyName = "CLEAR_DATE_TIME";
-            this.cLEARDATETIMEDataGridViewTextBoxColumn.FillWeight = 80F;
-            this.cLEARDATETIMEDataGridViewTextBoxColumn.HeaderText = "Clear Time";
-            this.cLEARDATETIMEDataGridViewTextBoxColumn.Name = "cLEARDATETIMEDataGridViewTextBoxColumn";
-            this.cLEARDATETIMEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aLAMDESCDataGridViewTextBoxColumn
-            // 
-            this.aLAMDESCDataGridViewTextBoxColumn.DataPropertyName = "ALAM_DESC";
-            this.aLAMDESCDataGridViewTextBoxColumn.HeaderText = "Description";
-            this.aLAMDESCDataGridViewTextBoxColumn.Name = "aLAMDESCDataGridViewTextBoxColumn";
-            this.aLAMDESCDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // aLARMObjToShowBindingSource
             // 
@@ -442,6 +389,76 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.97765F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1602, 716);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // aLAMCODEDataGridViewTextBoxColumn
+            // 
+            this.aLAMCODEDataGridViewTextBoxColumn.DataPropertyName = "ALAM_CODE";
+            this.aLAMCODEDataGridViewTextBoxColumn.FillWeight = 50F;
+            this.aLAMCODEDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.aLAMCODEDataGridViewTextBoxColumn.Name = "aLAMCODEDataGridViewTextBoxColumn";
+            this.aLAMCODEDataGridViewTextBoxColumn.ReadOnly = true;
+            this.aLAMCODEDataGridViewTextBoxColumn.Width = 55;
+            // 
+            // eQPTIDDataGridViewTextBoxColumn
+            // 
+            this.eQPTIDDataGridViewTextBoxColumn.DataPropertyName = "EQPT_ID";
+            this.eQPTIDDataGridViewTextBoxColumn.FillWeight = 50F;
+            this.eQPTIDDataGridViewTextBoxColumn.HeaderText = "Device ID";
+            this.eQPTIDDataGridViewTextBoxColumn.Name = "eQPTIDDataGridViewTextBoxColumn";
+            this.eQPTIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.eQPTIDDataGridViewTextBoxColumn.Width = 125;
+            // 
+            // aLAMSTATDataGridViewTextBoxColumn
+            // 
+            this.aLAMSTATDataGridViewTextBoxColumn.DataPropertyName = "ALAM_STAT";
+            this.aLAMSTATDataGridViewTextBoxColumn.FillWeight = 50F;
+            this.aLAMSTATDataGridViewTextBoxColumn.HeaderText = "State";
+            this.aLAMSTATDataGridViewTextBoxColumn.Name = "aLAMSTATDataGridViewTextBoxColumn";
+            this.aLAMSTATDataGridViewTextBoxColumn.ReadOnly = true;
+            this.aLAMSTATDataGridViewTextBoxColumn.Width = 85;
+            // 
+            // aLAMLVLDataGridViewTextBoxColumn
+            // 
+            this.aLAMLVLDataGridViewTextBoxColumn.DataPropertyName = "ALAM_LVL";
+            this.aLAMLVLDataGridViewTextBoxColumn.FillWeight = 50F;
+            this.aLAMLVLDataGridViewTextBoxColumn.HeaderText = "Level";
+            this.aLAMLVLDataGridViewTextBoxColumn.Name = "aLAMLVLDataGridViewTextBoxColumn";
+            this.aLAMLVLDataGridViewTextBoxColumn.ReadOnly = true;
+            this.aLAMLVLDataGridViewTextBoxColumn.Width = 85;
+            // 
+            // rPTDATETIMEDataGridViewTextBoxColumn
+            // 
+            this.rPTDATETIMEDataGridViewTextBoxColumn.DataPropertyName = "RPT_DATE_TIME";
+            this.rPTDATETIMEDataGridViewTextBoxColumn.FillWeight = 80F;
+            this.rPTDATETIMEDataGridViewTextBoxColumn.HeaderText = "Happend time";
+            this.rPTDATETIMEDataGridViewTextBoxColumn.Name = "rPTDATETIMEDataGridViewTextBoxColumn";
+            this.rPTDATETIMEDataGridViewTextBoxColumn.ReadOnly = true;
+            this.rPTDATETIMEDataGridViewTextBoxColumn.Width = 155;
+            // 
+            // cLEARDATETIMEDataGridViewTextBoxColumn
+            // 
+            this.cLEARDATETIMEDataGridViewTextBoxColumn.DataPropertyName = "CLEAR_DATE_TIME";
+            this.cLEARDATETIMEDataGridViewTextBoxColumn.FillWeight = 80F;
+            this.cLEARDATETIMEDataGridViewTextBoxColumn.HeaderText = "Clear Time";
+            this.cLEARDATETIMEDataGridViewTextBoxColumn.Name = "cLEARDATETIMEDataGridViewTextBoxColumn";
+            this.cLEARDATETIMEDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cLEARDATETIMEDataGridViewTextBoxColumn.Width = 135;
+            // 
+            // aLAMDESCDataGridViewTextBoxColumn
+            // 
+            this.aLAMDESCDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.aLAMDESCDataGridViewTextBoxColumn.DataPropertyName = "ALAM_DESC";
+            this.aLAMDESCDataGridViewTextBoxColumn.HeaderText = "Description";
+            this.aLAMDESCDataGridViewTextBoxColumn.Name = "aLAMDESCDataGridViewTextBoxColumn";
+            this.aLAMDESCDataGridViewTextBoxColumn.ReadOnly = true;
+            this.aLAMDESCDataGridViewTextBoxColumn.Width = 145;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.HeaderText = "";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
             // 
             // HistoryAlarmsForm
             // 
@@ -500,5 +517,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn rPTDATETIMEDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cLEARDATETIMEDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn aLAMDESCDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }

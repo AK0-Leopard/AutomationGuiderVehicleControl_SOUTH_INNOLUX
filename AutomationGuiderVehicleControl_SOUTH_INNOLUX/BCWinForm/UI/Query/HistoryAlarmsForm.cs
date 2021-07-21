@@ -37,6 +37,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             var alarms = mainform.BCApp.SCApplication.AlarmBLL.GetAlarms(start_time, end_time);
             if (alarms != null && alarms.Count > 0)
             {
+                alarms.ForEach(alarm => SCUtility.TrimAllParameter(alarm));
                 string alarm_code = m_AlarmCodeTbl.Text;
                 string device_id = m_EqptIDCbx.Text;
                 if (!SCUtility.isEmpty(alarm_code))

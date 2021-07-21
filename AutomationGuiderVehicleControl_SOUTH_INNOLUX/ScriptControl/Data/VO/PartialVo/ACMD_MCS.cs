@@ -8,6 +8,7 @@ using com.mirle.ibg3k0.sc.Data.VO;
 using com.mirle.ibg3k0.sc.Data.VO.Interface;
 using com.mirle.ibg3k0.sc.ObjectRelay;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,9 @@ namespace com.mirle.ibg3k0.sc
 {
     public partial class ACMD_MCS
     {
+        public static ConcurrentDictionary<string, ACMD_MCS> MCS_CMD_InfoList = new ConcurrentDictionary<string, ACMD_MCS>();
+
+        public int RetryTimes = 0;
         public string ManualSelectedFinishCarrierLoc = "";
         /// <summary>
         /// 1 2 4 8 16 32 64 128
@@ -98,6 +102,26 @@ namespace com.mirle.ibg3k0.sc
                 COMMANDSTATE = COMMANDSTATE & 224;
                 return COMMANDSTATE == COMMAND_STATUS_BIT_INDEX_UNLOADING;
             }
+        }
+
+        public void put(ACMD_MCS ortherObj)
+        {
+            CMD_ID = ortherObj.CMD_ID;
+            CARRIER_ID = ortherObj.CARRIER_ID;
+            TRANSFERSTATE = ortherObj.TRANSFERSTATE;
+            COMMANDSTATE = ortherObj.COMMANDSTATE;
+            HOSTSOURCE = ortherObj.HOSTSOURCE;
+            HOSTDESTINATION = ortherObj.HOSTDESTINATION;
+            PRIORITY = ortherObj.PRIORITY;
+            CHECKCODE = ortherObj.CHECKCODE;
+            PAUSEFLAG = ortherObj.PAUSEFLAG;
+            CMD_INSER_TIME = ortherObj.CMD_INSER_TIME;
+            CMD_START_TIME = ortherObj.CMD_START_TIME;
+            CMD_FINISH_TIME = ortherObj.CMD_FINISH_TIME;
+            TIME_PRIORITY = ortherObj.TIME_PRIORITY;
+            PORT_PRIORITY = ortherObj.PORT_PRIORITY;
+            PRIORITY_SUM = ortherObj.PRIORITY_SUM;
+            REPLACE = ortherObj.REPLACE;
         }
     }
 

@@ -1205,6 +1205,11 @@ namespace com.mirle.ibg3k0.bc.winform
                 }                                                              //A0.19
             }
         }
+
+        private void vehicleOperationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openForm(typeof(VehicleOperationForm).Name, true, false);
+        }
     }
 
     public delegate void MouseMovedEvent();

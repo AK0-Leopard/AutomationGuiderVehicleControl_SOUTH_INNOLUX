@@ -51,6 +51,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             cb_advanceDriveAway.Checked = DebugParameter.AdvanceDriveAway;
             cb_passCouplerHPSafetySingnal.Checked = DebugParameter.isPassCouplerHPSafetySignal;
             ck_isMaunalReportFinishWhenLoadingUnloading.Checked = DebugParameter.isManualReportCommandFinishWhenLoadingUnloading;
+            num_interlockMaxRetryCount.Value = DebugParameter.InterlockErrorMaxRetryCount;
 
 
             List<string> lstVh = new List<string>();
@@ -1624,6 +1625,11 @@ namespace com.mirle.ibg3k0.bc.winform.UI
         {
             var quake_signal = bcApp.SCApplication.getBCFApplication().tryGetReadValueEventstring("Equipment", "QuakeSensor", "QUAKE_SENSOR_SIGNAL", out bcf.Controller.ValueRead vr);
             vr.Value = new int[1] { 1 };
+        }
+
+        private void num_interlockMaxRetryCount_ValueChanged(object sender, EventArgs e)
+        {
+            DebugParameter.InterlockErrorMaxRetryCount = (int)num_interlockMaxRetryCount.Value;
         }
     }
 }

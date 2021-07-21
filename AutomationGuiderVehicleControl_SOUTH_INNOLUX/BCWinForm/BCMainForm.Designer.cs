@@ -116,6 +116,7 @@ namespace com.mirle.ibg3k0.bc.winform
             this.cycleRunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.logout_timer = new System.Windows.Forms.Timer(this.components);
+            this.vehicleOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chargerControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.CMS_OnLineMode.SuspendLayout();
@@ -354,6 +355,7 @@ namespace com.mirle.ibg3k0.bc.winform
             this.transferCommandToolStripMenuItem,
             this.carrierInstalledRemoveToolStripMenuItem,
             this.engineerToolStripMenuItem,
+            this.vehicleOperationToolStripMenuItem,
             this.languageChangeToolStripMenuItem,
             this.editToolStripMenuItem,
             this.toolStripSeparator1});
@@ -569,12 +571,6 @@ namespace com.mirle.ibg3k0.bc.winform
             this.logout_timer.Interval = 10000;
             this.logout_timer.Tick += new System.EventHandler(this.logout_timer_Tick);
             // 
-            // chargerControlToolStripMenuItem
-            // 
-            this.chargerControlToolStripMenuItem.Name = "chargerControlToolStripMenuItem";
-            resources.ApplyResources(this.chargerControlToolStripMenuItem, "chargerControlToolStripMenuItem");
-            this.chargerControlToolStripMenuItem.Click += new System.EventHandler(this.chargerControlToolStripMenuItem_Click);
-            // 
             // BCMainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -743,7 +739,6 @@ namespace com.mirle.ibg3k0.bc.winform
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem alarmListToolStripMenuItem;
         private System.Windows.Forms.Timer logout_timer;
-        private System.Windows.Forms.ToolStripMenuItem chargerControlToolStripMenuItem;
     }
 
     /// <summary>

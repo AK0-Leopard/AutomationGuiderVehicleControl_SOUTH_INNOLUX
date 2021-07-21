@@ -554,7 +554,7 @@ namespace com.mirle.ibg3k0.sc.BLL
 
 
 
-        public  ACMD_MCS getCMD_MCSByID(string cmd_id)
+        public ACMD_MCS getCMD_MCSByID(string cmd_id)
         {
             ACMD_MCS cmd_mcs = null;
             //using (DBConnection_EF con = new DBConnection_EF())
@@ -1040,9 +1040,10 @@ namespace com.mirle.ibg3k0.sc.BLL
                     if (DebugParameter.CanAutoRandomGeneratesCommand || (scApp.getEQObjCacheManager().getLine().SCStats == ALINE.TSCState.AUTO && scApp.getEQObjCacheManager().getLine().MCSCommandAutoAssign))
                     {
                         int idle_vh_count = scApp.VehicleBLL.cache.getVhCurrentStatusInIdleCount(scApp.CMDBLL);
+                        List<ACMD_MCS> ACMD_MCSs = scApp.CMDBLL.loadMCS_Command_Queue();
+
                         if (idle_vh_count > 0)
                         {
-                            List<ACMD_MCS> ACMD_MCSs = scApp.CMDBLL.loadMCS_Command_Queue();
                             checkOnlyOneExcuteWTOCommand(ref ACMD_MCSs);
                             //List<ACMD_MCS> wto_command = null;
                             List<ACMD_MCS> port_priority_max_command = null;
@@ -1314,7 +1315,10 @@ namespace com.mirle.ibg3k0.sc.BLL
                 }
             }
         }
+        private void refreshMCS_CMD_RetryTimes(List<ACMD_MCS> InQueueACMD_MCSs)
+        {
 
+        }
         public virtual bool createWaitingRetryOHTCCmd(string vhID, string mcs_cmd_ID)
         {
             return false;
@@ -1533,24 +1537,6 @@ namespace com.mirle.ibg3k0.sc.BLL
             dicTranTaskSchedule = query.OrderBy(item => item.Key).ToDictionary(item => item.Key, item => item.ToList());
 
             return dicTranTaskSchedule;
-        }
-        public E_TRAN_STATUS CompleteStatusToETransferStatus(CompleteStatus completeStatus)
-        {
-            switch (completeStatus)
-            {
-                case CompleteStatus.CmpStatusCancel:
-                    return E_TRAN_STATUS.Canceled;
-                case CompleteStatus.CmpStatusAbort:
-                case CompleteStatus.CmpStatusVehicleAbort:
-                case CompleteStatus.CmpStatusIdmisMatch:
-                case CompleteStatus.CmpStatusIdreadFailed:
-                case CompleteStatus.CmpStatusInterlockError:
-                case CompleteStatus.CmpStatusLongTimeInaction:
-                case CompleteStatus.CmpStatusForceFinishByOp:
-                    return E_TRAN_STATUS.Aborted;
-                default:
-                    return E_TRAN_STATUS.Complete;
-            }
         }
 
         public bool hasCMD_MCSExcuteByFromToPort(string containsPortID)
@@ -2220,26 +2206,6 @@ namespace com.mirle.ibg3k0.sc.BLL
             return isOK;
         }
 
-        public E_CMD_STATUS CompleteStatusToECmdStatus(CompleteStatus completeStatus)
-        {
-            switch (completeStatus)
-            {
-                case CompleteStatus.CmpStatusCancel:
-                    return E_CMD_STATUS.CancelEndByOHTC;
-                case CompleteStatus.CmpStatusAbort:
-                    return E_CMD_STATUS.AbnormalEndByOHTC;
-                case CompleteStatus.CmpStatusVehicleAbort:
-                case CompleteStatus.CmpStatusIdmisMatch:
-                case CompleteStatus.CmpStatusIdreadFailed:
-                case CompleteStatus.CmpStatusInterlockError:
-                case CompleteStatus.CmpStatusLongTimeInaction:
-                    return E_CMD_STATUS.AbnormalEndByOHT;
-                case CompleteStatus.CmpStatusForceFinishByOp:
-                    return E_CMD_STATUS.AbnormalEndByOHTC;
-                default:
-                    return E_CMD_STATUS.NormalEnd;
-            }
-        }
 
         #endregion CMD_OHTC
 
@@ -3056,5 +3022,23 @@ namespace com.mirle.ibg3k0.sc.BLL
         }
 
 
+        public virtual void AddCMD_MCS_RetryTimes(string cmdID)
+        {
+            if (ACMD_MCS.MCS_CMD_InfoList.TryGetValue(cmdID, out ACMD_MCS cmd_mcs))
+            {
+                cmd_mcs.RetryTimes++;
+            }
+        }
+        public virtual bool IsCMD_MCS_RetryOverTimes(string cmdID)
+        {
+            if (ACMD_MCS.MCS_CMD_InfoList.TryGetValue(cmdID, out ACMD_MCS cmd_mcs))
+            {
+                return cmd_mcs.RetryTimes >= DebugParameter.InterlockErrorMaxRetryCount;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

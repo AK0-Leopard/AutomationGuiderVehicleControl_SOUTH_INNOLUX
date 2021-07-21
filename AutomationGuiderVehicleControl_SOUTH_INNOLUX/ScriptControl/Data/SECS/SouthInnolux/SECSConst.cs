@@ -266,6 +266,9 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnolux
                 case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusVehicleAbort:
                 case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusLongTimeInaction:
                 case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusForceFinishByOp:
+                case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusDoubleStorage:
+                case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusEmptyRetrival:
+                case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusPositionError:
                     if (cmd_mcs == null)
                     {
                         return CMD_Result_Unsuccessful;
@@ -308,6 +311,13 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnolux
         /// </summary>
         public static readonly string ACK_Not_Accepted = "1";
         #endregion ACK
+
+        #region Port Event Status
+        public const string PORTEvtState_DOWN = "0";
+        public const string PORTEvtState_RTU = "1";
+        public const string PORTEvtState_RTL = "2";
+        public const string PORTEvtState_WAIT = "3";
+        #endregion Port Event Status
 
         public class AlarmStatus
         {

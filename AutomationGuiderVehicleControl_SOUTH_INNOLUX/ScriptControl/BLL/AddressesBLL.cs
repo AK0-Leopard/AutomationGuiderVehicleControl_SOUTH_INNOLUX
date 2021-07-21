@@ -108,7 +108,8 @@ namespace com.mirle.ibg3k0.sc.BLL
             public bool IsCouplerWork(CouplerAddress couplerAddress, UnitBLL unitBLL)
             {
                 string bc_id = SCApplication.getInstance().BC_ID;
-                if (bc_id == "NORTH_INNOLUX_Test_Site") return true;//暫時都return ok
+                if (bc_id == "NORTH_INNOLUX_Test_Site")
+                    return true;//暫時都return ok
                 AUNIT charger = unitBLL.OperateCatch.getUnit(couplerAddress.ChargerID);
                 if (charger != null)
                 {

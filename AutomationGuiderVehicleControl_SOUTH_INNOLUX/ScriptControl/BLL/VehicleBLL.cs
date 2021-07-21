@@ -1598,6 +1598,9 @@ namespace com.mirle.ibg3k0.sc.BLL
                 case CompleteStatus.CmpStatusIdreadFailed:
                 case CompleteStatus.CmpStatusInterlockError:
                 case CompleteStatus.CmpStatusLongTimeInaction:
+                case CompleteStatus.CmpStatusDoubleStorage:
+                case CompleteStatus.CmpStatusEmptyRetrival:
+                case CompleteStatus.CmpStatusPositionError:
                     return E_CMD_STATUS.AbnormalEndByOHT;
                 case CompleteStatus.CmpStatusForceFinishByOp:
                     return E_CMD_STATUS.AbnormalEndByOHTC;
@@ -1618,6 +1621,9 @@ namespace com.mirle.ibg3k0.sc.BLL
                 case CompleteStatus.CmpStatusInterlockError:
                 case CompleteStatus.CmpStatusLongTimeInaction:
                 case CompleteStatus.CmpStatusForceFinishByOp:
+                case CompleteStatus.CmpStatusDoubleStorage:
+                case CompleteStatus.CmpStatusEmptyRetrival:
+                case CompleteStatus.CmpStatusPositionError:
                     return E_TRAN_STATUS.Aborted;
                 default:
                     return E_TRAN_STATUS.Complete;

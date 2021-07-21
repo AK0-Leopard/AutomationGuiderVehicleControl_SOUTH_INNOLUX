@@ -239,6 +239,8 @@ namespace com.mirle.ibg3k0.sc
         [JsonIgnore]
         public virtual int PrePositionSeqNum { get; set; } = 0;
         [JsonIgnore]
+        public virtual int PreStatusSeqNum { get; set; } = 0;
+        [JsonIgnore]
         public virtual string[] PredictAddresses { get; set; }
         [JsonIgnore]
         public virtual string startAdr { get; set; } = string.Empty;

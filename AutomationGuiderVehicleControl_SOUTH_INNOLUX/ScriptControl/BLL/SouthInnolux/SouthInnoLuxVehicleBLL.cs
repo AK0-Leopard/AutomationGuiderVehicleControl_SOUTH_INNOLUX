@@ -1511,17 +1511,83 @@ namespace com.mirle.ibg3k0.sc.BLL
 
                 if (!SCUtility.isEmpty(mcs_cmd_id))
                 {
+
                     E_TRAN_STATUS mcs_cmd_tran_status = CompleteStatusToETransferStatus(completeStatus);
                     ACMD_MCS acmd_mcs = scApp.CMDBLL.getCMD_MCSByID(mcs_cmd_id);
-                    if (DebugParameter.isManualReportCommandFinishWhenLoadingUnloading && !isDirectFinish && (acmd_mcs.isLoading || acmd_mcs.isUnloading))
+                    //if (DebugParameter.isManualReportCommandFinishWhenLoadingUnloading && !isDirectFinish && (acmd_mcs.isLoading || acmd_mcs.isUnloading))
+
+                    if (!isDirectFinish && (acmd_mcs.isLoading || acmd_mcs.isUnloading))
                     //if (DebugParameter.isManualReportCommandFinishWhenLoadingUnloading)
                     {
                         //not thing...
                         //如果是在Loading / unload的時候，不主動把MCS命令結束掉，讓人員在透過畫面去按
+                        //但再loading又有例外，當該筆命結束狀態是PositionError或者是Interlockerror時，需要將它變回queue的狀態，避免在發生異常時貨再Source Port上無法自動恢復搬送
+                        //(此種Case Mcs無法重下)
+                        //if (acmd_mcs.isLoading &&
+                        //    (completeStatus == CompleteStatus.CmpStatusPositionError ||
+                        //     completeStatus == CompleteStatus.CmpStatusInterlockError)
+                        //   )
+                        //{
+                        //    isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
+                        //    scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(mcs_cmd_id);
+                        //}
+                        if (acmd_mcs.isLoading)
+                        {
+                            switch (completeStatus)
+                            {
+                                case CompleteStatus.CmpStatusPositionError:
+                                case CompleteStatus.CmpStatusInterlockError:
+                                    if (scApp.CMDBLL.IsCMD_MCS_RetryOverTimes(mcs_cmd_id))
+                                    {
+                                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleBLL), Device: Service.VehicleService.DEVICE_NAME_AGV,
+                                           Data: $"mcs cmd:{cmd_id} complete status:{completeStatus} when loading," +
+                                                 $"but over retry count:{DebugParameter.InterlockErrorMaxRetryCount} will finish command!");
+                                        //在超過次數後會直接將命令結束，直接結束命令即可。
+                                        isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
+                                        finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                                    }
+                                    else
+                                    {
+                                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleBLL), Device: Service.VehicleService.DEVICE_NAME_AGV,
+                                           Data: $"mcs cmd:{cmd_id} complete status:{completeStatus} when loading," +
+                                                 $"not over retry count:{DebugParameter.InterlockErrorMaxRetryCount} will return to queue!");
+                                        //要自行將命令改回queue
+                                        isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
+                                        scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(mcs_cmd_id);
+                                        scApp.CMDBLL.AddCMD_MCS_RetryTimes(mcs_cmd_id);
+                                    }
+                                    break;
+                                case CompleteStatus.CmpStatusEmptyRetrival:
+                                    //直接結束命令即可。
+                                    isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
+                                    finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                                    break;
+                                default:
+                                    //等待initial時，上報cmd finish，以便確認CST 最後位置。
+                                    break;
+                            }
+                        }
+                        else if (acmd_mcs.isUnloading)
+                        {
+                            switch (completeStatus)
+                            {
+                                case CompleteStatus.CmpStatusPositionError:
+                                case CompleteStatus.CmpStatusInterlockError:
+                                case CompleteStatus.CmpStatusDoubleStorage:
+                                    //直接結束命令即可。
+                                    isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
+                                    finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                                    break;
+                                default:
+                                    //等待initial時，上報cmd finish，以便確認CST 最後位置。
+                                    break;
+                            }
+                        }
                     }
                     else
                     {
                         isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
+
                         if (completeStatus != CompleteStatus.CmpStatusAbort &&
                             completeStatus != CompleteStatus.CmpStatusCancel &&
                             acmd_mcs != null && acmd_mcs.TRANSFERSTATE < E_TRAN_STATUS.Transferring)
@@ -1532,15 +1598,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                         {
                             //isSuccess &= scApp.SysExcuteQualityBLL.updateSysExecQity_CmdFinish(vh.MCS_CMD);
                             //isSuccess &= scApp.CMDBLL.updateCMD_MCS_TranStatus2Complete(vh.MCS_CMD);
-                            ASYSEXCUTEQUALITY quality = null;
-                            scApp.SysExcuteQualityBLL.updateSysExecQity_CmdFinish(mcs_cmd_id, ohtc_cmd_status, completeStatus, total_cmd_dis, out quality);
-                            //scApp.CMDBLL.updateCMD_MCS_TranStatus2Complete(mcs_cmd_id, E_TRAN_STATUS.Complete);
-                            scApp.CMDBLL.updateCMD_MCS_TranStatus2Complete(mcs_cmd_id, mcs_cmd_tran_status);
-                            if (quality != null)
-                            {
-                                SCUtility.TrimAllParameter(quality);
-                                LogManager.GetLogger("SysExcuteQuality").Info(quality.ToString());
-                            }
+                            finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
                         }
                     }
                 }
@@ -1558,41 +1616,20 @@ namespace com.mirle.ibg3k0.sc.BLL
                 isSuccess = false;
             }
             return isSuccess;
-            //2.
-            //bool isParkAdr = scApp.ParkBLL.isInPrckAddress(vh.CUR_ADR_ID, vh.VEHICLE_TYPE);
-            //if (isParkAdr)
-            //{
-            //    scApp.VehicleBLL.setVhIsParkingOnWay(eq_id, vh.CUR_ADR_ID);
-            //    scApp.ParkBLL.checkAndUpdateVhEntryParkingAdr(eq_id, vh.CUR_ADR_ID);
-            //}
-            ////bool needMoveToIdle = vh.VEHICLE_TYPE == E_VH_TYPE.Dirty
-            ////                   || scApp.CMDBLL.getCMD_MCSisQueueCount() == 0;
-            //else
-            //{
-            //    Task.Run(() =>
-            //    {
-            //        bool isCmdInQueue = scApp.CMDBLL.isCMD_OHTCQueueByVh(eq_id);
-            //        if (!isCmdInQueue)
-            //        {
-            //            bool isParking = false;
-            //            bool isCycleRun = false;
-            //            isParking = scApp.ParkBLL.checkAndUpdateVhEntryParkingAdr(eq_id, vh.CUR_ADR_ID);
-            //            if (!isParking)
-            //            {
-            //                isCycleRun = scApp.CycleBLL.checkAndUpdateVhEntryCycleRunAdr(eq_id, vh.CUR_ADR_ID);
-            //                if (!isCycleRun)
-            //                {
-            //                    FindParkZoneOrCycleRunZoneNew(vh);
-            //                }
-            //            }
-            //        }
-            //    });
-            //}
-            //3.
-            //mcsDefaultMapAction.sendS6F11_common(SECSConst.CEID_Vehicle_Unassigned, eq_id);
-            //mcsDefaultMapAction.sendS6F11_common(SECSConst.CEID_Transfer_Completed, eq_id);
-            //scApp.VIDBLL.initialVIDCommandInfo(eq_id);
         }
+
+        private void finishMCSCmd(CompleteStatus completeStatus, int total_cmd_dis, string mcs_cmd_id, E_CMD_STATUS ohtc_cmd_status, E_TRAN_STATUS mcs_cmd_tran_status)
+        {
+            ASYSEXCUTEQUALITY quality = null;
+            scApp.SysExcuteQualityBLL.updateSysExecQity_CmdFinish(mcs_cmd_id, ohtc_cmd_status, completeStatus, total_cmd_dis, out quality);
+            scApp.CMDBLL.updateCMD_MCS_TranStatus2Complete(mcs_cmd_id, mcs_cmd_tran_status);
+            if (quality != null)
+            {
+                SCUtility.TrimAllParameter(quality);
+                LogManager.GetLogger("SysExcuteQuality").Info(quality.ToString());
+            }
+        }
+
         private E_CMD_STATUS CompleteStatusToECmdStatus(CompleteStatus completeStatus)
         {
             switch (completeStatus)
@@ -1606,6 +1643,9 @@ namespace com.mirle.ibg3k0.sc.BLL
                 case CompleteStatus.CmpStatusIdreadFailed:
                 case CompleteStatus.CmpStatusInterlockError:
                 case CompleteStatus.CmpStatusLongTimeInaction:
+                case CompleteStatus.CmpStatusDoubleStorage:
+                case CompleteStatus.CmpStatusEmptyRetrival:
+                case CompleteStatus.CmpStatusPositionError:
                     return E_CMD_STATUS.AbnormalEndByOHT;
                 case CompleteStatus.CmpStatusForceFinishByOp:
                     return E_CMD_STATUS.AbnormalEndByOHTC;
@@ -1626,6 +1666,9 @@ namespace com.mirle.ibg3k0.sc.BLL
                 case CompleteStatus.CmpStatusInterlockError:
                 case CompleteStatus.CmpStatusLongTimeInaction:
                 case CompleteStatus.CmpStatusForceFinishByOp:
+                case CompleteStatus.CmpStatusDoubleStorage:
+                case CompleteStatus.CmpStatusEmptyRetrival:
+                case CompleteStatus.CmpStatusPositionError:
                     return E_TRAN_STATUS.Aborted;
                 default:
                     return E_TRAN_STATUS.Complete;

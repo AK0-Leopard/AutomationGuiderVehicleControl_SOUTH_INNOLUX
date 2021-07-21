@@ -927,41 +927,6 @@ namespace com.mirle.ibg3k0.sc.App
             }
         }
 
-        public class TransferCmpState
-        {
-            public static string convert2MCS(ProtocolFormat.OHTMessage.CompleteStatus tran_cmp_status)
-            {
-                switch (tran_cmp_status)
-                {
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusMove:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusLoad:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusUnload:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusLoadunload:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusHome:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusOverride:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusCstIdrenmae:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusMtlhome:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusMoveToCharger:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusSystemOut:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusSystemIn:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusTechingMove:
-                        return SECSConst.CMD_Result_Successful;
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusCancel:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusAbort:
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusVehicleAbort:
-                        return SECSConst.CMD_Result_OtherErrors;
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusInterlockError:
-                        return SECSConst.CMD_Result_InterlockError;
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusIdmisMatch:
-                        return SECSConst.CMD_Result_IDMismatch;
-                    case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusIdreadFailed:
-                        return SECSConst.CMD_Result_IDReadFailed;
-                    default:
-                        throw new Exception("參數錯誤"); //TODO 要帶入正確的Exception。
-                }
-            }
-        }
-
 
         public enum MirleActiveType
         {
