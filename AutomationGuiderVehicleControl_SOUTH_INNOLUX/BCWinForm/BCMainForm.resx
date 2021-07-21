@@ -508,13 +508,13 @@
     <value>306, 26</value>
   </data>
   <data name="transferCommandHistoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Transfer History Command</value>
+    <value>Transfer Command History</value>
   </data>
   <data name="alarmToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>306, 26</value>
   </data>
   <data name="alarmToolStripMenuItem.Text" xml:space="preserve">
-    <value>Alarm History Query</value>
+    <value>Alarm History</value>
   </data>
   <data name="staticsChartToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>306, 26</value>

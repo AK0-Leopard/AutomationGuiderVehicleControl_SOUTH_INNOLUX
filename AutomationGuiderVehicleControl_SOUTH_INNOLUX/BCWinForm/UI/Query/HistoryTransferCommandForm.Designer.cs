@@ -1,6 +1,6 @@
 ﻿namespace com.mirle.ibg3k0.bc.winform.UI
 {
-    partial class HistoryAlarmsForm
+    partial class HistoryTransferCommandForm
     {
         /// <summary>
         /// Required designer variable.
@@ -47,15 +47,22 @@
             this.m_exportBtn = new CCWin.SkinControl.SkinButton();
             this.btnlSearch = new CCWin.SkinControl.SkinButton();
             this.dgv_TransferCommand = new System.Windows.Forms.DataGridView();
-            this.aLAMCODEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.eQPTIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aLAMSTATDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aLAMLVLDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rPTDATETIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cLEARDATETIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aLAMDESCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aLARMObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.cMDIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cARRIERIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vEHICLEIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tRANSFERSTATEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hOSTSOURCEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pRIORITYDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMDINSERTIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMDFINISHTIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rEPLACEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isLoadingDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.isUnloadingDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cMDMCSObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.skinGroupBox2.SuspendLayout();
@@ -66,8 +73,8 @@
             this.tableLayoutPanel5.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_TransferCommand)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aLARMObjToShowBindingSource)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cMDMCSObjToShowBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -119,6 +126,7 @@
             this.skinGroupBox2.TitleBorderColor = System.Drawing.Color.Black;
             this.skinGroupBox2.TitleRectBackColor = System.Drawing.Color.LightSteelBlue;
             this.skinGroupBox2.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
+            this.skinGroupBox2.Visible = false;
             // 
             // tableLayoutPanel4
             // 
@@ -160,7 +168,7 @@
             this.skinGroupBox4.Size = new System.Drawing.Size(393, 104);
             this.skinGroupBox4.TabIndex = 77;
             this.skinGroupBox4.TabStop = false;
-            this.skinGroupBox4.Text = "    Alarm Set Time ";
+            this.skinGroupBox4.Text = "    Set Cmd Insert Period";
             this.skinGroupBox4.TitleBorderColor = System.Drawing.Color.Black;
             this.skinGroupBox4.TitleRectBackColor = System.Drawing.Color.LightSteelBlue;
             this.skinGroupBox4.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
@@ -203,9 +211,9 @@
             this.label3.Location = new System.Drawing.Point(3, 8);
             this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(102, 22);
+            this.label3.Size = new System.Drawing.Size(96, 22);
             this.label3.TabIndex = 57;
-            this.label3.Text = "From Time";
+            this.label3.Text = "Start Time";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // m_StartDTCbx
@@ -253,6 +261,7 @@
             this.skinGroupBox1.TitleBorderColor = System.Drawing.Color.Black;
             this.skinGroupBox1.TitleRectBackColor = System.Drawing.Color.LightSteelBlue;
             this.skinGroupBox1.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
+            this.skinGroupBox1.Visible = false;
             // 
             // tableLayoutPanel5
             // 
@@ -302,7 +311,7 @@
             this.m_exportBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.m_exportBtn.ImageSize = new System.Drawing.Size(24, 24);
             this.m_exportBtn.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.m_exportBtn.Location = new System.Drawing.Point(257, 64);
+            this.m_exportBtn.Location = new System.Drawing.Point(3, 42);
             this.m_exportBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.m_exportBtn.MouseBack = null;
             this.m_exportBtn.Name = "m_exportBtn";
@@ -316,7 +325,6 @@
             // 
             // btnlSearch
             // 
-            this.btnlSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnlSearch.BackColor = System.Drawing.Color.Transparent;
             this.btnlSearch.BaseColor = System.Drawing.Color.LightGray;
             this.btnlSearch.BorderColor = System.Drawing.Color.Black;
@@ -326,18 +334,17 @@
             this.btnlSearch.Font = new System.Drawing.Font("Arial", 14F);
             this.btnlSearch.ForeColor = System.Drawing.Color.Black;
             this.btnlSearch.Image = global::com.mirle.ibg3k0.bc.winform.Properties.Resources.se;
-            this.btnlSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnlSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnlSearch.ImageSize = new System.Drawing.Size(24, 24);
             this.btnlSearch.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnlSearch.Location = new System.Drawing.Point(257, 25);
+            this.btnlSearch.Location = new System.Drawing.Point(3, 3);
             this.btnlSearch.MouseBack = null;
             this.btnlSearch.Name = "btnlSearch";
             this.btnlSearch.NormlBack = null;
             this.btnlSearch.RoundStyle = CCWin.SkinClass.RoundStyle.All;
             this.btnlSearch.Size = new System.Drawing.Size(127, 32);
             this.btnlSearch.TabIndex = 83;
-            this.btnlSearch.Text = "Search";
-            this.btnlSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnlSearch.Text = "   Search";
             this.btnlSearch.UseVisualStyleBackColor = false;
             this.btnlSearch.Click += new System.EventHandler(this.btnlSearch_Click);
             // 
@@ -349,14 +356,21 @@
             this.dgv_TransferCommand.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dgv_TransferCommand.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_TransferCommand.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.aLAMCODEDataGridViewTextBoxColumn,
-            this.eQPTIDDataGridViewTextBoxColumn,
-            this.aLAMSTATDataGridViewTextBoxColumn,
-            this.aLAMLVLDataGridViewTextBoxColumn,
-            this.rPTDATETIMEDataGridViewTextBoxColumn,
-            this.cLEARDATETIMEDataGridViewTextBoxColumn,
-            this.aLAMDESCDataGridViewTextBoxColumn});
-            this.dgv_TransferCommand.DataSource = this.aLARMObjToShowBindingSource;
+            this.cMDIDDataGridViewTextBoxColumn,
+            this.cARRIERIDDataGridViewTextBoxColumn,
+            this.vEHICLEIDDataGridViewTextBoxColumn,
+            this.tRANSFERSTATEDataGridViewTextBoxColumn,
+            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn,
+            this.hOSTSOURCEDataGridViewTextBoxColumn,
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn,
+            this.pRIORITYDataGridViewTextBoxColumn,
+            this.cMDINSERTIMEDataGridViewTextBoxColumn,
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn,
+            this.cMDFINISHTIMEDataGridViewTextBoxColumn,
+            this.rEPLACEDataGridViewTextBoxColumn,
+            this.isLoadingDataGridViewCheckBoxColumn,
+            this.isUnloadingDataGridViewCheckBoxColumn});
+            this.dgv_TransferCommand.DataSource = this.cMDMCSObjToShowBindingSource;
             this.dgv_TransferCommand.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_TransferCommand.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgv_TransferCommand.Location = new System.Drawing.Point(3, 119);
@@ -368,65 +382,6 @@
             this.dgv_TransferCommand.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_TransferCommand.Size = new System.Drawing.Size(1596, 594);
             this.dgv_TransferCommand.TabIndex = 9;
-            // 
-            // aLAMCODEDataGridViewTextBoxColumn
-            // 
-            this.aLAMCODEDataGridViewTextBoxColumn.DataPropertyName = "ALAM_CODE";
-            this.aLAMCODEDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.aLAMCODEDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.aLAMCODEDataGridViewTextBoxColumn.Name = "aLAMCODEDataGridViewTextBoxColumn";
-            this.aLAMCODEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // eQPTIDDataGridViewTextBoxColumn
-            // 
-            this.eQPTIDDataGridViewTextBoxColumn.DataPropertyName = "EQPT_ID";
-            this.eQPTIDDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.eQPTIDDataGridViewTextBoxColumn.HeaderText = "Device ID";
-            this.eQPTIDDataGridViewTextBoxColumn.Name = "eQPTIDDataGridViewTextBoxColumn";
-            this.eQPTIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aLAMSTATDataGridViewTextBoxColumn
-            // 
-            this.aLAMSTATDataGridViewTextBoxColumn.DataPropertyName = "ALAM_STAT";
-            this.aLAMSTATDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.aLAMSTATDataGridViewTextBoxColumn.HeaderText = "State";
-            this.aLAMSTATDataGridViewTextBoxColumn.Name = "aLAMSTATDataGridViewTextBoxColumn";
-            this.aLAMSTATDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aLAMLVLDataGridViewTextBoxColumn
-            // 
-            this.aLAMLVLDataGridViewTextBoxColumn.DataPropertyName = "ALAM_LVL";
-            this.aLAMLVLDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.aLAMLVLDataGridViewTextBoxColumn.HeaderText = "Level";
-            this.aLAMLVLDataGridViewTextBoxColumn.Name = "aLAMLVLDataGridViewTextBoxColumn";
-            this.aLAMLVLDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // rPTDATETIMEDataGridViewTextBoxColumn
-            // 
-            this.rPTDATETIMEDataGridViewTextBoxColumn.DataPropertyName = "RPT_DATE_TIME";
-            this.rPTDATETIMEDataGridViewTextBoxColumn.FillWeight = 80F;
-            this.rPTDATETIMEDataGridViewTextBoxColumn.HeaderText = "Happend time";
-            this.rPTDATETIMEDataGridViewTextBoxColumn.Name = "rPTDATETIMEDataGridViewTextBoxColumn";
-            this.rPTDATETIMEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cLEARDATETIMEDataGridViewTextBoxColumn
-            // 
-            this.cLEARDATETIMEDataGridViewTextBoxColumn.DataPropertyName = "CLEAR_DATE_TIME";
-            this.cLEARDATETIMEDataGridViewTextBoxColumn.FillWeight = 80F;
-            this.cLEARDATETIMEDataGridViewTextBoxColumn.HeaderText = "Clear Time";
-            this.cLEARDATETIMEDataGridViewTextBoxColumn.Name = "cLEARDATETIMEDataGridViewTextBoxColumn";
-            this.cLEARDATETIMEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aLAMDESCDataGridViewTextBoxColumn
-            // 
-            this.aLAMDESCDataGridViewTextBoxColumn.DataPropertyName = "ALAM_DESC";
-            this.aLAMDESCDataGridViewTextBoxColumn.HeaderText = "Description";
-            this.aLAMDESCDataGridViewTextBoxColumn.Name = "aLAMDESCDataGridViewTextBoxColumn";
-            this.aLAMDESCDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aLARMObjToShowBindingSource
-            // 
-            this.aLARMObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.ALARMObjToShow);
             // 
             // tableLayoutPanel1
             // 
@@ -443,7 +398,109 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1602, 716);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // HistoryAlarmsForm
+            // cMDIDDataGridViewTextBoxColumn
+            // 
+            this.cMDIDDataGridViewTextBoxColumn.DataPropertyName = "CMD_ID";
+            this.cMDIDDataGridViewTextBoxColumn.HeaderText = "CMD_ID";
+            this.cMDIDDataGridViewTextBoxColumn.Name = "cMDIDDataGridViewTextBoxColumn";
+            this.cMDIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cARRIERIDDataGridViewTextBoxColumn
+            // 
+            this.cARRIERIDDataGridViewTextBoxColumn.DataPropertyName = "CARRIER_ID";
+            this.cARRIERIDDataGridViewTextBoxColumn.HeaderText = "CARRIER_ID";
+            this.cARRIERIDDataGridViewTextBoxColumn.Name = "cARRIERIDDataGridViewTextBoxColumn";
+            this.cARRIERIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // vEHICLEIDDataGridViewTextBoxColumn
+            // 
+            this.vEHICLEIDDataGridViewTextBoxColumn.DataPropertyName = "VEHICLE_ID";
+            this.vEHICLEIDDataGridViewTextBoxColumn.HeaderText = "VEHICLE_ID";
+            this.vEHICLEIDDataGridViewTextBoxColumn.Name = "vEHICLEIDDataGridViewTextBoxColumn";
+            this.vEHICLEIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // tRANSFERSTATEDataGridViewTextBoxColumn
+            // 
+            this.tRANSFERSTATEDataGridViewTextBoxColumn.DataPropertyName = "TRANSFERSTATE";
+            this.tRANSFERSTATEDataGridViewTextBoxColumn.HeaderText = "TRANSFERSTATE";
+            this.tRANSFERSTATEDataGridViewTextBoxColumn.Name = "tRANSFERSTATEDataGridViewTextBoxColumn";
+            this.tRANSFERSTATEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // tRANSFERSTATEToShowDataGridViewTextBoxColumn
+            // 
+            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn.DataPropertyName = "TRANSFERSTATEToShow";
+            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn.HeaderText = "TRANSFERSTATEToShow";
+            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn.Name = "tRANSFERSTATEToShowDataGridViewTextBoxColumn";
+            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // hOSTSOURCEDataGridViewTextBoxColumn
+            // 
+            this.hOSTSOURCEDataGridViewTextBoxColumn.DataPropertyName = "HOSTSOURCE";
+            this.hOSTSOURCEDataGridViewTextBoxColumn.HeaderText = "HOSTSOURCE";
+            this.hOSTSOURCEDataGridViewTextBoxColumn.Name = "hOSTSOURCEDataGridViewTextBoxColumn";
+            this.hOSTSOURCEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // hOSTDESTINATIONDataGridViewTextBoxColumn
+            // 
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn.DataPropertyName = "HOSTDESTINATION";
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn.HeaderText = "HOSTDESTINATION";
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn.Name = "hOSTDESTINATIONDataGridViewTextBoxColumn";
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pRIORITYDataGridViewTextBoxColumn
+            // 
+            this.pRIORITYDataGridViewTextBoxColumn.DataPropertyName = "PRIORITY";
+            this.pRIORITYDataGridViewTextBoxColumn.HeaderText = "PRIORITY";
+            this.pRIORITYDataGridViewTextBoxColumn.Name = "pRIORITYDataGridViewTextBoxColumn";
+            this.pRIORITYDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cMDINSERTIMEDataGridViewTextBoxColumn
+            // 
+            this.cMDINSERTIMEDataGridViewTextBoxColumn.DataPropertyName = "CMD_INSER_TIME";
+            this.cMDINSERTIMEDataGridViewTextBoxColumn.HeaderText = "CMD_INSER_TIME";
+            this.cMDINSERTIMEDataGridViewTextBoxColumn.Name = "cMDINSERTIMEDataGridViewTextBoxColumn";
+            this.cMDINSERTIMEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cMDSTARTTIMEDataGridViewTextBoxColumn
+            // 
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn.DataPropertyName = "CMD_START_TIME";
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn.HeaderText = "CMD_START_TIME";
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn.Name = "cMDSTARTTIMEDataGridViewTextBoxColumn";
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cMDFINISHTIMEDataGridViewTextBoxColumn
+            // 
+            this.cMDFINISHTIMEDataGridViewTextBoxColumn.DataPropertyName = "CMD_FINISH_TIME";
+            this.cMDFINISHTIMEDataGridViewTextBoxColumn.HeaderText = "CMD_FINISH_TIME";
+            this.cMDFINISHTIMEDataGridViewTextBoxColumn.Name = "cMDFINISHTIMEDataGridViewTextBoxColumn";
+            this.cMDFINISHTIMEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // rEPLACEDataGridViewTextBoxColumn
+            // 
+            this.rEPLACEDataGridViewTextBoxColumn.DataPropertyName = "REPLACE";
+            this.rEPLACEDataGridViewTextBoxColumn.HeaderText = "REPLACE";
+            this.rEPLACEDataGridViewTextBoxColumn.Name = "rEPLACEDataGridViewTextBoxColumn";
+            this.rEPLACEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // isLoadingDataGridViewCheckBoxColumn
+            // 
+            this.isLoadingDataGridViewCheckBoxColumn.DataPropertyName = "isLoading";
+            this.isLoadingDataGridViewCheckBoxColumn.HeaderText = "isLoading";
+            this.isLoadingDataGridViewCheckBoxColumn.Name = "isLoadingDataGridViewCheckBoxColumn";
+            this.isLoadingDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
+            // isUnloadingDataGridViewCheckBoxColumn
+            // 
+            this.isUnloadingDataGridViewCheckBoxColumn.DataPropertyName = "isUnloading";
+            this.isUnloadingDataGridViewCheckBoxColumn.HeaderText = "isUnloading";
+            this.isUnloadingDataGridViewCheckBoxColumn.Name = "isUnloadingDataGridViewCheckBoxColumn";
+            this.isUnloadingDataGridViewCheckBoxColumn.ReadOnly = true;
+            // 
+            // cMDMCSObjToShowBindingSource
+            // 
+            this.cMDMCSObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.CMD_MCSObjToShow);
+            // 
+            // HistoryTransferCommandForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -451,8 +508,8 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
-            this.Name = "HistoryAlarmsForm";
-            this.Text = "History Alarms";
+            this.Name = "HistoryTransferCommandForm";
+            this.Text = "History Transfer Command";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TransferCommandQureyListForm_FormClosed);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
@@ -466,14 +523,13 @@
             this.tableLayoutPanel5.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_TransferCommand)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aLARMObjToShowBindingSource)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.cMDMCSObjToShowBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.BindingSource aLARMObjToShowBindingSource;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private CCWin.SkinControl.SkinGroupBox skinGroupBox2;
@@ -493,12 +549,20 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
         private CCWin.SkinControl.SkinButton m_exportBtn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aLAMCODEDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn eQPTIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aLAMSTATDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aLAMLVLDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rPTDATETIMEDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cLEARDATETIMEDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn aLAMDESCDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource cMDMCSObjToShowBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cMDIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cARRIERIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn vEHICLEIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tRANSFERSTATEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tRANSFERSTATEToShowDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hOSTSOURCEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hOSTDESTINATIONDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn pRIORITYDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cMDINSERTIMEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cMDSTARTTIMEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cMDFINISHTIMEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rEPLACEDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isLoadingDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn isUnloadingDataGridViewCheckBoxColumn;
     }
 }

@@ -2983,6 +2983,21 @@ namespace com.mirle.ibg3k0.sc.BLL
             }
             return hcmds;
         }
+
+        public List<ObjectRelay.HCMD_MCSObjToShow> loadHCMD_MCSs(DateTime dtStart, DateTime dtEnd)
+        {
+            List<ObjectRelay.HCMD_MCSObjToShow> hcmds = null;
+            using (TransactionScope ts = new TransactionScope(TransactionScopeOption.Required,
+                                                              new TransactionOptions() { IsolationLevel = IsolationLevel.ReadUncommitted }))
+            {
+                using (DBConnection_EF con = DBConnection_EF.GetUContext())
+                {
+                    hcmds = hcmd_mcsDao.loadByInsertPeriod(con, dtStart, dtEnd);
+                }
+                ts.Complete();
+            }
+            return hcmds;
+        }
         #endregion HCMD_MCS
         #region HCMD_OHTC
         public void CreatHCMD_OHTCs(List<HCMD_OHTC> HCMD_OHTC)

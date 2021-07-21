@@ -1031,7 +1031,7 @@ namespace com.mirle.ibg3k0.bc.winform
 
         private void sectionDataToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openForm(typeof(VehicleDataSettingForm).Name);
+            openForm(typeof(VehicleDataSettingForm).Name, true, false);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -1114,7 +1114,7 @@ namespace com.mirle.ibg3k0.bc.winform
 
         //private void hostConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         //{
-        //    openForm(typeof(HostModeChg_Form).Name);
+        //    openForm(typeof(HostModeChg_Form).Name, true, false);
         //}
 
         private void transferCommandToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1124,13 +1124,12 @@ namespace com.mirle.ibg3k0.bc.winform
 
         private void transferCommandHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openForm(typeof(HistoryTransferCommandQureyListForm).Name);
-
+            openForm(typeof(HistoryTransferCommandForm).Name, true, false);
         }
 
         private void alarmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openForm(typeof(HistoryAlarmsForm).Name);
+            openForm(typeof(HistoryAlarmsForm).Name, true, false);
         }
 
         private void reserveInfoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1150,7 +1149,7 @@ namespace com.mirle.ibg3k0.bc.winform
 
         private void hostConnectionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openForm(typeof(HostModeChg_Form).Name);
+            openForm(typeof(HostModeChg_Form).Name, true, false);
 
         }
 
