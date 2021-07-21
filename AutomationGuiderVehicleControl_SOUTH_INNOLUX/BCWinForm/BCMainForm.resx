@@ -382,7 +382,7 @@
     <value>Carrier Installed / Remove</value>
   </data>
   <data name="debugToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 26</value>
+    <value>214, 26</value>
   </data>
   <data name="debugToolStripMenuItem.Text" xml:space="preserve">
     <value>Debug</value>
@@ -391,10 +391,16 @@
     <value>False</value>
   </data>
   <data name="roadControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 26</value>
+    <value>214, 26</value>
   </data>
   <data name="roadControlToolStripMenuItem.Text" xml:space="preserve">
     <value>Road Control</value>
+  </data>
+  <data name="chargerControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="chargerControlToolStripMenuItem.Text" xml:space="preserve">
+    <value>Charger Control</value>
   </data>
   <data name="engineerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 26</value>
@@ -1552,6 +1558,12 @@
   </data>
   <data name="&gt;&gt;logout_timer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chargerControlToolStripMenuItem.Name" xml:space="preserve">
+    <value>chargerControlToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;chargerControlToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>BCMainForm</value>

@@ -1015,6 +1015,11 @@ namespace com.mirle.ibg3k0.bc.winform
             }
         }
 
+        private void chargerControlToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openForm(typeof(ChargerControlForm).Name, true, false);
+        }
+
         private void zhTwToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.UICulture = new System.Globalization.CultureInfo("zh-TW");

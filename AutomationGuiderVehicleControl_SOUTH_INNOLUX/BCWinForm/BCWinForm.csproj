@@ -464,6 +464,12 @@
     <Compile Include="UI\OHT_Form.Designer.cs">
       <DependentUpon>OHT_Form.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Operate\ChargerControlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Operate\ChargerControlForm.Designer.cs">
+      <DependentUpon>ChargerControlForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Operate\DebugForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1762,6 +1768,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\OHT_Form.resx">
       <DependentUpon>OHT_Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Operate\ChargerControlForm.resx">
+      <DependentUpon>ChargerControlForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Operate\DebugForm.resx">
       <DependentUpon>DebugForm.cs</DependentUpon>
