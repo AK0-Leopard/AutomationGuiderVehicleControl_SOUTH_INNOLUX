@@ -309,21 +309,6 @@
   <data name="carrierInstalledRemoveToolStripMenuItem.Text" xml:space="preserve">
     <value>Carrier Installed / Remove</value>
   </data>
-  <data name="debugToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 26</value>
-  </data>
-  <data name="debugToolStripMenuItem.Text" xml:space="preserve">
-    <value>Debug</value>
-  </data>
-  <data name="debugToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="roadControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 26</value>
-  </data>
-  <data name="roadControlToolStripMenuItem.Text" xml:space="preserve">
-    <value>Road Control</value>
-  </data>
   <data name="engineerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 26</value>
   </data>
@@ -501,31 +486,6 @@
   <data name="uASToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="systemToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 26</value>
-  </data>
-  <data name="systemToolStripMenuItem.Text" xml:space="preserve">
-    <value>System</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="toolStripMenuItem2.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="toolStripMenuItem2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>12, 26</value>
-  </data>
-  <data name="transferCommandToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 26</value>
-  </data>
-  <data name="transferCommandToolStripMenuItem.Text" xml:space="preserve">
-    <value>Transfer Command</value>
-  </data>
-  <data name="carrierInstalledRemoveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 26</value>
-  </data>
-  <data name="carrierInstalledRemoveToolStripMenuItem.Text" xml:space="preserve">
-    <value>Carrier Installed / Remove</value>
-  </data>
   <data name="debugToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 26</value>
   </data>
@@ -541,11 +501,11 @@
   <data name="roadControlToolStripMenuItem.Text" xml:space="preserve">
     <value>Road Control</value>
   </data>
-  <data name="engineerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 26</value>
+  <data name="chargerControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
   </data>
-  <data name="engineerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Engineer</value>
+  <data name="chargerControlToolStripMenuItem.Text" xml:space="preserve">
+    <value>Charger Control</value>
   </data>
   <data name="zhTwToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 26</value>
@@ -1441,6 +1401,18 @@
     <value>roadControlToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;roadControlToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chargerControlToolStripMenuItem.Name" xml:space="preserve">
+    <value>chargerControlToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;chargerControlToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;vehicleOperationToolStripMenuItem.Name" xml:space="preserve">
+    <value>vehicleOperationToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;vehicleOperationToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;languageChangeToolStripMenuItem.Name" xml:space="preserve">

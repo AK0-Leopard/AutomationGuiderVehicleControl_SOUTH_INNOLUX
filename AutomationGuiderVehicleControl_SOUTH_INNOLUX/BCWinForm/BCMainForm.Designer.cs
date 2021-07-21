@@ -89,6 +89,8 @@ namespace com.mirle.ibg3k0.bc.winform
             this.engineerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.roadControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chargerControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.vehicleOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageChangeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zhTwToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enUSToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,8 +118,6 @@ namespace com.mirle.ibg3k0.bc.winform
             this.cycleRunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.logout_timer = new System.Windows.Forms.Timer(this.components);
-            this.vehicleOperationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chargerControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.CMS_OnLineMode.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -394,6 +394,18 @@ namespace com.mirle.ibg3k0.bc.winform
             this.roadControlToolStripMenuItem.Name = "roadControlToolStripMenuItem";
             resources.ApplyResources(this.roadControlToolStripMenuItem, "roadControlToolStripMenuItem");
             this.roadControlToolStripMenuItem.Click += new System.EventHandler(this.roadControlToolStripMenuItem_Click);
+            // 
+            // chargerControlToolStripMenuItem
+            // 
+            this.chargerControlToolStripMenuItem.Name = "chargerControlToolStripMenuItem";
+            resources.ApplyResources(this.chargerControlToolStripMenuItem, "chargerControlToolStripMenuItem");
+            this.chargerControlToolStripMenuItem.Click += new System.EventHandler(this.chargerControlToolStripMenuItem_Click);
+            // 
+            // vehicleOperationToolStripMenuItem
+            // 
+            this.vehicleOperationToolStripMenuItem.Name = "vehicleOperationToolStripMenuItem";
+            resources.ApplyResources(this.vehicleOperationToolStripMenuItem, "vehicleOperationToolStripMenuItem");
+            this.vehicleOperationToolStripMenuItem.Click += new System.EventHandler(this.vehicleOperationToolStripMenuItem_Click);
             // 
             // languageChangeToolStripMenuItem
             // 
@@ -738,6 +750,8 @@ namespace com.mirle.ibg3k0.bc.winform
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem alarmListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem vehicleOperationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem chargerControlToolStripMenuItem;
         private System.Windows.Forms.Timer logout_timer;
     }
 
