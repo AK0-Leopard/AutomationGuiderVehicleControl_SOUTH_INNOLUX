@@ -13,8 +13,8 @@ namespace com.mirle.ibg3k0.bc.winform.UI
     public partial class HistoryTransferCommandForm : Form
     {
         BCMainForm mainform;
-        BindingSource cmsMCS_bindingSource = new BindingSource();
-        List<HCMD_MCSObjToShow> cmdMCSList = null;
+        BindingSource hcmdMCS_bindingSource = new BindingSource();
+        List<HCMD_MCSObjToShow> hcmdMCSList = null;
 #pragma warning disable CS0414 // 已指派欄位 'HistoryTransferCommandForm.selection_index'，但從未使用過其值。
         int selection_index = -1;
 #pragma warning restore CS0414 // 已指派欄位 'HistoryTransferCommandForm.selection_index'，但從未使用過其值。
@@ -24,18 +24,18 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             dgv_TransferCommand.AutoGenerateColumns = false;
             mainform = _mainForm;
 
-            dgv_TransferCommand.DataSource = cmsMCS_bindingSource;
+            dgv_TransferCommand.DataSource = hcmdMCS_bindingSource;
 
             m_StartDTCbx.Value = DateTime.Today;
             m_EndDTCbx.Value = DateTime.Now;
-            m_exportBtn.Enabled = cmdMCSList != null && cmdMCSList.Count > 0;
+            m_exportBtn.Enabled = hcmdMCSList != null && hcmdMCSList.Count > 0;
         }
 
         private async Task updateTransferCommand()
         {
-            await Task.Run(()=>cmdMCSList = mainform.BCApp.SCApplication.CMDBLL.loadHCMD_MCSs(m_StartDTCbx.Value, m_EndDTCbx.Value));
-            m_exportBtn.Enabled = cmdMCSList != null && cmdMCSList.Count > 0;
-            cmsMCS_bindingSource.DataSource = cmdMCSList;
+            await Task.Run(()=> hcmdMCSList = mainform.BCApp.SCApplication.CMDBLL.loadHCMD_MCSs(m_StartDTCbx.Value, m_EndDTCbx.Value));
+            m_exportBtn.Enabled = hcmdMCSList != null && hcmdMCSList.Count > 0;
+            hcmdMCS_bindingSource.DataSource = hcmdMCSList;
             dgv_TransferCommand.Refresh();
         }
 
@@ -73,7 +73,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
 
         private async void m_exportBtn_Click(object sender, EventArgs e)
         {
-            if (cmdMCSList == null || cmdMCSList.Count == 0) return;
+            if (hcmdMCSList == null || hcmdMCSList.Count == 0) return;
             Button btn = sender as Button;
             ProgressBarDialog progress = new ProgressBarDialog(null);
             try
@@ -97,7 +97,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
                 Common.XSLXHelper helper = new Common.XSLXHelper();
                 //取得轉為 xlsx 的物件
                 ClosedXML.Excel.XLWorkbook xlsx = null;
-                await Task.Run(() => xlsx = helper.Export(cmdMCSList));
+                await Task.Run(() => xlsx = helper.Export(hcmdMCSList));
                 if (xlsx != null)
                     xlsx.SaveAs(filename);
             }

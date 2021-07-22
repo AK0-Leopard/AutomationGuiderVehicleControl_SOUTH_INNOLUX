@@ -47,12 +47,9 @@
             this.m_exportBtn = new CCWin.SkinControl.SkinButton();
             this.btnlSearch = new CCWin.SkinControl.SkinButton();
             this.dgv_TransferCommand = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.cMDIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cARRIERIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vEHICLEIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tRANSFERSTATEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hOSTSOURCEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hOSTDESTINATIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pRIORITYDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,9 +57,8 @@
             this.cMDSTARTTIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cMDFINISHTIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.rEPLACEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isLoadingDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.isUnloadingDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cMDMCSObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.hCMDMCSObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.skinGroupBox2.SuspendLayout();
@@ -73,8 +69,8 @@
             this.tableLayoutPanel5.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_TransferCommand)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hCMDMCSObjToShowBindingSource)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cMDMCSObjToShowBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -358,19 +354,15 @@
             this.dgv_TransferCommand.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cMDIDDataGridViewTextBoxColumn,
             this.cARRIERIDDataGridViewTextBoxColumn,
-            this.vEHICLEIDDataGridViewTextBoxColumn,
             this.tRANSFERSTATEDataGridViewTextBoxColumn,
-            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn,
             this.hOSTSOURCEDataGridViewTextBoxColumn,
             this.hOSTDESTINATIONDataGridViewTextBoxColumn,
             this.pRIORITYDataGridViewTextBoxColumn,
             this.cMDINSERTIMEDataGridViewTextBoxColumn,
             this.cMDSTARTTIMEDataGridViewTextBoxColumn,
             this.cMDFINISHTIMEDataGridViewTextBoxColumn,
-            this.rEPLACEDataGridViewTextBoxColumn,
-            this.isLoadingDataGridViewCheckBoxColumn,
-            this.isUnloadingDataGridViewCheckBoxColumn});
-            this.dgv_TransferCommand.DataSource = this.cMDMCSObjToShowBindingSource;
+            this.rEPLACEDataGridViewTextBoxColumn});
+            this.dgv_TransferCommand.DataSource = this.hCMDMCSObjToShowBindingSource;
             this.dgv_TransferCommand.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgv_TransferCommand.GridColor = System.Drawing.SystemColors.ControlDarkDark;
             this.dgv_TransferCommand.Location = new System.Drawing.Point(3, 119);
@@ -382,21 +374,6 @@
             this.dgv_TransferCommand.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_TransferCommand.Size = new System.Drawing.Size(1596, 594);
             this.dgv_TransferCommand.TabIndex = 9;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.dgv_TransferCommand, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.80447F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.97765F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1602, 716);
-            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // cMDIDDataGridViewTextBoxColumn
             // 
@@ -412,26 +389,12 @@
             this.cARRIERIDDataGridViewTextBoxColumn.Name = "cARRIERIDDataGridViewTextBoxColumn";
             this.cARRIERIDDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // vEHICLEIDDataGridViewTextBoxColumn
-            // 
-            this.vEHICLEIDDataGridViewTextBoxColumn.DataPropertyName = "VEHICLE_ID";
-            this.vEHICLEIDDataGridViewTextBoxColumn.HeaderText = "VEHICLE_ID";
-            this.vEHICLEIDDataGridViewTextBoxColumn.Name = "vEHICLEIDDataGridViewTextBoxColumn";
-            this.vEHICLEIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // tRANSFERSTATEDataGridViewTextBoxColumn
             // 
             this.tRANSFERSTATEDataGridViewTextBoxColumn.DataPropertyName = "TRANSFERSTATE";
             this.tRANSFERSTATEDataGridViewTextBoxColumn.HeaderText = "TRANSFERSTATE";
             this.tRANSFERSTATEDataGridViewTextBoxColumn.Name = "tRANSFERSTATEDataGridViewTextBoxColumn";
             this.tRANSFERSTATEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tRANSFERSTATEToShowDataGridViewTextBoxColumn
-            // 
-            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn.DataPropertyName = "TRANSFERSTATEToShow";
-            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn.HeaderText = "TRANSFERSTATEToShow";
-            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn.Name = "tRANSFERSTATEToShowDataGridViewTextBoxColumn";
-            this.tRANSFERSTATEToShowDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // hOSTSOURCEDataGridViewTextBoxColumn
             // 
@@ -456,24 +419,30 @@
             // 
             // cMDINSERTIMEDataGridViewTextBoxColumn
             // 
+            this.cMDINSERTIMEDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.cMDINSERTIMEDataGridViewTextBoxColumn.DataPropertyName = "CMD_INSER_TIME";
             this.cMDINSERTIMEDataGridViewTextBoxColumn.HeaderText = "CMD_INSER_TIME";
             this.cMDINSERTIMEDataGridViewTextBoxColumn.Name = "cMDINSERTIMEDataGridViewTextBoxColumn";
             this.cMDINSERTIMEDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cMDINSERTIMEDataGridViewTextBoxColumn.Width = 175;
             // 
             // cMDSTARTTIMEDataGridViewTextBoxColumn
             // 
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.cMDSTARTTIMEDataGridViewTextBoxColumn.DataPropertyName = "CMD_START_TIME";
             this.cMDSTARTTIMEDataGridViewTextBoxColumn.HeaderText = "CMD_START_TIME";
             this.cMDSTARTTIMEDataGridViewTextBoxColumn.Name = "cMDSTARTTIMEDataGridViewTextBoxColumn";
             this.cMDSTARTTIMEDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn.Width = 175;
             // 
             // cMDFINISHTIMEDataGridViewTextBoxColumn
             // 
+            this.cMDFINISHTIMEDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.cMDFINISHTIMEDataGridViewTextBoxColumn.DataPropertyName = "CMD_FINISH_TIME";
             this.cMDFINISHTIMEDataGridViewTextBoxColumn.HeaderText = "CMD_FINISH_TIME";
             this.cMDFINISHTIMEDataGridViewTextBoxColumn.Name = "cMDFINISHTIMEDataGridViewTextBoxColumn";
             this.cMDFINISHTIMEDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cMDFINISHTIMEDataGridViewTextBoxColumn.Width = 185;
             // 
             // rEPLACEDataGridViewTextBoxColumn
             // 
@@ -482,23 +451,24 @@
             this.rEPLACEDataGridViewTextBoxColumn.Name = "rEPLACEDataGridViewTextBoxColumn";
             this.rEPLACEDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // isLoadingDataGridViewCheckBoxColumn
+            // hCMDMCSObjToShowBindingSource
             // 
-            this.isLoadingDataGridViewCheckBoxColumn.DataPropertyName = "isLoading";
-            this.isLoadingDataGridViewCheckBoxColumn.HeaderText = "isLoading";
-            this.isLoadingDataGridViewCheckBoxColumn.Name = "isLoadingDataGridViewCheckBoxColumn";
-            this.isLoadingDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.hCMDMCSObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.HCMD_MCSObjToShow);
             // 
-            // isUnloadingDataGridViewCheckBoxColumn
+            // tableLayoutPanel1
             // 
-            this.isUnloadingDataGridViewCheckBoxColumn.DataPropertyName = "isUnloading";
-            this.isUnloadingDataGridViewCheckBoxColumn.HeaderText = "isUnloading";
-            this.isUnloadingDataGridViewCheckBoxColumn.Name = "isUnloadingDataGridViewCheckBoxColumn";
-            this.isUnloadingDataGridViewCheckBoxColumn.ReadOnly = true;
-            // 
-            // cMDMCSObjToShowBindingSource
-            // 
-            this.cMDMCSObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.CMD_MCSObjToShow);
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.dgv_TransferCommand, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.80447F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.97765F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1602, 716);
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // HistoryTransferCommandForm
             // 
@@ -523,8 +493,8 @@
             this.tableLayoutPanel5.PerformLayout();
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_TransferCommand)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.hCMDMCSObjToShowBindingSource)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cMDMCSObjToShowBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -549,12 +519,10 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
         private CCWin.SkinControl.SkinButton m_exportBtn;
-        private System.Windows.Forms.BindingSource cMDMCSObjToShowBindingSource;
+        private System.Windows.Forms.BindingSource hCMDMCSObjToShowBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn cMDIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cARRIERIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn vEHICLEIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn tRANSFERSTATEDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tRANSFERSTATEToShowDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hOSTSOURCEDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn hOSTDESTINATIONDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pRIORITYDataGridViewTextBoxColumn;
@@ -562,7 +530,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn cMDSTARTTIMEDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn cMDFINISHTIMEDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn rEPLACEDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isLoadingDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn isUnloadingDataGridViewCheckBoxColumn;
     }
 }
