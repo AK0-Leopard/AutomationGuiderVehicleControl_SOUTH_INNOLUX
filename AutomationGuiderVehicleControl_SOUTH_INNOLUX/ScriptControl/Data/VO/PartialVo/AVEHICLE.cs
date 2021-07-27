@@ -672,7 +672,7 @@ namespace com.mirle.ibg3k0.sc
                    DateTime.Now > LAST_FULLY_CHARGED_TIME?.AddMinutes(SystemParameter.TheLongestFullyChargedIntervalTime_Mim);
         }
 
-
+        public bool IsLongTimeInstallCarrierHappend { get; set; } = false;
         [JsonIgnore]
         public string VhExcuteCMDStatusChangeEvent = "VhExcuteCMDStatusChangeEvent";
         public void NotifyVhExcuteCMDStatusChange()
@@ -1634,7 +1634,15 @@ namespace com.mirle.ibg3k0.sc
                         double carrier_installed_time = vh.CarrierInstalledTime.Elapsed.TotalSeconds;
                         if (carrier_installed_time > AVEHICLE.MAX_ALLOW_CARRIER_INSTALLED_TIME_SECOND)
                         {
-                            vh.onCarrierLongTimeInstalledInVh(SCUtility.Trim(vh.CST_ID, true));
+                            if (!vh.IsLongTimeInstallCarrierHappend)
+                            {
+                                vh.IsLongTimeInstallCarrierHappend = true;
+                                vh.onCarrierLongTimeInstalledInVh(SCUtility.Trim(vh.CST_ID, true));
+                            }
+                        }
+                        else
+                        {
+                            vh.IsLongTimeInstallCarrierHappend = false;
                         }
                     }
                     catch (Exception ex)
