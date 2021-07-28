@@ -707,6 +707,7 @@ namespace com.mirle.ibg3k0.bc.winform
         [AuthorityCheck(FUNCode = BCAppConstants.FUNC_MAINTENANCE_FUN)]
         private System.Windows.Forms.ToolStripMenuItem mataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_USER_MANAGEMENT)]
         private System.Windows.Forms.ToolStripMenuItem uASToolStripMenuItem;
         [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripMenuItem operatorToolStripMenuItem;

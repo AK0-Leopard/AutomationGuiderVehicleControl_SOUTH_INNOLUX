@@ -12,6 +12,8 @@
 // 2016/04/01    Kevin Wei      N/A            A0.02   調整Datagridview的大小。
 // 2016/04/06    Kevin Wei      N/A            A0.03   取消Power User、Disable的使用。
 // 2016/04/06    Harris Kuo     N/A            A0.04    修改按下"Close"後,可以關閉整個UASMainForm
+// 2021/07/28    Allen TIng     N/A            A0.05   將userGrpCbx給值部分放到Refresh()裡，
+// //                                                  在UserGrpForm頁籤做得調整在切換UserMngForm頁籤時才會更新
 //**********************************************************************************
 
 using System;
@@ -48,11 +50,12 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
             UserDataGridView.DataSource = userDataBS;
 
             //A0.01 Start
-            List<UASUSRGRP> userGrpList = bcApp.SCApplication.UserBLL.loadAllUserGroup();
-            foreach (UASUSRGRP usrGrp in userGrpList)
-            {
-                userGrpCbx.Items.Add(usrGrp.USER_GRP);
-            }
+            // move to Refresh() - reloadUserGroupList() //A0.05
+            //List<UASUSRGRP> userGrpList = bcApp.SCApplication.UserBLL.loadAllUserGroup();
+            //foreach (UASUSRGRP usrGrp in userGrpList)
+            //{
+            //    userGrpCbx.Items.Add(usrGrp.USER_GRP?.Trim());
+            //}
             //A0.01 End
 
             Refresh();
@@ -71,6 +74,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
         {
             base.Refresh();
             reloadUserDataTable();
+            reloadUserGroupList(); //A0.05
             clearTextBox();
         }
 
@@ -83,6 +87,16 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
             userDataList.AddRange(userList);
             userDataBS.ResetBindings(false);
             this.Cursor = Cursors.Default;
+        }
+
+        private void reloadUserGroupList()
+        {
+            userGrpCbx.Items.Clear();
+            List<UASUSRGRP> userGrpList = bcApp.SCApplication.UserBLL.loadAllUserGroup();
+            foreach (UASUSRGRP usrGrp in userGrpList)
+            {
+                userGrpCbx.Items.Add(usrGrp.USER_GRP?.Trim());
+            }
         }
 
         private void clearTextBox()
