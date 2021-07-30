@@ -2574,7 +2574,7 @@ namespace com.mirle.ibg3k0.sc.Service
             {
                 bool is_can = reservedVh.isTcpIpConnect &&
                        (reservedVh.MODE_STATUS == VHModeStatus.AutoRemote || reservedVh.MODE_STATUS == VHModeStatus.AutoCharging) &&
-                       reservedVh.ACT_STATUS == VHActionStatus.NoCommand &&
+                        reservedVh.ACT_STATUS == VHActionStatus.NoCommand &&
                        !scApp.CMDBLL.isCMD_OHTCQueueByVh(reservedVh.VEHICLE_ID);
                 //&& !scApp.CMDBLL.HasCMD_MCSInQueue();
                 return (is_can, CAN_NOT_AVOID_RESULT.Normal);

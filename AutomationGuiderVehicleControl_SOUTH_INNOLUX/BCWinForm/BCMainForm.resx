@@ -378,33 +378,6 @@
   <data name="carrierInstalledRemoveToolStripMenuItem.Text" xml:space="preserve">
     <value>Carrier Installed / Remove</value>
   </data>
-  <data name="debugToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 26</value>
-  </data>
-  <data name="debugToolStripMenuItem.Text" xml:space="preserve">
-    <value>Debug</value>
-  </data>
-  <data name="debugToolStripMenuItem.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="roadControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 26</value>
-  </data>
-  <data name="roadControlToolStripMenuItem.Text" xml:space="preserve">
-    <value>Road Control</value>
-  </data>
-  <data name="chargerControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 26</value>
-  </data>
-  <data name="chargerControlToolStripMenuItem.Text" xml:space="preserve">
-    <value>Charger Control</value>
-  </data>
-  <data name="engineerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 26</value>
-  </data>
-  <data name="engineerToolStripMenuItem.Text" xml:space="preserve">
-    <value>Engineer</value>
-  </data>
   <data name="vehicleOperationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 26</value>
   </data>
@@ -449,6 +422,30 @@
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
     <value>297, 6</value>
+  </data>
+  <data name="roadControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="roadControlToolStripMenuItem.Text" xml:space="preserve">
+    <value>Road Control</value>
+  </data>
+  <data name="chargerControlToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="chargerControlToolStripMenuItem.Text" xml:space="preserve">
+    <value>Charger Control</value>
+  </data>
+  <data name="cycleRunToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>214, 26</value>
+  </data>
+  <data name="cycleRunToolStripMenuItem.Text" xml:space="preserve">
+    <value>Cycle Run</value>
+  </data>
+  <data name="engineerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 26</value>
+  </data>
+  <data name="engineerToolStripMenuItem.Text" xml:space="preserve">
+    <value>Engineer</value>
   </data>
   <data name="operatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 26</value>
@@ -557,12 +554,6 @@
   </data>
   <data name="engineeringModeToolStripMenuItem.Text" xml:space="preserve">
     <value>Engineering mode</value>
-  </data>
-  <data name="cycleRunToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>235, 26</value>
-  </data>
-  <data name="cycleRunToolStripMenuItem.Text" xml:space="preserve">
-    <value>Cycle Run</value>
   </data>
   <data name="engineerToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 26</value>
@@ -1382,30 +1373,6 @@
   <data name="&gt;&gt;carrierInstalledRemoveToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;engineerToolStripMenuItem.Name" xml:space="preserve">
-    <value>engineerToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;engineerToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;debugToolStripMenuItem.Name" xml:space="preserve">
-    <value>debugToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;debugToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;roadControlToolStripMenuItem.Name" xml:space="preserve">
-    <value>roadControlToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;roadControlToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;chargerControlToolStripMenuItem.Name" xml:space="preserve">
-    <value>chargerControlToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;chargerControlToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;vehicleOperationToolStripMenuItem.Name" xml:space="preserve">
     <value>vehicleOperationToolStripMenuItem</value>
   </data>
@@ -1447,6 +1414,30 @@
   </data>
   <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;engineerToolStripMenuItem.Name" xml:space="preserve">
+    <value>engineerToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;engineerToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;roadControlToolStripMenuItem.Name" xml:space="preserve">
+    <value>roadControlToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;roadControlToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chargerControlToolStripMenuItem.Name" xml:space="preserve">
+    <value>chargerControlToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;chargerControlToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cycleRunToolStripMenuItem.Name" xml:space="preserve">
+    <value>cycleRunToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;cycleRunToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mataToolStripMenuItem.Name" xml:space="preserve">
     <value>mataToolStripMenuItem</value>
@@ -1554,12 +1545,6 @@
     <value>engineeringModeToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;engineeringModeToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cycleRunToolStripMenuItem.Name" xml:space="preserve">
-    <value>cycleRunToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;cycleRunToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;timer1.Name" xml:space="preserve">

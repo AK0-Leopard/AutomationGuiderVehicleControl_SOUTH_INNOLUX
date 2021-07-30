@@ -360,17 +360,14 @@ namespace com.mirle.ibg3k0.bc.winform.UI
 
         private void ChargerControlForm_Load(object sender, EventArgs e)
         {
-            DebugParameter.IsDebugMode = true;
             timer1.Start();
         }
 
         private void ChargerControlForm_Closed(object sender, FormClosedEventArgs e)
         {
-            DebugParameter.IsDebugMode = false;
-            DebugParameter.IsCycleRun = false;
             timer1.Stop();
             unregisterEvent();
-            mainForm.removeForm(typeof(DebugForm).Name);
+            mainForm.removeForm(typeof(ChargerControlForm).Name);
         }
 
         #region MTL Test

@@ -895,6 +895,8 @@ namespace com.mirle.ibg3k0.bc.winform
                                 , BCApplication.getMessageString("INFO")
                                 , MessageBoxButtons.OK
                                 , MessageBoxIcon.Information);
+                closeAllOpenForm();      
+                closeUasMainForm();      
             }
             catch (Exception ex)
             {
