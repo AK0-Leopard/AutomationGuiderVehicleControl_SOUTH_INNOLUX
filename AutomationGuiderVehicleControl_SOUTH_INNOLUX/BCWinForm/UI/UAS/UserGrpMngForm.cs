@@ -34,7 +34,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
     public partial class UserGrpMngForm : Form
     {
         private BCApplication bcApp = BCApplication.getInstance();
-
+        const string GROUP_NAME_ADMIN = "ADMIN";
         private BindingSource userGroupDataBS = new BindingSource();
         private List<UASUSRGRP> userGroupList = new List<UASUSRGRP>();
         private UASMainForm uasMainForm = null; //A0.02
@@ -58,14 +58,14 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
             this.Refresh();
         }
 
-        public override void Refresh() 
+        public override void Refresh()
         {
             base.Refresh();
             reloadUserGroupTable();
             UserGroupTbx.Clear();
         }
 
-        private void reloadUserGroupTable() 
+        private void reloadUserGroupTable()
         {
             this.Cursor = Cursors.WaitCursor;
             List<UASUSRGRP> groupList = bcApp.SCApplication.UserBLL.loadAllUserGroup();
@@ -76,7 +76,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
             this.Cursor = Cursors.Default;
         }
 
-        private Boolean checkInputData() 
+        private Boolean checkInputData()
         {
             string user_group = this.UserGroupTbx.Text.Trim();
 
@@ -98,19 +98,19 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
             }
             string user_group = this.UserGroupTbx.Text.Trim();
 
-            if (!checkInputData()) 
+            if (!checkInputData())
             {
                 return;
             }
 
-            Boolean createSuccess = bcApp.SCApplication.UserBLL.addUserGroup(user_group); 
+            Boolean createSuccess = bcApp.SCApplication.UserBLL.addUserGroup(user_group);
             if (createSuccess)
             {
                 //MessageBox.Show(this, BCApplication.getMessageString("CREATE_SUCCESS"));
                 BCUtility.showMsgBox_Info(this, BCApplication.getMessageString("CREATE_SUCCESS"));
                 Refresh();
             }
-            else 
+            else
             {
                 //MessageBox.Show(this, BCApplication.getMessageString("CREATE_FAILED"));
                 BCUtility.showMsgBox_Info(this, BCApplication.getMessageString("CREATE_FAILED"));
@@ -120,12 +120,12 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
         private UASUSRGRP getSelectedRowToTextBox()
         {
             int selectedRowCnt = UserGroupGridView.Rows.GetRowCount(DataGridViewElementStates.Selected);
-            if (selectedRowCnt <= 0) 
+            if (selectedRowCnt <= 0)
             {
                 return null;
             }
             int selectedIndex = UserGroupGridView.SelectedRows[0].Index;
-            if (userGroupList.Count <= selectedIndex) 
+            if (userGroupList.Count <= selectedIndex)
             {
                 return null;
             }
@@ -140,7 +140,11 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
             {
                 return;
             }
-
+            if (SCUtility.isMatche(selectUserGroup.USER_GRP, GROUP_NAME_ADMIN))
+            {
+                BCUtility.showMsgBox_Info(this, $"Can't delete group:[{GROUP_NAME_ADMIN}]");
+                return;
+            }
             if (!BCUtility.doLogin(this, bcApp, BCAppConstants.FUNC_USER_MANAGEMENT))
             {
                 return;
@@ -149,7 +153,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
             var confirmResult = MessageBox.Show(this, "Are you sure to delete this item ?",
                         "Confirm Delete!",
                         MessageBoxButtons.YesNo);
-            if (confirmResult != DialogResult.Yes) 
+            if (confirmResult != DialogResult.Yes)
             {
                 return;
             }
@@ -161,7 +165,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
                 BCUtility.showMsgBox_Info(this, BCApplication.getMessageString("DELETE_SUCCESS"));
                 Refresh();
             }
-            else 
+            else
             {
                 //MessageBox.Show(this, BCApplication.getMessageString("DELETE_FAILED"));
                 BCUtility.showMsgBox_Info(this, BCApplication.getMessageString("DELETE_FAILED"));
@@ -170,6 +174,8 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
 
         private void RgsFuncBtn_Click(object sender, EventArgs e)
         {
+
+
             registerFunction();
             //if (!BCUtility.doLogin(this, bcApp, BCAppConstants.FUNC_USER_MANAGEMENT))
             //{
@@ -199,7 +205,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
             //{
             //    return;
             //}
-            
+
             //List<string> funcCodes = selectFuncCodeList.Select(o => o.Func_Code.Trim()).ToList();
             //Boolean registerSuccess = bcApp.SCApplication.UserBLL.registerUserFunc(selectUserGroup.User_Grp, funcCodes);
             //if (registerSuccess)
@@ -222,6 +228,11 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
             UASUSRGRP selectUserGroup = getSelectedRowToTextBox();
             if (selectUserGroup == null)
             {
+                return;
+            }
+            if (SCUtility.isMatche(selectUserGroup.USER_GRP, GROUP_NAME_ADMIN))
+            {
+                BCUtility.showMsgBox_Info(this, $"Can't update group:[{GROUP_NAME_ADMIN}] of register function");
                 return;
             }
 
@@ -267,12 +278,12 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
                 return;
             }
 
-            fillGroupDataToTextBox(selectUserGroup.USER_GRP); 
+            fillGroupDataToTextBox(selectUserGroup.USER_GRP);
         }
 
         private void fillGroupDataToTextBox(string user_grp)
         {
-            UserGroupTbx.Text = user_grp.Trim(); 
+            UserGroupTbx.Text = user_grp.Trim();
         }
 
         private void UserGroupGridView_DoubleClick(object sender, EventArgs e)

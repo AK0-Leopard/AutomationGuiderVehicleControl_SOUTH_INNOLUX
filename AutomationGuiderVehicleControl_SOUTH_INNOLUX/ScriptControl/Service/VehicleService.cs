@@ -4396,6 +4396,8 @@ namespace com.mirle.ibg3k0.sc.Service
                     }
                 }
                 oneDirectPath();
+                segmentListChanged?.Invoke(this, segment);
+
                 //List<AMCSREPORTQUEUE> reportqueues = new List<AMCSREPORTQUEUE>();
                 //foreach (APORTSTATION port_station in port_stations)
                 //{
@@ -4416,6 +4418,27 @@ namespace com.mirle.ibg3k0.sc.Service
                 logger.Error(ex, "Exception:");
             }
             return (segment != null, segment);
+        }
+
+        private EventHandler<ASECTION> sectionListChanged;
+        private object _sectionListChangedLock = new object();
+        public event EventHandler<ASECTION> SectionListChanged
+        {
+            add
+            {
+                lock (_sectionListChangedLock)
+                {
+                    sectionListChanged -= value;
+                    sectionListChanged += value;
+                }
+            }
+            remove
+            {
+                lock (_sectionListChangedLock)
+                {
+                    sectionListChanged -= value;
+                }
+            }
         }
         public (bool isSuccess, ASECTION section) doEnableDisableSection(string sectionID, E_PORT_STATUS port_status, [CallerMemberName] string Method = "")
         {
@@ -4448,6 +4471,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                    Data: $"Start enable/disable sec id:{sectionID}, Action:{port_status} call member:{Method},result:{is_success}");
                 oneDirectPath();
+                sectionListChanged?.Invoke(this, section);
             }
             catch (Exception ex)
             {

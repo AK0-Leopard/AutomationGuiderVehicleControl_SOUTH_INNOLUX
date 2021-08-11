@@ -77,6 +77,15 @@ namespace com.mirle.ibg3k0.bc.winform.UI
 
             initialEvent();
             uc_StatusTreeViewer1.start(scApp);
+            scApp.VehicleService.SectionListChanged += RoadControlService_SectionListChanged;
+            RefreshMapColor();
+        }
+        private void RoadControlService_SectionListChanged(object sender, ASECTION e)
+        {
+            Adapter.Invoke((obj) =>
+            {
+                RefreshMapColor();
+            }, null);
         }
 
         private void initialEvent()
@@ -1265,6 +1274,26 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             else
             {
                 MessageBox.Show($"Creat fail,result:{result.check_result}.");
+            }
+        }
+
+        private void RefreshMapColor()
+        {
+            var sections = scApp.SectionBLL.cache.GetSections();
+            foreach (ASECTION sec in sections)
+            {
+                if (sec.PRE_DISABLE_FLAG)
+                {
+                    this.SetSpecifySectionSelected(sec.SEC_ID, Color.Pink);
+                }
+                else if (sec.STATUS == E_SEG_STATUS.Closed)
+                {
+                    this.SetSpecifySectionSelected(sec.SEC_ID, Color.Red);
+                }
+                else
+                {
+                    this.ResetSpecifySectionSelected(sec.SEC_ID);
+                }
             }
         }
     }

@@ -362,7 +362,7 @@
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
         LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACZTeXN0
         ZW0uV2luZG93cy5Gb3Jtcy5JbWFnZUxpc3RTdHJlYW1lcgEAAAAERGF0YQcCAgAAAAkDAAAADwMAAAB8
-        EgAAAk1TRnQBSQFMAgEBBQEAAZABAAGQAQABGAEAARgBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
+        EgAAAk1TRnQBSQFMAgEBBQEAAaABAAGgAQABGAEAARgBAAT/AQkBAAj/AUIBTQE2AQQGAAE2AQQCAAEo
         AwABYAMAATADAAEBAQABCAYAARIYAAGAAgABgAMAAoABAAGAAwABgAEAAYABAAKAAgADwAEAAcAB3AHA
         AQAB8AHKAaYBAAEzBQABMwEAATMBAAEzAQACMwIAAxYBAAMcAQADIgEAAykBAANVAQADTQEAA0IBAAM5
         AQABgAF8Af8BAAJQAf8BAAGTAQAB1gEAAf8B7AHMAQABxgHWAe8BAAHWAucBAAGQAakBrQIAAf8BMwMA
@@ -491,6 +491,9 @@
   <data name="AddBtn.Text" xml:space="preserve">
     <value>Create</value>
   </data>
+  <data name="AddBtn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;AddBtn.Name" xml:space="preserve">
     <value>AddBtn</value>
   </data>
@@ -527,6 +530,9 @@
   <data name="DeleteBtn.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="DeleteBtn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;DeleteBtn.Name" xml:space="preserve">
     <value>DeleteBtn</value>
   </data>
@@ -562,6 +568,9 @@
   </data>
   <data name="UpdBtn.Text" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="UpdBtn.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;UpdBtn.Name" xml:space="preserve">
     <value>UpdBtn</value>

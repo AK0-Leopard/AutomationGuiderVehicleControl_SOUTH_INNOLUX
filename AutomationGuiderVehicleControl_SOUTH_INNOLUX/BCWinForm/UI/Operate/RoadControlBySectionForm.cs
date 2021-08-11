@@ -316,7 +316,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
         {
             mainForm.removeForm(this.Name);
             oht_form.LeaveSegmentSetMode(SectionSelectOnMap);
-            oht_form.ResetAllSegment();
+            //oht_form.ResetAllSegment();
         }
 
 

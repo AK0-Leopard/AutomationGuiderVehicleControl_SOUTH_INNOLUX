@@ -37,6 +37,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
     public partial class UserMngForm : Form
     {
         private BCApplication bcApp = BCApplication.getInstance();
+        const string USER_NAME_ADMIN = "ADMIN";
 
         private BindingSource userDataBS = new BindingSource();
         private List<UASUSR> userDataList = new List<UASUSR>();
@@ -270,6 +271,12 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
             UASUSR selectUser = getSelectedRowToTextBox();
             if (selectUser == null)
             {
+                return;
+            }
+
+            if (SCUtility.isMatche(selectUser.USER_ID, USER_NAME_ADMIN))
+            {
+                BCUtility.showMsgBox_Info(this, $"Can't delete user:[{USER_NAME_ADMIN}]");
                 return;
             }
 
