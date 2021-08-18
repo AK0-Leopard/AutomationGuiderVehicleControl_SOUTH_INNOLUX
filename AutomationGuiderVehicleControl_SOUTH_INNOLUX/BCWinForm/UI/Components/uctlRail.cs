@@ -17,6 +17,7 @@ using com.mirle.ibg3k0.bc.winform.Common;
 using com.mirle.ibg3k0.sc;
 using com.mirle.ibg3k0.bcf.Common;
 using NLog;
+using System.Threading;
 
 namespace com.mirle.ibg3k0.bc.winform.UI.Components
 {
@@ -47,6 +48,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.Components
         private PointObject[] m_pPoints;
         private PointF m_pCenterPoint;
         private static Logger logger = LogManager.GetCurrentClassLogger();
+        private App.BCApplication bcApp = null;
         #endregion	/* Internal Variable */
 
         #region "Event"
@@ -275,9 +277,10 @@ namespace com.mirle.ibg3k0.bc.winform.UI.Components
 
         #region "Constructor／Destructor"
 
-        public uctlRail()
+        public uctlRail(App.BCApplication _bcApp)
         {
             InitializeComponent();
+            bcApp = _bcApp;
             m_pPoints = new PointObject[2];
 
             m_iNum = -1;
@@ -733,6 +736,57 @@ namespace com.mirle.ibg3k0.bc.winform.UI.Components
                 };
                 RailSelected(this, arge);
             }
+        }
+
+        private void enableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RailEnableDisable(E_PORT_STATUS.InService);
+        }
+
+        private async void RailEnableDisable(E_PORT_STATUS portStatus)
+        {
+            try
+            {
+                if (!BCUtility.doLogin(this, bcApp, App.BCAppConstants.FUNC_OPERATION_FUN))
+                {
+                    MessageBox.Show($"No Authority!");
+                    return;
+                }
+
+                string desc = portStatus == E_PORT_STATUS.InService ? "Enable" : "Disable";
+                enableToolStripMenuItem.Enabled = false;
+                var ban_result = await Task.Run(() =>
+                {
+                    var result = bcApp.SCApplication.VehicleService.doEnableDisableSection
+                    (sc.Common.SCUtility.Trim(m_sSectionID, true), portStatus);
+                    return result;
+                });
+                if (ban_result.isSuccess)
+                {
+                    MessageBox.Show($"Section ID:{m_sSectionID} {desc} success.");
+                }
+                else
+                {
+                    MessageBox.Show($"Section ID:{m_sSectionID} {desc} fail.");
+                }
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Exception");
+            }
+            finally
+            {
+                enableToolStripMenuItem.Enabled = true;
+            }
+        }
+
+        private void disableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RailEnableDisable(E_PORT_STATUS.OutOfService);
+        }
+
+        private void uctlRail_Load(object sender, EventArgs e)
+        {
         }
     }
 

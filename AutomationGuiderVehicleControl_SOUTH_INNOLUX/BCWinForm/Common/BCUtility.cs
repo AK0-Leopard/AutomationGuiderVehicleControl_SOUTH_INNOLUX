@@ -326,5 +326,42 @@ namespace com.mirle.ibg3k0.bc.winform.Common
 
             return resourceKey; // Fallback with the key name
         }
+        public static void updateUIDisplayByAuthority(BCApplication bcApp, object targetFormType)
+        {
+            //PropertyDescriptorCollection properties =
+            //TypeDescriptor.GetProperties(targetFormType);
+            BindingFlags flag = BindingFlags.Instance | BindingFlags.NonPublic;
+            MemberInfo[] memberInfos = targetFormType.GetType().GetMembers(flag);
+            //MemberInfo[] memberInfos = typeof(BCMainForm).GetMembers(flag);
+
+            var typeSwitch = new com.mirle.ibg3k0.bc.winform.BCMainForm.TypeSwitch()
+                .Case((System.Windows.Forms.ToolStripMenuItem tsm, bool tf) => { tsm.Enabled = tf; })
+                .Case((System.Windows.Forms.ComboBox cb, bool tf) => { cb.Enabled = tf; })
+                .Case((System.Windows.Forms.ContextMenuStrip cm, bool tf) => { cm.Enabled = tf; })
+                //A0.05 .Case((System.Windows.Forms.Button btn, bool tf) => { btn.Enabled = tf; })
+                .Case((CCWin.SkinControl.SkinButton btn, bool tf) => { btn.Enabled = tf; }) //A0.05
+                .Case((System.Windows.Forms.TableLayoutPanel tblay, bool tf) => { tblay.Enabled = tf; });       //A0.08
+
+            foreach (MemberInfo memberInfo in memberInfos)
+            {
+                Attribute AuthorityCheck = memberInfo.GetCustomAttribute(typeof(AuthorityCheck));
+                if (AuthorityCheck != null)
+                {
+                    string attribute_FUNName = ((AuthorityCheck)AuthorityCheck).FUNCode;
+                    //ToolStripMenuItem tsl = (ToolStripMenuItem)((FieldInfo)memberInfo).GetValue(this);
+                    FieldInfo info = (FieldInfo)memberInfo;
+                    if (bcApp.SCApplication.UserBLL.checkUserAuthority(bcApp.LoginUserID, attribute_FUNName))
+                    {
+                        typeSwitch.Switch(info.GetValue(targetFormType), true);
+                    }
+                    else
+                    {
+                        typeSwitch.Switch(info.GetValue(targetFormType), false);
+                    }
+                }
+            }
+
+
+        }
     }
 }

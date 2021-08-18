@@ -4365,6 +4365,26 @@ namespace com.mirle.ibg3k0.sc.Service
         #endregion Specially Control
 
         #region RoadService
+        private EventHandler<ASEGMENT> segmentListChanged;
+        private object _segmentListChangedLock = new object();
+        public event EventHandler<ASEGMENT> SegmentListChanged
+        {
+            add
+            {
+                lock (_segmentListChangedLock)
+                {
+                    segmentListChanged -= value;
+                    segmentListChanged += value;
+                }
+            }
+            remove
+            {
+                lock (_segmentListChangedLock)
+                {
+                    segmentListChanged -= value;
+                }
+            }
+        }
         public (bool isSuccess, ASEGMENT segment) doEnableDisableSegment(string segment_id, E_PORT_STATUS port_status)
         {
             ASEGMENT segment = null;

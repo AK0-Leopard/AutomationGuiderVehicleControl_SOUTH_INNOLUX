@@ -292,7 +292,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.Components
                     int index = 0;
                     foreach (ARAIL rail in enumerRail)
                     {
-                        m_objItemRail[index] = new uctlRail();
+                        m_objItemRail[index] = new uctlRail(mainForm.BCApp);
                         m_objItemRail[index].p_Num = index + 1;
                         m_objItemRail[index].p_ID = rail.RAIL_ID;
                         m_objItemRail[index].p_RailType = rail.RAILTYPE;

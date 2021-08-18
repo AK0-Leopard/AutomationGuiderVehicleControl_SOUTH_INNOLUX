@@ -262,9 +262,9 @@ namespace com.mirle.ibg3k0.bc.winform
             this.operatorToolStripMenuItem,
             this.mataToolStripMenuItem,
             this.languageToolStripMenuItem,
+            this.queryToolStripMenuItem,
             this.tipMessageToolStripMenuItem,
             this.monitorToolStripMenuItem,
-            this.queryToolStripMenuItem,
             this.engineerToolStripMenuItem1});
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.menuStrip1_MouseDoubleClick);
@@ -697,12 +697,12 @@ namespace com.mirle.ibg3k0.bc.winform
         /// The menu strip1
         /// </summary>
         private System.Windows.Forms.MenuStrip menuStrip1;
-        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_MAINTENANCE_FUN)]
+        //[AuthorityCheck(FUNCode = BCAppConstants.FUNC_MAINTENANCE_FUN)]
         private System.Windows.Forms.ToolStripMenuItem mataToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
         [AuthorityCheck(FUNCode = BCAppConstants.FUNC_USER_MANAGEMENT)]
         private System.Windows.Forms.ToolStripMenuItem uASToolStripMenuItem;
-        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
+        //[AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripMenuItem operatorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logInToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logOutToolStripMenuItem;
@@ -714,14 +714,18 @@ namespace com.mirle.ibg3k0.bc.winform
         private System.Windows.Forms.ToolStripMenuItem monitorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem communectionStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem engineerToolStripMenuItem;
-        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_ENGINEER_FUN)]
+        //[AuthorityCheck(FUNCode = BCAppConstants.FUNC_ENGINEER_FUN)]
         private System.Windows.Forms.ToolStripMenuItem engineerToolStripMenuItem1;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_ENGINEER_FUN)]
         private System.Windows.Forms.ToolStripMenuItem debugToolStripMenuItem1;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_ENGINEER_FUN)]
         private System.Windows.Forms.ToolStripMenuItem engineeringModeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem roadControlToolStripMenuItem;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripMenuItem languageChangeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zhTwToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem enUSToolStripMenuItem;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sectionDataToolStripMenuItem;
         private System.Windows.Forms.ToolStripStatusLabel tssl_Warn_Name;
@@ -729,20 +733,25 @@ namespace com.mirle.ibg3k0.bc.winform
         private System.Windows.Forms.ToolStripStatusLabel tssl_Error_Name;
         private System.Windows.Forms.ToolStripStatusLabel tssl_Error_Value;
         private System.Windows.Forms.Timer timer1;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripMenuItem transferCommandToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem queryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transferCommandHistoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alarmToolStripMenuItem;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_MAINTENANCE_FUN)]
         private System.Windows.Forms.ToolStripMenuItem reserveSectionInfoToolStripMenuItem;
         [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripMenuItem hostConnectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem staticsChartToolStripMenuItem;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripMenuItem carrierInstalledRemoveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cycleRunToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem alarmListToolStripMenuItem;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripMenuItem vehicleOperationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem chargerControlToolStripMenuItem;
         private System.Windows.Forms.Timer logout_timer;

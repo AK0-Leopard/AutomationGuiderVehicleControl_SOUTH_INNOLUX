@@ -891,6 +891,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
         public void LeaveSegmentSetMode(EventHandler eventHandler)
         {
             uctl_Map.RemoveRailSelectedEvent(eventHandler);
+            RefreshMapColor();
         }
         public void SetSpecifySegmentSelected(string seg_num, Color set_color)
         {
