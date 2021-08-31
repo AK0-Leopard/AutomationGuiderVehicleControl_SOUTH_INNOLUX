@@ -221,28 +221,36 @@ namespace com.mirle.ibg3k0.sc.Service
 
         private void Vh_LocationChange(object sender, LocationChangeEventArgs e)
         {
-            AVEHICLE vh = sender as AVEHICLE;
-            ASECTION leave_section = scApp.SectionBLL.cache.GetSection(e.LeaveSection);
-            ASECTION entry_section = scApp.SectionBLL.cache.GetSection(e.EntrySection);
-            entry_section?.Entry(vh.VEHICLE_ID);
-            leave_section?.Leave(vh.VEHICLE_ID);
-
-            vh.removeAttentionReserveSection(leave_section);
-            //在一進入已經預約的路段後，就將該預約權釋放。用途是這樣不會去擋到上一段預約的路徑
-            //這樣在垂直路段上，會有撞車的疑慮
-            //if (entry_section != null)
-            //{
-            //    scApp.ReserveBLL.RemoveManyReservedSectionsByVIDSID(vh.VEHICLE_ID, entry_section.SEC_ID);
-            //    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-            //       Data: $"vh:{vh.VEHICLE_ID} entry section {entry_section.SEC_ID},remove reserved.",
-            //       VehicleID: vh.VEHICLE_ID);
-            //}
-            if (leave_section != null)
+            try
             {
-                scApp.ReserveBLL.RemoveManyReservedSectionsByVIDSID(vh.VEHICLE_ID, leave_section.SEC_ID);
-                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                   Data: $"vh:{vh.VEHICLE_ID} leave section {entry_section.SEC_ID},remove reserved.",
-                   VehicleID: vh.VEHICLE_ID);
+                AVEHICLE vh = sender as AVEHICLE;
+                ASECTION leave_section = scApp.SectionBLL.cache.GetSection(e.LeaveSection);
+                ASECTION entry_section = scApp.SectionBLL.cache.GetSection(e.EntrySection);
+                entry_section?.Entry(vh.VEHICLE_ID);
+                leave_section?.Leave(vh.VEHICLE_ID);
+
+                vh.removeAttentionReserveSection(leave_section);
+                //在一進入已經預約的路段後，就將該預約權釋放。用途是這樣不會去擋到上一段預約的路徑
+                //這樣在垂直路段上，會有撞車的疑慮
+                //if (entry_section != null)
+                //{
+                //    scApp.ReserveBLL.RemoveManyReservedSectionsByVIDSID(vh.VEHICLE_ID, entry_section.SEC_ID);
+                //    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                //       Data: $"vh:{vh.VEHICLE_ID} entry section {entry_section.SEC_ID},remove reserved.",
+                //       VehicleID: vh.VEHICLE_ID);
+                //}
+                if (leave_section != null)
+                {
+                    scApp.ReserveBLL.RemoveManyReservedSectionsByVIDSID(vh.VEHICLE_ID, leave_section.SEC_ID);
+                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                       Data: $"vh:{vh.VEHICLE_ID} leave section {entry_section.SEC_ID},remove reserved.",
+                       VehicleID: vh.VEHICLE_ID);
+                }
+                scApp.CMDBLL.removeAlreadyPassedSection(vh.VEHICLE_ID, e.LeaveSection);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception");
             }
         }
 
@@ -2874,6 +2882,7 @@ namespace com.mirle.ibg3k0.sc.Service
                     scApp.MapBLL.getPortID(vh.CUR_ADR_ID, out port_id);
                     scApp.PortBLL.OperateCatch.updatePortStationCSTExistStatus(port_id, string.Empty);
                     //scApp.PortBLL.OperateCatch.ClearAllPortStationCSTExistToEmpty();
+                    scApp.CMDBLL.setWillPassSectionInfo(vh.VEHICLE_ID, vh.PredictSectionsToDesination);
                     break;
                 case EventType.UnloadComplete:
                     //var port_station = scApp.MapBLL.getPortByAdrID(current_adr_id);//要考慮到一個Address會有多個Port的問題

@@ -697,6 +697,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
                     InObservationVh.addEventHandler(predictPathHandler
                                         , BCFUtility.getPropertyName(() => InObservationVh.VhStatusChangeEvent)
                                         , (s1, e1) => { changePredictPathByInObservation(); });
+                    InObservationVh.LocationChange += InObservationVh_LocationChange;
 
                     cmb_Vehicle.Text = vh_id;
                     VehicleObjToShow veicleObjShow = scApp.getEQObjCacheManager().CommonInfo.ObjectToShow_list.Where(o => o.VEHICLE_ID == vh_id).FirstOrDefault();
@@ -719,9 +720,24 @@ namespace com.mirle.ibg3k0.bc.winform.UI
                     if (dgv_vhStatus.SelectedRows.Count > 0)
                         dgv_vhStatus.SelectedRows[0].Selected = false;
                     cmb_Vehicle.Text = string.Empty;
-
+                    Adapter.Invoke((obj) =>
+                    {
+                        RefreshMapColor();
+                    }, null);
                 }
                 uctl_Map.reAdjustTheLayerOrder();
+            }
+        }
+
+        private void InObservationVh_LocationChange(object sender, LocationChangeEventArgs e)
+        {
+            try
+            {
+                changePredictPathByInObservation();
+            }
+            catch(Exception ex)
+            {
+                logger.Error(ex, "Exception");
             }
         }
 
@@ -929,9 +945,12 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             }
             else
             {
-                if (InObservationVh.vh_CMD_Status < E_CMD_STATUS.NormalEnd)
+                if (InObservationVh.vh_CMD_Status < E_CMD_STATUS.NormalEnd &&
+                    InObservationVh.WillPassSectionID != null &&
+                    InObservationVh.WillPassSectionID.Count > 0)
                 {
-                    setSpecifyRail(InObservationVh.PredictSections);
+                    //setSpecifyRail(InObservationVh.PredictSections);
+                    setSpecifyRail(InObservationVh.WillPassSectionID.ToArray());
                     setSpecifyAdr();
                 }
                 else
