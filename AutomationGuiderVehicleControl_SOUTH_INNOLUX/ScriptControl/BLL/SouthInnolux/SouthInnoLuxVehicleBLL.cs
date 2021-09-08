@@ -1511,12 +1511,12 @@ namespace com.mirle.ibg3k0.sc.BLL
 
                 if (!SCUtility.isEmpty(mcs_cmd_id))
                 {
-
                     E_TRAN_STATUS mcs_cmd_tran_status = CompleteStatusToETransferStatus(completeStatus);
                     ACMD_MCS acmd_mcs = scApp.CMDBLL.getCMD_MCSByID(mcs_cmd_id);
                     //if (DebugParameter.isManualReportCommandFinishWhenLoadingUnloading && !isDirectFinish && (acmd_mcs.isLoading || acmd_mcs.isUnloading))
 
-                    if (!isDirectFinish && (acmd_mcs.isLoading || acmd_mcs.isUnloading))
+                    if (!isDirectFinish && (acmd_mcs.isLoading ||
+                                            acmd_mcs.isUnloading))
                     //if (DebugParameter.isManualReportCommandFinishWhenLoadingUnloading)
                     {
                         //not thing...
@@ -1588,18 +1588,55 @@ namespace com.mirle.ibg3k0.sc.BLL
                     {
                         isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
 
-                        if (completeStatus != CompleteStatus.CmpStatusAbort &&
-                            completeStatus != CompleteStatus.CmpStatusCancel &&
-                            acmd_mcs != null && acmd_mcs.TRANSFERSTATE < E_TRAN_STATUS.Transferring)
+                        if (completeStatus == CompleteStatus.CmpStatusAbort ||
+                            completeStatus == CompleteStatus.CmpStatusCancel)
                         {
-                            scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(mcs_cmd_id);
+                            finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
                         }
                         else
                         {
-                            //isSuccess &= scApp.SysExcuteQualityBLL.updateSysExecQity_CmdFinish(vh.MCS_CMD);
-                            //isSuccess &= scApp.CMDBLL.updateCMD_MCS_TranStatus2Complete(vh.MCS_CMD);
-                            finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                            if (acmd_mcs.TRANSFERSTATE < E_TRAN_STATUS.Transferring)
+                            {
+                                if (isInterlockError(completeStatus))
+                                {
+                                    finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                                }
+                                else
+                                {
+                                    scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(mcs_cmd_id);
+                                }
+                            }
+                            else
+                            {
+                                if (isNormalFinish(completeStatus) ||
+                                    isInterlockError(completeStatus))
+                                {
+                                    finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                                }
+                                else
+                                {
+                                    //等待initial時，上報cmd finish，就在直接下給車子
+                                }
+                            }
                         }
+                        //if (completeStatus != CompleteStatus.CmpStatusAbort &&
+                        //    completeStatus != CompleteStatus.CmpStatusCancel &&
+                        //    //acmd_mcs != null && acmd_mcs.TRANSFERSTATE < E_TRAN_STATUS.Transferring)
+                        //    acmd_mcs != null)
+                        //{
+                        //    if (acmd_mcs.TRANSFERSTATE < E_TRAN_STATUS.Transferring)
+                        //        scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(mcs_cmd_id);
+                        //    else
+                        //    {
+                        //        //等待initial時，上報cmd finish，就在直接下給車子
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    //isSuccess &= scApp.SysExcuteQualityBLL.updateSysExecQity_CmdFinish(vh.MCS_CMD);
+                        //    //isSuccess &= scApp.CMDBLL.updateCMD_MCS_TranStatus2Complete(vh.MCS_CMD);
+                        //    finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                        //}
                     }
                 }
                 else
@@ -1617,6 +1654,31 @@ namespace com.mirle.ibg3k0.sc.BLL
             }
             return isSuccess;
         }
+        private bool isNormalFinish(CompleteStatus completeStatus)
+        {
+            switch (completeStatus)
+            {
+                case CompleteStatus.CmpStatusLoad:
+                case CompleteStatus.CmpStatusLoadunload:
+                case CompleteStatus.CmpStatusUnload:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        private bool isInterlockError(CompleteStatus completeStatus)
+        {
+            switch (completeStatus)
+            {
+                case CompleteStatus.CmpStatusInterlockError:
+                case CompleteStatus.CmpStatusPositionError:
+                case CompleteStatus.CmpStatusDoubleStorage:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
 
         private void finishMCSCmd(CompleteStatus completeStatus, int total_cmd_dis, string mcs_cmd_id, E_CMD_STATUS ohtc_cmd_status, E_TRAN_STATUS mcs_cmd_tran_status)
         {

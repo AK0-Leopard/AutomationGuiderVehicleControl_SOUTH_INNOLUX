@@ -2118,34 +2118,37 @@ namespace com.mirle.ibg3k0.sc.Service
                         {
                             if (is_cst_on_vh)
                             {
-                                cmd_mcs.ManualSelectedFinishCarrierLoc = eqpt.Real_ID;
+                                //cmd_mcs.ManualSelectedFinishCarrierLoc = eqpt.Real_ID;
                                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                                   Data: $"mcs cmd:{cmd_mcs_id} is finish on :{cmd_mcs.ManualSelectedFinishCarrierLoc} .",
+                                   Data: $"mcs cmd:{cmd_mcs_id} is continue on :{eqpt.Real_ID} .",
                                    VehicleID: eqpt.VEHICLE_ID,
                                    CarrierID: eqpt.CST_ID);
-                                finishCmdForInitial(eqpt, cmd_mcs, E_TRAN_STATUS.Aborted, sc.Data.SECS.SouthInnolux.SECSConst.CMD_Result_UnloadError);
+                                //finishCmdForInitial(eqpt, cmd_mcs, E_TRAN_STATUS.Aborted, sc.Data.SECS.SouthInnolux.SECSConst.CMD_Result_UnloadError);
+                                continueCmdCarrierOnVhForInitial(eqpt, cmd_mcs);
                             }
                             else
                             {
-                                cmd_mcs.ManualSelectedFinishCarrierLoc = cmd_mcs.HOSTSOURCE;
+                                //cmd_mcs.ManualSelectedFinishCarrierLoc = cmd_mcs.HOSTSOURCE;
                                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                                   Data: $"mcs cmd:{cmd_mcs_id} is finish on :{cmd_mcs.ManualSelectedFinishCarrierLoc} .",
+                                   Data: $"mcs cmd:{cmd_mcs_id} is finish on :{cmd_mcs.HOSTSOURCE},will return status to queue .",
                                    VehicleID: eqpt.VEHICLE_ID,
                                    CarrierID: eqpt.CST_ID);
-                                finishCmdForInitial(eqpt, cmd_mcs, E_TRAN_STATUS.Canceled, sc.Data.SECS.SouthInnolux.SECSConst.CMD_Result_UnloadError);
+                                //finishCmdForInitial(eqpt, cmd_mcs, E_TRAN_STATUS.Canceled, sc.Data.SECS.SouthInnolux.SECSConst.CMD_Result_UnloadError);
+                                scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(cmd_mcs_id);
                             }
                         }
                         else if (cmd_mcs.isUnloading)
                         {
                             if (is_cst_on_vh)
                             {
-                                cmd_mcs.ManualSelectedFinishCarrierLoc = eqpt.Real_ID;
+                                //cmd_mcs.ManualSelectedFinishCarrierLoc = eqpt.Real_ID;
                                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                                   Data: $"mcs cmd:{cmd_mcs_id} is finish on :{cmd_mcs.ManualSelectedFinishCarrierLoc} .",
+                                   Data: $"mcs cmd:{cmd_mcs_id} is continue on :{eqpt.Real_ID} .",
                                    VehicleID: eqpt.VEHICLE_ID,
                                    CarrierID: eqpt.CST_ID);
 
-                                finishCmdForInitial(eqpt, cmd_mcs, E_TRAN_STATUS.Aborted, sc.Data.SECS.SouthInnolux.SECSConst.CMD_Result_LoadError);
+                                //finishCmdForInitial(eqpt, cmd_mcs, E_TRAN_STATUS.Aborted, sc.Data.SECS.SouthInnolux.SECSConst.CMD_Result_LoadError);
+                                continueCmdCarrierOnVhForInitial(eqpt, cmd_mcs);
                             }
                             else
                             {
@@ -2160,10 +2163,11 @@ namespace com.mirle.ibg3k0.sc.Service
                         else
                         {
                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                               Data: $"mcs cmd:{cmd_mcs_id} is finish  .",
+                               Data: $"mcs cmd:{cmd_mcs_id} is continue  .",
                                VehicleID: eqpt.VEHICLE_ID,
                                CarrierID: eqpt.CST_ID);
-                            finishCmdForInitial(eqpt, cmd_mcs, E_TRAN_STATUS.Canceled, sc.Data.SECS.SouthInnolux.SECSConst.CMD_Result_Unsuccessful);
+                            //finishCmdForInitial(eqpt, cmd_mcs, E_TRAN_STATUS.Canceled, sc.Data.SECS.SouthInnolux.SECSConst.CMD_Result_Unsuccessful);
+                            continueCmdCarrierOnVhForInitial(eqpt, cmd_mcs);
                         }
                     }
                 }
@@ -2185,6 +2189,16 @@ namespace com.mirle.ibg3k0.sc.Service
             scApp.VIDBLL.initialVIDCommandInfo(vh_id);
             scApp.CMDBLL.updateCMD_MCS_TranStatus2Complete(cmd_mcs_id, finish_tran_status);
             scApp.ReportBLL.newReportTransferCommandFinish(cmd_mcs, eqpt, cmd_result_code, null);
+        }
+
+        private void continueCmdCarrierOnVhForInitial(AVEHICLE eqpt, ACMD_MCS cmd_mcs)
+        {
+            string vh_id = SCUtility.Trim(eqpt.VEHICLE_ID, true);
+            string ohtc_cmd = SCUtility.Trim(eqpt.OHTC_CMD, true);
+            string cmd_mcs_id = SCUtility.Trim(eqpt.MCS_CMD, true);
+            scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, ohtc_cmd, E_CMD_STATUS.AbnormalEndByOHT);
+            cmd_mcs.HOSTSOURCE = eqpt.Real_ID;
+            scApp.CMDBLL.AssignMCSCommand2Vehicle(cmd_mcs, E_CMD_TYPE.Unload, eqpt);
         }
 
         private void TranEventReportLoadingUnloading(BCFApplication bcfApp, AVEHICLE eqpt, int seq_num, EventType eventType)
@@ -3443,20 +3457,61 @@ namespace com.mirle.ibg3k0.sc.Service
                     case CompleteStatus.CmpStatusPositionError:
                     case CompleteStatus.CmpStatusDoubleStorage:
                         return false;//在unloading發生時，就直接結束命令
-
                     default:
                         return true;//等待initial時，上報cmd finish，以便確認CST 最後位置。
                 }
             }
             else
             {
-                bool is_transferring = acmd_mcs.TRANSFERSTATE >= E_TRAN_STATUS.Transferring;
-                if (completeStatus != CompleteStatus.CmpStatusAbort &&
-                    completeStatus != CompleteStatus.CmpStatusCancel &&
-                    is_transferring == false)
-                    return true; //要將命令改成queue
+                if (isNormalFinish(completeStatus) ||
+                    isInterlockError(completeStatus))
+                {
+                    return false;
+                }
                 else
-                    return false;  //直接結束掉命令
+                {
+                    if (completeStatus == CompleteStatus.CmpStatusAbort ||
+                        completeStatus == CompleteStatus.CmpStatusCancel)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                    //if (completeStatus != CompleteStatus.CmpStatusAbort &&
+                    //completeStatus != CompleteStatus.CmpStatusCancel)
+                    //    //is_transferring == false)
+                    //    return true; //只要命令結束，都不直接上報finish(Transferring - 等initila在下回給車子
+                    //                 //                             initial - 改回Queue)
+                    //else
+                    //    return false;  //直接結束掉命令
+                }
+                //bool is_transferring = acmd_mcs.TRANSFERSTATE >= E_TRAN_STATUS.Transferring;
+            }
+        }
+        private bool isNormalFinish(CompleteStatus completeStatus)
+        {
+            switch (completeStatus)
+            {
+                case CompleteStatus.CmpStatusLoad:
+                case CompleteStatus.CmpStatusLoadunload:
+                case CompleteStatus.CmpStatusUnload:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        private bool isInterlockError(CompleteStatus completeStatus)
+        {
+            switch (completeStatus)
+            {
+                case CompleteStatus.CmpStatusInterlockError:
+                case CompleteStatus.CmpStatusPositionError:
+                case CompleteStatus.CmpStatusDoubleStorage:
+                    return true;
+                default:
+                    return false;
             }
         }
 

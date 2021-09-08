@@ -3,9 +3,7 @@ using com.mirle.ibg3k0.sc.App;
 using com.mirle.ibg3k0.sc.Common;
 using com.mirle.ibg3k0.sc.Data;
 using com.mirle.ibg3k0.sc.Data.DAO;
-using com.mirle.ibg3k0.sc.Data.DAO.EntityFramework;
 using com.mirle.ibg3k0.sc.Data.SECS;
-using com.mirle.ibg3k0.sc.Data.ValueDefMapAction;
 using com.mirle.ibg3k0.sc.Data.VO;
 using com.mirle.ibg3k0.sc.ProtocolFormat.OHTMessage;
 using NLog;
@@ -14,7 +12,6 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace com.mirle.ibg3k0.sc.BLL
@@ -1325,7 +1322,7 @@ namespace com.mirle.ibg3k0.sc.BLL
         }
 
 
-        private bool AssignMCSCommand2Vehicle(ACMD_MCS waittingExcuteMcsCmd, E_CMD_TYPE cmdType, AVEHICLE bestSuitableVh)
+        public override bool AssignMCSCommand2Vehicle(ACMD_MCS waittingExcuteMcsCmd, E_CMD_TYPE cmdType, AVEHICLE bestSuitableVh)
         {
             string hostsource = waittingExcuteMcsCmd.HOSTSOURCE;
             string hostdest = waittingExcuteMcsCmd.HOSTDESTINATION;

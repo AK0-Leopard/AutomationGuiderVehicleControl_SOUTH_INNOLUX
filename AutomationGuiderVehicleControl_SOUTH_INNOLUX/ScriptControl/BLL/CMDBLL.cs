@@ -1441,7 +1441,7 @@ namespace com.mirle.ibg3k0.sc.BLL
         }
 
 
-        private bool AssignMCSCommand2Vehicle(ACMD_MCS waittingExcuteMcsCmd, E_CMD_TYPE cmdType, AVEHICLE bestSuitableVh)
+        public virtual bool AssignMCSCommand2Vehicle(ACMD_MCS waittingExcuteMcsCmd, E_CMD_TYPE cmdType, AVEHICLE bestSuitableVh)
         {
             string hostsource = waittingExcuteMcsCmd.HOSTSOURCE;
             string hostdest = waittingExcuteMcsCmd.HOSTDESTINATION;

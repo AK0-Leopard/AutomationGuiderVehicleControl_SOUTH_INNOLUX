@@ -1585,6 +1585,8 @@ namespace com.mirle.ibg3k0.sc.BLL
             //mcsDefaultMapAction.sendS6F11_common(SECSConst.CEID_Transfer_Completed, eq_id);
             //scApp.VIDBLL.initialVIDCommandInfo(eq_id);
         }
+
+
         private E_CMD_STATUS CompleteStatusToECmdStatus(CompleteStatus completeStatus)
         {
             switch (completeStatus)
