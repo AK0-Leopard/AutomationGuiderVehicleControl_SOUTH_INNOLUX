@@ -2095,6 +2095,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 //3.unloading + cst=empty => CST在Dest Port上
                 //4.unloading + cst=not empty => CST在車上
                 string cmd_mcs_id = SCUtility.Trim(eqpt.MCS_CMD, true);
+                string ohtc_cmd_id = SCUtility.Trim(eqpt.OHTC_CMD, true);
                 if (!SCUtility.isEmpty(cmd_mcs_id))
                 {
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
@@ -2129,6 +2130,11 @@ namespace com.mirle.ibg3k0.sc.Service
                             else
                             {
                                 //cmd_mcs.ManualSelectedFinishCarrierLoc = cmd_mcs.HOSTSOURCE;
+                                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                                   Data: $"finish ohtc_cmd:{ohtc_cmd_id} by initial event.",
+                                   VehicleID: eqpt.VEHICLE_ID,
+                                   CarrierID: eqpt.CST_ID);
+                                scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(eqpt.VEHICLE_ID, ohtc_cmd_id, E_CMD_STATUS.AbnormalEndByOHT);
                                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                                    Data: $"mcs cmd:{cmd_mcs_id} is finish on :{cmd_mcs.HOSTSOURCE},will return status to queue .",
                                    VehicleID: eqpt.VEHICLE_ID,
@@ -2172,7 +2178,6 @@ namespace com.mirle.ibg3k0.sc.Service
                     }
                 }
                 replyTranEventReport(bcfApp, eventType, eqpt, seq_num);
-
             }
             catch (Exception ex)
             {
@@ -2198,7 +2203,19 @@ namespace com.mirle.ibg3k0.sc.Service
             string cmd_mcs_id = SCUtility.Trim(eqpt.MCS_CMD, true);
             scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, ohtc_cmd, E_CMD_STATUS.AbnormalEndByOHT);
             cmd_mcs.HOSTSOURCE = eqpt.Real_ID;
-            scApp.CMDBLL.AssignMCSCommand2Vehicle(cmd_mcs, E_CMD_TYPE.Unload, eqpt);
+            //要等到車子真的變回Auto時，才可以下命令下去
+            bool is_ready_assign = SpinWait.SpinUntil(() => eqpt.isAuto, 5000);
+            if (is_ready_assign)
+            {
+                scApp.CMDBLL.AssignMCSCommand2Vehicle(cmd_mcs, E_CMD_TYPE.Unload, eqpt);
+            }
+            else
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Warn, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"want continue assign mcs command:{SCUtility.Trim(cmd_mcs.CMD_ID, true)} to vh:{eqpt.VEHICLE_ID}, but status not ready. vh status:{eqpt.MODE_STATUS}",
+                   VehicleID: eqpt.VEHICLE_ID,
+                   CarrierID: eqpt.CST_ID);
+            }
         }
 
         private void TranEventReportLoadingUnloading(BCFApplication bcfApp, AVEHICLE eqpt, int seq_num, EventType eventType)

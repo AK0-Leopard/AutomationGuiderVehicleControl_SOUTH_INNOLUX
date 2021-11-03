@@ -1586,11 +1586,12 @@ namespace com.mirle.ibg3k0.sc.BLL
                     }
                     else
                     {
-                        isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
+                        //isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
 
                         if (completeStatus == CompleteStatus.CmpStatusAbort ||
                             completeStatus == CompleteStatus.CmpStatusCancel)
                         {
+                            isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
                             finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
                         }
                         else
@@ -1599,10 +1600,12 @@ namespace com.mirle.ibg3k0.sc.BLL
                             {
                                 if (isInterlockError(completeStatus))
                                 {
+                                    isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
                                     finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
                                 }
                                 else
                                 {
+                                    isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
                                     scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(mcs_cmd_id);
                                 }
                             }
@@ -1611,6 +1614,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                                 if (isNormalFinish(completeStatus) ||
                                     isInterlockError(completeStatus))
                                 {
+                                    isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd_id, ohtc_cmd_status);
                                     finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
                                 }
                                 else

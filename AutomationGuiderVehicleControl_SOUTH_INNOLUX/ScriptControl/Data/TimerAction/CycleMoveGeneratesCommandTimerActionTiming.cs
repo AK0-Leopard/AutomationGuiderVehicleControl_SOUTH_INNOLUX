@@ -60,7 +60,8 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
 
                     if (!selected_vh.isTcpIpConnect ||
                         selected_vh.MODE_STATUS != VHModeStatus.AutoRemote ||
-                        scApp.CMDBLL.isCMD_OHTCQueueByVh(selected_vh.VEHICLE_ID))
+                        //scApp.CMDBLL.isCMD_OHTCQueueByVh(selected_vh.VEHICLE_ID))
+                        scApp.CMDBLL.isCMD_OHTCExcuteIncludeQueueByVh(selected_vh.VEHICLE_ID))
                     {
                         return;
                     }

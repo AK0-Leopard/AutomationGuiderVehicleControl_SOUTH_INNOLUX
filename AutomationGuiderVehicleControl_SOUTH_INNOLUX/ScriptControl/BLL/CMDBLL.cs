@@ -407,6 +407,7 @@ namespace com.mirle.ibg3k0.sc.BLL
             {
                 ACMD_MCS cmd = cmd_mcsDao.getByID(con, cmd_id);
                 cmd.TRANSFERSTATE = E_TRAN_STATUS.Queue;
+                cmd.COMMANDSTATE = 0;
                 cmd_mcsDao.update(con, cmd);
             }
             return isSuccess;
@@ -1996,6 +1997,17 @@ namespace com.mirle.ibg3k0.sc.BLL
             using (DBConnection_EF con = DBConnection_EF.GetUContext())
             {
                 count = cmd_ohtcDAO.getVhExcuteCMDConut(con, vh_id);
+            }
+            return count != 0;
+        }
+        public bool isCMD_OHTCExcuteIncludeQueueByVh(string vh_id)
+        {
+            int count = 0;
+            //DBConnection_EF con = DBConnection_EF.GetContext();
+            //using (DBConnection_EF con = new DBConnection_EF())
+            using (DBConnection_EF con = DBConnection_EF.GetUContext())
+            {
+                count = cmd_ohtcDAO.getVhExcuteIncludeQueueCMDConut(con, vh_id);
             }
             return count != 0;
         }
