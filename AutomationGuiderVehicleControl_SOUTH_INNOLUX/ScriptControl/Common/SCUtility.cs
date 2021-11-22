@@ -830,7 +830,7 @@ namespace com.mirle.ibg3k0.sc.Common
             json = json.Replace("RPT_TIME", "@timestamp");
             LogManager.GetLogger("RecodeReportInfo").Info(json);
             logEntry.RPT_TIME = nowDt.ToString(SCAppConstants.DateTimeFormat_23);
-            System.Threading.ThreadPool.QueueUserWorkItem(new WaitCallback(SCApplication.getInstance().LineService.PublishEQMsgInfo), logEntry);
+            //System.Threading.ThreadPool.QueueUserWorkItem(new WaitCallback(SCApplication.getInstance().LineService.PublishEQMsgInfo), logEntry);
         }
 
         static Google.Protobuf.JsonFormatter jsonFormatter = 

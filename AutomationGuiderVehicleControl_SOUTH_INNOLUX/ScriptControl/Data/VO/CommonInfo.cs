@@ -57,6 +57,29 @@ namespace com.mirle.ibg3k0.sc.Data.VO
             }
         }
         #endregion
+
+        #region EQ Log Info
+        private readonly static int MAX_EQ_LOG_INFO_MSG_COUNT = 5000;
+        private List<ProtocolFormat.OHTMessage.EQLOG_INFO> eQLogInfos = new List<ProtocolFormat.OHTMessage.EQLOG_INFO>();
+        public List<ProtocolFormat.OHTMessage.EQLOG_INFO> EQLogInfos
+        {
+            get { return eQLogInfos; }
+        }
+
+        public void addEqLogIngo(ProtocolFormat.OHTMessage.EQLOG_INFO eqLogInfo)
+        {
+            lock (eQLogInfos)
+            {
+                if (eQLogInfos.Count > MAX_EQ_LOG_INFO_MSG_COUNT)
+                {
+                    eQLogInfos.RemoveAt(mpcTipMsgList.Count - 1);
+                }
+                eQLogInfos.Insert(0, eqLogInfo);
+                OnPropertyChanged(BCFUtility.getPropertyName(() => this.MPCTipMsgList));
+            }
+        }
+        #endregion EQ Log Info
+
         #region AlarmHis
         private AlarmHisList alarmHisList = new AlarmHisList();
         public AlarmHisList AlarmHisList { get { return alarmHisList; } }
@@ -88,7 +111,7 @@ namespace com.mirle.ibg3k0.sc.Data.VO
             Time = BCFUtility.formatDateTime(DateTime.Now, SCAppConstants.DateTimeFormat_22);
         }
 
-     
+
 
     }
 

@@ -1633,7 +1633,8 @@ namespace com.mirle.ibg3k0.sc
                             vh.onLongTimeInaction(vh.OHTC_CMD);
                         }
                         double carrier_installed_time = vh.CarrierInstalledTime.Elapsed.TotalSeconds;
-                        if (carrier_installed_time > AVEHICLE.MAX_ALLOW_CARRIER_INSTALLED_TIME_SECOND)
+                        //if (carrier_installed_time > AVEHICLE.MAX_ALLOW_CARRIER_INSTALLED_TIME_SECOND)
+                        if (carrier_installed_time > SystemParameter.MaxAllowCarrierInstalledTime_Sec)
                         {
                             if (!vh.IsLongTimeInstallCarrierHappend)
                             {
@@ -1685,7 +1686,7 @@ namespace com.mirle.ibg3k0.sc
             public List<Section> GuideSectionsStart2Form { get; private set; }
             public List<string> GuideAddressStart2Form { get; private set; }
             public List<Section> GuideSectionsForm2To { get; private set; }
-            public List<string> GuideAddressForm2To{ get; private set; }
+            public List<string> GuideAddressForm2To { get; private set; }
             public GuideData(sc.BLL.ReserveBLL reserveBLL, List<string> giudeSectionIDs, List<string> guideAddresses)
             {
                 GuideSectionsStart2Form = new List<Section>();

@@ -47,8 +47,6 @@
             this.m_exportBtn = new CCWin.SkinControl.SkinButton();
             this.btnlSearch = new CCWin.SkinControl.SkinButton();
             this.dgv_TransferCommand = new System.Windows.Forms.DataGridView();
-            this.aLARMObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.aLAMCODEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.eQPTIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aLAMSTATDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +55,8 @@
             this.cLEARDATETIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aLAMDESCDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aLARMObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.skinGroupBox2.SuspendLayout();
@@ -371,25 +371,6 @@
             this.dgv_TransferCommand.Size = new System.Drawing.Size(1596, 594);
             this.dgv_TransferCommand.TabIndex = 9;
             // 
-            // aLARMObjToShowBindingSource
-            // 
-            this.aLARMObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.ALARMObjToShow);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.dgv_TransferCommand, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.80447F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.97765F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1602, 716);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
             // aLAMCODEDataGridViewTextBoxColumn
             // 
             this.aLAMCODEDataGridViewTextBoxColumn.DataPropertyName = "ALAM_CODE";
@@ -459,6 +440,25 @@
             this.Column1.HeaderText = "";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
+            // 
+            // aLARMObjToShowBindingSource
+            // 
+            this.aLARMObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.ALARMObjToShow);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.dgv_TransferCommand, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.80447F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.97765F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1602, 716);
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
             // HistoryAlarmsForm
             // 

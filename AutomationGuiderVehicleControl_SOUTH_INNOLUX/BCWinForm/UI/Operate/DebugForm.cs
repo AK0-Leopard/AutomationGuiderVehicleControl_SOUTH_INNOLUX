@@ -52,6 +52,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             cb_passCouplerHPSafetySingnal.Checked = DebugParameter.isPassCouplerHPSafetySignal;
             ck_isMaunalReportFinishWhenLoadingUnloading.Checked = DebugParameter.isManualReportCommandFinishWhenLoadingUnloading;
             num_interlockMaxRetryCount.Value = DebugParameter.InterlockErrorMaxRetryCount;
+            num_MaxCarrierInstalledTime.Value = sc.App.SystemParameter.MaxAllowCarrierInstalledTime_Sec;
 
 
             List<string> lstVh = new List<string>();
@@ -1630,6 +1631,12 @@ namespace com.mirle.ibg3k0.bc.winform.UI
         private void num_interlockMaxRetryCount_ValueChanged(object sender, EventArgs e)
         {
             DebugParameter.InterlockErrorMaxRetryCount = (int)num_interlockMaxRetryCount.Value;
+        }
+
+        private void num_MaxCarrierInstalledTime_ValueChanged(object sender, EventArgs e)
+        {
+            //sc.App.SystemParameter.MaxAllowCarrierInstalledTime_Sec = (int)num_MaxCarrierInstalledTime.Value;
+            sc.App.SystemParameter.setMaxAllowCarrierInstalledTime_Sec((int)num_MaxCarrierInstalledTime.Value);
         }
     }
 }

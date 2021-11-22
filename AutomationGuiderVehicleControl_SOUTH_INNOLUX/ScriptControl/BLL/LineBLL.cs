@@ -217,6 +217,79 @@ namespace com.mirle.ibg3k0.sc.BLL
 
         }
 
+        public static EQLOG_INFO converToEqLogInfoObj(dynamic logEntry)
+        {
+            EQLOG_INFO eq_gpp = new EQLOG_INFO();
+
+            try
+            {
+                eq_gpp.TIME = logEntry.RPT_TIME;
+                if (SCUtility.isMatche(logEntry.MSG_FROM, SCUtility.MSG_ROLE_MCS))
+                {
+                    eq_gpp.SENDRECEIVE = logEntry.MSG_FROM + " => " + logEntry.MSG_TO;
+                }
+                else if (SCUtility.isMatche(logEntry.MSG_FROM, SCUtility.MSG_ROLE_OHXC))
+                {
+                    if (SCUtility.isMatche(logEntry.MSG_TO, SCUtility.MSG_ROLE_MCS))
+                    {
+                        eq_gpp.SENDRECEIVE = logEntry.MSG_TO + " <= " + logEntry.MSG_FROM;
+                    }
+                    else
+                    {
+                        eq_gpp.SENDRECEIVE = logEntry.MSG_FROM + " => " + logEntry.MSG_TO;
+                    }
+                }
+                else
+                {
+                    eq_gpp.SENDRECEIVE = logEntry.MSG_TO + " <= " + logEntry.MSG_FROM;
+                }
+
+                eq_gpp.FUNNAME = logEntry.FUN_NAME;
+                eq_gpp.SEQNO = logEntry.SEQ_NUM;
+                eq_gpp.VHID = logEntry.VH_ID;
+                eq_gpp.OHTCCMDID = logEntry.OHTC_CMD_ID;
+                eq_gpp.ACTTYPE = logEntry.ACT_TYPE;
+                eq_gpp.MCSCMDID = logEntry.MCS_CMD_ID;
+                eq_gpp.EVENTTYPE = logEntry.EVENT_TYPE;
+                eq_gpp.VHSTATUS = logEntry.VH_STATUS;
+
+                StringBuilder sb = new StringBuilder();
+                sb.AppendLine("Function Name: " + logEntry.FUN_NAME);
+                sb.AppendLine("Sequence No: " + logEntry.SEQ_NUM);
+                sb.AppendLine("VH ID: " + logEntry.VH_ID);
+                sb.AppendLine("OHTC CMD ID: " + logEntry.OHTC_CMD_ID);
+                sb.AppendLine("ACT Type: " + logEntry.ACT_TYPE);
+                sb.AppendLine("MCS CMD ID: " + logEntry.MCS_CMD_ID);
+                sb.AppendLine("Travel Distance: " + logEntry.TRAVEL_DIS);
+                sb.AppendLine("ADR ID: " + logEntry.ADR_ID);
+                sb.AppendLine("SEC ID: " + logEntry.SECID);
+                sb.AppendLine("Event Type: " + logEntry.EVENT_TYPE);
+                sb.AppendLine("SEC Distance: " + logEntry.SEC_DIS);
+                sb.AppendLine("Block SEC Distance: " + logEntry.BLOCK_SEC_ID);
+                sb.AppendLine("Is Block Pass: " + logEntry.IS_BLOCK_PASS);
+                sb.AppendLine("Is HID Pass: " + logEntry.IS_HID_PASS);
+                sb.AppendLine("VH Status: " + logEntry.VH_STATUS);
+                sb.AppendLine("Result: " + logEntry.RESULT);
+                sb.AppendLine("Message:");
+
+                string sMsg = logEntry.MSG_BODY;
+                List<string> sMsgList = sMsg.Split(',').ToList();
+                foreach (string msg in sMsgList)
+                {
+                    string tmpMsg = msg.Replace("\"", " ");
+                    sb.AppendLine(tmpMsg);
+                }
+
+                eq_gpp.MESSAGE = sb.ToString();
+                return eq_gpp;
+
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception:");
+                return null;
+            }
+        }
         public static byte[] Convert2GPB_TcpMsgInfo(dynamic logEntry)
         {
             EQLOG_INFO eq_gpp = new EQLOG_INFO();
@@ -348,7 +421,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                 HostMode = line.Host_Control_State == SCAppConstants.LineHostControlState.HostControlState.On_Line_Remote
              ? HostMode.OnlineRemote : HostMode.Offline,
                 TSCState = line.SCStats == ALINE.TSCState.AUTO ? TSCState.Auto : line.SCStats == ALINE.TSCState.PAUSING ? TSCState.Pausing :
-                line.SCStats == ALINE.TSCState.PAUSED ? TSCState.Paused: line.SCStats == ALINE.TSCState.TSC_INIT ? TSCState.Tscint : TSCState.Paused,
+                line.SCStats == ALINE.TSCState.PAUSED ? TSCState.Paused : line.SCStats == ALINE.TSCState.TSC_INIT ? TSCState.Tscint : TSCState.Paused,
                 PLC = LinkStatus.LinkFail,
                 IMS = line.DetectionSystemExist == SCAppConstants.ExistStatus.Exist ?
              LinkStatus.LinkOk : LinkStatus.LinkFail,
@@ -390,7 +463,7 @@ namespace com.mirle.ibg3k0.sc.BLL
         {
             TRANSFER_INFO line_gpb = new TRANSFER_INFO()
             {
-                MCSCommandAutoAssign = line.MCSCommandAutoAssign 
+                MCSCommandAutoAssign = line.MCSCommandAutoAssign
             };
 
             byte[] arrayByte = new byte[line_gpb.CalculateSize()];
@@ -1383,7 +1456,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                 {
                     foreach (AECDATAMAP item in ecDataMapList)
                     {
-                        AECDATAMAP ecdata  = ecDataMapDao.getByECID(conn, true, item.ECID);
+                        AECDATAMAP ecdata = ecDataMapDao.getByECID(conn, true, item.ECID);
                         ecdata.ECV = item.ECV;
                         ecDataMapDao.updateECData(conn, ecdata);
                         scApp.BCSystemBLL.updateSystemParameter(item.ECID, item.ECV, true);

@@ -371,27 +371,26 @@ namespace com.mirle.ibg3k0.sc.Service
             }
         }
 
-        object publishEQMsgLock = new object();
         public void PublishEQMsgInfo(Object tcpLog)
         {
-            lock (publishEQMsgLock)
+            try
             {
-                try
-                {
-                    dynamic logEntry = tcpLog as JObject;
+                dynamic logEntry = tcpLog as JObject;
+                EQLOG_INFO eq_log_ingo = LineBLL.converToEqLogInfoObj(logEntry);
+                var ci = scApp.getEQObjCacheManager().CommonInfo;
+                ci.addEqLogIngo(eq_log_ingo);
 
-                    byte[] tcpMsg_Serialize = BLL.LineBLL.Convert2GPB_TcpMsgInfo(logEntry);
+                //byte[] tcpMsg_Serialize = BLL.LineBLL.Convert2GPB_TcpMsgInfo(logEntry);
 
-                    if (tcpMsg_Serialize != null)
-                    {
-                        scApp.getNatsManager().PublishAsync
-                            (SCAppConstants.NATS_SUBJECT_TCPIP_LOG, tcpMsg_Serialize);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    logger.Error(ex, "Exception:");
-                }
+                //if (tcpMsg_Serialize != null)
+                //{
+                //    scApp.getNatsManager().PublishAsync
+                //        (SCAppConstants.NATS_SUBJECT_TCPIP_LOG, tcpMsg_Serialize);
+                //}
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception:");
             }
         }
 
