@@ -794,8 +794,9 @@ namespace com.mirle.ibg3k0.sc.Data.SECSDriver
             if (line.Host_Control_State != SCAppConstants.LineHostControlState.HostControlState.EQ_Off_line)
             {
                 //S6F11SendEquiptmentOffLine();
-                scApp.LineService.OfflineWithHost();
-                scApp.LineService.OnlineRemoteWithHost();
+
+                //scApp.LineService.OfflineWithHost();
+                //scApp.LineService.OnlineRemoteWithHost();
             }
             //S1F1
             //S1F1SendAreYouThere();

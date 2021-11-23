@@ -830,10 +830,10 @@ namespace com.mirle.ibg3k0.sc.Common
             json = json.Replace("RPT_TIME", "@timestamp");
             LogManager.GetLogger("RecodeReportInfo").Info(json);
             logEntry.RPT_TIME = nowDt.ToString(SCAppConstants.DateTimeFormat_23);
-            //System.Threading.ThreadPool.QueueUserWorkItem(new WaitCallback(SCApplication.getInstance().LineService.PublishEQMsgInfo), logEntry);
+            System.Threading.ThreadPool.QueueUserWorkItem(new WaitCallback(SCApplication.getInstance().LineService.PublishEQMsgInfo), logEntry);
         }
 
-        static Google.Protobuf.JsonFormatter jsonFormatter = 
+        static Google.Protobuf.JsonFormatter jsonFormatter =
             new JsonFormatter(new JsonFormatter.Settings(true).
                 WithFormatDefaultValues(true).
                 WithTypeRegistry(Google.Protobuf.Reflection.TypeRegistry.FromMessages(ProtocolFormat.NorthInnolux.Agvmessage.ID_36_TRANS_EVENT_RESPONSE_EXTENSION.Descriptor)));
@@ -975,7 +975,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(send_str);
 
-            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
+            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
                 fun_name, seq_num, vh_id, send_str.CmdID, send_str.ActType.ToString(),
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -991,7 +991,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(recive_str);
 
-            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
+            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
                 fun_name, seq_num, vh_id, recive_str.CmdID, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1007,7 +1007,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(send_str);
 
-            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
+            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
                 fun_name, seq_num, vh_id, vh_DO.OHTC_CMD, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1023,7 +1023,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(recive_str);
 
-            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
+            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
                 fun_name, seq_num, vh_id, vh_DO.OHTC_CMD, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1040,7 +1040,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(send_str);
 
-            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
+            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
                 fun_name, seq_num, vh_id, vh_DO.OHTC_CMD, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1056,7 +1056,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(recive_str);
 
-            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
+            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
                 fun_name, seq_num, vh_id, vh_DO.OHTC_CMD, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1135,7 +1135,7 @@ namespace com.mirle.ibg3k0.sc.Common
         {
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(send_str);
-            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
+            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
                 fun_name, seq_num, vh_id, vh_DO.OHTC_CMD, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1150,7 +1150,7 @@ namespace com.mirle.ibg3k0.sc.Common
         {
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(recive_str);
-            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
+            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
                 (recive_str as IMessage).Descriptor.Name, seq_num, vh_id, vh_DO.OHTC_CMD, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1166,7 +1166,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(send_str);
 
-            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
+            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
                 fun_name, seq_num, vh_id, vh_DO.OHTC_CMD, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1183,7 +1183,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(recive_str);
 
-            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
+            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
                 fun_name, seq_num, vh_id, vh_DO.OHTC_CMD, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1233,7 +1233,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(send_str);
 
-            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
+            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
                 fun_name, seq_num, vh_id, string.Empty, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1249,7 +1249,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(recive_str);
 
-            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
+            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
                 fun_name, seq_num, vh_id, string.Empty, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1299,7 +1299,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(send_str);
 
-            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
+            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
                 fun_name, seq_num, vh_id, string.Empty, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1315,7 +1315,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
             string fun_name = RenameFunName(recive_str);
 
-            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_VH,
+            RecodeReportInfo(MSG_ROLE_VH, MSG_ROLE_OHXC,
                 fun_name, seq_num, vh_id, string.Empty, string.Empty,
                 vh_DO.MCS_CMD, //S2F49
                 vh_DO.CUR_ADR_ID, vh_DO.CUR_SEC_ID, string.Empty, (uint)vh_DO.ACC_SEC_DIST, string.Empty, string.Empty, //134
@@ -1362,9 +1362,10 @@ namespace com.mirle.ibg3k0.sc.Common
         private static string RenameFunName(IMessage send_str)
         {
             string fun_name = send_str.Descriptor.Name;
-            string[] fun_nameSplit = fun_name.Split('_');
-            fun_name = string.Concat(fun_nameSplit[0], "_", fun_nameSplit[1]);
             return fun_name;
+
+            //string[] fun_nameSplit = fun_name.Split('_');
+            //fun_name = string.Concat(fun_nameSplit[0], "_", fun_nameSplit[1]);
         }
 
 

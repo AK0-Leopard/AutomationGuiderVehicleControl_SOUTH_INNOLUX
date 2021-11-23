@@ -103,20 +103,21 @@ namespace com.mirle.ibg3k0.bc.winform
             this.englishToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zh_twToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zh_chToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tipMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.monitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.communectionStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.queryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.transferCommandHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alarmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.staticsChartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.alarmListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipMessageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.monitorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.communectionStatusToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.engineerToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.debugToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.engineeringModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.logout_timer = new System.Windows.Forms.Timer(this.components);
+            this.currentVhCommInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.CMS_OnLineMode.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -486,25 +487,6 @@ namespace com.mirle.ibg3k0.bc.winform
             resources.ApplyResources(this.zh_chToolStripMenuItem, "zh_chToolStripMenuItem");
             this.zh_chToolStripMenuItem.Click += new System.EventHandler(this.zh_chToolStripMenuItem_Click);
             // 
-            // tipMessageToolStripMenuItem
-            // 
-            this.tipMessageToolStripMenuItem.Name = "tipMessageToolStripMenuItem";
-            resources.ApplyResources(this.tipMessageToolStripMenuItem, "tipMessageToolStripMenuItem");
-            this.tipMessageToolStripMenuItem.Click += new System.EventHandler(this.tipMessageToolStripMenuItem_Click);
-            // 
-            // monitorToolStripMenuItem
-            // 
-            this.monitorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.communectionStatusToolStripMenuItem});
-            this.monitorToolStripMenuItem.Name = "monitorToolStripMenuItem";
-            resources.ApplyResources(this.monitorToolStripMenuItem, "monitorToolStripMenuItem");
-            // 
-            // communectionStatusToolStripMenuItem
-            // 
-            this.communectionStatusToolStripMenuItem.Name = "communectionStatusToolStripMenuItem";
-            resources.ApplyResources(this.communectionStatusToolStripMenuItem, "communectionStatusToolStripMenuItem");
-            this.communectionStatusToolStripMenuItem.Click += new System.EventHandler(this.communectionStatusToolStripMenuItem_Click);
-            // 
             // queryToolStripMenuItem
             // 
             this.queryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -512,7 +494,8 @@ namespace com.mirle.ibg3k0.bc.winform
             this.alarmToolStripMenuItem,
             this.staticsChartToolStripMenuItem,
             this.toolStripSeparator3,
-            this.alarmListToolStripMenuItem});
+            this.alarmListToolStripMenuItem,
+            this.currentVhCommInfoToolStripMenuItem});
             this.queryToolStripMenuItem.Name = "queryToolStripMenuItem";
             resources.ApplyResources(this.queryToolStripMenuItem, "queryToolStripMenuItem");
             // 
@@ -545,6 +528,25 @@ namespace com.mirle.ibg3k0.bc.winform
             resources.ApplyResources(this.alarmListToolStripMenuItem, "alarmListToolStripMenuItem");
             this.alarmListToolStripMenuItem.Click += new System.EventHandler(this.alarmListToolStripMenuItem_Click);
             // 
+            // tipMessageToolStripMenuItem
+            // 
+            this.tipMessageToolStripMenuItem.Name = "tipMessageToolStripMenuItem";
+            resources.ApplyResources(this.tipMessageToolStripMenuItem, "tipMessageToolStripMenuItem");
+            this.tipMessageToolStripMenuItem.Click += new System.EventHandler(this.tipMessageToolStripMenuItem_Click);
+            // 
+            // monitorToolStripMenuItem
+            // 
+            this.monitorToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.communectionStatusToolStripMenuItem});
+            this.monitorToolStripMenuItem.Name = "monitorToolStripMenuItem";
+            resources.ApplyResources(this.monitorToolStripMenuItem, "monitorToolStripMenuItem");
+            // 
+            // communectionStatusToolStripMenuItem
+            // 
+            this.communectionStatusToolStripMenuItem.Name = "communectionStatusToolStripMenuItem";
+            resources.ApplyResources(this.communectionStatusToolStripMenuItem, "communectionStatusToolStripMenuItem");
+            this.communectionStatusToolStripMenuItem.Click += new System.EventHandler(this.communectionStatusToolStripMenuItem_Click);
+            // 
             // engineerToolStripMenuItem1
             // 
             this.engineerToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -575,6 +577,12 @@ namespace com.mirle.ibg3k0.bc.winform
             this.logout_timer.Enabled = true;
             this.logout_timer.Interval = 10000;
             this.logout_timer.Tick += new System.EventHandler(this.logout_timer_Tick);
+            // 
+            // currentVhCommInfoToolStripMenuItem
+            // 
+            this.currentVhCommInfoToolStripMenuItem.Name = "currentVhCommInfoToolStripMenuItem";
+            resources.ApplyResources(this.currentVhCommInfoToolStripMenuItem, "currentVhCommInfoToolStripMenuItem");
+            this.currentVhCommInfoToolStripMenuItem.Click += new System.EventHandler(this.currentVhCommInfoToolStripMenuItem_Click);
             // 
             // BCMainForm
             // 
@@ -755,6 +763,7 @@ namespace com.mirle.ibg3k0.bc.winform
         private System.Windows.Forms.ToolStripMenuItem vehicleOperationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem chargerControlToolStripMenuItem;
         private System.Windows.Forms.Timer logout_timer;
+        private System.Windows.Forms.ToolStripMenuItem currentVhCommInfoToolStripMenuItem;
     }
 
     /// <summary>

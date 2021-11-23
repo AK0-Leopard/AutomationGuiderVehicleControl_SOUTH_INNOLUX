@@ -1915,7 +1915,7 @@ namespace com.mirle.ibg3k0.sc.App
         public static int TheLongestFullyChargedIntervalTime_Mim = 15;
 
         public static bool AutoOverride = true;
-        public static int MaxAllowCarrierInstalledTime_Sec { get; private set; } = 600;
+        public static int MaxAllowCarrierInstalledTime_Sec { get; private set; } = 1200;
 
         public static void setSECSConversactionTimeout(int timeout)
         {

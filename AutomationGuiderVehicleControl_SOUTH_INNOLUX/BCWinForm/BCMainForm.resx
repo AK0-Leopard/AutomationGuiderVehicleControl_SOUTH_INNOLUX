@@ -466,19 +466,19 @@
     <value>Maintenance</value>
   </data>
   <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>160, 26</value>
   </data>
   <data name="englishToolStripMenuItem.Text" xml:space="preserve">
     <value>English</value>
   </data>
   <data name="zh_twToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>160, 26</value>
   </data>
   <data name="zh_twToolStripMenuItem.Text" xml:space="preserve">
     <value>繁體中文</value>
   </data>
   <data name="zh_chToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 26</value>
+    <value>160, 26</value>
   </data>
   <data name="zh_chToolStripMenuItem.Text" xml:space="preserve">
     <value>简体中文</value>
@@ -518,6 +518,12 @@
   </data>
   <data name="alarmListToolStripMenuItem.Text" xml:space="preserve">
     <value>Alarm List</value>
+  </data>
+  <data name="currentVhCommInfoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>306, 26</value>
+  </data>
+  <data name="currentVhCommInfoToolStripMenuItem.Text" xml:space="preserve">
+    <value>Current Vh Comm. Info</value>
   </data>
   <data name="queryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 26</value>
@@ -1475,24 +1481,6 @@
   <data name="&gt;&gt;zh_chToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tipMessageToolStripMenuItem.Name" xml:space="preserve">
-    <value>tipMessageToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;tipMessageToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;monitorToolStripMenuItem.Name" xml:space="preserve">
-    <value>monitorToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;monitorToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;communectionStatusToolStripMenuItem.Name" xml:space="preserve">
-    <value>communectionStatusToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;communectionStatusToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;queryToolStripMenuItem.Name" xml:space="preserve">
     <value>queryToolStripMenuItem</value>
   </data>
@@ -1529,6 +1517,24 @@
   <data name="&gt;&gt;alarmListToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;tipMessageToolStripMenuItem.Name" xml:space="preserve">
+    <value>tipMessageToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;tipMessageToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;monitorToolStripMenuItem.Name" xml:space="preserve">
+    <value>monitorToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;monitorToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;communectionStatusToolStripMenuItem.Name" xml:space="preserve">
+    <value>communectionStatusToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;communectionStatusToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;engineerToolStripMenuItem1.Name" xml:space="preserve">
     <value>engineerToolStripMenuItem1</value>
   </data>
@@ -1558,6 +1564,12 @@
   </data>
   <data name="&gt;&gt;logout_timer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;currentVhCommInfoToolStripMenuItem.Name" xml:space="preserve">
+    <value>currentVhCommInfoToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;currentVhCommInfoToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>BCMainForm</value>

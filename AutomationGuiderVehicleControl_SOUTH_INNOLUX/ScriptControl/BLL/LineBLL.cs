@@ -224,24 +224,28 @@ namespace com.mirle.ibg3k0.sc.BLL
             try
             {
                 eq_gpp.TIME = logEntry.RPT_TIME;
+
+                //bool is_send = SCUtility.isMatche(logEntry.MSG_FROM, SCUtility.MSG_ROLE_OHXC);
+                //if (is_send)
+                //{
+                //    eq_gpp.SENDRECEIVE = logEntry.MSG_FROM + " => " + logEntry.MSG_TO;
+                //}
+                //else
+                //{
+                //    eq_gpp.SENDRECEIVE = logEntry.MSG_FROM + " <= " + logEntry.MSG_TO;
+                //}
+
                 if (SCUtility.isMatche(logEntry.MSG_FROM, SCUtility.MSG_ROLE_MCS))
                 {
-                    eq_gpp.SENDRECEIVE = logEntry.MSG_FROM + " => " + logEntry.MSG_TO;
+                    eq_gpp.SENDRECEIVE = logEntry.MSG_TO + " <= " + logEntry.MSG_FROM ;
                 }
-                else if (SCUtility.isMatche(logEntry.MSG_FROM, SCUtility.MSG_ROLE_OHXC))
+                else if (SCUtility.isMatche(logEntry.MSG_FROM, SCUtility.MSG_ROLE_VH))
                 {
-                    if (SCUtility.isMatche(logEntry.MSG_TO, SCUtility.MSG_ROLE_MCS))
-                    {
-                        eq_gpp.SENDRECEIVE = logEntry.MSG_TO + " <= " + logEntry.MSG_FROM;
-                    }
-                    else
-                    {
-                        eq_gpp.SENDRECEIVE = logEntry.MSG_FROM + " => " + logEntry.MSG_TO;
-                    }
+                    eq_gpp.SENDRECEIVE = logEntry.MSG_TO + " <= " + logEntry.MSG_FROM;
                 }
                 else
                 {
-                    eq_gpp.SENDRECEIVE = logEntry.MSG_TO + " <= " + logEntry.MSG_FROM;
+                    eq_gpp.SENDRECEIVE = logEntry.MSG_FROM + " => " + logEntry.MSG_TO;
                 }
 
                 eq_gpp.FUNNAME = logEntry.FUN_NAME;

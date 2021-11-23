@@ -524,6 +524,12 @@
     <Compile Include="UI\Query\AlarmListForm.Designer.cs">
       <DependentUpon>AlarmListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Query\CurrentEqLogInfoForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Query\CurrentEqLogInfoForm.Designer.cs">
+      <DependentUpon>CurrentEqLogInfoForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Query\HistoryTransferCommandForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1805,6 +1811,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Query\AlarmListForm.resx">
       <DependentUpon>AlarmListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Query\CurrentEqLogInfoForm.resx">
+      <DependentUpon>CurrentEqLogInfoForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Query\HistoryTransferCommandForm.resx">
       <DependentUpon>HistoryTransferCommandForm.cs</DependentUpon>

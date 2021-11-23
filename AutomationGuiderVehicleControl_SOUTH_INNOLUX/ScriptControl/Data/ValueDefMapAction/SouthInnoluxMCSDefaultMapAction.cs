@@ -1671,7 +1671,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                          line.Host_Control_State == SCAppConstants.LineHostControlState.HostControlState.On_Line_Local)
                 {
                     s1f18.ONLACK = SECSConst.ONLACK_Equipment_Already_On_Line;
-                    msg = "OHS is online remote ready!!"; //A0.05
+                    msg = "AGVC is online remote ready!!"; //A0.05
                 }
                 else
                 {
@@ -3464,8 +3464,10 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             }
             isOnlineWithMcs = false;
             line.Secs_Link_Stat = SCAppConstants.LinkStatus.LinkFail;
-            scApp.LineBLL.updateHostControlState(SCAppConstants.LineHostControlState.HostControlState.EQ_Off_line);
-            scApp.LineService.TSCStateToNone();
+
+            //根據SPEC修改，再與MCS斷線後不主動變Auto、Offline
+            //scApp.LineBLL.updateHostControlState(SCAppConstants.LineHostControlState.HostControlState.EQ_Off_line);
+            //scApp.LineService.TSCStateToNone();
 
             line.connInfoUpdate_Disconnection();
 

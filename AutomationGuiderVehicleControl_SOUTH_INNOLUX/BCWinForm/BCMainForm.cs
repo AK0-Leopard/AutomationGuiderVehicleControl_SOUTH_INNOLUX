@@ -1212,6 +1212,11 @@ namespace com.mirle.ibg3k0.bc.winform
         {
             openForm(typeof(VehicleOperationForm).Name, true, false);
         }
+
+        private void currentVhCommInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openForm(typeof(CurrentEqLogInfoForm).Name, true, false);
+        }
     }
 
     public delegate void MouseMovedEvent();
