@@ -42,18 +42,17 @@
             this.txt_commandID = new System.Windows.Forms.MaskedTextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.btnlSearch = new CCWin.SkinControl.SkinButton();
+            this.skinGroupBox2 = new CCWin.SkinControl.SkinGroupBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.txt_mcsCmdID = new System.Windows.Forms.MaskedTextBox();
             this.dgv_eqLogInfos = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.txt_message = new System.Windows.Forms.TextBox();
-            this.skinGroupBox2 = new CCWin.SkinControl.SkinGroupBox();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.txt_mcsCmdID = new System.Windows.Forms.MaskedTextBox();
             this.aLARMObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VH_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VH_STATUS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ACT_TYPE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FUN_NAME = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SENDRECEIVE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EVENT_TYPE = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,11 +66,11 @@
             this.skinGroupBox1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.skinGroupBox2.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_eqLogInfos)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.skinGroupBox2.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.aLARMObjToShowBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -120,7 +119,7 @@
             this.skinGroupBox4.Size = new System.Drawing.Size(393, 104);
             this.skinGroupBox4.TabIndex = 77;
             this.skinGroupBox4.TabStop = false;
-            this.skinGroupBox4.Text = "    Alarm Set Time ";
+            this.skinGroupBox4.Text = "Time";
             this.skinGroupBox4.TitleBorderColor = System.Drawing.Color.Black;
             this.skinGroupBox4.TitleRectBackColor = System.Drawing.Color.LightSteelBlue;
             this.skinGroupBox4.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
@@ -275,6 +274,52 @@
             this.btnlSearch.UseVisualStyleBackColor = false;
             this.btnlSearch.Click += new System.EventHandler(this.btnlSearch_Click);
             // 
+            // skinGroupBox2
+            // 
+            this.skinGroupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.skinGroupBox2.BorderColor = System.Drawing.Color.Black;
+            this.skinGroupBox2.Controls.Add(this.tableLayoutPanel4);
+            this.skinGroupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.skinGroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.skinGroupBox2.Font = new System.Drawing.Font("Arial", 14F);
+            this.skinGroupBox2.ForeColor = System.Drawing.Color.Black;
+            this.skinGroupBox2.Location = new System.Drawing.Point(657, 3);
+            this.skinGroupBox2.Name = "skinGroupBox2";
+            this.skinGroupBox2.RectBackColor = System.Drawing.SystemColors.Control;
+            this.skinGroupBox2.RoundStyle = CCWin.SkinClass.RoundStyle.All;
+            this.skinGroupBox2.Size = new System.Drawing.Size(251, 104);
+            this.skinGroupBox2.TabIndex = 79;
+            this.skinGroupBox2.TabStop = false;
+            this.skinGroupBox2.Text = "MCS Cmd ID";
+            this.skinGroupBox2.TitleBorderColor = System.Drawing.Color.Black;
+            this.skinGroupBox2.TitleRectBackColor = System.Drawing.Color.LightSteelBlue;
+            this.skinGroupBox2.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.Controls.Add(this.txt_mcsCmdID, 0, 0);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 25);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(245, 76);
+            this.tableLayoutPanel4.TabIndex = 84;
+            // 
+            // txt_mcsCmdID
+            // 
+            this.txt_mcsCmdID.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txt_mcsCmdID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txt_mcsCmdID.Font = new System.Drawing.Font("Arial", 14F);
+            this.txt_mcsCmdID.Location = new System.Drawing.Point(9, 23);
+            this.txt_mcsCmdID.Name = "txt_mcsCmdID";
+            this.txt_mcsCmdID.PromptChar = ' ';
+            this.txt_mcsCmdID.Size = new System.Drawing.Size(227, 29);
+            this.txt_mcsCmdID.TabIndex = 64;
+            // 
             // dgv_eqLogInfos
             // 
             this.dgv_eqLogInfos.AllowUserToAddRows = false;
@@ -285,7 +330,6 @@
             this.Time,
             this.VH_ID,
             this.VH_STATUS,
-            this.ACT_TYPE,
             this.FUN_NAME,
             this.SENDRECEIVE,
             this.EVENT_TYPE,
@@ -346,52 +390,6 @@
             this.txt_message.Size = new System.Drawing.Size(486, 588);
             this.txt_message.TabIndex = 10;
             // 
-            // skinGroupBox2
-            // 
-            this.skinGroupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.skinGroupBox2.BorderColor = System.Drawing.Color.Black;
-            this.skinGroupBox2.Controls.Add(this.tableLayoutPanel4);
-            this.skinGroupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.skinGroupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.skinGroupBox2.Font = new System.Drawing.Font("Arial", 14F);
-            this.skinGroupBox2.ForeColor = System.Drawing.Color.Black;
-            this.skinGroupBox2.Location = new System.Drawing.Point(657, 3);
-            this.skinGroupBox2.Name = "skinGroupBox2";
-            this.skinGroupBox2.RectBackColor = System.Drawing.SystemColors.Control;
-            this.skinGroupBox2.RoundStyle = CCWin.SkinClass.RoundStyle.All;
-            this.skinGroupBox2.Size = new System.Drawing.Size(251, 104);
-            this.skinGroupBox2.TabIndex = 79;
-            this.skinGroupBox2.TabStop = false;
-            this.skinGroupBox2.Text = "MCS Cmd ID";
-            this.skinGroupBox2.TitleBorderColor = System.Drawing.Color.Black;
-            this.skinGroupBox2.TitleRectBackColor = System.Drawing.Color.LightSteelBlue;
-            this.skinGroupBox2.TitleRoundStyle = CCWin.SkinClass.RoundStyle.All;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Controls.Add(this.txt_mcsCmdID, 0, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 25);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 1;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(245, 76);
-            this.tableLayoutPanel4.TabIndex = 84;
-            // 
-            // txt_mcsCmdID
-            // 
-            this.txt_mcsCmdID.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.txt_mcsCmdID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txt_mcsCmdID.Font = new System.Drawing.Font("Arial", 14F);
-            this.txt_mcsCmdID.Location = new System.Drawing.Point(9, 23);
-            this.txt_mcsCmdID.Name = "txt_mcsCmdID";
-            this.txt_mcsCmdID.PromptChar = ' ';
-            this.txt_mcsCmdID.Size = new System.Drawing.Size(227, 29);
-            this.txt_mcsCmdID.TabIndex = 64;
-            // 
             // aLARMObjToShowBindingSource
             // 
             this.aLARMObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.ALARMObjToShow);
@@ -419,14 +417,6 @@
             this.VH_STATUS.Name = "VH_STATUS";
             this.VH_STATUS.ReadOnly = true;
             this.VH_STATUS.Width = 125;
-            // 
-            // ACT_TYPE
-            // 
-            this.ACT_TYPE.DataPropertyName = "ACTTYPE";
-            this.ACT_TYPE.HeaderText = "Act. Type";
-            this.ACT_TYPE.Name = "ACT_TYPE";
-            this.ACT_TYPE.ReadOnly = true;
-            this.ACT_TYPE.Width = 125;
             // 
             // FUN_NAME
             // 
@@ -485,7 +475,7 @@
             this.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "CurrentEqLogInfoForm";
-            this.Text = "History Alarms";
+            this.Text = "EQ Log Info";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TransferCommandQureyListForm_FormClosed);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
@@ -496,13 +486,13 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.skinGroupBox2.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_eqLogInfos)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.skinGroupBox2.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.aLARMObjToShowBindingSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -533,7 +523,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Time;
         private System.Windows.Forms.DataGridViewTextBoxColumn VH_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn VH_STATUS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ACT_TYPE;
         private System.Windows.Forms.DataGridViewTextBoxColumn FUN_NAME;
         private System.Windows.Forms.DataGridViewTextBoxColumn SENDRECEIVE;
         private System.Windows.Forms.DataGridViewTextBoxColumn EVENT_TYPE;

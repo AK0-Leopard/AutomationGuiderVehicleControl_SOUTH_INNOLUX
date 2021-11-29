@@ -782,7 +782,7 @@ namespace com.mirle.ibg3k0.sc.Common
 
         public const string MSG_ROLE_VH = "Vehicle";
         public const string MSG_ROLE_MCS = "MCS";
-        public const string MSG_ROLE_OHXC = "OHxC";
+        public const string MSG_ROLE_OHXC = "AGVC";
         public static void RecodeReportInfo(string msg_from, string msg_to,
         string fun_name, int seq_num, string vh_id, string ohtc_cmd_id, string act_type,
         string mcs_cmd_id,
