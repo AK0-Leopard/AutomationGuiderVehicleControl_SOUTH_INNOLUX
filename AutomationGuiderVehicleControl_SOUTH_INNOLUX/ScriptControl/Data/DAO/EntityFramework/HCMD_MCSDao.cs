@@ -40,6 +40,14 @@ namespace com.mirle.ibg3k0.sc.Data.DAO.EntityFramework
                         select new ObjectRelay.HCMD_MCSObjToShow() { cmd_mcs = cmd };
             return query.ToList();
         }
+        public List<HCMD_MCS> loadByInsertTimeEndTime(DBConnection_EF con, DateTime insertTime, DateTime finishTime)
+        {
+            var query = from cmd in con.HCMD_MCS
+                        where cmd.CMD_START_TIME > insertTime && (cmd.CMD_FINISH_TIME != null && cmd.CMD_FINISH_TIME < finishTime)
+                        orderby cmd.CMD_START_TIME descending
+                        select cmd;
+            return query.ToList();
+        }
         public List<ObjectRelay.HCMD_MCSObjToShow> loadByInsertPeriod(DBConnection_EF con, DateTime dtStart, DateTime dtEnd)
         {
             var query = from cmd in con.HCMD_MCS

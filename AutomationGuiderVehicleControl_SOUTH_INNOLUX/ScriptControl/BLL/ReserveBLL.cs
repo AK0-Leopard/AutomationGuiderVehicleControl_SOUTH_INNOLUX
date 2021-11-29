@@ -4,6 +4,7 @@ using Mirle.Hlts.Utils;
 using System;
 using System.Text;
 using System.Linq;
+using System.Collections.Generic;
 using com.mirle.ibg3k0.sc.ProtocolFormat.OHTMessage;
 using Google.Protobuf.Collections;
 using Common.Logging;
@@ -14,6 +15,7 @@ namespace com.mirle.ibg3k0.sc.BLL
     {
         NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         private Mirle.Hlts.ReserveSection.Map.ViewModels.HltMapViewModel mapAPI { get; set; }
+        private SCApplication SCApp;
 
         private EventHandler reserveStatusChange;
         private object _reserveStatusChangeEventLock = new object();
@@ -38,7 +40,45 @@ namespace com.mirle.ibg3k0.sc.BLL
 
         private void onReserveStatusChange()
         {
+            try
+            {
+                updateVehicleReservedSectionID();
+            }
+            catch
+            {
+
+            }
             reserveStatusChange?.Invoke(this, EventArgs.Empty);
+        }
+        private void updateVehicleReservedSectionID()
+        {
+            var vhs = SCApp?.getEQObjCacheManager()?.getAllVehicle();
+            if (vhs?.Count > 0)
+            {
+                foreach (var vh in vhs)
+                {
+                    vh.ReservedSectionID = GetCurrentReserveSectionByVhID(vh.VEHICLE_ID);
+                    //logger.Error($"ReserveInfoTest- vh_id({vh.VEHICLE_ID?.Trim()}), reserve_sections: {ListStringToString(vh.ReservedSectionID)}");
+                }
+            }
+        }
+        private string ListStringToString(List<string> lst)
+        {
+            string sRtn = "";
+            bool isFirst = true;
+            if (lst?.Count > 0)
+            {
+                foreach (var s in lst)
+                {
+                    if (isFirst)
+                    {
+                        sRtn = s;
+                        isFirst = false;
+                    }
+                    else sRtn += "," + s;
+                }
+            }
+            return sRtn;
         }
 
         public ReserveBLL()
@@ -46,7 +86,9 @@ namespace com.mirle.ibg3k0.sc.BLL
         }
         public virtual void start(SCApplication _app)
         {
-            mapAPI = _app.getReserveSectionAPI();
+            //mapAPI = _app.getReserveSectionAPI();
+            SCApp = _app;
+            mapAPI = SCApp.getReserveSectionAPI();
         }
 
         public virtual bool DrawAllReserveSectionInfo()
@@ -141,6 +183,22 @@ namespace com.mirle.ibg3k0.sc.BLL
             {
                 logger.Warn(ex, "Exception");
             }
+        }
+
+        public List<string> GetCurrentReserveSectionByVhID(string vh_id)
+        {
+            List<string> reserveSecs = new List<string>();
+            var current_reserve_sections_byVHID = mapAPI.HltReservedSections.Where(rs => rs.RSVehicleID == vh_id?.Trim()).ToList();
+            if (current_reserve_sections_byVHID?.Count > 0)
+            {
+                foreach (var reserve_section in current_reserve_sections_byVHID)
+                {
+                    string reserveSec = reserve_section.RSMapSectionID;
+                    if (!string.IsNullOrWhiteSpace(reserveSec))
+                        reserveSecs.Add(reserveSec);
+                }
+            }
+            return reserveSecs;
         }
 
         public virtual string GetCurrentReserveSection()
