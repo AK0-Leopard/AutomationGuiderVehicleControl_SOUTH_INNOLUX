@@ -104,7 +104,6 @@ namespace com.mirle.ibg3k0.sc.Service
                 vh.addEventHandler(nameof(VehicleService), vh.VhPositionChangeEvent, PublishVhInfo);
                 vh.addEventHandler(nameof(VehicleService), vh.VhExcuteCMDStatusChangeEvent, PublishVhInfo);
                 vh.addEventHandler(nameof(VehicleService), vh.VhStatusChangeEvent, PublishVhInfo);
-                vh.addEventHandler(nameof(VehicleService), vh.VhStatusChangeEvent, PublishVhInfo);
                 vh.LocationChange += Vh_LocationChange;
                 vh.SegmentChange += Vh_SegementChange;
                 vh.TimerActionStart();
