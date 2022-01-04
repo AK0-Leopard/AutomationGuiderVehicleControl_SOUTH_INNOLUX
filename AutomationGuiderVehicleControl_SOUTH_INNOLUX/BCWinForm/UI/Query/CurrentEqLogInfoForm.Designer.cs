@@ -46,10 +46,6 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.txt_mcsCmdID = new System.Windows.Forms.MaskedTextBox();
             this.dgv_eqLogInfos = new System.Windows.Forms.DataGridView();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.txt_message = new System.Windows.Forms.TextBox();
-            this.aLARMObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VH_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VH_STATUS = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +55,10 @@
             this.SEQ_NUM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OHTC_CMD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MCS_CMD_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.txt_message = new System.Windows.Forms.TextBox();
+            this.aLARMObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.skinGroupBox4.SuspendLayout();
@@ -349,51 +349,6 @@
             this.dgv_eqLogInfos.TabIndex = 9;
             this.dgv_eqLogInfos.SelectionChanged += new System.EventHandler(this.dgv_eqLogInfos_SelectionChanged);
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.80447F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.97765F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1602, 716);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.23559F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.76441F));
-            this.tableLayoutPanel2.Controls.Add(this.dgv_eqLogInfos, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.txt_message, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 119);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1596, 594);
-            this.tableLayoutPanel2.TabIndex = 79;
-            // 
-            // txt_message
-            // 
-            this.txt_message.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txt_message.Location = new System.Drawing.Point(1107, 3);
-            this.txt_message.Multiline = true;
-            this.txt_message.Name = "txt_message";
-            this.txt_message.ReadOnly = true;
-            this.txt_message.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txt_message.Size = new System.Drawing.Size(486, 588);
-            this.txt_message.TabIndex = 10;
-            // 
-            // aLARMObjToShowBindingSource
-            // 
-            this.aLARMObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.ALARMObjToShow);
-            // 
             // Time
             // 
             this.Time.DataPropertyName = "sTIME";
@@ -466,6 +421,51 @@
             this.MCS_CMD_ID.ReadOnly = true;
             this.MCS_CMD_ID.Width = 145;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.80447F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75.97765F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1602, 716);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.23559F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.76441F));
+            this.tableLayoutPanel2.Controls.Add(this.dgv_eqLogInfos, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.txt_message, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 119);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1596, 594);
+            this.tableLayoutPanel2.TabIndex = 79;
+            // 
+            // txt_message
+            // 
+            this.txt_message.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt_message.Location = new System.Drawing.Point(1107, 3);
+            this.txt_message.Multiline = true;
+            this.txt_message.Name = "txt_message";
+            this.txt_message.ReadOnly = true;
+            this.txt_message.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txt_message.Size = new System.Drawing.Size(486, 588);
+            this.txt_message.TabIndex = 10;
+            // 
+            // aLARMObjToShowBindingSource
+            // 
+            this.aLARMObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.ALARMObjToShow);
+            // 
             // CurrentEqLogInfoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
@@ -475,7 +475,7 @@
             this.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             this.Name = "CurrentEqLogInfoForm";
-            this.Text = "EQ Log Info";
+            this.Text = "Communication Log";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TransferCommandQureyListForm_FormClosed);
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);

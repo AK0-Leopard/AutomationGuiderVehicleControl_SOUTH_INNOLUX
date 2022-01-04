@@ -305,10 +305,10 @@ namespace com.mirle.ibg3k0.sc.Common
             string msg = string.Format("{0}{1}", sb.ToString(), sxfy.GetType().Name);
             //            SECSMsgLogger.Info(sb.ToString());
             SECSMsgLogger.Info(msg);
-            Task.Run(() =>
-            {
-                setLogInfo_SECS(scApp, isReceive, sxfy, sDateTime);
-            });
+            //Task.Run(() =>
+            //{
+            //    setLogInfo_SECS(scApp, isReceive, sxfy, sDateTime);
+            //});
         }
 
         public const String FUNCTION_TRANSDFERTYPE_SEND = "Send";
@@ -1372,12 +1372,12 @@ namespace com.mirle.ibg3k0.sc.Common
 
         #endregion TCPIP Msg Log
         #region SECS Msg Log
-        public static void RecodeReportInfo(S2F49_TRANSFER recive_str)
+        public static void RecodeReportInfo(com.mirle.ibg3k0.sc.Data.SECS.SouthInnolux.S2F49_TRANSFER recive_str)
         {
             string sraeamfun_name = recive_str.StreamFunction;
             RecodeReportInfo(MSG_ROLE_MCS, MSG_ROLE_OHXC,
                 sraeamfun_name, recive_str.SystemByte, string.Empty, string.Empty, string.Empty,
-                recive_str.REPITEMS.COMMINFO.COMMAINFO.COMMANDIDINFO.CommandID, //S2F49
+                recive_str.REPITEMS.COMMINFO.COMMAINFOVALUE.COMMANDID.CPVAL, //S2F49
                 string.Empty, string.Empty, string.Empty, 0, string.Empty, string.Empty, //134 rep
                 0, 0,//134 reply
                 0,
@@ -1385,7 +1385,7 @@ namespace com.mirle.ibg3k0.sc.Common
                 recive_str.toSECSString(),
                 string.Empty);//144          
         }
-        public static void RecodeReportInfo(S2F50 send_str, string mcs_cmd_id, string reply_result)
+        public static void RecodeReportInfo(com.mirle.ibg3k0.sc.Data.SECS.SouthInnolux.S2F50 send_str, string mcs_cmd_id, string reply_result)
         {
             string sraeamfun_name = send_str.StreamFunction;
             RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_MCS,
@@ -1398,85 +1398,99 @@ namespace com.mirle.ibg3k0.sc.Common
                 send_str.toSECSString(),
                 reply_result);                                                     //144          
         }
-        public static void RecodeReportInfo(string vh_id, string mcs_cmd_id, S6F11 send_str, string ceid)
+        public static void RecodeReportInfo(string vh_id, string mcs_cmd_id, com.mirle.ibg3k0.sc.Data.SECS.SouthInnolux.S6F11 send_str, string ceid)
         {
-            string ohtc_cmd = string.Empty;
-            string mcs_cmd = string.Empty;
-            string cur_adr_id = string.Empty;
-            string cur_sec_id = string.Empty;
-            uint acc_sec_dist = 0;
-            string act_status = string.Empty;
-            mcs_cmd = mcs_cmd_id;
-            if (!isEmpty(vh_id))
+            try
             {
-                AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
-                switch (ceid)
+                string ohtc_cmd = string.Empty;
+                string mcs_cmd = string.Empty;
+                string cur_adr_id = string.Empty;
+                string cur_sec_id = string.Empty;
+                uint acc_sec_dist = 0;
+                string act_status = string.Empty;
+                mcs_cmd = mcs_cmd_id;
+                if (!isEmpty(vh_id))
                 {
-                    case SECSConst.CEID_Transfer_Completed:
-                    case SECSConst.CEID_Vehicle_Unassigned:
-                        ohtc_cmd = string.Empty;
-                        break;
-                    default:
-                        ohtc_cmd = vh_DO.OHTC_CMD;
-                        break;
+                    AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
+                    switch (ceid)
+                    {
+                        case SECSConst.CEID_Transfer_Completed:
+                        case SECSConst.CEID_Vehicle_Unassigned:
+                            ohtc_cmd = string.Empty;
+                            break;
+                        default:
+                            ohtc_cmd = vh_DO.OHTC_CMD;
+                            break;
+                    }
+                    cur_adr_id = vh_DO.CUR_ADR_ID;
+                    cur_sec_id = vh_DO.CUR_SEC_ID;
+                    acc_sec_dist = (uint)vh_DO.ACC_SEC_DIST;
+                    act_status = vh_DO.ACT_STATUS.ToString();
                 }
-                cur_adr_id = vh_DO.CUR_ADR_ID;
-                cur_sec_id = vh_DO.CUR_SEC_ID;
-                acc_sec_dist = (uint)vh_DO.ACC_SEC_DIST;
-                act_status = vh_DO.ACT_STATUS.ToString();
-            }
 
-            string sraeamfun_name = send_str.StreamFunction;
-            string ceid_name = string.Concat(send_str.CEID, "-", SCApplication.getMessageString("CEID_" + send_str.CEID));
-            RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_MCS,
-                sraeamfun_name, send_str.SystemByte, vh_id, ohtc_cmd, string.Empty,
-                mcs_cmd,                                                                     //S2F49
-                cur_adr_id, cur_sec_id, ceid_name, acc_sec_dist, string.Empty, string.Empty, //134 rep
-                0, 0,//134 reply
-                0,
-                act_status,
-                send_str.toSECSString(),
-                string.Empty);
+                string sraeamfun_name = send_str.StreamFunction;
+                string ceid_name = string.Concat(send_str.CEID, "-", SCApplication.getMessageString("CEID_" + send_str.CEID));
+                RecodeReportInfo(MSG_ROLE_OHXC, MSG_ROLE_MCS,
+                    sraeamfun_name, send_str.SystemByte, vh_id, ohtc_cmd, string.Empty,
+                    mcs_cmd,                                                                     //S2F49
+                    cur_adr_id, cur_sec_id, ceid_name, acc_sec_dist, string.Empty, string.Empty, //134 rep
+                    0, 0,//134 reply
+                    0,
+                    act_status,
+                    send_str.toSECSString(),
+                    string.Empty);
+            }
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Exception:");
+            }
         }
-        public static void RecodeReportInfo(string vh_id, string mcs_cmd_id, S6F12 receive_str, string ceid, string reply_result)
+        public static void RecodeReportInfo(string vh_id, string mcs_cmd_id, com.mirle.ibg3k0.sc.Data.SECS.SouthInnolux.S6F12 receive_str, string ceid, string reply_result)
         {
-            string ohtc_cmd = string.Empty;
-            string mcs_cmd = string.Empty;
-            string cur_adr_id = string.Empty;
-            string cur_sec_id = string.Empty;
-            uint acc_sec_dist = 0;
-            string act_status = string.Empty;
-            mcs_cmd = mcs_cmd_id;
-            if (!isEmpty(vh_id))
+            try
             {
-                AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
-                switch (ceid)
+                string ohtc_cmd = string.Empty;
+                string mcs_cmd = string.Empty;
+                string cur_adr_id = string.Empty;
+                string cur_sec_id = string.Empty;
+                uint acc_sec_dist = 0;
+                string act_status = string.Empty;
+                mcs_cmd = mcs_cmd_id;
+                if (!isEmpty(vh_id))
                 {
-                    case SECSConst.CEID_Transfer_Completed:
-                    case SECSConst.CEID_Vehicle_Unassigned:
-                        ohtc_cmd = string.Empty;
-                        break;
-                    default:
-                        ohtc_cmd = vh_DO.OHTC_CMD;
-                        break;
+                    AVEHICLE vh_DO = SCApplication.getInstance().getEQObjCacheManager().getVehicletByVHID(vh_id);
+                    switch (ceid)
+                    {
+                        case SECSConst.CEID_Transfer_Completed:
+                        case SECSConst.CEID_Vehicle_Unassigned:
+                            ohtc_cmd = string.Empty;
+                            break;
+                        default:
+                            ohtc_cmd = vh_DO.OHTC_CMD;
+                            break;
+                    }
+                    cur_adr_id = vh_DO.CUR_ADR_ID;
+                    cur_sec_id = vh_DO.CUR_SEC_ID;
+                    acc_sec_dist = (uint)vh_DO.ACC_SEC_DIST;
+                    act_status = vh_DO.ACT_STATUS.ToString();
                 }
-                cur_adr_id = vh_DO.CUR_ADR_ID;
-                cur_sec_id = vh_DO.CUR_SEC_ID;
-                acc_sec_dist = (uint)vh_DO.ACC_SEC_DIST;
-                act_status = vh_DO.ACT_STATUS.ToString();
+
+                string sraeamfun_name = receive_str.StreamFunction;
+
+                RecodeReportInfo(MSG_ROLE_MCS, MSG_ROLE_OHXC,
+                    sraeamfun_name, receive_str.SystemByte, vh_id, ohtc_cmd, string.Empty,
+                    mcs_cmd,                                                                     //S2F49
+                    cur_adr_id, cur_sec_id, string.Empty, acc_sec_dist, string.Empty, string.Empty, //134 rep
+                    0, 0,//134 reply
+                    0,
+                    act_status,
+                    receive_str.toSECSString(),
+                    reply_result);
             }
-
-            string sraeamfun_name = receive_str.StreamFunction;
-
-            RecodeReportInfo(MSG_ROLE_MCS, MSG_ROLE_OHXC,
-                sraeamfun_name, receive_str.SystemByte, vh_id, ohtc_cmd, string.Empty,
-                mcs_cmd,                                                                     //S2F49
-                cur_adr_id, cur_sec_id, string.Empty, acc_sec_dist, string.Empty, string.Empty, //134 rep
-                0, 0,//134 reply
-                0,
-                act_status,
-                receive_str.toSECSString(),
-                reply_result);
+            catch (Exception ex)
+            {
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Exception:");
+            }
         }
         #endregion SECS Msg Log
 

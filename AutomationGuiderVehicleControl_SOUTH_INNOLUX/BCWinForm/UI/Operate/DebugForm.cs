@@ -52,7 +52,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             cb_passCouplerHPSafetySingnal.Checked = DebugParameter.isPassCouplerHPSafetySignal;
             ck_isMaunalReportFinishWhenLoadingUnloading.Checked = DebugParameter.isManualReportCommandFinishWhenLoadingUnloading;
             num_interlockMaxRetryCount.Value = DebugParameter.InterlockErrorMaxRetryCount;
-            num_MaxCarrierInstalledTime.Value = sc.App.SystemParameter.MaxAllowCarrierInstalledTime_Sec;
+            num_MaxCarrierInstalledTime.Value = sc.App.SystemParameter.MaxAllowCarrierAbnormalInstalledTime_Sec;
 
 
             List<string> lstVh = new List<string>();

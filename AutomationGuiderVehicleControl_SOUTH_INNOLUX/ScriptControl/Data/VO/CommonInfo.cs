@@ -72,10 +72,9 @@ namespace com.mirle.ibg3k0.sc.Data.VO
             {
                 if (eQLogInfos.Count > MAX_EQ_LOG_INFO_MSG_COUNT)
                 {
-                    eQLogInfos.RemoveAt(mpcTipMsgList.Count - 1);
+                    eQLogInfos.RemoveAt(eQLogInfos.Count - 1);
                 }
                 eQLogInfos.Insert(0, eqLogInfo);
-                OnPropertyChanged(BCFUtility.getPropertyName(() => this.MPCTipMsgList));
             }
         }
         #endregion EQ Log Info

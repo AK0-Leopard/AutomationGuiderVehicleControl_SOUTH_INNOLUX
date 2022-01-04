@@ -99,6 +99,7 @@ namespace com.mirle.ibg3k0.sc
 
         private Stopwatch CurrentCommandExcuteTime;
         private Stopwatch CarrierInstalledTime;
+        private Stopwatch CarrierAbnormalInstalledTime;
 
 
         public void addAttentionReserveSection(ASECTION attentionSection)
@@ -204,6 +205,7 @@ namespace com.mirle.ibg3k0.sc
 
             CurrentCommandExcuteTime = new Stopwatch();
             CarrierInstalledTime = new Stopwatch();
+            CarrierAbnormalInstalledTime = new Stopwatch();
 
         }
         public void TimerActionStart()
@@ -712,6 +714,18 @@ namespace com.mirle.ibg3k0.sc
         {
             if (CarrierInstalledTime.IsRunning)
                 CarrierInstalledTime.Reset();
+        }
+
+        public void CarrierAbnormalInstallStart()
+        {
+            if (!CarrierAbnormalInstalledTime.IsRunning)
+                CarrierAbnormalInstalledTime.Restart();
+        }
+
+        public void CarrierAbnormalInstallStop()
+        {
+            if (CarrierAbnormalInstalledTime.IsRunning)
+                CarrierAbnormalInstalledTime.Reset();
         }
 
         public bool send_Str1(ID_1_HOST_BASIC_INFO_VERSION_REP sned_gpp, out ID_101_HOST_BASIC_INFO_VERSION_RESPONSE receive_gpp)
@@ -1632,9 +1646,12 @@ namespace com.mirle.ibg3k0.sc
                         {
                             vh.onLongTimeInaction(vh.OHTC_CMD);
                         }
-                        double carrier_installed_time = vh.CarrierInstalledTime.Elapsed.TotalSeconds;
+
+                        checkHasCSTAbnormalInstallStatus();
+                        //double carrier_abnormal_installed_time = vh.CarrierInstalledTime.Elapsed.TotalSeconds;
+                        double carrier_abnormal_installed_time = vh.CarrierAbnormalInstalledTime.Elapsed.TotalSeconds;
                         //if (carrier_installed_time > AVEHICLE.MAX_ALLOW_CARRIER_INSTALLED_TIME_SECOND)
-                        if (carrier_installed_time > SystemParameter.MaxAllowCarrierInstalledTime_Sec)
+                        if (carrier_abnormal_installed_time > SystemParameter.MaxAllowCarrierAbnormalInstalledTime_Sec)
                         {
                             if (!vh.IsLongTimeInstallCarrierHappend)
                             {
@@ -1662,6 +1679,18 @@ namespace com.mirle.ibg3k0.sc
                 }
             }
 
+            private void checkHasCSTAbnormalInstallStatus()
+            {
+                if (vh.HAS_CST == 1 &&
+                   (!vh.isTcpIpConnect || vh.IsError || vh.ACT_STATUS == VHActionStatus.NoCommand))
+                {
+                    vh.CarrierAbnormalInstallStart();
+                }
+                else
+                {
+                    vh.CarrierAbnormalInstallStop();
+                }
+            }
         }
 
         public class GuideData

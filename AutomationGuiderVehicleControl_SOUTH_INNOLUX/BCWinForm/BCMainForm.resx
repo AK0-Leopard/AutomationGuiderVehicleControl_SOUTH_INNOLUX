@@ -523,7 +523,7 @@
     <value>306, 26</value>
   </data>
   <data name="currentVhCommInfoToolStripMenuItem.Text" xml:space="preserve">
-    <value>Current Vh Comm. Info</value>
+    <value>Communication Log</value>
   </data>
   <data name="queryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 26</value>
@@ -1517,6 +1517,12 @@
   <data name="&gt;&gt;alarmListToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;currentVhCommInfoToolStripMenuItem.Name" xml:space="preserve">
+    <value>currentVhCommInfoToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;currentVhCommInfoToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;tipMessageToolStripMenuItem.Name" xml:space="preserve">
     <value>tipMessageToolStripMenuItem</value>
   </data>
@@ -1564,12 +1570,6 @@
   </data>
   <data name="&gt;&gt;logout_timer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;currentVhCommInfoToolStripMenuItem.Name" xml:space="preserve">
-    <value>currentVhCommInfoToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;currentVhCommInfoToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>BCMainForm</value>

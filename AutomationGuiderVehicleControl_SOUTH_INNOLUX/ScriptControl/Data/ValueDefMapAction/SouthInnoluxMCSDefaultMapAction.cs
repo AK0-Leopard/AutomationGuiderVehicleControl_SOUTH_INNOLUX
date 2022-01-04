@@ -460,10 +460,8 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 {
                     case "TRANSFER":
                         S2F49_TRANSFER s2f49_transfer = ((S2F49_TRANSFER)e.secsHandler.Parse<S2F49_TRANSFER>(e));
-                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(AUOMCSDefaultMapAction), Device: DEVICE_NAME_MCS,
-                           Data: s2f49_transfer);
                         SCUtility.secsActionRecordMsg(scApp, true, s2f49_transfer);
-                        //SCUtility.RecodeReportInfo(s2f49_transfer);
+                        SCUtility.RecodeReportInfo(s2f49_transfer);
                         //if (!isProcessEAP(s2f49)) { return; }
 
                         S2F50 s2f50 = new S2F50();
@@ -505,14 +503,12 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                                 {
                                     TrxSECS.ReturnCode rtnCode = ISECSControl.replySECS(bcfApp, s2f50);
                                     SCUtility.secsActionRecordMsg(scApp, false, s2f50);
-                                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(AUOMCSDefaultMapAction), Device: DEVICE_NAME_MCS,
-                                       Data: s2f50);
                                     if (rtnCode != TrxSECS.ReturnCode.Normal)
                                     {
                                         logger.Warn("Reply EQPT S2F50) Error:{0}", rtnCode);
                                         isCreatScuess = false;
                                     }
-                                    //SCUtility.RecodeReportInfo(s2f50, cmdID, rtnCode.ToString());
+                                    SCUtility.RecodeReportInfo(s2f50, cmdID, rtnCode.ToString());
                                 }
                                 if (isCreatScuess)
                                 {
@@ -3317,15 +3313,14 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 LogHelper.setCallContextKey_ServiceID(CALL_CONTEXT_KEY_WORD_SERVICE_ID_MCS);
 
                 S6F11 s6f11 = (S6F11)SCUtility.ToObject(queue.SERIALIZED_SXFY);
-
+                string vh_id = SCUtility.Trim(queue.VEHICLE_ID, true);
+                string mcs_cmd_id = SCUtility.Trim(queue.MCS_CMD_ID, true);
                 S6F12 s6f12 = null;
                 SXFY abortSecs = null;
                 String rtnMsg = string.Empty;
 
                 if (!isSend()) return true;
-
-
-                //SCUtility.RecodeReportInfo(vh_id, mcs_cmd_id, s6f11, s6f11.CEID);
+                SCUtility.RecodeReportInfo(vh_id, mcs_cmd_id, s6f11, s6f11.CEID);
                 SCUtility.secsActionRecordMsg(scApp, false, s6f11);
                 TrxSECS.ReturnCode rtnCode = ISECSControl.sendRecv<S6F12>(bcfApp, s6f11, out s6f12,
                     out abortSecs, out rtnMsg, null);
@@ -3336,11 +3331,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 SCUtility.secsActionRecordMsg(scApp, false, s6f12);
                 SCUtility.actionRecordMsg(scApp, s6f11.StreamFunction, line.Real_ID,
                             "sendS6F11_common.", rtnCode.ToString());
-                //SCUtility.RecodeReportInfo(vh_id, mcs_cmd_id, s6f12, s6f11.CEID, rtnCode.ToString());
-                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(AUOMCSDefaultMapAction), Device: DEVICE_NAME_MCS,
-                   Data: s6f12,
-                   VehicleID: queue.VEHICLE_ID,
-                   XID: queue.MCS_CMD_ID);
+                SCUtility.RecodeReportInfo(vh_id, mcs_cmd_id, s6f12, s6f11.CEID, rtnCode.ToString());
 
                 if (rtnCode != TrxSECS.ReturnCode.Normal)
                 {
