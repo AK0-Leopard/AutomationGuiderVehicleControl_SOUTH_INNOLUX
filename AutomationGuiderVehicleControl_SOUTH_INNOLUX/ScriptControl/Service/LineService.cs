@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static com.mirle.ibg3k0.sc.AVEHICLE;
+using static com.mirle.ibg3k0.sc.Common.LogStatus;
 
 namespace com.mirle.ibg3k0.sc.Service
 {
@@ -331,6 +332,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 try
                 {
                     SYSTEMPROCESS_INFO logObj = systemLog as SYSTEMPROCESS_INFO;
+                    if (! Common.LogStatus.CheckLevel(logObj.LOGLEVEL)) return;
 
                     byte[] systemMsg_Serialize = BLL.LineBLL.Convert2GPB_SystemMsgInfo(logObj);
 

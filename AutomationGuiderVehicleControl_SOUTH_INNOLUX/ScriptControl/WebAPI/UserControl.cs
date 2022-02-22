@@ -542,6 +542,97 @@ namespace com.mirle.ibg3k0.sc.WebAPI
                 return response;
             };
 
+            Post["UserControl/LogLevelAdd"] = (p) =>
+            {
+                var scApp = SCApplication.getInstance();
+                bool isSuccess = true;
+                string result = string.Empty;
+
+                string level = Request.Query.level.Value ?? Request.Form.level.Value ?? string.Empty;
+                try
+                {
+                    Boolean deleteSuccess = Common.LogStatus.AddLevel(level);
+                    if (deleteSuccess)
+                    {
+                        result = "OK";
+                    }
+                    else
+                    {
+                        result = "ADD_FAILED";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    isSuccess = false;
+                    result = "Execption happend!";
+                    logger.Error(ex, "Execption:");
+                }
+                var response = (Response)result;
+                response.ContentType = restfulContentType;
+                return response;
+            };
+
+            Post["UserControl/LogLevelChange"] = (p) =>
+            {
+                var scApp = SCApplication.getInstance();
+                bool isSuccess = true;
+                string result = string.Empty;
+
+                string oldlevel = Request.Query.oldlevel.Value ?? Request.Form.oldlevel.Value ?? string.Empty;
+                string newlevel = Request.Query.newlevel.Value ?? Request.Form.newlevel.Value ?? string.Empty;
+                try
+                {
+                    Boolean deleteSuccess = Common.LogStatus.LevelChange(oldlevel, newlevel);
+                    if (deleteSuccess)
+                    {
+                        result = "OK";
+                    }
+                    else
+                    {
+                        result = "CHANGE_FAILED";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    isSuccess = false;
+                    result = "Execption happend!";
+                    logger.Error(ex, "Execption:");
+                }
+                var response = (Response)result;
+                response.ContentType = restfulContentType;
+                return response;
+            };
+
+            //Post["UserControl/LogLevelRemove"] = (p) =>
+            //{
+            //    var scApp = SCApplication.getInstance();
+            //    bool isSuccess = true;
+            //    string result = string.Empty;
+
+            //    string level = Request.Query.level.Value ?? Request.Form.level.Value ?? string.Empty;
+            //    try
+            //    {
+            //        Boolean deleteSuccess = Common.LogStatus.RemoveLevel(level);
+            //        if (deleteSuccess)
+            //        {
+            //            result = "OK";
+            //        }
+            //        else
+            //        {
+            //            result = "DELETE_FAILED";
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        isSuccess = false;
+            //        result = "Execption happend!";
+            //        logger.Error(ex, "Execption:");
+            //    }
+            //    var response = (Response)result;
+            //    response.ContentType = restfulContentType;
+            //    return response;
+            //};
+
         }
     }
 }

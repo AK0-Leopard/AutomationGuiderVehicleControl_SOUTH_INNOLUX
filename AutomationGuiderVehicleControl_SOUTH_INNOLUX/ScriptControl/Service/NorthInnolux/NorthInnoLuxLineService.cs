@@ -319,7 +319,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 try
                 {
                     SYSTEMPROCESS_INFO logObj = systemLog as SYSTEMPROCESS_INFO;
-
+                    if (!Common.LogStatus.CheckLevel(logObj.LOGLEVEL)) return;
                     byte[] systemMsg_Serialize = BLL.LineBLL.Convert2GPB_SystemMsgInfo(logObj);
 
                     if (systemMsg_Serialize != null)
