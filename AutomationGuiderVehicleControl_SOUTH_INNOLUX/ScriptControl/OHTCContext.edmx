@@ -102,7 +102,7 @@
             <PropertyRef Name="CEID" />
             <PropertyRef Name="RPTID" />
           </Key>
-          <Property Name="CEID" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="CEID" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="RPTID" Type="char" MaxLength="4" Nullable="false" />
           <Property Name="ORDER_NUM" Type="int" Nullable="false" />
           <Property Name="NAME" Type="char" MaxLength="20" />
@@ -113,7 +113,7 @@
             <PropertyRef Name="CMD_ID" />
           </Key>
           <Property Name="CMD_ID" Type="char" MaxLength="64" Nullable="false" />
-          <Property Name="CARRIER_ID" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="CARRIER_ID" Type="char" MaxLength="40" Nullable="false" />
           <Property Name="TRANSFERSTATE" Type="int" Nullable="false" />
           <Property Name="COMMANDSTATE" Type="int" Nullable="false" />
           <Property Name="HOSTSOURCE" Type="char" MaxLength="64" />
@@ -135,7 +135,7 @@
           </Key>
           <Property Name="CMD_ID" Type="char" MaxLength="64" Nullable="false" />
           <Property Name="VH_ID" Type="char" MaxLength="8" Nullable="false" />
-          <Property Name="CARRIER_ID" Type="char" MaxLength="64" />
+          <Property Name="CARRIER_ID" Type="char" MaxLength="40" />
           <Property Name="CMD_ID_MCS" Type="char" MaxLength="64" />
           <Property Name="CMD_TPYE" Type="int" Nullable="false" />
           <Property Name="SOURCE" Type="char" MaxLength="64" />
@@ -238,7 +238,7 @@
           <Key>
             <PropertyRef Name="CEID" />
           </Key>
-          <Property Name="CEID" Type="char" MaxLength="7" Nullable="false" />
+          <Property Name="CEID" Type="char" MaxLength="3" Nullable="false" />
           <Property Name="ENABLE_FLG" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="AFLOW_REL">
@@ -366,7 +366,7 @@
           <Property Name="INTER_TIME" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="REPORT_TIME" Type="datetime2" Precision="7" />
           <Property Name="STREAMFUNCTION_NAME" Type="varchar" MaxLength="60" Nullable="false" />
-          <Property Name="STREAMFUNCTION_CEID" Type="char" MaxLength="7" />
+          <Property Name="STREAMFUNCTION_CEID" Type="char" MaxLength="5" />
           <Property Name="MCS_CMD_ID" Type="char" MaxLength="64" />
           <Property Name="VEHICLE_ID" Type="char" MaxLength="8" />
           <Property Name="PORT_ID" Type="char" MaxLength="64" />
@@ -791,7 +791,7 @@
             <PropertyRef Name="VEHICLE_ID" />
             <PropertyRef Name="SUB_VER" />
           </Key>
-          <Property Name="VEHICLE_ID" Type="char" MaxLength="8" Nullable="false" />
+          <Property Name="VEHICLE_ID" Type="char" MaxLength="5" Nullable="false" />
           <Property Name="GUIDE_START_STOP_SPEED" Type="int" Nullable="false" />
           <Property Name="GUIDE_MAX_SPD" Type="int" Nullable="false" />
           <Property Name="GUIDE_ACCEL_DECCEL_TIME" Type="int" Nullable="false" />
@@ -934,15 +934,15 @@
             <PropertyRef Name="CMD_ID" />
             <PropertyRef Name="CMD_INSER_TIME" />
           </Key>
-          <Property Name="CMD_ID" Type="char" MaxLength="64" Nullable="false" />
-          <Property Name="CARRIER_ID" Type="char" MaxLength="64" Nullable="false" />
-          <Property Name="TRANSFERSTATE" Type="int" Nullable="false" />
+          <Property Name="CMD_ID" Type="nvarchar" MaxLength="64" Nullable="false" />
+          <Property Name="CARRIER_ID" Type="nvarchar" MaxLength="40" />
+          <Property Name="TRANSFERSTATE" Type="int" />
           <Property Name="COMMANDSTATE" Type="int" Nullable="false" />
-          <Property Name="HOSTSOURCE" Type="char" MaxLength="64" />
-          <Property Name="HOSTDESTINATION" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="HOSTSOURCE" Type="nvarchar" MaxLength="64" />
+          <Property Name="HOSTDESTINATION" Type="nvarchar" MaxLength="64" />
           <Property Name="PRIORITY" Type="int" Nullable="false" />
-          <Property Name="CHECKCODE" Type="char" MaxLength="2" Nullable="false" />
-          <Property Name="PAUSEFLAG" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="CHECKCODE" Type="nvarchar" MaxLength="64" />
+          <Property Name="PAUSEFLAG" Type="nvarchar" MaxLength="64" />
           <Property Name="CMD_INSER_TIME" Type="datetime2" Precision="7" Nullable="false" />
           <Property Name="CMD_START_TIME" Type="datetime2" Precision="7" />
           <Property Name="CMD_FINISH_TIME" Type="datetime2" Precision="7" />
@@ -956,13 +956,13 @@
             <PropertyRef Name="CMD_ID" />
             <PropertyRef Name="CMD_END_TIME" />
           </Key>
-          <Property Name="CMD_ID" Type="char" MaxLength="64" Nullable="false" />
-          <Property Name="VH_ID" Type="char" MaxLength="8" Nullable="false" />
-          <Property Name="CARRIER_ID" Type="char" MaxLength="64" />
-          <Property Name="CMD_ID_MCS" Type="char" MaxLength="64" />
+          <Property Name="CMD_ID" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="VH_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CARRIER_ID" Type="nvarchar" MaxLength="100" />
+          <Property Name="CMD_ID_MCS" Type="nvarchar" MaxLength="100" />
           <Property Name="CMD_TPYE" Type="int" Nullable="false" />
-          <Property Name="SOURCE" Type="char" MaxLength="64" />
-          <Property Name="DESTINATION" Type="char" MaxLength="64" />
+          <Property Name="SOURCE" Type="nvarchar" MaxLength="100" />
+          <Property Name="DESTINATION" Type="nvarchar" MaxLength="100" />
           <Property Name="PRIORITY" Type="int" Nullable="false" />
           <Property Name="CMD_START_TIME" Type="datetime2" Precision="7" />
           <Property Name="CMD_END_TIME" Type="datetime2" Precision="7" Nullable="false" />
@@ -1037,7 +1037,7 @@
           <Property Name="USER_GRP" Type="char" MaxLength="20" Nullable="false" />
         </EntityType>
         <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'AGVC_North_Innolux.dbo.VSECTION_100' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+警告 6002: 資料表/檢視 'AGVC_South_Innolux_v2.dbo.VSECTION_100' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="VSECTION_100">
           <Key>
             <PropertyRef Name="SEC_ID" />
@@ -1122,7 +1122,7 @@
           <Property Name="LAST_TECH_TIME" Type="smalldatetime" />
         </EntityType>
         <!--產生期間發現錯誤:
-警告 6002: 資料表/檢視 'AGVC_North_Innolux.dbo.VACMD_MCS' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+警告 6002: 資料表/檢視 'AGVC_South_Innolux_v2.dbo.VACMD_MCS' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
         <EntityType Name="VACMD_MCS">
           <Key>
             <PropertyRef Name="CMD_ID" />
@@ -1140,7 +1140,7 @@
             <PropertyRef Name="REPLACE" />
           </Key>
           <Property Name="CMD_ID" Type="char" MaxLength="64" Nullable="false" />
-          <Property Name="CARRIER_ID" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="CARRIER_ID" Type="char" MaxLength="40" Nullable="false" />
           <Property Name="TRANSFERSTATE" Type="int" Nullable="false" />
           <Property Name="COMMANDSTATE" Type="int" Nullable="false" />
           <Property Name="HOSTSOURCE" Type="char" MaxLength="64" />
@@ -1157,6 +1157,30 @@
           <Property Name="REPLACE" Type="int" Nullable="false" />
           <Property Name="OHTC_CMD" Type="char" MaxLength="64" />
           <Property Name="VH_ID" Type="char" MaxLength="8" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'AGVC_South_Innolux_v2.dbo.VHCMD_OHTC_MCS' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="VHCMD_OHTC_MCS">
+          <Key>
+            <PropertyRef Name="CMD_ID_MCS" />
+            <PropertyRef Name="VH_ID" />
+            <PropertyRef Name="MCS_CMD_INSER_TIME" />
+            
+            <PropertyRef Name="OHTC_CMD_STATUS" />
+            <PropertyRef Name="OHTC_CMD_END_TIME" />
+          </Key>
+          <Property Name="CMD_ID_MCS" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="VH_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CARRIER_ID" Type="nvarchar" MaxLength="100" />
+          <Property Name="HOSTSOURCE" Type="nvarchar" MaxLength="64" />
+          <Property Name="HOSTDESTINATION" Type="nvarchar" MaxLength="64" />
+          <Property Name="MCS_CMD_INSER_TIME" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="MCS_CMD_START_TIME" Type="datetime2" Precision="7" />
+          <Property Name="MCS_CMD_FINISH_TIME" Type="datetime2" Precision="7" />
+          <Property Name="MCS_COMMANDSTATE" Type="int" Nullable="false" />
+          <Property Name="OHTC_CMD_STATUS" Type="int" Nullable="false" />
+          <Property Name="OHTC_CMD_START_TIME" Type="datetime2" Precision="7" />
+          <Property Name="OHTC_CMD_END_TIME" Type="datetime2" Precision="7" Nullable="false" />
         </EntityType>
         <EntityContainer Name="OHTC_DevModelStoreContainer">
           <EntitySet Name="AADDRESS" EntityType="Self.AADDRESS" Schema="dbo" store:Type="Tables" />
@@ -1298,6 +1322,22 @@
     [VACMD_MCS].[VH_ID] AS [VH_ID]
     FROM [dbo].[VACMD_MCS] AS [VACMD_MCS]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="VHCMD_OHTC_MCS" EntityType="Self.VHCMD_OHTC_MCS" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VHCMD_OHTC_MCS].[CMD_ID_MCS] AS [CMD_ID_MCS], 
+    [VHCMD_OHTC_MCS].[VH_ID] AS [VH_ID], 
+    [VHCMD_OHTC_MCS].[CARRIER_ID] AS [CARRIER_ID], 
+    [VHCMD_OHTC_MCS].[HOSTSOURCE] AS [HOSTSOURCE], 
+    [VHCMD_OHTC_MCS].[HOSTDESTINATION] AS [HOSTDESTINATION], 
+    [VHCMD_OHTC_MCS].[MCS_CMD_INSER_TIME] AS [MCS_CMD_INSER_TIME], 
+    [VHCMD_OHTC_MCS].[MCS_CMD_START_TIME] AS [MCS_CMD_START_TIME], 
+    [VHCMD_OHTC_MCS].[MCS_CMD_FINISH_TIME] AS [MCS_CMD_FINISH_TIME], 
+    [VHCMD_OHTC_MCS].[MCS_COMMANDSTATE] AS [MCS_COMMANDSTATE], 
+    [VHCMD_OHTC_MCS].[OHTC_CMD_STATUS] AS [OHTC_CMD_STATUS], 
+    [VHCMD_OHTC_MCS].[OHTC_CMD_START_TIME] AS [OHTC_CMD_START_TIME], 
+    [VHCMD_OHTC_MCS].[OHTC_CMD_END_TIME] AS [OHTC_CMD_END_TIME]
+    FROM [dbo].[VHCMD_OHTC_MCS] AS [VHCMD_OHTC_MCS]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -1373,6 +1413,7 @@
           <EntitySet Name="HCMD_OHTC" EntityType="OHTC_DevModel.HCMD_OHTC" />
           <EntitySet Name="VACMD_MCS" EntityType="OHTC_DevModel.VACMD_MCS" />
           <EntitySet Name="VSECTION_100" EntityType="OHTC_DevModel.VSECTION_100" />
+          <EntitySet Name="VHCMD_OHTC_MCS" EntityType="OHTC_DevModel.VHCMD_OHTC_MCS" />
           </EntityContainer>
         <EntityType Name="ABASEDATA_VER">
           <Key>
@@ -1604,7 +1645,7 @@
           </Key>
           <Property Type="String" Name="CMD_ID" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="VH_ID" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
-          <Property Type="String" Name="CARRIER_ID" MaxLength="64" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="CARRIER_ID" MaxLength="40" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="CMD_ID_MCS" MaxLength="64" FixedLength="true" Unicode="false" />
           <Property Type="OHTC_DevModel.E_CMD_TYPE" Name="CMD_TPYE" Nullable="false" />
           <Property Type="String" Name="SOURCE" MaxLength="64" FixedLength="true" Unicode="false" />
@@ -1624,7 +1665,7 @@
             <PropertyRef Name="CEID" />
             <PropertyRef Name="RPTID" />
           </Key>
-          <Property Type="String" Name="CEID" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="CEID" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
           <Property Type="String" Name="RPTID" Nullable="false" MaxLength="4" FixedLength="true" Unicode="false" />
           <Property Type="Int32" Name="ORDER_NUM" Nullable="false" />
           <Property Type="String" Name="NAME" MaxLength="20" FixedLength="true" Unicode="false" />
@@ -1821,7 +1862,7 @@
           <Key>
             <PropertyRef Name="CEID" />
           </Key>
-          <Property Name="CEID" Type="String" Nullable="false" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="CEID" Type="String" Nullable="false" MaxLength="3" FixedLength="true" Unicode="false" />
           <Property Name="ENABLE_FLG" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
         </EntityType>
         <EntityType Name="AFLOW_REL">
@@ -2001,7 +2042,7 @@
           <Property Name="INTER_TIME" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="REPORT_TIME" Type="DateTime" Precision="7" />
           <Property Name="STREAMFUNCTION_NAME" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
-          <Property Name="STREAMFUNCTION_CEID" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+          <Property Name="STREAMFUNCTION_CEID" Type="String" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="MCS_CMD_ID" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
           <Property Name="VEHICLE_ID" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
           <Property Name="PORT_ID" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
@@ -2094,7 +2135,7 @@
             <PropertyRef Name="VEHICLE_ID" />
             <PropertyRef Name="SUB_VER" />
           </Key>
-          <Property Name="VEHICLE_ID" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Name="VEHICLE_ID" Type="String" Nullable="false" MaxLength="5" FixedLength="true" Unicode="false" />
           <Property Name="GUIDE_START_STOP_SPEED" Type="Int32" Nullable="false" />
           <Property Name="GUIDE_MAX_SPD" Type="Int32" Nullable="false" />
           <Property Name="GUIDE_ACCEL_DECCEL_TIME" Type="Int32" Nullable="false" />
@@ -2457,15 +2498,15 @@
             <PropertyRef Name="CMD_ID" />
             <PropertyRef Name="CMD_INSER_TIME" />
           </Key>
-          <Property Name="CMD_ID" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
-          <Property Name="CARRIER_ID" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
+          <Property Name="CMD_ID" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="CARRIER_ID" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
           <Property Name="TRANSFERSTATE" Type="OHTC_DevModel.E_TRAN_STATUS" Nullable="false" />
           <Property Name="COMMANDSTATE" Type="Int32" Nullable="false" />
-          <Property Name="HOSTSOURCE" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
-          <Property Name="HOSTDESTINATION" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
+          <Property Name="HOSTSOURCE" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="HOSTDESTINATION" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="PRIORITY" Type="Int32" Nullable="false" />
-          <Property Name="CHECKCODE" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Name="PAUSEFLAG" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="CHECKCODE" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="PAUSEFLAG" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
           <Property Name="CMD_INSER_TIME" Type="DateTime" Nullable="false" Precision="7" />
           <Property Name="CMD_START_TIME" Type="DateTime" Precision="7" />
           <Property Name="CMD_FINISH_TIME" Type="DateTime" Precision="7" />
@@ -2493,7 +2534,7 @@
             <PropertyRef Name="CMD_ID" />
           </Key>
           <Property Name="CMD_ID" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
-          <Property Name="CARRIER_ID" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
+          <Property Name="CARRIER_ID" Type="String" Nullable="false" MaxLength="40" FixedLength="true" Unicode="false" />
           <Property Name="TRANSFERSTATE" Type="OHTC_DevModel.E_TRAN_STATUS" Nullable="false" />
           <Property Name="COMMANDSTATE" Type="Int32" Nullable="false" />
           <Property Name="HOSTSOURCE" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
@@ -2514,13 +2555,13 @@
             <PropertyRef Name="CMD_ID" />
             <PropertyRef Name="CMD_END_TIME" />
           </Key>
-          <Property Name="CMD_ID" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
-          <Property Name="VH_ID" Type="String" Nullable="false" MaxLength="8" FixedLength="true" Unicode="false" />
-          <Property Name="CARRIER_ID" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
-          <Property Name="CMD_ID_MCS" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
+          <Property Name="CMD_ID" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VH_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CARRIER_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CMD_ID_MCS" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CMD_TPYE" Type="OHTC_DevModel.E_CMD_TYPE" Nullable="false" />
-          <Property Name="SOURCE" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
-          <Property Name="DESTINATION" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
+          <Property Name="SOURCE" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DESTINATION" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="PRIORITY" Type="Int32" Nullable="false" />
           <Property Name="CMD_START_TIME" Type="DateTime" Precision="7" />
           <Property Name="CMD_END_TIME" Type="DateTime" Nullable="false" Precision="7" />
@@ -2548,7 +2589,7 @@
             <PropertyRef Name="REPLACE" />
           </Key>
           <Property Name="CMD_ID" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
-          <Property Name="CARRIER_ID" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
+          <Property Name="CARRIER_ID" Type="String" Nullable="false" MaxLength="40" FixedLength="true" Unicode="false" />
           <Property Name="TRANSFERSTATE" Type="OHTC_DevModel.E_TRAN_STATUS" Nullable="false" />
           <Property Name="COMMANDSTATE" Type="Int32" Nullable="false" />
           <Property Name="HOSTSOURCE" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
@@ -2648,6 +2689,27 @@
           <Property Name="BRANCH_FLAG" Type="Boolean" Nullable="false" />
           <Property Name="AREA_SECSOR" Type="Int32" />
           <Property Name="LAST_TECH_TIME" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="VHCMD_OHTC_MCS">
+          <Key>
+            <PropertyRef Name="CMD_ID_MCS" />
+            <PropertyRef Name="VH_ID" />
+            <PropertyRef Name="MCS_CMD_INSER_TIME" />
+            <PropertyRef Name="OHTC_CMD_STATUS" />
+            <PropertyRef Name="OHTC_CMD_END_TIME" />
+          </Key>
+          <Property Name="CMD_ID_MCS" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="VH_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CARRIER_ID" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="HOSTSOURCE" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="HOSTDESTINATION" Type="String" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Name="MCS_CMD_INSER_TIME" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="MCS_CMD_START_TIME" Type="DateTime" Precision="7" />
+          <Property Name="MCS_CMD_FINISH_TIME" Type="DateTime" Precision="7" />
+          <Property Name="MCS_COMMANDSTATE" Type="Int32" Nullable="false" />
+          <Property Name="OHTC_CMD_STATUS" Type="Int32" Nullable="false" />
+          <Property Name="OHTC_CMD_START_TIME" Type="DateTime" Precision="7" />
+          <Property Name="OHTC_CMD_END_TIME" Type="DateTime" Nullable="false" Precision="7" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -3795,6 +3857,24 @@
                 <ScalarProperty Name="SEG_ORDER_NUM" ColumnName="SEG_ORDER_NUM" />
                 <ScalarProperty Name="SEC_ORDER_NUM" ColumnName="SEC_ORDER_NUM" />
                 <ScalarProperty Name="SEC_ID" ColumnName="SEC_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VHCMD_OHTC_MCS">
+            <EntityTypeMapping TypeName="OHTC_DevModel.VHCMD_OHTC_MCS">
+              <MappingFragment StoreEntitySet="VHCMD_OHTC_MCS">
+                <ScalarProperty Name="OHTC_CMD_END_TIME" ColumnName="OHTC_CMD_END_TIME" />
+                <ScalarProperty Name="OHTC_CMD_START_TIME" ColumnName="OHTC_CMD_START_TIME" />
+                <ScalarProperty Name="OHTC_CMD_STATUS" ColumnName="OHTC_CMD_STATUS" />
+                <ScalarProperty Name="MCS_COMMANDSTATE" ColumnName="MCS_COMMANDSTATE" />
+                <ScalarProperty Name="MCS_CMD_FINISH_TIME" ColumnName="MCS_CMD_FINISH_TIME" />
+                <ScalarProperty Name="MCS_CMD_START_TIME" ColumnName="MCS_CMD_START_TIME" />
+                <ScalarProperty Name="MCS_CMD_INSER_TIME" ColumnName="MCS_CMD_INSER_TIME" />
+                <ScalarProperty Name="HOSTDESTINATION" ColumnName="HOSTDESTINATION" />
+                <ScalarProperty Name="HOSTSOURCE" ColumnName="HOSTSOURCE" />
+                <ScalarProperty Name="CARRIER_ID" ColumnName="CARRIER_ID" />
+                <ScalarProperty Name="VH_ID" ColumnName="VH_ID" />
+                <ScalarProperty Name="CMD_ID_MCS" ColumnName="CMD_ID_MCS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
