@@ -24,6 +24,7 @@ namespace com.mirle.ibg3k0.sc
         public Nullable<System.DateTime> MCS_CMD_FINISH_TIME { get; set; }
         public int MCS_COMMANDSTATE { get; set; }
         public int OHTC_CMD_STATUS { get; set; }
+        public int OHTC_CMD_TYPE { get; set; }
         public Nullable<System.DateTime> OHTC_CMD_START_TIME { get; set; }
         public System.DateTime OHTC_CMD_END_TIME { get; set; }
     }
