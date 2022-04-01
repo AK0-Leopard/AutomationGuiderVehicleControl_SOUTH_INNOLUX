@@ -1284,6 +1284,7 @@
     <Content Include="DLL\System.Data.SQLite.dll" />
     <Content Include="DLL\System.Data.SQLite.Linq.dll" />
     <Content Include="DLL\System.IO.Abstractions.dll" />
+    <Content Include="SQL Schema\[2022_04_01] View建立調整.sql" />
     <Content Include="SQL Schema\[2022_03_16] VHCMD_OHTC_MCS Create.sql" />
   </ItemGroup>
   <ItemGroup>
