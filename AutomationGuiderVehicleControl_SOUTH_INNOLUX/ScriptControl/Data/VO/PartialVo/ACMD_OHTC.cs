@@ -15,7 +15,7 @@ namespace com.mirle.ibg3k0.sc
             return new HCMD_OHTC()
             {
                 CMD_ID = this.CMD_ID,
-                VH_ID = this.VH_ID,
+                VH_ID = sc.Common.SCUtility.Trim(this.VH_ID),
                 CARRIER_ID = this.CARRIER_ID,
                 CMD_ID_MCS = this.CMD_ID_MCS,
                 CMD_TPYE = this.CMD_TPYE,
@@ -30,6 +30,7 @@ namespace com.mirle.ibg3k0.sc
                 ESTIMATED_TIME = this.ESTIMATED_TIME,
                 ESTIMATED_EXCESS_TIME = this.ESTIMATED_EXCESS_TIME,
                 REAL_CMP_TIME = this.REAL_CMP_TIME,
+                COMPLETE_STATUS = this.COMPLETE_STATUS
             };
         }
 

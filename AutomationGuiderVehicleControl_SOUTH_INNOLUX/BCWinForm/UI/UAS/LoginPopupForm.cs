@@ -78,7 +78,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.UAS
         private void LoginPopupForm_Load(object sender, EventArgs e)
         {
             OKBtn.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.FuncCodeTBx.Text = function_code.Trim();
+            //this.FuncCodeTBx.Text = function_code.Trim();
         }
 
         /// <summary>

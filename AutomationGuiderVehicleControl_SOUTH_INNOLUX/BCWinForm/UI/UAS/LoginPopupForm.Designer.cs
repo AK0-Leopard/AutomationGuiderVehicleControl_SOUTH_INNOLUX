@@ -33,8 +33,6 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.UserIDLbl = new System.Windows.Forms.Label();
             this.PwdLbl = new System.Windows.Forms.Label();
-            this.FuncCodeLbl = new System.Windows.Forms.Label();
-            this.FuncCodeTBx = new System.Windows.Forms.TextBox();
             this.UserIDTBx = new System.Windows.Forms.TextBox();
             this.PwdTBx = new System.Windows.Forms.TextBox();
             this.LoginPnl = new System.Windows.Forms.Panel();
@@ -55,12 +53,10 @@
             // tableLayoutPanel2
             // 
             resources.ApplyResources(this.tableLayoutPanel2, "tableLayoutPanel2");
-            this.tableLayoutPanel2.Controls.Add(this.UserIDLbl, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.PwdLbl, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.FuncCodeLbl, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.FuncCodeTBx, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.UserIDTBx, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.PwdTBx, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.UserIDLbl, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.PwdLbl, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.UserIDTBx, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.PwdTBx, 1, 1);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             // 
             // UserIDLbl
@@ -72,17 +68,6 @@
             // 
             resources.ApplyResources(this.PwdLbl, "PwdLbl");
             this.PwdLbl.Name = "PwdLbl";
-            // 
-            // FuncCodeLbl
-            // 
-            resources.ApplyResources(this.FuncCodeLbl, "FuncCodeLbl");
-            this.FuncCodeLbl.Name = "FuncCodeLbl";
-            // 
-            // FuncCodeTBx
-            // 
-            resources.ApplyResources(this.FuncCodeTBx, "FuncCodeTBx");
-            this.FuncCodeTBx.Name = "FuncCodeTBx";
-            this.FuncCodeTBx.ReadOnly = true;
             // 
             // UserIDTBx
             // 
@@ -139,8 +124,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label UserIDLbl;
         private System.Windows.Forms.Label PwdLbl;
-        private System.Windows.Forms.Label FuncCodeLbl;
-        private System.Windows.Forms.TextBox FuncCodeTBx;
         private System.Windows.Forms.TextBox UserIDTBx;
         private System.Windows.Forms.TextBox PwdTBx;
         private System.Windows.Forms.Panel LoginPnl;

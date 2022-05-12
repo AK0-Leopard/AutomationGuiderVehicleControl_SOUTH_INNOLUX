@@ -450,8 +450,8 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             Task.Run(() =>
             {
                 var mtl_mapaction = bcApp.SCApplication.getEQObjCacheManager().getUnit("MCharger", charger_id).
-                getMapActionByIdentityKey(nameof(com.mirle.ibg3k0.sc.Data.ValueDefMapAction.SubChargerValueDefMapAction)) as
-                com.mirle.ibg3k0.sc.Data.ValueDefMapAction.SubChargerValueDefMapAction;
+                getMapActionByIdentityKey(nameof(com.mirle.ibg3k0.sc.Data.ValueDefMapAction.NorthInnolux.SubChargerValueDefMapAction)) as
+                com.mirle.ibg3k0.sc.Data.ValueDefMapAction.NorthInnolux.SubChargerValueDefMapAction;
                 mtl_mapaction.AGVCToChargerCouplerEnable(i_coupler_id, is_enable);
             });
         }

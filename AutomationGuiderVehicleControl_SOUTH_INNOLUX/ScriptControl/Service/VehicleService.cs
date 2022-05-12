@@ -1222,7 +1222,8 @@ namespace com.mirle.ibg3k0.sc.Service
                 }
             }
             //scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(cmd.CMD_ID, E_CMD_STATUS.AbnormalEndByOHT);
-            scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vhID, cmd.CMD_ID, E_CMD_STATUS.AbnormalEndByOHT);
+            //scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vhID, cmd.CMD_ID, E_CMD_STATUS.AbnormalEndByOHT);
+            scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vhID, cmd.CMD_ID, E_CMD_STATUS.AbnormalEndByOHT, CompleteStatus.CmpStatusCommandInitailFail);
         }
 
 
@@ -4088,7 +4089,7 @@ namespace com.mirle.ibg3k0.sc.Service
         #endregion Vh Connection / disconnention
 
         #region Vehicle Install/Remove
-        public (bool isSuccess, string result) Install(string vhID)
+        public virtual (bool isSuccess, string result) Install(string vhID)
         {
             try
             {
@@ -4141,7 +4142,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 return (false, "");
             }
         }
-        public (bool isSuccess, string result) Remove(string vhID)
+        public virtual (bool isSuccess, string result) Remove(string vhID)
         {
             try
             {
@@ -4164,6 +4165,15 @@ namespace com.mirle.ibg3k0.sc.Service
                 is_success = is_success && scApp.VehicleBLL.updataVehicleRemove(vhID);
                 if (is_success)
                 {
+                    ID_134_TRANS_EVENT_REP recive_str = new ID_134_TRANS_EVENT_REP()
+                    {
+                        CurrentAdrID = "",
+                        CurrentSecID = "",
+                        XAxis = -1,
+                        YAxis = -1
+                    };
+                    scApp.VehicleBLL.setAndPublishPositionReportInfo2Redis(vh_vo.VEHICLE_ID, recive_str);
+
                     vh_vo.VechileRemove();
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                        Data: $"vh id:{vhID} remove success. start release reserved control...",

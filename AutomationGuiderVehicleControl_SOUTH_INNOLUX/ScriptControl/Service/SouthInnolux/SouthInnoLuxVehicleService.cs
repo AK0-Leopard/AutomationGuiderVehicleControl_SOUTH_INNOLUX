@@ -1138,7 +1138,8 @@ namespace com.mirle.ibg3k0.sc.Service
                 scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(cmd.CMD_ID_MCS);
             }
             //scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(cmd.CMD_ID, E_CMD_STATUS.AbnormalEndByOHT);
-            scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vhID, cmd.CMD_ID, E_CMD_STATUS.AbnormalEndByOHT);
+            //scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vhID, cmd.CMD_ID, E_CMD_STATUS.AbnormalEndByOHT);
+            scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vhID, cmd.CMD_ID, E_CMD_STATUS.AbnormalEndByOHT, CompleteStatus.CmpStatusCommandInitailFail);
         }
 
 
@@ -2133,7 +2134,8 @@ namespace com.mirle.ibg3k0.sc.Service
                                    Data: $"finish ohtc_cmd:{ohtc_cmd_id} by initial event.",
                                    VehicleID: eqpt.VEHICLE_ID,
                                    CarrierID: eqpt.CST_ID);
-                                scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(eqpt.VEHICLE_ID, ohtc_cmd_id, E_CMD_STATUS.AbnormalEndByOHT);
+                                //scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(eqpt.VEHICLE_ID, ohtc_cmd_id, E_CMD_STATUS.AbnormalEndByOHT);
+                                scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(eqpt.VEHICLE_ID, ohtc_cmd_id, E_CMD_STATUS.AbnormalEndByOHT, CompleteStatus.CmpStatusVehicleAbort);
                                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                                    Data: $"mcs cmd:{cmd_mcs_id} is finish on :{cmd_mcs.HOSTSOURCE},will return status to queue .",
                                    VehicleID: eqpt.VEHICLE_ID,
@@ -2200,7 +2202,8 @@ namespace com.mirle.ibg3k0.sc.Service
             string vh_id = SCUtility.Trim(eqpt.VEHICLE_ID, true);
             string ohtc_cmd = SCUtility.Trim(eqpt.OHTC_CMD, true);
             string cmd_mcs_id = SCUtility.Trim(eqpt.MCS_CMD, true);
-            scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, ohtc_cmd, E_CMD_STATUS.AbnormalEndByOHT);
+            //scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, ohtc_cmd, E_CMD_STATUS.AbnormalEndByOHT);
+            scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vh_id, ohtc_cmd, E_CMD_STATUS.AbnormalEndByOHT, CompleteStatus.CmpStatusVehicleAbort);
             cmd_mcs.HOSTSOURCE = eqpt.Real_ID;
             //要等到車子真的變回Auto時，才可以下命令下去
             bool is_ready_assign = SpinWait.SpinUntil(() => eqpt.isAuto, 5000);
@@ -4091,7 +4094,7 @@ namespace com.mirle.ibg3k0.sc.Service
         #endregion Vh Connection / disconnention
 
         #region Vehicle Install/Remove
-        public (bool isSuccess, string result) Install(string vhID)
+        public override (bool isSuccess, string result) Install(string vhID)
         {
             try
             {
@@ -4144,7 +4147,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 return (false, "");
             }
         }
-        public (bool isSuccess, string result) Remove(string vhID)
+        public override (bool isSuccess, string result) Remove(string vhID)
         {
             try
             {
@@ -4167,6 +4170,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 is_success = is_success && scApp.VehicleBLL.updataVehicleRemove(vhID);
                 if (is_success)
                 {
+                    initialVhPosition(vh_vo);
                     vh_vo.VechileRemove();
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                        Data: $"vh id:{vhID} remove success. start release reserved control...",
@@ -4188,6 +4192,24 @@ namespace com.mirle.ibg3k0.sc.Service
                    Data: ex,
                    VehicleID: vhID);
                 return (false, "");
+            }
+        }
+        private void initialVhPosition(AVEHICLE vh)
+        {
+            try
+            {
+                ID_134_TRANS_EVENT_REP recive_str = new ID_134_TRANS_EVENT_REP()
+                {
+                    CurrentAdrID = "",
+                    CurrentSecID = "",
+                    XAxis = -1,
+                    YAxis = -1
+                };
+                scApp.VehicleBLL.setAndPublishPositionReportInfo2Redis(vh.VEHICLE_ID, recive_str);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception");
             }
         }
         #endregion Vehicle Install/Remove
