@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ProtocolFormat\SegFun.proto" />
+    <None Remove="ProtocolFormat\VehicleControlFun.proto" />
+    <None Remove="ProtocolFormat\VehicleControlPublishMessage.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.20.1" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.20.1" />
+    <PackageReference Include="Grpc.Core" Version="2.46.1" />
+    <PackageReference Include="Grpc.Core.Api" Version="2.46.1" />
+    <PackageReference Include="Grpc.Tools" Version="2.46.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="ProtocolFormat\SegFun.proto" />
+    <Protobuf Include="ProtocolFormat\VehicleControlFun.proto" />
+    <Protobuf Include="ProtocolFormat\VehicleControlPublishMessage.proto" />
+  </ItemGroup>
+
+</Project>
