@@ -1185,6 +1185,7 @@
           <Property Name="OHTC_CMD_TYPE" Type="int" Nullable="false" />
           <Property Name="OHTC_CMD_START_TIME" Type="datetime2" Precision="7" />
           <Property Name="OHTC_CMD_END_TIME" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="OHTC_COMPLETE_STATUS" Type="int" />
         </EntityType>
         <EntityContainer Name="OHTC_DevModelStoreContainer">
           <EntitySet Name="AADDRESS" EntityType="Self.AADDRESS" Schema="dbo" store:Type="Tables" />
@@ -1340,7 +1341,8 @@
     [VHCMD_OHTC_MCS].[OHTC_CMD_STATUS] AS [OHTC_CMD_STATUS], 
     [VHCMD_OHTC_MCS].[OHTC_CMD_TYPE] AS [OHTC_CMD_TYPE], 
     [VHCMD_OHTC_MCS].[OHTC_CMD_START_TIME] AS [OHTC_CMD_START_TIME], 
-    [VHCMD_OHTC_MCS].[OHTC_CMD_END_TIME] AS [OHTC_CMD_END_TIME]
+    [VHCMD_OHTC_MCS].[OHTC_CMD_END_TIME] AS [OHTC_CMD_END_TIME], 
+    [VHCMD_OHTC_MCS].[OHTC_COMPLETE_STATUS] AS [OHTC_COMPLETE_STATUS]
     FROM [dbo].[VHCMD_OHTC_MCS] AS [VHCMD_OHTC_MCS]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -2720,6 +2722,7 @@
           <Property Name="OHTC_CMD_TYPE" Type="Int32" Nullable="false" />
           <Property Name="OHTC_CMD_START_TIME" Type="DateTime" Precision="7" />
           <Property Name="OHTC_CMD_END_TIME" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="OHTC_COMPLETE_STATUS" Type="OHTC_DevModel.CompleteStatus" />
         </EntityType>
         <EnumType Name="CompleteStatus" a:ExternalTypeName="com.mirle.ibg3k0.sc.ProtocolFormat.OHTMessage.CompleteStatus" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
         </Schema>
@@ -3876,6 +3879,7 @@
           <EntitySetMapping Name="VHCMD_OHTC_MCS">
             <EntityTypeMapping TypeName="OHTC_DevModel.VHCMD_OHTC_MCS">
               <MappingFragment StoreEntitySet="VHCMD_OHTC_MCS">
+                <ScalarProperty Name="OHTC_COMPLETE_STATUS" ColumnName="OHTC_COMPLETE_STATUS" />
                 <ScalarProperty Name="OHTC_CMD_END_TIME" ColumnName="OHTC_CMD_END_TIME" />
                 <ScalarProperty Name="OHTC_CMD_START_TIME" ColumnName="OHTC_CMD_START_TIME" />
                 <ScalarProperty Name="OHTC_CMD_TYPE" ColumnName="OHTC_CMD_TYPE" />
