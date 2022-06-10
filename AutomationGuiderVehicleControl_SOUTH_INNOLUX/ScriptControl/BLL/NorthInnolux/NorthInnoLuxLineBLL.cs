@@ -1266,14 +1266,14 @@ namespace com.mirle.ibg3k0.sc.BLL
         /// </summary>
         /// <param name="ecidList">The ecid list.</param>
         /// <returns>List&lt;ECDataMap&gt;.</returns>
-        public List<ECDataMap> loadDefaultECDataList(List<string> ecidList)
+        public List<ECDataMap> loadDefaultECDataList(SCApplication scApp, List<string> ecidList)
         {
             List<ECDataMap> rtnList = new List<ECDataMap>();
             try
             {
                 if (ecidList == null || ecidList.Count == 0)
                 {
-                    rtnList = ecDataMapDao.loadAllDefaultECData();
+                    rtnList = ecDataMapDao.loadAllDefaultECData(scApp);
                 }
                 else
                 {

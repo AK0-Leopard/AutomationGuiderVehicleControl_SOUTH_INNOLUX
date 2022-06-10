@@ -1217,6 +1217,11 @@ namespace com.mirle.ibg3k0.bc.winform
         {
             openForm(typeof(CurrentEqLogInfoForm).Name, true, false);
         }
+
+        private void equipmentConstantToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openForm(typeof(ECDataEdit_Form).Name, true, false);
+        }
     }
 
     public delegate void MouseMovedEvent();

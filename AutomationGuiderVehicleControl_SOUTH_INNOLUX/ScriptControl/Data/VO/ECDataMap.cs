@@ -55,5 +55,18 @@ namespace com.mirle.ibg3k0.sc.Data.VO
         /// <value>The ecv.</value>
         public virtual string ECV { get; set; }
 
+        public AECDATAMAP convert2ECData()
+        {
+            return new AECDATAMAP()
+            {
+                EQPT_REAL_ID = this.EQPT_REAL_ID,
+                ECID = this.ECID,
+                ECNAME = this.ECNAME,
+                ECMIN = this.ECMIN,
+                ECMAX = this.ECMAX,
+                ECV = this.ECV,
+            };
+        }
+
     }
 }

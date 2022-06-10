@@ -447,6 +447,12 @@
   <data name="engineerToolStripMenuItem.Text" xml:space="preserve">
     <value>Engineer</value>
   </data>
+  <data name="equipmentConstantToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>300, 26</value>
+  </data>
+  <data name="equipmentConstantToolStripMenuItem.Text" xml:space="preserve">
+    <value>Equipment Constant</value>
+  </data>
   <data name="operatorToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 26</value>
   </data>
@@ -1570,6 +1576,12 @@
   </data>
   <data name="&gt;&gt;logout_timer.Type" xml:space="preserve">
     <value>System.Windows.Forms.Timer, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;equipmentConstantToolStripMenuItem.Name" xml:space="preserve">
+    <value>equipmentConstantToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;equipmentConstantToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>BCMainForm</value>

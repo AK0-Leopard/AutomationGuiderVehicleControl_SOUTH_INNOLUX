@@ -1228,8 +1228,8 @@ namespace com.mirle.ibg3k0.sc.BLL
             if (ACMD_MCS.MCS_CMD_InfoList.TryGetValue(SCUtility.Trim(cmdID, true), out ACMD_MCS cmd_mcs))
             {
                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(SouthInnoLuxCMDBLL), Device: string.Empty,
-                   Data: $"Cmd id:{cmdID} check retry count ,current count:{cmd_mcs.RetryTimes},max retry count:{DebugParameter.InterlockErrorMaxRetryCount}");
-                return cmd_mcs.RetryTimes >= DebugParameter.InterlockErrorMaxRetryCount;
+                   Data: $"Cmd id:{cmdID} check retry count ,current count:{cmd_mcs.RetryTimes},max retry count:{SystemParameter.InterlockErrorMaxRetryCount}");
+                return cmd_mcs.RetryTimes >= SystemParameter.InterlockErrorMaxRetryCount;
             }
             else
             {

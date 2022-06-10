@@ -50,6 +50,12 @@ namespace com.mirle.ibg3k0.sc.App
         public static readonly string ECID_SOFT_REVISION = "1040";
         public static readonly string ECID_TIME_FORMAT = "1050";
         public static readonly string ECID_MDLN = "1030";
+
+        public static readonly string ECID_VEHICLE_LOW_BATTERY_VALUE= "2001";
+        public static readonly string ECID_VEHICLE_HIGH_BATTERY_VALUE= "2002";
+        public static readonly string ECID_VEHICLE_INTERLOCK_RETRY_COUNT= "2003";
+        public static readonly string ECID_MAX_ALLOW_CST_ABNORMAL_INSTALLED_TIME= "2004";
+
         /// <summary>
         /// The eci d_ devic e_ identifier
         /// </summary>

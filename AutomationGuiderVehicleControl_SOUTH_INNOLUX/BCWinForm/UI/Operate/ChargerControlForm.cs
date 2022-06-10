@@ -475,16 +475,6 @@ namespace com.mirle.ibg3k0.bc.winform.UI
         }
 
 
-        private void num_BatteryLowBoundaryValue_ValueChanged(object sender, EventArgs e)
-        {
-            AVEHICLE.SettingBatteryLevelLowBoundary((UInt16)num_BatteryLowBoundaryValue.Value);
-
-        }
-
-        private void num_BatteryHighBoundaryValue_ValueChanged(object sender, EventArgs e)
-        {
-            AVEHICLE.SettingBatteryLevelHighBoundary((UInt16)num_BatteryHighBoundaryValue.Value);
-        }
 
 
         private void cb_passCouplerHPSafetySingnal_CheckedChanged(object sender, EventArgs e)

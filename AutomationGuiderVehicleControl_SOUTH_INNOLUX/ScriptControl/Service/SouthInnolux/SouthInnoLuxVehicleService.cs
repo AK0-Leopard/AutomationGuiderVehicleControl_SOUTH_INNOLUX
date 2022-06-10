@@ -3452,14 +3452,14 @@ namespace com.mirle.ibg3k0.sc.Service
                         {
                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                                Data: $"mcs cmd:{cmd_id} complete status:{completeStatus} when loading," +
-                                     $"but over retry count:{DebugParameter.InterlockErrorMaxRetryCount} will finish command!");
+                                     $"but over retry count:{SystemParameter.InterlockErrorMaxRetryCount} will finish command!");
                             return false;//在超過次數後會直接將命令結束
                         }
                         else
                         {
                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                                Data: $"mcs cmd:{cmd_id} complete status:{completeStatus} when loading," +
-                                     $"not over retry count:{DebugParameter.InterlockErrorMaxRetryCount} will return to queue!");
+                                     $"not over retry count:{SystemParameter.InterlockErrorMaxRetryCount} will return to queue!");
                             return true;//在還沒超過次數時會將命令改回queue
                         }
                     case CompleteStatus.CmpStatusEmptyRetrival:

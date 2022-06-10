@@ -188,40 +188,10 @@ namespace com.mirle.ibg3k0.sc.BLL
                 {
                     SystemParameter.setSECSConversactionTimeout(Convert.ToInt16(val));
                 }
-                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_INITIAL_COMMUNICATION_STATE))
-                {
-                    SystemParameter.setInitialCommunicationState(val);
-                }
                 else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_INITIAL_CONTROL_STATE))
                 {
                     SystemParameter.setInitialHostMode(val);
                 }
-                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_EQPNAME))
-                {
-                    SystemParameter.setEQPName(val);
-                }
-                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_ESTABLISH_COMMUNICATION_TIMEOUT))
-                {
-                    SystemParameter.setEstablishCommunicationTimeout(Convert.ToInt16(val));
-                }
-                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_SOFT_REVISION))
-                {
-                    SystemParameter.setSoftRevision(val);
-                }
-                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_TIME_FORMAT))
-                {
-                    SystemParameter.setTimeFormat(val);
-                }
-                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_MDLN))
-                {
-                    SystemParameter.setMDLN(val);
-                }
-
-
-
-
-
-
                 else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_CONTROL_STATE_KEEPING_TIME))
                 {
                     SystemParameter.setControlStateKeepTime(Convert.ToInt16(val));
@@ -259,6 +229,22 @@ namespace com.mirle.ibg3k0.sc.BLL
                 else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_T8))
                 {
                     scApp.setSECSAgentT8Timeout(Convert.ToInt32(val), refreshSecsAgent);
+                }
+                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_LOW_BATTERY_VALUE))
+                {
+                    SystemParameter.setVehicleBatteryLowBoundaryValue(Convert.ToUInt16(val));
+                }
+                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_HIGH_BATTERY_VALUE))
+                {
+                    SystemParameter.setVehicleBatteryHighBoundaryValue(Convert.ToUInt16(val));
+                }
+                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_INTERLOCK_RETRY_COUNT))
+                {
+                    SystemParameter.setInterlockErrorMaxRetryCount(Convert.ToInt32(val));
+                }
+                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_MAX_ALLOW_CST_ABNORMAL_INSTALLED_TIME))
+                {
+                    SystemParameter.setMaxAllowCarrierInstalledTime_Sec(Convert.ToInt32(val));
                 }
             }
             catch (Exception ex)

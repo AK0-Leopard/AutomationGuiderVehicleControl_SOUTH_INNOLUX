@@ -51,8 +51,6 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             cb_advanceDriveAway.Checked = DebugParameter.AdvanceDriveAway;
             cb_passCouplerHPSafetySingnal.Checked = DebugParameter.isPassCouplerHPSafetySignal;
             ck_isMaunalReportFinishWhenLoadingUnloading.Checked = DebugParameter.isManualReportCommandFinishWhenLoadingUnloading;
-            num_interlockMaxRetryCount.Value = DebugParameter.InterlockErrorMaxRetryCount;
-            num_MaxCarrierInstalledTime.Value = sc.App.SystemParameter.MaxAllowCarrierAbnormalInstalledTime_Sec;
 
 
             List<string> lstVh = new List<string>();
@@ -124,10 +122,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
                 comboBox_port14.SelectedIndex = 1;
             }
 
-            num_BatteryLowBoundaryValue.Value = AVEHICLE.BATTERYLEVELVALUE_LOW;
-            //num_BatteryMiddleBoundaryValue.Value = AVEHICLE.BATTERYLEVELVALUE_MIDDLE;
-            num_BatteryHighBoundaryValue.Value = AVEHICLE.BATTERYLEVELVALUE_HIGH;
-
+            
 
             List<APORTSTATION> all_port_station = bcApp.SCApplication.PortStationBLL.OperateCatch.getAllPortStation();
             dgv_cache_object_data_portstation.DataSource = all_port_station;
@@ -1213,18 +1208,6 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             bcApp.SCApplication.SysExcuteQualityBLL.creatSysExcuteQuality(cmdID, "CST05", source_port, destn_port);
 
         }
-
-        private void num_BatteryLowBoundaryValue_ValueChanged(object sender, EventArgs e)
-        {
-            AVEHICLE.SettingBatteryLevelLowBoundary((UInt16)num_BatteryLowBoundaryValue.Value);
-
-        }
-
-        private void num_BatteryHighBoundaryValue_ValueChanged(object sender, EventArgs e)
-        {
-            AVEHICLE.SettingBatteryLevelHighBoundary((UInt16)num_BatteryHighBoundaryValue.Value);
-        }
-
         private void btn_refresf_portsation_info_Click(object sender, EventArgs e)
         {
             dgv_cache_object_data_portstation.Refresh();
@@ -1443,11 +1426,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
         {
             try
             {
-                if (!noticeCar.IS_INSTALLED)
-                {
-                    MessageBox.Show($"{vh_id} is removed ready!");
-                    return;
-                }
+
                 btn_changeToRemove.Enabled = false;
                 (bool isSuccess, string result) check_result = default((bool isSuccess, string result));
                 await Task.Run(() => check_result = bcApp.SCApplication.VehicleService.Remove(vh_id));
@@ -1628,15 +1607,5 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             vr.Value = new int[1] { 1 };
         }
 
-        private void num_interlockMaxRetryCount_ValueChanged(object sender, EventArgs e)
-        {
-            DebugParameter.InterlockErrorMaxRetryCount = (int)num_interlockMaxRetryCount.Value;
-        }
-
-        private void num_MaxCarrierInstalledTime_ValueChanged(object sender, EventArgs e)
-        {
-            //sc.App.SystemParameter.MaxAllowCarrierInstalledTime_Sec = (int)num_MaxCarrierInstalledTime.Value;
-            sc.App.SystemParameter.setMaxAllowCarrierInstalledTime_Sec((int)num_MaxCarrierInstalledTime.Value);
-        }
     }
 }

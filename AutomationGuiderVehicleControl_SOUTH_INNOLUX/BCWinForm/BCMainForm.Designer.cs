@@ -118,6 +118,7 @@ namespace com.mirle.ibg3k0.bc.winform
             this.engineeringModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.logout_timer = new System.Windows.Forms.Timer(this.components);
+            this.equipmentConstantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.CMS_OnLineMode.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -358,7 +359,8 @@ namespace com.mirle.ibg3k0.bc.winform
             this.languageChangeToolStripMenuItem,
             this.editToolStripMenuItem,
             this.toolStripSeparator1,
-            this.engineerToolStripMenuItem});
+            this.engineerToolStripMenuItem,
+            this.equipmentConstantToolStripMenuItem});
             this.operatorToolStripMenuItem.Name = "operatorToolStripMenuItem";
             resources.ApplyResources(this.operatorToolStripMenuItem, "operatorToolStripMenuItem");
             // 
@@ -584,6 +586,12 @@ namespace com.mirle.ibg3k0.bc.winform
             this.logout_timer.Interval = 10000;
             this.logout_timer.Tick += new System.EventHandler(this.logout_timer_Tick);
             // 
+            // equipmentConstantToolStripMenuItem
+            // 
+            this.equipmentConstantToolStripMenuItem.Name = "equipmentConstantToolStripMenuItem";
+            resources.ApplyResources(this.equipmentConstantToolStripMenuItem, "equipmentConstantToolStripMenuItem");
+            this.equipmentConstantToolStripMenuItem.Click += new System.EventHandler(this.equipmentConstantToolStripMenuItem_Click);
+            // 
             // BCMainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -764,6 +772,8 @@ namespace com.mirle.ibg3k0.bc.winform
         private System.Windows.Forms.ToolStripMenuItem chargerControlToolStripMenuItem;
         private System.Windows.Forms.Timer logout_timer;
         private System.Windows.Forms.ToolStripMenuItem currentVhCommInfoToolStripMenuItem;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
+        private System.Windows.Forms.ToolStripMenuItem equipmentConstantToolStripMenuItem;
     }
 
     /// <summary>

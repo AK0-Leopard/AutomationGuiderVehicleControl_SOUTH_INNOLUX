@@ -27,7 +27,7 @@ using com.mirle.ibg3k0.Utility.ul.Data.VO;
 
 namespace com.mirle.ibg3k0.sc.BLL
 {
-    public class SouthInnoLuxLineBLL:LineBLL
+    public class SouthInnoLuxLineBLL : LineBLL
     {
         //private SCApplication scApp = null;
         private static Logger logger = LogManager.GetCurrentClassLogger();
@@ -348,7 +348,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                 HostMode = line.Host_Control_State == SCAppConstants.LineHostControlState.HostControlState.On_Line_Remote
              ? HostMode.OnlineRemote : HostMode.Offline,
                 TSCState = line.SCStats == ALINE.TSCState.AUTO ? TSCState.Auto : line.SCStats == ALINE.TSCState.PAUSING ? TSCState.Pausing :
-                line.SCStats == ALINE.TSCState.PAUSED ? TSCState.Paused: line.SCStats == ALINE.TSCState.TSC_INIT ? TSCState.Tscint : TSCState.Paused,
+                line.SCStats == ALINE.TSCState.PAUSED ? TSCState.Paused : line.SCStats == ALINE.TSCState.TSC_INIT ? TSCState.Tscint : TSCState.Paused,
                 PLC = LinkStatus.LinkFail,
                 IMS = line.DetectionSystemExist == SCAppConstants.ExistStatus.Exist ?
              LinkStatus.LinkOk : LinkStatus.LinkFail,
@@ -390,7 +390,7 @@ namespace com.mirle.ibg3k0.sc.BLL
         {
             TRANSFER_INFO line_gpb = new TRANSFER_INFO()
             {
-                MCSCommandAutoAssign = line.MCSCommandAutoAssign 
+                MCSCommandAutoAssign = line.MCSCommandAutoAssign
             };
 
             byte[] arrayByte = new byte[line_gpb.CalculateSize()];
@@ -1266,14 +1266,14 @@ namespace com.mirle.ibg3k0.sc.BLL
         /// </summary>
         /// <param name="ecidList">The ecid list.</param>
         /// <returns>List&lt;ECDataMap&gt;.</returns>
-        public List<ECDataMap> loadDefaultECDataList(List<string> ecidList)
+        public List<ECDataMap> loadDefaultECDataList(SCApplication scApp, List<string> ecidList)
         {
             List<ECDataMap> rtnList = new List<ECDataMap>();
             try
             {
                 if (ecidList == null || ecidList.Count == 0)
                 {
-                    rtnList = ecDataMapDao.loadAllDefaultECData();
+                    rtnList = ecDataMapDao.loadAllDefaultECData(scApp);
                 }
                 else
                 {
@@ -1377,13 +1377,13 @@ namespace com.mirle.ibg3k0.sc.BLL
                 }
                 //A0.06 End
 
-                conn = DBConnection_EF.GetContext();
+                conn = DBConnection_EF.GetUContext();
                 conn.BeginTransaction();
                 if (ecDataMapList != null && ecDataMapList.Count > 0)
                 {
                     foreach (AECDATAMAP item in ecDataMapList)
                     {
-                        AECDATAMAP ecdata  = ecDataMapDao.getByECID(conn, true, item.ECID);
+                        AECDATAMAP ecdata = ecDataMapDao.getByECID(conn, true, item.ECID);
                         ecdata.ECV = item.ECV;
                         ecDataMapDao.updateECData(conn, ecdata);
                         scApp.BCSystemBLL.updateSystemParameter(item.ECID, item.ECV, true);

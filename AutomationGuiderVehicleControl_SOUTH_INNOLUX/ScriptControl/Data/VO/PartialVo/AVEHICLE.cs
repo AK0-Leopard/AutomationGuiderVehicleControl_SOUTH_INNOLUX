@@ -51,13 +51,14 @@ namespace com.mirle.ibg3k0.sc
         Logger logger = LogManager.GetCurrentClassLogger();
         public const string DEVICE_NAME_AGV = "AGV";
         //public static UInt16 BATTERYLEVELVALUE_FULL { get; private set; } = 98;
-        public static UInt16 BATTERYLEVELVALUE_FULL { get; private set; } = 100;
-        public static UInt16 BATTERYLEVELVALUE_HIGH { get; private set; } = 80;
+        //public static UInt16 BATTERYLEVELVALUE_FULL { get; private set; } = 100;
+        public static UInt16 BATTERYLEVELVALUE_FULL { get; private set; } = 99;
+        public static UInt16 BATTERYLEVELVALUE_HIGH { get { return SystemParameter.VehicleBatteryHighBoundaryValue; } }
         //public static UInt16 BATTERYLEVELVALUE_MIDDLE { get; private set; } = 50;
         //public static UInt16 BATTERYLEVELVALUE_LOW { get; private set; } = 10;
         public static UInt16 BATTERYLEVELVALUE_MIDDLE { get; private set; } = 65;
         //public static UInt16 BATTERYLEVELVALUE_LOW { get; private set; } = 50;
-        public static UInt16 BATTERYLEVELVALUE_LOW { get; private set; } = 40;
+        public static UInt16 BATTERYLEVELVALUE_LOW { get { return SystemParameter.VehicleBatteryLowBoundaryValue; } }
 
         /// <summary>
         /// 在一次的Reserve要不到的過程中，最多可以Override失敗的次數
@@ -380,14 +381,6 @@ namespace com.mirle.ibg3k0.sc
         //{
         //    BATTERYLEVELVALUE_MIDDLE = boundaryValue;
         //}
-        public static void SettingBatteryLevelHighBoundary(UInt16 boundaryValue)
-        {
-            BATTERYLEVELVALUE_HIGH = boundaryValue;
-        }
-        public static void SettingBatteryLevelLowBoundary(UInt16 boundaryValue)
-        {
-            BATTERYLEVELVALUE_LOW = boundaryValue;
-        }
 
         [JsonIgnore]
         public virtual E_CMD_TYPE CmdType { get; set; } = default(E_CMD_TYPE);

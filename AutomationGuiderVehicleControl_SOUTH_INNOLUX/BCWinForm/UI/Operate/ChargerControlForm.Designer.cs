@@ -467,11 +467,11 @@
             // 
             // num_BatteryHighBoundaryValue
             // 
+            this.num_BatteryHighBoundaryValue.Enabled = false;
             this.num_BatteryHighBoundaryValue.Location = new System.Drawing.Point(952, 792);
             this.num_BatteryHighBoundaryValue.Name = "num_BatteryHighBoundaryValue";
             this.num_BatteryHighBoundaryValue.Size = new System.Drawing.Size(158, 30);
             this.num_BatteryHighBoundaryValue.TabIndex = 29;
-            this.num_BatteryHighBoundaryValue.ValueChanged += new System.EventHandler(this.num_BatteryHighBoundaryValue_ValueChanged);
             // 
             // label38
             // 
@@ -484,11 +484,11 @@
             // 
             // num_BatteryLowBoundaryValue
             // 
+            this.num_BatteryLowBoundaryValue.Enabled = false;
             this.num_BatteryLowBoundaryValue.Location = new System.Drawing.Point(530, 792);
             this.num_BatteryLowBoundaryValue.Name = "num_BatteryLowBoundaryValue";
             this.num_BatteryLowBoundaryValue.Size = new System.Drawing.Size(158, 30);
             this.num_BatteryLowBoundaryValue.TabIndex = 27;
-            this.num_BatteryLowBoundaryValue.ValueChanged += new System.EventHandler(this.num_BatteryLowBoundaryValue_ValueChanged);
             // 
             // lbl_batteryLowBoundaryValue
             // 

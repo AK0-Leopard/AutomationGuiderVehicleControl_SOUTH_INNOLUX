@@ -710,8 +710,24 @@ namespace com.mirle.ibg3k0.sc.App
 
         public void loadECDataToSystem()
         {
-            List<AECDATAMAP> ecDataMaps = lineBLL.loadAllECDataList();
 
+            List<ECDataMap> ecDataMaps_defult = lineBLL.loadDefaultECDataList(this, null);
+
+            List<AECDATAMAP> ecDataMaps = lineBLL.loadAllECDataList();
+            List<AECDATAMAP> new_ec_data_maps = new List<AECDATAMAP>();
+            foreach (var ec_data in ecDataMaps_defult)
+            {
+                var db_ec_data = ecDataMaps.Where(ec => SCUtility.isMatche(ec.ECID, ec_data.ECID)).FirstOrDefault();
+                if (db_ec_data == null)
+                {
+                    new_ec_data_maps.Add(ec_data.convert2ECData());
+                }
+            }
+            if (new_ec_data_maps.Count > 0)
+            {
+                lineBLL.insertNewECData(new_ec_data_maps);
+                ecDataMaps = lineBLL.loadAllECDataList();
+            }
 
             foreach (AECDATAMAP item in ecDataMaps)
             {
@@ -792,7 +808,58 @@ namespace com.mirle.ibg3k0.sc.App
                     }
                     catch (Exception) { }
                 }
-
+                else if (BCFUtility.isMatche(item.ECID, SCAppConstants.ECID_VEHICLE_LOW_BATTERY_VALUE))
+                {
+                    try
+                    {
+                        if (UInt16.TryParse(SCUtility.Trim(item.ECV), out UInt16 r))
+                        {
+                            if (SystemParameter.VehicleBatteryLowBoundaryValue != r)
+                            {
+                                SystemParameter.setVehicleBatteryLowBoundaryValue(r);
+                            }
+                        }
+                    }
+                    catch (Exception) { }
+                }
+                else if (BCFUtility.isMatche(item.ECID, SCAppConstants.ECID_VEHICLE_HIGH_BATTERY_VALUE))
+                {
+                    try
+                    {
+                        if (UInt16.TryParse(SCUtility.Trim(item.ECV), out UInt16 r))
+                        {
+                            if (SystemParameter.VehicleBatteryHighBoundaryValue != r)
+                            {
+                                SystemParameter.setVehicleBatteryHighBoundaryValue(r);
+                            }
+                        }
+                    }
+                    catch (Exception) { }
+                }
+                else if (BCFUtility.isMatche(item.ECID, SCAppConstants.ECID_VEHICLE_INTERLOCK_RETRY_COUNT))
+                {
+                    try
+                    {
+                        if (int.TryParse(SCUtility.Trim(item.ECV), out int r))
+                            if (SystemParameter.InterlockErrorMaxRetryCount != r)
+                            {
+                                SystemParameter.setInterlockErrorMaxRetryCount(r);
+                            }
+                    }
+                    catch (Exception) { }
+                }
+                else if (BCFUtility.isMatche(item.ECID, SCAppConstants.ECID_MAX_ALLOW_CST_ABNORMAL_INSTALLED_TIME))
+                {
+                    try
+                    {
+                        if (int.TryParse(SCUtility.Trim(item.ECV), out int r))
+                            if (SystemParameter.MaxAllowCarrierAbnormalInstalledTime_Sec != r)
+                            {
+                                SystemParameter.setMaxAllowCarrierInstalledTime_Sec(r);
+                            }
+                    }
+                    catch (Exception) { }
+                }
                 //B0.12 End
             }
         }
@@ -994,6 +1061,7 @@ namespace com.mirle.ibg3k0.sc.App
                 loadCSVToDataset(ohxcConfig, "RESERVEENHANCEINFO");
                 loadCSVToDataset(ohxcConfig, "TRAFFICCONTROLINFO");
                 loadCSVToDataset(ohxcConfig, "ALARMCONVERTINFO");
+                loadCSVToDataset(ohxcConfig, "ECDATAMAP");
                 logger.Info("init bc_Config success");
             }
             else
@@ -1924,6 +1992,10 @@ namespace com.mirle.ibg3k0.sc.App
 
         public static bool AutoOverride = true;
         public static int MaxAllowCarrierAbnormalInstalledTime_Sec { get; private set; } = 1200;
+        public static UInt16 VehicleBatteryHighBoundaryValue { get; private set; } = 80;
+        public static UInt16 VehicleBatteryLowBoundaryValue { get; private set; } = 40;
+        public static int InterlockErrorMaxRetryCount { get; private set; } = 3;
+
 
         public static void setSECSConversactionTimeout(int timeout)
         {
@@ -2005,6 +2077,19 @@ namespace com.mirle.ibg3k0.sc.App
         public static void setMaxAllowCarrierInstalledTime_Sec(int maxAllowCarrierInstalledTime_Sec)
         {
             MaxAllowCarrierAbnormalInstalledTime_Sec = maxAllowCarrierInstalledTime_Sec;
+        }
+
+        public static void setVehicleBatteryLowBoundaryValue(UInt16 vehicleBatteryLowBoundaryValue)
+        {
+            VehicleBatteryLowBoundaryValue = vehicleBatteryLowBoundaryValue;
+        }
+        public static void setVehicleBatteryHighBoundaryValue(UInt16 vehicleBatteryHighBoundaryValue)
+        {
+            VehicleBatteryHighBoundaryValue = vehicleBatteryHighBoundaryValue;
+        }
+        public static void setInterlockErrorMaxRetryCount(int interlockErrorMaxRetryCount)
+        {
+            InterlockErrorMaxRetryCount = interlockErrorMaxRetryCount;
         }
     }
 

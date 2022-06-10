@@ -172,9 +172,6 @@ namespace com.mirle.ibg3k0.sc.Module
             AVEHICLE vh = sender as AVEHICLE;
             try
             {
-                //LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleChargerModule), Device: DEVICE_NAME,
-                //   Data: $"Battery Level Change,Current Level:{e}.low level:{AVEHICLE.BATTERYLEVELVALUE_LOW},middle level:{AVEHICLE.BATTERYLEVELVALUE_MIDDLE}",
-                //   VehicleID: vh.VEHICLE_ID);
                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleChargerModule), Device: DEVICE_NAME,
                    Data: $"Battery Level Change,Current Level:{e}.low level:{AVEHICLE.BATTERYLEVELVALUE_LOW},Hight level:{AVEHICLE.BATTERYLEVELVALUE_HIGH}",
                    VehicleID: vh.VEHICLE_ID);

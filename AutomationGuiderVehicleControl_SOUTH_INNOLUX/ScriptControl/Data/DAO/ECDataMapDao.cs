@@ -98,11 +98,11 @@ namespace com.mirle.ibg3k0.sc.Data.DAO
         /// Loads all default ec data.
         /// </summary>
         /// <returns>List&lt;ECDataMap&gt;.</returns>
-        public List<ECDataMap> loadAllDefaultECData()
+        public List<ECDataMap> loadAllDefaultECData(SCApplication scApp)
         {
             try
             {
-                DataTable dt = SCApplication.getInstance().OHxCConfig.Tables["ECDATAMAP"];
+                DataTable dt = scApp.OHxCConfig.Tables["ECDATAMAP"];
                 var query = from c in dt.AsEnumerable()
                             select new ECDataMap
                             {
