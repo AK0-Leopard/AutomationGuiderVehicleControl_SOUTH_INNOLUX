@@ -1187,6 +1187,7 @@
     <Compile Include="VSECTION_100.cs">
       <DependentUpon>OHTCContext.tt</DependentUpon>
     </Compile>
+    <Compile Include="WebAPI\Grpc\Server\ControllerSettingFunGreeter.cs" />
     <Compile Include="WebAPI\Grpc\Server\RoadControl.cs" />
     <Compile Include="WebAPI\TransferManagement.cs" />
     <Compile Include="WebAPI\UserControl.cs" />

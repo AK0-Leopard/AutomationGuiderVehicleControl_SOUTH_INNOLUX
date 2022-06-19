@@ -18,7 +18,12 @@ namespace com.mirle.ibg3k0.sc
 {
     public partial class ACMD_MCS
     {
-        public static ConcurrentDictionary<string, ACMD_MCS> MCS_CMD_InfoList = new ConcurrentDictionary<string, ACMD_MCS>();
+        public static ConcurrentDictionary<string, ACMD_MCS> MCS_CMD_InfoList { get; private set; } = new ConcurrentDictionary<string, ACMD_MCS>();
+        public static List<string> loadCurrentTransferCarrierID()
+        {
+            var carriers_id = MCS_CMD_InfoList.ToArray().Select(kv => sc.Common.SCUtility.Trim(kv.Value.CARRIER_ID)).ToList();
+            return carriers_id;
+        }
 
         public int RetryTimes = 0;
         public string ManualSelectedFinishCarrierLoc = "";

@@ -332,7 +332,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 try
                 {
                     SYSTEMPROCESS_INFO logObj = systemLog as SYSTEMPROCESS_INFO;
-                    if (! Common.LogStatus.CheckLevel(logObj.LOGLEVEL)) return;
+                    if (!Common.LogStatus.CheckLevel(logObj.LOGLEVEL)) return;
 
                     byte[] systemMsg_Serialize = BLL.LineBLL.Convert2GPB_SystemMsgInfo(logObj);
 
@@ -529,5 +529,42 @@ namespace com.mirle.ibg3k0.sc.Service
           forkDir: Mirle.Hlts.Utils.HltDirection.None);
         }
         #endregion Trafficlight Control
+
+        #region EC Data
+        public (bool isSuccess, string result) doECDataUpdate(string ecid, string ecValue)
+        {
+            try
+            {
+
+                var ecData = scApp.LineBLL.getECData(ecid);
+                ecData.ECV = ecValue;
+                //AECDATAMAP ecData = new AECDATAMAP()
+                //{
+                //    ECID = ecid,
+                //    ECNAME = ecName,
+                //    ECV = ecValue,
+                //    ECMAX = ecMax,
+                //    ECMIN = ecMin,
+                //    EQPT_REAL_ID = scApp.BC_ID
+                //};
+
+                string action = string.Format("Modify ECID, ECID:[{0}],ECNAME:[{1}],ECV:[{2}],ECMAX:[{3}],ECMIN:[{4}],EQPT_REAL_ID:[{5}]" //A0.04
+                , ecData.ECID, ecData.ECNAME, ecData.ECV, ecData.ECMAX, ecData.ECMIN, ecData.EQPT_REAL_ID);                               //A0.04
+
+
+                List<AECDATAMAP> updateEcDataList = new List<AECDATAMAP>();
+                updateEcDataList.Add(ecData);
+                string updateEcRtnMsg = string.Empty;
+                Boolean result = scApp.LineBLL.updateECData(updateEcDataList, out updateEcRtnMsg, false); //A0.03
+                                                                                                          //progress.End();
+                return (result, updateEcRtnMsg);
+            }
+            catch(Exception ex)
+            {
+                logger.Error(ex, "Exception");
+                return (false, "Exception happend");
+            }
+        }
+        #endregion EC Data
     }
 }

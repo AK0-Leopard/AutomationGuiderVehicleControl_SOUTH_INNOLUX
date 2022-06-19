@@ -70,39 +70,34 @@ namespace com.mirle.ibg3k0.sc.Service
                 vh.LongTimeCarrierInstalled += Vh_LongTimeCarrierInstalled;
             }
         }
-        private long syncPoint_LongTimeCarrierInstalled = 0;
-        private void Vh_LongTimeCarrierInstalled(object sender, string carrierID)
+        private void Vh_LongTimeCarrierInstalled(object sender, LongTimeCarrierInstalledStatusChangeEventArgs arg)
         {
             AVEHICLE vh = sender as AVEHICLE;
             if (vh == null) return;
-            if (System.Threading.Interlocked.Exchange(ref syncPoint_LongTimeCarrierInstalled, 1) == 0)
+            try
             {
-
-                try
+                string carrierID = arg.CarrierID;
+                bool is_happend = arg.IsHappend;
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"Process carrier long time installed,is happend:{is_happend} cmd id:{carrierID}",
+                   VehicleID: vh.VEHICLE_ID,
+                   CarrierID: vh.CST_ID);
+                if (is_happend)
                 {
-                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                       Data: $"Process vehicle long time inaction, cmd id:{carrierID}",
-                       VehicleID: vh.VEHICLE_ID,
-                       CarrierID: vh.CST_ID);
-
-                    //當發生
-                    //doCommandFigish(vh.VEHICLE_ID, cmdID, CompleteStatus.CmpStatusLongTimeInaction, 0);
-                    //要再上報Alamr Rerport給MCS
                     ProcessAlarmReport(vh, AlarmBLL.VEHICLE_LONG_TIME_INSTALLED_CARRIER, ErrorStatus.ErrSet, $"vehicle long time installed carrier, carrier id:{carrierID}");
-
                     BCFApplication.onWarningMsg($"Vehicle:{vh.VEHICLE_ID} long time installed carrier, carrier id:{carrierID}");
                 }
-                catch (Exception ex)
+                else
                 {
-                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Warn, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                       Data: ex,
-                       VehicleID: vh.VEHICLE_ID,
-                       CarrierID: vh.CST_ID);
+                    ProcessAlarmReport(vh, AlarmBLL.VEHICLE_LONG_TIME_INSTALLED_CARRIER, ErrorStatus.ErrReset, $"vehicle long time installed carrier, carrier id:{carrierID}");
                 }
-                finally
-                {
-                    System.Threading.Interlocked.Exchange(ref syncPoint_LongTimeCarrierInstalled, 0);
-                }
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Warn, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: ex,
+                   VehicleID: vh.VEHICLE_ID,
+                   CarrierID: vh.CST_ID);
             }
         }
         private void Vh_ModeStatusChange(object sender, VHModeStatus e)

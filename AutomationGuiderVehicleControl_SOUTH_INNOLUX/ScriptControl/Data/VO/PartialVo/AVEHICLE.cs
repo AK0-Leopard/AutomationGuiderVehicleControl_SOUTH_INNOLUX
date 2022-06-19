@@ -45,6 +45,16 @@ namespace com.mirle.ibg3k0.sc
             LeaveSegment = leaveSegment;
         }
     }
+    public class LongTimeCarrierInstalledStatusChangeEventArgs : EventArgs
+    {
+        public bool IsHappend { get; private set; }
+        public string CarrierID { get; private set; }
+        public LongTimeCarrierInstalledStatusChangeEventArgs(bool isHappend, string carrierID)
+        {
+            IsHappend = isHappend;
+            CarrierID = carrierID;
+        }
+    }
 
     public partial class AVEHICLE : BaseEQObject
     {
@@ -92,7 +102,7 @@ namespace com.mirle.ibg3k0.sc
         public event EventHandler<string> LongTimeInaction;
         public event EventHandler LongTimeDisconnection;
         public event EventHandler<VHModeStatus> ModeStatusChange;
-        public event EventHandler<string> LongTimeCarrierInstalled;
+        public event EventHandler<LongTimeCarrierInstalledStatusChangeEventArgs> LongTimeCarrierInstalled;
 
         VehicleTimerAction vehicleTimer = null;
 
@@ -191,9 +201,9 @@ namespace com.mirle.ibg3k0.sc
         {
             ModeStatusChange?.Invoke(this, modeStatus);
         }
-        public void onCarrierLongTimeInstalledInVh(string carrierID)
+        public void onCarrierLongTimeInstalledInVh(LongTimeCarrierInstalledStatusChangeEventArgs arg)
         {
-            LongTimeCarrierInstalled?.Invoke(this, carrierID);
+            LongTimeCarrierInstalled?.Invoke(this, arg);
         }
 
         public AVEHICLE()
@@ -1628,6 +1638,34 @@ namespace com.mirle.ibg3k0.sc
                         {
                             vh.onLongTimeDisConnection();
                         }
+
+                        checkHasCSTAbnormalInstallStatus();
+                        //double carrier_abnormal_installed_time = vh.CarrierInstalledTime.Elapsed.TotalSeconds;
+                        double carrier_abnormal_installed_time = vh.CarrierAbnormalInstalledTime.Elapsed.TotalSeconds;
+                        //if (carrier_installed_time > AVEHICLE.MAX_ALLOW_CARRIER_INSTALLED_TIME_SECOND)
+                        if (carrier_abnormal_installed_time > SystemParameter.MaxAllowCarrierAbnormalInstalledTime_Sec)
+                        {
+                            if (!vh.IsLongTimeInstallCarrierHappend)
+                            {
+                                vh.IsLongTimeInstallCarrierHappend = true;
+                                LongTimeCarrierInstalledStatusChangeEventArgs arg =
+                                    new LongTimeCarrierInstalledStatusChangeEventArgs(true, vh.CST_ID);
+                                vh.onCarrierLongTimeInstalledInVh(arg);
+                            }
+                        }
+                        else
+                        {
+                            if (vh.IsLongTimeInstallCarrierHappend)
+                            {
+                                vh.IsLongTimeInstallCarrierHappend = false;
+                                LongTimeCarrierInstalledStatusChangeEventArgs arg =
+                                    new LongTimeCarrierInstalledStatusChangeEventArgs(false, "");
+                                vh.onCarrierLongTimeInstalledInVh(arg);
+                            }
+
+
+                        }
+
                         if (!vh.isTcpIpConnect) return;
                         //1.檢查是否已經大於一定時間沒有進行通訊
                         double from_last_comm_time = vh.getFromTheLastCommTime(scApp.getBCFApplication());
@@ -1641,22 +1679,6 @@ namespace com.mirle.ibg3k0.sc
                             vh.onLongTimeInaction(vh.OHTC_CMD);
                         }
 
-                        checkHasCSTAbnormalInstallStatus();
-                        //double carrier_abnormal_installed_time = vh.CarrierInstalledTime.Elapsed.TotalSeconds;
-                        double carrier_abnormal_installed_time = vh.CarrierAbnormalInstalledTime.Elapsed.TotalSeconds;
-                        //if (carrier_installed_time > AVEHICLE.MAX_ALLOW_CARRIER_INSTALLED_TIME_SECOND)
-                        if (carrier_abnormal_installed_time > SystemParameter.MaxAllowCarrierAbnormalInstalledTime_Sec)
-                        {
-                            if (!vh.IsLongTimeInstallCarrierHappend)
-                            {
-                                vh.IsLongTimeInstallCarrierHappend = true;
-                                vh.onCarrierLongTimeInstalledInVh(SCUtility.Trim(vh.CST_ID, true));
-                            }
-                        }
-                        else
-                        {
-                            vh.IsLongTimeInstallCarrierHappend = false;
-                        }
                     }
                     catch (Exception ex)
                     {
@@ -1675,15 +1697,31 @@ namespace com.mirle.ibg3k0.sc
 
             private void checkHasCSTAbnormalInstallStatus()
             {
-                if (vh.HAS_CST == 1 &&
-                   (!vh.isTcpIpConnect || vh.IsError || vh.ACT_STATUS == VHActionStatus.NoCommand))
+                if (vh.HAS_CST == 1)
                 {
-                    vh.CarrierAbnormalInstallStart();
+                    var crrent_transfer_carriers_id = ACMD_MCS.loadCurrentTransferCarrierID();
+                    if (crrent_transfer_carriers_id.Contains(vh.CST_ID))
+                    {
+                        vh.CarrierAbnormalInstallStop();
+                    }
+                    else
+                    {
+                        vh.CarrierAbnormalInstallStart();
+                    }
                 }
                 else
                 {
                     vh.CarrierAbnormalInstallStop();
                 }
+                //if (vh.HAS_CST == 1 &&
+                //   (!vh.isTcpIpConnect || vh.IsError || vh.ACT_STATUS == VHActionStatus.NoCommand))
+                //{
+                //    vh.CarrierAbnormalInstallStart();
+                //}
+                //else
+                //{
+                //    vh.CarrierAbnormalInstallStop();
+                //}
             }
         }
 

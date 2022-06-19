@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ProtocolFormat\ControllerSettingFun.proto" />
     <None Remove="ProtocolFormat\SegFun.proto" />
     <None Remove="ProtocolFormat\VehicleControlFun.proto" />
     <None Remove="ProtocolFormat\VehicleControlPublishMessage.proto" />
@@ -22,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Protobuf Include="ProtocolFormat\ControllerSettingFun.proto" GrpcServices="Server" />
     <Protobuf Include="ProtocolFormat\SegFun.proto" />
     <Protobuf Include="ProtocolFormat\VehicleControlFun.proto" />
     <Protobuf Include="ProtocolFormat\VehicleControlPublishMessage.proto" />

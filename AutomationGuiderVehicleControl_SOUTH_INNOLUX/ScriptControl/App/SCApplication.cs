@@ -353,7 +353,8 @@ namespace com.mirle.ibg3k0.sc.App
 
         public FloydAlgorithmRouteGuide.TimeWindow TimeWindow { get; private set; } = null;
 
-        private Grpc.Core.Server gRPC_With_RoadControlService;
+        //private Grpc.Core.Server gRPC_With_RoadControlService;
+        private Grpc.Core.Server gRPC_With_ControllerSettingFun;
 
 
         //config
@@ -1415,9 +1416,14 @@ namespace com.mirle.ibg3k0.sc.App
                 userControlService = new UserControlService();
                 transferService = new TransferService();
             }
-            gRPC_With_RoadControlService = new Grpc.Core.Server()
+            //gRPC_With_RoadControlService = new Grpc.Core.Server()
+            //{
+            //    Services = { CommonMessage.ProtocolFormat.SegFun.segmentGreeter.BindService(new WebAPI.Grpc.Server.RoadControl(this)) },
+            //    Ports = { new Grpc.Core.ServerPort("127.0.0.1", 7004, Grpc.Core.ServerCredentials.Insecure) },
+            //};
+            gRPC_With_ControllerSettingFun = new Grpc.Core.Server()
             {
-                Services = { CommonMessage.ProtocolFormat.SegFun.segmentGreeter.BindService(new WebAPI.Grpc.Server.RoadControl(this)) },
+                Services = { CommonMessage.ProtocolFormat.ControllerSettingFun.ControllerSettingFunGreeter.BindService(new WebAPI.Grpc.Server.ControllerSettingFun(this)) },
                 Ports = { new Grpc.Core.ServerPort("127.0.0.1", 7004, Grpc.Core.ServerCredentials.Insecure) },
             };
 
@@ -1470,7 +1476,8 @@ namespace com.mirle.ibg3k0.sc.App
             connectionInfoService.start(this);
             userControlService.start(this);
             transferService.start(this);
-            gRPC_With_RoadControlService.Start();
+            //gRPC_With_RoadControlService.Start();
+            gRPC_With_ControllerSettingFun.Start();
         }
 
         private void initWIF()

@@ -119,7 +119,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction.NorthInnolux
         }
 
         uint message_index = 0;
-        public virtual void AGVCToChargerCouplerEnable(uint couplerID, bool isEnable)
+        public virtual bool AGVCToChargerCouplerEnable(uint couplerID, bool isEnable)
         {
             AGVCToChargerCouplerEnableDisable send_function =
                 scApp.getFunBaseObj<AGVCToChargerCouplerEnableDisable>(unit.UNIT_ID) as AGVCToChargerCouplerEnableDisable;
@@ -137,10 +137,12 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction.NorthInnolux
                          VehicleID: unit.UNIT_ID);
                 //3.發送訊息
                 send_function.Write(bcfApp, unit.EqptObjectCate, unit.UNIT_ID);
+                return true;
             }
             catch (Exception ex)
             {
                 logger.Error(ex, "Exception");
+                return false;
             }
             finally
             {
