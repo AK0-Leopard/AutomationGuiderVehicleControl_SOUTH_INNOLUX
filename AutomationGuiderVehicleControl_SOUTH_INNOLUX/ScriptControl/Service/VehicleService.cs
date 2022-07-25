@@ -113,8 +113,29 @@ namespace com.mirle.ibg3k0.sc.Service
                 vh.ModeStatusChange += Vh_ModeStatusChange;
                 vh.LongTimeCarrierInstalled += Vh_LongTimeCarrierInstalled;
             }
+            scApp.LineService.LoadUnloadInterlockErrorTimesUpdataComplete += LineService_LoadUnloadInterlockErrorTimesUpdataComplete;
             oneDirectPath();
         }
+
+        private void LineService_LoadUnloadInterlockErrorTimesUpdataComplete(object sender, EventArgs e)
+        {
+            try
+            {
+                var vhs = scApp.VehicleBLL.cache.loadAllVh();
+                foreach (var vh in vhs)
+                {
+                    if (vh.MODE_STATUS == VHModeStatus.AutoCharging ||
+                        vh.MODE_STATUS == VHModeStatus.AutoLocal ||
+                        vh.MODE_STATUS == VHModeStatus.AutoRemote)
+                        ControlDataReport(vh.VEHICLE_ID);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception");
+            }
+        }
+
         private void Vh_LongTimeCarrierInstalled(object sender, LongTimeCarrierInstalledStatusChangeEventArgs arg)
         {
             AVEHICLE vh = sender as AVEHICLE;
@@ -139,10 +160,7 @@ namespace com.mirle.ibg3k0.sc.Service
             }
             catch (Exception ex)
             {
-                LogHelper.Log(logger: logger, LogLevel: LogLevel.Warn, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                   Data: ex,
-                   VehicleID: vh.VEHICLE_ID,
-                   CarrierID: vh.CST_ID);
+                logger.Error(ex, "Exception");
             }
         }
 
@@ -163,6 +181,7 @@ namespace com.mirle.ibg3k0.sc.Service
                     e == VHModeStatus.AutoRemote)
                 {
                     ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrReset, $"vehicle cannot service");
+                    Task.Run(() => ControlDataReport(vh.VEHICLE_ID));
                 }
                 else
                 {
@@ -569,20 +588,13 @@ namespace com.mirle.ibg3k0.sc.Service
             bool isSuccess = false;
             AVEHICLE vh = scApp.getEQObjCacheManager().getVehicletByVHID(vh_id);
 
-            CONTROL_DATA data = scApp.DataSyncBLL.getReleaseCONTROL_DATA();
+            //CONTROL_DATA data = scApp.DataSyncBLL.getReleaseCONTROL_DATA();
             string rtnMsg = string.Empty;
             ID_121_CONTROL_DATA_RESPONSE receive_gpp;
             ID_21_CONTROL_DATA_REP sned_gpp = new ID_21_CONTROL_DATA_REP()
             {
-                TimeoutT1 = (UInt32)data.T1,
-                TimeoutT2 = (UInt32)data.T2,
-                TimeoutT3 = (UInt32)data.T3,
-                TimeoutT4 = (UInt32)data.T4,
-                TimeoutT5 = (UInt32)data.T5,
-                TimeoutT6 = (UInt32)data.T6,
-                TimeoutT7 = (UInt32)data.T7,
-                TimeoutT8 = (UInt32)data.T8,
-                TimeoutBlock = (UInt32)data.BLOCK_REQ_TIME_OUT
+                LoadInterlockErrorRetryTimes = SystemParameter.LoadingInterlockErrorMaxRetryCount,
+                UnloadInterlockErrorRetryTimes = SystemParameter.UnloadingInterlockErrorMaxRetryCount
             };
             isSuccess = vh.sned_S21(sned_gpp, out receive_gpp);
             isSuccess = isSuccess && receive_gpp.ReplyCode == 0;
@@ -709,6 +721,9 @@ namespace com.mirle.ibg3k0.sc.Service
                 VhStopSingle pauseStat = receive_gpp.PauseStatus;
                 VhStopSingle errorStat = receive_gpp.ErrorStatus;
                 VhLoadCSTStatus loadCSTStatus = receive_gpp.HasCST;
+                UInt32 loading_interlock_error_times = receive_gpp.LoadInterlockErrorRetryTimes;
+                UInt32 unloading_interlock_error_times = receive_gpp.UnloadInterlockErrorRetryTimes;
+
                 //VhGuideStatus leftGuideStat = recive_str.LeftGuideLockStatus;
                 //VhGuideStatus rightGuideStat = recive_str.RightGuideLockStatus;
 
@@ -721,7 +736,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 //  scApp.VehicleBLL.getAndProcPositionReportFromRedis(vh.VEHICLE_ID);
 
                 //checkCurrentCmdStatusWithVhActionStat(vh.VEHICLE_ID, actionStat);
-
+                scApp.VehicleBLL.cache.SetInterlockErrorRetryTimes(vh.VEHICLE_ID, loading_interlock_error_times, unloading_interlock_error_times);
                 if (modeStat != vh.MODE_STATUS)
                 {
                     //checkRemoveReserveStatusByModeChange(vh, modeStat, vh.MODE_STATUS);
@@ -3264,6 +3279,9 @@ namespace com.mirle.ibg3k0.sc.Service
             int obstacleDIST = recive_str.ObstDistance;
             string obstacleVhID = recive_str.ObstVehicleID;
             int steeringWheel = recive_str.SteeringWheel;
+            UInt32 loading_interlock_error_times = recive_str.LoadInterlockErrorRetryTimes;
+            UInt32 unloading_interlock_error_times = recive_str.UnloadInterlockErrorRetryTimes;
+
             bool hasdifferent = !SCUtility.isMatche(eqpt.CST_ID, cstID) ||
                                 eqpt.MODE_STATUS != modeStat ||
                                 eqpt.ACT_STATUS != actionStat ||
@@ -3274,7 +3292,6 @@ namespace com.mirle.ibg3k0.sc.Service
                                 eqpt.HAS_CST != (int)loadCSTStatus ||
                                 eqpt.BatteryCapacity != batteryCapacity ||
                                 eqpt.STEERINGWHEELANGLE != steeringWheel;
-
             if (loadCSTStatus == VhLoadCSTStatus.Exist)
             {
                 eqpt.CarrierInstall();
@@ -3289,7 +3306,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 //checkRemoveReserveStatusByModeChange(eqpt, modeStat, eqpt.MODE_STATUS);
                 eqpt.onModeStatusChange(modeStat);
             }
-
+            scApp.VehicleBLL.cache.SetInterlockErrorRetryTimes(eqpt.VEHICLE_ID, loading_interlock_error_times, unloading_interlock_error_times);
             //20190906 暫時不去判斷該條件
             //checkCurrentCmdStatusWithVhActionStat(eqpt.VEHICLE_ID, actionStat);
             if (eqpt.RESERVE_PAUSE != reserveStatus)

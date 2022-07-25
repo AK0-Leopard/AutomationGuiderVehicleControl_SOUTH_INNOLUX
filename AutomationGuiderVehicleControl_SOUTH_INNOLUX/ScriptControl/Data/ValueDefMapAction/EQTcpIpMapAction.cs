@@ -450,7 +450,34 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
 
             //eqpt.VHStateMach.Fire(SCAppConstants.E_VH_EVENT.CompensationDataError);
         }
+        public override bool sned_Str21(ID_21_CONTROL_DATA_REP send_gpp, out ID_121_CONTROL_DATA_RESPONSE receive_gpp)
+        {
+            bool isSuccess = false;
+            try
+            {
 
+                WrapperMessage wrapper = new WrapperMessage
+                {
+                    ID = WrapperMessage.ControlDataRepFieldNumber,
+                    ControlDataRep = send_gpp
+                };
+                com.mirle.iibg3k0.ttc.Common.TrxTcpIp.ReturnCode result = snedRecv(wrapper, out receive_gpp, out string reason);
+                if (result == TrxTcpIp.ReturnCode.Normal)
+                {
+                    isSuccess = true;
+                }
+                else
+                {
+                    isSuccess = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception");
+                receive_gpp = null;
+            }
+            return isSuccess;
+        }
         public override bool send_Str31(ID_31_TRANS_REQUEST send_gpp, out ID_131_TRANS_RESPONSE receive_gpp, out string reason)
         {
             bool isSuccess = false;

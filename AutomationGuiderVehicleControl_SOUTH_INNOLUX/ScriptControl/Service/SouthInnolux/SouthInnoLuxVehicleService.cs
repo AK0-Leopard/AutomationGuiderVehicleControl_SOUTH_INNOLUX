@@ -117,6 +117,7 @@ namespace com.mirle.ibg3k0.sc.Service
                     e == VHModeStatus.AutoRemote)
                 {
                     ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrReset, $"vehicle cannot service");
+                    Task.Run(() => ControlDataReport(vh.VEHICLE_ID));
                 }
                 else
                 {
@@ -483,30 +484,7 @@ namespace com.mirle.ibg3k0.sc.Service
             isSuccess = isSuccess && receive_gpp.ReplyCode == 0;
             return isSuccess;
         }
-        public bool ControlDataReport(string vh_id)
-        {
-            bool isSuccess = false;
-            AVEHICLE vh = scApp.getEQObjCacheManager().getVehicletByVHID(vh_id);
 
-            CONTROL_DATA data = scApp.DataSyncBLL.getReleaseCONTROL_DATA();
-            string rtnMsg = string.Empty;
-            ID_121_CONTROL_DATA_RESPONSE receive_gpp;
-            ID_21_CONTROL_DATA_REP sned_gpp = new ID_21_CONTROL_DATA_REP()
-            {
-                TimeoutT1 = (UInt32)data.T1,
-                TimeoutT2 = (UInt32)data.T2,
-                TimeoutT3 = (UInt32)data.T3,
-                TimeoutT4 = (UInt32)data.T4,
-                TimeoutT5 = (UInt32)data.T5,
-                TimeoutT6 = (UInt32)data.T6,
-                TimeoutT7 = (UInt32)data.T7,
-                TimeoutT8 = (UInt32)data.T8,
-                TimeoutBlock = (UInt32)data.BLOCK_REQ_TIME_OUT
-            };
-            isSuccess = vh.sned_S21(sned_gpp, out receive_gpp);
-            isSuccess = isSuccess && receive_gpp.ReplyCode == 0;
-            return isSuccess;
-        }
         public bool GuideDataReport(string vh_id)
         {
             bool isSuccess = false;
@@ -3447,14 +3425,14 @@ namespace com.mirle.ibg3k0.sc.Service
                         {
                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                                Data: $"mcs cmd:{cmd_id} complete status:{completeStatus} when loading," +
-                                     $"but over retry count:{SystemParameter.InterlockErrorMaxRetryCount} will finish command!");
+                                     $"but over retry count:{SystemParameter.AGVCLoadingInterlockErrorMaxRetryCount} will finish command!");
                             return false;//在超過次數後會直接將命令結束
                         }
                         else
                         {
                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                                Data: $"mcs cmd:{cmd_id} complete status:{completeStatus} when loading," +
-                                     $"not over retry count:{SystemParameter.InterlockErrorMaxRetryCount} will return to queue!");
+                                     $"not over retry count:{SystemParameter.AGVCLoadingInterlockErrorMaxRetryCount} will return to queue!");
                             return true;//在還沒超過次數時會將命令改回queue
                         }
                     case CompleteStatus.CmpStatusEmptyRetrival:

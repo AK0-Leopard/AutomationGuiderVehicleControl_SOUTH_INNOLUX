@@ -125,98 +125,120 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             bulidECValueTextBox();
         }
 
-        private void m_modifyBtn_Click(object sender, EventArgs e)
+        private async void m_modifyBtn_Click(object sender, EventArgs e)
         {
-            string ecid = string.Format(SCAppConstants.ECID_Format, m_ecidTxb.Text);
-            string ecName = m_ecNameTxb.Text;
-            string ecValue;
-            string ecMax = m_maxTxb.Text; //A0.09
-            string ecMin = m_minTxb.Text; //A0.09
-
-            ecValue = m_ecValueTxb.Text;
-
-            //A0.09 Add Start
-            if (BCFUtility.isEmpty(ecid))
+            try
             {
-                MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_ECID_Cannot_Empty"));
+                m_modifyBtn.Enabled = false;
+                string ecid = string.Format(SCAppConstants.ECID_Format, m_ecidTxb.Text);
+                string ecName = m_ecNameTxb.Text;
+                string ecValue;
+                string ecMax = m_maxTxb.Text; //A0.09
+                string ecMin = m_minTxb.Text; //A0.09
 
-                return;
-            }
-            if (BCFUtility.isEmpty(ecName))
-            {
-                MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_ECName_Cannot_Empty"));
-                return;
-            }
-            //A0.09 Add End
+                ecValue = m_ecValueTxb.Text;
 
-            // A0.07 Add Start 修改資料時檢查ECValue是否為空值
-            if (BCFUtility.isEmpty(ecValue))
-            {
-                MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_ECV_Cannot_Empty"));
-
-                return;
-            }
-            // A0.07 Add End
-
-            //A0.09 Add Start
-            if (BCFUtility.isEmpty(ecMax))
-            {
-                MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_MaxValue_Cannot_Empty"));
-                return;
-            }
-            if (BCFUtility.isEmpty(ecMin))
-            {
-                MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_MinValue_Cannot_Empty"));
-
-                return;
-            }
-            //A0.09 Add end
-
-            //A0.09 string ecMax = m_maxTxb.Text;
-            //A0.09 string ecMin = m_minTxb.Text;
-            Boolean isFound = false;
-            foreach (AECDATAMAP data in ecDataList)
-            {
-                if (BCFUtility.isMatche(data.ECID, ecid))
+                //A0.09 Add Start
+                if (BCFUtility.isEmpty(ecid))
                 {
-                    isFound = true;
-                    break;
+                    MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_ECID_Cannot_Empty"));
+
+                    return;
                 }
-            }
-            if (!isFound)
-            {
-                MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_ECV_Not_Found_ECID_{0}", ecid));
-                return;
-            }
-            AECDATAMAP ecData = new AECDATAMAP()
-            {
-                ECID = ecid,
-                ECNAME = ecName,
-                ECV = ecValue,
-                ECMAX = ecMax,
-                ECMIN = ecMin,
-                EQPT_REAL_ID = bcApp.SCApplication.BC_ID
-            };
+                if (BCFUtility.isEmpty(ecName))
+                {
+                    MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_ECName_Cannot_Empty"));
+                    return;
+                }
+                //A0.09 Add End
 
-            string action = string.Format("Modify ECID, ECID:[{0}],ECNAME:[{1}],ECV:[{2}],ECMAX:[{3}],ECMIN:[{4}],EQPT_REAL_ID:[{5}]" //A0.04
-            , ecData.ECID, ecData.ECNAME, ecData.ECV, ecData.ECMAX, ecData.ECMIN, ecData.EQPT_REAL_ID);                               //A0.04
-            bcApp.SCApplication.BCSystemBLL.addOperationHis(bcApp.LoginUserID, this.Name, action);                                    //A0.04
+                // A0.07 Add Start 修改資料時檢查ECValue是否為空值
+                if (BCFUtility.isEmpty(ecValue))
+                {
+                    MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_ECV_Cannot_Empty"));
+
+                    return;
+                }
+                // A0.07 Add End
+
+                //A0.09 Add Start
+                if (BCFUtility.isEmpty(ecMax))
+                {
+                    MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_MaxValue_Cannot_Empty"));
+                    return;
+                }
+                if (BCFUtility.isEmpty(ecMin))
+                {
+                    MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_MinValue_Cannot_Empty"));
+
+                    return;
+                }
+                //A0.09 Add end
+
+                //A0.09 string ecMax = m_maxTxb.Text;
+                //A0.09 string ecMin = m_minTxb.Text;
+                Boolean isFound = false;
+                foreach (AECDATAMAP data in ecDataList)
+                {
+                    if (BCFUtility.isMatche(data.ECID, ecid))
+                    {
+                        isFound = true;
+                        break;
+                    }
+                }
+                if (!isFound)
+                {
+                    MessageBox.Show(this, SCApplication.getMessageString("ECDataEdit_ECV_Not_Found_ECID_{0}", ecid));
+                    return;
+                }
+                AECDATAMAP ecData = new AECDATAMAP()
+                {
+                    ECID = ecid,
+                    ECNAME = ecName,
+                    ECV = ecValue,
+                    ECMAX = ecMax,
+                    ECMIN = ecMin,
+                    EQPT_REAL_ID = bcApp.SCApplication.BC_ID
+                };
+
+                var update_result = await Task.Run(() => bcApp.SCApplication.LineService.eqDataUpdate(ecid, ecData));
+
+                string action = string.Format("Modify ECID, ECID:[{0}],ECNAME:[{1}],ECV:[{2}],ECMAX:[{3}],ECMIN:[{4}],EQPT_REAL_ID:[{5}]" //A0.04
+                , ecData.ECID, ecData.ECNAME, ecData.ECV, ecData.ECMAX, ecData.ECMIN, ecData.EQPT_REAL_ID);                               //A0.04
+                bcApp.SCApplication.BCSystemBLL.addOperationHis(bcApp.LoginUserID, this.Name, action);                                    //A0.04
+                if (update_result.isSuccess)
+                {
+                    MessageBox.Show(this, "Update Success !");
+                }
+                else
+                {
+                    BCFApplication.onInfoMsg(this.Name, update_result.result);
+                }
 
 
-            List<AECDATAMAP> updateEcDataList = new List<AECDATAMAP>();
-            updateEcDataList.Add(ecData);
-            string updateEcRtnMsg = string.Empty;
-            Boolean result = bcApp.SCApplication.LineBLL.updateECData(updateEcDataList, out updateEcRtnMsg, false); //A0.03
-            //progress.End();
-            if (result)
-            {
-                MessageBox.Show(this, "Update Success !");
+                //List<AECDATAMAP> updateEcDataList = new List<AECDATAMAP>();
+                //updateEcDataList.Add(ecData);
+                //string updateEcRtnMsg = string.Empty;
+                //Boolean result = bcApp.SCApplication.LineBLL.updateECData(updateEcDataList, out updateEcRtnMsg, false); //A0.03
+                ////progress.End();
+                //if (result)
+                //{
+                //    MessageBox.Show(this, "Update Success !");
+                //}
+                //else
+                //{
+                //    BCFApplication.onInfoMsg(this.Name, updateEcRtnMsg);
+                //}
+                refresh();
             }
-            else
+            catch (Exception ex)
             {
-                BCFApplication.onInfoMsg(this.Name, updateEcRtnMsg);
+                NLog.LogManager.GetCurrentClassLogger().Error(ex, "Exception");
             }
-            refresh();
+            finally
+            {
+                m_modifyBtn.Enabled = true;
+            }
 
         }
         private void bulidECValueTextBox()

@@ -265,6 +265,8 @@ message Timestamp {
 	 uint32 TimeoutT7 = 7;				
 	 uint32 TimeoutT8 = 8;				
 	 uint32 TimeoutBlock = 9;				
+	 uint32 LoadInterlockErrorRetryTimes = 11;			
+	 uint32 UnloadInterlockErrorRetryTimes = 12;			
   }
    message ID_121_CONTROL_DATA_RESPONSE {
 	 int32 ReplyCode = 1;
@@ -544,6 +546,8 @@ message Timestamp {
 	double DirectionAngle = 28;
 	double VehicleAngle = 29;
 	double Speed = 30;
+	uint32 LoadInterlockErrorRetryTimes = 101;
+	uint32 UnloadInterlockErrorRetryTimes = 102;
   }
 
   message ID_144_STATUS_CHANGE_REP {
@@ -577,6 +581,8 @@ message Timestamp {
 	double DirectionAngle = 28;
 	double VehicleAngle = 29;
 	double Speed = 30;
+	uint32 LoadInterlockErrorRetryTimes = 101;
+	uint32 UnloadInterlockErrorRetryTimes = 102;
   }
 
   message ID_44_STATUS_CHANGE_RESPONSE {

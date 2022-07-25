@@ -381,6 +381,24 @@ namespace com.mirle.ibg3k0.sc.ObjectRelay
                 NotifyPropertyChanged(BCFUtility.getPropertyName(() => this.UPD_TIME));
             }
         }
+        public uint LoadingInterlockErrorRetryTimes
+        {
+            get { return vehicle.LoadingInterlockErrorRetryTimes; }
+            set
+            {
+                vehicle.LoadingInterlockErrorRetryTimes = value;
+                NotifyPropertyChanged(BCFUtility.getPropertyName(() => this.LoadingInterlockErrorRetryTimes));
+            }
+        }
+        public uint UnloadingInterlockErrorRetryTimes
+        {
+            get { return vehicle.UnloadingInterlockErrorRetryTimes; }
+            set
+            {
+                vehicle.UnloadingInterlockErrorRetryTimes = value;
+                NotifyPropertyChanged(BCFUtility.getPropertyName(() => this.UnloadingInterlockErrorRetryTimes));
+            }
+        }
         //[DisplayName("Cycle Zone ID")]
         //public string cYCLERUN_ID
         //{

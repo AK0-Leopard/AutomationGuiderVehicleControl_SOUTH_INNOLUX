@@ -837,14 +837,26 @@ namespace com.mirle.ibg3k0.sc.App
                     }
                     catch (Exception) { }
                 }
-                else if (BCFUtility.isMatche(item.ECID, SCAppConstants.ECID_VEHICLE_INTERLOCK_RETRY_COUNT))
+                else if (BCFUtility.isMatche(item.ECID, SCAppConstants.ECID_VEHICLE_LODING_INTERLOCK_RETRY_COUNT))
                 {
                     try
                     {
-                        if (int.TryParse(SCUtility.Trim(item.ECV), out int r))
-                            if (SystemParameter.InterlockErrorMaxRetryCount != r)
+                        if (uint.TryParse(SCUtility.Trim(item.ECV), out uint r))
+                            if (SystemParameter.LoadingInterlockErrorMaxRetryCount != r)
                             {
-                                SystemParameter.setInterlockErrorMaxRetryCount(r);
+                                SystemParameter.setLodingInterlockErrorMaxRetryCount(r);
+                            }
+                    }
+                    catch (Exception) { }
+                }
+                else if (BCFUtility.isMatche(item.ECID, SCAppConstants.ECID_VEHICLE_UNLOADING_INTERLOCK_RETRY_COUNT_ULOAD))
+                {
+                    try
+                    {
+                        if (uint.TryParse(SCUtility.Trim(item.ECV), out uint r))
+                            if (SystemParameter.UnloadingInterlockErrorMaxRetryCount != r)
+                            {
+                                SystemParameter.setUnlodingInterlockErrorMaxRetryCount(r);
                             }
                     }
                     catch (Exception) { }
@@ -2001,7 +2013,9 @@ namespace com.mirle.ibg3k0.sc.App
         public static int MaxAllowCarrierAbnormalInstalledTime_Sec { get; private set; } = 1200;
         public static UInt16 VehicleBatteryHighBoundaryValue { get; private set; } = 80;
         public static UInt16 VehicleBatteryLowBoundaryValue { get; private set; } = 40;
-        public static int InterlockErrorMaxRetryCount { get; private set; } = 3;
+        public static uint AGVCLoadingInterlockErrorMaxRetryCount { get; private set; } = 0;
+        public static uint LoadingInterlockErrorMaxRetryCount { get; private set; } = 3;
+        public static uint UnloadingInterlockErrorMaxRetryCount { get; private set; } = 3;
 
 
         public static void setSECSConversactionTimeout(int timeout)
@@ -2094,9 +2108,13 @@ namespace com.mirle.ibg3k0.sc.App
         {
             VehicleBatteryHighBoundaryValue = vehicleBatteryHighBoundaryValue;
         }
-        public static void setInterlockErrorMaxRetryCount(int interlockErrorMaxRetryCount)
+        public static void setLodingInterlockErrorMaxRetryCount(uint lodinginterlockErrorMaxRetryCount)
         {
-            InterlockErrorMaxRetryCount = interlockErrorMaxRetryCount;
+            LoadingInterlockErrorMaxRetryCount = lodinginterlockErrorMaxRetryCount;
+        }
+        public static void setUnlodingInterlockErrorMaxRetryCount(uint unlodinginterlockErrorMaxRetryCount)
+        {
+            UnloadingInterlockErrorMaxRetryCount = unlodinginterlockErrorMaxRetryCount;
         }
     }
 

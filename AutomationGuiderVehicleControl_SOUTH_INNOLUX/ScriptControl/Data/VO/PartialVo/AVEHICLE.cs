@@ -287,6 +287,10 @@ namespace com.mirle.ibg3k0.sc
         public virtual List<string> Alarms { get; set; }
         [JsonIgnore]
         public virtual bool IsPrepareAvoid { get; set; }
+        [JsonIgnore]
+        public virtual uint LoadingInterlockErrorRetryTimes{ get; set; } = 0;
+        [JsonIgnore]
+        public virtual uint UnloadingInterlockErrorRetryTimes{ get; set; } = 0;
 
 
 
@@ -384,6 +388,7 @@ namespace com.mirle.ibg3k0.sc
             get { return RESERVE_PAUSE == VhStopSingle.StopSingleOn; }
             set { }
         }
+
 
         public List<string> CurrentReserveSegmentID = new List<string>();
 

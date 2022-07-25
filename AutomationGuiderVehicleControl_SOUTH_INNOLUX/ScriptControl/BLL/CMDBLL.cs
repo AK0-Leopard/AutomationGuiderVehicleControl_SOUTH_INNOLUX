@@ -3070,7 +3070,7 @@ namespace com.mirle.ibg3k0.sc.BLL
             if (ACMD_MCS.MCS_CMD_InfoList.TryGetValue(cmdID, out ACMD_MCS cmd_mcs))
             {
                 //return cmd_mcs.RetryTimes >= DebugParameter.InterlockErrorMaxRetryCount;
-                return cmd_mcs.RetryTimes >= SystemParameter.InterlockErrorMaxRetryCount;
+                return cmd_mcs.RetryTimes >= SystemParameter.AGVCLoadingInterlockErrorMaxRetryCount;
             }
             else
             {

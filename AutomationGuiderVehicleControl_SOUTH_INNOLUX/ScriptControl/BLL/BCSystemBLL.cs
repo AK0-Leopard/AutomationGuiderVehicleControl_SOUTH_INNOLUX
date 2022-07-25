@@ -238,9 +238,13 @@ namespace com.mirle.ibg3k0.sc.BLL
                 {
                     SystemParameter.setVehicleBatteryHighBoundaryValue(Convert.ToUInt16(val));
                 }
-                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_INTERLOCK_RETRY_COUNT))
+                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_LODING_INTERLOCK_RETRY_COUNT ))
                 {
-                    SystemParameter.setInterlockErrorMaxRetryCount(Convert.ToInt32(val));
+                    SystemParameter.setLodingInterlockErrorMaxRetryCount(Convert.ToUInt32(val));
+                }
+                else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_UNLOADING_INTERLOCK_RETRY_COUNT_ULOAD))
+                {
+                    SystemParameter.setUnlodingInterlockErrorMaxRetryCount(Convert.ToUInt32(val));
                 }
                 else if (BCFUtility.isMatche(ecid, SCAppConstants.ECID_MAX_ALLOW_CST_ABNORMAL_INSTALLED_TIME))
                 {

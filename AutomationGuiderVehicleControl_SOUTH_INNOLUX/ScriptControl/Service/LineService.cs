@@ -25,6 +25,8 @@ namespace com.mirle.ibg3k0.sc.Service
         public int trafficPassTime = 20;
         public string trafficLight1Section = "";
         public string trafficLight2Section = "";
+        public event EventHandler LoadUnloadInterlockErrorTimesUpdataComplete;
+
         public LineService()
         {
 
@@ -538,32 +540,35 @@ namespace com.mirle.ibg3k0.sc.Service
 
                 var ecData = scApp.LineBLL.getECData(ecid);
                 ecData.ECV = ecValue;
-                //AECDATAMAP ecData = new AECDATAMAP()
-                //{
-                //    ECID = ecid,
-                //    ECNAME = ecName,
-                //    ECV = ecValue,
-                //    ECMAX = ecMax,
-                //    ECMIN = ecMin,
-                //    EQPT_REAL_ID = scApp.BC_ID
-                //};
-
-                string action = string.Format("Modify ECID, ECID:[{0}],ECNAME:[{1}],ECV:[{2}],ECMAX:[{3}],ECMIN:[{4}],EQPT_REAL_ID:[{5}]" //A0.04
-                , ecData.ECID, ecData.ECNAME, ecData.ECV, ecData.ECMAX, ecData.ECMIN, ecData.EQPT_REAL_ID);                               //A0.04
-
-
-                List<AECDATAMAP> updateEcDataList = new List<AECDATAMAP>();
-                updateEcDataList.Add(ecData);
-                string updateEcRtnMsg = string.Empty;
-                Boolean result = scApp.LineBLL.updateECData(updateEcDataList, out updateEcRtnMsg, false); //A0.03
-                                                                                                          //progress.End();
-                return (result, updateEcRtnMsg);
+                return eqDataUpdate(ecid, ecData);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.Error(ex, "Exception");
                 return (false, "Exception happend");
             }
+        }
+
+        public (bool isSuccess, string result) eqDataUpdate(string ecid, AECDATAMAP ecData)
+        {
+            string action = string.Format("Modify ECID, ECID:[{0}],ECNAME:[{1}],ECV:[{2}],ECMAX:[{3}],ECMIN:[{4}],EQPT_REAL_ID:[{5}]" //A0.04
+            , ecData.ECID, ecData.ECNAME, ecData.ECV, ecData.ECMAX, ecData.ECMIN, ecData.EQPT_REAL_ID);                               //A0.04
+
+
+            List<AECDATAMAP> updateEcDataList = new List<AECDATAMAP>();
+            updateEcDataList.Add(ecData);
+            string updateEcRtnMsg = string.Empty;
+            Boolean result = scApp.LineBLL.updateECData(updateEcDataList, out updateEcRtnMsg, false); //A0.03
+                                                                                                      //progress.End();
+            if (result)
+            {
+                if (sc.Common.SCUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_LODING_INTERLOCK_RETRY_COUNT) ||
+                    sc.Common.SCUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_UNLOADING_INTERLOCK_RETRY_COUNT_ULOAD))
+                {
+                    LoadUnloadInterlockErrorTimesUpdataComplete?.Invoke(this, EventArgs.Empty);
+                }
+            }
+            return (result, updateEcRtnMsg);
         }
         #endregion EC Data
     }
