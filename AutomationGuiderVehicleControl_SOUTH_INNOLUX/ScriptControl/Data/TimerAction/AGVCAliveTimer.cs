@@ -25,6 +25,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
+
 namespace com.mirle.ibg3k0.sc.Data.TimerAction
 {
     class AGVCAliveTimer : ITimerAction
@@ -33,6 +35,8 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
         protected SCApplication scApp = null;
         protected MPLCSMControl smControl;
         private AEQPT mCharger;
+        private Stopwatch stopwatch_last_sync = new Stopwatch();
+        private const int SYNC_DATA_TIME_PERIOD_DAY = 1;
         public AGVCAliveTimer(string name, long intervalMilliSec)
             : base(name, intervalMilliSec)
         {
@@ -41,7 +45,7 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
 
         public override void initStart()
         {
-            
+
             scApp = SCApplication.getInstance();
             //smControl = scApp.getBCFApplication().getMPLCSMControl("Charger") as MPLCSMControl;
         }
@@ -59,7 +63,7 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
                 ValueWrite isAliveIndexVW = scApp.getBCFApplication().getWriteValueEvent(SCAppConstants.EQPT_OBJECT_CATE_EQPT, "MCharger", "AGVC_TO_CHARGER_ALIVE_INDEX");
                 if (isAliveIndexVW == null) return;
                 UInt16 isAliveIndex = (UInt16)isAliveIndexVW.getText();
-                
+
                 int x = isAliveIndex + 1;
                 if (x > 9999) { x = 1; }
                 isAliveIndexVW.setWriteValue((UInt16)x);
@@ -80,11 +84,26 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
                     switchFlag = false;
                     isWriteSucess = false;
                 }
+
+                DateTimeSyncWithCharger();
+
             }
             catch (Exception e)
             {
                 switchFlag = true;
                 isWriteSucess = false;
+            }
+        }
+
+        private void DateTimeSyncWithCharger()
+        {
+            if (!stopwatch_last_sync.IsRunning || stopwatch_last_sync.Elapsed.TotalDays >= SYNC_DATA_TIME_PERIOD_DAY)
+            {
+                var mtl_mapaction = mCharger.
+                    getMapActionByIdentityKey(nameof(com.mirle.ibg3k0.sc.Data.ValueDefMapAction.ChargerValueDefMapAction)) as
+                    com.mirle.ibg3k0.sc.Data.ValueDefMapAction.ChargerValueDefMapAction;
+                DateTime dateTime = DateTime.Now;
+                mtl_mapaction.DateTimeSyncCommand(dateTime);
             }
         }
     }

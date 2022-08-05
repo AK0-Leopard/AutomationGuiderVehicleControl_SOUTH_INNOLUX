@@ -25,8 +25,8 @@ namespace com.mirle.ibg3k0.sc.Common
                         var configOptions = new ConfigurationOptions();
                         configOptions.EndPoints.Add(SCAppConstants.ConnectionSetting.REDIS_SERVER_CONFIGURATION);
                         configOptions.ClientName = "OHxCRedisConnection";
-                        configOptions.ConnectTimeout = 100000;
-                        configOptions.SyncTimeout = 100000;
+                        configOptions.ConnectTimeout = 100_000;
+                        configOptions.SyncTimeout = 100_000;
                         configOptions.AbortOnConnectFail = false;
                         return configOptions;
                     });

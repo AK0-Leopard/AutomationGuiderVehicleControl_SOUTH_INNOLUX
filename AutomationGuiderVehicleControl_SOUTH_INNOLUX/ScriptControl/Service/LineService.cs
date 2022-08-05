@@ -408,13 +408,15 @@ namespace com.mirle.ibg3k0.sc.Service
                 bool need_trun_on_buzzer = line.HasSeriousAlarmHappend;
                 bool need_trun_on_yellow_light = line.HasWarningHappend;
                 bool need_trun_on_green_light = !line.HasSeriousAlarmHappend && !line.HasWarningHappend;
-                bool need_trun_on_blue_light = !line.HasSeriousAlarmHappend && !line.HasWarningHappend;
+                //bool need_trun_on_blue_light = !line.HasSeriousAlarmHappend && !line.HasWarningHappend;
+                bool need_trun_on_blue_light = false;
 
                 Task.Run(() => Lighthouse?.setColorLight(
                     need_trun_on_red_light, need_trun_on_yellow_light, need_trun_on_green_light,
                     need_trun_on_blue_light, need_trun_on_buzzer, true));
             }
         }
+
         #region Trafficlight Control
         public bool traffic_work_light_on = false;
         public bool traffic_red_light_on = false;
