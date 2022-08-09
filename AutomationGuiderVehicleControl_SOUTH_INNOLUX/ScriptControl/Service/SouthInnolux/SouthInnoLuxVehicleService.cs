@@ -117,7 +117,8 @@ namespace com.mirle.ibg3k0.sc.Service
                     e == VHModeStatus.AutoRemote)
                 {
                     ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrReset, $"vehicle cannot service");
-                    Task.Run(() => ControlDataReport(vh.VEHICLE_ID));
+                    //Task.Run(() => ControlDataReport(vh.VEHICLE_ID));
+                    Task.Run(() => ControlDataSettiingAndVhParameterRequest(vh.VEHICLE_ID));
                 }
                 else
                 {
@@ -133,6 +134,7 @@ namespace com.mirle.ibg3k0.sc.Service
                    CarrierID: vh.CST_ID);
             }
         }
+
 
         private void Vh_LongTimeDisconnection(object sender, EventArgs e)
         {
@@ -3402,14 +3404,14 @@ namespace com.mirle.ibg3k0.sc.Service
             }
             vh.onCommandComplete(completeStatus);
 
-            if (scApp.getEQObjCacheManager().getLine().SCStats == ALINE.TSCState.PAUSING)
-            {
-                List<ACMD_MCS> cmd_mcs_lst = scApp.CMDBLL.loadACMD_MCSIsUnfinished();
-                if (cmd_mcs_lst.Count == 0)
-                {
-                    scApp.LineService.TSCStateToPause();
-                }
-            }
+            //if (scApp.getEQObjCacheManager().getLine().SCStats == ALINE.TSCState.PAUSING)
+            //{
+            //    List<ACMD_MCS> cmd_mcs_lst = scApp.CMDBLL.loadACMD_MCSIsUnfinished();
+            //    if (cmd_mcs_lst.Count == 0)
+            //    {
+            //        scApp.LineService.TSCStateToPause();
+            //    }
+            //}
         }
 
         private bool IsKeepCMDMCSDontFinish(ACMD_MCS acmd_mcs, CompleteStatus completeStatus)
@@ -4175,8 +4177,8 @@ namespace com.mirle.ibg3k0.sc.Service
                 {
                     CurrentAdrID = "",
                     CurrentSecID = "",
-                    XAxis = -1,
-                    YAxis = -1
+                    XAxis = -1000,
+                    YAxis = -1000
                 };
                 scApp.VehicleBLL.setAndPublishPositionReportInfo2Redis(vh.VEHICLE_ID, recive_str);
             }

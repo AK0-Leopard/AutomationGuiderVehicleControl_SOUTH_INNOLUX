@@ -2171,11 +2171,12 @@ namespace com.mirle.ibg3k0.sc.BLL
                     vh.CurrentFailOverrideTimes = 0;
                 }
             }
-            public void SetInterlockErrorRetryTimes(string vhID, UInt32 loadingInterlockErrorTimes, UInt32 unloadingInterlockErrorTimes)
+            public void SetVehicleParameter(string vhID, UInt32 loadingInterlockErrorTimes, UInt32 unloadingInterlockErrorTimes, UInt32 battryLowLevelValue)
             {
                 var vh = eqObjCacheManager.getAllVehicle().Where(v => SCUtility.isMatche(v.VEHICLE_ID, vhID)).SingleOrDefault();
                 vh.LoadingInterlockErrorRetryTimes = loadingInterlockErrorTimes;
                 vh.UnloadingInterlockErrorRetryTimes = unloadingInterlockErrorTimes;
+                vh.CurrentVhSettingOfBattryLowLevelValue = battryLowLevelValue;
             }
 
 

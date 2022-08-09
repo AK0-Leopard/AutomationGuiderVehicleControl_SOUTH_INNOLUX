@@ -2007,7 +2007,8 @@ namespace com.mirle.ibg3k0.sc.App
 
         public static bool AutoTeching = false;
         public static int CSTMaxWaitTime = 0;
-        public static int TheLongestFullyChargedIntervalTime_Mim = 15;
+        //public static int TheLongestFullyChargedIntervalTime_Mim = 15;
+        public static int TheLongestFullyChargedIntervalTime_Mim = 0;
 
         public static bool AutoOverride = true;
         public static int MaxAllowCarrierAbnormalInstalledTime_Sec { get; private set; } = 1200;

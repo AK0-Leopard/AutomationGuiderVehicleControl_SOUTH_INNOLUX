@@ -113,11 +113,11 @@ namespace com.mirle.ibg3k0.sc.Service
                 vh.ModeStatusChange += Vh_ModeStatusChange;
                 vh.LongTimeCarrierInstalled += Vh_LongTimeCarrierInstalled;
             }
-            scApp.LineService.LoadUnloadInterlockErrorTimesUpdataComplete += LineService_LoadUnloadInterlockErrorTimesUpdataComplete;
+            scApp.LineService.VehicleParametersChanged += LineService_VehicleParametersChanged;
             oneDirectPath();
         }
 
-        private void LineService_LoadUnloadInterlockErrorTimesUpdataComplete(object sender, EventArgs e)
+        private void LineService_VehicleParametersChanged(object sender, EventArgs e)
         {
             try
             {
@@ -127,7 +127,8 @@ namespace com.mirle.ibg3k0.sc.Service
                     if (vh.MODE_STATUS == VHModeStatus.AutoCharging ||
                         vh.MODE_STATUS == VHModeStatus.AutoLocal ||
                         vh.MODE_STATUS == VHModeStatus.AutoRemote)
-                        ControlDataReport(vh.VEHICLE_ID);
+                        //ControlDataReport(vh.VEHICLE_ID);
+                        ControlDataSettiingAndVhParameterRequest(vh.VEHICLE_ID);
                 }
             }
             catch (Exception ex)
@@ -135,7 +136,31 @@ namespace com.mirle.ibg3k0.sc.Service
                 logger.Error(ex, "Exception");
             }
         }
+        protected void ControlDataSettiingAndVhParameterRequest(string vhID)
+        {
+            try
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"start setting vh control data...",
+                   VehicleID: vhID);
+                string doing = "control data setting...";
+                bool is_success = ControlDataReport(vhID);
+                if (is_success)
+                {
+                    SpinWait.SpinUntil(() => false, 1000);
+                    doing = "control data request...";
+                    VehicleParameterRequest(vhID);
+                }
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"finish setting vh control data,do:[{doing}] result:{is_success}",
+                   VehicleID: vhID);
 
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception:");
+            }
+        }
         private void Vh_LongTimeCarrierInstalled(object sender, LongTimeCarrierInstalledStatusChangeEventArgs arg)
         {
             AVEHICLE vh = sender as AVEHICLE;
@@ -181,7 +206,7 @@ namespace com.mirle.ibg3k0.sc.Service
                     e == VHModeStatus.AutoRemote)
                 {
                     ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrReset, $"vehicle cannot service");
-                    Task.Run(() => ControlDataReport(vh.VEHICLE_ID));
+                    Task.Run(() => ControlDataSettiingAndVhParameterRequest(vh.VEHICLE_ID));
                 }
                 else
                 {
@@ -594,7 +619,8 @@ namespace com.mirle.ibg3k0.sc.Service
             ID_21_CONTROL_DATA_REP sned_gpp = new ID_21_CONTROL_DATA_REP()
             {
                 LoadInterlockErrorRetryTimes = SystemParameter.LoadingInterlockErrorMaxRetryCount,
-                UnloadInterlockErrorRetryTimes = SystemParameter.UnloadingInterlockErrorMaxRetryCount
+                UnloadInterlockErrorRetryTimes = SystemParameter.UnloadingInterlockErrorMaxRetryCount,
+                BattryLowLevelValue = SystemParameter.VehicleBatteryLowBoundaryValue
             };
             isSuccess = vh.sned_S21(sned_gpp, out receive_gpp);
             isSuccess = isSuccess && receive_gpp.ReplyCode == 0;
@@ -625,6 +651,29 @@ namespace com.mirle.ibg3k0.sc.Service
             isSuccess = isSuccess && receive_gpp.ReplyCode == 0;
             return isSuccess;
         }
+        public bool VehicleParameterRequest(string vh_id)
+        {
+            bool isSuccess = false;
+            string reason = string.Empty;
+            AVEHICLE vh = scApp.getEQObjCacheManager().getVehicletByVHID(vh_id);
+            ID_127_PARAMETERS_RESPONSE receive_gpp;
+            ID_27_PARAMETERS_REQUEST send_gpp = new ID_27_PARAMETERS_REQUEST();
+
+            isSuccess = vh.send_S27(send_gpp, out receive_gpp);
+
+            if (isSuccess)
+            {
+                UInt32 load_inter_lock_error_retry_rimes = receive_gpp.LoadInterlockErrorRetryTimes;
+                UInt32 unload_inter_lockerror_retry_times = receive_gpp.UnloadInterlockErrorRetryTimes;
+                UInt32 battry_low_level_value = receive_gpp.BattryLowLevelValue;
+                UInt32 loading_charge_interval = receive_gpp.LoadingChargeInterval;
+                scApp.VehicleBLL.cache.SetVehicleParameter
+                    (vh_id, load_inter_lock_error_retry_rimes, unload_inter_lockerror_retry_times, battry_low_level_value);
+            }
+            return isSuccess;
+        }
+
+
         public bool doDataSysc(string vh_id)
         {
             bool isSyscCmp = false;
@@ -721,8 +770,6 @@ namespace com.mirle.ibg3k0.sc.Service
                 VhStopSingle pauseStat = receive_gpp.PauseStatus;
                 VhStopSingle errorStat = receive_gpp.ErrorStatus;
                 VhLoadCSTStatus loadCSTStatus = receive_gpp.HasCST;
-                UInt32 loading_interlock_error_times = receive_gpp.LoadInterlockErrorRetryTimes;
-                UInt32 unloading_interlock_error_times = receive_gpp.UnloadInterlockErrorRetryTimes;
 
                 //VhGuideStatus leftGuideStat = recive_str.LeftGuideLockStatus;
                 //VhGuideStatus rightGuideStat = recive_str.RightGuideLockStatus;
@@ -736,7 +783,6 @@ namespace com.mirle.ibg3k0.sc.Service
                 //  scApp.VehicleBLL.getAndProcPositionReportFromRedis(vh.VEHICLE_ID);
 
                 //checkCurrentCmdStatusWithVhActionStat(vh.VEHICLE_ID, actionStat);
-                scApp.VehicleBLL.cache.SetInterlockErrorRetryTimes(vh.VEHICLE_ID, loading_interlock_error_times, unloading_interlock_error_times);
                 if (modeStat != vh.MODE_STATUS)
                 {
                     //checkRemoveReserveStatusByModeChange(vh, modeStat, vh.MODE_STATUS);
@@ -3279,8 +3325,6 @@ namespace com.mirle.ibg3k0.sc.Service
             int obstacleDIST = recive_str.ObstDistance;
             string obstacleVhID = recive_str.ObstVehicleID;
             int steeringWheel = recive_str.SteeringWheel;
-            UInt32 loading_interlock_error_times = recive_str.LoadInterlockErrorRetryTimes;
-            UInt32 unloading_interlock_error_times = recive_str.UnloadInterlockErrorRetryTimes;
 
             bool hasdifferent = !SCUtility.isMatche(eqpt.CST_ID, cstID) ||
                                 eqpt.MODE_STATUS != modeStat ||
@@ -3306,7 +3350,6 @@ namespace com.mirle.ibg3k0.sc.Service
                 //checkRemoveReserveStatusByModeChange(eqpt, modeStat, eqpt.MODE_STATUS);
                 eqpt.onModeStatusChange(modeStat);
             }
-            scApp.VehicleBLL.cache.SetInterlockErrorRetryTimes(eqpt.VEHICLE_ID, loading_interlock_error_times, unloading_interlock_error_times);
             //20190906 暫時不去判斷該條件
             //checkCurrentCmdStatusWithVhActionStat(eqpt.VEHICLE_ID, actionStat);
             if (eqpt.RESERVE_PAUSE != reserveStatus)
@@ -4182,8 +4225,8 @@ namespace com.mirle.ibg3k0.sc.Service
                     {
                         CurrentAdrID = "",
                         CurrentSecID = "",
-                        XAxis = -1,
-                        YAxis = -1
+                        XAxis = -1000,
+                        YAxis = -1000
                     };
                     scApp.VehicleBLL.setAndPublishPositionReportInfo2Redis(vh_vo.VEHICLE_ID, recive_str);
 

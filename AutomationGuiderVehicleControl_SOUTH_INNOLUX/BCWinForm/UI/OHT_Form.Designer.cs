@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -72,26 +72,13 @@
             this.lbl_destinationName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.uc_StatusTreeViewer1 = new com.mirle.ibg3k0.bc.winform.UI.Components.MyUserControl.uc_StatusTreeViewer();
             this.pnl_Map = new System.Windows.Forms.Panel();
-            this.uctl_Map = new com.mirle.ibg3k0.bc.winform.UI.Components.uctl_Map();
             this.tbcList = new System.Windows.Forms.TabControl();
             this.tab_vhStatus = new System.Windows.Forms.TabPage();
             this.dgv_vhStatus = new System.Windows.Forms.DataGridView();
-            this.vehicleObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tapTransferCmd = new System.Windows.Forms.TabPage();
             this.dgv_TransferCommand = new System.Windows.Forms.DataGridView();
-            this.cMDIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cARRIERIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.VEHICLE_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tRANSFERSTATEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hOSTSOURCEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hOSTDESTINATIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pRIORITYDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cMDINSERTIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cMDSTARTTIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rEPLACEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cMDMCSObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tapDetail = new System.Windows.Forms.TabPage();
             this.dgv_TaskCommand = new System.Windows.Forms.DataGridView();
             this.tapCurrentAlarm = new System.Windows.Forms.TabPage();
@@ -103,8 +90,6 @@
             this.report_time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alarm_desc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer_TimedUpdates = new System.Windows.Forms.Timer(this.components);
-            this.vehicleObjToShowBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.aCMDMCSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.uPDTIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BATTERYCAPACITY = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aCCSECDIST2ShowDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -123,6 +108,21 @@
             this.aCTSTATUSDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mODESTATUSDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vEHICLEIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uc_StatusTreeViewer1 = new com.mirle.ibg3k0.bc.winform.UI.Components.MyUserControl.uc_StatusTreeViewer();
+            this.uctl_Map = new com.mirle.ibg3k0.bc.winform.UI.Components.uctl_Map();
+            this.vehicleObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.cMDIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cARRIERIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tRANSFERSTATEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hOSTSOURCEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pRIORITYDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMDINSERTIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rEPLACEDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cMDMCSObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.vehicleObjToShowBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.aCMDMCSBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.vEHICLEIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mODESTATUSDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.aCTSTATUSDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -142,6 +142,7 @@
             this.uPDTIMEDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LoadingInterlockErrorRetryTimes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UnloadingInterlockErrorRetryTimes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CurrentVhSettingOfBattryLowLevelValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -158,15 +159,15 @@
             this.tbcList.SuspendLayout();
             this.tab_vhStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_vhStatus)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleObjToShowBindingSource)).BeginInit();
             this.tapTransferCmd.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_TransferCommand)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cMDMCSObjToShowBindingSource)).BeginInit();
             this.tapDetail.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_TaskCommand)).BeginInit();
             this.tapCurrentAlarm.SuspendLayout();
             this.tlp_crtAlarm.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Alarm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vehicleObjToShowBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cMDMCSObjToShowBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehicleObjToShowBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aCMDMCSBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -649,22 +650,13 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.uc_StatusTreeViewer1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(315, 829);
+            this.tabPage2.Size = new System.Drawing.Size(315, 823);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Status Viewer";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // uc_StatusTreeViewer1
-            // 
-            this.uc_StatusTreeViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uc_StatusTreeViewer1.Location = new System.Drawing.Point(3, 3);
-            this.uc_StatusTreeViewer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uc_StatusTreeViewer1.Name = "uc_StatusTreeViewer1";
-            this.uc_StatusTreeViewer1.Size = new System.Drawing.Size(309, 823);
-            this.uc_StatusTreeViewer1.TabIndex = 0;
             // 
             // pnl_Map
             // 
@@ -675,19 +667,6 @@
             this.pnl_Map.Name = "pnl_Map";
             this.pnl_Map.Size = new System.Drawing.Size(1589, 855);
             this.pnl_Map.TabIndex = 0;
-            // 
-            // uctl_Map
-            // 
-            this.uctl_Map.AutoScroll = true;
-            this.uctl_Map.BackColor = System.Drawing.Color.MidnightBlue;
-            this.uctl_Map.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.uctl_Map.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uctl_Map.Location = new System.Drawing.Point(0, 0);
-            this.uctl_Map.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uctl_Map.Name = "uctl_Map";
-            this.uctl_Map.Size = new System.Drawing.Size(1589, 855);
-            this.uctl_Map.TabIndex = 0;
-            this.uctl_Map.Load += new System.EventHandler(this.uctl_Map_Load);
             // 
             // tbcList
             // 
@@ -721,14 +700,14 @@
             this.dgv_vhStatus.AllowUserToDeleteRows = false;
             this.dgv_vhStatus.AutoGenerateColumns = false;
             this.dgv_vhStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_vhStatus.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_vhStatus.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgv_vhStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_vhStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.vEHICLEIDDataGridViewTextBoxColumn1,
@@ -750,6 +729,7 @@
             this.uPDTIMEDataGridViewTextBoxColumn1,
             this.LoadingInterlockErrorRetryTimes,
             this.UnloadingInterlockErrorRetryTimes,
+            this.CurrentVhSettingOfBattryLowLevelValue,
             this.Column1});
             this.dgv_vhStatus.DataSource = this.vehicleObjToShowBindingSource;
             this.dgv_vhStatus.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -763,10 +743,6 @@
             this.dgv_vhStatus.TabIndex = 0;
             this.dgv_vhStatus.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_vhStatus_CellClick);
             this.dgv_vhStatus.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_vhStatus_DataError);
-            // 
-            // vehicleObjToShowBindingSource
-            // 
-            this.vehicleObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.VehicleObjToShow);
             // 
             // tapTransferCmd
             // 
@@ -810,86 +786,12 @@
             this.dgv_TransferCommand.Size = new System.Drawing.Size(1916, 156);
             this.dgv_TransferCommand.TabIndex = 0;
             // 
-            // cMDIDDataGridViewTextBoxColumn
-            // 
-            this.cMDIDDataGridViewTextBoxColumn.DataPropertyName = "CMD_ID";
-            this.cMDIDDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.cMDIDDataGridViewTextBoxColumn.Name = "cMDIDDataGridViewTextBoxColumn";
-            this.cMDIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cARRIERIDDataGridViewTextBoxColumn
-            // 
-            this.cARRIERIDDataGridViewTextBoxColumn.DataPropertyName = "CARRIER_ID";
-            this.cARRIERIDDataGridViewTextBoxColumn.HeaderText = "Carrier ID";
-            this.cARRIERIDDataGridViewTextBoxColumn.Name = "cARRIERIDDataGridViewTextBoxColumn";
-            this.cARRIERIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // VEHICLE_ID
             // 
             this.VEHICLE_ID.DataPropertyName = "VEHICLE_ID";
             this.VEHICLE_ID.HeaderText = "Vh";
             this.VEHICLE_ID.Name = "VEHICLE_ID";
             this.VEHICLE_ID.ReadOnly = true;
-            // 
-            // tRANSFERSTATEDataGridViewTextBoxColumn
-            // 
-            this.tRANSFERSTATEDataGridViewTextBoxColumn.DataPropertyName = "TRANSFERSTATEToShow";
-            this.tRANSFERSTATEDataGridViewTextBoxColumn.FillWeight = 60F;
-            this.tRANSFERSTATEDataGridViewTextBoxColumn.HeaderText = "State";
-            this.tRANSFERSTATEDataGridViewTextBoxColumn.Name = "tRANSFERSTATEDataGridViewTextBoxColumn";
-            this.tRANSFERSTATEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // hOSTSOURCEDataGridViewTextBoxColumn
-            // 
-            this.hOSTSOURCEDataGridViewTextBoxColumn.DataPropertyName = "HOSTSOURCE";
-            this.hOSTSOURCEDataGridViewTextBoxColumn.FillWeight = 150F;
-            this.hOSTSOURCEDataGridViewTextBoxColumn.HeaderText = "L Port";
-            this.hOSTSOURCEDataGridViewTextBoxColumn.Name = "hOSTSOURCEDataGridViewTextBoxColumn";
-            this.hOSTSOURCEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // hOSTDESTINATIONDataGridViewTextBoxColumn
-            // 
-            this.hOSTDESTINATIONDataGridViewTextBoxColumn.DataPropertyName = "HOSTDESTINATION";
-            this.hOSTDESTINATIONDataGridViewTextBoxColumn.FillWeight = 150F;
-            this.hOSTDESTINATIONDataGridViewTextBoxColumn.HeaderText = "U Port";
-            this.hOSTDESTINATIONDataGridViewTextBoxColumn.Name = "hOSTDESTINATIONDataGridViewTextBoxColumn";
-            this.hOSTDESTINATIONDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // pRIORITYDataGridViewTextBoxColumn
-            // 
-            this.pRIORITYDataGridViewTextBoxColumn.DataPropertyName = "PRIORITY";
-            this.pRIORITYDataGridViewTextBoxColumn.FillWeight = 70F;
-            this.pRIORITYDataGridViewTextBoxColumn.HeaderText = "Priority";
-            this.pRIORITYDataGridViewTextBoxColumn.Name = "pRIORITYDataGridViewTextBoxColumn";
-            this.pRIORITYDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cMDINSERTIMEDataGridViewTextBoxColumn
-            // 
-            this.cMDINSERTIMEDataGridViewTextBoxColumn.DataPropertyName = "CMD_INSER_TIME";
-            this.cMDINSERTIMEDataGridViewTextBoxColumn.FillWeight = 120F;
-            this.cMDINSERTIMEDataGridViewTextBoxColumn.HeaderText = "Inser Time";
-            this.cMDINSERTIMEDataGridViewTextBoxColumn.Name = "cMDINSERTIMEDataGridViewTextBoxColumn";
-            this.cMDINSERTIMEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cMDSTARTTIMEDataGridViewTextBoxColumn
-            // 
-            this.cMDSTARTTIMEDataGridViewTextBoxColumn.DataPropertyName = "CMD_START_TIME";
-            this.cMDSTARTTIMEDataGridViewTextBoxColumn.FillWeight = 120F;
-            this.cMDSTARTTIMEDataGridViewTextBoxColumn.HeaderText = "Start Time";
-            this.cMDSTARTTIMEDataGridViewTextBoxColumn.Name = "cMDSTARTTIMEDataGridViewTextBoxColumn";
-            this.cMDSTARTTIMEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // rEPLACEDataGridViewTextBoxColumn
-            // 
-            this.rEPLACEDataGridViewTextBoxColumn.DataPropertyName = "REPLACE";
-            this.rEPLACEDataGridViewTextBoxColumn.FillWeight = 50F;
-            this.rEPLACEDataGridViewTextBoxColumn.HeaderText = "Replace";
-            this.rEPLACEDataGridViewTextBoxColumn.Name = "rEPLACEDataGridViewTextBoxColumn";
-            this.rEPLACEDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cMDMCSObjToShowBindingSource
-            // 
-            this.cMDMCSObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.CMD_MCSObjToShow);
             // 
             // tapDetail
             // 
@@ -1006,15 +908,6 @@
             // 
             this.timer_TimedUpdates.Interval = 1000;
             this.timer_TimedUpdates.Tick += new System.EventHandler(this.timer_TimedUpdates_Tick);
-            // 
-            // vehicleObjToShowBindingSource1
-            // 
-            this.vehicleObjToShowBindingSource1.AllowNew = true;
-            this.vehicleObjToShowBindingSource1.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.VehicleObjToShow);
-            // 
-            // aCMDMCSBindingSource
-            // 
-            this.aCMDMCSBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ACMD_MCS);
             // 
             // uPDTIMEDataGridViewTextBoxColumn
             // 
@@ -1159,6 +1052,115 @@
             this.vEHICLEIDDataGridViewTextBoxColumn.Name = "vEHICLEIDDataGridViewTextBoxColumn";
             this.vEHICLEIDDataGridViewTextBoxColumn.ReadOnly = true;
             this.vEHICLEIDDataGridViewTextBoxColumn.Width = 75;
+            // 
+            // uc_StatusTreeViewer1
+            // 
+            this.uc_StatusTreeViewer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uc_StatusTreeViewer1.Location = new System.Drawing.Point(3, 3);
+            this.uc_StatusTreeViewer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uc_StatusTreeViewer1.Name = "uc_StatusTreeViewer1";
+            this.uc_StatusTreeViewer1.Size = new System.Drawing.Size(309, 823);
+            this.uc_StatusTreeViewer1.TabIndex = 0;
+            // 
+            // uctl_Map
+            // 
+            this.uctl_Map.AutoScroll = true;
+            this.uctl_Map.BackColor = System.Drawing.Color.MidnightBlue;
+            this.uctl_Map.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uctl_Map.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uctl_Map.Location = new System.Drawing.Point(0, 0);
+            this.uctl_Map.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uctl_Map.Name = "uctl_Map";
+            this.uctl_Map.Size = new System.Drawing.Size(1589, 855);
+            this.uctl_Map.TabIndex = 0;
+            this.uctl_Map.Load += new System.EventHandler(this.uctl_Map_Load);
+            // 
+            // vehicleObjToShowBindingSource
+            // 
+            this.vehicleObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.VehicleObjToShow);
+            // 
+            // cMDIDDataGridViewTextBoxColumn
+            // 
+            this.cMDIDDataGridViewTextBoxColumn.DataPropertyName = "CMD_ID";
+            this.cMDIDDataGridViewTextBoxColumn.HeaderText = "ID";
+            this.cMDIDDataGridViewTextBoxColumn.Name = "cMDIDDataGridViewTextBoxColumn";
+            this.cMDIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cARRIERIDDataGridViewTextBoxColumn
+            // 
+            this.cARRIERIDDataGridViewTextBoxColumn.DataPropertyName = "CARRIER_ID";
+            this.cARRIERIDDataGridViewTextBoxColumn.HeaderText = "Carrier ID";
+            this.cARRIERIDDataGridViewTextBoxColumn.Name = "cARRIERIDDataGridViewTextBoxColumn";
+            this.cARRIERIDDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // tRANSFERSTATEDataGridViewTextBoxColumn
+            // 
+            this.tRANSFERSTATEDataGridViewTextBoxColumn.DataPropertyName = "TRANSFERSTATEToShow";
+            this.tRANSFERSTATEDataGridViewTextBoxColumn.FillWeight = 60F;
+            this.tRANSFERSTATEDataGridViewTextBoxColumn.HeaderText = "State";
+            this.tRANSFERSTATEDataGridViewTextBoxColumn.Name = "tRANSFERSTATEDataGridViewTextBoxColumn";
+            this.tRANSFERSTATEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // hOSTSOURCEDataGridViewTextBoxColumn
+            // 
+            this.hOSTSOURCEDataGridViewTextBoxColumn.DataPropertyName = "HOSTSOURCE";
+            this.hOSTSOURCEDataGridViewTextBoxColumn.FillWeight = 150F;
+            this.hOSTSOURCEDataGridViewTextBoxColumn.HeaderText = "L Port";
+            this.hOSTSOURCEDataGridViewTextBoxColumn.Name = "hOSTSOURCEDataGridViewTextBoxColumn";
+            this.hOSTSOURCEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // hOSTDESTINATIONDataGridViewTextBoxColumn
+            // 
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn.DataPropertyName = "HOSTDESTINATION";
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn.FillWeight = 150F;
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn.HeaderText = "U Port";
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn.Name = "hOSTDESTINATIONDataGridViewTextBoxColumn";
+            this.hOSTDESTINATIONDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // pRIORITYDataGridViewTextBoxColumn
+            // 
+            this.pRIORITYDataGridViewTextBoxColumn.DataPropertyName = "PRIORITY";
+            this.pRIORITYDataGridViewTextBoxColumn.FillWeight = 70F;
+            this.pRIORITYDataGridViewTextBoxColumn.HeaderText = "Priority";
+            this.pRIORITYDataGridViewTextBoxColumn.Name = "pRIORITYDataGridViewTextBoxColumn";
+            this.pRIORITYDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cMDINSERTIMEDataGridViewTextBoxColumn
+            // 
+            this.cMDINSERTIMEDataGridViewTextBoxColumn.DataPropertyName = "CMD_INSER_TIME";
+            this.cMDINSERTIMEDataGridViewTextBoxColumn.FillWeight = 120F;
+            this.cMDINSERTIMEDataGridViewTextBoxColumn.HeaderText = "Inser Time";
+            this.cMDINSERTIMEDataGridViewTextBoxColumn.Name = "cMDINSERTIMEDataGridViewTextBoxColumn";
+            this.cMDINSERTIMEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cMDSTARTTIMEDataGridViewTextBoxColumn
+            // 
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn.DataPropertyName = "CMD_START_TIME";
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn.FillWeight = 120F;
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn.HeaderText = "Start Time";
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn.Name = "cMDSTARTTIMEDataGridViewTextBoxColumn";
+            this.cMDSTARTTIMEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // rEPLACEDataGridViewTextBoxColumn
+            // 
+            this.rEPLACEDataGridViewTextBoxColumn.DataPropertyName = "REPLACE";
+            this.rEPLACEDataGridViewTextBoxColumn.FillWeight = 50F;
+            this.rEPLACEDataGridViewTextBoxColumn.HeaderText = "Replace";
+            this.rEPLACEDataGridViewTextBoxColumn.Name = "rEPLACEDataGridViewTextBoxColumn";
+            this.rEPLACEDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // cMDMCSObjToShowBindingSource
+            // 
+            this.cMDMCSObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.CMD_MCSObjToShow);
+            // 
+            // vehicleObjToShowBindingSource1
+            // 
+            this.vehicleObjToShowBindingSource1.AllowNew = true;
+            this.vehicleObjToShowBindingSource1.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.VehicleObjToShow);
+            // 
+            // aCMDMCSBindingSource
+            // 
+            this.aCMDMCSBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ACMD_MCS);
             // 
             // vEHICLEIDDataGridViewTextBoxColumn1
             // 
@@ -1320,6 +1322,14 @@
             this.UnloadingInterlockErrorRetryTimes.ReadOnly = true;
             this.UnloadingInterlockErrorRetryTimes.Width = 247;
             // 
+            // CurrentVhSettingOfBattryLowLevelValue
+            // 
+            this.CurrentVhSettingOfBattryLowLevelValue.DataPropertyName = "CurrentVhSettingOfBattryLowLevelValue";
+            this.CurrentVhSettingOfBattryLowLevelValue.HeaderText = "Battry Level(Low)";
+            this.CurrentVhSettingOfBattryLowLevelValue.Name = "CurrentVhSettingOfBattryLowLevelValue";
+            this.CurrentVhSettingOfBattryLowLevelValue.ReadOnly = true;
+            this.CurrentVhSettingOfBattryLowLevelValue.Width = 168;
+            // 
             // Column1
             // 
             this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
@@ -1362,15 +1372,15 @@
             this.tbcList.ResumeLayout(false);
             this.tab_vhStatus.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_vhStatus)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.vehicleObjToShowBindingSource)).EndInit();
             this.tapTransferCmd.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_TransferCommand)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.cMDMCSObjToShowBindingSource)).EndInit();
             this.tapDetail.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_TaskCommand)).EndInit();
             this.tapCurrentAlarm.ResumeLayout(false);
             this.tlp_crtAlarm.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Alarm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.vehicleObjToShowBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.cMDMCSObjToShowBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.vehicleObjToShowBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.aCMDMCSBindingSource)).EndInit();
             this.ResumeLayout(false);
@@ -1491,6 +1501,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn uPDTIMEDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn LoadingInterlockErrorRetryTimes;
         private System.Windows.Forms.DataGridViewTextBoxColumn UnloadingInterlockErrorRetryTimes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CurrentVhSettingOfBattryLowLevelValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
     }
 }

@@ -25,7 +25,7 @@ namespace com.mirle.ibg3k0.sc.Service
         public int trafficPassTime = 20;
         public string trafficLight1Section = "";
         public string trafficLight2Section = "";
-        public event EventHandler LoadUnloadInterlockErrorTimesUpdataComplete;
+        public event EventHandler VehicleParametersChanged;
 
         public LineService()
         {
@@ -565,9 +565,10 @@ namespace com.mirle.ibg3k0.sc.Service
             if (result)
             {
                 if (sc.Common.SCUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_LODING_INTERLOCK_RETRY_COUNT) ||
-                    sc.Common.SCUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_UNLOADING_INTERLOCK_RETRY_COUNT_ULOAD))
+                    sc.Common.SCUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_UNLOADING_INTERLOCK_RETRY_COUNT_ULOAD) ||
+                    sc.Common.SCUtility.isMatche(ecid, SCAppConstants.ECID_VEHICLE_LOW_BATTERY_VALUE))
                 {
-                    LoadUnloadInterlockErrorTimesUpdataComplete?.Invoke(this, EventArgs.Empty);
+                    Task.Run(() => VehicleParametersChanged?.Invoke(this, EventArgs.Empty));
                 }
             }
             return (result, updateEcRtnMsg);

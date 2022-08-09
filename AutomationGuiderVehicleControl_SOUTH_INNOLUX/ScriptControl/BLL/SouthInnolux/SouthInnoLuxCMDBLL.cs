@@ -1179,6 +1179,29 @@ namespace com.mirle.ibg3k0.sc.BLL
                             }
                         }
                     }
+                    else
+                    {
+                        var sc_stats = scApp.getEQObjCacheManager().getLine().SCStats;
+                        if (sc_stats == ALINE.TSCState.PAUSING)
+                        {
+                            LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(CMDBLL), Device: string.Empty,
+                                          Data: $"current sc stats");
+
+                            if (hasExcuteCMD_MCSNotFinish())
+                            {
+                                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(CMDBLL), Device: string.Empty,
+                                              Data: $"current sc stats:{sc_stats},waitting command finish...");
+
+                                //not thing....
+                            }
+                            else
+                            {
+                                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(CMDBLL), Device: string.Empty,
+                                              Data: $"current sc stats:{sc_stats},change to pause.");
+                                scApp.LineService.TSCStateToPause();
+                            }
+                        }
+                    }
                 }
                 finally
                 {

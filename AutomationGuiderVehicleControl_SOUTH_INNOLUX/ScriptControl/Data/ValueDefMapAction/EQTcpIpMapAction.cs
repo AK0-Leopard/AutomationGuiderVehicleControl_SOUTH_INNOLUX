@@ -478,6 +478,34 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             }
             return isSuccess;
         }
+        public override bool sned_Str27(ID_27_PARAMETERS_REQUEST send_gpp, out ID_127_PARAMETERS_RESPONSE receive_gpp)
+        {
+            bool isSuccess = false;
+            try
+            {
+
+                WrapperMessage wrapper = new WrapperMessage
+                {
+                    ID = WrapperMessage.ControlDataRepFieldNumber,
+                    ParametersReq = send_gpp
+                };
+                com.mirle.iibg3k0.ttc.Common.TrxTcpIp.ReturnCode result = snedRecv(wrapper, out receive_gpp, out string reason);
+                if (result == TrxTcpIp.ReturnCode.Normal)
+                {
+                    isSuccess = true;
+                }
+                else
+                {
+                    isSuccess = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception");
+                receive_gpp = null;
+            }
+            return isSuccess;
+        }
         public override bool send_Str31(ID_31_TRANS_REQUEST send_gpp, out ID_131_TRANS_RESPONSE receive_gpp, out string reason)
         {
             bool isSuccess = false;

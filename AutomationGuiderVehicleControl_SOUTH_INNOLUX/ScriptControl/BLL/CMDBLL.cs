@@ -1550,6 +1550,16 @@ namespace com.mirle.ibg3k0.sc.BLL
             return count != 0;
         }
 
+        public bool hasExcuteCMD_MCSNotFinish()
+        {
+            int count = 0;
+            using (DBConnection_EF con = DBConnection_EF.GetUContext())
+            {
+                count = cmd_mcsDao.getACMD_MCSIsUnfinishedCount(con);
+            }
+            return count > 0;
+        }
+
         #endregion CMD_MCS
 
         #region CMD_OHTC

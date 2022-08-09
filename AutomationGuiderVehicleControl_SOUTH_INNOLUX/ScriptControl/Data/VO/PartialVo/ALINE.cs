@@ -82,8 +82,11 @@ namespace com.mirle.ibg3k0.sc
             get { return hasSeriousAlarmHappend; }
             set
             {
+                if (hasSeriousAlarmHappend != value)
+                {
                     hasSeriousAlarmHappend = value;
                     OnPropertyChanged(BCFUtility.getPropertyName(() => this.HasSeriousAlarmHappend));
+                }
             }
         }
 
@@ -94,8 +97,11 @@ namespace com.mirle.ibg3k0.sc
             get { return hasWarningHappend; }
             set
             {
+                if (hasWarningHappend != value)
+                {
                     hasWarningHappend = value;
                     OnPropertyChanged(BCFUtility.getPropertyName(() => this.HasWarningHappend));
+                }
             }
         }
 

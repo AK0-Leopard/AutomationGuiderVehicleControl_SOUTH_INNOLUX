@@ -43,6 +43,10 @@ namespace com.mirle.ibg3k0.sc.Service
             line.addEventHandler(nameof(LineService), nameof(line.IsEarthquakeHappend), PublishLineInfo);
             line.addEventHandler(nameof(LineService), nameof(line.IsAlarmHappened), PublishLineInfo);
 
+            line.addEventHandler(nameof(LineService), nameof(line.HasSeriousAlarmHappend), CheckLightAndBuzzer);
+            line.addEventHandler(nameof(LineService), nameof(line.HasWarningHappend), CheckLightAndBuzzer);
+
+
             //line.addEventHandler(nameof(LineService), nameof(line.CurrntVehicleModeAutoRemoteCount), PublishLineInfo);
             //line.addEventHandler(nameof(LineService), nameof(line.CurrntVehicleModeAutoLoaclCount), PublishLineInfo);
             //line.addEventHandler(nameof(LineService), nameof(line.CurrntVehicleStatusIdelCount), PublishLineInfo);

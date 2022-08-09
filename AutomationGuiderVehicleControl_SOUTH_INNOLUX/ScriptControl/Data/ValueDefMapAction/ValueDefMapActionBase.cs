@@ -122,6 +122,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
         public virtual bool sned_Str19(ID_19_SCALE_DATA_REP send_gpp, out ID_119_SCALE_DATA_RESPONSE receive_gpp) { receive_gpp = null; return true; }
         public virtual bool sned_Str21(ID_21_CONTROL_DATA_REP send_gpp, out ID_121_CONTROL_DATA_RESPONSE receive_gpp) { receive_gpp = null; return true; }
         public virtual bool sned_Str23(ID_23_GUIDE_DATA_REP send_gpp, out ID_123_GUIDE_DATA_RESPONSE receive_gpp) { receive_gpp = null; return true; }
+        public virtual bool sned_Str27(ID_27_PARAMETERS_REQUEST send_gpp, out ID_127_PARAMETERS_RESPONSE receive_gpp) { receive_gpp = null; return true; }
 
         public virtual bool sned_Str61(ID_61_INDIVIDUAL_UPLOAD_REQ send_gpp, out ID_161_INDIVIDUAL_UPLOAD_RESPONSE receive_gpp) { receive_gpp = null; return true; }
         public virtual bool sned_Str63(ID_63_INDIVIDUAL_CHANGE_REQ send_gpp, out ID_163_INDIVIDUAL_CHANGE_RESPONSE receive_gpp) { receive_gpp = null; return true; }

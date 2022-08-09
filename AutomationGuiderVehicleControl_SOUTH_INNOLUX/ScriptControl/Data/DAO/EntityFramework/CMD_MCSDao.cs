@@ -271,6 +271,16 @@ namespace com.mirle.ibg3k0.sc.Data.DAO.EntityFramework
             return query.Count();
         }
 
+        public int getACMD_MCSIsUnfinishedCount(DBConnection_EF con)
+        {
+            var query = from cmd in con.ACMD_MCS
+                        where cmd.TRANSFERSTATE > E_TRAN_STATUS.Queue && cmd.TRANSFERSTATE <= E_TRAN_STATUS.Aborting
+                        && cmd.CHECKCODE.Trim() == SECSConst.HCACK_Confirm
+                        select cmd;
+
+            return query.Count();
+        }
+
 
     }
 

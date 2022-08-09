@@ -267,10 +267,22 @@ message Timestamp {
 	 uint32 TimeoutBlock = 9;				
 	 uint32 LoadInterlockErrorRetryTimes = 11;			
 	 uint32 UnloadInterlockErrorRetryTimes = 12;			
+	 uint32 BattryLowLevelValue = 13;			
+	 uint32 LoadingChargeInterval = 14;			
   }
    message ID_121_CONTROL_DATA_RESPONSE {
 	 int32 ReplyCode = 1;
   }
+
+   message ID_27_PARAMETERS_REQUEST{		
+  }
+   message ID_127_PARAMETERS_RESPONSE{
+	 uint32 LoadInterlockErrorRetryTimes = 11;			
+	 uint32 UnloadInterlockErrorRetryTimes = 12;			
+	 uint32 BattryLowLevelValue = 13;			
+	 uint32 LoadingChargeInterval = 14;			
+  }
+
 
     message ID_23_GUIDE_DATA_REP{
 	 uint32 StartStopSpd = 1;
@@ -546,8 +558,6 @@ message Timestamp {
 	double DirectionAngle = 28;
 	double VehicleAngle = 29;
 	double Speed = 30;
-	uint32 LoadInterlockErrorRetryTimes = 101;
-	uint32 UnloadInterlockErrorRetryTimes = 102;
   }
 
   message ID_144_STATUS_CHANGE_REP {
@@ -581,8 +591,6 @@ message Timestamp {
 	double DirectionAngle = 28;
 	double VehicleAngle = 29;
 	double Speed = 30;
-	uint32 LoadInterlockErrorRetryTimes = 101;
-	uint32 UnloadInterlockErrorRetryTimes = 102;
   }
 
   message ID_44_STATUS_CHANGE_RESPONSE {
@@ -986,6 +994,9 @@ message Timestamp {
 
 		ID_23_GUIDE_DATA_REP Guide_Data_Rep = 23;
 		ID_123_GUIDE_DATA_RESPONSE Guide_Data_Resp = 123;
+
+		ID_27_PARAMETERS_REQUEST Parameters_Req = 27;
+		ID_127_PARAMETERS_RESPONSE Parameters_Resp = 127;
 
 		ID_61_INDIVIDUAL_UPLOAD_REQ Individual_Upload_Req = 61;
 		ID_161_INDIVIDUAL_UPLOAD_RESPONSE Individual_Upload_Resp = 161;

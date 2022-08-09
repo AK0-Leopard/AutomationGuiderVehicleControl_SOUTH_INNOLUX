@@ -288,9 +288,11 @@ namespace com.mirle.ibg3k0.sc
         [JsonIgnore]
         public virtual bool IsPrepareAvoid { get; set; }
         [JsonIgnore]
-        public virtual uint LoadingInterlockErrorRetryTimes{ get; set; } = 0;
+        public virtual uint LoadingInterlockErrorRetryTimes { get; set; } = 0;
         [JsonIgnore]
-        public virtual uint UnloadingInterlockErrorRetryTimes{ get; set; } = 0;
+        public virtual uint UnloadingInterlockErrorRetryTimes { get; set; } = 0;
+        [JsonIgnore]
+        public virtual uint CurrentVhSettingOfBattryLowLevelValue { get; set; } = 0;
 
 
 
@@ -785,6 +787,12 @@ namespace com.mirle.ibg3k0.sc
             ValueDefMapActionBase mapAction = null;
             mapAction = getExcuteMapAction();
             return mapAction.sned_Str23(send_gpp, out receive_gpp);
+        }
+        public bool send_S27(ID_27_PARAMETERS_REQUEST send_gpp, out ID_127_PARAMETERS_RESPONSE receive_gpp)
+        {
+            ValueDefMapActionBase mapAction = null;
+            mapAction = getExcuteMapAction();
+            return mapAction.sned_Str27(send_gpp, out receive_gpp);
         }
 
 

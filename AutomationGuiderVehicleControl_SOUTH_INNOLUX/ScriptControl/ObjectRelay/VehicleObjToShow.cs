@@ -399,6 +399,15 @@ namespace com.mirle.ibg3k0.sc.ObjectRelay
                 NotifyPropertyChanged(BCFUtility.getPropertyName(() => this.UnloadingInterlockErrorRetryTimes));
             }
         }
+        public uint CurrentVhSettingOfBattryLowLevelValue
+        {
+            get { return vehicle.CurrentVhSettingOfBattryLowLevelValue; }
+            set
+            {
+                vehicle.CurrentVhSettingOfBattryLowLevelValue = value;
+                NotifyPropertyChanged(BCFUtility.getPropertyName(() => this.CurrentVhSettingOfBattryLowLevelValue));
+            }
+        }
         //[DisplayName("Cycle Zone ID")]
         //public string cYCLERUN_ID
         //{
