@@ -606,6 +606,60 @@ namespace com.mirle.ibg3k0.sc.WebAPI
                 response.ContentType = restfulContentType;
                 return response;
             };
+            Post["AVEHICLES/InstallStatusChange"] = (p) =>
+            {
+                string result = string.Empty;
+                SCApplication scApp = SCApplication.getInstance();
+                string vh_id = Request.Query.vh_id.Value ?? Request.Form.vh_id.Value ?? string.Empty;
+                string string_is_install = Request.Query.isInstall.Value ?? Request.Form.isInstall.Value ?? string.Empty;
+
+                bool is_change_to_installed = string_is_install.ToUpper().StartsWith(SCAppConstants.TRUE_FLAG);
+
+                try
+                {
+                    AVEHICLE vh = scApp.getEQObjCacheManager().getVehicletByVHID(vh_id);
+                    if (vh == null)
+                    {
+                        result = $"{vh_id} is not exist.";
+                    }
+                    else
+                    {
+                        (bool isSuccess, string result) check_result = default((bool isSuccess, string result));
+                        if(is_change_to_installed)
+                        {
+                            check_result = scApp.VehicleService.Install(vh.VEHICLE_ID);
+                            if (check_result.isSuccess)
+                            {
+                                result = $"{vh_id} is install success!";
+                            }
+                            else
+                            {
+                                result = $"{vh_id} is install fail,result:{check_result.result}";
+                            }
+                        }
+                        else
+                        {
+                            check_result = scApp.VehicleService.Remove(vh.VEHICLE_ID);
+                            if (check_result.isSuccess)
+                            {
+                                result = $"{vh_id} is remove success!";
+                            }
+                            else
+                            {
+                                result = $"{vh_id} is remove fail,result:{check_result.result}";
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result = $"{vh_id} is install exception happend,result:{ex}";
+                }
+
+                var response = (Response)result;
+                response.ContentType = restfulContentType;
+                return response;
+            };
 
             Post["AVEHICLES/ResetAlarm"] = (p) =>
             {

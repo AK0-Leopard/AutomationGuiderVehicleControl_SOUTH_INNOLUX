@@ -430,11 +430,13 @@ namespace com.mirle.ibg3k0.sc.Module
                     //1.如果N分鐘前，都沒有充飽過，就要等他充飽以後才可以再叫他回去工作
                     //if (ChargingVh.LAST_FULLY_CHARGED_TIME.HasValue &&
                     //   DateTime.Now > ChargingVh.LAST_FULLY_CHARGED_TIME?.AddMinutes(SystemParameter.TheLongestFullyChargedIntervalTime_Mim))
-                    if (!ChargingVh.LAST_FULLY_CHARGED_TIME.HasValue ||
-                       DateTime.Now > ChargingVh.LAST_FULLY_CHARGED_TIME?.AddMinutes(SystemParameter.TheLongestFullyChargedIntervalTime_Mim))
+                    //Now : 00:05,Last : 00:03 +15= 00:18 => 不需要長充電
+                    //if (!ChargingVh.LAST_FULLY_CHARGED_TIME.HasValue ||
+                    //   DateTime.Now > ChargingVh.LAST_FULLY_CHARGED_TIME?.AddMinutes(SystemParameter.TheLongestFullyChargedIntervalTime_Mim)) 
+                    if (ChargingVh.IsNeedToLongCharge()) 
                     {
                         if (ChargingVh.BatteryLevel == BatteryLevel.Full
-                            && ChargingVh.MODE_STATUS == VHModeStatus.AutoCharging)
+                          && ChargingVh.MODE_STATUS == VHModeStatus.AutoCharging)
                         {
                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleChargerModule), Device: DEVICE_NAME,
                                      Data: $"ask vh:{ChargingVh.VEHICLE_ID} recover to auto remmote " +

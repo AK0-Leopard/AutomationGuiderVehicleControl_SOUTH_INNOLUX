@@ -4112,6 +4112,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 List<AMCSREPORTQUEUE> reportqueues = new List<AMCSREPORTQUEUE>();
                 is_success = is_success && scApp.ReportBLL.newReportVehicleInstalled(vh_vo.Real_ID, reportqueues);
                 scApp.ReportBLL.newSendMCSMessage(reportqueues);
+                vh_vo.NotifyVhStatusChange();
                 return (true, "");
             }
             catch (Exception ex)
@@ -4159,6 +4160,8 @@ namespace com.mirle.ibg3k0.sc.Service
                 List<AMCSREPORTQUEUE> reportqueues = new List<AMCSREPORTQUEUE>();
                 is_success = is_success && scApp.ReportBLL.newReportVehicleRemoved(vh_vo.Real_ID, reportqueues);
                 scApp.ReportBLL.newSendMCSMessage(reportqueues);
+                vh_vo.NotifyVhStatusChange();
+
                 return (true, "");
             }
             catch (Exception ex)

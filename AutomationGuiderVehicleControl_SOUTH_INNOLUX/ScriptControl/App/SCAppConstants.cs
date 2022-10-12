@@ -150,6 +150,14 @@ namespace com.mirle.ibg3k0.sc.App
         /// The n o_ flag
         /// </summary>
         public static readonly string NO_FLAG = "N";
+        /// <summary>
+        /// The ye s_ flag
+        /// </summary>
+        public static readonly string TRUE_FLAG = "T";
+        /// <summary>
+        /// The n o_ flag
+        /// </summary>
+        public static readonly string FALSE_FLAG = "F";
 
         /// <summary>
         /// The o_ flag

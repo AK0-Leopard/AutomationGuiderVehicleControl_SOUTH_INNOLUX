@@ -681,9 +681,10 @@ namespace com.mirle.ibg3k0.sc
         }
         public bool IsNeedToLongCharge()
         {
-            return MODE_STATUS == VHModeStatus.AutoCharging &&
-                   LAST_FULLY_CHARGED_TIME.HasValue &&
-                   DateTime.Now > LAST_FULLY_CHARGED_TIME?.AddMinutes(SystemParameter.TheLongestFullyChargedIntervalTime_Mim);
+            return false;
+            //return MODE_STATUS == VHModeStatus.AutoCharging &&
+            //       LAST_FULLY_CHARGED_TIME.HasValue &&
+            //       DateTime.Now > LAST_FULLY_CHARGED_TIME?.AddMinutes(SystemParameter.TheLongestFullyChargedIntervalTime_Mim);
         }
 
         public bool IsLongTimeInstallCarrierHappend { get; set; } = false;

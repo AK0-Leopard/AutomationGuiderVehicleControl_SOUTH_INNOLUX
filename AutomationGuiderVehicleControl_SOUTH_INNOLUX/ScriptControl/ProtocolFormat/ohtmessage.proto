@@ -788,6 +788,8 @@ message Timestamp {
 	double X_Axis = 53;
 	double Y_Axis = 54;
 	repeated string ReservedSectionID = 55;
+
+	bool IS_INSTALL = 56;
   }
 
 

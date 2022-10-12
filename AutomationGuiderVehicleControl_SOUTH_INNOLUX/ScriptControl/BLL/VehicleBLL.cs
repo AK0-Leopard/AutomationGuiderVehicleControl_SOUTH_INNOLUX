@@ -2112,6 +2112,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                 BatteryTemperature = vh.BatteryTemperature,
                 XAxis = vh.X_Axis,
                 YAxis = vh.Y_Axis,
+                ISINSTALL = vh.IS_INSTALLED
             };
             if (vh.PredictSections != null)
                 vh_gpp.PredictPath.AddRange(vh.PredictSections);

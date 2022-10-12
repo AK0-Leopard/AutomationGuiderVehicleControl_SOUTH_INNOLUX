@@ -122,7 +122,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
                 comboBox_port14.SelectedIndex = 1;
             }
 
-            
+
 
             List<APORTSTATION> all_port_station = bcApp.SCApplication.PortStationBLL.OperateCatch.getAllPortStation();
             dgv_cache_object_data_portstation.DataSource = all_port_station;
@@ -385,9 +385,12 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             {
                 case "SOUTH_INNOLUX":
                 case "NORTH_INNOLUX":
-                    tb_CouplerStatus1.Text = unit.coupler1Status_NORTH_INNOLUX.ToString();
-                    tb_CouplerStatus2.Text = unit.coupler2Status_NORTH_INNOLUX.ToString();
-                    tb_CouplerStatus3.Text = unit.coupler3Status_NORTH_INNOLUX.ToString();
+                    //tb_CouplerStatus1.Text = unit.coupler1Status_NORTH_INNOLUX.ToString();
+                    //tb_CouplerStatus2.Text = unit.coupler2Status_NORTH_INNOLUX.ToString();
+                    //tb_CouplerStatus3.Text = unit.coupler3Status_NORTH_INNOLUX.ToString();
+                    tb_CouplerStatus1.Text = CouplerStatusConvert(unit.coupler1Status_NORTH_INNOLUX);
+                    tb_CouplerStatus2.Text = CouplerStatusConvert(unit.coupler2Status_NORTH_INNOLUX);
+                    tb_CouplerStatus3.Text = CouplerStatusConvert(unit.coupler3Status_NORTH_INNOLUX);
                     break;
                 default:
                     tb_CouplerStatus1.Text = unit.coupler1Status.ToString();
@@ -396,7 +399,36 @@ namespace com.mirle.ibg3k0.bc.winform.UI
                     break;
             }
         }
+        private string CouplerStatusConvert(SCAppConstants.CouplerStatus_NORTH_INNOLUX status)
+        {
+            if (Enum.IsDefined(typeof(SCAppConstants.CouplerStatus_NORTH_INNOLUX), status))
+            {
+                switch (status)
+                {
+                    case com.mirle.ibg3k0.sc.App.SCAppConstants.CouplerStatus_NORTH_INNOLUX.None:
+                        return "Disable";
+                    case com.mirle.ibg3k0.sc.App.SCAppConstants.CouplerStatus_NORTH_INNOLUX.Auto:
+                        return "Enable";
+                    case com.mirle.ibg3k0.sc.App.SCAppConstants.CouplerStatus_NORTH_INNOLUX.Error:
+                        return "Alarm";
+                    default:
+                        return status.ToString();
+                }
+            }
+            else
+            {
+                switch ((int)status)
+                {
+                    case 5: return "Close";
+                    case 6: return "Maintain";
+                    case 7: return "Pause";
+                    case 8: return "Wait";
+                    case 9: return "Stop";
+                    default: return status.ToString();
+                }
 
+            }
+        }
         private void cb_PIOCoupler_SelectedIndexChanged(object sender, EventArgs e)
         {
             AUNIT unit = bcApp.SCApplication.getEQObjCacheManager().getUnitByUnitID(cb_ChargerID.Text);

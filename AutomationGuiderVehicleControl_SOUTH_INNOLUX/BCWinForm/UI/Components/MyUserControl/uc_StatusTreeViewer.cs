@@ -101,12 +101,47 @@ namespace com.mirle.ibg3k0.bc.winform.UI.Components.MyUserControl
             string cherger_text = unit.UNIT_ID;
             //tNode = tNode.Nodes.Add(scenarioInfo.Name);
             tNode = tNode.Nodes.Add(cherger_text, cherger_text);
-            tNode.Nodes.Add(COUPLER_1, $"{COUPLER_1}({unit.ADR_ID_COUPLER_DISPLAY_ADR1}):{unit.coupler1Status_NORTH_INNOLUX}");
-            tNode.Nodes.Add(COUPLER_2, $"{COUPLER_2}({unit.ADR_ID_COUPLER_DISPLAY_ADR2}):{unit.coupler2Status_NORTH_INNOLUX}");
-            tNode.Nodes.Add(COUPLER_3, $"{COUPLER_3}({unit.ADR_ID_COUPLER_DISPLAY_ADR3}):{unit.coupler3Status_NORTH_INNOLUX}");
+            //tNode.Nodes.Add(COUPLER_1, $"{COUPLER_1}({unit.ADR_ID_COUPLER_DISPLAY_ADR1}):{unit.coupler1Status_NORTH_INNOLUX}");
+            //tNode.Nodes.Add(COUPLER_2, $"{COUPLER_2}({unit.ADR_ID_COUPLER_DISPLAY_ADR2}):{unit.coupler2Status_NORTH_INNOLUX}");
+            //tNode.Nodes.Add(COUPLER_3, $"{COUPLER_3}({unit.ADR_ID_COUPLER_DISPLAY_ADR3}):{unit.coupler3Status_NORTH_INNOLUX}");
+            tNode.Nodes.Add(COUPLER_1, $"{COUPLER_1}({unit.ADR_ID_COUPLER_DISPLAY_ADR1}):{CouplerStatusConvert(unit.coupler1Status_NORTH_INNOLUX)}");
+            tNode.Nodes.Add(COUPLER_2, $"{COUPLER_2}({unit.ADR_ID_COUPLER_DISPLAY_ADR2}):{CouplerStatusConvert(unit.coupler2Status_NORTH_INNOLUX)}");
+            tNode.Nodes.Add(COUPLER_3, $"{COUPLER_3}({unit.ADR_ID_COUPLER_DISPLAY_ADR3}):{CouplerStatusConvert(unit.coupler3Status_NORTH_INNOLUX)}");
             tNode.Tag = unit;
             return tNode;
         }
+
+        private string CouplerStatusConvert(sc.App.SCAppConstants.CouplerStatus_NORTH_INNOLUX status)
+        {
+            if (Enum.IsDefined(typeof(sc.App.SCAppConstants.CouplerStatus_NORTH_INNOLUX), status))
+            {
+                switch (status)
+                {
+                    case com.mirle.ibg3k0.sc.App.SCAppConstants.CouplerStatus_NORTH_INNOLUX.None:
+                        return "Disable";
+                    case com.mirle.ibg3k0.sc.App.SCAppConstants.CouplerStatus_NORTH_INNOLUX.Auto:
+                        return "Enable";
+                    case com.mirle.ibg3k0.sc.App.SCAppConstants.CouplerStatus_NORTH_INNOLUX.Error:
+                        return "Alarm";
+                    default:
+                        return status.ToString();
+                }
+            }
+            else
+            {
+                switch ((int)status)
+                {
+                    case 5: return "Close";
+                    case 6: return "Maintain";
+                    case 7: return "Pause";
+                    case 8: return "Wait";
+                    case 9: return "Stop";
+                    default: return status.ToString();
+                }
+
+            }
+        }
+
         const string TSC_STATE = "TSCStats";
         private TreeNode TSCState2TreeNode(sc.ALINE line)
         {
@@ -150,9 +185,12 @@ namespace com.mirle.ibg3k0.bc.winform.UI.Components.MyUserControl
             {
                 TreeNode node = node_obj as TreeNode;
                 var charger = node.Tag as sc.AUNIT;
-                node.Nodes[COUPLER_1].Text = $"{COUPLER_1}({charger.ADR_ID_COUPLER_DISPLAY_ADR1}):{charger.coupler1Status_NORTH_INNOLUX}";
-                node.Nodes[COUPLER_2].Text = $"{COUPLER_2}({charger.ADR_ID_COUPLER_DISPLAY_ADR2}):{charger.coupler2Status_NORTH_INNOLUX}";
-                node.Nodes[COUPLER_3].Text = $"{COUPLER_3}({charger.ADR_ID_COUPLER_DISPLAY_ADR3}):{charger.coupler3Status_NORTH_INNOLUX}";
+                //node.Nodes[COUPLER_1].Text = $"{COUPLER_1}({charger.ADR_ID_COUPLER_DISPLAY_ADR1}):{charger.coupler1Status_NORTH_INNOLUX}";
+                //node.Nodes[COUPLER_2].Text = $"{COUPLER_2}({charger.ADR_ID_COUPLER_DISPLAY_ADR2}):{charger.coupler2Status_NORTH_INNOLUX}";
+                //node.Nodes[COUPLER_3].Text = $"{COUPLER_3}({charger.ADR_ID_COUPLER_DISPLAY_ADR3}):{charger.coupler3Status_NORTH_INNOLUX}";
+                node.Nodes[COUPLER_1].Text = $"{COUPLER_1}({charger.ADR_ID_COUPLER_DISPLAY_ADR1}):{CouplerStatusConvert(charger.coupler1Status_NORTH_INNOLUX)}";
+                node.Nodes[COUPLER_2].Text = $"{COUPLER_2}({charger.ADR_ID_COUPLER_DISPLAY_ADR2}):{CouplerStatusConvert(charger.coupler2Status_NORTH_INNOLUX)}";
+                node.Nodes[COUPLER_3].Text = $"{COUPLER_3}({charger.ADR_ID_COUPLER_DISPLAY_ADR3}):{CouplerStatusConvert(charger.coupler3Status_NORTH_INNOLUX)}";
             }
 
             var agvc_status_node = treeView.Nodes[NODE_AGVC_STATUS];
