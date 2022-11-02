@@ -51,6 +51,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             cb_advanceDriveAway.Checked = DebugParameter.AdvanceDriveAway;
             cb_passCouplerHPSafetySingnal.Checked = DebugParameter.isPassCouplerHPSafetySignal;
             ck_isMaunalReportFinishWhenLoadingUnloading.Checked = DebugParameter.isManualReportCommandFinishWhenLoadingUnloading;
+            cb_byPassEarthQuakeSignal.Checked = DebugParameter.ByPassEarthquakeSignal;
 
 
             List<string> lstVh = new List<string>();
@@ -1639,5 +1640,9 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             vr.Value = new int[1] { 1 };
         }
 
+        private void cb_byPassEarthQuakeSignal_CheckedChanged(object sender, EventArgs e)
+        {
+            DebugParameter.ByPassEarthquakeSignal = cb_byPassEarthQuakeSignal.Checked;
+        }
     }
 }

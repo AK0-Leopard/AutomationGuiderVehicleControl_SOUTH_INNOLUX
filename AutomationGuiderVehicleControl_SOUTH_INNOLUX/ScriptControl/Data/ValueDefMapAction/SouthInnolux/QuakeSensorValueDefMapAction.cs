@@ -129,14 +129,19 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                             mtl_mapaction.AGVCToMChargerAllChargerChargingFinish();
                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(QuakeSensorValueDefMapAction), Device: DEVICE_NAME_QUAKE_SENSOR,
                                      Data: "Earthquake happend,end pause vh and force finish charger charging ");
+                            
+                            scApp.LineService.ProcessAlarmReport(eqpt.EQPT_ID, BLL.AlarmBLL.EarthquakeIsHappening, ErrorStatus.ErrSet, $"Earthquake is happening");
+                            BCFApplication.onWarningMsg($"Earthquake is happening");
 
                         }
                         else
                         {
-                            foreach (var v in vhs)
-                            {
-                                scApp.VehicleService.PauseRequest(v.VEHICLE_ID, PauseEvent.Continue, SCAppConstants.OHxCPauseType.Normal);
-                            }
+                            scApp.LineService.ProcessAlarmReport(eqpt.EQPT_ID, BLL.AlarmBLL.EarthquakeIsHappening, ErrorStatus.ErrReset, $"Earthquake is happening");
+
+                            //foreach (var v in vhs)
+                            //{
+                            //    scApp.VehicleService.PauseRequest(v.VEHICLE_ID, PauseEvent.Continue, SCAppConstants.OHxCPauseType.Normal);
+                            //}
                         }
                     }
                 }

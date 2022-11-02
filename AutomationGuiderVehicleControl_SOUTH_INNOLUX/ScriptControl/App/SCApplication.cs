@@ -2205,5 +2205,8 @@ namespace com.mirle.ibg3k0.sc.App
         public static Boolean isManualReportCommandFinishWhenLoadingUnloading = true;
         public static int InterlockErrorMaxRetryCount = 3;
 
+        public static bool ByPassEarthquakeSignal = false;
+
+
     }
 }

@@ -1002,9 +1002,17 @@ namespace com.mirle.ibg3k0.sc.BLL
             {
                 try
                 {
+                    ALINE line = scApp.getEQObjCacheManager().getLine();
                     if (scApp.getEQObjCacheManager().getLine().ServiceMode
                         != SCAppConstants.AppServiceMode.Active)
                         return;
+                    if (line.IsEarthquakeHappend)
+                    {
+                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(CMDBLL), Device: string.Empty,
+                                      Data: $"Is earth quake happend. by pass this transfer scan");
+                        return;
+                    }
+
                     List<ACMD_MCS> unfinish_mcs_cmd = scApp.CMDBLL.loadACMD_MCSIsUnfinished();
                     refreshACMD_MCSInfoList(unfinish_mcs_cmd);
                     scApp.getEQObjCacheManager().getLine().CurrentExcuteACMD_MCS = unfinish_mcs_cmd;

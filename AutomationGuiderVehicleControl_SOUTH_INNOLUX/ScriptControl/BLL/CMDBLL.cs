@@ -1030,10 +1030,10 @@ namespace com.mirle.ibg3k0.sc.BLL
             {
                 try
                 {
+                    ALINE line = scApp.getEQObjCacheManager().getLine();
                     if (scApp.getEQObjCacheManager().getLine().ServiceMode
                         != SCAppConstants.AppServiceMode.Active)
                         return;
-
                     //if (scApp.getEQObjCacheManager().getLine().SCStats != ALINE.TSCState.AUTO)
                     //    return;
                     //if (DebugParameter.CanAutoRandomGeneratesCommand || scApp.getEQObjCacheManager().getLine().SCStats == ALINE.TSCState.AUTO)

@@ -74,6 +74,14 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
             {
                 try
                 {
+                    ALINE line = scApp.getEQObjCacheManager().getLine();
+                    if (line.IsEarthquakeHappend)
+                    {
+                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(CouplerCheckTimerAction), Device: string.Empty,
+                                      Data: $"Is earth quake happend. by pass this charge process");
+                        return;
+                    }
+
                     scApp.VehicleChargerModule.CouplerTimingCheck();
                 }
                 catch (Exception ex)

@@ -106,19 +106,19 @@ namespace com.mirle.ibg3k0.sc.Common
                         ($"{vh_id} is {recent_tran_event} for a long time,current sec id [{current_sec_id}].");
                     break;
                 case SCAppConstants.REDIS_EVENT_CODE_EARTHQUAKE_ON:
-                    string[] earthquake_info = getMessageList(messageValue);
-                    bool isHappend = bool.Parse(earthquake_info[0]);
-                    ALINE line = app.getEQObjCacheManager().getLine();
-                    line.IsEarthquakeHappend = isHappend;
-                    if (isHappend)
-                    {
-                        bcf.App.BCFApplication.onErrorMsg("An earthquake has occurred !!!");
-                        app.VehicleService.PauseAllVehicleByOHxCPause();
-                    }
-                    else
-                    {
-                        app.VehicleService.ResumeAllVehicleByOhxCPause();
-                    }
+                    //string[] earthquake_info = getMessageList(messageValue);
+                    //bool isHappend = bool.Parse(earthquake_info[0]);
+                    //ALINE line = app.getEQObjCacheManager().getLine();
+                    //line.IsEarthquakeHappend = isHappend;
+                    //if (isHappend)
+                    //{
+                    //    bcf.App.BCFApplication.onErrorMsg("An earthquake has occurred !!!");
+                    //    app.VehicleService.PauseAllVehicleByOHxCPause();
+                    //}
+                    //else
+                    //{
+                    //    app.VehicleService.ResumeAllVehicleByOhxCPause();
+                    //}
                     break;
                 case SCAppConstants.REDIS_EVENT_CODE_ADVANCE_NOTICE_OBSTRUCTED_VH:
                     string[] obstructed_vh_info = getMessageList(messageValue);
@@ -205,20 +205,20 @@ namespace com.mirle.ibg3k0.sc.Common
                         ($"{vh_id} is {recent_tran_event} for a long time,current sec id [{current_sec_id}].");
                     break;
                 case SCAppConstants.REDIS_EVENT_CODE_EARTHQUAKE_ON:
-                    string[] earthquake_info = getMessageList(messageValue);
-                    bool isHappend = bool.Parse(earthquake_info[0]);
-                    ALINE line = app.getEQObjCacheManager().getLine();
-                    line.IsEarthquakeHappend = isHappend;
-                    if (isHappend)
-                    {
-                        bcf.App.BCFApplication.onErrorMsg("An earthquake has occurred !!!");
-                        app.VehicleService.PauseAllVehicleByOHxCPause();
-                    }
-                    else
-                    {
-                        app.VehicleService.ResumeAllVehicleByOhxCPause();
-                    }
-                    break;
+                    //string[] earthquake_info = getMessageList(messageValue);
+                    //bool isHappend = bool.Parse(earthquake_info[0]);
+                    //ALINE line = app.getEQObjCacheManager().getLine();
+                    //line.IsEarthquakeHappend = isHappend;
+                    //if (isHappend)
+                    //{
+                    //    bcf.App.BCFApplication.onErrorMsg("An earthquake has occurred !!!");
+                    //    app.VehicleService.PauseAllVehicleByOHxCPause();
+                    //}
+                    //else
+                    //{
+                    //    app.VehicleService.ResumeAllVehicleByOhxCPause();
+                    //}
+                    //break;
                 case SCAppConstants.REDIS_EVENT_CODE_ADVANCE_NOTICE_OBSTRUCTED_VH:
                     string[] obstructed_vh_info = getMessageList(messageValue);
                     string obstructed_vh = vh_id;

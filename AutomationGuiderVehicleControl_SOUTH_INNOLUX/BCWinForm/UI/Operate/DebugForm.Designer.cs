@@ -350,6 +350,7 @@
             this.label85 = new System.Windows.Forms.Label();
             this.label86 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.cb_byPassEarthQuakeSignal = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1354,6 +1355,7 @@
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.cb_byPassEarthQuakeSignal);
             this.tabPage1.Controls.Add(this.ck_isMaunalReportFinishWhenLoadingUnloading);
             this.tabPage1.Controls.Add(this.cb_advanceDriveAway);
             this.tabPage1.Controls.Add(this.grb_Reserve);
@@ -1585,7 +1587,7 @@
             // 
             this.cb_Cache_data_Name.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cb_Cache_data_Name.FormattingEnabled = true;
-            this.cb_Cache_data_Name.Location = new System.Drawing.Point(210, 3);
+            this.cb_Cache_data_Name.Location = new System.Drawing.Point(210, 8);
             this.cb_Cache_data_Name.Name = "cb_Cache_data_Name";
             this.cb_Cache_data_Name.Size = new System.Drawing.Size(164, 30);
             this.cb_Cache_data_Name.TabIndex = 1;
@@ -3784,6 +3786,17 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // cb_byPassEarthQuakeSignal
+            // 
+            this.cb_byPassEarthQuakeSignal.AutoSize = true;
+            this.cb_byPassEarthQuakeSignal.Location = new System.Drawing.Point(1131, 620);
+            this.cb_byPassEarthQuakeSignal.Name = "cb_byPassEarthQuakeSignal";
+            this.cb_byPassEarthQuakeSignal.Size = new System.Drawing.Size(193, 26);
+            this.cb_byPassEarthQuakeSignal.TabIndex = 29;
+            this.cb_byPassEarthQuakeSignal.Text = "By pass 地震訊號";
+            this.cb_byPassEarthQuakeSignal.UseVisualStyleBackColor = true;
+            this.cb_byPassEarthQuakeSignal.CheckedChanged += new System.EventHandler(this.cb_byPassEarthQuakeSignal_CheckedChanged);
+            // 
             // DebugForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
@@ -4196,5 +4209,6 @@
         private System.Windows.Forms.CheckBox ck_isMaunalReportFinishWhenLoadingUnloading;
         private System.Windows.Forms.Button btn_initial_test;
         private System.Windows.Forms.Button btn_quake_test;
+        private System.Windows.Forms.CheckBox cb_byPassEarthQuakeSignal;
     }
 }

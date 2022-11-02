@@ -193,7 +193,16 @@ namespace com.mirle.ibg3k0.sc
         [BaseElement(NonChangeFromOtherVO = true)]
         public virtual bool IsEarthquakeHappend
         {
-            get { return isearthquakehappend; }
+            get
+            {
+                if(DebugParameter.ByPassEarthquakeSignal)
+                {
+                    LogHelper.Log(logger: NLog.LogManager.GetCurrentClassLogger(), LogLevel: LogLevel.Info, Class: nameof(CMDBLL), Device: string.Empty,
+                                  Data: $"Earth quake signal is by pass ");
+                    return false;
+                }
+                return isearthquakehappend;
+            }
             set
             {
                 if (isearthquakehappend != value)
