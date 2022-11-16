@@ -65,7 +65,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 vh.TimerActionStart();
                 vh.LongTimeNoCommuncation += Vh_LongTimeNoCommuncation;
                 vh.LongTimeInaction += Vh_LongTimeInaction;
-                //vh.LongTimeDisconnection += Vh_LongTimeDisconnection;
+                vh.LongTimeDisconnection += Vh_LongTimeDisconnection;
                 vh.ModeStatusChange += Vh_ModeStatusChange;
                 vh.LongTimeCarrierInstalled += Vh_LongTimeCarrierInstalled;
             }
@@ -136,21 +136,28 @@ namespace com.mirle.ibg3k0.sc.Service
         }
 
 
-        private void Vh_LongTimeDisconnection(object sender, EventArgs e)
+        private void Vh_LongTimeDisconnection(object sender, bool isLongTimeDisconnection)
         {
             AVEHICLE vh = sender as AVEHICLE;
             if (vh == null) return;
             try
             {
-                vh.stopVehicleTimer();
+                //vh.stopVehicleTimer();
                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                    Data: $"Process vehicle long time disconnection",
                    VehicleID: vh.VEHICLE_ID,
                    CarrierID: vh.CST_ID);
 
-                //要再上報Alamr Rerport給MCS
-                if (vh.IS_INSTALLED)
-                    ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrSet, $"vehicle cannot service");
+                if (isLongTimeDisconnection)
+                {
+                    //要再上報Alamr Rerport給MCS
+                    if (vh.IS_INSTALLED)
+                        ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrSet, $"vehicle cannot service");
+                }
+                else
+                {
+                    ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrReset, $"vehicle cannot service");
+                }
             }
             catch (Exception ex)
             {
@@ -2197,6 +2204,7 @@ namespace com.mirle.ibg3k0.sc.Service
 
         private void TranEventReportLoadingUnloading(BCFApplication bcfApp, AVEHICLE eqpt, int seq_num, EventType eventType)
         {
+
             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                Data: $"Process report {eventType}",
                VehicleID: eqpt.VEHICLE_ID,
@@ -4035,7 +4043,7 @@ namespace com.mirle.ibg3k0.sc.Service
             //scApp.getEQObjCacheManager().refreshVh(eqpt.VEHICLE_ID);
             vh.VhRecentTranEvent = EventType.AdrPass;
             vh.isTcpIpConnect = true;
-            vh.startVehicleTimer();
+            //vh.startVehicleTimer();
 
             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                Data: "Connection ! Begin synchronize with vehicle...",

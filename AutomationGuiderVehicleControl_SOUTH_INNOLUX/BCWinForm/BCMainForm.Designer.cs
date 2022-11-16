@@ -729,6 +729,7 @@ namespace com.mirle.ibg3k0.bc.winform
         private System.Windows.Forms.ToolStripMenuItem tipMessageToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem monitorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem communectionStatusToolStripMenuItem;
+        [AuthorityCheck(FUNCode = BCAppConstants.FUNC_ENGINEER_FUN)]
         private System.Windows.Forms.ToolStripMenuItem engineerToolStripMenuItem;
         //[AuthorityCheck(FUNCode = BCAppConstants.FUNC_ENGINEER_FUN)]
         private System.Windows.Forms.ToolStripMenuItem engineerToolStripMenuItem1;

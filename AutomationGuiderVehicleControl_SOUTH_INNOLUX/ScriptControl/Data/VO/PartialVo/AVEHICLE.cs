@@ -69,6 +69,7 @@ namespace com.mirle.ibg3k0.sc
         public static UInt16 BATTERYLEVELVALUE_MIDDLE { get; private set; } = 65;
         //public static UInt16 BATTERYLEVELVALUE_LOW { get; private set; } = 50;
         public static UInt16 BATTERYLEVELVALUE_LOW { get { return SystemParameter.VehicleBatteryLowBoundaryValue; } }
+        public static UInt16 URGENT_BATTERY_LEVEL = 30;
 
         /// <summary>
         /// 在一次的Reserve要不到的過程中，最多可以Override失敗的次數
@@ -100,9 +101,10 @@ namespace com.mirle.ibg3k0.sc
         public event EventHandler<BatteryLevel> BatteryLevelChange;
         public event EventHandler LongTimeNoCommuncation;
         public event EventHandler<string> LongTimeInaction;
-        public event EventHandler LongTimeDisconnection;
+        public event EventHandler<bool> LongTimeDisconnection;
         public event EventHandler<VHModeStatus> ModeStatusChange;
         public event EventHandler<LongTimeCarrierInstalledStatusChangeEventArgs> LongTimeCarrierInstalled;
+        public event EventHandler<bool> UrgentBatteryLevelHappend;
 
         VehicleTimerAction vehicleTimer = null;
 
@@ -193,9 +195,13 @@ namespace com.mirle.ibg3k0.sc
         {
             LongTimeInaction?.Invoke(this, cmdID);
         }
-        public void onLongTimeDisConnection()
+        public void onLongTimeDisConnection(bool isLongTimeDisconnection)
         {
-            LongTimeDisconnection?.Invoke(this, EventArgs.Empty);
+            LongTimeDisconnection?.Invoke(this, isLongTimeDisconnection);
+        }
+        public void onUrgentBatteryLevelHappend(bool isUrgentBatteryLevelHappend)
+        {
+            UrgentBatteryLevelHappend?.Invoke(this, isUrgentBatteryLevelHappend);
         }
         public void onModeStatusChange(VHModeStatus modeStatus)
         {
@@ -514,6 +520,35 @@ namespace com.mirle.ibg3k0.sc
                     sw_speed.Restart();
                     istcpipconnect = value;
                     OnPropertyChanged(BCFUtility.getPropertyName(() => this.isTcpIpConnect), VEHICLE_ID);
+                }
+            }
+        }
+
+        private bool islongtimedisconnection;
+        [BaseElement(NonChangeFromOtherVO = true)]
+        public virtual bool isLongTimeDisconnection
+        {
+            get { return islongtimedisconnection; }
+            set
+            {
+                if (islongtimedisconnection != value)
+                {
+                    islongtimedisconnection = value;
+                    onLongTimeDisConnection(value);
+                }
+            }
+        }
+        private bool isurgentbatterylevelhappend;
+        [BaseElement(NonChangeFromOtherVO = true)]
+        public virtual bool isUrgentBatteryLevelHappend
+        {
+            get { return isurgentbatterylevelhappend; }
+            set
+            {
+                if (isurgentbatterylevelhappend != value)
+                {
+                    isurgentbatterylevelhappend = value;
+                    onUrgentBatteryLevelHappend(value);
                 }
             }
         }
@@ -1650,8 +1685,22 @@ namespace com.mirle.ibg3k0.sc
                         double disconnection_time = vh.getDisconnectionIntervalTime(scApp.getBCFApplication());
                         if (disconnection_time > AVEHICLE.MAX_ALLOW_NO_CONNECTION_TIME_SECOND)
                         {
-                            vh.onLongTimeDisConnection();
+                            vh.isLongTimeDisconnection = true;
                         }
+                        else
+                        {
+                            vh.isLongTimeDisconnection = false;
+                        }
+
+                        if (vh.BatteryCapacity < AVEHICLE.URGENT_BATTERY_LEVEL)
+                        {
+                            vh.isUrgentBatteryLevelHappend = true;
+                        }
+                        else
+                        {
+                            vh.isUrgentBatteryLevelHappend = false;
+                        }
+
 
                         checkHasCSTAbnormalInstallStatus();
                         //double carrier_abnormal_installed_time = vh.CarrierInstalledTime.Elapsed.TotalSeconds;

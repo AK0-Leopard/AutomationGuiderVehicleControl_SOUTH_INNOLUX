@@ -324,6 +324,12 @@ namespace com.mirle.ibg3k0.bc.winform.UI
 
         private void btn_start_Click(object sender, EventArgs e)
         {
+            ALINE line = scApp.getEQObjCacheManager().getLine();
+            if (line.IsEarthquakeHappend)
+            {
+                MessageBox.Show("Current earthquake happending,can't creat command", "Command create fail.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             E_CMD_TYPE cmd_type;
             Enum.TryParse<E_CMD_TYPE>(cbm_Action.SelectedValue.ToString(), out cmd_type);
             switch (cmd_type)

@@ -109,12 +109,44 @@ namespace com.mirle.ibg3k0.sc.Service
                 vh.TimerActionStart();
                 vh.LongTimeNoCommuncation += Vh_LongTimeNoCommuncation;
                 vh.LongTimeInaction += Vh_LongTimeInaction;
-                //vh.LongTimeDisconnection += Vh_LongTimeDisconnection;
+                vh.LongTimeDisconnection += Vh_LongTimeDisconnection;
                 vh.ModeStatusChange += Vh_ModeStatusChange;
                 vh.LongTimeCarrierInstalled += Vh_LongTimeCarrierInstalled;
+                vh.UrgentBatteryLevelHappend += Vh_UrgentBatteryLevelHappend; ;
             }
             scApp.LineService.VehicleParametersChanged += LineService_VehicleParametersChanged;
             oneDirectPath();
+        }
+
+        private void Vh_UrgentBatteryLevelHappend(object sender, bool isUrgentBatteryLevelHappend)
+        {
+            AVEHICLE vh = sender as AVEHICLE;
+            if (vh == null) return;
+            try
+            {
+                //vh.stopVehicleTimer();
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"Process vehicle Urgent Battery Level Happend,isUrgentBatteryLevelHappend:{isUrgentBatteryLevelHappend}",
+                   VehicleID: vh.VEHICLE_ID,
+                   CarrierID: vh.CST_ID);
+
+                if (isUrgentBatteryLevelHappend)
+                {
+                    ProcessAlarmReport(vh, AlarmBLL.VEHICLE_URGENT_BATTERY_LEVEL_HAPPEND, ErrorStatus.ErrSet, $"vehicle is low battery, please pay your attention");
+                }
+                else
+                {
+                    ProcessAlarmReport(vh, AlarmBLL.VEHICLE_URGENT_BATTERY_LEVEL_HAPPEND, ErrorStatus.ErrReset, $"vehicle is low battery, please pay your attention");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Warn, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: ex,
+                   VehicleID: vh.VEHICLE_ID,
+                   CarrierID: vh.CST_ID);
+            }
         }
 
         private void LineService_VehicleParametersChanged(object sender, EventArgs e)
@@ -223,21 +255,29 @@ namespace com.mirle.ibg3k0.sc.Service
             }
         }
 
-        private void Vh_LongTimeDisconnection(object sender, EventArgs e)
+        private void Vh_LongTimeDisconnection(object sender, bool isLongTimeDisconnectionHappending)
         {
             AVEHICLE vh = sender as AVEHICLE;
             if (vh == null) return;
             try
             {
-                vh.stopVehicleTimer();
+                //vh.stopVehicleTimer();
                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                    Data: $"Process vehicle long time disconnection",
                    VehicleID: vh.VEHICLE_ID,
                    CarrierID: vh.CST_ID);
 
-                //要再上報Alamr Rerport給MCS
-                if (vh.IS_INSTALLED)
-                    ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrSet, $"vehicle cannot service");
+                if (isLongTimeDisconnectionHappending)
+                {
+                    //要再上報Alamr Rerport給MCS
+                    if (vh.IS_INSTALLED)
+                        ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrSet, $"vehicle cannot service");
+                }
+                else
+                {
+                    ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrReset, $"vehicle cannot service");
+                }
+
             }
             catch (Exception ex)
             {
@@ -445,9 +485,6 @@ namespace com.mirle.ibg3k0.sc.Service
                 //var vh_Serialize = ZeroFormatter.ZeroFormatterSerializer.Serialize(vh);
                 //RecoderTESTLog(vh_Serialize, target_log_TEST_ZeroFormatter);
 
-                Task.Run(() => scApp.FlexsimCommandDao.setVhStatusToFlexsimDB(vh_id, vh.CUR_ADR_ID, vh.ACC_SEC_DIST, vh.VhRecentTranEvent, vh.CST_ID,
-                                                               vh.MODE_STATUS, vh.ACT_STATUS, vh.OBS_PAUSE, vh.BLOCK_PAUSE, vh.CMD_PAUSE,
-                                                               vh.HID_PAUSE, vh.ERROR, vh.EARTHQUAKE_PAUSE, vh.SAFETY_DOOR_PAUSE));
 
                 scApp.getNatsManager().PublishAsync
                     (string.Format(SCAppConstants.NATS_SUBJECT_VH_INFO_0, vh.VEHICLE_ID.Trim()), vh_Serialize);
@@ -3322,6 +3359,7 @@ namespace com.mirle.ibg3k0.sc.Service
             VhStopSingle pauseStat = recive_str.PauseStatus;
             VhStopSingle errorStat = recive_str.ErrorStatus;
             VhLoadCSTStatus loadCSTStatus = recive_str.HasCST;
+            VhChargeStatus ChargeStatus = recive_str.ChargeStatus;
             int obstacleDIST = recive_str.ObstDistance;
             string obstacleVhID = recive_str.ObstVehicleID;
             int steeringWheel = recive_str.SteeringWheel;
@@ -3355,6 +3393,10 @@ namespace com.mirle.ibg3k0.sc.Service
             if (eqpt.RESERVE_PAUSE != reserveStatus)
             {
                 scApp.VehicleBLL.cache.SetReservePause(eqpt.VEHICLE_ID, reserveStatus);
+            }
+            if (eqpt.ChargeStatus != ChargeStatus)
+            {
+                scApp.VehicleBLL.cache.SetChargeStatus(eqpt.VEHICLE_ID, ChargeStatus);
             }
             if (hasdifferent && !scApp.VehicleBLL.doUpdateVehicleStatus(eqpt,
                                    cstID, modeStat, actionStat,
@@ -4111,7 +4153,7 @@ namespace com.mirle.ibg3k0.sc.Service
             //scApp.getEQObjCacheManager().refreshVh(eqpt.VEHICLE_ID);
             vh.VhRecentTranEvent = EventType.AdrPass;
             vh.isTcpIpConnect = true;
-            vh.startVehicleTimer();
+            //vh.startVehicleTimer();
 
             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                Data: "Connection ! Begin synchronize with vehicle...",

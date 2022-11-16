@@ -173,13 +173,13 @@ namespace com.mirle.ibg3k0.sc.Service
             }
         }
 
-        private void Vh_LongTimeDisconnection(object sender, EventArgs e)
+        private void Vh_LongTimeDisconnection(object sender, bool e)
         {
             AVEHICLE vh = sender as AVEHICLE;
             if (vh == null) return;
             try
             {
-                vh.stopVehicleTimer();
+                //vh.stopVehicleTimer();
                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                    Data: $"Process vehicle long time disconnection",
                    VehicleID: vh.VEHICLE_ID,
@@ -4267,7 +4267,7 @@ namespace com.mirle.ibg3k0.sc.Service
             //scApp.getEQObjCacheManager().refreshVh(eqpt.VEHICLE_ID);
             vh.VhRecentTranEvent = EventType.AdrPass;
             vh.isTcpIpConnect = true;
-            vh.startVehicleTimer();
+            //vh.startVehicleTimer();
 
             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                Data: "Connection ! Begin synchronize with vehicle...",

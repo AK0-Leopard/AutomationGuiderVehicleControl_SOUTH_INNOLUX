@@ -282,6 +282,11 @@ namespace com.mirle.ibg3k0.sc.WebAPI
                 string result = string.Empty;
                 try
                 {
+                    ALINE line = scApp.getEQObjCacheManager().getLine();
+                    if (line.IsEarthquakeHappend)
+                    {
+                        return (Response)"Current earthquake happending,can't creat command";
+                    }
                     ACMD_OHTC cmd_obj = null;
                     AVEHICLE assignVH = null;
 

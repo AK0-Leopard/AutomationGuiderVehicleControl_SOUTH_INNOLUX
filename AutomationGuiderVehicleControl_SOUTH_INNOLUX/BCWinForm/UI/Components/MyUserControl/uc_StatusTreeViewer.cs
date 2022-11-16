@@ -136,6 +136,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.Components.MyUserControl
                     case 7: return "Pause";
                     case 8: return "Wait";
                     case 9: return "Stop";
+                    case 10: return "Interlock";
                     default: return status.ToString();
                 }
 
