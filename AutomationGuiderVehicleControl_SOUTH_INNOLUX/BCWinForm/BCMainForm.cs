@@ -1222,6 +1222,18 @@ namespace com.mirle.ibg3k0.bc.winform
         {
             openForm(typeof(ECDataEdit_Form).Name, true, false);
         }
+
+        private void notifyIcon1_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
+            this.WindowState = FormWindowState.Maximized;
+            this.Activate();
+        }
     }
 
     public delegate void MouseMovedEvent();

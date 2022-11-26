@@ -97,6 +97,7 @@ namespace com.mirle.ibg3k0.bc.winform
             this.roadControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.chargerControlToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cycleRunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.equipmentConstantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reserveSectionInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.languageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,10 +119,14 @@ namespace com.mirle.ibg3k0.bc.winform
             this.engineeringModeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.logout_timer = new System.Windows.Forms.Timer(this.components);
-            this.equipmentConstantToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.cmsNotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1.SuspendLayout();
             this.CMS_OnLineMode.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.cmsNotifyIcon.SuspendLayout();
             this.SuspendLayout();
             // 
             // startConnectionToolStripMenuItem
@@ -448,6 +453,12 @@ namespace com.mirle.ibg3k0.bc.winform
             resources.ApplyResources(this.cycleRunToolStripMenuItem, "cycleRunToolStripMenuItem");
             this.cycleRunToolStripMenuItem.Click += new System.EventHandler(this.cycleRunToolStripMenuItem_Click);
             // 
+            // equipmentConstantToolStripMenuItem
+            // 
+            this.equipmentConstantToolStripMenuItem.Name = "equipmentConstantToolStripMenuItem";
+            resources.ApplyResources(this.equipmentConstantToolStripMenuItem, "equipmentConstantToolStripMenuItem");
+            this.equipmentConstantToolStripMenuItem.Click += new System.EventHandler(this.equipmentConstantToolStripMenuItem_Click);
+            // 
             // mataToolStripMenuItem
             // 
             this.mataToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -586,11 +597,30 @@ namespace com.mirle.ibg3k0.bc.winform
             this.logout_timer.Interval = 10000;
             this.logout_timer.Tick += new System.EventHandler(this.logout_timer_Tick);
             // 
-            // equipmentConstantToolStripMenuItem
+            // notifyIcon1
             // 
-            this.equipmentConstantToolStripMenuItem.Name = "equipmentConstantToolStripMenuItem";
-            resources.ApplyResources(this.equipmentConstantToolStripMenuItem, "equipmentConstantToolStripMenuItem");
-            this.equipmentConstantToolStripMenuItem.Click += new System.EventHandler(this.equipmentConstantToolStripMenuItem_Click);
+            this.notifyIcon1.ContextMenuStrip = this.cmsNotifyIcon;
+            resources.ApplyResources(this.notifyIcon1, "notifyIcon1");
+            this.notifyIcon1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseDown);
+            // 
+            // cmsNotifyIcon
+            // 
+            this.cmsNotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
+            this.toolStripSeparator4});
+            this.cmsNotifyIcon.Name = "cmsNotifyIcon";
+            resources.ApplyResources(this.cmsNotifyIcon, "cmsNotifyIcon");
+            // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            resources.ApplyResources(this.openToolStripMenuItem, "openToolStripMenuItem");
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
             // 
             // BCMainForm
             // 
@@ -601,6 +631,7 @@ namespace com.mirle.ibg3k0.bc.winform
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "BCMainForm";
+            this.ShowInTaskbar = false;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BCMainForm_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BCMainForm_FormClosed);
@@ -610,6 +641,7 @@ namespace com.mirle.ibg3k0.bc.winform
             this.CMS_OnLineMode.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.cmsNotifyIcon.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -775,6 +807,10 @@ namespace com.mirle.ibg3k0.bc.winform
         private System.Windows.Forms.ToolStripMenuItem currentVhCommInfoToolStripMenuItem;
         [AuthorityCheck(FUNCode = BCAppConstants.FUNC_OPERATION_FUN)]
         private System.Windows.Forms.ToolStripMenuItem equipmentConstantToolStripMenuItem;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip cmsNotifyIcon;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 
     /// <summary>

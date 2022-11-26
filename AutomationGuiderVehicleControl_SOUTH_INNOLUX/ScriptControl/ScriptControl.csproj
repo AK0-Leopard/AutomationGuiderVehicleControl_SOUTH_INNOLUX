@@ -1240,6 +1240,7 @@
     </Content>
     <Content Include="DLL\BlockControlFramework.dll" />
     <Content Include="DLL\BlockControlFramework.pdb" />
+    <Content Include="DLL\Cowboy.Sockets.pdb" />
     <Content Include="DLL\Mirle.Hlts.ReserveSection.Map.dll" />
     <Content Include="DLL\Mirle.Hlts.ReserveSection.Map.pdb" />
     <Content Include="DLL\Mirle.Hlts.ReserveSection.Vision.dll" />
@@ -1252,6 +1253,7 @@
     <Content Include="DLL\opencv_world412.dll" />
     <Content Include="DLL\SECSTrxControl.pdb" />
     <Content Include="DLL\TCPIPTrxControl.dll" />
+    <Content Include="DLL\TCPIPTrxControl.pdb" />
     <Content Include="hasp_windows_24266.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

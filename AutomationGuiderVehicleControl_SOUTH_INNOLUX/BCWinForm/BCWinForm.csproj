@@ -649,6 +649,7 @@
       <DependentUpon>UserMngForm.cs</DependentUpon>
     </Compile>
     <Content Include="DLL\LiveCharts.Wpf.dll" />
+    <Content Include="Image\001.ico" />
     <Content Include="MapFile\AUO_CAAGV100\v1.2.0.10之後需使用_AOU_AGVC_CREAT_HCMD_OHTC.sql" />
     <Content Include="MapFile\AUO_CAAGV100\AUO_CAAGV100_20191016.sql" />
     <Content Include="MapFile\AUO_CAAGV100\AUO_CAAGV100_20191216.sql" />
