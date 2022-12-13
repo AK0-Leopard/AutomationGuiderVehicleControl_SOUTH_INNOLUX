@@ -3477,7 +3477,7 @@ namespace com.mirle.ibg3k0.sc.Service
                     {
                         return false;
                     }
-                    else
+                    else //如果是VehicleAbort也不可以[直接將命令清除]，由於客戶希望看到在命令結束時，知道異常的命令是執行哪一筆，所以要等到initial時候再進行結束的動作
                     {
                         return true;
                     }
@@ -3499,6 +3499,8 @@ namespace com.mirle.ibg3k0.sc.Service
                 case CompleteStatus.CmpStatusLoad:
                 case CompleteStatus.CmpStatusLoadunload:
                 case CompleteStatus.CmpStatusUnload:
+                case CompleteStatus.CmpStatusIdmisMatch:
+                case CompleteStatus.CmpStatusIdreadFailed:
                     return true;
                 default:
                     return false;

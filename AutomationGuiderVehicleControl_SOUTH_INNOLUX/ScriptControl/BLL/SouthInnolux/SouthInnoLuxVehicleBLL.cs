@@ -1515,8 +1515,20 @@ namespace com.mirle.ibg3k0.sc.BLL
                     ACMD_MCS acmd_mcs = scApp.CMDBLL.getCMD_MCSByID(mcs_cmd_id);
                     //if (DebugParameter.isManualReportCommandFinishWhenLoadingUnloading && !isDirectFinish && (acmd_mcs.isLoading || acmd_mcs.isUnloading))
 
-                    if (!isDirectFinish && (acmd_mcs.isLoading ||
-                                            acmd_mcs.isUnloading))
+                    if (isDirectFinish)
+                    {
+                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleBLL), Device: Service.VehicleService.DEVICE_NAME_AGV,
+                           Data: $"mcs cmd:{mcs_cmd_id} complete status:{completeStatus} is direct finish.");
+
+                        isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vh_id, cmd_id, ohtc_cmd_status, completeStatus);
+                        finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                        return true;
+                    }
+
+                    //if (!isDirectFinish && (acmd_mcs.isLoading ||
+                    //                        acmd_mcs.isUnloading))
+                    if (acmd_mcs.isLoading ||
+                        acmd_mcs.isUnloading)
                     //if (DebugParameter.isManualReportCommandFinishWhenLoadingUnloading)
                     {
                         //not thing...
@@ -1540,7 +1552,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                                     if (scApp.CMDBLL.IsCMD_MCS_RetryOverTimes(mcs_cmd_id))
                                     {
                                         LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleBLL), Device: Service.VehicleService.DEVICE_NAME_AGV,
-                                           Data: $"mcs cmd:{cmd_id} complete status:{completeStatus} when loading," +
+                                           Data: $"mcs cmd:{mcs_cmd_id} complete status:{completeStatus} when loading," +
                                                  $"but over retry count:{SystemParameter.AGVCLoadingInterlockErrorMaxRetryCount} will finish command!");
                                         //在超過次數後會直接將命令結束，直接結束命令即可。
                                         isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vh_id, cmd_id, ohtc_cmd_status, completeStatus);
@@ -1665,6 +1677,8 @@ namespace com.mirle.ibg3k0.sc.BLL
                 case CompleteStatus.CmpStatusLoad:
                 case CompleteStatus.CmpStatusLoadunload:
                 case CompleteStatus.CmpStatusUnload:
+                case CompleteStatus.CmpStatusIdmisMatch:
+                case CompleteStatus.CmpStatusIdreadFailed:
                     return true;
                 default:
                     return false;
