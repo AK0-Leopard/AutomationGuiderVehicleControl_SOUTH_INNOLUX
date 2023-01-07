@@ -52,6 +52,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             cb_passCouplerHPSafetySingnal.Checked = DebugParameter.isPassCouplerHPSafetySignal;
             ck_isMaunalReportFinishWhenLoadingUnloading.Checked = DebugParameter.isManualReportCommandFinishWhenLoadingUnloading;
             cb_byPassEarthQuakeSignal.Checked = DebugParameter.ByPassEarthquakeSignal;
+            cb_byPassCheckVhReadyExcuteCommandFlag.Checked = DebugParameter.ByPassCheckVhReadyExcuteCommandFlag;
 
 
             List<string> lstVh = new List<string>();
@@ -1585,7 +1586,11 @@ namespace com.mirle.ibg3k0.bc.winform.UI
         private void btnLighthouse_Click(object sender, EventArgs e)
         {
             var Lighthouse = bcApp.SCApplication.getEQObjCacheManager().getEquipmentByEQPTID("ColorLight");
-            if (sender == btn_lighthouse_red_set)
+            if (sender == btn_lighthouse_buzzer_set)
+            {
+                Lighthouse.setColorLightBuzzer(true);
+            }
+            else if (sender == btn_lighthouse_red_set)
             {
                 Lighthouse.setColorLightRedWithBuzzer(true, true);
             }
@@ -1600,6 +1605,10 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             else if (sender == btn_lighthouse_orange_set)
             {
                 Lighthouse.setColorLightYellow(true);
+            }
+            else if (sender == btn_lighthouse_buzzer_reset)
+            {
+                Lighthouse.setColorLightBuzzer(false);
             }
             else if (sender == btn_lighthouse_red_reset)
             {
@@ -1644,6 +1653,11 @@ namespace com.mirle.ibg3k0.bc.winform.UI
         private void cb_byPassEarthQuakeSignal_CheckedChanged(object sender, EventArgs e)
         {
             DebugParameter.ByPassEarthquakeSignal = cb_byPassEarthQuakeSignal.Checked;
+        }
+
+        private void cb_byPassCheckVhReadyExcuteCommandFlag_CheckedChanged(object sender, EventArgs e)
+        {
+            DebugParameter.ByPassCheckVhReadyExcuteCommandFlag = cb_byPassCheckVhReadyExcuteCommandFlag.Checked;
         }
     }
 }

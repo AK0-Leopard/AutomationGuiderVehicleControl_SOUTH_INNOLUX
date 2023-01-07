@@ -2062,6 +2062,12 @@ namespace com.mirle.ibg3k0.sc.BLL
 
                         string vehicle_id = cmd.VH_ID.Trim();
                         AVEHICLE assignVH = scApp.VehicleBLL.getVehicleByID(vehicle_id);
+                        if (!assignVH.IsReadyExcuteCommand)
+                        {
+                            LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(CMDBLL), Device: string.Empty,
+                               Data: $"vh:{assignVH.VEHICLE_ID} not ready excute command by pass send command, currentChangeToAutoTotalTime:{assignVH.currentChangeToAutoTotalTime}");
+                            continue;
+                        }
                         if (cmd.CMD_TPYE != E_CMD_TYPE.Override)
                         {
                             if (!assignVH.isTcpIpConnect || !SCUtility.isEmpty(assignVH.OHTC_CMD))

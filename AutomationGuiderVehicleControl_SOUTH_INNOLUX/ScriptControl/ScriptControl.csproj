@@ -552,6 +552,7 @@
     <Compile Include="Data\PLC_Functions\NorthInnolux\CouplerChargingReport.cs" />
     <Compile Include="Data\PLC_Functions\PortStationReport.cs" />
     <Compile Include="Data\PLC_Functions\EQStatusReport.cs" />
+    <Compile Include="Data\PLC_Functions\SouthInnolux\ColorLightBuzzer.cs" />
     <Compile Include="Data\PLC_Functions\SouthInnolux\ColorLightRedWithBuzzer.cs" />
     <Compile Include="Data\PLC_Functions\SouthInnolux\ColorLightSignalGreen.cs" />
     <Compile Include="Data\PLC_Functions\SouthInnolux\ColorLightSignalBlue.cs" />

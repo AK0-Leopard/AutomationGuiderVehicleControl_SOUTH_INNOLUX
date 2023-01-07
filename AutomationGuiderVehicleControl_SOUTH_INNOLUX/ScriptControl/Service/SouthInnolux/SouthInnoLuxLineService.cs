@@ -34,6 +34,7 @@ namespace com.mirle.ibg3k0.sc.Service
             reportBLL = _app.ReportBLL;
             lineBLL = _app.LineBLL;
             line = scApp.getEQObjCacheManager().getLine();
+            InitialLightAndBuzzer();
 
             line.addEventHandler(nameof(LineService), nameof(line.Currnet_Park_Type), PublishLineInfo);
             line.addEventHandler(nameof(LineService), nameof(line.Currnet_Cycle_Type), PublishLineInfo);
@@ -75,7 +76,26 @@ namespace com.mirle.ibg3k0.sc.Service
             var commonInfo = scApp.getEQObjCacheManager().CommonInfo;
             commonInfo.addEventHandler(nameof(LineService), BCFUtility.getPropertyName(() => commonInfo.MPCTipMsgList),
              PublishTipMessageInfo);
+
         }
+
+        private void InitialLightAndBuzzer()
+        {
+            try
+            {
+                bool processAfterHasErrorExist = scApp.AlarmBLL.hasAlarmErrorExist();
+                line.HasSeriousAlarmHappend = processAfterHasErrorExist;
+
+                bool processAfterHasWarningExist = scApp.AlarmBLL.hasAlarmWarningExist();
+                line.HasWarningHappend = processAfterHasWarningExist;
+                CheckLightAndBuzzer(null, null);
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception:");
+            }
+        }
+
         private void Line_LineStatusChange(object sender, EventArgs e)
         {
             PublishLineInfo(sender, null);
@@ -184,6 +204,7 @@ namespace com.mirle.ibg3k0.sc.Service
             }
             catch (Exception ex)
             {
+                logger.Error(ex, "Exception:");
             }
         }
 

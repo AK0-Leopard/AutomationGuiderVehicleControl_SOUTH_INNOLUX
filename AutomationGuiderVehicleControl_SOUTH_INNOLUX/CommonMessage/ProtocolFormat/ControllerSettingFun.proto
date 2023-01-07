@@ -16,8 +16,11 @@ service ControllerSettingFunGreeter {
 	rpc ChargeSetting(ChargeSettingRequest) returns (ChargeSettingReply);
 	//Controller參數設定
 	rpc ControllerParameterSetting(ControllerParameterSettingRequest) returns (ControllerParameterSettingReply);
+	//要求停止蜂鳴器
+	rpc resetBuzzer(Empty) returns (Empty);
 
 }
+message Empty {} 
 
 message ControlRequest {string id=1; bool enable=2;}
 message ControlReply{ string result=1;}

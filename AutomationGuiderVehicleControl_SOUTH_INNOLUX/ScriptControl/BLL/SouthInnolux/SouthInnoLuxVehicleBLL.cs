@@ -1631,7 +1631,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                                 }
                                 else
                                 {
-                                    //等待initial時，上報cmd finish，就在直接下給車子
+                                    //等待initial時，上報cmd finish(由於如果是VehicleAbort，客戶想要知道原本的命令是哪一筆
                                 }
                             }
                         }

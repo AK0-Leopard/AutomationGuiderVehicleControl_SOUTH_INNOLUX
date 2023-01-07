@@ -237,11 +237,13 @@ namespace com.mirle.ibg3k0.sc.Service
                     e == VHModeStatus.AutoLocal ||
                     e == VHModeStatus.AutoRemote)
                 {
+                    vh.ChangeToAutoTimingBegins();
                     ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrReset, $"vehicle cannot service");
                     Task.Run(() => ControlDataSettiingAndVhParameterRequest(vh.VEHICLE_ID));
                 }
                 else
                 {
+                    vh.ChangeToAutoTimeStop();
                     if (vh.IS_INSTALLED)
                         ProcessAlarmReport(vh, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrSet, $"vehicle cannot service");
                 }

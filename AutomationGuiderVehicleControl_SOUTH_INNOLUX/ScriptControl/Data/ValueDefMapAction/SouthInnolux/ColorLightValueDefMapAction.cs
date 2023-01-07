@@ -154,7 +154,31 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 scApp.putFunBaseObj<ColorLightRedWithBuzzer>(function);
             }
         }
+        public void sendColorLightBuzzerSignal(bool buzzer_signal)
+        {
+            var function =
+                scApp.getFunBaseObj<ColorLightBuzzer>(eqpt.EQPT_ID) as ColorLightBuzzer;
+            try
+            {
+                //1.建立各個Function物件
+                function.buzzerSignal = buzzer_signal;
+                function.Write(bcfApp, eqpt.EqptObjectCate, eqpt.EQPT_ID);
+                //2.紀錄發送資料的Log
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(ColorLightValueDefMapAction), Device: DEVICE_NAME_COLORLIGHT,
+                         Data: function.ToString(),
+                         VehicleID: eqpt.EQPT_ID);
+                //3.logical (include db save)
 
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception");
+            }
+            finally
+            {
+                scApp.putFunBaseObj<ColorLightBuzzer>(function);
+            }
+        }
         public void sendColorLightYellowSignal(bool signal)
         {
             var function =

@@ -1,5 +1,6 @@
 ﻿using com.mirle.ibg3k0.sc.Common;
 using CommonMessage.ProtocolFormat.ControllerSettingFun;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Grpc.Core;
 using NLog;
 using System;
@@ -62,6 +63,17 @@ namespace com.mirle.ibg3k0.sc.WebAPI.Grpc.Server
                Data: $"Revice gRPC [{nameof(sectionControl)}] requset, section id:{request.Id} is enable:{request.Enable},excute result:{result.isSuccess}");
 
             return Task.FromResult(reply);
+        }
+
+        public override Task<Empty> resetBuzzer(Empty request, ServerCallContext context)
+        {
+            LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(ControllerSettingFun), Device: "AGVC",
+               Data: $"Revice gRPC [{nameof(resetBuzzer)}] requset ...");
+            var Lighthouse = scApp.getEQObjCacheManager().getEquipmentByEQPTID("ColorLight");
+            Lighthouse.setColorLightBuzzer(false);
+            LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(ControllerSettingFun), Device: "AGVC",
+               Data: $"Revice gRPC [{nameof(resetBuzzer)}] requset,process end");
+            return Task.FromResult(new Empty());
         }
 
         //public override Task<ControlReply> sectionControl(ControlRequest request, ServerCallContext context)

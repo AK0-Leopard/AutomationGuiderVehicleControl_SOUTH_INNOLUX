@@ -275,6 +275,16 @@ namespace com.mirle.ibg3k0.sc
                 mapAction.sendColorLightRedWithBuzzerSignal(buzzer_signal, light_signal);
             }
         }
+        public void setColorLightBuzzer(bool buzzer_signal)
+        {
+            lock (color_light_lock)
+            {
+                ColorLightValueDefMapAction mapAction =
+                    getMapActionByIdentityKey(nameof(ColorLightValueDefMapAction)) as ColorLightValueDefMapAction;
+                mapAction.sendColorLightBuzzerSignal(buzzer_signal);
+            }
+        }
+
         public void setColorLightYellow(bool signal)
         {
             lock (color_light_lock)

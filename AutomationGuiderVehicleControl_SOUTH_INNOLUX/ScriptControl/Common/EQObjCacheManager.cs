@@ -1407,7 +1407,8 @@ namespace com.mirle.ibg3k0.sc.Common
             //vh_vo.CUR_SEC_ID = vh_bo.CUR_SEC_ID;
             vh_vo.SEC_ENTRY_TIME = vh_bo.SEC_ENTRY_TIME;
             vh_vo.ACC_SEC_DIST = vh_bo.ACC_SEC_DIST;
-            vh_vo.MODE_STATUS = vh_bo.MODE_STATUS;
+            //不進行由DB將狀態讀回來的動作，而是透過143進行詢問
+            //vh_vo.MODE_STATUS = vh_bo.MODE_STATUS;
             vh_vo.ACT_STATUS = vh_bo.ACT_STATUS;
             vh_vo.MCS_CMD = vh_bo.MCS_CMD;
             vh_vo.OHTC_CMD = vh_bo.OHTC_CMD;

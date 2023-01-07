@@ -113,6 +113,7 @@ namespace com.mirle.ibg3k0.sc
         private Stopwatch CurrentCommandExcuteTime;
         private Stopwatch CarrierInstalledTime;
         private Stopwatch CarrierAbnormalInstalledTime;
+        private Stopwatch ChangeToAutoTotalTime;
 
 
         public void addAttentionReserveSection(ASECTION attentionSection)
@@ -223,7 +224,7 @@ namespace com.mirle.ibg3k0.sc
             CurrentCommandExcuteTime = new Stopwatch();
             CarrierInstalledTime = new Stopwatch();
             CarrierAbnormalInstalledTime = new Stopwatch();
-
+            ChangeToAutoTotalTime = new Stopwatch();
         }
         public void TimerActionStart()
         {
@@ -774,6 +775,17 @@ namespace com.mirle.ibg3k0.sc
             if (CarrierAbnormalInstalledTime.IsRunning)
                 CarrierAbnormalInstalledTime.Reset();
         }
+        public void ChangeToAutoTimingBegins()
+        {
+            if (!ChangeToAutoTotalTime.IsRunning)
+                ChangeToAutoTotalTime.Restart();
+        }
+
+        public void ChangeToAutoTimeStop()
+        {
+            if (ChangeToAutoTotalTime.IsRunning)
+                ChangeToAutoTotalTime.Reset();
+        }
 
         public bool send_Str1(ID_1_HOST_BASIC_INFO_VERSION_REP sned_gpp, out ID_101_HOST_BASIC_INFO_VERSION_RESPONSE receive_gpp)
         {
@@ -1295,6 +1307,28 @@ namespace com.mirle.ibg3k0.sc
                            CarrierID: CST_ID);
         }
 
+        const int BEGIN_EXCUTE_COMMAND_DELAY_TIME_ms = 10_000;
+        [JsonIgnore]
+        public bool IsReadyExcuteCommand
+        {
+            get
+            {
+                if (DebugParameter.ByPassCheckVhReadyExcuteCommandFlag)
+                {
+                    LogHelper.Log(logger: NLog.LogManager.GetCurrentClassLogger(), LogLevel: NLog.LogLevel.Debug, Class: nameof(AVEHICLE), Device: DEVICE_NAME_AGV,
+                                   Data: $"Vh:{VEHICLE_ID} by pass check vh ready excute command flag",
+                                   VehicleID: VEHICLE_ID,
+                                   CarrierID: CST_ID);
+                    return true;
+                }
+                else
+                {
+                    return ChangeToAutoTotalTime.ElapsedMilliseconds > BEGIN_EXCUTE_COMMAND_DELAY_TIME_ms;
+                }
+            }
+        }
+        [JsonIgnore]
+        public long currentChangeToAutoTotalTime { get { return ChangeToAutoTotalTime.ElapsedMilliseconds; } }
         #region Vehicle state machine
 
         public class VehicleStateMachine : StateMachine<VehicleState, VehicleTrigger>

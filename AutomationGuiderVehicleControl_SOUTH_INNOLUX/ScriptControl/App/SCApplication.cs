@@ -2206,6 +2206,7 @@ namespace com.mirle.ibg3k0.sc.App
         public static int InterlockErrorMaxRetryCount = 3;
 
         public static bool ByPassEarthquakeSignal = false;
+        public static bool ByPassCheckVhReadyExcuteCommandFlag = false;
 
 
     }
