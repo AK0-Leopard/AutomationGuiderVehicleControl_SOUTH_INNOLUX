@@ -1762,6 +1762,7 @@ namespace com.mirle.ibg3k0.sc
 
 
                         }
+                        checkAutoTimingIsBegins();
 
                         if (!vh.isTcpIpConnect) return;
                         //1.檢查是否已經大於一定時間沒有進行通訊
@@ -1789,6 +1790,18 @@ namespace com.mirle.ibg3k0.sc
                         System.Threading.Interlocked.Exchange(ref syncPoint, 0);
                     }
 
+                }
+            }
+
+            private void checkAutoTimingIsBegins()
+            {
+                if (vh.isAuto)
+                {
+                    vh.ChangeToAutoTimingBegins();
+                }
+                else
+                {
+                    vh.ChangeToAutoTimeStop();
                 }
             }
 

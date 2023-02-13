@@ -219,9 +219,9 @@
             this.cb_startCyc.AutoSize = true;
             this.cb_startCyc.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.cb_startCyc.Dock = System.Windows.Forms.DockStyle.Right;
-            this.cb_startCyc.Location = new System.Drawing.Point(476, 714);
+            this.cb_startCyc.Location = new System.Drawing.Point(476, 715);
             this.cb_startCyc.Name = "cb_startCyc";
-            this.cb_startCyc.Size = new System.Drawing.Size(179, 46);
+            this.cb_startCyc.Size = new System.Drawing.Size(179, 45);
             this.cb_startCyc.TabIndex = 8;
             this.cb_startCyc.Text = "Start Cycle Run";
             this.cb_startCyc.UseVisualStyleBackColor = true;
