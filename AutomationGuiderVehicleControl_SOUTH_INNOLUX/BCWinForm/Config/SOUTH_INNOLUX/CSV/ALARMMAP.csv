@@ -20,10 +20,10 @@ AGV_NODE,6,1,MoveFinishFail,"1.§ä¤£¨ì¨®¤l©w¦ì
 5.­«·s½Õ¾ã°¨¹F Gain ­È"
 AGV_NODE,7,1,LoadingOn,AGV ¦b©ñ³f©R¥Oµ²§ô®É Loading sensor Åã¥Ü¦³³f,"1.½T©w¥x¨®¤W¬O§_¦³³f
 2.½T»{²ü¦³sensorª¬ºA"
-AGV_NODE,8,1,ForkCommandExist,©ñ³f«eFork¦³¤W¤@µ§©R¥O¥¼§¹¦¨,"1.¬d¬ÝLog (Comm, Debug)"
+AGV_NODE,8,1,TRUCommandExist,©ñ³f«eFork¦³¤W¤@µ§©R¥O¥¼§¹¦¨,"1.¬d¬ÝLog (Comm, Debug)"
 AGV_NODE,9,1,VehicleCannotUnload,¨®¤l¤£¦b©ñ³f¦ì¸m¡AµLªk°µ©ñ³f°Ê§@,"1.½T»{©R¥O¥Øªº¦a¦ì¸m¬O§_¬°©ñ³f¯¸
 2.½T»{¦a¹Ï¹Ï¸ê¨ú³f¯¸³]©w"
-AGV_NODE,10,1,ForkCommandExist,¨ú³f«eFork¦³¤W¤@µ§©R¥O¥¼§¹¦¨,"1.¬d¬ÝLog (Comm, Debug)"
+AGV_NODE,10,1,TRUCommandExist,¨ú³f«eFork¦³¤W¤@µ§©R¥O¥¼§¹¦¨,"1.¬d¬ÝLog (Comm, Debug)"
 AGV_NODE,11,1,PositionLostWithCmd,AGV¤£¦b¤Þ¾É¸ô®|,"1.¬d¬ÝLog (Comm, Debug)
 2.½T»{AGVC¤U¹F¸ô®|¸òAGV©Ò¦b¦ì¸m¥²¶·¦³Ãö³s©Ê"
 AGV_NODE,12,1,ChargeDirectionError,AGV ¥R¹q¯¸ÂI³]©w¿ù»~,"1.½T»{ Address.csv ¥R¹q¯¸¯¸ÂI³]©w
@@ -271,7 +271,7 @@ AGV_NODE,104101,1,Reject Move Command : Closing Program,©Úµ´²¾°Ê©R¥O_µ{¦¡Ãö³¬¤¤,
 AGV_NODE,104102,1,Reject Move Command : MoveControl Status is not Idle,©Úµ´²¾°Ê©R¥O_MoveControl¤£¦bIdleª¬ºA,
 AGV_NODE,104103,1,Reject Move Command : Charging,"©Úµ´²¾°Ê©R¥O_¥R¹q¤¤
 1.¥R¹q¤¤¤£¯à²¾°Ê",µ¥«ÝAGV¥Rº¡¹q§Y¥i«ì´_¥¿±`
-AGV_NODE,104104,1,Reject Move Command : Fork isn't in home Status,"©Úµ´²¾°Ê©R¥O_Fork¤£¦bHomeÂI
+AGV_NODE,104104,1,Reject Move Command : TRU isn't in home Status,"©Úµ´²¾°Ê©R¥O_Fork¤£¦bHomeÂI
 1. ¥x¨®¥¼³B©ó¦Û°Êª¬ºA",¤Á¦^¤â°Ê¡A²M°£²§±`«á¡A½T»{AGVC©R¥O¡AµM«á¶i¦æ´_Âk­«·s¤W½u
 AGV_NODE,104105,1,Reject Move Command : MoveControl driver disconnect,©Úµ´²¾°Ê©R¥O_MoveControl¦³Driverª¬ºA¤£¬OReady,¤Á¦^¤â°Ê¡A²M°£²§±`«á¡A½T»{AGVC©R¥O¡AµM«á¶i¦æ´_Âk­«·s¤W½u
 AGV_NODE,104106,1,Reject Move Commandmiddler : No current coordinates,"©Úµ´²¾°Ê©R¥O_°g¯è¤¤
@@ -286,7 +286,7 @@ AGV_NODE,104108,1,Reject Move Command : Not is start AGV angle,©Úµ´²¾°Ê©R¥O_©M°_
 2.Æ[¹îSLAM¬O§_¥¿±`¹B§@¡C"
 AGV_NODE,104109,1,Reject Move Command : in cancel flow,©Úµ´²¾°Ê©R¥O_Cancel¬yµ{¤¤,¤Á¦^¤â°Ê¡A²M°£²§±`«á¡A½T»{AGVC©R¥O¡AµM«á¶i¦æ´_Âk­«·s¤W½u
 AGV_NODE,104110,1,Reject Move Command : in AutoRetry flow,©Úµ´²¾°Ê©R¥O_¦b¦Û°Ê­«¸Õ¬yµ{¤¤,¤Á¦^¤â°Ê¡A²M°£²§±`«á¡A½T»{AGVC©R¥O¡AµM«á¶i¦æ´_Âk­«·s¤W½u
-AGV_NODE,104200,2,SafetyStop : Fork isn't in home Status,"¦w¥þ«OÅ@°±¤î_Fork¤£¦bHomeÂI
+AGV_NODE,104200,2,SafetyStop : TRU isn't in home Status,"¦w¥þ«OÅ@°±¤î_Fork¤£¦bHomeÂI
 1.¥x¨®¦Û°Êª¬ºA°T¸¹ Off
 2.¥x¨®¥¼³B©ó¦Û°Êª¬ºA","1.½T»{¥x¨®¬O§_¦b Autoª¬ºA
 2.½T»{PLC W0A00±ø¥ó¬O§_¦³Sensor²§±`"
@@ -358,80 +358,80 @@ AGV_NODE,104502,2,Can't AutoRetry : Create Retry MoveCmdInfo fail,µLªk¦Û°Ê­«¸Õ_«
 AGV_NODE,104600,2,BeamSensor singal on Timeout,"BeamSensorOn_Timeout
 1.Beamsensor°T¸¹ªøOn¨S¦³®ø°£","1.½T»{Beamsensor¸Ë¸m¬O§_¦³°T¸¹´Ý¯dª¬ªp(½Õ¾ãBeamSensor¶ZÂ÷)
 2.½Õ¾ãµ{¦¡¤ºÀð¾À³]©w¶ZÂ÷"
-AGV_NODE,270001,2,Fork Command Format NG,Fork_©R¥O®æ¦¡NG,Fork_©R¥O®æ¦¡NG
-AGV_NODE,270002,2,Fork Command Read timeout,Fork_©R¥OÅª¨ú¶W®É,1.ÀË¬d PLC ¥æ´¤°T¸¹
-AGV_NODE,270003,2,Fork Not Busy timeout,Fork_¤£¦£¿ý¶W®É,1.ÀË¬d PLC ¥æ´¤°T¸¹
-AGV_NODE,270004,2,Fork Command Executing timeout,Fork_©R¥O°õ¦æ¶W®É,1.½T»{¤H¾÷¤WPIO³]©w®É¶¡¤£¯à¤j©óLocal¤ºµ{¦¡³]©w®É¶¡
+AGV_NODE,270001,2,TRU Command Format NG,Fork_©R¥O®æ¦¡NG,Fork_©R¥O®æ¦¡NG
+AGV_NODE,270002,2,TRU Command Read timeout,Fork_©R¥OÅª¨ú¶W®É,1.ÀË¬d PLC ¥æ´¤°T¸¹
+AGV_NODE,270003,2,TRU Not Busy timeout,Fork_¤£¦£¿ý¶W®É,1.ÀË¬d PLC ¥æ´¤°T¸¹
+AGV_NODE,270004,2,TRU Command Executing timeout,Fork_©R¥O°õ¦æ¶W®É,1.½T»{¤H¾÷¤WPIO³]©w®É¶¡¤£¯à¤j©óLocal¤ºµ{¦¡³]©w®É¶¡
 AGV_NODE,270005,1,Batterys Charging Time Out,"¹q¦À¥R¹q¶W®É
 1.¶W¹L¥R¹q³]©w®É¶¡",1.½T»{¤H¾÷¤W¥R¹q³]©wtimeout®É¶¡¤£¯à¤j©óµ{¦¡³]©w®É¶¡
-AGV_NODE,270007,2,Fork Home Flag Waiting timeout,"Fork¦^Homeµ¥«Ý¶W®É
+AGV_NODE,270007,2,TRU Home Flag Waiting timeout,"Fork¦^Homeµ¥«Ý¶W®É
 1.¦bFork©R¥Oµ²§ôµ¥«Ý¥x¨®¦Û°Êª¬ºA°T¸¹ON®É¶¡¤Óªø",1.ÀË¬d PLC W0A00 °T¸¹¤Î¥d¦í­ì¦]
 AGV_NODE,280001,1,Meter Adam Connect Fail,,"1. ½ÐÀË¬dAdam ¬O§_²§±`
 2. ½Ð½T»{ IPC ±µÀY¬O§_²§±`(RS232)"
 AGV_NODE,280002,1,Particle Counter Connect Fail,,1. ½ÐÀË¬d»ö¾¹¬O§_¥¿±`¶}±Ò
 AGV_NODE,280003,1,Plc BigData Sensor Connect Fail,,
-AGV_NODE,280004,1,VibrationMeter Connect Fail,,
-AGV_NODE,200001,2,Emergency Stop(FR Side)[X013A],,½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡AÃP¶}ºò«æ°±¤î¶}Ãö±Ò°Ê(FR°¼)[X013A]¡A¶i¦æ´_Âk¾Þ§@
-AGV_NODE,200002,2,Emergency Stop(FL Side)[X013C],,½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡AÃP¶}ºò«æ°±¤î¶}Ãö±Ò°Ê(FL°¼)[X013C]¡A¶i¦æ´_Âk¾Þ§@
-AGV_NODE,200003,2,Emergency Stop(BR Side)[X013D],,½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡AÃP¶}ºò«æ°±¤î¶}Ãö±Ò°Ê(BR°¼)[X013D]¡A¶i¦æ´_Âk¾Þ§@
-AGV_NODE,200004,2,Emergency Stop(BL Side)[X013F],,½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡AÃP¶}ºò«æ°±¤î¶}Ãö±Ò°Ê(BL°¼)[X013F]¡A¶i¦æ´_Âk¾Þ§@
-AGV_NODE,200005,2,Emergency Stop(Handheld Touch Panel),,½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡AÃP¶}ºò«æ°±¤î¶}Ãö(¤p¤H¾÷)¡A¶i¦æ´_Âk¾Þ§@
-AGV_NODE,200006,2,Emergency Stop,,
-AGV_NODE,200007,2,Emergency Stop,,
-AGV_NODE,200008,2,System No Power On,,½Ð¥ý¥´¶}Â¼ªO¶}Ãö ON ¦A«ö¤Uºñ¦â«ö¶s START
-AGV_NODE,200009,2,284V No Power On,,«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@¡A¦pªG²§±`¥¼²M°£»ÝÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬OÀË¬d284V¹q·½¨ÑÀ³¬O§_¦³·lÃa
-AGV_NODE,200010,2,284V Power Supply No Start,,«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@¡A¦pªG²§±`¥¼²M°£»ÝÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬OÀË¬d284V¹q·½¨ÑÀ³¬O§_¦³·lÃa
-AGV_NODE,200011,2,284VSupply FAN Error,,«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@¡A¦pªG²§±`¥¼²M°£»ÝÀË¬d284V¹q·½­·®°¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªºª½¬y¹q·½¶}Ãö¥¼¶}±Ò¡C
-AGV_NODE,200012,2,284VSupply Overflow Error,,«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@¡A¦pªG²§±`¥¼²M°£»ÝÀË¬d284V¹q·½¬O§_¦³·lÃa
-AGV_NODE,200013,2,284VSupply Overtemperature Error,,«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@¡A¦pªG²§±`¥¼²M°£»ÝÀË¬d¹q·½­·®°©Î¬O284V¹q·½¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªºª½¬y¹q·½¶}Ãö¥¼¶}±Ò¡A¾É­P´²¼ö¤£¨Î·Å«×²§±`
-AGV_NODE,200014,2,Safety Relay Not Ready(EMO System),,½T»{¦w¥þ¼Ò²ÕSafety Relay Not Ready(EMO¨t²Î)
-AGV_NODE,200015,2, Battery Voltage Not Enough,,½ÐÀË¬d¹q¦À¹qÀ£
-AGV_NODE,200016,2,Walker Wheel Motor Error(FR Side),,½T»{¨«¦æ½ü°¨¹F¬O§_²§±`(FR°¼)
-AGV_NODE,200017,2,Walker Wheel Motor Error(FL Side),,½T»{¨«¦æ½ü°¨¹F¬O§_²§±`(FL°¼)
-AGV_NODE,200018,2,Walker Wheel Motor Error(BR Side),,½T»{¨«¦æ½ü°¨¹F¬O§_²§±`(BR°¼)
-AGV_NODE,200019,2,Walker Wheel Motor Error(BL Side),,½T»{¨«¦æ½ü°¨¹F¬O§_²§±`(BL°¼)
-AGV_NODE,200020,2,Hand Servo Motor No Power On,,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
-AGV_NODE,200021,2,Car Charging Action Time Out(R Side),,ÀË¬d¥R¹q¼Î(R°¼)°Ê§@¬O§_¥¿½T¡A©Î¬O»P¥R¹q¼Î¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200022,2,Car Charging Action Time Out(L Side),,ÀË¬d¥R¹q¼Î(L°¼)°Ê§@¬O§_¥¿½T¡A©Î¬O»P¥R¹q¼Î¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200023,2,Coupler_R Side Handshake Signal Off In Charging,,ÀË¬d¥R¹q¼Î(R°¼)°Ê§@¬O§_¥¿½T©Î¬O¥¼¨ì¦ì¡A¥æ´¤³q°TSENSOR¦w¸Ë¦n©Î·lÃa¾É­P¥æ´¤°T¸¹µo°e²§±`
-AGV_NODE,200024,2,Coupler_L Side Handshake Signal Off In Charging,,ÀË¬d¥R¹q¼Î(L°¼)°Ê§@¬O§_¥¿½T©Î¬O¥¼¨ì¦ì¡A¥æ´¤³q°TSENSOR¦w¸Ë¦n©Î·lÃa¾É­P¥æ´¤°T¸¹µo°e²§±`
-AGV_NODE,200025,2,Correct Function comfirm fail (L Side),,
-AGV_NODE,200026,2,Correct Function comfirm fail (R Side),,
-AGV_NODE,200027,2,Execute IPC Get/Put Command Time Out,,ÀË¬dFORK¨ú©ñ°Ê§@¬O§_¥¿½T¡A©Î¬OFORK©R¥O°õ¦æ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200028,2,Vehicle Battery Voltage Too Low Error,,»Ý­n¥ß§Y¥R¹q¡A¦pªG¦b¥R¹qª¬ºA¤U¨ÌµMµo¥Í²§±`¡C»ÝÀË¬d¬O§_¥R¹q¦³°ÝÃD©Î¬O¹q¦À³Ì¤p­È³]©w¹L°ª
-AGV_NODE,200029,2,Vehicle Battery Voltage Too High Error,,¦pªG¦b¥R¹qª¬ºA¤U¨ÌµMµo¥Í²§±`¡C»ÝÀË¬d¬O§_¥R¹q¦³°ÝÃD©Î¬O¹q¦À³Ì¤j­È³]©w¹L§C
-AGV_NODE,200030,2,Vehicle Battery Temperature Too High Error,,»ÝÀË¬d­·®°¹q·½¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªº¹q·½¶}Ãö¥¼¶}±Ò¡A¾É­P´²¼ö¤£¨Î·Å«×²§±`
-AGV_NODE,200031,2,BAT-Front  FAN1 Alarm ,,»ÝÀË¬d¹q·½­·®°(«e-1)¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªº¹q·½¶}Ãö¥¼¶}±Ò¡C
-AGV_NODE,200032,2,BAT-Front  FAN2 Alarm ,,»ÝÀË¬d¹q·½­·®°(«e-2)¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªº¹q·½¶}Ãö¥¼¶}±Ò¡C
-AGV_NODE,200033,2,BAT-Back  FAN1 Alarm ,,»ÝÀË¬d¹q·½­·®°(«á-1)¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªº¹q·½¶}Ãö¥¼¶}±Ò¡C
-AGV_NODE,200034,2,BAT-Back  FAN2 Alarm ,,»ÝÀË¬d¹q·½­·®°(«á-2)¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªº¹q·½¶}Ãö¥¼¶}±Ò¡C
-AGV_NODE,200035,2,Wheel Servo Motor No Power On,,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O°¨¹F¨Ó·½ºÝ284V¦³²§±`
-AGV_NODE,200036,2,Wheel Turn Servo Motor No Power On,,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O°¨¹F¨Ó·½ºÝ284V¦³²§±`
-AGV_NODE,200037,2,Lifter Servo Motor No Power On,,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O°¨¹F¨Ó·½ºÝ284V¦³²§±`
-AGV_NODE,200038,2,Turn Servo Motor No Power On,,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O°¨¹F¨Ó·½ºÝ284V¦³²§±`
-AGV_NODE,200039,2,Door Servo Motor No Power On,,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O°¨¹F¨Ó·½ºÝ284V¦³²§±`
-AGV_NODE,200040,2,Bump Sensor Error(F side)[X0114],,½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(F°¼)[X0114]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200041,2,Bump Sensor Error(B side)[X011A],,½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(F°¼)[X011A]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200042,2,Bump Sensor Error(L side)[X0134],,½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(F°¼)[X0134]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200043,2,Bump Sensor Error(R side)[X0136],,½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(F°¼)[X0136]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200044,2,Bump Sensor Error(R side Door)[X0115],,½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(L°¼DOOR)[X0115]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200045,2,Bump Sensor Error(R side Door)[X011B],,½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(R°¼DOOR)[X011B]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200046,2,Hand Correct Function Comfirm Error - Left side,,
-AGV_NODE,200047,2,Hand Correct Function Comfirm Error - Left side,,
-AGV_NODE,200048,2,LiDAR Sensor_F Error[X107],,½T»{¬O§_¦³ª««~©Î¤H­û¦b´ú¶ZSENSOR_F[X0107]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200049,2,LiDAR Sensor_B Error[X109],,½T»{¬O§_¦³ª««~©Î¤H­û¦b´ú¶ZSENSOR_B[X0109]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200050,2,LiDAR Sensor_L Error[X127],,½T»{¬O§_¦³ª««~©Î¤H­û¦b´ú¶ZSENSOR_L[X0127]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200051,2,LiDAR Sensor_R Error[X129],,½T»{¬O§_¦³ª««~©Î¤H­û¦b´ú¶ZSENSOR_R[X0129]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200052,2,LiDAR_F Alarm[X1B0],,½T»{´ú¶Z Sensor_F ¬O§_²§±`[X1B0]
-AGV_NODE,200053,2,LiDAR_F Fault[X1B1],,½T»{´ú¶Z Sensor_F ¬O§_¥¢®Ä[X1B1]
-AGV_NODE,200054,2,LiDAR_B Alarm[X1B4],,½T»{´ú¶Z Sensor_B ¬O§_²§±`[X1B4]
-AGV_NODE,200055,2,LiDAR_B Fault[X1B5],,½T»{´ú¶Z Sensor_B ¬O§_¥¢®Ä[X1B5]
-AGV_NODE,200056,2,Hand Forward/Back Axis Servo Off,,
-AGV_NODE,200057,2,Hand Up/Down Axis Servo Off,,
-AGV_NODE,200058,2,Hand Turn/Slide Axis Servo Off,,
-AGV_NODE,200059,2,Shutter Servo Off,,
-AGV_NODE,200060,2,Hand Slide Side Servo Off,,
-AGV_NODE,200061,2,Hand Turn Side Servo Off,,
+AGV_NODE,280004,1,VibrationMeter Connect Fail,,1. ½ÐÀË¬d»ö¾¹¬O§_¥¿±`¶}±Ò
+AGV_NODE,200001,2,Emergency Stop(FR Side)[X013A],ºò«æ°±¤î¶}Ãö§@°Ê(FR°¼)[X013A],½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡AÃP¶}ºò«æ°±¤î¶}Ãö±Ò°Ê(FR°¼)[X013A]¡A¶i¦æ´_Âk¾Þ§@
+AGV_NODE,200002,2,Emergency Stop(FL Side)[X013C],ºò«æ°±¤î¶}Ãö§@°Ê(FL°¼)[X013C],½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡AÃP¶}ºò«æ°±¤î¶}Ãö±Ò°Ê(FL°¼)[X013C]¡A¶i¦æ´_Âk¾Þ§@
+AGV_NODE,200003,2,Emergency Stop(BR Side)[X013D],ºò«æ°±¤î¶}Ãö§@°Ê(BR°¼)[X013D],½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡AÃP¶}ºò«æ°±¤î¶}Ãö±Ò°Ê(BR°¼)[X013D]¡A¶i¦æ´_Âk¾Þ§@
+AGV_NODE,200004,2,Emergency Stop(BL Side)[X013F],ºò«æ°±¤î¶}Ãö§@°Ê(BL°¼)[X013F],½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡AÃP¶}ºò«æ°±¤î¶}Ãö±Ò°Ê(BL°¼)[X013F]¡A¶i¦æ´_Âk¾Þ§@
+AGV_NODE,200005,2,Emergency Stop(TRUheld Touch Panel),ºò«æ°±¤î¶}Ãö§@°Ê(¤p¤H¾÷),½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡AÃP¶}ºò«æ°±¤î¶}Ãö(¤p¤H¾÷)¡A¶i¦æ´_Âk¾Þ§@
+AGV_NODE,200006,2,,,
+AGV_NODE,200007,2,,,
+AGV_NODE,200008,2,System No Power On,¨t²Î¥¼±Ò°Ê,½Ð¥ý¥´¶}Â¼ªO¶}Ãö ON ¦A«ö¤Uºñ¦â«ö¶s START
+AGV_NODE,200009,2,284V No Power On,284V ¹q·½¨ÑÀ³¾¹¥¼°e¹q,«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@¡A¦pªG²§±`¥¼²M°£»ÝÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬OÀË¬d284V¹q·½¨ÑÀ³¬O§_¦³·lÃa
+AGV_NODE,200010,2,IPC Not Ready,IPC ¥¼´Nºü,
+AGV_NODE,200011,2,Force ELMO Servo Off form IPC, IPC ±j¨î ELMO ¦øªAÃö³¬,ÀËIPC¬O§_¦³¤U«ü¥Oµ¹ELMO¦øªAÃö³¬¡C
+AGV_NODE,200012,2,"During the AGV trek, please move the AGV to the ""iron"" BAR CODE","AGV°g¯è¤¤½Ð²¾°ÊAGV¨ì""ÅK""BAR CODE³B",«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@¡A¦pªG²§±`¥¼²M°£»ÝÀË¬d284V¹q·½¬O§_¦³·lÃa
+AGV_NODE,200013,2,,,«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@¡A¦pªG²§±`¥¼²M°£»ÝÀË¬d¹q·½­·®°©Î¬O284V¹q·½¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªºª½¬y¹q·½¶}Ãö¥¼¶}±Ò¡A¾É­P´²¼ö¤£¨Î·Å«×²§±`
+AGV_NODE,200014,2,Safety Relay Not Ready(EMO System),Safety Relay Not Ready(EMO¨t²Î),
+AGV_NODE,200015,2, Battery Voltage Not Enough,¹q¦À¹qÀ£¤£¨¬,½ÐÀË¬d¹q¦À¹qÀ£
+AGV_NODE,200016,2,Walker Wheel Motor Error(FR Side),¨«¦æ½ü°¨¹F²§±`(¥k«e°¼),½T»{¨«¦æ½ü°¨¹F¬O§_²§±`(FR°¼)
+AGV_NODE,200017,2,Walker Wheel Motor Error(FL Side),¨«¦æ½ü°¨¹F²§±`(¥ª«e°¼),½T»{¨«¦æ½ü°¨¹F¬O§_²§±`(FL°¼)
+AGV_NODE,200018,2,Walker Wheel Motor Error(BR Side),¨«¦æ½ü°¨¹F²§±`(¥k«á°¼),½T»{¨«¦æ½ü°¨¹F¬O§_²§±`(BR°¼)
+AGV_NODE,200019,2,Walker Wheel Motor Error(BL Side),¨«¦æ½ü°¨¹F²§±`(¥ª«á°¼),½T»{¨«¦æ½ü°¨¹F¬O§_²§±`(BL°¼)
+AGV_NODE,200020,2,,,
+AGV_NODE,200021,2,,,
+AGV_NODE,200022,2,,,
+AGV_NODE,200023,2,Coupler_R Side TRUshake Signal Off In Charging,Coupler_R°¼¦b¥R¹q®É¥æ´¤°T¸¹Off,ÀË¬d¥R¹q¼Î(R°¼)°Ê§@¬O§_¥¿½T©Î¬O¥¼¨ì¦ì¡A¥æ´¤³q°TSENSOR¦w¸Ë¦n©Î·lÃa¾É­P¥æ´¤°T¸¹µo°e²§±`
+AGV_NODE,200024,2,Coupler_L Side TRUshake Signal Off In Charging,Coupler_L°¼¦b¥R¹q®É¥æ´¤°T¸¹Off,ÀË¬d¥R¹q¼Î(L°¼)°Ê§@¬O§_¥¿½T©Î¬O¥¼¨ì¦ì¡A¥æ´¤³q°TSENSOR¦w¸Ë¦n©Î·lÃa¾É­P¥æ´¤°T¸¹µo°e²§±`
+AGV_NODE,200025,2,,,
+AGV_NODE,200026,2,,,
+AGV_NODE,200027,2,Execute IPC Get/Put Command Time Out,°õ¦æIPC¨ú©ñ©R¥OTime Out,ÀË¬dFORK¨ú©ñ°Ê§@¬O§_¥¿½T¡A©Î¬OFORK©R¥O°õ¦æ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200028,2,Vehicle Battery Voltage Too Low Error,¨®Åé¹q¦À¹qÀ£¹L§C²§±`,»Ý­n¥ß§Y¥R¹q¡A¦pªG¦b¥R¹qª¬ºA¤U¨ÌµMµo¥Í²§±`¡C»ÝÀË¬d¬O§_¥R¹q¦³°ÝÃD©Î¬O¹q¦À³Ì¤p­È³]©w¹L°ª
+AGV_NODE,200029,2,Vehicle Battery Voltage Too High Error,¨®Åé¹q¦À¹qÀ£¹L°ª²§±`,¦pªG¦b¥R¹qª¬ºA¤U¨ÌµMµo¥Í²§±`¡C»ÝÀË¬d¬O§_¥R¹q¦³°ÝÃD©Î¬O¹q¦À³Ì¤j­È³]©w¹L§C
+AGV_NODE,200030,2,Vehicle Battery Temperature Too High Error,¨®Åé¹q¦À·Å«×¹L°ª²§±`,»ÝÀË¬d­·®°¹q·½¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªº¹q·½¶}Ãö¥¼¶}±Ò¡A¾É­P´²¼ö¤£¨Î·Å«×²§±`
+AGV_NODE,200031,2,BAT-Front  FAN1 Alarm ,¨®Åé¹q¦À­·®°²§±`(«e-1),»ÝÀË¬d¹q·½­·®°(«e-1)¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªº¹q·½¶}Ãö¥¼¶}±Ò¡C
+AGV_NODE,200032,2,BAT-Front  FAN2 Alarm ,¨®Åé¹q¦À­·®°²§±`(«e-2),»ÝÀË¬d¹q·½­·®°(«e-2)¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªº¹q·½¶}Ãö¥¼¶}±Ò¡C
+AGV_NODE,200033,2,BAT-Back  FAN1 Alarm ,¨®Åé¹q¦À­·®°²§±`(«á-1),»ÝÀË¬d¹q·½­·®°(«á-1)¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªº¹q·½¶}Ãö¥¼¶}±Ò¡C
+AGV_NODE,200034,2,BAT-Back  FAN2 Alarm ,¨®Åé¹q¦À­·®°²§±`(«á-2),»ÝÀË¬d¹q·½­·®°(«á-2)¬O§_¦³·lÃa¡A©Î¬O¨ÑÀ³­·®°ªº¹q·½¶}Ãö¥¼¶}±Ò¡C
+AGV_NODE,200035,2,Safety switch (OS32C) triggered (F side),¦w¥þ¶}Ãö(OS32C) Ä²µo (F°¼),ÀË¬d¬O§_¦w¥þ¶}Ãö(OS32C) Ä²µo (F°¼)¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê
+AGV_NODE,200036,2,Safety switch (OS32C) triggered (B side),¦w¥þ¶}Ãö(OS32C) Ä²µo (B°¼),ÀË¬d¬O§_¦w¥þ¶}Ãö(OS32C) Ä²µo (B°¼)¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê
+AGV_NODE,200037,2,Safety switch (OS32C) triggered (L side),¦w¥þ¶}Ãö(OS32C) Ä²µo (L°¼),ÀË¬d¬O§_¦w¥þ¶}Ãö(OS32C) Ä²µo (L°¼)¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê
+AGV_NODE,200038,2,Safety switch (OS32C) triggered (R side),¦w¥þ¶}Ãö(OS32C) Ä²µo (R°¼),ÀË¬d¬O§_¦w¥þ¶}Ãö(OS32C) Ä²µo (R°¼)¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê
+AGV_NODE,200039,2,,,
+AGV_NODE,200040,2,Bump Sensor Error(F side)[X0114],Bump Sensor²§±`(¨®ÀY)[X0114],½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(F°¼)[X0114]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200041,2,Bump Sensor Error(B side)[X011A],Bump Sensor²§±`(¨®§À)[X011A],½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(F°¼)[X011A]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200042,2,Bump Sensor Error(L side)[X0134],Bump Sensor²§±`(¥ª°¼)[X0134],½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(F°¼)[X0134]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200043,2,Bump Sensor Error(R side)[X0136],Bump Sensor²§±`(¥k°¼)[X0136],½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(F°¼)[X0136]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200044,2,Bump Sensor Error(R side Door)[X0115],Bump Sensor²§±`(¥ª°¼DOOR)[X0115],½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(L°¼DOOR)[X0115]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200045,2,Bump Sensor Error(R side Door)[X011B],Bump Sensor²§±`(¥k°¼DOOR)[X011B],½T»{µL¤H¸IÄ²¨ìBUMP SENSOR(R°¼DOOR)[X011B]¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200046,2,TRU Correct Function Comfirm Error - Left side,¥D¥R¹q¯¸¸É¥¿¾¹½T»{¥¢±Ñ(L),½T»{AGV¨®(L°¼)SR-1000¹ï¦ì¬O§_¥¿½T
+AGV_NODE,200047,2,TRU Correct Function Comfirm Error - Left side,¥D¥R¹q¯¸¸É¥¿¾¹½T»{¥¢±Ñ(R),½T»{AGV¨®(R°¼)SR-1000¹ï¦ì¬O§_¥¿½T
+AGV_NODE,200048,2,LiDAR Sensor_F Error[X107],F Side  LiDAR ½T»{¥¢±Ñ,½T»{AGV¨®(F°¼) LiDAR ¹ï¦ì¬O§_¥¿½T
+AGV_NODE,200049,2,LiDAR Sensor_B Error[X109],B Side  LiDAR ½T»{¥¢±Ñ,½T»{AGV¨®(B°¼) LiDAR ¹ï¦ì¬O§_¥¿½T
+AGV_NODE,200050,2,LiDAR Sensor_L Error[X127],L Side  LiDAR ½T»{¥¢±Ñ,½T»{AGV¨®(L°¼) LiDAR ¹ï¦ì¬O§_¥¿½T
+AGV_NODE,200051,2,LiDAR Sensor_R Error[X129],R Side  LiDAR ½T»{¥¢±Ñ,½T»{AGV¨®(R°¼) LiDAR ¹ï¦ì¬O§_¥¿½T
+AGV_NODE,200052,2,LiDAR_F Alarm[X1B0],LiDAR_F Alarm ²§±`[X1B0],½T»{LiDAR_F ¬O§_²§±`[X1B0]
+AGV_NODE,200053,2,LiDAR_F Fault[X1B1],LiDAR_F Fault ¥¢®Ä[X1B0],½T»{LiDAR_F ¬O§_¥¢®Ä[X1B1]
+AGV_NODE,200054,2,LiDAR_B Alarm[X1B4],LiDAR_B Alarm ²§±`[X1B4],½T»{LiDAR_B ¬O§_²§±`[X1B4]
+AGV_NODE,200055,2,LiDAR_B Fault[X1B5],LiDAR_B Fault ¥¢®Ä[X1B5],½T»{LiDAR_B ¬O§_¥¢®Ä[X1B5]
+AGV_NODE,200056,2,TRU Forward/Back Axis Servo Off,¦ùÁY¶b ¦øªA°¨¹F¥¼°e¹q,ÀË¬dº|¹qÂ_¸ô¾¹(CP0622/CP0627)¬O§_¤w¶}±Ò
+AGV_NODE,200057,2,TRU Up/Down Axis Servo Off,¤É­°¶b ¦øªA°¨¹F¥¼°e¹q,ÀË¬dº|¹qÂ_¸ô¾¹(CP0602/CP0607)¬O§_¤w¶}±Ò
+AGV_NODE,200058,2,TRU Turn/Slide Axis Servo Off,±ÛÂà¶b+²¾¸ü¶b ¦øªA°¨¹F¥¼°e¹q,ÀË¬dº|¹qÂ_¸ô¾¹(CP0602/CP0607)¬O§_¤w¶}±Ò
+AGV_NODE,200059,2,Shutter Servo Off,©Ôªù¶b ¦øªA°¨¹F¥¼°e¹q,ÀË¬dº|¹qÂ_¸ô¾¹(CP0632)¬O§_¤w¶}±Ò
+AGV_NODE,200060,2,TRU Slide Side Servo Off,¨«¦æ¶b ¦øªA°¨¹F¥¼°e¹q,ÀË¬dº|¹qÂ_¸ô¾¹(CP0617)¬O§_¤w¶}±Ò
+AGV_NODE,200061,2,TRU Turn Side Servo Off,Âà¦V¶b ¦øªA°¨¹F¥¼°e¹q,ÀË¬dº|¹qÂ_¸ô¾¹(CP0612)¬O§_¤w¶}±Ò
 AGV_NODE,200062,2,,,
 AGV_NODE,200063,2,,,
 AGV_NODE,200064,2,,,
@@ -440,20 +440,20 @@ AGV_NODE,200066,2,,,
 AGV_NODE,200067,2,,,
 AGV_NODE,200068,2,,,
 AGV_NODE,200069,2,,,
-AGV_NODE,200070,2,Get\Put logic error - Right side,,
+AGV_NODE,200070,2,Get\Put logic error - Right side,R Side  EQ ¸m¨úCST PLCÅÞ¿è¿ù»~,½ÐÀË¬dPLC (R°¼)¨ú¸mª«µ{¦¡ÅÞ¿è¬O§_¥¿½T
 AGV_NODE,200071,2,,,
-AGV_NODE,200072,2,Get\Put logic error - Left side,,
+AGV_NODE,200072,2,Get\Put logic error - Left side,L Side  EQ ¸m¨úCST PLCÅÞ¿è¿ù»~,½ÐÀË¬dPLC (L°¼)¨ú¸mª«µ{¦¡ÅÞ¿è¬O§_¥¿½T
 AGV_NODE,200073,2,,,
-AGV_NODE,200074,2,284V Power Supply 1 No Start,,
-AGV_NODE,200075,2,284V Power Supply 2 No Start,,
-AGV_NODE,200076,2,284V Power Supply 3 No Start,,
-AGV_NODE,200077,2,284V Power Supply Fan 1 No Start,,
-AGV_NODE,200078,2,284V Power Supply Fan 2 No Start,,
-AGV_NODE,200079,2,284V Power Supply Fan 3 No Start,,
-AGV_NODE,200080,2,284V Power Supply 1 Over Current,,
-AGV_NODE,200081,2,284V Power Supply 2 Over Current,,
-AGV_NODE,200082,2,284V Power Supply 1 Over Heating,,
-AGV_NODE,200083,2,284V Power Supply 2 Over Heating,,
+AGV_NODE,200074,2,284V Power Supply 1 No Start,284V ¹q·½¨ÑÀ³¾¹ 1 ¥¼±Ò°Ê,½ÐÀË¬d¤H¾÷­±ªOPower On¬O§_¤w¶}±Ò
+AGV_NODE,200075,2,284V Power Supply 2 No Start,284V ¹q·½¨ÑÀ³¾¹ 2 ¥¼±Ò°Ê,½ÐÀË¬d¤H¾÷­±ªOPower On¬O§_¤w¶}±Ò
+AGV_NODE,200076,2,284V Power Supply 3 No Start,284V ¹q·½¨ÑÀ³¾¹ 3 ¥¼±Ò°Ê,½ÐÀË¬d¤H¾÷­±ªOPower On¬O§_¤w¶}±Ò
+AGV_NODE,200077,2,284V Power Supply Fan 1 No Start,284V ¹q·½¨ÑÀ³¾¹ 1 ­·®°²§±`,½ÐÀË¬d284V ¹q·½¨ÑÀ³¾¹1­·®°¬O§_²§±`
+AGV_NODE,200078,2,284V Power Supply Fan 2 No Start,284V ¹q·½¨ÑÀ³¾¹ 2 ­·®°²§±`,½ÐÀË¬d284V ¹q·½¨ÑÀ³¾¹2­·®°¬O§_²§±`
+AGV_NODE,200079,2,284V Power Supply Fan 3 No Start,284V ¹q·½¨ÑÀ³¾¹ 3 ­·®°²§±`,½ÐÀË¬d284V ¹q·½¨ÑÀ³¾¹3­·®°¬O§_²§±`
+AGV_NODE,200080,2,284V Power Supply 1 Over Current,284V ¹q·½¨ÑÀ³¾¹ 1 ¹L¹q¬y,½ÐÀË¬d284V ¹q·½¨ÑÀ³¾¹1¹q¬y¬O§_²§±`
+AGV_NODE,200081,2,284V Power Supply 2 Over Current,284V ¹q·½¨ÑÀ³¾¹ 2 ¹L¹q¬y,½ÐÀË¬d284V ¹q·½¨ÑÀ³¾¹1¹q¬y¬O§_²§±`
+AGV_NODE,200082,2,284V Power Supply 1 Over Heating,284V ¹q·½¨ÑÀ³¾¹ 1 ¹L·Å²§±`,½ÐÀË¬d284V ¹q·½¨ÑÀ³¾¹1·Å«×¬O§_²§±`
+AGV_NODE,200083,2,284V Power Supply 2 Over Heating,284V ¹q·½¨ÑÀ³¾¹ 2 ¹L·Å²§±`,½ÐÀË¬d284V ¹q·½¨ÑÀ³¾¹2·Å«×¬O§_²§±`
 AGV_NODE,200084,2,,,
 AGV_NODE,200085,2,,,
 AGV_NODE,200086,2,,,
@@ -570,111 +570,111 @@ AGV_NODE,200196,2,,,
 AGV_NODE,200197,2,,,
 AGV_NODE,200198,2,,,
 AGV_NODE,200199,2,,,
-AGV_NODE,200200,2,CST Detect Sensor Error[X01AC],,ÀË¬dCST¦b®uÀË[X01AC]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200201,2,CST Detect Sensor Error[X0217][X021B],,ÀË¬dCST¦b®uÀË[X0217][X021B]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200202,2,Shutter upper limit sensor error [X020B] - Right side,,
-AGV_NODE,200203,2,Shutter lower limit sensor error [X020D] - Right side,,
-AGV_NODE,200204,2,Shutter upper limit sensor error [X020E] - Left side,,
-AGV_NODE,200205,2,Shutter lower limit sensor error [X020F] - Left side,,
-AGV_NODE,200206,2,Hand Check Out Error[X0201][X0205],,ÀË¬dFORK¦b²üÀË[X0201][X0205]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200207,2,Hand Forward/Back Axis RLSSensor Error,,¤âÁu¦ùÁY¶b¸IÄ²¨ì¤U·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤U·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200208,2,Hand Forward/Back Axis FLSSensor Error,,¤âÁu¦ùÁY¶b¸IÄ²¨ì¤W·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤W·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200209,2,Hand Forward/Back Axis Error,,¤âÁu¦ùÁY¶b°Ê§@®É¬O§_µo¥Í²§±`¡A½Ð¨Ì¦øªA²§±`½X¤À§O¶i¦æ±Æ°£´_Âk¾Þ§@
-AGV_NODE,200210,2,Hand Forward/Back Axis Servo Action Time Out,,¤âÁu¦ùÁY¶b°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200211,2,Hand Up/Down Axis RLS Sensor Error,,¤âÁu¤É­°¶b¸IÄ²¨ì¤U·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤U·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200212,2,Hand Up/Down Axis FLS Sensor Error,,¤âÁu¤É­°¶b¸IÄ²¨ì¤W·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤W·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200213,2,Hand Up/Down Axis Servo Error,,¤âÁu¤É­°¶b°Ê§@®É¬O§_µo¥Í²§±`¡A½Ð¨Ì¦øªA²§±`½X¤À§O¶i¦æ±Æ°£´_Âk¾Þ§@
-AGV_NODE,200214,2,Hand Up/Down Axis Servo Action Time Out,,¤âÁu¤É­°¶b°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200215,2,Hand Slide Axis RLS Sensor Error,,¤âÁu²¾¸ü¶b¸IÄ²¨ì¤U·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤U·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200216,2,Hand Slide Axis FLS Sensor Error,,¤âÁu²¾¸ü¶b¸IÄ²¨ì¤W·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤W·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200217,2,Hand Slide Axis Servo Error,,¤âÁu²¾¸ü¶b°Ê§@®É¬O§_µo¥Í²§±`¡A½Ð¨Ì¦øªA²§±`½X¤À§O¶i¦æ±Æ°£´_Âk¾Þ§@
-AGV_NODE,200218,2,Hand Slide Axis Servo Action Time Out,,¤âÁu²¾¸ü¶b°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200219,2,Hand Turn Axis RLS Sensor Error,,¤âÁu±ÛÂà¶b¸IÄ²¨ì¤U·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤U·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200220,2,Hand Turn Axis FLS Sensor Error,,¤âÁu±ÛÂà¶b¸IÄ²¨ì¤W·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤W·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
-AGV_NODE,200221,2,Hand Turn Axis Servo Error,,¤âÁu±ÛÂà¶b°Ê§@®É¬O§_µo¥Í²§±`¡A½Ð¨Ì¦øªA²§±`½X¤À§O¶i¦æ±Æ°£´_Âk¾Þ§@
-AGV_NODE,200222,2,Hand Turn Axis Servo Action Time Out,,¤âÁu±ÛÂà¶b°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200223,2,Shutter Door Servo Controller Error,,©Ôªù¦øªA¶b°Ê§@®É¬O§_µo¥Í²§±`¡A½Ð¨Ì¦øªA²§±`½X¤À§O¶i¦æ±Æ°£´_Âk¾Þ§@
-AGV_NODE,200224,2,Shutter Door Servo Controller Error,,
-AGV_NODE,200225,2,Hand Back End Sensor Is Not On[Dog],,¤âÁu¦ùÁY¶b¦^­ìÂI®É¡A­ìÂI(DOG)«H¸¹¥¼§@°Ê¡AÀË¬dSENSOR¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200226,2,Hand Down End Sensor Is Not On[X0219],,¤âÁu¤É­°¶b°õ¦æ¤U­°ºÝ©I¥s¡A¨ì¦ì¤U­°ºÝSENSOR[X0219]«H¸¹¥¼§@°Ê¡AÀË¬dSENSOR¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200227,2,Hand Rising End Sensor Is Not On[X0218],,¤âÁu¤É­°¶b°õ¦æ¤W¤ÉºÝ©I¥s®É¡A¨ì¦ì¤W¤ÉºÝSENSOR[X0218]«H¸¹¥¼§@°Ê¡AÀË¬dSENSOR¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200228,2,Hand Turn Axis 90 Degrees Sensor Is Not On[X020A],,¤âÁu±ÛÂà¶b°õ¦æ90«×©I¥s®É¡A¨ì¦ì90«×SENSOR[X020A]«H¸¹¥¼§@°Ê¡AÀË¬dSENSOR¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200229,2,Hand Forward/Back Axis Servo Is Not In Back Position,,½Ð¦b¤â°Ê¼Ò¦¡°õ¦æJOG¾Þ§@¡AÅý¦ùÁY¶b¦øªA¨ì¹FÁY¦^¦ì¸m¦A¤Á´«¦¨¦Û°Ê¼Ò¦¡
-AGV_NODE,200230,2,Hand Up/Down Axis Servo Is Not In Get CST Position,,½Ð¦b¤â°Ê¼Ò¦¡°õ¦æJOG¾Þ§@¡AÅý¤É­°¶b¦øªA¨ì¹F¨ú©ñCST¦ì¸m¦A¤Á´«¦¨¦Û°Ê¼Ò¦¡
-AGV_NODE,200231,2,Hand Slide Axis Servo Is Not In Get/Put CST Position,,½Ð¦b¤â°Ê¼Ò¦¡°õ¦æJOG¾Þ§@¡AÅý²¾¸ü¶b¦øªA¨ì¹F¨ú©ñCST¦ì¸m¦A¤Á´«¦¨¦Û°Ê¼Ò¦¡
-AGV_NODE,200232,2,Hand Turn Axis Servo Is Not In GetCST Position,,½Ð¦b¤â°Ê¼Ò¦¡°õ¦æJOG¾Þ§@¡AÅý±ÛÂà¶b¦øªA¨ì¹F¨ú©ñCST¦ì¸m¦A¤Á´«¦¨¦Û°Ê¼Ò¦¡
-AGV_NODE,200233,2,Hand Get CST Action Time Out,,ÀË¬d¤âÁu¨úCST°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬O¨ú©ñCST°Ê§@®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200234,2,Hand Put CST Action Time Out,,ÀË¬d¤âÁu©ñCST°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬O¨ú©ñCST°Ê§@®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200235,2,Hand Is Not Execute Get Cassette Action,,¤âÁu±µ¦¬¨ì©R¥O«o¥¼°õ¦æ§@°Ê¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`¾É­PFORK¥¼¦ù¥X°õ¦æ¨úCST§@°Ê
-AGV_NODE,200236,2,Hand Is Not Execute Put Cassette Action,,¤âÁu±µ¦¬¨ì©R¥O«o¥¼°õ¦æ§@°Ê¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`¾É­PFORK¥¼¦ù¥X°õ¦æ©ñCST§@°Ê
-AGV_NODE,200237,2,Hand Forward/Back Axis And Turn Axis Servo Home Return Time Out,,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200238,2,Hand Up/Down Axis Servo Home Return Time Out,,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200239,2,Hand Slide Axis Servo Home Return Time Out,,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200240,2,Hand Back To Work Home Action Time Out(Nothing),,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200241,2,Hand Back To Work Home Action Time Out(Something),,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200242,2,Hand GetEQ CST Action Time Out(L Side),,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200243,2,Hand Put EQ CST Action Time Out(L Side),,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200244,2,Hand GetEQ CST Action Time Out(R Side),,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200245,2,Hand Put EQ CST Action Time Out(R Side),,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200246,2,Shutter Door Fall Action Time Out(L Side),,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR[X0133]¥¼§@°Ê¡A¥H¤ÎServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200247,2,Shutter Door Fall Action Time Out(R Side),,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR[X0113]¥¼§@°Ê¡A¥H¤ÎServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200248,2,Hand Servo Off Action Time Out,,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê
-AGV_NODE,200249,2,Hand Servo On Action Time Out,,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê
-AGV_NODE,200250,2,Shutter Door R Side Rise Action Time Out,,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200251,2,Shutter Door R Side Fall Action Time Out,,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200252,2,TRU FORK up/down Sensor error,,ÀË¬d¤É­°¶É±×ÀËª¾SENSOR[X021A]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200253,2,"AGV Car And EQ Handshake,T4 Time out (L Side)",,ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A¥H¤ÎT4¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200200,2,CST Detect Sensor Error[X01AC],CST¦b®uÀË²§±`[X01AC],ÀË¬dCST¦b®uÀË[X01AC]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200201,2,CST Detect Sensor Error[X0217][X021B],CST¦b®uÀË²§±`[X0217][X021B],ÀË¬dCST¦b®uÀË[X0217][X021B]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200202,2,,,
+AGV_NODE,200203,2,,,
+AGV_NODE,200204,2,,,
+AGV_NODE,200205,2,,,
+AGV_NODE,200206,2,TRU Check Out Error[X0201][X0205],TRU¦b®uÀË¥X²§±`[X0201][X0205],ÀË¬dFORK¦b²üÀË[X0201][X0205]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200207,2,TRU Forward/Back Axis RLSSensor Error,TRU¦ùÁY¶b¤U·¥­­Sensor²§±`,¤âÁu¦ùÁY¶b¸IÄ²¨ì¤U·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤U·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200208,2,TRU Forward/Back Axis FLSSensor Error,TRU¦ùÁY¶b¤W·¥­­Sensor²§±`,¤âÁu¦ùÁY¶b¸IÄ²¨ì¤W·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤W·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200209,2,TRU Forward/Back Axis Error,TRU¦ùÁY¶b¦øªA±±¨î¾¹²§±`,¤âÁu¦ùÁY¶b°Ê§@®É¬O§_µo¥Í²§±`¡A½Ð¨Ì¦øªA²§±`½X¤À§O¶i¦æ±Æ°£´_Âk¾Þ§@
+AGV_NODE,200210,2,TRU Forward/Back Axis Servo Action Time Out,TRU¦ùÁY¶b¦øªA°Ê§@Time Out,¤âÁu¦ùÁY¶b°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200211,2,TRU Up/Down Axis RLS Sensor Error,TRU¤É­°¶b¤U·¥­­Sensor²§±`,¤âÁu¤É­°¶b¸IÄ²¨ì¤U·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤U·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200212,2,TRU Up/Down Axis FLS Sensor Error,TRU¤É­°¶b¤W·¥­­Sensor²§±`,¤âÁu¤É­°¶b¸IÄ²¨ì¤W·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤W·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200213,2,TRU Up/Down Axis Servo Error,TRU¤É­°¶b¦øªA±±¨î¾¹²§±`,¤âÁu¤É­°¶b°Ê§@®É¬O§_µo¥Í²§±`¡A½Ð¨Ì¦øªA²§±`½X¤À§O¶i¦æ±Æ°£´_Âk¾Þ§@
+AGV_NODE,200214,2,TRU Up/Down Axis Servo Action Time Out,TRU¤É­°¶b¦øªA°Ê§@Time Out,¤âÁu¤É­°¶b°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200215,2,TRU Slide Axis RLS Sensor Error,TRU²¾¸ü¶b¤U·¥­­Sensor²§±`,¤âÁu²¾¸ü¶b¸IÄ²¨ì¤U·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤U·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200216,2,TRU Slide Axis FLS Sensor Error,TRU²¾¸ü¶b¤W·¥­­Sensor²§±`,¤âÁu²¾¸ü¶b¸IÄ²¨ì¤W·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤W·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200217,2,TRU Slide Axis Servo Error,TRU²¾¸ü¶b¦øªA±±¨î¾¹²§±`,¤âÁu²¾¸ü¶b°Ê§@®É¬O§_µo¥Í²§±`¡A½Ð¨Ì¦øªA²§±`½X¤À§O¶i¦æ±Æ°£´_Âk¾Þ§@
+AGV_NODE,200218,2,TRU Slide Axis Servo Action Time Out,TRU²¾¸ü¶b¦øªA°Ê§@Time Out,¤âÁu²¾¸ü¶b°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200219,2,TRU Turn Axis RLS Sensor Error,TRU±ÛÂà¶b¤U·¥­­Sensor²§±`,¤âÁu±ÛÂà¶b¸IÄ²¨ì¤U·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤U·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200220,2,TRU Turn Axis FLS Sensor Error,TRU±ÛÂà¶b¤W·¥­­Sensor²§±`,¤âÁu±ÛÂà¶b¸IÄ²¨ì¤W·¥­­¡A½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±¡A°õ¦æ³æ¶bJOG¾Þ§@²¾°ÊÂ÷¶}¤W·¥­­¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æAlarm´_Âk¾Þ§@
+AGV_NODE,200221,2,TRU Turn Axis Servo Error,TRU±ÛÂà¶b¦øªA±±¨î¾¹²§±`,¤âÁu±ÛÂà¶b°Ê§@®É¬O§_µo¥Í²§±`¡A½Ð¨Ì¦øªA²§±`½X¤À§O¶i¦æ±Æ°£´_Âk¾Þ§@
+AGV_NODE,200222,2,TRU Turn Axis Servo Action Time Out,TRU±ÛÂà¶b¦øªA°Ê§@Time Out,¤âÁu±ÛÂà¶b°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200223,2,Shutter Door Servo Controller Error,©Ôªù¶b ¦øªA±±¨î¾¹²§±`,©Ôªù¦øªA¶b°Ê§@®É¬O§_µo¥Í²§±`¡A½Ð¨Ì¦øªA²§±`½X¤À§O¶i¦æ±Æ°£´_Âk¾Þ§@
+AGV_NODE,200224,2,,,
+AGV_NODE,200225,2,TRU Back End Sensor Is Not On[Dog],¤âÁu«á°hºÝSensor¥¼On[ªñÂI°T¸¹],¤âÁu¦ùÁY¶b¦^­ìÂI®É¡A­ìÂI(DOG)«H¸¹¥¼§@°Ê¡AÀË¬dSENSOR¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200226,2,TRU Down End Sensor Is Not On[X0219],¤âÁu¤U­°ºÝSensor¥¼On[X0219],¤âÁu¤É­°¶b°õ¦æ¤U­°ºÝ©I¥s¡A¨ì¦ì¤U­°ºÝSENSOR[X0219]«H¸¹¥¼§@°Ê¡AÀË¬dSENSOR¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200227,2,TRU Rising End Sensor Is Not On[X0218],¤âÁu¤W¤ÉºÝSensor¥¼On[X0218],¤âÁu¤É­°¶b°õ¦æ¤W¤ÉºÝ©I¥s®É¡A¨ì¦ì¤W¤ÉºÝSENSOR[X0218]«H¸¹¥¼§@°Ê¡AÀË¬dSENSOR¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200228,2,TRU Turn Axis 90 Degrees Sensor Is Not On[X020A],±ÛÂà¶b 90«×Sensor¥¼On[X020A],¤âÁu±ÛÂà¶b°õ¦æ90«×©I¥s®É¡A¨ì¦ì90«×SENSOR[X020A]«H¸¹¥¼§@°Ê¡AÀË¬dSENSOR¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200229,2,TRU Forward/Back Axis Servo Is Not In Back Position,¦ùÁY¶b ¦øªA¥¼¦bÁY¦^¦ì¸m,½Ð¦b¤â°Ê¼Ò¦¡°õ¦æJOG¾Þ§@¡AÅý¦ùÁY¶b¦øªA¨ì¹FÁY¦^¦ì¸m¦A¤Á´«¦¨¦Û°Ê¼Ò¦¡
+AGV_NODE,200230,2,TRU Up/Down Axis Servo Is Not In Get CST Position,¤É­°¶b ¦øªA¥¼¦b¨úCST¦ì¸m,½Ð¦b¤â°Ê¼Ò¦¡°õ¦æJOG¾Þ§@¡AÅý¤É­°¶b¦øªA¨ì¹F¨ú©ñCST¦ì¸m¦A¤Á´«¦¨¦Û°Ê¼Ò¦¡
+AGV_NODE,200231,2,TRU Slide Axis Servo Is Not In Get/Put CST Position,²¾¸ü¶b ¦øªA¥¼¦b¨ú©ñCST¦ì¸m,½Ð¦b¤â°Ê¼Ò¦¡°õ¦æJOG¾Þ§@¡AÅý²¾¸ü¶b¦øªA¨ì¹F¨ú©ñCST¦ì¸m¦A¤Á´«¦¨¦Û°Ê¼Ò¦¡
+AGV_NODE,200232,2,TRU Turn Axis Servo Is Not In GetCST Position,±ÛÂà¶b ¦øªA¥¼¦b¨úCST¦ì¸m,½Ð¦b¤â°Ê¼Ò¦¡°õ¦æJOG¾Þ§@¡AÅý±ÛÂà¶b¦øªA¨ì¹F¨ú©ñCST¦ì¸m¦A¤Á´«¦¨¦Û°Ê¼Ò¦¡
+AGV_NODE,200233,2,TRU Get CST Action Time Out,¤âÁu¨úCST°Ê§@Time Out,ÀË¬d¤âÁu¨úCST°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬O¨ú©ñCST°Ê§@®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200234,2,TRU Put CST Action Time Out,¤âÁu©ñCST°Ê§@Time Out,ÀË¬d¤âÁu©ñCST°Ê§@®É¬O§_µo¥Í²§±`¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬O¨ú©ñCST°Ê§@®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200235,2,TRU Is Not Execute Get Cassette Action,¤âÁu¥¼°õ¦æ¨úCassetteªº°Ê§@,¤âÁu±µ¦¬¨ì©R¥O«o¥¼°õ¦æ§@°Ê¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`¾É­PFORK¥¼¦ù¥X°õ¦æ¨úCST§@°Ê
+AGV_NODE,200236,2,TRU Is Not Execute Put Cassette Action,¤âÁu¥¼°õ¦æ©ñCassetteªº°Ê§@,¤âÁu±µ¦¬¨ì©R¥O«o¥¼°õ¦æ§@°Ê¡AÀË¬d¬O§_¬°¦øªAª¬ºA²§±`¾É­PFORK¥¼¦ù¥X°õ¦æ©ñCST§@°Ê
+AGV_NODE,200237,2,TRU Forward/Back Axis And Turn Axis Servo Home Return Time Out,¦ùÁY¶b»P±ÛÂà¶b ¦øªA­ìÂI´_Âk Time Out,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200238,2,TRU Up/Down Axis Servo Home Return Time Out,¤É­°¶b ¦øªA­ìÂI´_Âk Time Out,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200239,2,TRU Slide Axis Servo Home Return Time Out,²¾¸ü¶b ¦øªA­ìÂI´_Âk Time Out,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200240,2,TRU Back To Work Home Action Time Out(Nothing),¤âÁu¦^¤u§@­ìÂI°Ê§@Time Out(µLª«®É),ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200241,2,TRU Back To Work Home Action Time Out(Something),¤âÁu¦^¤u§@­ìÂI°Ê§@Time Out(¦³ª«®É),ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200242,2,TRU GetEQ CST Action Time Out(L Side),¤âÁu¨úEQ CST°Ê§@Time Out(L°¼),ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200243,2,TRU Put EQ CST Action Time Out(L Side),¤âÁu©ñEQ CST°Ê§@Time Out(L°¼),ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200244,2,TRU GetEQ CST Action Time Out(R Side),¤âÁu¨úEQ CST°Ê§@Time Out(R°¼),ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200245,2,TRU Put EQ CST Action Time Out(R Side),¤âÁu©ñEQ CST°Ê§@Time Out(R°¼),ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê¡A¥H¤Î¦øªA­ìÂI´_Âk®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200246,2,Shutter Door Fall Action Time Out(L Side),±²ªù¤U­°°Ê§@Time Out(L°¼),ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR[X0133]¥¼§@°Ê¡A¥H¤ÎServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200247,2,Shutter Door Fall Action Time Out(R Side),±²ªù¤U­°°Ê§@Time Out(R°¼),ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR[X0113]¥¼§@°Ê¡A¥H¤ÎServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200248,2,TRU Servo Off Action Time Out,¤âÁuServo Off°Ê§@Time Out,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê
+AGV_NODE,200249,2,TRU Servo On Action Time Out,¤âÁuServo On°Ê§@Time Out,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OSENSOR¥¼§@°Ê
+AGV_NODE,200250,2,Shutter Door R Side Rise Action Time Out,R°¼±²ªù ¤W¤É°Ê§@Time Out,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200251,2,Shutter Door R Side Fall Action Time Out,R°¼±²ªù ¤U­°°Ê§@Time Out,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200252,2,TRU Fok up/down Sensor error,TRU FORK ¤É­°¶É±×ÀËª¾²§±`,ÀË¬d¤É­°¶É±×ÀËª¾SENSOR[X021A]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200253,2,"AGV Car And EQ TRUshake,T4 Time out (L Side)","AGV¨®»PEQ¥æ´¤,µo¥ÍT4 Time out (L°¼)",ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A¥H¤ÎT4¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
 AGV_NODE,200254,2,,,
-AGV_NODE,200255,2,Shutter Door L Side Rise Action Time Out,,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200256,2,Shutter Door L Side Fall Action Time Out,,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,200257,2,TRU FORK Tilt sensor Alarm[X21A],,
-AGV_NODE,200258,2,"AGV Car And EQ Handshake,T4 Time out (R Side)",,ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A¥H¤ÎT4¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200255,2,Shutter Door L Side Rise Action Time Out,L°¼±²ªù ¤W¤É°Ê§@Time Out,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200256,2,Shutter Door L Side Fall Action Time Out,L°¼±²ªù ¤U­°°Ê§@Time Out,ÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬OServo Time Out ®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,200257,2,TRU TRU Tilt sensor Alarm[X21A],TRU FORK ¦ù­°¶É±×ÀËª¾²§±`[X21A],ÀË¬dFORK¶É±×ÀËª¾¬O§_²§±`[X21A]
+AGV_NODE,200258,2,"AGV Car And EQ TRUshake,T4 Time out (R Side)","AGV¨®»PEQ¥æ´¤,µo¥ÍT4 Time out (R°¼)",ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A¥H¤ÎT4¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
 AGV_NODE,200259,2,,,
-AGV_NODE,200260,2,"Hand Get CST,Hand Detect Sensor Detect Nothing[X0201]",,ÀË¬dFORK¦b²üÀË[X0201]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200261,2,"Hand Get CST,Hand Detect Sensor Detect Nothing[X0205]",,ÀË¬dFORK¦b²üÀË[X0205]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200262,2,"Hand Put CST,Hand Detect Sensor Detect Nothing[X0201]",,ÀË¬dFORK¦b²üÀË[X0201]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200263,2,"Hand Put CST,Hand Detect Sensor Detect Nothing[X0205]",,ÀË¬dFORK¦b²üÀË[X0205]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200264,2,"Hand Put CST,But Hand Detect Sensor Detect Something[X0201]",,ÀË¬dFORK¦b²üÀË[X0201]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200265,2,"Hand Put CST,But Hand Detect Sensor Detect Something[X0205]",,ÀË¬dFORK¦b²üÀË[X0205]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200266,2,Servo#1 Tween axis Position abnormal ,,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±°õ¦æ¦P°ª¾Þ§@¡AµM«á¦A°õ¦æ¦øªA©I¥s¾Þ§@¦pªG²§±`¥¼®ø¥¢½ÐÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬O¤âÁu¾÷ºc¥i¯à¦³°ÝÃD
-AGV_NODE,200267,2,Servo#2 Tween axis Position abnormal ,,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±°õ¦æ¦P°ª¾Þ§@¡AµM«á¦A°õ¦æ¦øªA©I¥s¾Þ§@¦pªG²§±`¥¼®ø¥¢½ÐÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬O¤âÁu¾÷ºc¥i¯à¦³°ÝÃD
-AGV_NODE,200268,2,Worng rotationof hand Get/Put CST(L Side) ,,ÀË¬dSENSOR[X12A6]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200269,2,Worng rotationof hand Get/Put  CST(R Side) ,,ÀË¬dSENSOR[X020C]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200270,2,PUT Double Storag R Side abnormal,,ÀË¬d¤G­«®æÀËª¾  (R)[X0204]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200271,2,Get  Empty Retriev R Side abnormal,,ÀË¬d¤G­«®æÀËª¾  (R)[X0204]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200272,2,PUT Double Storag L Side abnormal,,ÀË¬d¤G­«®æÀËª¾  (L)[X0200]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200273,2,Get Empty Retriev L Side abnormal,,ÀË¬d¤G­«®æÀËª¾  (L)[X0200]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200274,2,"Down Position,FORK Hand Sensor On ,CST ON   ",,ÀË¬dFORK¦b²üÀË[X0201][X0205]©MCST¦b®uÀË[X01AC]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
-AGV_NODE,200275,2,Get CST From EQ Double Storag abnormal,,ÀË¬d¤G­«®æ¬O§_²§±`
-AGV_NODE,200276,2,Put CST To EQ Double Storag abnormal,,ÀË¬d¤G­«®æ¬O§_²§±`
-AGV_NODE,200277,2,"FORK (R Side) Get/Put, LiDAR Sensor_L Error[X127]",,"ÀË¬d,L°¼SensorÀË¥X¬O§_²§±`[X127]"
-AGV_NODE,200278,2,"FORK (L Side) Get/Put, (R Side) Sensor On",,ÀË¬dR°¼SensorÀË¥X¬O§_²§±`[X129]
+AGV_NODE,200260,2,"TRU Get CST,TRU Detect Sensor Detect Nothing[X0201]","¤âÁu¨úCST®É,Fork²ü¦³ÀËÀË´úµLª«[X0201]",ÀË¬dFORK¦b²üÀË[X0201]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200261,2,"TRU Get CST,TRU Detect Sensor Detect Nothing[X0205]","¤âÁu¨úCST®É,Fork²ü¦³ÀËÀË´úµLª«[X0205]",ÀË¬dFORK¦b²üÀË[X0205]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200262,2,"TRU Put CST,TRU Detect Sensor Detect Nothing[X0201]","¤âÁu©ñCST®É,Fork²ü¦³ÀËÀË´úµLª«[X0201]",ÀË¬dFORK¦b²üÀË[X0201]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200263,2,"TRU Put CST,TRU Detect Sensor Detect Nothing[X0205]","¤âÁu©ñCST®É,Fork²ü¦³ÀËÀË´úµLª«[X0205]",ÀË¬dFORK¦b²üÀË[X0205]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200264,2,"TRU Put CST,But TRU Detect Sensor Detect Something[X0201]","¤âÁu©ñ§¹CST®É,¦ýFork²ü¦³ÀËÀË´ú¦³ª«[X0201]",ÀË¬dFORK¦b²üÀË[X0201]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200265,2,"TRU Put CST,But TRU Detect Sensor Detect Something[X0205]","¤âÁu©ñ§¹CST®É,¦ýFork²ü¦³ÀËÀË´ú¦³ª«[X0205]",ÀË¬dFORK¦b²üÀË[X0205]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200266,2,Servo#1 Tween axis Position abnormal ,Servo#1 ¸É¶¡¦ìÓ_²§±`,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±°õ¦æ¦P°ª¾Þ§@¡AµM«á¦A°õ¦æ¦øªA©I¥s¾Þ§@¦pªG²§±`¥¼®ø¥¢½ÐÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬O¤âÁu¾÷ºc¥i¯à¦³°ÝÃD
+AGV_NODE,200267,2,Servo#2 Tween axis Position abnormal ,Servo#2 ¸É¶¡¦ìÓ_²§±`,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA³æ/Âù¶b¾Þ§@µe­±°õ¦æ¦P°ª¾Þ§@¡AµM«á¦A°õ¦æ¦øªA©I¥s¾Þ§@¦pªG²§±`¥¼®ø¥¢½ÐÀË¬d¬O§_¬°¦øªAª¬ºA²§±`©Î¬O¤âÁu¾÷ºc¥i¯à¦³°ÝÃD
+AGV_NODE,200268,2,Worng rotationof TRU Get/Put CST(L Side) ,¤âÁu¨ú©ñCST ±ÛÂà¤è¦V¿ù»~(L°¼),ÀË¬dSENSOR[X12A6]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200269,2,Worng rotationof TRU Get/Put  CST(R Side) ,¤âÁu¨ú©ñCST ±ÛÂà¤è¦V¿ù»~(R°¼),ÀË¬dSENSOR[X020C]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200270,2,PUT Double Storag R Side abnormal,R°¼ ¸mª«¤G­«®æ§PÂ_²§±`(¦³ª«),ÀË¬d¤G­«®æÀËª¾  (R)[X0204]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200271,2,Get  Empty Retriev R Side abnormal,R°¼ ¨úª«¤G­«®æ§PÂ_²§±`(µLª«),ÀË¬d¤G­«®æÀËª¾  (R)[X0204]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200272,2,PUT Double Storag L Side abnormal,L°¼ ¸mª«¤G­«®æ§PÂ_²§±`(¦³ª«),ÀË¬d¤G­«®æÀËª¾  (L)[X0200]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200273,2,Get Empty Retriev L Side abnormal,L°¼ ¨úª«¤G­«®æ§PÂ_²§±`(µLª«),ÀË¬d¤G­«®æÀËª¾  (L)[X0200]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200274,2,"Down Position,TRU TRU Sensor On ,CST ON   ","¤U­°ºÝ®É,FORKÀË»PCST¦³µLÀË¦P®ÉON",ÀË¬dFORK¦b²üÀË[X0201][X0205]©MCST¦b®uÀË[X01AC]¬O§_¦³·lÃa¡A©Î¬O·Ó®g¨¤«×¥¼½Õ¾ã¦n¡A¾É­PSENSOR§@°Ê²§±`
+AGV_NODE,200275,2,Get CST From EQ Double Storag abnormal,"±qEQ¨úCST®É,µo¥Í¤G­«®æ²§±`",ÀË¬d¤G­«®æ¬O§_²§±`
+AGV_NODE,200276,2,Put CST To EQ Double Storag abnormal,"©ñCST¨ìEQ®É,µo¥Í¤G­«®æ²§±`",ÀË¬d¤G­«®æ¬O§_²§±`
+AGV_NODE,200277,2,"TRU (R Side) Get/Put, LiDAR Sensor_L Error[X127]",TRU ±ÛÂà¤¤¤H­û³]³Æ«I¤J¦w¥þ°Ï°ì(L°¼),"ÀË¬d,L°¼SensorÀË¥X¬O§_²§±`[X127]"
+AGV_NODE,200278,2,"TRU (L Side) Get/Put, (R Side) Sensor On",TRU ±ÛÂà¤¤¤H­û³]³Æ«I¤J¦w¥þ°Ï°ì(R°¼),ÀË¬dR°¼SensorÀË¥X¬O§_²§±`[X129]
 AGV_NODE,200279,2,,,
-AGV_NODE,200280,2,EQ Ready signal Off - Left side,,
-AGV_NODE,200281,2,EQ Ready signal Off - Right side,,
+AGV_NODE,200280,2,EQ Ready signal Off - Left side,L Side EQ I/F Ready °T¸¹ OFF,
+AGV_NODE,200281,2,EQ Ready signal Off - Right side,R Side EQ I/F Ready °T¸¹ OFF,
 AGV_NODE,200282,2,"AGV is not Ready
-AGV is in manual state, please do home return or close the door",,(²§±`®ø°£(Åv­­µn¤J(©ÔªùÃö³¬
-AGV_NODE,200283,2,Charger Error(R Side),,"½ÐÀË¬d¥R¹q®É,¥D¥R¹q¼Î¬O§_²§±`(R°¼)"
-AGV_NODE,200284,2,"In Charge,Charger Sensor Error(R Side)",,"½ÐÀË¬d¥R¹q®É,¥D¥R¹q¼ÎÀËª¾¬O§_²§±`(R°¼)"
-AGV_NODE,200285,2,Charger Error(L Side),,"½ÐÀË¬d¥R¹q®É,¥D¥R¹q¼Î¬O§_²§±`(L°¼)"
-AGV_NODE,200286,2,"In Charge,Charger Sensor Error(L Side)",,"½ÐÀË¬d¥R¹q®É,¥D¥R¹q¼ÎÀËª¾¬O§_²§±`(L°¼)"
+AGV is in manual state, please do home return or close the door",¥i¯à¬O(²§±`¨S®ø(Åv­­¥¼µn(©Ôªù¨SÃö,(²§±`®ø°£(Åv­­µn¤J(©ÔªùÃö³¬
+AGV_NODE,200283,2,Charger Error(R Side),¥R¹q¤¤  ¥D¥R¹q¼Îµo¥Í²§±`(R°¼),"½ÐÀË¬d¥R¹q®É,¥D¥R¹q¼Î¬O§_²§±`(R°¼)"
+AGV_NODE,200284,2,"In Charge,Charger Sensor Error(R Side)",¥R¹q¤¤  ¥D¥R¹q¼ÎÀËª¾²§±`(R°¼),"½ÐÀË¬d¥R¹q®É,¥D¥R¹q¼ÎÀËª¾¬O§_²§±`(R°¼)"
+AGV_NODE,200285,2,Charger Error(L Side),¥R¹q¤¤  ¥D¥R¹q¼Îµo¥Í²§±`(L°¼),"½ÐÀË¬d¥R¹q®É,¥D¥R¹q¼Î¬O§_²§±`(L°¼)"
+AGV_NODE,200286,2,"In Charge,Charger Sensor Error(L Side)",¥R¹q¤¤  ¥D¥R¹q¼ÎÀËª¾²§±`(L°¼),"½ÐÀË¬d¥R¹q®É,¥D¥R¹q¼ÎÀËª¾¬O§_²§±`(L°¼)"
 AGV_NODE,200287,2,,,
 AGV_NODE,200288,2,,,
-AGV_NODE,200289,2,"AGV has been blocked for too long, please remove the obstacles",,"AGVªý¾×°±¤î®É¶¡¹L¤[,½Ð²¾°£»ÙÃªª«"
-AGV_NODE,200290,2,EQ Ready signal Off - Left side,,
-AGV_NODE,200291,2,EQ Ready signal Off - Right side,,
-AGV_NODE,200292,2,Charging pile is not in HP - Right side,,
-AGV_NODE,200293,2,Charging pile is not in HP - Left side,,
-AGV_NODE,200294,2,Charging system off,,
-AGV_NODE,200295,2,Charging system off - with CST,,
-AGV_NODE,200296,2,Charging error - Right side,,
-AGV_NODE,200297,2,Charging error in unloading - Right side,,
-AGV_NODE,200298,2,Charging error in loading - Right side,,
-AGV_NODE,200299,2,Charging error - Left side,,
-AGV_NODE,200300,2,Charging error in unloading - Left side,,
-AGV_NODE,200301,2,Charging error in loading - Left side,,
-AGV_NODE,200302,2,EQ Ready signal On - Left side,,
-AGV_NODE,200303,2,EQ Ready signal On - Right side,,
+AGV_NODE,200289,2,"AGV has been blocked for too long, please remove the obstacles",AGVªý¾×°±¤î®É¶¡¹L¤[½Ð²¾°£»ÙÃªª«,"AGVªý¾×°±¤î®É¶¡¹L¤[,½Ð²¾°£»ÙÃªª«"
+AGV_NODE,200290,2,EQ Ready signal Off - Left side,L Side ¨ú©ñ¤¤ EQ Ready °T¸¹ OFF,½ÐÀË¬d¥æ´¤°T¸¹L Side ¨ú©ñ¤¤ EQ Ready °T¸¹¬O§_OFF
+AGV_NODE,200291,2,EQ Ready signal Off - Right side,R Side ¨ú©ñ¤¤ EQ Ready °T¸¹ OFF,½ÐÀË¬d¥æ´¤°T¸¹R Side ¨ú©ñ¤¤ EQ Ready °T¸¹¬O§_OFF
+AGV_NODE,200292,2,Charging pile is not in HP - Right side,R Side  ¥R¹q¼Î¹q·¥¤£¦b«áºÝ,½ÐÀË¬dR Side¥R¹q¼Î¹q·¥¬O§_¦b«áºÝ
+AGV_NODE,200293,2,Charging pile is not in HP - Left side,L Side  ¥R¹q¼Î¹q·¥¤£¦b«áºÝ,½ÐÀË¬dL Side¥R¹q¼Î¹q·¥¬O§_¦b«áºÝ
+AGV_NODE,200294,2,Charging system off,¥R¹q¾÷  ¨t²Î°±¤î¤¤,½ÐÀË¬d¥R¹q¾÷¨t²Î¬O§_¥¿±`
+AGV_NODE,200295,2,Charging system off - with CST,¥R¹q¾÷  ¨t²Î°±¤î¤¤(¦³Cassette),½ÐÀË¬d¥R¹q¾÷¨t²Î¬O§_¥¿±`(CST¦bAGV¨®¤º)
+AGV_NODE,200296,2,Charging error - Right side,"¥R¹q¤¤""°Æ""¥R¹q¼Îµo¥Í²§±`(R°¼)","½ÐÀË¬d""°Æ""¥R¹q¼Î¬O§_²§±`(R°¼)"
+AGV_NODE,200297,2,Charging error in unloading - Right side,"¸m³f¥R¹q¤¤""°Æ""¥R¹q¼Îµo¥Í²§±`(R°¼)","½ÐÀË¬d""°Æ""¥R¹q¼Î¬O§_²§±`(R°¼)"
+AGV_NODE,200298,2,Charging error in loading - Right side,"¨ú³f¥R¹q¤¤""°Æ""¥R¹q¼Îµo¥Í²§±`(R°¼)","½ÐÀË¬d""°Æ""¥R¹q¼Î¬O§_²§±`(R°¼)"
+AGV_NODE,200299,2,Charging error - Left side,"¥R¹q¤¤""°Æ""¥R¹q¼Îµo¥Í²§±`(L°¼)","½ÐÀË¬d""°Æ""¥R¹q¼Î¬O§_²§±`(L°¼)"
+AGV_NODE,200300,2,Charging error in unloading - Left side,"¸m³f¥R¹q¤¤""°Æ""¥R¹q¼Îµo¥Í²§±`(L°¼)","½ÐÀË¬d""°Æ""¥R¹q¼Î¬O§_²§±`(L°¼)"
+AGV_NODE,200301,2,Charging error in loading - Left side,"¨ú³f¥R¹q¤¤""°Æ""¥R¹q¼Îµo¥Í²§±`(L°¼)","½ÐÀË¬d""°Æ""¥R¹q¼Î¬O§_²§±`(L°¼)"
+AGV_NODE,200302,2,EQ Ready signal On - Left side,L Side  ¨ú©ñ§¹¦¨EQ Ready°T¸¹ON,½ÐÀË¬d¥æ´¤°T¸¹L Side ¨ú©ñ§¹¦¨ EQ Ready °T¸¹¬O§_ON
+AGV_NODE,200303,2,EQ Ready signal On - Right side,R Side  ¨ú©ñ§¹¦¨EQ Ready°T¸¹ON,½ÐÀË¬d¥æ´¤°T¸¹R Side ¨ú©ñ§¹¦¨ EQ Ready °T¸¹¬O§_ON
 AGV_NODE,200304,2,,,
 AGV_NODE,200305,2,,,
 AGV_NODE,200306,2,,,
@@ -1071,70 +1071,70 @@ AGV_NODE,200696,2,,,
 AGV_NODE,200697,2,,,
 AGV_NODE,200698,2,,,
 AGV_NODE,200699,2,,,
-AGV_NODE,200700,2,StopChargeTimeout,,
-AGV_NODE,200701,2,VehicleIsNotInAutoMode,,
-AGV_NODE,200702,2,AgvcCallEms,,
-AGV_NODE,200703,2,PositionError,,
-AGV_NODE,200704,2,MoveControl Exception,,
-AGV_NODE,200705,2,Command out of trigger range,,
-AGV_NODE,200706,2,Move : Initail Wheel Angle Timeout,,
-AGV_NODE,200707,2,Move : Enable allAxis Timeout,,
-AGV_NODE,200708,2,Reserve : Command's Reserve out of ReserveList's Range,,
-AGV_NODE,200709,2,SlowStop : Timeout,,
-AGV_NODE,200710,2,STurn : AGV turning too fast,,
-AGV_NODE,200711,2,STurn : AGV turning too slow,,
-AGV_NODE,200712,2,STurn : AGV turning with wrong path,,
-AGV_NODE,200713,2,STurn : one of wheels turning too slow,,
-AGV_NODE,200714,2,STurn : stop in STurn feature distable,,
-AGV_NODE,200715,2,STurn : continue in STurn feature distable,,
-AGV_NODE,200716,2,RTurn : AGV turning too fast,,
-AGV_NODE,200717,2,RTurn : AGV turning too slow,,
-AGV_NODE,200718,2,RTurn : Virtual Axis not Link,,
-AGV_NODE,200719,2,RTurn : Turn direction format error,,
-AGV_NODE,200720,2,RTurn : stop in RTurn feature distable,,
-AGV_NODE,200721,2,RTurn : RTurn Control timeout,,
-AGV_NODE,200722,2,RTurn : stop in can't continue step,,
-AGV_NODE,200723,2,RTurn : continue in RTurn feature distable,,
-AGV_NODE,200724,2,StopAndClear : Timeout,,
-AGV_NODE,200725,2,MoveMethod Initail Fail,,
-AGV_NODE,200726,2,MoveMethod Driver Command Fail,,
-AGV_NODE,200727,2,MotionDriver_Elmo Initail Fail,,
-AGV_NODE,200728,2,MotionDriver_Elmo Connect Fail,,
-AGV_NODE,200729,2,MotionDriver_Elmo Axis Setting format error,,
-AGV_NODE,200730,2,MotionDriver_Elmo Bulk Exception,,
-AGV_NODE,200731,2,MotionDriver_Elmo Disconnect : IPC witch controler,,
-AGV_NODE,200732,2,MotionDriver_Elmo Disconnect : controler witch driver,,
-AGV_NODE,200733,2,LocateControl Initail Fail,,
-AGV_NODE,200734,2,LocateDriver_BarcodeMapSystem Initail Fail,,
-AGV_NODE,200735,2,LocateDriver_BarcodeMapSystem Connect Fail,,
-AGV_NODE,200736,2,LocateDriver_SLAM_Sick Initail Fail,,
-AGV_NODE,200737,2,LocateDriver_SLAM_Sick Connect Fail,,
-AGV_NODE,200738,2,LocateDriver_SLAM_Sick data format error,,
-AGV_NODE,200739,2,Can't Override : Override Timeout,,
-AGV_NODE,200740,2,SafetyStop : Fork isn't in home Status,,
-AGV_NODE,200741,2,SafetyStop : Charging,,
-AGV_NODE,200742,2,SafetyStop : Excessive angular deviation,,
-AGV_NODE,200743,2,SafetyStop : Excessive section deviation,,
-AGV_NODE,200744,2,SafetyStop : Too long not read barcode (turn),,
-AGV_NODE,200745,2,SafetyStop : Too long not read barcode (line),,
-AGV_NODE,200746,2,SafetyStop : AGV Stop without reason,,
-AGV_NODE,200747,2,SafetyStop : Velocity change error,,
-AGV_NODE,200748,2,SafetyStop : Axis error,,
-AGV_NODE,200749,2,SafetyStop : LocateControl Error,,
-AGV_NODE,200750,2,SafetyStop : Stop Request,,
-AGV_NODE,200751,2,SafetyStop : Bumper Stop,,
-AGV_NODE,200752,2,SafetyStop : EMO Stop,,
-AGV_NODE,200753,2,SafetyStop : Delta update value error,,
-AGV_NODE,200754,2,Can't AutoRetry : AutoRetry Count more than config,,
-AGV_NODE,200755,2,Can't AutoRetry : AutoReset fail,,
-AGV_NODE,200756,2,Can't AutoRetry : Create Retry MoveCmdInfo fail,,
-AGV_NODE,200757,2,BeamSensor singal on Timeout,,
-AGV_NODE,200758,2,Fork Command Format NG,,
-AGV_NODE,200759,2,Fork Command Read timeout,,
-AGV_NODE,200760,2,Fork Not Busy timeout,,
-AGV_NODE,200761,2,Fork Command Executing timeout,,
-AGV_NODE,200762,2,Fork Home Flag Waiting timeout,,
-AGV_NODE,200763,2,AGV switch to Manual,,
+AGV_NODE,200700,2,StopChargeTimeout,Stop Charge Timeout,
+AGV_NODE,200701,2,VehicleIsNotInAutoMode,VehicleIs Not In Auto Mode,
+AGV_NODE,200702,2,AgvcCallEms,Agv_c Call Ems,
+AGV_NODE,200703,2,PositionError,Position Error,
+AGV_NODE,200704,2,MoveControl Exception,Move Control Exception,
+AGV_NODE,200705,2,Command out of trigger range,Command out of trigger range,
+AGV_NODE,200706,2,Move : Initail Wheel Angle Timeout,Move : Initail Wheel Angle Timeout,
+AGV_NODE,200707,2,Move : Enable allAxis Timeout,Move : Enable allAxis Timeout,
+AGV_NODE,200708,2,Reserve : Command's Reserve out of ReserveList's Range,Reserve : Command's Reserve out of ReserveList's Range,
+AGV_NODE,200709,2,SlowStop : Timeout,SlowStop : Timeout,
+AGV_NODE,200710,2,STurn : AGV turning too fast,STurn : AGV turning too fast,
+AGV_NODE,200711,2,STurn : AGV turning too slow,STurn : AGV turning too slow,
+AGV_NODE,200712,2,STurn : AGV turning with wrong path,STurn : AGV turning with wrong path,
+AGV_NODE,200713,2,STurn : one of wheels turning too slow,STurn : one of wheels turning too slow,
+AGV_NODE,200714,2,STurn : stop in STurn feature distable,STurn : stop in STurn feature distable,
+AGV_NODE,200715,2,STurn : continue in STurn feature distable,STurn : continue in STurn feature distable,
+AGV_NODE,200716,2,RTurn : AGV turning too fast,RTurn : AGV turning too fast,
+AGV_NODE,200717,2,RTurn : AGV turning too slow,RTurn : AGV turning too slow,
+AGV_NODE,200718,2,RTurn : Virtual Axis not Link,RTurn : Virtual Axis not Link,
+AGV_NODE,200719,2,RTurn : Turn direction format error,RTurn : Turn direction format error,
+AGV_NODE,200720,2,RTurn : stop in RTurn feature distable,RTurn : stop in RTurn feature distable,
+AGV_NODE,200721,2,RTurn : RTurn Control timeout,RTurn : RTurn Control timeout,
+AGV_NODE,200722,2,RTurn : stop in can't continue step,RTurn : stop in can't continue step,
+AGV_NODE,200723,2,RTurn : continue in RTurn feature distable,RTurn : continue in RTurn feature distable,
+AGV_NODE,200724,2,StopAndClear : Timeout,StopAndClear : Timeout,
+AGV_NODE,200725,2,MoveMethod Initail Fail,MoveMethod Initail Fail,
+AGV_NODE,200726,2,MoveMethod Driver Command Fail,MoveMethod Driver Command Fail,
+AGV_NODE,200727,2,MotionDriver_Elmo Initail Fail,MotionDriver_Elmo Initail Fail,
+AGV_NODE,200728,2,MotionDriver_Elmo Connect Fail,MotionDriver_Elmo Connect Fail,
+AGV_NODE,200729,2,MotionDriver_Elmo Axis Setting format error,MotionDriver_Elmo Axis Setting format error,
+AGV_NODE,200730,2,MotionDriver_Elmo Bulk Exception,MotionDriver_Elmo Bulk Exception,
+AGV_NODE,200731,2,MotionDriver_Elmo Disconnect : IPC witch controler,MotionDriver_Elmo Disconnect : IPC witch controler,
+AGV_NODE,200732,2,MotionDriver_Elmo Disconnect : controler witch driver,MotionDriver_Elmo Disconnect : controler witch driver,
+AGV_NODE,200733,2,LocateControl Initail Fail,Locate Control Initail Fail,
+AGV_NODE,200734,2,LocateDriver_BarcodeMapSystem Initail Fail,Locate Driver_Barcode Map System Initail Fail,
+AGV_NODE,200735,2,LocateDriver_BarcodeMapSystem Connect Fail,Locate Driver_Barcode Map System Connect Fail,
+AGV_NODE,200736,2,LocateDriver_SLAM_Sick Initail Fail,Locate Driver_SLAM_Sick Initail Fail,
+AGV_NODE,200737,2,LocateDriver_SLAM_Sick Connect Fail,Locate Driver_SLAM_Sick Connect Fail,
+AGV_NODE,200738,2,LocateDriver_SLAM_Sick data format error,Locate Driver_SLAM_Sick data format error,
+AGV_NODE,200739,2,Can't Override : Override Timeout,Can't Override : Override Timeout,
+AGV_NODE,200740,2,SafetyStop : TRU isn't in home Status,Safety Stop : Fork isn't in home Status,
+AGV_NODE,200741,2,SafetyStop : Charging,Safety Stop : Charging,
+AGV_NODE,200742,2,SafetyStop : Excessive angular deviation,Safety Stop : Excessive angular deviation,
+AGV_NODE,200743,2,SafetyStop : Excessive section deviation,Safety Stop : Excessive section deviation,
+AGV_NODE,200744,2,SafetyStop : Too long not read barcode (turn),Safety Stop : Too long not read barcode (turn),
+AGV_NODE,200745,2,SafetyStop : Too long not read barcode (line),Safety Stop : Too long not read barcode (line),
+AGV_NODE,200746,2,SafetyStop : AGV Stop without reason,Safety Stop : AGV Stop without reason,
+AGV_NODE,200747,2,SafetyStop : Velocity change error,Safety Stop : Velocity change error,
+AGV_NODE,200748,2,SafetyStop : Axis error,Safety Stop : Axis error,
+AGV_NODE,200749,2,SafetyStop : LocateControl Error,Safety Stop : Locate Control Error,
+AGV_NODE,200750,2,SafetyStop : Stop Request,Safety Stop : Stop Request,
+AGV_NODE,200751,2,SafetyStop : Bumper Stop,Safety Stop : Bumper Stop,
+AGV_NODE,200752,2,SafetyStop : EMO Stop,Safety Stop : EMO Stop,
+AGV_NODE,200753,2,SafetyStop : Delta update value error,Safety Stop : Delta update value error,
+AGV_NODE,200754,2,Can't AutoRetry : AutoRetry Count more than config,Can't Auto Retry : Auto Retry Count more than config,
+AGV_NODE,200755,2,Can't AutoRetry : AutoReset fail,Can't Auto Retry : Auto Reset fail,
+AGV_NODE,200756,2,Can't AutoRetry : Create Retry MoveCmdInfo fail,Can't Auto Retry : Create Retry Move CmdInfo fail,
+AGV_NODE,200757,2,BeamSensor singal on Timeout,Beam Sensor singal on Timeout,
+AGV_NODE,200758,2,TRU Command Format NG,Fork Command Format NG,
+AGV_NODE,200759,2,TRU Command Read timeout,Fork Command Read timeout,
+AGV_NODE,200760,2,TRU Not Busy timeout,Fork Not Busy timeout,
+AGV_NODE,200761,2,TRU Command Executing timeout,Fork Command Executing timeout,
+AGV_NODE,200762,2,TRU Home Flag Waiting timeout,Fork Home Flag Waiting timeout,
+AGV_NODE,200763,2,AGV switch to Manual,AGV switch to Manual,
 AGV_NODE,200764,2,,,
 AGV_NODE,200765,2,,,
 AGV_NODE,200766,2,,,
@@ -1411,238 +1411,238 @@ AGV_NODE,201036,2,,,
 AGV_NODE,201037,2,,,
 AGV_NODE,201038,2,,,
 AGV_NODE,201039,2,,,
-AGV_NODE,201040,1,¡iPLC¡jBattery Power (Low) Latch,,PLC¹q¦À²§±`»Ý¶i¦æ§ó´«
-AGV_NODE,201041,1,,,
-AGV_NODE,201042,1,B Side Brake Release Button Enable,¥þ¨«¦æ°Ê½ü«b¨®ÄÀ©ñ,B°¼½ü¤l·Ù¨®§@°Ê¤¤¡A«ö¤UBrake release «ö¶s¸Ñ°£·Ù¨®
-AGV_NODE,201043,1,Beam Sensor Detect Something(FR Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (FR°¼) [X0100][X0101]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201044,1,Beam Sensor Detect Something(FL Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (FL°¼) [X0102][X0103]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201045,1,Beam Sensor Detect Something(FC Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (FC°¼) [X0104][X0105]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201046,1,Beam Sensor Detect Something(BR Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (BR°¼) [X010A][X010B]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201047,1,Beam Sensor Detect Something(BL Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (BL°¼) [X010C][X010D]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201048,1,Beam Sensor Detect Something(BC Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (BC°¼) [X010E][X010F]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201049,1,Beam Sensor reserve,,
-AGV_NODE,201050,1,Beam Sensor reserve,,
-AGV_NODE,201051,1,IPC Not Ready,,ÀË¬dIPC Ready¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A©Î¬OIPC¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa
-AGV_NODE,201052,1,,,
-AGV_NODE,201053,1,,,
-AGV_NODE,201054,1,,,
-AGV_NODE,201055,1,,,
-AGV_NODE,201056,1,,,
-AGV_NODE,201057,1,,,
+AGV_NODE,201040,1,¡iPLC¡jBattery Power (Low) Latch,¡iPLC¡j¹q¦À¹q¤O(Low) Latch,PLC¹q¦À²§±`»Ý¶i¦æ§ó´«
+AGV_NODE,201041,1,F Side Brake Release Button Enable,AGV¨«¦æ½ü«b¨®ÄÀ©ñ«ö¶s±Ò¥Î(¨®ÀY³B),F°¼½ü¤l·Ù¨®§@°Ê¤¤¡A«ö¤UBrake release «ö¶s¸Ñ°£·Ù¨®
+AGV_NODE,201042,1,B Side Brake Release Button Enable,AGV¨«¦æ½ü«b¨®ÄÀ©ñ«ö¶s±Ò¥Î(¨®§À³B),B°¼½ü¤l·Ù¨®§@°Ê¤¤¡A«ö¤UBrake release «ö¶s¸Ñ°£·Ù¨®
+AGV_NODE,201043,1,Beam Sensor Detect Something(FR Side),Beam Sensor°»´ú¦³ª«Åé(FR°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (FR°¼) [X0100][X0101]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201044,1,Beam Sensor Detect Something(FL Side),Beam Sensor°»´ú¦³ª«Åé(FL°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (FL°¼) [X0102][X0103]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201045,1,Beam Sensor Detect Something(FC Side),Beam Sensor°»´ú¦³ª«Åé(FC°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (FC°¼) [X0104][X0105]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201046,1,Beam Sensor Detect Something(BR Side),Beam Sensor°»´ú¦³ª«Åé(BR°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (BR°¼) [X010A][X010B]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201047,1,Beam Sensor Detect Something(BL Side),Beam Sensor°»´ú¦³ª«Åé(BL°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (BL°¼) [X010C][X010D]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201048,1,Beam Sensor Detect Something(BC Side),Beam Sensor°»´ú¦³ª«Åé(BC°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (BC°¼) [X010E][X010F]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201049,1,Force ELMO Servo Off,±j¨îELMO¦øªAOff,
+AGV_NODE,201050,1,Auto state AGV has Cassette without command Timeout,¦Û°Êª¬ºA AGV¦³ Cassette  µL«ü¥O Timeout,½ÐÀË¬dAGVC¬O§_¦³¤U©R¥O©ñCST
+AGV_NODE,201051,1,IPC Not Ready,IPC Not Ready,ÀË¬dIPC Ready¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A©Î¬OIPC¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa
+AGV_NODE,201052,1,"CST to EQ, the double grid is abnormal (L side)","¸m©ñCSTµ¹EQ®É,¤G­«®æ²§±`(L°¼)",½ÐÀË¬d(L°¼)¤G­«®æÀË[X200]¬O§_¥¿±`
+AGV_NODE,201053,1,"CST from EQ, the double grid is abnormal (L side)","±qEQ¨úCST®É,¤G­«®æ²§±`(L°¼",½ÐÀË¬d(L°¼)¤G­«®æÀË[X200]¬O§_¥¿±`
+AGV_NODE,201054,1,"CST to EQ, the double grid is abnormal (R side)","¸m©ñCSTµ¹EQ®É,¤G­«®æ²§±`(R°¼",½ÐÀË¬d(R°¼)¤G­«®æÀË[X204]¬O§_¥¿±`
+AGV_NODE,201055,1,"CST from EQ, the double grid is abnormal (R side)","±qEQ¨úCST®É,µo¥Í¤G­«®æ²§±`(R°¼",½ÐÀË¬d(R°¼)¤G­«®æ[X204]¬O§_¥¿±`
+AGV_NODE,201056,1,"CST from EQ, adetection sensor error","±qEQ¨úCST®É,µo¥ÍCSTÀËª¾²§±`",½ÐÀË¬dCSTÀË[X1AC]¬O§_¥¿±`
+AGV_NODE,201057,1,"CST to EQ, adetection sensor error","©ñCSTµ¹EQ®É,µo¥ÍCSTÀËª¾²§±`",½ÐÀË¬dCSTÀË[X1AC]¬O§_¥¿±`
 AGV_NODE,201058,1,,,
 AGV_NODE,201059,1,,,
-AGV_NODE,201060,1,,,
-AGV_NODE,201061,1,,,
-AGV_NODE,201062,1,,,
-AGV_NODE,201063,1,,,
-AGV_NODE,201064,1,,,
-AGV_NODE,201065,1,Double Check Sensor Pass (L Side),,¤G­«®æÀËª¾  (L)[X0200]¤£¨Ï¥Î¡A¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
-AGV_NODE,201066,1,Double Check Sensor Pass (R Side),,¤G­«®æÀËª¾  (R)[X0204]¤£¨Ï¥Î¡A¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
-AGV_NODE,201067,1,Hand Check Function Not Use,¤âÁu¦b®u¥\¯à¤£¨Ï¥Î,FORK¦b²üÀË[X0201][X0205]¤£¨Ï¥Î¡A¤H¾÷¥i¤W¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
-AGV_NODE,201068,1,,,
-AGV_NODE,201069,1,,,
-AGV_NODE,201070,1,,,
-AGV_NODE,201071,1,Correct Mode Not Use,SR 1000,AGV¨®¸É¥¿¥\¯à¤£¨Ï¥Î¡A¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
-AGV_NODE,201072,1,,,
-AGV_NODE,201073,1,,,
-AGV_NODE,201074,1,,,Ãö³¬Bump Sensor¥\¯à¡A¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
-AGV_NODE,201075,1,,,
-AGV_NODE,201076,1,,,
-AGV_NODE,201077,1,,,
-AGV_NODE,201078,1,,,
-AGV_NODE,201079,1,,,
-AGV_NODE,201080,1,,,
-AGV_NODE,201081,1,Hand Forward/Back Axis Home Return Ask On,,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA­ìÂI´_Âk¾Þ§@µe­±¡A°õ¦æ¦øªA­ìÂI´_Âk¾Þ§@¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201082,1,Hand Up/Down Axis Home Return Ask On,,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA­ìÂI´_Âk¾Þ§@µe­±¡A°õ¦æ¦øªA­ìÂI´_Âk¾Þ§@¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201083,1,Hand Slide Axis Home Return Ask On,,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA­ìÂI´_Âk¾Þ§@µe­±¡A°õ¦æ¦øªA­ìÂI´_Âk¾Þ§@¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201084,1,Hand Turn Axis Home Return Ask On,,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA­ìÂI´_Âk¾Þ§@µe­±¡A°õ¦æ¦øªA­ìÂI´_Âk¾Þ§@¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201085,1,Charging timeout - Right side,,
-AGV_NODE,201086,1,Charging timeout - Left side,,
-AGV_NODE,201087,1,"System Has Action,Can Not Turn Manual",,¤âÁu¨ú©ñ°Ê§@¥¼§¹¦¨¡A»ÝÀË¬d¨ú©ñ°Ê§@¬O§_¥¿±`©Î¬Oµ¥«Ý¨ú©ñ°Ê°µ§¹¦¨«á¡A«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@¡A§Y¥i¤Á´«¦¨¤â°Ê
-AGV_NODE,201088,1,"System Has Error,Can Not Turn Auto",,²§±`°Ê§@±Æ°£«á¡A«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@¡A§Y¥i¤Á´«¦¨¦Û°Ê
-AGV_NODE,201089,1,"Brake Release Has Action,Can Not Turn Auto",,½ü¤l·Ù¨®§@°Ê¤¤¡A«ö¤UBrake release «ö¶s¸Ñ°£·Ù¨®¡A«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@¡A§Y¥i¤Á´«¦¨¦Û°Ê
-AGV_NODE,201090,1,Beam Sensor Shielded(FR Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(FR°¼)[X0100][X0101]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201091,1,Beam Sensor Shielded(BR Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(BR°¼)[X010A][X010B]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201092,1,Beam Sensor Shielded(LR Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(LR°¼)[X0120][X0121]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201093,1,Beam Sensor Shielded(LL Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(LL°¼)[X0122][X0123]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201094,1,Beam Sensor Shielded(RR Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(RR°¼)[X012A][X012B]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201095,1,Beam Sensor Shielded(RL Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(RL°¼)[X012C][X012D]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201096,1,Charging timeout - Right side,,
-AGV_NODE,201097,1,Charging timeout - Left side,,
-AGV_NODE,201098,1,Corrector Read Action Time Out,,ÀË¬dBCRÅª¨ú¬O§_¦³°ÝÃD¡A©Î¬OBCR¦³·lÃa
-AGV_NODE,201099,1,Servo enters power saving mode,,
-AGV_NODE,201100,1,EQ HO_AVBL signal off - Left side,,
-AGV_NODE,201101,1,EQ HO_AVBL signal off - Right side,,
-AGV_NODE,201102,1,"Ready Signal Is Not On,Hand Can Not Action(L Side)",,EQ³]³ÆºÝ¬O§_¦³²§±`¾É­P¥æ´¤°±¤î¡A©Î¬O¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A
-AGV_NODE,201103,1,"Ready Signal Is Not On,Hand Can Not Action(R Side)",,EQ³]³ÆºÝ¬O§_¦³²§±`¾É­P¥æ´¤°±¤î¡A©Î¬O¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A
-AGV_NODE,201104,1,Charger Station Error,,ÀË¬dAGV¨®¥R¹q¬O§_¥¿±`
-AGV_NODE,201105,1,Battery Brand Is Not Setting,,½Ð¦b¤H¾÷³]©w¹q¦À¼tµP
-AGV_NODE,201106,1,Vehicle Battery Voltage Too High Warning,,¥Nªí»Ý­n°±¤î¥R¹q©Î¬O¹q¦À³Ì¤j­È(Äµ§i¨Ï¥Î)³]©w¹L§C
-AGV_NODE,201107,1,Vehicle Battery Voltage Too Low Warning,,¥Nªí»Ý­n¥ß§Y¥R¹q©Î¬O¹q¦À³Ì¤p­È(Äµ§i¨Ï¥Î)³]©w¹L°ª
-AGV_NODE,201108,1,IPC Stop Command Enable,,¤£±µ¨üIPCªº°±¤î©R¥O¡A ¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
-AGV_NODE,201109,1,"AGV Car And EQ Handshake,T2 Timeout (L Side)",,ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT2¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,201110,1,"AGV Car And EQ Handshake,T5 Timeout (L Side)",,ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT5¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,201111,1,"AGV Car And EQ Handshake,T8 Timeout (L Side)",,ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT8¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,201112,1,"AGV Car And EQ Handshake,T2 Timeout (R Side)",,ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT2¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,201113,1,"AGV Car And EQ Handshake,T5 Timeout (R Side)",,ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT5¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,201114,1,"AGV Car And EQ Handshake,T8 Timeout (R Side)",,ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT8¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
-AGV_NODE,201115,1,Corrector Function Confirm NG,,»Ý½T»{¬°¦óIPC¤U¹F¸É¥¿¾¹¥\¯àNG
-AGV_NODE,201116,1,IPC Is Not Ask Corrector Function Confirm,,¨S¦¬¨ìIPC¤U¹F¸É¥¿¾¹¥\¯à©R¥O¡A»Ý½T»{»PIPCªº³q°T¬O§_¥¿±`
-AGV_NODE,201117,1,"Coupler_R Side Receive Charge Command,Sensor Off",,½ÐÀË¬dX1A9°T¸¹¬O§_¥¿±`
-AGV_NODE,201118,1,"Coupler_L Side Receive Charge Command,Sensor Off",,½ÐÀË¬dX1A8°T¸¹¬O§_¥¿±`
-AGV_NODE,201119,1,Master CC-Link Module Error Or Warning,,ÀË¬dMaster CC-Link¼Ò²Õ¬O§_¦³²§±`
-AGV_NODE,201120,1,Electric Meter Communication Over Time,,ÀË¬d¹q¿ö¬O§_¦³²§±`¡A©Î¬O»P¹q¿öªº³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa
-AGV_NODE,201121,1,IPC Get/Put CommanDownG(StageCode),,½T»{IPC¨ú©ñ©R¥O¬O§_¥¿½T
-AGV_NODE,201122,1,IPC Get/Put CommanDownG( ActionCode),,½T»{IPC¨ú©ñ©R¥O¬O§_¥¿½T
-AGV_NODE,201123,1,"Stage Has CST,Can Not Execute Get Command(L Side)",,¨®¤ºÁÙ¦³CST¡Aµ¥«Ý©ñ¸mCST©R¥O©Î¬O¥b¦Û°Ê±j¨î·h°£¡A¦A¶i¦æ«áÄò¾Þ§@
-AGV_NODE,201124,1,"EQ Port No CST,Can Not Execute Get Command(L Side)",,EQ³]³ÆºÝ¨S¦³CST¡A½Ð¥ý½T»{¦A¤U¹F¨úCST©R¥O¡A©Î¬O¿ï¾Ü¨ä¥LEQ¦³CSTªº¶i¦æ¨úCST¾Þ§@
-AGV_NODE,201125,1,"Stage Has CST,Can Not Execute Get Command(R Side)",,¨®¤ºÁÙ¦³CST¡Aµ¥«Ý©ñ¸mCST©R¥O©Î¬O¥b¦Û°Ê±j¨î·h°£¡A¦A¶i¦æ«áÄò¾Þ§@
-AGV_NODE,201126,1,"EQ Port No CST,Can Not Execute Get Command(R Side)",,EQ³]³ÆºÝ¨S¦³CST¡A½Ð¥ý½T»{¦A¤U¹F¨úCST©R¥O¡A©Î¬O¿ï¾Ü¨ä¥LEQ¦³CSTªº¶i¦æ¨úCST¾Þ§@
-AGV_NODE,201127,1,"Stage No CST,Can Not Execute Put Command(L Side)",,¨®¤º¨S¦³CST¡A½Ð¥ý°õ¦æ¨úCST©R¥O©Î¬O°õ¦æ¥b¦Û°Ê±j¨î¨úCST¾Þ§@¡A¦A¶i¦æ«áÄò¾Þ§@
-AGV_NODE,201128,1,"EQ Port Has CST,Can Not Execute Put Command(L Side)",,EQ³]³ÆºÝ¤w¦³CST¡A½Ð¥ý±Æ°£«á¦A¤U¹F©ñ¸mCST©R¥O¡A©Î¬O¿ï¾Ü¨ä¥LEQ¶i¦æ©ñ¸m
-AGV_NODE,201129,1,"Stage No CST,Can Not Execute Put Command(R Side)",,¨®¤º¨S¦³CST¡A½Ð¥ý°õ¦æ¨úCST©R¥O©Î¬O°õ¦æ¥b¦Û°Ê±j¨î¨úCST¾Þ§@¡A¦A¶i¦æ«áÄò¾Þ§@
-AGV_NODE,201130,1,"EQ Port Has CST,Can Not Execute Put Command(R Side)",,EQ³]³ÆºÝ¤w¦³CST¡A½Ð¥ý±Æ°£«á¦A¤U¹F©ñ¸mCST©R¥O¡A©Î¬O¿ï¾Ü¨ä¥LEQ¶i¦æ©ñ¸m
-AGV_NODE,201131,1,IPC Get/Put Comman NG (Direction Code),,IPC¨ú©ñ©R¥ONG(¤è¦VCode½X¿ù»~)
-AGV_NODE,201132,1,"Vehicle Is Not Position,Can Not Accept IPC Command",,½Ð¥ýµ¥«ÝAGV¨®¨ì¹F©w¦ì¡A¦A¤U¹F©R¥O
-AGV_NODE,201133,1,"Hand Is Not In Work Home,Can Not Accept IPC Command",,½Ð¥ý¾Þ§@¤H¾÷¤Á´«¨ì´_Âk¾Þ§@­¶­±¡A¾Þ§@¦U¶b¤âÁu¦^¨ì¤u§@­ìÂI
-AGV_NODE,201134,1,"Servo On/Off Status Not Complete,Can Not Accept IPC Command",,½Ð¥ýÀË¬d¤âÁu¦øªA¦U¶b¬O§_¦³²§±`¡A¦A¶i¦æ«áÄò¾Þ§@
-AGV_NODE,201135,1,"IPC Command Signal Residual,Can Not Accept New Command",,½Ð¥ý°õ¦æ§¹IPCªº©R¥O¡A©Î¬O¤W­ÓIPC©R¥O¥¼°õ¦æ§¹¦¨¥ý²M°£§¹¾Þ§@¦U¶b¤âÁu¦^¨ì¤u§@­ìÂI¡A¦A¶i¦æ«áÄò¾Þ§@
-AGV_NODE,201136,1,"Hand Action,Can Not Accept IPC Command",,¤âÁu°Ê§@¤¤µ¥«Ý°Ê§@§¹¦¨¡A¦A¤U¹F©R¥O
-AGV_NODE,201137,1,IPC Get/Put Comman NG (Speed Code),,IPC¨ú©ñ©R¥ONG(³t«×Code½X¿ù»~)
-AGV_NODE,201138,1,"System Is Not Ready,Can Not Accept IPC Command",,½Ð¥ý±N²§±`±Æ°£¡Aµ{¦¡ªì©l¤Æ©M¤âÁu¦^¨ì¤u§@­ìÂI¡A¦A¶i¦æ«áÄò¾Þ§@
-AGV_NODE,201139,1,"Hand Is Manual Mode,Can Not Accept IPC Command",,½Ð¤Á¦¨¦Û°Ê¼Ò¦¡¡Aµ¥«Ý±µ¨üIPC©R¥O
-AGV_NODE,201140,1,"Hand Home Return,Can Not Accept IPC Command",,¤âÁu­ìÂI´_Âk¤¤µ¥«Ý°Ê§@§¹¦¨¡A¦A¤U¹F©R¥O
-AGV_NODE,201141,1,"Alarm Report,T1 TimeOut",,Alarm¦^³ø¹O®É
-AGV_NODE,201142,1,"Hand Teaching Report,T1 TimeOut",,Fork Teaching¦^³ø¹O®É
-AGV_NODE,201143,1,"Vehicle Teaching Report,T1 TimeOut",,Vehicle Teaching¦^³ø¹w®É
-AGV_NODE,201144,1,"Hand Alignment Teching Report,T1 TimeOut",,Fork Alignment Teching¦^³ø¹O®É
-AGV_NODE,201145,1,Trun Wheel Motor Servo Off(FR Side),,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
-AGV_NODE,201146,1,Trun Wheel Motor Servo Off(FL Side),,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
-AGV_NODE,201147,1,Trun Wheel Motor Servo Off(BR Side),,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
-AGV_NODE,201148,1,Trun Wheel Motor Servo Off(BL Side),,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
-AGV_NODE,201149,1,Walker Wheel Motor Servo Off(FR Side),,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
-AGV_NODE,201150,1,Walker Wheel Motor Servo Off(FL Side),,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
-AGV_NODE,201151,1,Walker Wheel Motor Servo Off(BR Side),,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
-AGV_NODE,201152,1,Walker Wheel Motor Servo Off(BL Side),,ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
-AGV_NODE,201153,1,IPC Order Car Wheel Servo Off,,½Ð½T»{IPC¬°¦ó¤U¹FServo Off«ü¥O
-AGV_NODE,201154,1,Hand Pause,,½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡A¤H¾÷¸Ñ°£¼È°±
-AGV_NODE,201155,1,Hand Decomposed Action Mode Use,,¤âÁu¥b¦Û°Ê¤À¸Ñ°Ê§@¤¤¡A¤H¾÷¤W¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î
-AGV_NODE,201156,1,Stage And Direction Number Are Different,,°Ê§@«ü¥OStage»PDirection¸¹½X¤£¦P
+AGV_NODE,201060,1,double grid anomaly,¤G­«®æ²§±`,"½ÐÀË¬d(L/R°¼)¤G­«®æÀË[X200,X204]¬O§_¥¿±`"
+AGV_NODE,201061,1,Fork Post PIO Fail,Fork Post PIO Fail,½ÐÀË¬dPost PIO °T¸¹¬O§_¥¿±`
+AGV_NODE,201062,1,Fork Busy Fail,Fork Busy Fail,½ÐÀË¬dBusy °T¸¹¬O§_¥¿±`
+AGV_NODE,201063,1,Fork PrePIO  Fail,Fork PrePIO  Fail,½ÐÀË¬dPrePIO  °T¸¹¬O§_¥¿±`
+AGV_NODE,201064,1,Fork command NG,Fork command NG,½ÐÀË¬dFORK «ü¥O¬O§_¥¿±`
+AGV_NODE,201065,1,Double Check Sensor Pass (L Side),¤G­«®æÀËª¾¥\¯à¤£¨Ï¥Î(L°¼),¤G­«®æÀËª¾  (L)[X0200]¤£¨Ï¥Î¡A¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
+AGV_NODE,201066,1,Double Check Sensor Pass (R Side),¤G­«®æÀËª¾¥\¯à¤£¨Ï¥Î(R°¼),¤G­«®æÀËª¾  (R)[X0204]¤£¨Ï¥Î¡A¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
+AGV_NODE,201067,1,TRU Check Function Not Use,¤âÁuÀËª¾¥\¯à¤£¨Ï¥Î,FORK¦b²üÀË[X0201][X0205]¤£¨Ï¥Î¡A¤H¾÷¥i¤W¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
+AGV_NODE,201068,1,Hand Sensor Check Function Not Use,¤âÁu¦b®uÀËª¾¥\¯à¤£¨Ï¥Î,AGV¨®¤âÁu¦b®uÀËª¾¤£¨Ï¥Î¡A¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
+AGV_NODE,201069,1,Confirm trolley positioning function use,½T»{¥x¨®©w¦ì¥\¯à¨Ï¥Î,AGV¨®½T»{¥x¨®©w¦ì¥\¯à¨Ï¥Î¡A¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
+AGV_NODE,201070,1,shutters door do not use,©Ôªù¤£¨Ï¥Î,AGV¨®©Ôªù¤£¨Ï¥Î¡A¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
+AGV_NODE,201071,1,Correct Mode Not Use,©w¦ì¸É¥¿¼Ò¦¡(SR 1000)¤£¨Ï¥Î,AGV¨®¸É¥¿¥\¯à¤£¨Ï¥Î¡A¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
+AGV_NODE,201072,1,power saving mode enabled,¬Ù¹q¼Ò¦¡±Ò¥Î¤¤,
+AGV_NODE,201073,1,Forced handshake with EQ,±j¨î»PEQ¶i¦æ¥æ´¤¥\¯à¨Ï¥Î,
+AGV_NODE,201074,1,Enforce Close Bump Sensor Function,±j¨îÃö³¬Bump Sensor¥\¯à,Ãö³¬Bump Sensor¥\¯à¡A¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
+AGV_NODE,201075,1,AGVC forced to end charging (R side),AGVC±j¨îµ²§ô¥R¹q(R°¼),AGVC±j¨îµ²§ô¥R¹q(R°¼)
+AGV_NODE,201076,1,Abnormal charging pile (R side),¥R¹q¼Î²§±`(R°¼),½ÐÀË¬d¥R¹q¼Î¬O§_²§±`(R°¼)
+AGV_NODE,201077,1,Abnormal detection of charging pile (R side),¥R¹q¼ÎÀËª¾²§±`(R°¼),½ÐÀË¬d¥R¹q¼Î¬O§_²§±`(R°¼)
+AGV_NODE,201078,1,AGVC forced to end charging (L side),AGVC±j¨îµ²§ô¥R¹q(L°¼),AGVC±j¨îµ²§ô¥R¹q(L°¼)
+AGV_NODE,201079,1,Abnormal charging pile (L side),¥R¹q¼Î²§±`(L°¼),½ÐÀË¬d¥R¹q¼Î¬O§_²§±`(L°¼)
+AGV_NODE,201080,1,Abnormal detection of charging pile (L side),¥R¹q¼ÎÀËª¾²§±`(L°¼),½ÐÀË¬d¥R¹q¼Î¬O§_²§±`(L°¼)
+AGV_NODE,201081,1,TRU Forward/Back Axis Home Return Ask On,¤âÁu¦ùÁY¶b­ìÂI´_Âk­n¨DOn,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA­ìÂI´_Âk¾Þ§@µe­±¡A°õ¦æ¦øªA­ìÂI´_Âk¾Þ§@¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201082,1,TRU Up/Down Axis Home Return Ask On,¤âÁu¤É­°¶b­ìÂI´_Âk­n¨DOn,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA­ìÂI´_Âk¾Þ§@µe­±¡A°õ¦æ¦øªA­ìÂI´_Âk¾Þ§@¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201083,1,TRU Slide Axis Home Return Ask On,¤âÁu²¾¸ü¶b­ìÂI´_Âk­n¨DOn,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA­ìÂI´_Âk¾Þ§@µe­±¡A°õ¦æ¦øªA­ìÂI´_Âk¾Þ§@¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201084,1,TRU Turn Axis Home Return Ask On,¤âÁu±ÛÂà¶b­ìÂI´_Âk­n¨DOn,½Ð¾Þ§@¤H¾÷¶i¤J¦øªA­ìÂI´_Âk¾Þ§@µe­±¡A°õ¦æ¦øªA­ìÂI´_Âk¾Þ§@¡A±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201085,1,Battery temperature detection abnormal_F Side,BAT ¥»Åé·Å«×ÀËª¾²§±`_F,½ÐÀË¬d¹q¦À·Å«×¬O§_¥¿±`(F°¼)
+AGV_NODE,201086,1,Battery temperature detection abnormal_B Side,BAT ¥»Åé·Å«×ÀËª¾²§±`_B,½ÐÀË¬d¹q¦À·Å«×¬O§_¥¿±`(B°¼)
+AGV_NODE,201087,1,"System Has Action,Can Not Turn Manual","¨t²Î¤´¦³°Ê§@,µLªk¤Á¤â°Ê",¤âÁu¨ú©ñ°Ê§@¥¼§¹¦¨¡A»ÝÀË¬d¨ú©ñ°Ê§@¬O§_¥¿±`©Î¬Oµ¥«Ý¨ú©ñ°Ê°µ§¹¦¨«á¡A«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@¡A§Y¥i¤Á´«¦¨¤â°Ê
+AGV_NODE,201088,1,"System Has Error,Can Not Turn Auto","¨t²Î¦³²§±`,µLªk¤Á¦Û°Ê",²§±`°Ê§@±Æ°£«á¡A«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@¡A§Y¥i¤Á´«¦¨¦Û°Ê
+AGV_NODE,201089,1,"Brake Release Has Action,Can Not Turn Auto","Brake Release¦³§@°Ê,µLªk¤Á¦Û°Ê",½ü¤l·Ù¨®§@°Ê¤¤¡A«ö¤UBrake release «ö¶s¸Ñ°£·Ù¨®¡A«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@¡A§Y¥i¤Á´«¦¨¦Û°Ê
+AGV_NODE,201090,1,Beam Sensor Shielded(FR Side),Beam Sensor«Ì½ª¤¤(FR°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(FR°¼)[X0100][X0101]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201091,1,Beam Sensor Shielded(BR Side),Beam Sensor«Ì½ª¤¤(BR°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(BR°¼)[X010A][X010B]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201092,1,Beam Sensor Shielded(LR Side),Beam Sensor«Ì½ª¤¤(LR°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(LR°¼)[X0120][X0121]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201093,1,Beam Sensor Shielded(LL Side),Beam Sensor«Ì½ª¤¤(LL°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(LL°¼)[X0122][X0123]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201094,1,Beam Sensor Shielded(RR Side),Beam Sensor«Ì½ª¤¤(RR°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(RR°¼)[X012A][X012B]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201095,1,Beam Sensor Shielded(RL Side),Beam Sensor«Ì½ª¤¤(RL°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(RL°¼)[X012C][X012D]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201096,1,Charging timeout - Right side,AGV¥R¹q¶W¹L³]©w®É¶¡(R°¼),½ÐÀË¬dAGV¥R¹q¬O§_¥¿±`(R°¼)
+AGV_NODE,201097,1,Charging timeout - Left side,AGV¥R¹q¶W¹L³]©w®É¶¡(L°¼),½ÐÀË¬dAGV¥R¹q¬O§_¥¿±`(L°¼)
+AGV_NODE,201098,1,Corrector Read Action Time Out,¤H¾÷¤¶­±²Ö¿n¥¼Ä²±±¶W®É(Åv­­¤wµn¥X),½Ð­«·sµn¤J¾Þ§@Åv­­
+AGV_NODE,201099,1,Servo enters power saving mode,Servo¶i¤J¬Ù¹q¼Ò¦¡,Servo¶i¤J¬Ù¹q¼Ò¦¡
+AGV_NODE,201100,1,EQ HO_AVBL signal off - Left side,"EQ HO_AVBL °T¸¹OFF,¨ú®ø¥æ´¤(L°¼)",½ÐÀË¬dEQ¥æ´¤°T¸¹EQ HO_AVBL ¬O§_OFF(L°¼)
+AGV_NODE,201101,1,EQ HO_AVBL signal off - Right side,"EQ HO_AVBL °T¸¹OFF,¨ú®ø¥æ´¤(R°¼)",½ÐÀË¬dEQ¥æ´¤°T¸¹EQ HO_AVBL ¬O§_OFF(R°¼)
+AGV_NODE,201102,1,"Ready Signal Is Not On,TRU Can Not Action(L Side)",L Side ¨ú©ñ¤¤ EQ Ready °T¸¹ OFF,EQ³]³ÆºÝ¬O§_¦³²§±`¾É­P¥æ´¤°±¤î¡A©Î¬O¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A
+AGV_NODE,201103,1,"Ready Signal Is Not On,TRU Can Not Action(R Side)",R Side ¨ú©ñ¤¤ EQ Ready °T¸¹ OFF,EQ³]³ÆºÝ¬O§_¦³²§±`¾É­P¥æ´¤°±¤î¡A©Î¬O¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A
+AGV_NODE,201104,1,Charger Station Error,Charger Station Error,ÀË¬dAGV¨®¥R¹q¬O§_¥¿±`
+AGV_NODE,201105,1,Battery Brand Is Not Setting,¹q¦À¼tµP¥¼³]©w,½Ð¦b¤H¾÷³]©w¹q¦À¼tµP
+AGV_NODE,201106,1,Vehicle Battery Voltage Too High Warning,¨®Åé¹q¦À¹qÀ£¹L°ªÄµ§i,¥Nªí»Ý­n°±¤î¥R¹q©Î¬O¹q¦À³Ì¤j­È(Äµ§i¨Ï¥Î)³]©w¹L§C
+AGV_NODE,201107,1,Vehicle Battery Voltage Too Low Warning,"¨®Åé¹q¦À¹qÀ£¹L§CÄµ§i(48VÄµ§i,45VÂ_¹q)",¥Nªí»Ý­n¥ß§Y¥R¹q©Î¬O¹q¦À³Ì¤p­È(Äµ§i¨Ï¥Î)³]©w¹L°ª
+AGV_NODE,201108,1,IPC Stop Command Enable,IPC Stop Command µL®Ä,¤£±µ¨üIPCªº°±¤î©R¥O¡A ¤H¾÷¤W¥i¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î¤Á´«
+AGV_NODE,201109,1,"AGV Car And EQ TRUshake,T2 Timeout (L Side)","AGV¨®»PEQ¥æ´¤,µo¥ÍT2 Time out (L°¼)",ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT2¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,201110,1,"AGV Car And EQ TRUshake,T5 Timeout (L Side)","AGV¨®»PEQ¥æ´¤,µo¥ÍT5 Time out (L°¼)",ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT5¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,201111,1,"AGV Car And EQ TRUshake,T8 Timeout (L Side)","AGV¨®»PEQ¥æ´¤,µo¥ÍT8 Time out (L°¼)",ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT8¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,201112,1,"AGV Car And EQ TRUshake,T2 Timeout (R Side)","AGV¨®»PEQ¥æ´¤,µo¥ÍT2 Time out (R°¼)",ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT2¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,201113,1,"AGV Car And EQ TRUshake,T5 Timeout (R Side)","AGV¨®»PEQ¥æ´¤,µo¥ÍT5 Time out (R°¼)",ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT5¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,201114,1,"AGV Car And EQ TRUshake,T8 Timeout (R Side)","AGV¨®»PEQ¥æ´¤,µo¥ÍT8 Time out (R°¼)",ÀË¬d¥æ´¤«H¸¹¬O§_¦³¥¿±`µo°e¡A¥æ´¤³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa¡A©Î¬OT8¥æ´¤®É¶¡³]©w¹Lµu¡A»Ý­n¶i¦æ­×§ï
+AGV_NODE,201115,1,low battery voltage  warning,¨®Åé¹q¦À¹qÀ£¹L§CÂ_¹qÄµ§i,½ÐºÉ³t¥R¹q
+AGV_NODE,201116,1,IPC Is Not Ask Corrector Function Confirm,IPC¥¼¦^ÂÐ¸É¥¿¾¹¥\¯à½T»{,¨S¦¬¨ìIPC¤U¹F¸É¥¿¾¹¥\¯à©R¥O¡A»Ý½T»{»PIPCªº³q°T¬O§_¥¿±`
+AGV_NODE,201117,1,"Coupler_R Side Receive Charge Command,Sensor Off","Coupler_R°¼±µ¦¬¥R¹q©R¥O®É,Sensor Off",½ÐÀË¬dX1A9°T¸¹¬O§_¥¿±`
+AGV_NODE,201118,1,"Coupler_L Side Receive Charge Command,Sensor Off","Coupler_L°¼±µ¦¬¥R¹q©R¥O®É,Sensor Off",½ÐÀË¬dX1A8°T¸¹¬O§_¥¿±`
+AGV_NODE,201119,1,Master CC-Link Module Error Or Warning,Master CC-Link¼Ò²Õ¦³²§±`©ÎªÌÄµ§i,ÀË¬dMaster CC-Link¼Ò²Õ¬O§_¦³²§±`
+AGV_NODE,201120,1,Electric Meter Communication Over Time,¹q¿ö³q°T¶W®É,ÀË¬d¹q¿ö¬O§_¦³²§±`¡A©Î¬O»P¹q¿öªº³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa
+AGV_NODE,201121,1,IPC Get/Put CommanDownG(StageCode),IPC¨ú©ñ©R¥ONG(StageCode),½T»{IPC¨ú©ñ©R¥O¬O§_¥¿½T
+AGV_NODE,201122,1,IPC Get/Put CommanDownG( ActionCode),IPC¨ú©ñ©R¥ONG(°Ê§@Code),½T»{IPC¨ú©ñ©R¥O¬O§_¥¿½T
+AGV_NODE,201123,1,"Stage Has CST,Can Not Execute Get Command(L Side)","¸ü¥x¦³CST,µLªk°õ¦æGet«ü¥O(L°¼)",¨®¤ºÁÙ¦³CST¡Aµ¥«Ý©ñ¸mCST©R¥O©Î¬O¥b¦Û°Ê±j¨î·h°£¡A¦A¶i¦æ«áÄò¾Þ§@
+AGV_NODE,201124,1,"EQ Port No CST,Can Not Execute Get Command(L Side)","EQ PortµLCST,µLªk°õ¦æGet«ü¥O(L°¼)",EQ³]³ÆºÝ¨S¦³CST¡A½Ð¥ý½T»{¦A¤U¹F¨úCST©R¥O¡A©Î¬O¿ï¾Ü¨ä¥LEQ¦³CSTªº¶i¦æ¨úCST¾Þ§@
+AGV_NODE,201125,1,"Stage Has CST,Can Not Execute Get Command(R Side)","¸ü¥x¦³CST,µLªk°õ¦æGet«ü¥O(R°¼)",¨®¤ºÁÙ¦³CST¡Aµ¥«Ý©ñ¸mCST©R¥O©Î¬O¥b¦Û°Ê±j¨î·h°£¡A¦A¶i¦æ«áÄò¾Þ§@
+AGV_NODE,201126,1,"EQ Port No CST,Can Not Execute Get Command(R Side)","EQ PortµLCST,µLªk°õ¦æGet«ü¥O(R°¼)",EQ³]³ÆºÝ¨S¦³CST¡A½Ð¥ý½T»{¦A¤U¹F¨úCST©R¥O¡A©Î¬O¿ï¾Ü¨ä¥LEQ¦³CSTªº¶i¦æ¨úCST¾Þ§@
+AGV_NODE,201127,1,"Stage No CST,Can Not Execute Put Command(L Side)","¸ü¥xµLCST,µLªk°õ¦æPut«ü¥O(L°¼)",¨®¤º¨S¦³CST¡A½Ð¥ý°õ¦æ¨úCST©R¥O©Î¬O°õ¦æ¥b¦Û°Ê±j¨î¨úCST¾Þ§@¡A¦A¶i¦æ«áÄò¾Þ§@
+AGV_NODE,201128,1,"EQ Port Has CST,Can Not Execute Put Command(L Side)","EQ Port¦³CST,µLªk°õ¦æPut«ü¥O(L°¼)",EQ³]³ÆºÝ¤w¦³CST¡A½Ð¥ý±Æ°£«á¦A¤U¹F©ñ¸mCST©R¥O¡A©Î¬O¿ï¾Ü¨ä¥LEQ¶i¦æ©ñ¸m
+AGV_NODE,201129,1,"Stage No CST,Can Not Execute Put Command(R Side)","¸ü¥xµLCST,µLªk°õ¦æPut«ü¥O(R°¼)",¨®¤º¨S¦³CST¡A½Ð¥ý°õ¦æ¨úCST©R¥O©Î¬O°õ¦æ¥b¦Û°Ê±j¨î¨úCST¾Þ§@¡A¦A¶i¦æ«áÄò¾Þ§@
+AGV_NODE,201130,1,"EQ Port Has CST,Can Not Execute Put Command(R Side)","EQ Port¦³CST,µLªk°õ¦æPut«ü¥O(R°¼)",EQ³]³ÆºÝ¤w¦³CST¡A½Ð¥ý±Æ°£«á¦A¤U¹F©ñ¸mCST©R¥O¡A©Î¬O¿ï¾Ü¨ä¥LEQ¶i¦æ©ñ¸m
+AGV_NODE,201131,1,IPC Get/Put Comman NG (Direction Code),IPC¨ú©ñ©R¥ONG(¤è¦VCode),IPC¨ú©ñ©R¥ONG(¤è¦VCode½X¿ù»~)
+AGV_NODE,201132,1,"Vehicle Is Not Position,Can Not Accept IPC Command","¨®Åé¥¼©w¦ì,µLªk±µ¨üIPC©R¥O",½Ð¥ýµ¥«ÝAGV¨®¨ì¹F©w¦ì¡A¦A¤U¹F©R¥O
+AGV_NODE,201133,1,"TRU Is Not In Work Home,Can Not Accept IPC Command","¤âÁu¥¼¦b¤u§@­ìÂI,µLªk±µ¨üIPC©R¥O",½Ð¥ý¾Þ§@¤H¾÷¤Á´«¨ì´_Âk¾Þ§@­¶­±¡A¾Þ§@¦U¶b¤âÁu¦^¨ì¤u§@­ìÂI
+AGV_NODE,201134,1,"Servo On/Off Status Not Complete,Can Not Accept IPC Command","Servo On/Offª¬ºA¤£¥þ,µLªk±µ¨üIPC©R¥O",½Ð¥ýÀË¬d¤âÁu¦øªA¦U¶b¬O§_¦³²§±`¡A¦A¶i¦æ«áÄò¾Þ§@
+AGV_NODE,201135,1,"IPC Command Signal Residual,Can Not Accept New Command","IPC©R¥O°T¸¹´Ý¯d,µLªk±µ¨ü·s©R¥O",½Ð¥ý°õ¦æ§¹IPCªº©R¥O¡A©Î¬O¤W­ÓIPC©R¥O¥¼°õ¦æ§¹¦¨¥ý²M°£§¹¾Þ§@¦U¶b¤âÁu¦^¨ì¤u§@­ìÂI¡A¦A¶i¦æ«áÄò¾Þ§@
+AGV_NODE,201136,1,"TRU Action,Can Not Accept IPC Command","¤âÁu°Ê§@¤¤,µLªk±µ¨üIPC©R¥O",¤âÁu°Ê§@¤¤µ¥«Ý°Ê§@§¹¦¨¡A¦A¤U¹F©R¥O
+AGV_NODE,201137,1,IPC Get/Put Comman NG (Speed Code),IPC¨ú©ñ©R¥ONG(³t«×Code),IPC¨ú©ñ©R¥ONG(³t«×Code½X¿ù»~)
+AGV_NODE,201138,1,"System Is Not Ready,Can Not Accept IPC Command","¨t²Î¥¼Ready,µLªk±µ¨üIPC©R¥O",½Ð¥ý±N²§±`±Æ°£¡Aµ{¦¡ªì©l¤Æ©M¤âÁu¦^¨ì¤u§@­ìÂI¡A¦A¶i¦æ«áÄò¾Þ§@
+AGV_NODE,201139,1,"TRU Is Manual Mode,Can Not Accept IPC Command","¤âÁu³B©ó¤â°Ê¼Ò¦¡,µLªk±µ¦¬IPC©R¥O",½Ð¤Á¦¨¦Û°Ê¼Ò¦¡¡Aµ¥«Ý±µ¨üIPC©R¥O
+AGV_NODE,201140,1,"TRU Home Return,Can Not Accept IPC Command","¤âÁu­ìÂI´_Âk¤¤,µLªk±µ¦¬IPC©R¥O",¤âÁu­ìÂI´_Âk¤¤µ¥«Ý°Ê§@§¹¦¨¡A¦A¤U¹F©R¥O
+AGV_NODE,201141,1,"Alarm Report,T1 TimeOut","Alarm¦^³ø,T1 TimeOut",Alarm¦^³ø¹O®É
+AGV_NODE,201142,1,"TRU Teaching Report,T1 TimeOut","Fork Teaching¦^³ø,T1 TimeOut",Fork Teaching¦^³ø¹O®É
+AGV_NODE,201143,1,"Vehicle Teaching Report,T1 TimeOut","Vehicle Teaching¦^³ø,T1 TimeOut",Vehicle Teaching¦^³ø¹w®É
+AGV_NODE,201144,1,"TRU Alignment Teching Report,T1 TimeOut","Fork Alignment Teching¦^³ø,T1 TimeOut",Fork Alignment Teching¦^³ø¹O®É
+AGV_NODE,201145,1,Trun Wheel Motor Servo Off(FR Side),±ÛÂà½ü°¨¹F Servo Off (¥k«e°¼),ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
+AGV_NODE,201146,1,Trun Wheel Motor Servo Off(FL Side),±ÛÂà½ü°¨¹F Servo Off (¥ª«e°¼),ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
+AGV_NODE,201147,1,Trun Wheel Motor Servo Off(BR Side),±ÛÂà½ü°¨¹F Servo Off (¥k«á°¼),ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
+AGV_NODE,201148,1,Trun Wheel Motor Servo Off(BL Side),±ÛÂà½ü°¨¹F Servo Off (¥ª«á°¼),ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
+AGV_NODE,201149,1,Walker Wheel Motor Servo Off(FR Side),¨«¦æ½ü°¨¹F Servo Off (¥k«e°¼),ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
+AGV_NODE,201150,1,Walker Wheel Motor Servo Off(FL Side),¨«¦æ½ü°¨¹F Servo Off (¥ª«e°¼),ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
+AGV_NODE,201151,1,Walker Wheel Motor Servo Off(BR Side),¨«¦æ½ü°¨¹F Servo Off (¥k«á°¼),ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
+AGV_NODE,201152,1,Walker Wheel Motor Servo Off(BL Side),¨«¦æ½ü°¨¹F Servo Off (¥ª«á°¼),ÀË¬d¬O§_¦³EMO©Î¬OBUMP SENSOR¦³§@°Ê¡A¾É­P¦w¥þ°j¸ô¥¼¥¿±`±Ò°Ê¡A©Î¬O284V¨Ó·½ºÝ¦³²§±`
+AGV_NODE,201153,1,IPC Order Car Wheel Servo Off,IPC ¤U¥O¨®½üServo Off,½Ð½T»{IPC¬°¦ó¤U¹FServo Off«ü¥O
+AGV_NODE,201154,1,TRU Pause,¤âÁu¼È°±¤¤,½T»{µL¤H­û¾aªñ¡AµL¦w¥þºÃ¼{¡A¤H¾÷¸Ñ°£¼È°±
+AGV_NODE,201155,1,TRU Decomposed Action Mode Use,¤âÁu¤À¸Ñ°Ê§@¼Ò¦¡¨Ï¥Î¤¤,¤âÁu¥b¦Û°Ê¤À¸Ñ°Ê§@¤¤¡A¤H¾÷¤W¿ï¾Ü¨Ï¥Î/¤£¨Ï¥Î
+AGV_NODE,201156,1,Stage And Direction Number Are Different,Stage»PDirection¸¹½X¤£¦P,°Ê§@«ü¥OStage»PDirection¸¹½X¤£¦P
 AGV_NODE,201157,1,,,
 AGV_NODE,201158,1,,,
 AGV_NODE,201159,1,,,
-AGV_NODE,201160,1,Hand Correct Amount Too Much(Positive Degrees),,½Ð½T»{¤âÁu¸É¥¿¾¹¨¤«×¸É¥¿¶q¦³µL°ÝÃD
-AGV_NODE,201161,1,Hand Correct Amount Too Much(Negative Degrees),,½Ð½T»{¤âÁu¸É¥¿¾¹¨¤«×¸É¥¿¶q¦³µL°ÝÃD
-AGV_NODE,201162,1,Hand Correct Amount Too Much(Positive Direction)(Slide),,½Ð½T»{¤âÁu¸É¥¿¾¹¤âÁu²¾¸ü¸É¥¿¶q¦³µL°ÝÃD
-AGV_NODE,201163,1,Hand Correct Amount Too Much(Negative Direction)(Slide),,½Ð½T»{¤âÁu¸É¥¿¾¹¤âÁu²¾¸ü¸É¥¿¶q¦³µL°ÝÃD
-AGV_NODE,201164,1,Hand Correct Amount Too Much(Positive Direction)(FR/BK),,½Ð½T»{¤âÁu¸É¥¿¾¹¤âÁu«e«á¸É¥¿¶q¦³µL°ÝÃD
-AGV_NODE,201165,1,Hand Correct Amount Too Much(Negative Direction)(FR/BK),,½Ð½T»{¤âÁu¸É¥¿¾¹¤âÁu«e«á¸É¥¿¶q¦³µL°ÝÃD
-AGV_NODE,201166,1,Electric Meter Communication Error,,ÀË¬d¹q¿ö¬O§_¦³²§±`¡A©Î¬O»P¹q¿öªº³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa
-AGV_NODE,201167,1,Unload timeout - Left side,,
-AGV_NODE,201168,1,Unload timeout - Right side,,
-AGV_NODE,201169,1,,,
-AGV_NODE,201170,1,Beam Sensor Detect Something(LR Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (LR°¼) [X0120][X0121]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201171,1,Beam Sensor Detect Something(LL Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (LL°¼) [X0122][X0123]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201172,1,Beam Sensor Detect Something(LC Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (LC°¼) [X0124][X0125]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201173,1,Beam Sensor Detect Something(RR Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (RR°¼) [X012A][X012B]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201174,1,Beam Sensor Detect Something(RL Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (RL°¼) [X012C][X012D]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201175,1,Beam Sensor Detect Something(RC Side),,½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (RC°¼) [X012E][X012F]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
-AGV_NODE,201176,1,Door UnBrake Warnning,,·Ù¨®¸Ñ°£Äµ¥Ü¡A¦pªGµL¶·¥Î¨ì¡A¥i¿ï¾ÜÃö³¬
-AGV_NODE,201177,1,Lifter UnBrake Warnning,,·Ù¨®¸Ñ°£Äµ¥Ü¡A¦pªGµL¶·¥Î¨ì¡A¥i¿ï¾ÜÃö³¬
-AGV_NODE,201178,1,Turn+ Fork UnBrake Warnning,,·Ù¨®¸Ñ°£Äµ¥Ü¡A¦pªGµL¶·¥Î¨ì¡A¥i¿ï¾ÜÃö³¬
-AGV_NODE,201179,1,Transfer UnBrake Warnning,,·Ù¨®¸Ñ°£Äµ¥Ü¡A¦pªGµL¶·¥Î¨ì¡A¥i¿ï¾ÜÃö³¬
-AGV_NODE,201180,1,Beam Sensor Shielded(FL Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(FL°¼)[X0102][X0103]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201181,1,Beam Sensor Shielded(FC Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(FC°¼)[X0104][X0105]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201182,1,Beam Sensor Shielded(BL Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(BL°¼)[X010C][X010D]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201183,1,Beam Sensor Shielded(BC Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(BC°¼)[X010E][X010F]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201184,1,Beam Sensor Shielded(LC Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(LC°¼)[X0124][X0125]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201185,1,Beam Sensor Shielded(RC Side),,½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(RC°¼)[X012E][X012F]¡A¼È®É¤£¨Ï¥Î©R¥O
-AGV_NODE,201186,1,Personnel and equipment enter the rotating safety area(L Side),,
-AGV_NODE,201187,1,Personnel and equipment enter the rotating safety area(R Side),,
-AGV_NODE,201188,1,There are obstacles forwards,,
-AGV_NODE,201189,1,There are obstacles backwards,,
-AGV_NODE,201190,1,There are obstacles at left side,,
-AGV_NODE,201191,1,There are obstacles at right side,,
-AGV_NODE,201192,1,The forward blocking stop function is invalid,,
-AGV_NODE,201193,1,The backward blocking stop function is invalid,,
-AGV_NODE,201194,1,The left side blocking stop function is invalid,,
-AGV_NODE,201195,1,The right side blocking stop function is invalid,,
-AGV_NODE,201196,1,XFL torque reaches  threshold - noCST - move front,,
-AGV_NODE,201197,1,XFR torque reaches  threshold - noCST - move front,,
-AGV_NODE,201198,1,XRL torque reaches  threshold - noCST - move front,,
-AGV_NODE,201199,1,XRR torque reaches  threshold - noCST - move front,,
-AGV_NODE,201200,1,XFL torque reaches  threshold - noCST - move back,,
-AGV_NODE,201201,1,XFR torque reaches  threshold - noCST - move back,,
-AGV_NODE,201202,1,XRL torque reaches  threshold - noCST - move back,,
-AGV_NODE,201203,1,XRR torque reaches  threshold - noCST - move back,,
-AGV_NODE,201204,1,TFL torque reaches  threshold - noCST - move right,,
-AGV_NODE,201205,1,TFR torque reaches  threshold - noCST - move right,,
-AGV_NODE,201206,1,TRL torque reaches  threshold - noCST - move right,,
-AGV_NODE,201207,1,TRR torque reaches  threshold - noCST - move right,,
-AGV_NODE,201208,1,TFL torque reaches  threshold - noCST - move left,,
-AGV_NODE,201209,1,TFR torque reaches  threshold - noCST - move left,,
-AGV_NODE,201210,1,TRL torque reaches  threshold - noCST - move left,,
-AGV_NODE,201211,1,TRR torque reaches  threshold - noCST - move left,,
-AGV_NODE,201212,1,Correct function timeout in loading moving frontend -  Left side,,
-AGV_NODE,201213,1,Correct function timeout in unloading moving frontend -  Left side,,
-AGV_NODE,201214,1,Correct function timeout in loading moving backend -  Left side,,
-AGV_NODE,201215,1,Correct function timeout in unloading moving backend -  Left side,,
-AGV_NODE,201216,1,Correct function timeout in loading moving frontend -  Right side,,
-AGV_NODE,201217,1,Correct function timeout in unloading moving frontend -  Right side,,
-AGV_NODE,201218,1,Correct function timeout in loading moving backend -  Right side,,
-AGV_NODE,201219,1,Correct function timeout in unloading moving backend -  Right side,,
-AGV_NODE,201220,1,Correct function read timeout (L side),,
-AGV_NODE,201221,1,Correct function read timeout (R side),,
-AGV_NODE,201222,1,Correct function timeout in loading - Left side,,
-AGV_NODE,201223,1,Correct function timeout in unloading - Left side,,
-AGV_NODE,201224,1,Correct function timeout in loading - Right side,,
-AGV_NODE,201225,1,Correct function timeout in unloading - Right side,,
-AGV_NODE,201226,1,Correct function timeout at moving backend -  Left side,,
-AGV_NODE,201227,1,Correct function timeout at moving frontend -  Left side,,
-AGV_NODE,201228,1,Correct function timeout at moving backend -  Right side,,
-AGV_NODE,201229,1,Correct function timeout at moving frontend -  Right side,,
+AGV_NODE,201160,1,TRU Correct Amount Too Much(Positive Degrees),"¸É¥¿¾¹""¨¤«×""¸É¥¿¶q¹L¤j(¥¿¨¤«×)",½Ð½T»{¤âÁu¸É¥¿¾¹¨¤«×¸É¥¿¶q¦³µL°ÝÃD
+AGV_NODE,201161,1,TRU Correct Amount Too Much(Negative Degrees),"¸É¥¿¾¹""¨¤«×""¸É¥¿¶q¹L¤j(­t¨¤«×)",½Ð½T»{¤âÁu¸É¥¿¾¹¨¤«×¸É¥¿¶q¦³µL°ÝÃD
+AGV_NODE,201162,1,TRU Correct Amount Too Much(Positive Direction)(Slide),"¸É¥¿¾¹""²¾¸ü""¸É¥¿¶q¹L¤j(¥¿¤è¦V)",½Ð½T»{¤âÁu¸É¥¿¾¹¤âÁu²¾¸ü¸É¥¿¶q¦³µL°ÝÃD
+AGV_NODE,201163,1,TRU Correct Amount Too Much(Negative Direction)(Slide),"¸É¥¿¾¹""²¾¸ü""¸É¥¿¶q¹L¤j(­t¤è¦V)",½Ð½T»{¤âÁu¸É¥¿¾¹¤âÁu²¾¸ü¸É¥¿¶q¦³µL°ÝÃD
+AGV_NODE,201164,1,TRU Correct Amount Too Much(Positive Direction)(FR/BK),"¸É¥¿¾¹""¦ùÁY""¸É¥¿¶q¹L¤j(¥¿¤è¦V)",½Ð½T»{¤âÁu¸É¥¿¾¹¤âÁu«e«á¸É¥¿¶q¦³µL°ÝÃD
+AGV_NODE,201165,1,TRU Correct Amount Too Much(Negative Direction)(FR/BK),"¸É¥¿¾¹""¦ùÁY""¸É¥¿¶q¹L¤j(­t¤è¦V)",½Ð½T»{¤âÁu¸É¥¿¾¹¤âÁu«e«á¸É¥¿¶q¦³µL°ÝÃD
+AGV_NODE,201166,1,Electric Meter Communication Error,¹q¿ö³q°T²§±`,ÀË¬d¹q¿ö¬O§_¦³²§±`¡A©Î¬O»P¹q¿öªº³q°T¼Ò²Õ©M³q°T½u¬O§_¦³¦w¸Ë¦n©Î·lÃa
+AGV_NODE,201167,1,Unload timeout - Left side,¤âÁu©ñEQ CST°Ê§@Time Out(L°¼),½ÐÀË¬d©ñ¸mCST¨ìEQ¬O§_¦³°ÝÃD(L°¼)
+AGV_NODE,201168,1,Unload timeout - Right side,¤âÁu©ñEQ CST°Ê§@Time Out(R°¼),½ÐÀË¬d©ñ¸mCST¨ìEQ¬O§_¦³°ÝÃD(R°¼)
+AGV_NODE,201169,1,Need to set the battery number,»Ý­n³]©w¹q¦À½s¸¹,½Ð½T»{¹q¦À½s¸¹¬O§_¿é¤J¥¿½T
+AGV_NODE,201170,1,Beam Sensor Detect Something(LR Side),Beam Sensor°»´ú¦³ª«Åé(LR°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (LR°¼) [X0120][X0121]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201171,1,Beam Sensor Detect Something(LL Side),Beam Sensor°»´ú¦³ª«Åé(LL°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (LL°¼) [X0122][X0123]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201172,1,Beam Sensor Detect Something(LC Side),Beam Sensor°»´ú¦³ª«Åé(LC°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (LC°¼) [X0124][X0125]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201173,1,Beam Sensor Detect Something(RR Side),Beam Sensor°»´ú¦³ª«Åé(RR°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (RR°¼) [X012A][X012B]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201174,1,Beam Sensor Detect Something(RL Side),Beam Sensor°»´ú¦³ª«Åé(RL°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (RL°¼) [X012C][X012D]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201175,1,Beam Sensor Detect Something(RC Side),Beam Sensor°»´ú¦³ª«Åé(RC°¼),½T»{¬O§_¦³ª««~©Î¤H­û¦bBeam SENSOR (RC°¼) [X012E][X012F]·P´ú¶ZÂ÷¤º¡A ±Æ°£«á«ö¤U RESET«ö¶s°õ¦æ´_Âk¾Þ§@
+AGV_NODE,201176,1,Door UnBrake Warnning,©Ôªù¶b¸Ñ«b¨®¤¤Äµ§i,·Ù¨®¸Ñ°£Äµ¥Ü¡A¦pªGµL¶·¥Î¨ì¡A¥i¿ï¾ÜÃö³¬
+AGV_NODE,201177,1,Lifter UnBrake Warnning,¤É­°¶b¸Ñ«b¨®¤¤Äµ§i,·Ù¨®¸Ñ°£Äµ¥Ü¡A¦pªGµL¶·¥Î¨ì¡A¥i¿ï¾ÜÃö³¬
+AGV_NODE,201178,1,Turn+ TRU UnBrake Warnning,±ÛÂà¶b+¦ùÁY¶b¸Ñ«b¨®¤¤Äµ§i,·Ù¨®¸Ñ°£Äµ¥Ü¡A¦pªGµL¶·¥Î¨ì¡A¥i¿ï¾ÜÃö³¬
+AGV_NODE,201179,1,Transfer UnBrake Warnning,²¾¸ü¶b¸Ñ«b¨®¤¤Äµ§i,·Ù¨®¸Ñ°£Äµ¥Ü¡A¦pªGµL¶·¥Î¨ì¡A¥i¿ï¾ÜÃö³¬
+AGV_NODE,201180,1,Beam Sensor Shielded(FL Side),Beam Sensor«Ì½ª¤¤(FL°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(FL°¼)[X0102][X0103]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201181,1,Beam Sensor Shielded(FC Side),Beam Sensor«Ì½ª¤¤(FC°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(FC°¼)[X0104][X0105]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201182,1,Beam Sensor Shielded(BL Side),Beam Sensor«Ì½ª¤¤(BL°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(BL°¼)[X010C][X010D]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201183,1,Beam Sensor Shielded(BC Side),Beam Sensor«Ì½ª¤¤(BC°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(BC°¼)[X010E][X010F]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201184,1,Beam Sensor Shielded(LC Side),Beam Sensor«Ì½ª¤¤(LC°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(LC°¼)[X0124][X0125]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201185,1,Beam Sensor Shielded(RC Side),Beam Sensor«Ì½ª¤¤(RC°¼),½Ð¤F¸ÑIPC¬°¦ó¤U¹FBeam Sensor(RC°¼)[X012E][X012F]¡A¼È®É¤£¨Ï¥Î©R¥O
+AGV_NODE,201186,1,Personnel and equipment enter the rotating safety area(L Side),¤H­û³]³Æ¶i¤J±ÛÂà¦w¥þ°Ï°ì¤º(L°¼),½Ð½T»{¦³µL¤H­û¶i¤JFORK±ÛÂà½d³ò(L°¼)
+AGV_NODE,201187,1,Personnel and equipment enter the rotating safety area(R Side),¤H­û³]³Æ¶i¤J±ÛÂà¦w¥þ°Ï°ì¤º(R°¼),½Ð½T»{¦³µL¤H­û¶i¤JFORK±ÛÂà½d³ò(R°¼)
+AGV_NODE,201188,1,There are obstacles forwards,AGV«e¶i¦³ªýÃªª«,½Ð½T»{AGV«e¶i¦³µLªýÃªª«
+AGV_NODE,201189,1,There are obstacles backwards,AGV«á°h¦³ªýÃªª«,½Ð½T»{AGV«á°h¦³µLªýÃªª«
+AGV_NODE,201190,1,There are obstacles at left side,AGV¥ª¾î²¾¦³ªýÃªª«,½Ð½T»{AGV¥ª¾î²¾¦³µLªýÃªª«
+AGV_NODE,201191,1,There are obstacles at right side,AGV¥k¾î²¾¦³ªýÃªª«,½Ð½T»{AGV¥k¾î²¾¦³µLªýÃªª«
+AGV_NODE,201192,1,The forward blocking stop function is invalid,«e¦æªý¾×°±¤î¥\¯à¤wµL®Ä(¤£­n¯¸¦b¨®ÀY)Âà¦Û°Ê½Ðª`·N,«e¦æªý¾×°±¤î¥\¯à¤wµL®Ä(¤£­n¯¸¦b¨®ÀY)Âà¦Û°Ê½Ðª`·N
+AGV_NODE,201193,1,The backward blocking stop function is invalid,«á°hªý¾×°±¤î¥\¯à¤wµL®Ä(¤£­n¯¸¦b¨®§À)Âà¦Û°Ê½Ðª`·N,«á°hªý¾×°±¤î¥\¯à¤wµL®Ä(¤£­n¯¸¦b¨®§À)Âà¦Û°Ê½Ðª`·N
+AGV_NODE,201194,1,The left side blocking stop function is invalid,¥ª¾î²¾ªý¾×°±¤î¥\¯à¤wµL®Ä(¤£­n¯¸¦b¨®¥ª)Âà¦Û°Ê½Ðª`·N,¥ª¾î²¾ªý¾×°±¤î¥\¯à¤wµL®Ä(¤£­n¯¸¦b¨®¥ª)Âà¦Û°Ê½Ðª`·N
+AGV_NODE,201195,1,The right side blocking stop function is invalid,¥k¾î²¾ªý¾×°±¤î¥\¯à¤wµL®Ä(¤£­n¯¸¦b¨®¥k)Âà¦Û°Ê½Ðª`·N,¥k¾î²¾ªý¾×°±¤î¥\¯à¤wµL®Ä(¤£­n¯¸¦b¨®¥k)Âà¦Û°Ê½Ðª`·N
+AGV_NODE,201196,1,XFL torque reaches  threshold - noCST - move front,"¥ª«e½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«e¦æªÅ¨®)","½Ð½T»{¥ª«e½ü""¨«¦æ""§á¤O¬O§_¦³¦³°ÝÃD«e¦æªÅ¨®)"
+AGV_NODE,201197,1,XFR torque reaches  threshold - noCST - move front,"¥k«e½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«e¦æªÅ¨®)","½Ð½T»{¥k«e½ü""¨«¦æ""§á¤O¬O§_¦³¦³°ÝÃD(«e¦æªÅ¨®)"
+AGV_NODE,201198,1,XRL torque reaches  threshold - noCST - move front,"¥ª«á½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«e¦æªÅ¨®)","½Ð½T»{¥ª«á½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«e¦æªÅ¨®)"
+AGV_NODE,201199,1,XRR torque reaches  threshold - noCST - move front,"¥k«á½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«e¦æªÅ¨®)","½Ð½T»{¥k«á½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«e¦æªÅ¨®)"
+AGV_NODE,201200,1,XFL torque reaches  threshold - noCST - move back,"¥ª«e½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«á°hªÅ¨®)","½Ð½T»{¥ª«e½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«á°hªÅ¨®)"
+AGV_NODE,201201,1,XFR torque reaches  threshold - noCST - move back,"¥k«e½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«á°hªÅ¨®)","½Ð½T»{¥k«e½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«á°hªÅ¨®)"
+AGV_NODE,201202,1,XRL torque reaches  threshold - noCST - move back,"¥ª«á½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«á°hªÅ¨®)","½Ð½T»{¥ª«á½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«á°hªÅ¨®)"
+AGV_NODE,201203,1,XRR torque reaches  threshold - noCST - move back,"¥k«á½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«á°hªÅ¨®)","½Ð½T»{¥k«á½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«á°hªÅ¨®)"
+AGV_NODE,201204,1,TFL torque reaches  threshold - noCST - move right,"¥ª«e½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥kÂàªÅ¨®)","½Ð½T»{¥ª«e½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥kÂàªÅ¨®)"
+AGV_NODE,201205,1,TFR torque reaches  threshold - noCST - move right,"¥k«e½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥kÂàªÅ¨®)","½Ð½T»{¥k«e½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥kÂàªÅ¨®)"
+AGV_NODE,201206,1,TRL torque reaches  threshold - noCST - move right,"¥ª«á½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥kÂàªÅ¨®)","½Ð½T»{¥ª«á½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥kÂàªÅ¨®)"
+AGV_NODE,201207,1,TRR torque reaches  threshold - noCST - move right,"¥k«á½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥kÂàªÅ¨®)","½Ð½T»{¥k«á½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥kÂàªÅ¨®)"
+AGV_NODE,201208,1,TFL torque reaches  threshold - noCST - move left,"¥ª«e½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥ªÂàªÅ¨®)","½Ð½T»{¥ª«e½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥ªÂàªÅ¨®)"
+AGV_NODE,201209,1,TFR torque reaches  threshold - noCST - move left,"¥k«e½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥ªÂàªÅ¨®)","½Ð½T»{¥k«e½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥ªÂàªÅ¨®)"
+AGV_NODE,201210,1,TRL torque reaches  threshold - noCST - move left,"¥ª«á½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥ªÂàªÅ¨®)","½Ð½T»{¥ª«á½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥ªÂàªÅ¨®)"
+AGV_NODE,201211,1,TRR torque reaches  threshold - noCST - move left,"¥k«á½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥ªÂàªÅ¨®)","½Ð½T»{¥k«á½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥ªÂàªÅ¨®)"
+AGV_NODE,201212,1,Correct function timeout in loading moving frontend -  Left side,"«e¶i¤è¦V¨ú³f""ªì©w""¸É¥¿¾¹Åª¨ú¶W®É(L)",½Ð½T»{«e¶i¤è¦V¨ú³f¸É¥¿¾¹SR1000¬O§_¥¿±`(L°¼)
+AGV_NODE,201213,1,Correct function timeout in unloading moving frontend -  Left side,"«e¶i¤è¦V©ñ³f""ªì©w""¸É¥¿¾¹Åª¨ú¶W®É(L)",½Ð½T»{«e¶i¤è¦V©ñ³f¸É¥¿¾¹SR1000¬O§_¥¿±`(L°¼)
+AGV_NODE,201214,1,Correct function timeout in loading moving backend -  Left side,"«á°h¤è¦V¨ú³f""ªì©w""¸É¥¿¾¹Åª¨ú¶W®É(L)",½Ð½T»{«á°h¤è¦V¨ú³f¸É¥¿¾¹SR1000¬O§_¥¿±`(L°¼)
+AGV_NODE,201215,1,Correct function timeout in unloading moving backend -  Left side,"«á°h¤è¦V©ñ³f""ªì©w""¸É¥¿¾¹Åª¨ú¶W®É(L)",½Ð½T»{«á°h¤è¦V©ñ³f¸É¥¿¾¹SR1000¬O§_¥¿±`(L°¼)
+AGV_NODE,201216,1,Correct function timeout in loading moving frontend -  Right side,"«e¶i¤è¦V¨ú³f""ªì©w""¸É¥¿¾¹Åª¨ú¶W®É(R)",½Ð½T»{«e¶i¤è¦V¨ú³f¸É¥¿¾¹SR1000¬O§_¥¿±`(R°¼)
+AGV_NODE,201217,1,Correct function timeout in unloading moving frontend -  Right side,"«e¶i¤è¦V©ñ³f""ªì©w""¸É¥¿¾¹Åª¨ú¶W®É(R)",½Ð½T»{«e¶i¤è¦V©ñ³f¸É¥¿¾¹SR1000¬O§_¥¿±`(R°¼)
+AGV_NODE,201218,1,Correct function timeout in loading moving backend -  Right side,"«á°h¤è¦V¨ú³f""ªì©w""¸É¥¿¾¹Åª¨ú¶W®É(R)",½Ð½T»{«á°h¤è¦V¨ú³f¸É¥¿¾¹SR1000¬O§_¥¿±`(R°¼)
+AGV_NODE,201219,1,Correct function timeout in unloading moving backend -  Right side,"«á°h¤è¦V©ñ³f""ªì©w""¸É¥¿¾¹Åª¨ú¶W®É(R)",½Ð½T»{«á°h¤è¦V©ñ³f¸É¥¿¾¹SR1000¬O§_¥¿±`(R°¼)
+AGV_NODE,201220,1,Correct function read timeout (L side),¤â°Ê¸É¥¿¾¹Åª¨úTime Out(L),½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(L°¼)
+AGV_NODE,201221,1,Correct function read timeout (R side),¤â°Ê¸É¥¿¾¹Åª¨úTime Out(R),½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(R°¼)
+AGV_NODE,201222,1,Correct function timeout in loading - Left side,"¨ú³f°Ê§@""¶L©w""¸É¥¿¾¹Åª¨ú¶W®É(L)",½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(L°¼)
+AGV_NODE,201223,1,Correct function timeout in unloading - Left side,"©ñ³f°Ê§@""¶L©w""¸É¥¿¾¹Åª¨ú¶W®É(L)",½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(R°¼)
+AGV_NODE,201224,1,Correct function timeout in loading - Right side,"¨ú³f°Ê§@""¶L©w""¸É¥¿¾¹Åª¨ú¶W®É(R)",½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(L°¼)
+AGV_NODE,201225,1,Correct function timeout in unloading - Right side,"©ñ³f°Ê§@""¶L©w""¸É¥¿¾¹Åª¨ú¶W®É(R)",½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(R°¼)
+AGV_NODE,201226,1,Correct function timeout at moving backend -  Left side,"MOVE""«á°h""¤è¦V¸É¥¿¾¹Åª¨ú¶W®É(L)",½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(L°¼)
+AGV_NODE,201227,1,Correct function timeout at moving frontend -  Left side,"MOVE""«e¶i""¤è¦V¸É¥¿¾¹Åª¨ú¶W®É(L)",½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(R°¼)
+AGV_NODE,201228,1,Correct function timeout at moving backend -  Right side,"MOVE""«á°h""¤è¦V¸É¥¿¾¹Åª¨ú¶W®É(R)",½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(L°¼)
+AGV_NODE,201229,1,Correct function timeout at moving frontend -  Right side,"MOVE""«e¶i""¤è¦V¸É¥¿¾¹Åª¨ú¶W®É(R)",½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(R°¼)
 AGV_NODE,201230,1,,,
-AGV_NODE,201231,1,Vehicle BMS High Battery,,
+AGV_NODE,201231,1,Vehicle BMS High Battery,Vehicle BMS High Battery,Vehicle BMS High Battery
 AGV_NODE,201232,1,,,
-AGV_NODE,201233,1,AGV is not in charging position - Right side,,
-AGV_NODE,201234,1,AGV is not in charging position - Left side,,
-AGV_NODE,201235,1,Charger is out of service - Right side,,
-AGV_NODE,201236,1,Charger is out of service - Left side,,
-AGV_NODE,201237,1,Charging - Charge error - Right side,,
-AGV_NODE,201238,1,Charging - Charge sensor error - Right side,,
-AGV_NODE,201239,1,Charging - Charge error - Left side,,
-AGV_NODE,201240,1,Charging - Charge sensor error - Left side,,
-AGV_NODE,201241,1,Charging - Charge error - Right side,,
-AGV_NODE,201242,1,Charging - Charge error - Left side,,
-AGV_NODE,201243,1,Trigger Area sensor OS32C - front  side,,
-AGV_NODE,201244,1,Trigger Area sensor OS32C - back side,,
-AGV_NODE,201245,1,Trigger Area sensor OS32C - left  side,,
-AGV_NODE,201246,1,Trigger Area sensor OS32C - right  side,,
+AGV_NODE,201233,1,AGV is not in charging position - Right side,AGV¥¼¨ì¹F¥R¹q¦ì¸m(R°¼),½Ð½T»{AGV¨ì¥R¹q¼Î¦ì¸m¬O§_¦³°ÝÃD(R°¼)
+AGV_NODE,201234,1,AGV is not in charging position - Left side,AGV¥¼¨ì¹F¥R¹q¦ì¸m(L°¼),½Ð½T»{AGV¨ì¥R¹q¼Î¦ì¸m¬O§_¦³°ÝÃD(L°¼)
+AGV_NODE,201235,1,Charger is out of service - Right side,¥R¹q¼ÎÃö³¬¤¤! (R°¼),½Ð½T»{¥R¹q¼Î¬O§_Ãö³¬¤¤! (R°¼)
+AGV_NODE,201236,1,Charger is out of service - Left side,¥R¹q¼ÎÃö³¬¤¤! (L°¼),½Ð½T»{¥R¹q¼Î¬O§_Ãö³¬¤¤! (L°¼)
+AGV_NODE,201237,1,Charging - Charge error - Right side,¥R¹q¤¤  °Æ¥R¹q¼Îµo¥Í²§±`(R°¼),½ÐÀË¬d°Æ¥R¹q¼Î¬O§_µo¥Í²§±`(R°¼)
+AGV_NODE,201238,1,Charging - Charge sensor error - Right side,¥R¹q¤¤  °Æ¥R¹q¼ÎÀËª¾²§±`(R°¼),½ÐÀË¬d°Æ¥R¹q¼Î¬O§_µo¥Í²§±`(R°¼)
+AGV_NODE,201239,1,Charging - Charge error - Left side,¥R¹q¤¤  °Æ¥R¹q¼Îµo¥Í²§±`(L°¼),½ÐÀË¬d°Æ¥R¹q¼Î¬O§_µo¥Í²§±`(L°¼)
+AGV_NODE,201240,1,Charging - Charge sensor error - Left side,¥R¹q¤¤  °Æ¥R¹q¼ÎÀËª¾²§±`(L°¼),½ÐÀË¬d°Æ¥R¹q¼Î¬O§_µo¥Í²§±`(L°¼)
+AGV_NODE,201241,1,Charging - Charge error - Right side,¥R¹q¤¤  ¥D¥R¹q¼Îµo¥Í²§±`(R°¼),½ÐÀË¬d¥D¥R¹q¼Î¬O§_µo¥Í²§±`(R°¼)
+AGV_NODE,201242,1,Charging - Charge error - Left side,¥R¹q¤¤  ¥D¥R¹q¼Îµo¥Í²§±`(L°¼),½ÐÀË¬d¥D¥R¹q¼Î¬O§_µo¥Í²§±`(L°¼)
+AGV_NODE,201243,1,Trigger Area sensor OS32C - front  side,¦w¥þ¶}Ãö(OS32C) Ä²µo (F°¼),½Ð½T»{¦w¥þ¶}Ãö(OS32C) ¦³µLÄ²µo (F°¼)
+AGV_NODE,201244,1,Trigger Area sensor OS32C - back side,¦w¥þ¶}Ãö(OS32C) Ä²µo (B°¼),½Ð½T»{¦w¥þ¶}Ãö(OS32C) ¦³µLÄ²µo (B°¼)
+AGV_NODE,201245,1,Trigger Area sensor OS32C - left  side,¦w¥þ¶}Ãö(OS32C) Ä²µo (L°¼),½Ð½T»{¦w¥þ¶}Ãö(OS32C) ¦³µLÄ²µo (L°¼)
+AGV_NODE,201246,1,Trigger Area sensor OS32C - right  side,¦w¥þ¶}Ãö(OS32C) Ä²µo (R°¼),½Ð½T»{¦w¥þ¶}Ãö(OS32C) ¦³µLÄ²µo (R°¼)
 AGV_NODE,201247,1,,,
 AGV_NODE,201248,1,,,
 AGV_NODE,201249,1,,,
 AGV_NODE,201250,1,,,
-AGV_NODE,201251,1,Correct function timeout in loading - Left side,,
-AGV_NODE,201252,1,Correct function timeout in unloading - Left side,,
-AGV_NODE,201253,1,Correct function timeout in loading - Right side,,
-AGV_NODE,201254,1,Correct function timeout in unloading - Right side,,
+AGV_NODE,201251,1,Correct function timeout in loading - Left side,¨ú³f°Ê§@?©w¸É¥¿¾¹Åª¨ú¶W®É(L),½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(L°¼)
+AGV_NODE,201252,1,Correct function timeout in unloading - Left side,©ñ³f°Ê§@?©w¸É¥¿¾¹Åª¨ú¶W®É(L),½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(L°¼)
+AGV_NODE,201253,1,Correct function timeout in loading - Right side,¨ú³f°Ê§@?©w¸É¥¿¾¹Åª¨ú¶W®É(R),½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(R°¼)
+AGV_NODE,201254,1,Correct function timeout in unloading - Right side,©ñ³f°Ê§@?©w¸É¥¿¾¹Åª¨ú¶W®É(R),½Ð½T»{¸É¥¿¾¹SR1000¬O§_¥¿±`(R°¼)
 AGV_NODE,201255,1,,,
-AGV_NODE,201256,1,XFL torque reaches  threshold - CST - move front,,
-AGV_NODE,201257,1,XFR torque reaches  threshold - CST - move front,,
-AGV_NODE,201258,1,XRL torque reaches  threshold - CST - move front,,
-AGV_NODE,201259,1,XRR torque reaches  threshold - CST - move front,,
-AGV_NODE,201260,1,XFL torque reaches  threshold - CST - move back,,
-AGV_NODE,201261,1,XFR torque reaches  threshold - CST - move back,,
-AGV_NODE,201262,1,XRL torque reaches  threshold - CST - move back,,
-AGV_NODE,201263,1,XRR torque reaches  threshold - CST - move back,,
-AGV_NODE,201264,1,TFL torque reaches  threshold - CST - move right,,
-AGV_NODE,201265,1,TFR torque reaches  threshold - CST - move right,,
-AGV_NODE,201266,1,TRL torque reaches  threshold - CST - move right,,
-AGV_NODE,201267,1,TRR torque reaches  threshold - CST - move right,,
-AGV_NODE,201268,1,TFL torque reaches  threshold - CST - move left,,
-AGV_NODE,201269,1,TFR torque reaches  threshold - CST - move left,,
-AGV_NODE,201270,1,TRL torque reaches  threshold - CST - move left,,
-AGV_NODE,201271,1,TRR torque reaches  threshold - CST - move left,,
+AGV_NODE,201256,1,XFL torque reaches  threshold - CST - move front,"¥ª«e½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«e¦æ¸ü³f)","½Ð½T»{¥ª«e½ü""¨«¦æ""§á¤O¬O§_¦³¦³°ÝÃD«e¦æ¸ü³f)"
+AGV_NODE,201257,1,XFR torque reaches  threshold - CST - move front,"¥k«e½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«e¦æ¸ü³f)","½Ð½T»{¥k«e½ü""¨«¦æ""§á¤O¬O§_¦³¦³°ÝÃD(«e¦æ¸ü³f)"
+AGV_NODE,201258,1,XRL torque reaches  threshold - CST - move front,"¥ª«á½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«e¦æ¸ü³f)","½Ð½T»{¥ª«á½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«e¦æ¸ü³f)"
+AGV_NODE,201259,1,XRR torque reaches  threshold - CST - move front,"¥k«á½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«e¦æ¸ü³f)","½Ð½T»{¥k«á½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«e¦æ¸ü³f)"
+AGV_NODE,201260,1,XFL torque reaches  threshold - CST - move back,"¥ª«e½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«á°h¸ü³f)","½Ð½T»{¥ª«e½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«á°h¸ü³f)"
+AGV_NODE,201261,1,XFR torque reaches  threshold - CST - move back,"¥k«e½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«á°h¸ü³f)","½Ð½T»{¥k«e½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«á°h¸ü³f)"
+AGV_NODE,201262,1,XRL torque reaches  threshold - CST - move back,"¥ª«á½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«á°h¸ü³f)","½Ð½T»{¥ª«á½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«á°h¸ü³f)"
+AGV_NODE,201263,1,XRR torque reaches  threshold - CST - move back,"¥k«á½ü""¨«¦æ""§á¤O¹F¬ö¿ý­È(«á°h¸ü³f)","½Ð½T»{¥k«á½ü""¨«¦æ""§á¤O¬O§_¦³°ÝÃD(«á°h¸ü³f)"
+AGV_NODE,201264,1,TFL torque reaches  threshold - CST - move right,"¥ª«e½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥kÂà¸ü³f)","½Ð½T»{¥ª«e½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥kÂà¸ü³f)"
+AGV_NODE,201265,1,TFR torque reaches  threshold - CST - move right,"¥k«e½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥kÂà¸ü³f)","½Ð½T»{¥k«e½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥kÂà¸ü³f)"
+AGV_NODE,201266,1,TRL torque reaches  threshold - CST - move right,"¥ª«á½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥kÂà¸ü³f)","½Ð½T»{¥ª«á½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥kÂà¸ü³f)"
+AGV_NODE,201267,1,TRR torque reaches  threshold - CST - move right,"¥k«á½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥kÂà¸ü³f)","½Ð½T»{¥k«á½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥kÂà¸ü³f)"
+AGV_NODE,201268,1,TFL torque reaches  threshold - CST - move left,"¥ª«e½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥ªÂà¸ü³f)","½Ð½T»{¥ª«e½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥ªÂà¸ü³f)"
+AGV_NODE,201269,1,TFR torque reaches  threshold - CST - move left,"¥k«e½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥ªÂà¸ü³f)","½Ð½T»{¥k«e½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥ªÂà¸ü³f)"
+AGV_NODE,201270,1,TRL torque reaches  threshold - CST - move left,"¥ª«á½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥ªÂà¸ü³f)","½Ð½T»{¥ª«á½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥ªÂà¸ü³f)"
+AGV_NODE,201271,1,TRR torque reaches  threshold - CST - move left,"¥k«á½ü""±ÛÂà""§á¤O¹F¬ö¿ý­È(¥ªÂà¸ü³f)","½Ð½T»{¥k«á½ü""±ÛÂà""§á¤O¬O§_¦³°ÝÃD(¥ªÂà¸ü³f)"
 AGV_NODE,201272,1,,,
 AGV_NODE,201273,1,,,
 AGV_NODE,201274,1,,,
@@ -2078,9 +2078,9 @@ AGV_NODE,201703,1,CarrierIdReadFail,,
 AGV_NODE,201704,1,CarrierIdIsError,,
 AGV_NODE,201705,1,MoveFinishFail,,
 AGV_NODE,201706,1,LoadingOn,,
-AGV_NODE,201707,1,ForkCommandExist,,
+AGV_NODE,201707,1,TRUCommandExist,,
 AGV_NODE,201708,1,VehicleCannotUnload,,
-AGV_NODE,201709,1,ForkCommandExist,,
+AGV_NODE,201709,1,TRUCommandExist,,
 AGV_NODE,201710,1,PositionLostWithCmd,,
 AGV_NODE,201711,1,ChargeDirectionError,,
 AGV_NODE,201712,1,StartChargeTimeout,,
@@ -2154,7 +2154,7 @@ AGV_NODE,201779,1,Reject Move Command : MovecmdInfo data error,,
 AGV_NODE,201780,1,Reject Move Command : Closing Program,,
 AGV_NODE,201781,1,Reject Move Command : MoveControl Status is not Idle,,
 AGV_NODE,201782,1,Reject Move Command : Charging,,
-AGV_NODE,201783,1,Reject Move Command : Fork isn't in home Status,,
+AGV_NODE,201783,1,Reject Move Command : TRU isn't in home Status,,
 AGV_NODE,201784,1,Reject Move Command : MoveControl driver disconnect,,
 AGV_NODE,201785,1,Reject Move Commandmiddler : No current coordinates,,
 AGV_NODE,201786,1,Reject Move Command : Not is start position,,
