@@ -30,7 +30,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         /// <summary>
         /// The svid
         /// </summary>
-        [SecsElement(Index = 1, ListSpreadOut = true, ListElementType = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, 
+        [SecsElement(Index = 1, ListSpreadOut = true, ListElementType = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, 
             ListElementLength = 1)]
         public string[] SVID;
 

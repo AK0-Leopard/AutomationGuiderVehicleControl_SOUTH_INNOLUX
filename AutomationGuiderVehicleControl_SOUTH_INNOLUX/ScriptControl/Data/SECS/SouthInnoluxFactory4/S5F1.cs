@@ -31,7 +31,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         [SecsElement(Index = 1, Type = SecsElement.SecsElementType.TYPE_BINARY, Length = 1)]
         public string ALCD;
         //[SecsElement(Index = 2, Type = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, Length = 1)]
-        [SecsElement(Index = 2, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]//修改Type為TYPE_2_BYTE_UNSIGNED_INTEGER MarkChou 20190329
+        [SecsElement(Index = 2, Type = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, Length = 1)]//修改Type為TYPE_2_BYTE_UNSIGNED_INTEGER MarkChou 20190329
         public string ALID;
         //[SecsElement(Index = 3, Type = SecsElement.SecsElementType.TYPE_ASCII, Length = 50)]
         [SecsElement(Index = 3, Type = SecsElement.SecsElementType.TYPE_ASCII, Length = 40)]//修改長度為40 MarkChou 20190329

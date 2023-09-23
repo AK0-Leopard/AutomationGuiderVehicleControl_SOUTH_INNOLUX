@@ -31,7 +31,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         /// The ecids
         /// </summary>
         //[SecsElement(Index = 1, ListSpreadOut = true, ListElementType = SecsElement.SecsElementType.TYPE_ASCII, ListElementLength = 4)]
-        [SecsElement(Index = 1, ListSpreadOut = true, ListElementType = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, ListElementLength = 1)]//修改Type為TYPE_2_BYTE_UNSIGNED_INTEGER，並修改長度為1 MarkChou 20190329
+        [SecsElement(Index = 1, ListSpreadOut = true, ListElementType = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, ListElementLength = 1)]//修改Type為TYPE_2_BYTE_UNSIGNED_INTEGER，並修改長度為1 MarkChou 20190329
         public string[] ECIDS;
         
         /// <summary>

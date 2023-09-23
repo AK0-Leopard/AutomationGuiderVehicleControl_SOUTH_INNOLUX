@@ -18,7 +18,7 @@ using com.mirle.ibg3k0.bcf.Data.VO;
 using com.mirle.ibg3k0.sc.App;
 using com.mirle.ibg3k0.sc.BLL;
 using com.mirle.ibg3k0.sc.Common;
-using com.mirle.ibg3k0.sc.Data.SECS.SouthInnolux;
+using com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4;
 using com.mirle.ibg3k0.sc.Data.SECSDriver;
 
 using com.mirle.ibg3k0.sc.Data.VO;
@@ -235,12 +235,12 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                         s1f12.SVIDS[i].SVNAME = SECSConst.VID_Dictionary[SECSConst.VID_Transfer_Command];
                         s1f12.SVIDS[i].UNITS = strUnits;
                     }
-                    else if (s1f11.SVID[i] == SECSConst.VID_Transfer_Info)
-                    {
-                        s1f12.SVIDS[i].SVID = SECSConst.VID_Transfer_Info;
-                        s1f12.SVIDS[i].SVNAME = SECSConst.VID_Dictionary[SECSConst.VID_Transfer_Info];
-                        s1f12.SVIDS[i].UNITS = strUnits;
-                    }
+                    //else if (s1f11.SVID[i] == SECSConst.VID_Transfer_Info)
+                    //{
+                    //    s1f12.SVIDS[i].SVID = SECSConst.VID_Transfer_Info;
+                    //    s1f12.SVIDS[i].SVNAME = SECSConst.VID_Dictionary[SECSConst.VID_Transfer_Info];
+                    //    s1f12.SVIDS[i].UNITS = strUnits;
+                    //}
                     else if (s1f11.SVID[i] == SECSConst.VID_Transfer_State)
                     {
                         s1f12.SVIDS[i].SVID = SECSConst.VID_Transfer_State;
@@ -461,7 +461,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                     case "TRANSFER":
                         S2F49_TRANSFER s2f49_transfer = ((S2F49_TRANSFER)e.secsHandler.Parse<S2F49_TRANSFER>(e));
                         SCUtility.secsActionRecordMsg(scApp, true, s2f49_transfer);
-                        SCUtility.RecodeReportInfo(s2f49_transfer);
+                        //SCUtility.RecodeReportInfo(s2f49_transfer);
                         //if (!isProcessEAP(s2f49)) { return; }
 
                         S2F50 s2f50 = new S2F50();
@@ -508,7 +508,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                                         logger.Warn("Reply EQPT S2F50) Error:{0}", rtnCode);
                                         isCreatScuess = false;
                                     }
-                                    SCUtility.RecodeReportInfo(s2f50, cmdID, rtnCode.ToString());
+                                    //SCUtility.RecodeReportInfo(s2f50, cmdID, rtnCode.ToString());
                                 }
                                 if (isCreatScuess)
                                 {
@@ -3210,9 +3210,9 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                                 case SECSConst.VID_Transfer_Command:
                                     vid_item = Vids.VID_69_TransferCommand;
                                     break;
-                                case SECSConst.VID_Transfer_Info:
-                                    vid_item = Vids.VID_70_TransferInfo;
-                                    break;
+                                //case SECSConst.VID_Transfer_Info:
+                                //    vid_item = Vids.VID_70_TransferInfo;
+                                //    break;
                                 case SECSConst.VID_Transfer_Port:
                                     vid_item = Vids.VID_71_TransferPort;
                                     break;
@@ -3320,7 +3320,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 String rtnMsg = string.Empty;
 
                 if (!isSend()) return true;
-                SCUtility.RecodeReportInfo(vh_id, mcs_cmd_id, s6f11, s6f11.CEID);
+                //SCUtility.RecodeReportInfo(vh_id, mcs_cmd_id, s6f11, s6f11.CEID);
                 SCUtility.secsActionRecordMsg(scApp, false, s6f11);
                 TrxSECS.ReturnCode rtnCode = ISECSControl.sendRecv<S6F12>(bcfApp, s6f11, out s6f12,
                     out abortSecs, out rtnMsg, null);
@@ -3331,7 +3331,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 SCUtility.secsActionRecordMsg(scApp, false, s6f12);
                 SCUtility.actionRecordMsg(scApp, s6f11.StreamFunction, line.Real_ID,
                             "sendS6F11_common.", rtnCode.ToString());
-                SCUtility.RecodeReportInfo(vh_id, mcs_cmd_id, s6f12, s6f11.CEID, rtnCode.ToString());
+                //SCUtility.RecodeReportInfo(vh_id, mcs_cmd_id, s6f12, s6f11.CEID, rtnCode.ToString());
 
                 if (rtnCode != TrxSECS.ReturnCode.Normal)
                 {
@@ -3820,6 +3820,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 vid_collection.VID_70_TransferInfo.CARRIER_ID.CARRIER_ID = cmd.CARRIER_ID;
                 vid_collection.VID_70_TransferInfo.SOURCE_PORT.SOURCE_PORT = cmd.HOSTSOURCE;
                 vid_collection.VID_70_TransferInfo.DEST_PORT.DEST_PORT = cmd.HOSTDESTINATION;
+                vid_collection.VID_70_TransferInfo.CARRIER_LOC.CARRIER_LOC= cmd.HOSTSOURCE;
 
                 //vid_collection.VID_69_TransferCommand.COMMAND_INFO.COMMAND_ID = cmd.CMD_ID;
                 //vid_collection.VID_69_TransferCommand.COMMAND_INFO.PRIORITY = cmd.PRIORITY.ToString();

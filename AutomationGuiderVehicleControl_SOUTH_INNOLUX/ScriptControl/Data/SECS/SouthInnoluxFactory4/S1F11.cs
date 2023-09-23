@@ -32,7 +32,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         /// </summary>
         //[SecsElement(Index = 1, ListSpreadOut = true, ListElementType = SecsElement.SecsElementType.TYPE_ASCII, ListElementLength = 5)]
         //修改Type為TYPE_2_BYTE_UNSIGNED_INTEGER，並修改長度為1 MarkChou 20190315
-        [SecsElement(Index = 1, ListSpreadOut = true, ListElementType = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, ListElementLength = 1)]
+        [SecsElement(Index = 1, ListSpreadOut = true, ListElementType = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, ListElementLength = 1)]
         public string[] SVID;
 
         /// <summary>

@@ -32,7 +32,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         /// A zero-length list means all CEIDs.
         /// </summary>
         //[SecsElement(Index = 2, ListElementType = SecsElement.SecsElementType.TYPE_ASCII, ListElementLength = 3)]
-        [SecsElement(Index = 2, ListElementType = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, ListElementLength = 1)]//修改Type為TYPE_2_BYTE_UNSIGNED_INTEGER，並修改長度為1 MarkChou 20190329
+        [SecsElement(Index = 2, ListElementType = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, ListElementLength = 1)]//修改Type為TYPE_2_BYTE_UNSIGNED_INTEGER，並修改長度為1 MarkChou 20190329
         public string[] CEIDS;
 
         public S2F37()

@@ -443,32 +443,32 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public const string VID_Active_Carriers = "51";
         public const string VID_Active_Transfers = "52";
         public const string VID_Active_Vehicles = "53";
-        public const string VID_Carrier_ID = "54";
+        public const string VID_Carrier_ID = "7121";
         public const string VID_CarrierInfo = "55";
-        public const string VID_Carrier_Loc = "56";
+        public const string VID_Carrier_Loc = "7211";
         public const string VID_Command_Name = "57";
-        public const string VID_Command_ID = "58";
-        public const string VID_Command_Info = "59";
+        public const string VID_Command_ID = "7111";
+        public const string VID_Command_Info = "7101";
         public const string VID_Command_Type = "60";
         public const string VID_Destination_Port = "61";
         public const string VID_Enhanced_Carriers = "62";
         public const string VID_Enhanced_Transfers = "63";
-        public const string VID_EqpName = "64";
+        public const string VID_EqpName = "9001";
         public const string VID_InstallTime = "64";
         public const string VID_Priority = "65";
         public const string VID_Replace = "66";
-        public const string VID_Result_Code = "67";
+        public const string VID_Result_Code = "7005";
         public const string VID_Source_Port = "68";
         public const string VID_Transfer_Command = "69";
-        public const string VID_Transfer_Info = "70";
-        public const string VID_Transfer_Port = "71";
+        //public const string VID_Transfer_Info = "?";
+        public const string VID_Transfer_Port = "7321";
         public const string VID_Transfer_Port_List = "72";
         public const string VID_Transfer_State = "72";
         public const string VID_TCS_State = "73";
-        public const string VID_Vehicle_ID = "74";
-        public const string VID_Vehicle_Info = "75";
+        public const string VID_Vehicle_ID = "7311";
+        public const string VID_Vehicle_Info = "7301";
         public const string VID_Vehicle_State = "76";
-        public const string VID_Transfer_Complete_Info = "301";
+        public const string VID_Transfer_Complete_Info = "7102";
         public const string VID_Port_ID = "302";
         public const string VID_Port_Evt_State = "303";
         public const string VID_Port_Event_State = "304";
@@ -519,7 +519,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
             {VID_Result_Code,"Result_Code" },
             {VID_Source_Port,"Source_Port" },
             {VID_Transfer_Command,"Transfer_Command" },
-            {VID_Transfer_Info,"Transfer_Info" },
+            //{VID_Transfer_Info,"Transfer_Info" },
             {VID_Transfer_Port,"Transfer_Port" },
             {VID_Transfer_State,"Transfer_State" },
             {VID_TCS_State,"TCS_State" },

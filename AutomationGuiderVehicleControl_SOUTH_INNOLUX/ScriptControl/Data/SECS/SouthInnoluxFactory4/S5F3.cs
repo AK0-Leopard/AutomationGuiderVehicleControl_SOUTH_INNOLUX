@@ -30,7 +30,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         [SecsElement(Index = 1, Type = SecsElement.SecsElementType.TYPE_BINARY, Length = 1)]
         public string ALED;
         //[SecsElement(Index = 2, Type = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, Length = 4)]
-        [SecsElement(Index = 2, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]//修改Type為TYPE_2_BYTE_UNSIGNED_INTEGER,長度為1 MarkChou 20190329
+        [SecsElement(Index = 2, Type = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, Length = 1)]//修改Type為TYPE_2_BYTE_UNSIGNED_INTEGER,長度為1 MarkChou 20190329
         public string ALID;
 
         public S5F3()

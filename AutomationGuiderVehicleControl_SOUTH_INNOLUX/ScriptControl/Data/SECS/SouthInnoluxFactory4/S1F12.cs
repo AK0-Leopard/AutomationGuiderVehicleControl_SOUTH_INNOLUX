@@ -53,7 +53,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
             /// </summary>
             //[SecsElement(Index = 1, Type = SecsElement.SecsElementType.TYPE_ASCII, Length = 5)]
             //修改Type為TYPE_2_BYTE_UNSIGNED_INTEGER，並修改長度為1 MarkChou 20190315
-            [SecsElement(Index = 1, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]
+            [SecsElement(Index = 1, Type = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, Length = 1)]
             public string SVID;
             /// <summary>
             /// The svname
@@ -64,7 +64,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
             /// <summary>
             /// The unit
             /// </summary>
-            [SecsElement(Index = 3, Type = SecsElement.SecsElementType.TYPE_ASCII, Length = 3)]//加入新欄位UNITS MarkChou 20190315
+            [SecsElement(Index = 3, Type = SecsElement.SecsElementType.TYPE_ASCII, Length = 6)]//加入新欄位UNITS MarkChou 20190315
             public string UNITS;
         }
     }

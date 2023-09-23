@@ -29,7 +29,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
     {
         [SecsElement(Index = 1, Type = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, Length = 1)]
         public string DATAID;
-        [SecsElement(Index = 2, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]
+        [SecsElement(Index = 2, Type = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, Length = 1)]
         public string CEID;
         [SecsElement(Index = 3)]
         public RPTINFO INFO;
@@ -422,11 +422,14 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
                     public VIDITEM_68 SOURCE_PORT;
                     [SecsElement(Index = 3, ListSpreadOut = true)]
                     public VIDITEM_61 DEST_PORT;
+                    [SecsElement(Index = 4, ListSpreadOut = true)]
+                    public VIDITEM_56 CARRIER_LOC;
                     public VIDITEM_70()
                     {
                         CARRIER_ID = new VIDITEM_54();
                         SOURCE_PORT = new VIDITEM_68();
                         DEST_PORT = new VIDITEM_61();
+                        CARRIER_LOC = new VIDITEM_56();
                     }
                 }
 
