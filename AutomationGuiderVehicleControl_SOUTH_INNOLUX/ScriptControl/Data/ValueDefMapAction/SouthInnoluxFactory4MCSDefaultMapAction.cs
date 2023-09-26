@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Transactions;
+using static com.mirle.ibg3k0.sc.App.SCAppConstants.LineHostControlState;
 
 namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
 {
@@ -1159,24 +1160,28 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                     {
                         s1f4.SV[i] = buildAlarmEnabledVIDItem();
                     }
-                    else if (s1f3.SVID[i] == SECSConst.VID_Alarm_Set)
-                    {
-                        s1f4.SV[i] = buildAlarmSetVIDItem();
-                    }
+                    //else if (s1f3.SVID[i] == SECSConst.VID_Alarm_Set)
+                    //{
+                    //    s1f4.SV[i] = buildAlarmSetVIDItem();
+                    //}
                     //=====================================================
                     else if (s1f3.SVID[i] == SECSConst.VID_Clock)
                     {
                         s1f4.SV[i] = buildClockVIDItem();
+                    }
+                    else if (s1f3.SVID[i] == SECSConst.VID_SpecVersion)
+                    {
+                        s1f4.SV[i] = buildSpecVersion();
                     }
                     else if (s1f3.SVID[i] == SECSConst.VID_Control_State)
                     {
                         line.CurrentStateChecked = true;
                         s1f4.SV[i] = buildControlStateVIDItem();
                     }
-                    else if (s1f3.SVID[i] == SECSConst.VID_Events_Enabled)
-                    {
-                        s1f4.SV[i] = buildEventsEnabledVIDItem();
-                    }
+                    //else if (s1f3.SVID[i] == SECSConst.VID_Events_Enabled)
+                    //{
+                    //    s1f4.SV[i] = buildEventsEnabledVIDItem();
+                    //}
                     else if (s1f3.SVID[i] == SECSConst.VID_Active_Carriers)
                     {
                         s1f4.SV[i] = buildActiveCarriersVIDItem();
@@ -1200,6 +1205,11 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                     {
                         line.EnhancedCarriersChecked = true;
                         s1f4.SV[i] = buildEnhancedCarriersVIDItem();
+                    }
+                    else if (s1f3.SVID[i] == SECSConst.VID_Enhanced_Vehicle)
+                    {
+                        line.EnhancedCarriersChecked = true;
+                        s1f4.SV[i] = buildActiveEnhancedVehiclesVIDItem();
                     }
                     else if (s1f3.SVID[i] == SECSConst.VID_Enhanced_Transfers)
                     {
@@ -1310,17 +1320,41 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
         private S6F11.RPTINFO.RPTITEM.VIDITEM_05 buildClockVIDItem()
         {
             S6F11.RPTINFO.RPTITEM.VIDITEM_05 viditem_05 = new S6F11.RPTINFO.RPTITEM.VIDITEM_05();
-            viditem_05.CLOCK = DateTime.Now.ToString("yyyyMMddhhmmssffcc");
+            viditem_05.CLOCK = DateTime.Now.ToString(SCAppConstants.TimestampFormat_16);
+            return viditem_05;
+        }
+        private S6F11.RPTINFO.RPTITEM.VIDITEM_SPEC_VERSION buildSpecVersion()
+        {
+            S6F11.RPTINFO.RPTITEM.VIDITEM_SPEC_VERSION viditem_05 = new S6F11.RPTINFO.RPTITEM.VIDITEM_SPEC_VERSION();
+            viditem_05.SPEC_VERSION = "E82";
             return viditem_05;
         }
         private S6F11.RPTINFO.RPTITEM.VIDITEM_06 buildControlStateVIDItem()
         {
-            string control_state = SCAppConstants.LineHostControlState.convert2MES(line.Host_Control_State);
+            string control_state = convert2MES(line.Host_Control_State);
             S6F11.RPTINFO.RPTITEM.VIDITEM_06 viditem_06 = new S6F11.RPTINFO.RPTITEM.VIDITEM_06()
             {
                 CONTROLSTATE = control_state
             };
             return viditem_06;
+        }
+
+        public static string convert2MES(HostControlState hostMode)
+        {
+            switch (hostMode)
+            {
+                case HostControlState.EQ_Off_line:
+                case HostControlState.Going_Online:
+                case HostControlState.Host_Offline:
+                    return SECSConst.HostCrtMode_Host_Online;
+                case HostControlState.On_Line_Local:
+                    return SECSConst.HostCrtMode_On_Line_Local;
+                case HostControlState.On_Line_Remote:
+                    return SECSConst.HostCrtMode_On_Line_Remote;
+                default:
+                    return SECSConst.HostCrtMode_Host_Online;
+            }
+
         }
         private S6F11.RPTINFO.RPTITEM.VIDITEM_07 buildEventsEnabledVIDItem()
         {
@@ -1407,6 +1441,26 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                     {
                         VEHICLE_ID = vhs[j].Real_ID,
                         VEHICLE_STATE = ((int)vhs[j].State).ToString()//目前都填 Not Assigned, For Kevin Wei to Confirm
+                    }
+                };
+            }
+            return viditem_53;
+        }
+        private S6F11.RPTINFO.RPTITEM.VIDITEM_ENHANCE_VEHICLES buildActiveEnhancedVehiclesVIDItem()
+        {
+            List<AVEHICLE> vhs = scApp.getEQObjCacheManager().getAllVehicle();
+            int vhs_count = vhs.Count;
+            S6F11.RPTINFO.RPTITEM.VIDITEM_ENHANCE_VEHICLES viditem_53 = new S6F11.RPTINFO.RPTITEM.VIDITEM_ENHANCE_VEHICLES();
+            viditem_53.VEHICLEINFO = new S6F11.RPTINFO.RPTITEM.VIDITEM_ENHANCE_VEHICLE[vhs_count];
+            for (int j = 0; j < vhs_count; j++)
+            {
+                viditem_53.VEHICLEINFO[j] = new S6F11.RPTINFO.RPTITEM.VIDITEM_ENHANCE_VEHICLE()
+                {
+                    VHINFO = new S6F11.RPTINFO.RPTITEM.VIDITEM_ENHANCE_VEHICLE.VEHICLEINFO()
+                    {
+                        VEHICLE_ID = vhs[j].Real_ID,
+                        VEHICLE_STATE = ((int)vhs[j].State).ToString(),
+                        VEHICLE_LOCATION = SCUtility.isEmpty(vhs[j].CUR_ADR_ID) ? "" : vhs[j].CUR_ADR_ID
                     }
                 };
             }
@@ -1521,17 +1575,16 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 {
                     TRANSFER_STATE = transfer_state
                 };
-                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS = new S6F11.RPTINFO.RPTITEM.VIDITEM_70[1];//每一個TransferCMD只會有單一的Transfer Info嗎?  For Kevin Wei to Confirm
-                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS[0] = new S6F11.RPTINFO.RPTITEM.VIDITEM_70();
-                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS[0].CARRIER_ID = new S6F11.RPTINFO.RPTITEM.VIDITEM_54
+                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS = new S6F11.RPTINFO.RPTITEM.VIDITEM_TRAN_ENHANCED_TRAN_INFO();
+                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS.CARRIER_ID = new S6F11.RPTINFO.RPTITEM.VIDITEM_54
                 {
                     CARRIER_ID = mcs_cmd.CARRIER_ID
                 };
-                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS[0].SOURCE_PORT = new S6F11.RPTINFO.RPTITEM.VIDITEM_68
+                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS.SOURCE_PORT = new S6F11.RPTINFO.RPTITEM.VIDITEM_68
                 {
                     SOURCE_PORT = mcs_cmd.HOSTSOURCE
                 };
-                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS[0].DEST_PORT = new S6F11.RPTINFO.RPTITEM.VIDITEM_61
+                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS.DEST_PORT = new S6F11.RPTINFO.RPTITEM.VIDITEM_61
                 {
                     DEST_PORT = mcs_cmd.HOSTDESTINATION
                 };
@@ -1617,23 +1670,23 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 };
                 //A21.06.29 string port_evt_state = ((int)port_station[j].PORT_STATUS).ToString();
                 string port_evt_state = SECSConst.PORTEvtState_RTU;//A21.06.29
-                //if (port_station[j].PORT_SERVICE_STATUS == ProtocolFormat.OHTMessage.PortStationServiceStatus.OutOfService)
-                //{
-                //    port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Disabled).ToString();
-                //}
-                //else
-                //{
-                //    if (eqpt.EQ_Down)
-                //    {
-                //        port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Down).ToString();
-                //    }
-                //    else
-                //    {
-                //        port_evt_state = ((int)port_station[j].PORT_STATUS).ToString();
-                //    }
-                //}
-                //port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Wait).ToString();
-                //M0.01viditem_305.PORT_EVENT_STATEs[eq_port_index].PESTATE.PORT_EVT_STATE = new S6F11.RPTINFO.RPTITEM.VIDITEM_303()
+                                                                   //if (port_station[j].PORT_SERVICE_STATUS == ProtocolFormat.OHTMessage.PortStationServiceStatus.OutOfService)
+                                                                   //{
+                                                                   //    port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Disabled).ToString();
+                                                                   //}
+                                                                   //else
+                                                                   //{
+                                                                   //    if (eqpt.EQ_Down)
+                                                                   //    {
+                                                                   //        port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Down).ToString();
+                                                                   //    }
+                                                                   //    else
+                                                                   //    {
+                                                                   //        port_evt_state = ((int)port_station[j].PORT_STATUS).ToString();
+                                                                   //    }
+                                                                   //}
+                                                                   //port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Wait).ToString();
+                                                                   //M0.01viditem_305.PORT_EVENT_STATEs[eq_port_index].PESTATE.PORT_EVT_STATE = new S6F11.RPTINFO.RPTITEM.VIDITEM_303()
                 viditem_305.PORT_EVENT_STATEs[eq_port_index].PESTATE.PORT_EVT_STATE = new S6F11.RPTINFO.RPTITEM.VIDITEM_303()//M0.01
                 {
                     //PORT_EVT_STATE = ((int)port_station[j].PORT_EVENT_STATE).ToString()
@@ -2634,7 +2687,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 //string carrier_loc = CMD_MCS.TRANSFERSTATE >= E_TRAN_STATUS.Transferring ?
                 //                          vh == null ? "" : vh.Real_ID :
                 //                          CMD_MCS.HOSTSOURCE;
-                vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].CARRIER_LOC_OBJ.CARRIER_LOC = carrier_loc;
+                //vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].CARRIER_LOC_OBJ.CARRIER_LOC = carrier_loc;
 
                 //VID_67_ResultCode
                 vid_collection.VID_67_ResultCode.RESULT_CODE = resultCode;
@@ -3095,14 +3148,15 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                     StreamFunctionName = ceid_name
                 };
                 //if(ceid=="53"|| ceid == "53"ceid == "53")
-                if (SCUtility.isMatche(ceid, SECSConst.CEID_TSC_Auto_Completed) ||
-                SCUtility.isMatche(ceid, SECSConst.CEID_TSC_Auto_Initiated) ||
-                SCUtility.isMatche(ceid, SECSConst.CEID_TSC_Pause_Completed) ||
-                SCUtility.isMatche(ceid, SECSConst.CEID_TSC_Paused) ||
-                SCUtility.isMatche(ceid, SECSConst.CEID_TSC_Pause_Initiated) ||
-                SCUtility.isMatche(ceid, SECSConst.CEID_Equipment_OFF_LINE) ||
-                SCUtility.isMatche(ceid, SECSConst.CEID_Control_Status_Local) ||
-                SCUtility.isMatche(ceid, SECSConst.CEID_Control_Status_Remote))
+                //if (SCUtility.isMatche(ceid, SECSConst.CEID_TSC_Auto_Completed) ||
+                //SCUtility.isMatche(ceid, SECSConst.CEID_TSC_Auto_Initiated) ||
+                //SCUtility.isMatche(ceid, SECSConst.CEID_TSC_Pause_Completed) ||
+                //SCUtility.isMatche(ceid, SECSConst.CEID_TSC_Paused) ||
+                //SCUtility.isMatche(ceid, SECSConst.CEID_TSC_Pause_Initiated) ||
+                //SCUtility.isMatche(ceid, SECSConst.CEID_Equipment_OFF_LINE) ||
+                //SCUtility.isMatche(ceid, SECSConst.CEID_Control_Status_Local) ||
+                //SCUtility.isMatche(ceid, SECSConst.CEID_Control_Status_Remote))
+                if (false)
                 {
                     s6f11.INFO.ITEM = new S6F11.RPTINFO.RPTITEM[0];
                 }
@@ -3547,7 +3601,8 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.CARRIER_ID.CARRIER_ID = vid_info.MCS_CARRIER_ID;
             vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.SOURCE_PORT.SOURCE_PORT = vid_info.SOURCEPORT;
             vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.DEST_PORT.DEST_PORT = vid_info.DESTPORT;
-            vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].CARRIER_LOC_OBJ.CARRIER_LOC = vid_info.CARRIER_LOC;
+            vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.CARRIER_LOC.CARRIER_LOC = vid_info.CARRIER_LOC;
+            //vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].CARRIER_LOC_OBJ.CARRIER_LOC = vid_info.CARRIER_LOC;
 
             //VID_304_PortEventState
             vid_collection.VID_304_PortEventState.PESTATE.PORT_ID.PORT_ID = vid_info.PORT_ID;
@@ -3820,7 +3875,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 vid_collection.VID_70_TransferInfo.CARRIER_ID.CARRIER_ID = cmd.CARRIER_ID;
                 vid_collection.VID_70_TransferInfo.SOURCE_PORT.SOURCE_PORT = cmd.HOSTSOURCE;
                 vid_collection.VID_70_TransferInfo.DEST_PORT.DEST_PORT = cmd.HOSTDESTINATION;
-                vid_collection.VID_70_TransferInfo.CARRIER_LOC.CARRIER_LOC= cmd.HOSTSOURCE;
+                vid_collection.VID_70_TransferInfo.CARRIER_LOC.CARRIER_LOC = cmd.HOSTSOURCE;
 
                 //vid_collection.VID_69_TransferCommand.COMMAND_INFO.COMMAND_ID = cmd.CMD_ID;
                 //vid_collection.VID_69_TransferCommand.COMMAND_INFO.PRIORITY = cmd.PRIORITY.ToString();

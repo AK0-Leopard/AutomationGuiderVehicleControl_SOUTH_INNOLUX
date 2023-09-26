@@ -37,16 +37,12 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         #endregion Sample Flag
 
         #region Host Control Mode
-        public static readonly string HostCrtMode_EQ_Off_line = "1";
-        public static readonly string HostCrtMode_Going_Online = "2";
-        public static readonly string HostCrtMode_Host_Online = "3";
-        public static readonly string HostCrtMode_On_Line_Local = "4";
-        public static readonly string HostCrtMode_On_Line_Remote = "5";
+        public static readonly string HostCrtMode_Host_Online = "0";
+        public static readonly string HostCrtMode_On_Line_Local = "1";
+        public static readonly string HostCrtMode_On_Line_Remote = "2";
 
         public static readonly string[] HOST_CRT_MODE =
         {
-            HostCrtMode_EQ_Off_line,
-            HostCrtMode_Going_Online,
             HostCrtMode_Host_Online,
             HostCrtMode_On_Line_Local,
             HostCrtMode_On_Line_Remote
@@ -437,12 +433,13 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public const string VID_Establish_Communications_Timeout = "2";
         public const string VID_Alarm_Enabled = "3";
         public const string VID_Alarm_Set = "4";
-        public const string VID_Clock = "5";
-        public const string VID_Control_State = "6";
+        public const string VID_Clock = "100";
+        public const string VID_SpecVersion = "203";
+        public const string VID_Control_State = "200";
         public const string VID_Events_Enabled = "7";
-        public const string VID_Active_Carriers = "51";
-        public const string VID_Active_Transfers = "52";
-        public const string VID_Active_Vehicles = "53";
+        public const string VID_Active_Carriers = "3000";
+        public const string VID_Active_Transfers = "4000";
+        public const string VID_Active_Vehicles = "2000";
         public const string VID_Carrier_ID = "7121";
         public const string VID_CarrierInfo = "55";
         public const string VID_Carrier_Loc = "7211";
@@ -451,8 +448,9 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public const string VID_Command_Info = "7101";
         public const string VID_Command_Type = "60";
         public const string VID_Destination_Port = "61";
-        public const string VID_Enhanced_Carriers = "62";
-        public const string VID_Enhanced_Transfers = "63";
+        public const string VID_Enhanced_Carriers = "3001";
+        public const string VID_Enhanced_Vehicle = "2001";
+        public const string VID_Enhanced_Transfers = "4001";
         public const string VID_EqpName = "9001";
         public const string VID_InstallTime = "64";
         public const string VID_Priority = "65";
@@ -464,7 +462,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public const string VID_Transfer_Port = "7321";
         public const string VID_Transfer_Port_List = "72";
         public const string VID_Transfer_State = "72";
-        public const string VID_TCS_State = "73";
+        public const string VID_TCS_State = "202";
         public const string VID_Vehicle_ID = "7311";
         public const string VID_Vehicle_Info = "7301";
         public const string VID_Vehicle_State = "76";

@@ -119,7 +119,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
                 [Serializable]
                 public class VIDITEM_06 : SXFY
                 {
-                    [SecsElement(Index = 1, ListSpreadOut = true, Type = SecsElement.SecsElementType.TYPE_BINARY, Length = 1)]
+                    [SecsElement(Index = 1, ListSpreadOut = true, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]
                     public string CONTROLSTATE;
                     public VIDITEM_06()
                     {
@@ -169,6 +169,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
                         VEHICLEINFO[0] = new VIDITEM_75();
                     }
                 }
+
 
 
                 [Serializable]
@@ -323,14 +324,13 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
                         [SecsElement(Index = 2, ListSpreadOut = true, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]
                         public VIDITEM_72_2 TRANSFER_STATE;
                         [SecsElement(Index = 3, ListSpreadOut = true)]
-                        public VIDITEM_70[] TRANSFER_INFOS;
+                        public VIDITEM_TRAN_ENHANCED_TRAN_INFO TRANSFER_INFOS;
 
                         public ENHANCED_TRANSFER_COMMAND()
                         {
                             COMMAND_INFO_OBJ = new VIDITEM_59();
                             TRANSFER_STATE = new VIDITEM_72_2();
-                            TRANSFER_INFOS = new VIDITEM_70[1];
-                            TRANSFER_INFOS[0] = new VIDITEM_70();
+                            TRANSFER_INFOS = new VIDITEM_TRAN_ENHANCED_TRAN_INFO();
                         }
                     }
                 }
@@ -410,6 +410,23 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
                         //A0.01 TRANSFER_INFOs = new VIDITEM_70[1];
                         //A0.01 TRANSFER_INFOs[0] = new VIDITEM_70();
                         TRANSFER_INFO = new VIDITEM_70();//A0.01 
+                    }
+                }
+
+                [Serializable]
+                public class VIDITEM_TRAN_ENHANCED_TRAN_INFO : SXFY
+                {
+                    [SecsElement(Index = 1, ListSpreadOut = true)]
+                    public VIDITEM_54 CARRIER_ID;
+                    [SecsElement(Index = 2, ListSpreadOut = true)]
+                    public VIDITEM_68 SOURCE_PORT;
+                    [SecsElement(Index = 3, ListSpreadOut = true)]
+                    public VIDITEM_61 DEST_PORT;
+                    public VIDITEM_TRAN_ENHANCED_TRAN_INFO()
+                    {
+                        CARRIER_ID = new VIDITEM_54();
+                        SOURCE_PORT = new VIDITEM_68();
+                        DEST_PORT = new VIDITEM_61();
                     }
                 }
 
@@ -538,14 +555,14 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
                     [Serializable]
                     public class TRANSFER_COMPLETE_INFO : SXFY
                     {
-                        [SecsElement(Index = 1)]
+                        [SecsElement(Index = 1, ListSpreadOut = true)]
                         public VIDITEM_70 TRANSFER_INFO_OBJ;
-                        [SecsElement(Index = 2)]
-                        public VIDITEM_56 CARRIER_LOC_OBJ;
+                        //[SecsElement(Index = 2)]
+                        //public VIDITEM_56 CARRIER_LOC_OBJ;
                         public TRANSFER_COMPLETE_INFO()
                         {
                             TRANSFER_INFO_OBJ = new VIDITEM_70();
-                            CARRIER_LOC_OBJ = new VIDITEM_56();
+                            //CARRIER_LOC_OBJ = new VIDITEM_56();
                         }
                     }
                 }
@@ -682,6 +699,56 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
                         ERROR_TEXT = string.Empty;
                     }
                 }
+
+                [Serializable]
+                public class VIDITEM_SPEC_VERSION : SXFY
+                {
+                    [SecsElement(Index = 1, ListSpreadOut = true, Type = SecsElement.SecsElementType.TYPE_ASCII, Length = 8)]
+                    public string SPEC_VERSION;
+                    public VIDITEM_SPEC_VERSION()
+                    {
+                        SPEC_VERSION = string.Empty;
+                    }
+                }
+
+                [Serializable]
+                public class VIDITEM_ENHANCE_VEHICLES : SXFY
+                {
+                    [SecsElement(Index = 1, ListSpreadOut = true)]
+                    public VIDITEM_ENHANCE_VEHICLE[] VEHICLEINFO;
+                    public VIDITEM_ENHANCE_VEHICLES()
+                    {
+                        VEHICLEINFO = new VIDITEM_ENHANCE_VEHICLE[1];
+                        VEHICLEINFO[0] = new VIDITEM_ENHANCE_VEHICLE();
+                    }
+                }
+                [Serializable]
+                public class VIDITEM_ENHANCE_VEHICLE : SXFY
+                {
+                    [SecsElement(Index = 1, ListSpreadOut = true)]
+                    public VEHICLEINFO VHINFO;
+                    public VIDITEM_ENHANCE_VEHICLE()
+                    {
+                        VHINFO = new VEHICLEINFO()
+                        {
+                            VEHICLE_ID = string.Empty,
+                            VEHICLE_STATE = string.Empty,
+                            VEHICLE_LOCATION = string.Empty
+                        };
+                    }
+                    [Serializable]
+                    public class VEHICLEINFO : SXFY
+                    {
+                        [SecsElement(Index = 1, Type = SecsElement.SecsElementType.TYPE_ASCII, Length = 32)]
+                        public string VEHICLE_ID;
+                        [SecsElement(Index = 2, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]
+                        public string VEHICLE_STATE;
+                        [SecsElement(Index = 3, Type = SecsElement.SecsElementType.TYPE_ASCII, Length = 8)]
+                        public string VEHICLE_LOCATION;
+                    }
+                }
+
+
             }
         }
     }

@@ -1,0 +1,6 @@
+﻿EQPT_REAL_ID,ECID,ECNAME,ECMIN,ECMAX,ECV
+SOUTH_INNOLUX,2001,Vehicle Battery Low Boundary Value,0,100,30
+SOUTH_INNOLUX,2002,Vehicle Battery High Boundary Value,0,100,40
+SOUTH_INNOLUX,2003,Vehicle Interlock Retry Count(Load),0,999,3
+SOUTH_INNOLUX,2004,Vehicle Interlock Retry Count(Unload),0,999,3
+SOUTH_INNOLUX,2005,Max CST Abnormal Installed Time(Sec),0,9999,1200
