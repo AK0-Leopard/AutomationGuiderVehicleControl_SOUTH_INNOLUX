@@ -225,12 +225,18 @@ namespace com.mirle.ibg3k0.bc.winform.UI.Components
                 zoon_Factor = 210;
                 defaultMaxScale = 10;
             }
-            else if (BCFUtility.isMatche(mainForm.BCApp.SCApplication.BC_ID, SCAppConstants.WorkVersion.VERSION_NAME_SOUTH_INNOLUX)||
-                     BCFUtility.isMatche(mainForm.BCApp.SCApplication.BC_ID, SCAppConstants.WorkVersion.VERSION_NAME_SOUTH_INNOLUX_F4))
+            else if (BCFUtility.isMatche(mainForm.BCApp.SCApplication.BC_ID, SCAppConstants.WorkVersion.VERSION_NAME_SOUTH_INNOLUX))
             {
                 space_Height_m = 21000; //Innolux South 地圖地圖大小
                 space_Width_m = 50000;
                 zoon_Factor = 130;
+                defaultMaxScale = 10;
+            }
+            else if (BCFUtility.isMatche(mainForm.BCApp.SCApplication.BC_ID, SCAppConstants.WorkVersion.VERSION_NAME_SOUTH_INNOLUX_F4))
+            {
+                space_Height_m = 21000; //Innolux South 地圖地圖大小
+                space_Width_m = 115000;
+                zoon_Factor = 200;
                 defaultMaxScale = 10;
             }
             else if (BCFUtility.isMatche(mainForm.BCApp.SCApplication.BC_ID, SCAppConstants.WorkVersion.VERSION_NAME_NORTH_INNOLUX_TEST_SITE))
