@@ -185,7 +185,7 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.4.12\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.6.8\lib\net45\NLog.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Predes.ZabbixSender, Version=1.1.6333.16481, Culture=neutral, processorArchitecture=MSIL">
@@ -732,6 +732,7 @@
     <Compile Include="Data\VO\AlarmConvertInfo.cs" />
     <Compile Include="Data\VO\PartialVo\ACMD_MCS.cs" />
     <Compile Include="Data\VO\PartialVo\ACMD_OHTC.cs" />
+    <Compile Include="Data\VO\PartialVo\VehicleStatusInfo.cs" />
     <Compile Include="Data\VO\TrafficControlInfo.cs" />
     <Compile Include="Data\VO\VehicleMap.cs" />
     <Compile Include="Data\VO\ReserveEnhanceInfo.cs" />

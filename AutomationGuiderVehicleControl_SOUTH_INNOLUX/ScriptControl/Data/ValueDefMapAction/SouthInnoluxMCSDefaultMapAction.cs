@@ -710,38 +710,47 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             }
 
             //如果Source是個Port才需要檢查
-            if (source_is_a_port)
+            if (DebugParameter.ByPassCheckMCSCmdIsWalkerAble)
             {
-                ////確認是否有車子來可以搬送
-                //AVEHICLE vh = scApp.VehicleBLL.findBestSuitableVhStepByStepFromAdr(source_port_or_vh_id, E_VH_TYPE.None, isCheckHasVhCarry: true);
-                //isSuccess = vh != null;
-                //if (!isSuccess)
-                //{
-                //    check_result = $"No vehicle can reach mcs command id:{command_id} - source port:{source_port_or_vh_id}.{Environment.NewLine}please check the road traffic status.";
-                //    return SECSConst.HCACK_Cannot_Perform_Now;
-                //}
-                ////確認路徑是否可以行走
-                APORTSTATION source_port_station = scApp.PortStationBLL.OperateCatch.getPortStation(source_port_or_vh_id);
-                APORTSTATION dest_port_station = scApp.PortStationBLL.OperateCatch.getPortStation(dest_port);
-                isSuccess = scApp.GuideBLL.IsRoadWalkable(source_port_station.ADR_ID, dest_port_station.ADR_ID);
-                if (!isSuccess)
-                {
-                    check_result = $"MCS command id:{command_id} ,source port:{source_port_or_vh_id} to destination port:{dest_port} no path to go{Environment.NewLine}," +
-                        $"please check the road traffic status.";
-                    return SECSConst.HCACK_Cannot_Perform_Now;
-                }
+                //not thing....
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(SouthInnoluxMCSDefaultMapAction), Device: "OHxC",
+                   Data: $"by pass check mcs cmd is walkerable");
             }
-            //如果不是Port(則為指定車號)，要檢查是否從該車位置可以到達放貨地點
             else
             {
-                AVEHICLE carry_vh = scApp.VehicleBLL.cache.getVehicleByRealID(source_port_or_vh_id);
-                APORTSTATION dest_port_station = scApp.PortStationBLL.OperateCatch.getPortStation(dest_port);
-                isSuccess = scApp.GuideBLL.IsRoadWalkable(carry_vh.CUR_ADR_ID, dest_port_station.ADR_ID);
-                if (!isSuccess)
+                if (source_is_a_port)
                 {
-                    check_result = $"MCS command id:{command_id} ,vh:{source_port_or_vh_id} current address:{carry_vh.CUR_ADR_ID} to destination port:{dest_port}:{dest_port_station.ADR_ID} no path to go{Environment.NewLine}," +
-                        $"please check the road traffic status.";
-                    return SECSConst.HCACK_Cannot_Perform_Now;
+                    ////確認是否有車子來可以搬送
+                    //AVEHICLE vh = scApp.VehicleBLL.findBestSuitableVhStepByStepFromAdr(source_port_or_vh_id, E_VH_TYPE.None, isCheckHasVhCarry: true);
+                    //isSuccess = vh != null;
+                    //if (!isSuccess)
+                    //{
+                    //    check_result = $"No vehicle can reach mcs command id:{command_id} - source port:{source_port_or_vh_id}.{Environment.NewLine}please check the road traffic status.";
+                    //    return SECSConst.HCACK_Cannot_Perform_Now;
+                    //}
+                    ////確認路徑是否可以行走
+                    APORTSTATION source_port_station = scApp.PortStationBLL.OperateCatch.getPortStation(source_port_or_vh_id);
+                    APORTSTATION dest_port_station = scApp.PortStationBLL.OperateCatch.getPortStation(dest_port);
+                    isSuccess = scApp.GuideBLL.IsRoadWalkable(source_port_station.ADR_ID, dest_port_station.ADR_ID);
+                    if (!isSuccess)
+                    {
+                        check_result = $"MCS command id:{command_id} ,source port:{source_port_or_vh_id} to destination port:{dest_port} no path to go{Environment.NewLine}," +
+                            $"please check the road traffic status.";
+                        return SECSConst.HCACK_Cannot_Perform_Now;
+                    }
+                }
+                //如果不是Port(則為指定車號)，要檢查是否從該車位置可以到達放貨地點
+                else
+                {
+                    AVEHICLE carry_vh = scApp.VehicleBLL.cache.getVehicleByRealID(source_port_or_vh_id);
+                    APORTSTATION dest_port_station = scApp.PortStationBLL.OperateCatch.getPortStation(dest_port);
+                    isSuccess = scApp.GuideBLL.IsRoadWalkable(carry_vh.CUR_ADR_ID, dest_port_station.ADR_ID);
+                    if (!isSuccess)
+                    {
+                        check_result = $"MCS command id:{command_id} ,vh:{source_port_or_vh_id} current address:{carry_vh.CUR_ADR_ID} to destination port:{dest_port}:{dest_port_station.ADR_ID} no path to go{Environment.NewLine}," +
+                            $"please check the road traffic status.";
+                        return SECSConst.HCACK_Cannot_Perform_Now;
+                    }
                 }
             }
 

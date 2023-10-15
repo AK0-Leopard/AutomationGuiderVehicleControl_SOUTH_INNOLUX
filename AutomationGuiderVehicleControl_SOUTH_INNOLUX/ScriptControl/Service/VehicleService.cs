@@ -809,6 +809,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 VhStopSingle pauseStat = receive_gpp.PauseStatus;
                 VhStopSingle errorStat = receive_gpp.ErrorStatus;
                 VhLoadCSTStatus loadCSTStatus = receive_gpp.HasCST;
+                VhChargeStatus ChargeStatus = receive_gpp.ChargeStatus;
 
                 //VhGuideStatus leftGuideStat = recive_str.LeftGuideLockStatus;
                 //VhGuideStatus rightGuideStat = recive_str.RightGuideLockStatus;
@@ -835,6 +836,11 @@ namespace com.mirle.ibg3k0.sc.Service
                 {
                     vh.CarrierRemove();
                 }
+                if (vh.ChargeStatus != ChargeStatus)
+                {
+                    scApp.VehicleBLL.cache.SetChargeStatus(vh.VEHICLE_ID, ChargeStatus);
+                }
+
                 if (!scApp.VehicleBLL.doUpdateVehicleStatus(vh,
                                       cst_id, modeStat, actionStat,
                                        blockingStat, pauseStat, obstacleStat, VhStopSingle.StopSingleOff, errorStat, loadCSTStatus,

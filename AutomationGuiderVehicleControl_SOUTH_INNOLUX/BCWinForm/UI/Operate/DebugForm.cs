@@ -53,6 +53,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             ck_isMaunalReportFinishWhenLoadingUnloading.Checked = DebugParameter.isManualReportCommandFinishWhenLoadingUnloading;
             cb_byPassEarthQuakeSignal.Checked = DebugParameter.ByPassEarthquakeSignal;
             cb_byPassCheckVhReadyExcuteCommandFlag.Checked = DebugParameter.ByPassCheckVhReadyExcuteCommandFlag;
+            cb_byPassCheckIsWalkerAbleMCSCmd.Checked = DebugParameter.ByPassCheckMCSCmdIsWalkerAble;
 
 
             List<string> lstVh = new List<string>();
@@ -1658,6 +1659,11 @@ namespace com.mirle.ibg3k0.bc.winform.UI
         private void cb_byPassCheckVhReadyExcuteCommandFlag_CheckedChanged(object sender, EventArgs e)
         {
             DebugParameter.ByPassCheckVhReadyExcuteCommandFlag = cb_byPassCheckVhReadyExcuteCommandFlag.Checked;
+        }
+
+        private void cb_byPassCheckIsWalkerAbleMCSCmd_CheckedChanged(object sender, EventArgs e)
+        {
+            DebugParameter.ByPassCheckMCSCmdIsWalkerAble = cb_byPassCheckIsWalkerAbleMCSCmd.Checked;
         }
     }
 }

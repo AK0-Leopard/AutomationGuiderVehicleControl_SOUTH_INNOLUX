@@ -616,6 +616,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 VhStopSingle pauseStat = receive_gpp.PauseStatus;
                 VhStopSingle errorStat = receive_gpp.ErrorStatus;
                 VhLoadCSTStatus loadCSTStatus = receive_gpp.HasCST;
+                VhChargeStatus ChargeStatus = receive_gpp.ChargeStatus;
                 //VhGuideStatus leftGuideStat = recive_str.LeftGuideLockStatus;
                 //VhGuideStatus rightGuideStat = recive_str.RightGuideLockStatus;
 
@@ -641,6 +642,12 @@ namespace com.mirle.ibg3k0.sc.Service
                 {
                     vh.CarrierRemove();
                 }
+                if (vh.ChargeStatus != ChargeStatus)
+                {
+                    scApp.VehicleBLL.cache.SetChargeStatus(vh.VEHICLE_ID, ChargeStatus);
+                }
+
+
                 if (!scApp.VehicleBLL.doUpdateVehicleStatus(vh,
                                       cst_id, modeStat, actionStat,
                                        blockingStat, pauseStat, obstacleStat, VhStopSingle.StopSingleOff, errorStat, loadCSTStatus,
@@ -3143,6 +3150,8 @@ namespace com.mirle.ibg3k0.sc.Service
             VhStopSingle pauseStat = recive_str.PauseStatus;
             VhStopSingle errorStat = recive_str.ErrorStatus;
             VhLoadCSTStatus loadCSTStatus = recive_str.HasCST;
+            VhChargeStatus ChargeStatus = recive_str.ChargeStatus;
+
             int obstacleDIST = recive_str.ObstDistance;
             string obstacleVhID = recive_str.ObstVehicleID;
             int steeringWheel = recive_str.SteeringWheel;
@@ -3177,6 +3186,11 @@ namespace com.mirle.ibg3k0.sc.Service
             {
                 scApp.VehicleBLL.cache.SetReservePause(eqpt.VEHICLE_ID, reserveStatus);
             }
+            if (eqpt.ChargeStatus != ChargeStatus)
+            {
+                scApp.VehicleBLL.cache.SetChargeStatus(eqpt.VEHICLE_ID, ChargeStatus);
+            }
+
             if (hasdifferent && !scApp.VehicleBLL.doUpdateVehicleStatus(eqpt,
                                    cstID, modeStat, actionStat,
                                    blockingStat, pauseStat, obstacleStat, VhStopSingle.StopSingleOff, errorStat, loadCSTStatus,
