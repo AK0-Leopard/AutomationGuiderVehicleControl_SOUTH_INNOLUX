@@ -48,9 +48,9 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
 
         public class RPTITEM : SXFY
         {
-            [SecsElement(Index = 1, Type = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, Length = 1)]
+            [SecsElement(Index = 1, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]
             public string REPTID;
-            [SecsElement(Index = 2, ListElementType = SecsElement.SecsElementType.TYPE_4_BYTE_UNSIGNED_INTEGER, ListElementLength = 1)]
+            [SecsElement(Index = 2, ListElementType = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, ListElementLength = 1)]
             public string[] VIDS;
         }
 

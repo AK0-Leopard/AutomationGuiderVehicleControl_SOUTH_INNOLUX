@@ -432,7 +432,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public const string VID_AlarmID = "1";
         public const string VID_Establish_Communications_Timeout = "2";
         public const string VID_Alarm_Enabled = "3";
-        public const string VID_Alarm_Set = "4";
+        public const string VID_Alarm_Set = "102";
         public const string VID_Clock = "100";
         public const string VID_SpecVersion = "203";
         public const string VID_Control_State = "200";
@@ -470,7 +470,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public const string VID_Port_ID = "302";
         public const string VID_Port_Evt_State = "303";
         public const string VID_Port_Event_State = "304";
-        public const string VID_Registered_Ports = "305";
+        public const string VID_Registered_Ports = "5000";
         public const string VID_Near_Stocker_Port = "310";
         public const string VID_Current_Node = "311";
         public const string VID_Alarm_Text = "901";

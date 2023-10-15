@@ -414,8 +414,8 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                         Boolean isContain = SECSConst.CEID_ARRAY.Contains(ceid.Trim().PadLeft(3, '0'));
                         if (!isContain)
                         {
-                            isValid = false;
-                            break;
+                            //isValid = false;
+                            continue;
                         }
                     }
                     if (isValid)
@@ -1160,10 +1160,10 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                     {
                         s1f4.SV[i] = buildAlarmEnabledVIDItem();
                     }
-                    //else if (s1f3.SVID[i] == SECSConst.VID_Alarm_Set)
-                    //{
-                    //    s1f4.SV[i] = buildAlarmSetVIDItem();
-                    //}
+                    else if (s1f3.SVID[i] == SECSConst.VID_Alarm_Set)
+                    {
+                        s1f4.SV[i] = buildAlarmSetVIDItem();
+                    }
                     //=====================================================
                     else if (s1f3.SVID[i] == SECSConst.VID_Clock)
                     {
