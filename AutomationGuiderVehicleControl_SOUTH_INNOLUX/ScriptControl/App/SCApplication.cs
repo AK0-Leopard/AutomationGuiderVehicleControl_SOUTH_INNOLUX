@@ -1252,7 +1252,8 @@ namespace com.mirle.ibg3k0.sc.App
                 UnitBLL = new NorthInnoLuxUnitBLL();
                 ReserveBLL = new NorthInnoLuxReserveBLL();
             }
-            else if (BC_ID == "SOUTH_INNOLUX")
+            else if (BC_ID == "SOUTH_INNOLUX" ||
+                     BC_ID == "SOUTH_INXF4")
             {
                 bcSystemBLL = new SouthInnoLuxBCSystemBLL();
                 lineBLL = new SouthInnoLuxLineBLL();
@@ -1398,7 +1399,8 @@ namespace com.mirle.ibg3k0.sc.App
                 userControlService = new NorthInnoLuxUserControlService();
                 transferService = new NorthInnoLuxTransferService();
             }
-            else if (BC_ID == "SOUTH_INNOLUX")
+            else if (BC_ID == "SOUTH_INNOLUX" ||
+                     BC_ID == "SOUTH_INXF4")
             {
                 vehicleService = new SouthInnoLuxVehicleService();
                 lineService = new SouthInnoLuxLineService();

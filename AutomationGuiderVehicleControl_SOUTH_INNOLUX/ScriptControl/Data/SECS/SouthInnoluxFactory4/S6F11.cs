@@ -449,6 +449,22 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
                         CARRIER_LOC = new VIDITEM_56();
                     }
                 }
+                [Serializable]
+                public class VIDITEM_70_1 : SXFY
+                {
+                    [SecsElement(Index = 1, ListSpreadOut = true)]
+                    public VIDITEM_54 CARRIER_ID;
+                    [SecsElement(Index = 2, ListSpreadOut = true)]
+                    public VIDITEM_68 SOURCE_PORT;
+                    [SecsElement(Index = 3, ListSpreadOut = true)]
+                    public VIDITEM_61 DEST_PORT;
+                    public VIDITEM_70_1()
+                    {
+                        CARRIER_ID = new VIDITEM_54();
+                        SOURCE_PORT = new VIDITEM_68();
+                        DEST_PORT = new VIDITEM_61();
+                    }
+                }
 
                 [Serializable]
                 public class VIDITEM_71 : SXFY
@@ -556,14 +572,28 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
                     public class TRANSFER_COMPLETE_INFO : SXFY
                     {
                         [SecsElement(Index = 1, ListSpreadOut = true)]
-                        public VIDITEM_70 TRANSFER_INFO_OBJ;
-                        //[SecsElement(Index = 2)]
-                        //public VIDITEM_56 CARRIER_LOC_OBJ;
+                        public VIDITEM_70_1 TRANSFER_INFO_OBJ;
+                        [SecsElement(Index = 2)]
+                        public VIDITEM_56 CARRIER_LOC_OBJ;
                         public TRANSFER_COMPLETE_INFO()
                         {
-                            TRANSFER_INFO_OBJ = new VIDITEM_70();
-                            //CARRIER_LOC_OBJ = new VIDITEM_56();
+                            TRANSFER_INFO_OBJ = new VIDITEM_70_1();
+                            CARRIER_LOC_OBJ = new VIDITEM_56();
                         }
+                    }
+                }
+                [Serializable]
+                public class VIDITEM_301_1 : SXFY
+                {
+                    [SecsElement(Index = 1, ListSpreadOut = true)]
+                    public VIDITEM_70_1 TRANSFER_INFO_OBJ;
+                    [SecsElement(Index = 4, ListSpreadOut = true)]
+                    public VIDITEM_56 CARRIER_LOC;
+
+                    public VIDITEM_301_1()
+                    {
+                        TRANSFER_INFO_OBJ = new VIDITEM_70_1();
+                        CARRIER_LOC = new VIDITEM_56();
                     }
                 }
 
@@ -699,6 +729,56 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
                         ERROR_TEXT = string.Empty;
                     }
                 }
+                [Serializable]
+                public class VIDITEM_7006 : SXFY
+                {
+                    [SecsElement(Index = 1, ListSpreadOut = true, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]
+                    public string IDReadState;
+                    public VIDITEM_7006()
+                    {
+                        IDReadState = string.Empty;
+                    }
+                }
+                [Serializable]
+                public class VIDITEM_7011 : SXFY
+                {
+                    [SecsElement(Index = 1, ListSpreadOut = true, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]
+                    public string PortRequestState;
+                    public VIDITEM_7011()
+                    {
+                        PortRequestState = string.Empty;
+                    }
+                }
+                [Serializable]
+                public class VIDITEM_7012 : SXFY
+                {
+                    [SecsElement(Index = 1, ListSpreadOut = true, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]
+                    public string PortPresenceState;
+                    public VIDITEM_7012()
+                    {
+                        PortPresenceState = string.Empty;
+                    }
+                }
+                [Serializable]
+                public class VIDITEM_7401 : SXFY
+                {
+                    [SecsElement(Index = 1, ListSpreadOut = true, Type = SecsElement.SecsElementType.TYPE_ASCII, Length = 64)]
+                    public string ErrorID;
+                    public VIDITEM_7401()
+                    {
+                        ErrorID = string.Empty;
+                    }
+                }
+                [Serializable]
+                public class VIDITEM_7411 : SXFY
+                {
+                    [SecsElement(Index = 1, ListSpreadOut = true, Type = SecsElement.SecsElementType.TYPE_ASCII, Length = 64)]
+                    public string PortID;
+                    public VIDITEM_7411()
+                    {
+                        PortID = string.Empty;
+                    }
+                }
 
                 [Serializable]
                 public class VIDITEM_SPEC_VERSION : SXFY
@@ -790,6 +870,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
             VID_75_VehicleInfo = new S6F11.RPTINFO.RPTITEM.VIDITEM_75();
             VID_76_VehicleState = new S6F11.RPTINFO.RPTITEM.VIDITEM_76();
             VID_301_TransferCompleteInfo = new S6F11.RPTINFO.RPTITEM.VIDITEM_301();
+            VID_301_TransferCompleteInfo_1 = new S6F11.RPTINFO.RPTITEM.VIDITEM_301_1();
             VID_302_PortID = new S6F11.RPTINFO.RPTITEM.VIDITEM_302();
             VID_303_PortEvtState = new S6F11.RPTINFO.RPTITEM.VIDITEM_303();
             VID_304_PortEventState = new S6F11.RPTINFO.RPTITEM.VIDITEM_304();
@@ -801,6 +882,11 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
             VID_903_ErrorCode = new S6F11.RPTINFO.RPTITEM.VIDITEM_903();
             VID_904_UnitID = new S6F11.RPTINFO.RPTITEM.VIDITEM_904();
             VID_905_ErrorText = new S6F11.RPTINFO.RPTITEM.VIDITEM_905();
+            VID_7006_IDReadState = new S6F11.RPTINFO.RPTITEM.VIDITEM_7006();
+            VID_7011_PortRequestState = new S6F11.RPTINFO.RPTITEM.VIDITEM_7011();
+            VID_7012_PortPresenceState = new S6F11.RPTINFO.RPTITEM.VIDITEM_7012();
+            VID_7401_ErrorID = new S6F11.RPTINFO.RPTITEM.VIDITEM_7401();
+            VID_7411_PortID = new S6F11.RPTINFO.RPTITEM.VIDITEM_7411();
         }
         public string VH_ID;
         public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_01 VID_01_AlarmID;
@@ -839,6 +925,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_76 VID_76_VehicleState;
 
         public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_301 VID_301_TransferCompleteInfo;
+        public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_301_1 VID_301_TransferCompleteInfo_1;
         public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_302 VID_302_PortID;
         public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_303 VID_303_PortEvtState;
         public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_304 VID_304_PortEventState;
@@ -851,6 +938,11 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_903 VID_903_ErrorCode;
         public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_904 VID_904_UnitID;
         public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_905 VID_905_ErrorText;
+        public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_7006 VID_7006_IDReadState;
+        public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_7011 VID_7011_PortRequestState;
+        public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_7012 VID_7012_PortPresenceState;
+        public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_7401 VID_7401_ErrorID;
+        public com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4.S6F11.RPTINFO.RPTITEM.VIDITEM_7411 VID_7411_PortID;
     }
 
 }

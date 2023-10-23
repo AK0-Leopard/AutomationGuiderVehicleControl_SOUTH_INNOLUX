@@ -416,6 +416,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public const string CEID_Vehicle_Installed = "208";
         public const string CEID_Vehicle_Removed = "209";
         public const string CEID_Vehicle_Unassigned = "210";
+        public const string CEID_Vehicle_CarrierIDReadReport = "251";
         //Supplier Definitions Events 
         public const string CEID_Operator_Initiated_Action = "601";
         public const string CEID_Port_Event_State_Changed = "602";
@@ -424,6 +425,15 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public const string CEID_Vehicle_Charge_Completed = "605";
         public const string CEID_Unit_Error_Cleared = "901";
         public const string CEID_Unit_Error_Set = "902";
+
+        //Supplier Definitions Events 
+        public const string CEID_Port_Our_Of_Service_Report = "260";
+        public const string CEID_Port_In_Service_Report = "261";
+        public const string CEID_Port_No_Request_Report = "606";
+        public const string CEID_Port_Load_Request_Report = "607";
+        public const string CEID_Port_Unload_Request_Report = "608";
+        public const string CEID_Port_Presence_Report = "609";
+        public const string CEID_Port_No_Presence_Report = "610";
 
         //CEID Remark End
         #region CEID Array
@@ -441,7 +451,7 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public const string VID_Active_Transfers = "4000";
         public const string VID_Active_Vehicles = "2000";
         public const string VID_Carrier_ID = "7121";
-        public const string VID_CarrierInfo = "55";
+        public const string VID_CarrierInfo = "7201";
         public const string VID_Carrier_Loc = "7211";
         public const string VID_Command_Name = "57";
         public const string VID_Command_ID = "7111";
@@ -478,6 +488,11 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
         public const string VID_Error_Code = "903";
         public const string VID_Unit_ID = "904";
         public const string VID_Error_Text = "905";
+        public const string VID_ID_Read_Result = "7006";
+        public const string VID_ID_Port_Request_State = "7011";
+        public const string VID_ID_Port_Presence_State = "7012";
+        public const string VID_ID_Error_ID = "7401";
+        public const string VID_ID_Port_ID = "7411";
         #region Using Synchronize 
         //public const string VID_AlarmsSet = "4";
         //public const string VID_ControlState = "6";
@@ -577,13 +592,21 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
              CEID_Vehicle_Installed,
              CEID_Vehicle_Removed ,
              CEID_Vehicle_Unassigned,
+             CEID_Vehicle_CarrierIDReadReport,
              CEID_Operator_Initiated_Action,
              CEID_Port_Event_State_Changed,
              CEID_Vehicle_Charge_Request,
              CEID_Vehicle_Charge_Started ,
              CEID_Vehicle_Charge_Completed ,
              CEID_Unit_Error_Cleared,
-             CEID_Unit_Error_Set
+             CEID_Unit_Error_Set,
+             CEID_Port_Our_Of_Service_Report,
+             CEID_Port_In_Service_Report,
+             CEID_Port_No_Request_Report,
+             CEID_Port_Load_Request_Report,
+             CEID_Port_Unload_Request_Report,
+             CEID_Port_Presence_Report,
+             CEID_Port_No_Presence_Report
         };
         public static Dictionary<string, string> CEID_Dictionary = new Dictionary<string, string>()
         {

@@ -281,9 +281,9 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.AGVC
                     //{
                     //    return CMD_Result_Unsuccessful;
                     //}
-                    return CMD_Result_InterlockError;
+                    return "64";
                 case ProtocolFormat.OHTMessage.CompleteStatus.CmpStatusVehicleAbort: //A0.02
-                    return CMD_Result_VehicleAbortError;                             //A0.02
+                    return "1";                             //A0.02
                 default:
                     throw new Exception("參數錯誤"); //TODO 要帶入正確的Exception。
             }

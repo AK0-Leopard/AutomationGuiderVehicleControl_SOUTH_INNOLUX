@@ -387,6 +387,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             {
                 case "SOUTH_INNOLUX":
                 case "NORTH_INNOLUX":
+                case "SOUTH_INXF4":
                     //tb_CouplerStatus1.Text = unit.coupler1Status_NORTH_INNOLUX.ToString();
                     //tb_CouplerStatus2.Text = unit.coupler2Status_NORTH_INNOLUX.ToString();
                     //tb_CouplerStatus3.Text = unit.coupler3Status_NORTH_INNOLUX.ToString();
@@ -1403,7 +1404,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
 
         private void btn_alarmtSet_Click(object sender, EventArgs e)
         {
-            string error_code = "100001";
+            string error_code = "100000";
             //string error_code = "101128";
             //string error_code = "201170";
             var error_status = sc.ProtocolFormat.OHTMessage.ErrorStatus.ErrSet;
@@ -1413,7 +1414,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
 
         private void btn_alarmClear_Click(object sender, EventArgs e)
         {
-            string error_code = "100001";
+            string error_code = "100000";
             //string error_code = "0";
             //string error_code = "201170";
             var error_status = sc.ProtocolFormat.OHTMessage.ErrorStatus.ErrReset;

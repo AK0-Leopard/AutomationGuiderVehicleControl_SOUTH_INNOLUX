@@ -129,7 +129,8 @@ namespace com.mirle.ibg3k0.bc.winform.UI
                         }
 
                         //mainform.BCApp.SCApplication.ReportBLL.newReportTransferCommandFinish(mcs_cmd.cmd_mcs, excute_cmd_of_vh, sc.Data.SECS.AGVC.SECSConst.CMD_Result_Unsuccessful, null);
-                        mainform.BCApp.SCApplication.ReportBLL.newReportTransferCommandFinish(mcs_cmd.cmd_mcs, excute_cmd_of_vh, result_code, null);
+                        mainform.BCApp.SCApplication.ReportBLL.newReportTransferCommandFinish(mcs_cmd.cmd_mcs, excute_cmd_of_vh, "1", null);
+                        //mainform.BCApp.SCApplication.ReportBLL.newReportTransferCommandFinish(mcs_cmd.cmd_mcs, excute_cmd_of_vh, result_code, null);
                     }
                     catch { }
                 }

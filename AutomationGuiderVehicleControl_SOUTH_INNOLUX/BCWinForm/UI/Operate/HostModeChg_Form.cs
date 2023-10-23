@@ -135,6 +135,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
                 case "NORTH_INNOLUX":
                 case "NORTH_INNOLUX_Test_Site":
                 case "SOUTH_INNOLUX":
+                case "SOUTH_INXF4":
                 case "UMTC_Test_Site":
                     return true;
                 case "AUO_CAAGV100":

@@ -265,6 +265,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             {
                 case "SOUTH_INNOLUX":
                 case "NORTH_INNOLUX":
+                case "SOUTH_INXF4":
                     //tb_CouplerStatus1.Text = unit.coupler1Status_NORTH_INNOLUX.ToString();
                     //tb_CouplerStatus2.Text = unit.coupler2Status_NORTH_INNOLUX.ToString();
                     //tb_CouplerStatus3.Text = unit.coupler3Status_NORTH_INNOLUX.ToString();

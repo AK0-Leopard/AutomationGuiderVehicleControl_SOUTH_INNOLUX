@@ -414,8 +414,8 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                         Boolean isContain = SECSConst.CEID_ARRAY.Contains(ceid.Trim().PadLeft(3, '0'));
                         if (!isContain)
                         {
-                            //isValid = false;
-                            continue;
+                            isValid = false;
+                            break;
                         }
                     }
                     if (isValid)
@@ -1669,24 +1669,25 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                     PORT_ID = port_station[j].PORT_ID
                 };
                 //A21.06.29 string port_evt_state = ((int)port_station[j].PORT_STATUS).ToString();
-                string port_evt_state = SECSConst.PORTEvtState_RTU;//A21.06.29
-                                                                   //if (port_station[j].PORT_SERVICE_STATUS == ProtocolFormat.OHTMessage.PortStationServiceStatus.OutOfService)
-                                                                   //{
-                                                                   //    port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Disabled).ToString();
-                                                                   //}
-                                                                   //else
-                                                                   //{
-                                                                   //    if (eqpt.EQ_Down)
-                                                                   //    {
-                                                                   //        port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Down).ToString();
-                                                                   //    }
-                                                                   //    else
-                                                                   //    {
-                                                                   //        port_evt_state = ((int)port_station[j].PORT_STATUS).ToString();
-                                                                   //    }
-                                                                   //}
-                                                                   //port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Wait).ToString();
-                                                                   //M0.01viditem_305.PORT_EVENT_STATEs[eq_port_index].PESTATE.PORT_EVT_STATE = new S6F11.RPTINFO.RPTITEM.VIDITEM_303()
+                //string port_evt_state = SECSConst.PORTEvtState_RTU;//A21.06.29
+                string port_evt_state = "2";//A21.06.29
+                                            //if (port_station[j].PORT_SERVICE_STATUS == ProtocolFormat.OHTMessage.PortStationServiceStatus.OutOfService)
+                                            //{
+                                            //    port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Disabled).ToString();
+                                            //}
+                                            //else
+                                            //{
+                                            //    if (eqpt.EQ_Down)
+                                            //    {
+                                            //        port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Down).ToString();
+                                            //    }
+                                            //    else
+                                            //    {
+                                            //        port_evt_state = ((int)port_station[j].PORT_STATUS).ToString();
+                                            //    }
+                                            //}
+                                            //port_evt_state = ((int)ProtocolFormat.OHTMessage.PortStationStatus.Wait).ToString();
+                                            //M0.01viditem_305.PORT_EVENT_STATEs[eq_port_index].PESTATE.PORT_EVT_STATE = new S6F11.RPTINFO.RPTITEM.VIDITEM_303()
                 viditem_305.PORT_EVENT_STATEs[eq_port_index].PESTATE.PORT_EVT_STATE = new S6F11.RPTINFO.RPTITEM.VIDITEM_303()//M0.01
                 {
                     //PORT_EVT_STATE = ((int)port_station[j].PORT_EVENT_STATE).ToString()
@@ -2664,7 +2665,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.CARRIER_ID.CARRIER_ID = CMD_MCS.CARRIER_ID;
                 vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.SOURCE_PORT.SOURCE_PORT = CMD_MCS.HOSTSOURCE;
                 vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.DEST_PORT.DEST_PORT = CMD_MCS.HOSTDESTINATION;
-                //vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].CARRIER_LOC_OBJ.CARRIER_LOC = "";
+                vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].CARRIER_LOC_OBJ.CARRIER_LOC = "";
                 string carrier_loc = "";
 
                 if (SCUtility.isEmpty(CMD_MCS.ManualSelectedFinishCarrierLoc))
@@ -2684,6 +2685,8 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 {
                     carrier_loc = CMD_MCS.ManualSelectedFinishCarrierLoc;
                 }
+                vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].CARRIER_LOC_OBJ.CARRIER_LOC = carrier_loc;
+
                 //string carrier_loc = CMD_MCS.TRANSFERSTATE >= E_TRAN_STATUS.Transferring ?
                 //                          vh == null ? "" : vh.Real_ID :
                 //                          CMD_MCS.HOSTSOURCE;
@@ -3321,6 +3324,9 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                                 case SECSConst.VID_Error_Text:
                                     vid_item = Vids.VID_905_ErrorText;
                                     break;
+                                case SECSConst.VID_ID_Read_Result:
+                                    vid_item = Vids.VID_7006_IDReadState;
+                                    break;
 
                             }
                             s6f11.INFO.ITEM[i].VIDITEM[j] = vid_item;
@@ -3601,7 +3607,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.CARRIER_ID.CARRIER_ID = vid_info.MCS_CARRIER_ID;
             vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.SOURCE_PORT.SOURCE_PORT = vid_info.SOURCEPORT;
             vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.DEST_PORT.DEST_PORT = vid_info.DESTPORT;
-            vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.CARRIER_LOC.CARRIER_LOC = vid_info.CARRIER_LOC;
+            vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].CARRIER_LOC_OBJ.CARRIER_LOC = vid_info.CARRIER_LOC;
             //vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].CARRIER_LOC_OBJ.CARRIER_LOC = vid_info.CARRIER_LOC;
 
             //VID_304_PortEventState
@@ -3626,6 +3632,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             //VID_904_ErrorCode
             vid_collection.VID_904_UnitID.UNIT_ID = vid_info.UNIT_ID;
 
+            vid_collection.VID_7401_ErrorID.ErrorID = "1";
 
             return vid_collection;
         }
