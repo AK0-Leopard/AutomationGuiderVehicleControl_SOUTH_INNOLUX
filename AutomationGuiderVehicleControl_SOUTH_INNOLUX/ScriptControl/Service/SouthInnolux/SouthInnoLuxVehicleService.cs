@@ -843,6 +843,8 @@ namespace com.mirle.ibg3k0.sc.Service
             string vh_current_address = assignVH.CUR_ADR_ID;
             string vh_current_section = assignVH.CUR_SEC_ID;
             string start_section = assignVH.CUR_SEC_ID;
+            double x_axis = assignVH.X_Axis;
+            double y_axis = assignVH.Y_Axis;
             ActiveType active_type = scApp.CMDBLL.convertECmdType2ActiveType(cmd.CMD_TPYE);
             try
             {
@@ -862,7 +864,7 @@ namespace com.mirle.ibg3k0.sc.Service
                  guide_to_dest_section_ids,
                  guide_to_dest_address_ids)
                 //= FindGuideInfo(vh_current_address, source_adr, dest_adr, active_type, has_carry, need_by_pass_adr_ids);
-                = FindGuideInfo(vh_current_address, source_adr, dest_adr, active_type);
+                = FindGuideInfo(vh_current_address, vh_current_section, x_axis, y_axis, source_adr, dest_adr, active_type);
 
                 if (!isSuccess)
                 {
@@ -1036,7 +1038,7 @@ namespace com.mirle.ibg3k0.sc.Service
             List<string> guide_start_to_from_segment_ids, List<string> guide_start_to_from_section_ids, List<string> guide_start_to_from_address_ids,
             List<string> guide_to_dest_segment_ids, List<string> guide_to_dest_section_ids, List<string> guide_to_dest_address_ids)
             //FindGuideInfo(string vh_current_address, string source_adr, string dest_adr, ActiveType active_type, bool has_carray = false, List<string> byPassAddressIDs = null)
-            FindGuideInfo(string vh_current_address, string source_adr, string dest_adr, ActiveType active_type, bool has_carray = false, List<string> byPassSectionIDs = null)
+            FindGuideInfo(string vh_current_address, string vhCurrentSection, double x_axis, double y_axis, string source_adr, string dest_adr, ActiveType active_type, bool has_carray = false, List<string> byPassSectionIDs = null)
         {
             bool isSuccess = false;
             List<string> guide_start_to_from_segment_ids = null;
@@ -1045,6 +1047,8 @@ namespace com.mirle.ibg3k0.sc.Service
             List<string> guide_to_dest_segment_ids = null;
             List<string> guide_to_dest_section_ids = null;
             List<string> guide_to_dest_address_ids = null;
+            var current_secobj = scApp.SectionBLL.cache.GetSection(vhCurrentSection);
+
             int total_cost = 0;
             //1.取得行走路徑的詳細資料
             switch (active_type)
@@ -1067,7 +1071,16 @@ namespace com.mirle.ibg3k0.sc.Service
                         }
                         else
                         {
-                            isSuccess = true;//如果相同 代表是在同一個點上
+                            if (IsOnAdr(x_axis, y_axis, source_adr) || current_secobj == null)
+                            {
+                                isSuccess = true;//如果相同 代表是在同一個點上
+                            }
+                            else
+                            {
+                                string orther_adr = GetOrtherAdr(current_secobj, source_adr);
+                                (isSuccess, guide_start_to_from_segment_ids, guide_start_to_from_section_ids, guide_start_to_from_address_ids, total_cost)
+                                    = (true, new List<string>() { "" }, new List<string>() { current_secobj.SEC_ID }, new List<string>() { orther_adr, source_adr }, 1);
+                            }
                         }
                         if (isSuccess && !SCUtility.isMatche(source_adr, dest_adr))
                         {
@@ -1084,7 +1097,16 @@ namespace com.mirle.ibg3k0.sc.Service
                     }
                     else
                     {
-                        isSuccess = true; //如果相同 代表是在同一個點上
+                        if (IsOnAdr(x_axis, y_axis, source_adr) || current_secobj == null)
+                        {
+                            isSuccess = true;//如果相同 代表是在同一個點上
+                        }
+                        else
+                        {
+                            string orther_adr = GetOrtherAdr(current_secobj, source_adr);
+                            (isSuccess, guide_start_to_from_segment_ids, guide_start_to_from_section_ids, guide_start_to_from_address_ids, total_cost)
+                                = (true, new List<string>() { "" }, new List<string>() { current_secobj.SEC_ID }, new List<string>() { orther_adr, source_adr }, 1);
+                        }
                     }
                     break;
                 case ActiveType.Unload:
@@ -1095,7 +1117,17 @@ namespace com.mirle.ibg3k0.sc.Service
                     }
                     else
                     {
-                        isSuccess = true;//如果相同 代表是在同一個點上
+                        if (IsOnAdr(x_axis, y_axis, dest_adr) || current_secobj == null)
+                        {
+                            isSuccess = true;//如果相同 代表是在同一個點上
+                        }
+                        else
+                        {
+                            string orther_adr = GetOrtherAdr(current_secobj, dest_adr);
+                            (isSuccess, guide_start_to_from_segment_ids, guide_start_to_from_section_ids, guide_start_to_from_address_ids, total_cost)
+                                = (true, new List<string>() { "" }, new List<string>() { current_secobj.SEC_ID }, new List<string>() { orther_adr, dest_adr }, 1);
+                        }
+
                     }
                     break;
                 case ActiveType.Move:
@@ -1107,7 +1139,16 @@ namespace com.mirle.ibg3k0.sc.Service
                     }
                     else
                     {
-                        isSuccess = false;
+                        if (IsOnAdr(x_axis, y_axis, dest_adr) || current_secobj == null)
+                        {
+                            isSuccess = true;//如果相同 代表是在同一個點上
+                        }
+                        else
+                        {
+                            string orther_adr = GetOrtherAdr(current_secobj, dest_adr);
+                            (isSuccess, guide_start_to_from_segment_ids, guide_start_to_from_section_ids, guide_start_to_from_address_ids, total_cost)
+                                = (true, new List<string>() { "" }, new List<string>() { current_secobj.SEC_ID }, new List<string>() { orther_adr, dest_adr }, 1);
+                        }
                     }
                     break;
             }
@@ -1115,6 +1156,44 @@ namespace com.mirle.ibg3k0.sc.Service
                     guide_start_to_from_segment_ids, guide_start_to_from_section_ids, guide_start_to_from_address_ids,
                     guide_to_dest_segment_ids, guide_to_dest_section_ids, guide_to_dest_address_ids);
         }
+        private string GetOrtherAdr(ASECTION secObj, string adrID)
+        {
+            if (SCUtility.isMatche(secObj.FROM_ADR_ID, adrID))
+            {
+                return secObj.TO_ADR_ID;
+            }
+            else
+            {
+                return secObj.FROM_ADR_ID;
+            }
+        }
+        const int MAX_DIFF_DIS = 30;
+        private bool IsOnAdr(double vhXAxis, double vhYAxis, string adrID)
+        {
+            try
+            {
+                if (DebugParameter.ByPassAsixOnAdrCheck)
+                {
+                    return true;
+                }
+                var asix_result = scApp.ReserveBLL.GetHltMapAddress(adrID);
+                double diff = getDistance(vhXAxis, vhYAxis, asix_result.x, asix_result.y);
+                return diff < MAX_DIFF_DIS;
+            }
+            catch (Exception e)
+            {
+                logger.Error(e, "Exception");
+                return false;
+            }
+        }
+        private double getDistance(double x1, double y1, double x2, double y2)
+        {
+            double dx, dy;
+            dx = x2 - x1;
+            dy = y2 - y1;
+            return Math.Sqrt(dx * dx + dy * dy);
+        }
+
         private void AbnormalProcess(string vhID, ACMD_OHTC cmd)
         {
             if (!SCUtility.isEmpty(cmd.CMD_ID_MCS))
@@ -1146,6 +1225,8 @@ namespace com.mirle.ibg3k0.sc.Service
                 string source_adr = cmd.SOURCE;
                 string dest_adr = cmd.DESTINATION;
                 bool has_carry = assignVH.HAS_CST == 1;
+                double x_axis = assignVH.X_Axis;
+                double y_axis = assignVH.Y_Axis;
                 ActiveType active_type = scApp.CMDBLL.convertECmdType2ActiveType(cmd.CMD_TPYE);
                 //List<string> need_by_pass_adr_ids = new List<string>() { byPassAdr };
                 //List<string> need_by_pass_sec_ids = new List<string>() { byPassSection };
@@ -1188,7 +1269,7 @@ namespace com.mirle.ibg3k0.sc.Service
                      guide_to_dest_section_ids,
                      guide_to_dest_address_ids)
                     //= FindGuideInfo(vh_current_address, source_adr, dest_adr, active_type, has_carry, need_by_pass_adr_ids);
-                    = FindGuideInfo(vh_current_address, source_adr, dest_adr, active_type, has_carry, need_by_pass_sec_ids);
+                    = FindGuideInfo(vh_current_address, vh_current_section, x_axis, y_axis, source_adr, dest_adr, active_type, has_carry, need_by_pass_sec_ids);
                     //如果有找到路徑則確認一下段是否可以預約的到
                     if (isSuccess)
                     {
@@ -2148,7 +2229,7 @@ namespace com.mirle.ibg3k0.sc.Service
                                    Data: $"mcs cmd:{cmd_mcs_id} is finish on :{cmd_mcs.ManualSelectedFinishCarrierLoc} .",
                                    VehicleID: eqpt.VEHICLE_ID,
                                    CarrierID: eqpt.CST_ID);
-                                finishCmdForInitial(eqpt, cmd_mcs, E_TRAN_STATUS.Aborted, sc.Data.SECS.SouthInnolux.SECSConst.CMD_Result_LoadError);
+                                finishCmdForInitial(eqpt, cmd_mcs, E_TRAN_STATUS.Aborted, sc.Data.SECS.SouthInnolux.SECSConst.CMD_Result_Successful);
                             }
                         }
                         else
@@ -3007,32 +3088,38 @@ namespace com.mirle.ibg3k0.sc.Service
             {
                 case BCRReadResult.BcrMisMatch:
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                       Data: $"BCR miss match happend,start abort command id:{eqpt.OHTC_CMD?.Trim()}",
+                       Data: $"BCR miss match happend,continue command id:{eqpt.OHTC_CMD?.Trim()}",
                        VehicleID: eqpt.VEHICLE_ID,
                        CarrierID: eqpt.CST_ID);
-                    replyTranEventReport(bcfApp, eventType, eqpt, seqNum,
-                        renameCarrierID: readCarrierID,
-                        cancelType: CMDCancelType.CmdCancelIdMismatch);
-                    // Task.Run(() => doAbortCommand(eqpt, eqpt.OHTC_CMD, CMDCancelType.CmdCancelIdMismatch));
-                    scApp.ReportBLL.newReportCarrierRemoved(eqpt.Real_ID, vid_info.CARRIER_ID, vid_info.COMMAND_ID, null);
 
-                    scApp.VIDBLL.upDateVIDCarrierID(eqpt.VEHICLE_ID, readCarrierID);
+                    string mis_match_rename_cst_id = SCUtility.Trim(vid_info.CARRIER_ID, true);
+                    replyTranEventReport(bcfApp, eventType, eqpt, seqNum,
+                        renameCarrierID: mis_match_rename_cst_id,
+                        cancelType: CMDCancelType.CmdNone);
+
+                    // Task.Run(() => doAbortCommand(eqpt, eqpt.OHTC_CMD, CMDCancelType.CmdCancelIdMismatch));
+                    //scApp.ReportBLL.newReportCarrierRemoved(eqpt.Real_ID, vid_info.CARRIER_ID, vid_info.COMMAND_ID, null);
+
+                    //scApp.VIDBLL.upDateVIDCarrierID(eqpt.VEHICLE_ID, readCarrierID);
 
                     break;
                 case BCRReadResult.BcrReadFail:
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                       Data: $"BCR read fail happend,start abort command id:{eqpt.OHTC_CMD?.Trim()}",
+                       Data: $"BCR read fail happend,continue command id:{eqpt.OHTC_CMD?.Trim()}",
                        VehicleID: eqpt.VEHICLE_ID,
                        CarrierID: eqpt.CST_ID);
 
 
-                    string new_carrier_id =
-                        $"UNKNOWN-{eqpt.Real_ID.Trim()}-{vid_info.CARRIER_INSTALLED_TIME?.ToString(SCAppConstants.TimestampFormat_13)}";
-                    replyTranEventReport(bcfApp, eventType, eqpt, seqNum,
-                        renameCarrierID: new_carrier_id, cancelType: CMDCancelType.CmdCancelIdReadFailed);
-                    scApp.ReportBLL.newReportCarrierRemoved(eqpt.Real_ID, vid_info.CARRIER_ID, vid_info.COMMAND_ID, null);
+                    //string new_carrier_id =
+                    //    $"UNKNOWN-{eqpt.Real_ID.Trim()}-{vid_info.CARRIER_INSTALLED_TIME?.ToString(SCAppConstants.TimestampFormat_13)}";
+                    string new_carrier_id = SCUtility.Trim(vid_info.CARRIER_ID, true);
 
-                    scApp.VIDBLL.upDateVIDCarrierID(eqpt.VEHICLE_ID, new_carrier_id);
+                    replyTranEventReport(bcfApp, eventType, eqpt, seqNum,
+                        renameCarrierID: new_carrier_id, cancelType: CMDCancelType.CmdNone);
+
+                    //scApp.ReportBLL.newReportCarrierRemoved(eqpt.Real_ID, vid_info.CARRIER_ID, vid_info.COMMAND_ID, null);
+
+                    //scApp.VIDBLL.upDateVIDCarrierID(eqpt.VEHICLE_ID, new_carrier_id);
 
 
                     //     Task.Run(() => doAbortCommand(eqpt, eqpt.OHTC_CMD, CMDCancelType.CmdCancelIdReadFailed));
