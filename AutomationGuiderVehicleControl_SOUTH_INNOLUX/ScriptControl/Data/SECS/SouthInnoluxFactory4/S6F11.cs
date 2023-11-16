@@ -323,14 +323,16 @@ namespace com.mirle.ibg3k0.sc.Data.SECS.SouthInnoluxFactory4
                         public VIDITEM_59 COMMAND_INFO_OBJ;
                         [SecsElement(Index = 2, ListSpreadOut = true, Type = SecsElement.SecsElementType.TYPE_2_BYTE_UNSIGNED_INTEGER, Length = 1)]
                         public VIDITEM_72_2 TRANSFER_STATE;
-                        [SecsElement(Index = 3, ListSpreadOut = true)]
-                        public VIDITEM_TRAN_ENHANCED_TRAN_INFO TRANSFER_INFOS;
+                        [SecsElement(Index = 3)]
+                        public VIDITEM_TRAN_ENHANCED_TRAN_INFO[] TRANSFER_INFOS;
 
                         public ENHANCED_TRANSFER_COMMAND()
                         {
                             COMMAND_INFO_OBJ = new VIDITEM_59();
                             TRANSFER_STATE = new VIDITEM_72_2();
-                            TRANSFER_INFOS = new VIDITEM_TRAN_ENHANCED_TRAN_INFO();
+                            //TRANSFER_INFOS = new VIDITEM_TRAN_ENHANCED_TRAN_INFO();
+                            TRANSFER_INFOS = new VIDITEM_TRAN_ENHANCED_TRAN_INFO[1];
+                            TRANSFER_INFOS[0] = new VIDITEM_TRAN_ENHANCED_TRAN_INFO();
                         }
                     }
                 }

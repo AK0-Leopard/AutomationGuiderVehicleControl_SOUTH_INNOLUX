@@ -1575,16 +1575,16 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 {
                     TRANSFER_STATE = transfer_state
                 };
-                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS = new S6F11.RPTINFO.RPTITEM.VIDITEM_TRAN_ENHANCED_TRAN_INFO();
-                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS.CARRIER_ID = new S6F11.RPTINFO.RPTITEM.VIDITEM_54
+                //viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS = new S6F11.RPTINFO.RPTITEM.VIDITEM_TRAN_ENHANCED_TRAN_INFO();
+                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS[0].CARRIER_ID = new S6F11.RPTINFO.RPTITEM.VIDITEM_54
                 {
                     CARRIER_ID = mcs_cmd.CARRIER_ID
                 };
-                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS.SOURCE_PORT = new S6F11.RPTINFO.RPTITEM.VIDITEM_68
+                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS[0].SOURCE_PORT = new S6F11.RPTINFO.RPTITEM.VIDITEM_68
                 {
                     SOURCE_PORT = mcs_cmd.HOSTSOURCE
                 };
-                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS.DEST_PORT = new S6F11.RPTINFO.RPTITEM.VIDITEM_61
+                viditem_63.ENHANCED_CARRIER_INFOs[k].TRANSFER_INFOS[0].DEST_PORT = new S6F11.RPTINFO.RPTITEM.VIDITEM_61
                 {
                     DEST_PORT = mcs_cmd.HOSTDESTINATION
                 };
@@ -3883,6 +3883,11 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 vid_collection.VID_70_TransferInfo.SOURCE_PORT.SOURCE_PORT = cmd.HOSTSOURCE;
                 vid_collection.VID_70_TransferInfo.DEST_PORT.DEST_PORT = cmd.HOSTDESTINATION;
                 vid_collection.VID_70_TransferInfo.CARRIER_LOC.CARRIER_LOC = cmd.HOSTSOURCE;
+
+                vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.CARRIER_ID.CARRIER_ID = cmd.CARRIER_ID;
+                vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.SOURCE_PORT.SOURCE_PORT = cmd.HOSTSOURCE;
+                vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].TRANSFER_INFO_OBJ.DEST_PORT.DEST_PORT = cmd.HOSTDESTINATION;
+                vid_collection.VID_301_TransferCompleteInfo.TRANSFER_COMPLETE_INFOs[0].CARRIER_LOC_OBJ.CARRIER_LOC = cmd.HOSTSOURCE;
 
                 //vid_collection.VID_69_TransferCommand.COMMAND_INFO.COMMAND_ID = cmd.CMD_ID;
                 //vid_collection.VID_69_TransferCommand.COMMAND_INFO.PRIORITY = cmd.PRIORITY.ToString();
