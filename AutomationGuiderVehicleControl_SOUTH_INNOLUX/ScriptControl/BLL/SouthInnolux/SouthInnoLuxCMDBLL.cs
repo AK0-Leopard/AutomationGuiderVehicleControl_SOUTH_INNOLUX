@@ -996,21 +996,23 @@ namespace com.mirle.ibg3k0.sc.BLL
             }
         }
 
-        public override void checkMCSTransferCommand_New()
+        public override bool checkMCSTransferCommand_New()
         {
+            bool has_process = false;
             if (System.Threading.Interlocked.Exchange(ref syncTranCmdPoint, 1) == 0)
             {
+                has_process = true;
                 try
                 {
                     ALINE line = scApp.getEQObjCacheManager().getLine();
                     if (scApp.getEQObjCacheManager().getLine().ServiceMode
                         != SCAppConstants.AppServiceMode.Active)
-                        return;
+                        return has_process;
                     if (line.IsEarthquakeHappend)
                     {
                         LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(CMDBLL), Device: string.Empty,
                                       Data: $"Is earth quake happend. by pass this transfer scan");
-                        return;
+                        return has_process;
                     }
 
                     List<ACMD_MCS> unfinish_mcs_cmd = scApp.CMDBLL.loadACMD_MCSIsUnfinished();
@@ -1117,7 +1119,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                                                       Data: $"Success find nearest mcs command for vh:{nearest_vh.VEHICLE_ID}, command id:{nearest_cmd_mcs.CMD_ID.Trim()}" +
                                                             $"vh current address:{nearest_vh.CUR_ADR_ID},command source port:{nearest_cmd_mcs.HOSTSOURCE?.Trim()}",
                                                       XID: nearest_cmd_mcs.CMD_ID);
-                                        return;
+                                        return has_process;
                                     }
                                 }
                                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(CMDBLL), Device: string.Empty,
@@ -1216,6 +1218,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                     System.Threading.Interlocked.Exchange(ref syncTranCmdPoint, 0);
                 }
             }
+            return has_process;
         }
 
         private void refreshACMD_MCSInfoList(List<ACMD_MCS> currentExcuteMCSCmd)

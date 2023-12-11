@@ -222,7 +222,7 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
                         foreach (var vh_passive in vhs_ReserveStop)
                         {
                             if (vh_active == vh_passive) continue;
-                            if (!vh_active.IsReservePause || !vh_active.IsReservePause) continue;
+                            if (!vh_active.IsReservePause || !vh_passive.IsReservePause) continue;
                             if ((vh_active.CanNotReserveInfo != null && vh_passive.CanNotReserveInfo != null))
                             {
                                 List<AVEHICLE> sort_vhs = new List<AVEHICLE>() { vh_active, vh_passive };
@@ -255,8 +255,8 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
                                     AVEHICLE pass_vh = avoid_vh == vh_active ? vh_passive : vh_active;
 
 
-                                    var key_blocked_vh = findTheKeyBlockVhID(avoid_vh, pass_vh);
-                                    if (key_blocked_vh == null) continue;
+                                    //var key_blocked_vh = findTheKeyBlockVhID(avoid_vh, pass_vh);
+                                    //if (key_blocked_vh == null) continue;
                                     if (avoid_vh.isTcpIpConnect)
                                     {
                                         ACMD_OHTC cmd_ohtc = scApp.CMDBLL.GetCMD_OHTCByID(avoid_vh.OHTC_CMD);
@@ -265,7 +265,12 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
                                            VehicleID: avoid_vh.VEHICLE_ID,
                                            CarrierID: avoid_vh.CST_ID);
 
-                                        bool is_override_success = scApp.VehicleService.trydoAvoidCommandToVh(avoid_vh, key_blocked_vh);
+                                        bool is_override_success = false;
+                                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(DeadlockCheck), Device: "AGVC",
+                                           Data: $"change path by avoid search guide .",
+                                           VehicleID: avoid_vh.VEHICLE_ID,
+                                           CarrierID: avoid_vh.CST_ID);
+                                        is_override_success = scApp.VehicleService.trydoAvoidCommandToVhGuideBySearch(avoid_vh, pass_vh);
                                         if (is_override_success)
                                         {
                                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(DeadlockCheck), Device: "AGVC",

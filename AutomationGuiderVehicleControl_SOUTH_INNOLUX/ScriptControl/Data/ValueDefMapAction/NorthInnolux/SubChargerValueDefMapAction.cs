@@ -292,7 +292,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction.NorthInnolux
                             }
                         }
                     }
-                    var update_result = scApp.ReserveBLL.TryAddVehicleOrUpdate(unit.UNIT_ID + coupler_address.CouplerNum + "_v_car", coupler_address.ADR_ID, 90, Mirle.Hlts.Utils.HltDirection.NS);
+                    var update_result = scApp.ReserveBLL.TryAddVehicleOrUpdate(unit.UNIT_ID + coupler_address.CouplerNum + "_v_car", coupler_address.ADR_ID, 90, Mirle.Hlts.Utils.HltDirection.ForwardReverse);
 
                     if (!update_result.OK)
                     {

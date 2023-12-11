@@ -265,7 +265,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                 //在R2000的路段上，預約方向要帶入
                 if (IsR2000Section(reserveSectionID))
                 {
-                    return Mirle.Hlts.Utils.HltDirection.NS;
+                    return Mirle.Hlts.Utils.HltDirection.ForwardReverse;
                 }
                 else
                 {

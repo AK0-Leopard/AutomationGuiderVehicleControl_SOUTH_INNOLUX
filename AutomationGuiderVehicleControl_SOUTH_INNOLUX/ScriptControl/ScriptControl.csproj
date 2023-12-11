@@ -730,6 +730,8 @@
     <Compile Include="Data\ValueDefMapAction\FireDoorDefaultValueDefMapAction.cs" />
     <Compile Include="Data\ValueDefMapAction\FireDoorInfoDefaultValueDefMapAction.cs" />
     <Compile Include="Data\VO\AlarmConvertInfo.cs" />
+    <Compile Include="Data\VO\AvoidAddress.cs" />
+    <Compile Include="Data\VO\GuideInfo.cs" />
     <Compile Include="Data\VO\PartialVo\ACMD_MCS.cs" />
     <Compile Include="Data\VO\PartialVo\ACMD_OHTC.cs" />
     <Compile Include="Data\VO\PartialVo\VehicleStatusInfo.cs" />

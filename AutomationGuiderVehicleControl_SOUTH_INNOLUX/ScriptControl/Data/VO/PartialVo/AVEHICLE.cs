@@ -230,6 +230,7 @@ namespace com.mirle.ibg3k0.sc
             ChangeToAutoTotalTime = new Stopwatch();
             vehicleStatusInfo = new VehicleStatusInfo(this);
             initialVhErrorStateMachine();
+            guideInfo = new GuideInfo(this);
 
         }
         private void initialVhErrorStateMachine()
@@ -425,6 +426,7 @@ namespace com.mirle.ibg3k0.sc
             }
         }
 
+        private GuideInfo guideInfo { get; set; }
 
         public com.mirle.ibg3k0.sc.ProtocolFormat.OHTMessage.VhStopSingle RESERVE_PAUSE { get; set; }
         [JsonIgnore]
@@ -787,6 +789,37 @@ namespace com.mirle.ibg3k0.sc
         public void Stop()
         {
             CurrentCommandExcuteTime.Reset();
+        }
+
+
+        object guideInfoSetLock = new object();
+        public void setVhAvoidComplete()
+        {
+            lock (guideInfoSetLock)
+                guideInfo.setAvoidComplete();
+        }
+        public void resetVhGuideInfo()
+        {
+            lock (guideInfoSetLock)
+                guideInfo.resetGuideInfo();
+        }
+        public void setVhGuideInfo(BLL.ReserveBLL reserveBLL, ID_31_TRANS_REQUEST id_31, ActiveType originalAactiveType)
+        {
+            lock (guideInfoSetLock)
+                guideInfo.setGuideSection(reserveBLL, id_31, originalAactiveType);
+        }
+        public void setVhGuideInfo(BLL.ReserveBLL reserveBLL, ID_51_AVOID_REQUEST id_51)
+        {
+            lock (guideInfoSetLock)
+                guideInfo.setAvoidSection(reserveBLL, id_51);
+        }
+        public (bool hasInfo, List<string> currentGuideSection) tryGetCurrentGuideSection()
+        {
+            return guideInfo.tryGetCurrentGuideSection();
+        }
+        public (bool isExist, DriveDirction dir) tryGetWalkDirOnSection(string secID)
+        {
+            return guideInfo.tryGetWalkDirOnSection(secID);
         }
 
         public void CarrierInstall()

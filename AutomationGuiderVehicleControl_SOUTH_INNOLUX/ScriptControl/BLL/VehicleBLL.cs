@@ -7,6 +7,7 @@ using com.mirle.ibg3k0.sc.Data.ValueDefMapAction;
 using com.mirle.ibg3k0.sc.Data.VO;
 using com.mirle.ibg3k0.sc.ProtocolFormat.OHTMessage;
 using com.mirle.iibg3k0.ttc.Common;
+using Mirle.Hlts.Utils;
 using NLog;
 using StackExchange.Redis;
 using System;
@@ -1901,10 +1902,13 @@ namespace com.mirle.ibg3k0.sc.BLL
             double vh_angle = report_obj.VehicleAngle;
             double speed = report_obj.Speed;
             List<string> current_guide_address = vh.PredictAddresses?.ToList();
-            DriveDirction drive_dirction = report_obj.DrivingDirection;
+            //DriveDirction drive_dirction = report_obj.DrivingDirection;
+            //DriveDirction drive_dirction = getDrivingDirection(current_sec_id, vh.sWillPassAddressID);
             //DriveDirction drive_dirction = getDrivingDirection(current_sec_id, current_guide_address);
             //DriveDirction drive_dirction = getDrivingDirection(vh, current_sec_id);
-            speed = drive_dirction == DriveDirction.DriveDirForward ? speed : -speed;
+            //speed = drive_dirction == DriveDirction.DriveDirForward ? 1 : -1;
+            double dis_speed = getSpeedValue(vh, speed, current_sec_id);
+
             //如果這次上報的x、y 為0，則繼續拿上一次地來更新
             x_axis = x_axis == 0 ? vh.X_Axis : x_axis;
             y_axis = y_axis == 0 ? vh.Y_Axis : y_axis;
@@ -1929,22 +1933,23 @@ namespace com.mirle.ibg3k0.sc.BLL
             {
                 double distanceWithLastPosition = getDistance(x_axis, y_axis, vh.X_Axis, vh.Y_Axis);
                 Console.WriteLine($"distance:{distanceWithLastPosition}");
-                if (distanceWithLastPosition < ALLOWANCE_DISTANCE_mm)
-                {
-                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Warn, Class: nameof(VehicleBLL), Device: Service.VehicleService.DEVICE_NAME_AGV,
-                       Data: $"The vehicles report position change, the distan less then:{ALLOWANCE_DISTANCE_mm}mm, by pass it.",
-                       VehicleID: vh.VEHICLE_ID,
-                       CarrierID: vh.CST_ID);
-                    return;
-                }
-                updateVheiclePosition_CacheManager(vh, current_adr_id, current_sec_id, current_seg_id, sec_dis, drive_dirction, x_axis, y_axis, dir_angle, vh_angle);
+                //if (distanceWithLastPosition < ALLOWANCE_DISTANCE_mm)
+                //{
+                //    LogHelper.Log(logger: logger, LogLevel: LogLevel.Warn, Class: nameof(VehicleBLL), Device: Service.VehicleService.DEVICE_NAME_AGV,
+                //       Data: $"The vehicles report position change, the distan less then:{ALLOWANCE_DISTANCE_mm}mm, by pass it.",
+                //       VehicleID: vh.VEHICLE_ID,
+                //       CarrierID: vh.CST_ID);
+                //    return;
+                //}
+                updateVheiclePosition_CacheManager(vh, current_adr_id, current_sec_id, current_seg_id, sec_dis, DriveDirction.DriveDirNone, x_axis, y_axis, dir_angle, vh_angle);
                 //if (!SCUtility.isMatche(current_adr_id, last_adr_id))
                 {
-                    var sensor_dir = decideReserveDirection(vh_angle);
                     //var update_result = updateVheiclePositionToReserveControlModule(scApp.ReserveBLL, vh, x_axis, y_axis, dir_angle, vh_angle, speed,
-                    //                                                                Mirle.Hlts.Utils.HltDirection.NESW, Mirle.Hlts.Utils.HltDirection.None);
-                    var update_result = updateVheiclePositionToReserveControlModule(scApp.ReserveBLL, vh, current_sec_id, x_axis, y_axis, dir_angle, vh_angle, speed,
-                                                                                    sensor_dir, Mirle.Hlts.Utils.HltDirection.None);
+                    //                                                                HltDirection.NESW, HltDirection.None);
+                    //var update_result = updateVheiclePositionToReserveControlModule(scApp.ReserveBLL, vh, current_sec_id, x_axis, y_axis, dir_angle, vh_angle, speed,
+                    //                                                                sensor_dir, HltDirection.None);
+                    var update_result = updateVheiclePositionToReserveControlModule(scApp.ReserveBLL, vh, current_sec_id, x_axis, y_axis, dir_angle, vh_angle, dis_speed,
+                                                                                     HltDirection.None, HltDirection.None);
                     if (!update_result.OK)
                     {
                         string message = $"The vehicles bumped, vh:{vh.VEHICLE_ID} with vh:{update_result.VehicleID}";
@@ -1963,18 +1968,16 @@ namespace com.mirle.ibg3k0.sc.BLL
                         if (!one_of_them_is_in_r2000 &&
                             !update_result.VehicleID.StartsWith(Service.VehicleService.VehicleVirtualSymbol))
                         {
-                            bcf.App.BCFApplication.onErrorMsg(message);
+                            //bcf.App.BCFApplication.onErrorMsg(message);
                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Warn, Class: nameof(VehicleBLL), Device: Service.VehicleService.DEVICE_NAME_AGV,
                                Data: $"The vehicles bumped will happend. send ems to {vhID}",
                                VehicleID: vh.VEHICLE_ID,
                                CarrierID: vh.CST_ID);
-                            scApp.VehicleService.PauseRequest(vh.VEHICLE_ID, PauseEvent.Pause, SCAppConstants.OHxCPauseType.Normal);
                             //scApp.VehicleService.doAbortCommand(vh, vh.OHTC_CMD, CMDCancelType.CmdEms);
                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Warn, Class: nameof(VehicleBLL), Device: Service.VehicleService.DEVICE_NAME_AGV,
                                Data: $"The vehicles bumped will happend. send ems to {update_result.VehicleID}",
                                VehicleID: vh.VEHICLE_ID,
                                CarrierID: vh.CST_ID);
-                            scApp.VehicleService.PauseRequest(will_bumped_vh.VEHICLE_ID, PauseEvent.Pause, SCAppConstants.OHxCPauseType.Normal);
                             //scApp.VehicleService.doAbortCommand(will_bumped_vh, will_bumped_vh.OHTC_CMD, CMDCancelType.CmdEms);
                         }
                     }
@@ -2001,8 +2004,21 @@ namespace com.mirle.ibg3k0.sc.BLL
                     }
                 }
                 //scApp.VehicleBLL.updateVheiclePosition_CacheManager(vh, current_adr_id, current_sec_id, current_seg_id, sec_dis, drive_dirction);
+
             }
+
         }
+        private double getSpeedValue(AVEHICLE vh, double speed, string currentSectionID)
+        {
+            double speed_temp = speed == 0 ? 1 : speed;
+            DriveDirction drive_dirction = DriveDirction.DriveDirNone;
+            var check_result = vh.tryGetWalkDirOnSection(currentSectionID);
+            if (check_result.isExist)
+                drive_dirction = check_result.dir;
+            double dri_speed = drive_dirction == DriveDirction.DriveDirReverse ? -speed_temp : speed_temp;
+            return dri_speed;
+        }
+
 
         private double getDistance(double x1, double y1, double x2, double y2)
         {
@@ -2018,10 +2034,10 @@ namespace com.mirle.ibg3k0.sc.BLL
                 || vhAngle == -90
                 || vhAngle == -270
                 || vhAngle == 270)
-                return Mirle.Hlts.Utils.HltDirection.NS;
+                return Mirle.Hlts.Utils.HltDirection.ForwardReverse;
             else
             {
-                return Mirle.Hlts.Utils.HltDirection.EW;
+                return Mirle.Hlts.Utils.HltDirection.LeftRight;
             }
         }
 

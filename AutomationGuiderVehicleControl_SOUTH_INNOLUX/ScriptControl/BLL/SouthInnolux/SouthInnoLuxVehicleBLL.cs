@@ -2106,10 +2106,10 @@ namespace com.mirle.ibg3k0.sc.BLL
                 || vhAngle == -90
                 || vhAngle == -270
                 || vhAngle == 270)
-                return Mirle.Hlts.Utils.HltDirection.NS;
+                return Mirle.Hlts.Utils.HltDirection.ForwardReverse;
             else
             {
-                return Mirle.Hlts.Utils.HltDirection.EW;
+                return Mirle.Hlts.Utils.HltDirection.LeftRight;
             }
         }
         #region Vehicle Object Info

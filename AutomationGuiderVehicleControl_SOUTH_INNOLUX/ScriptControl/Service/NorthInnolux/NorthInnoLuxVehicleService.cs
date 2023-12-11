@@ -2690,7 +2690,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 //在R2000的路段上，預約方向要帶入
                 if (scApp.ReserveBLL.IsR2000Section(reserveSectionID))
                 {
-                    return Mirle.Hlts.Utils.HltDirection.NS;
+                    return Mirle.Hlts.Utils.HltDirection.ForwardReverse;
                 }
                 else
                 {
@@ -3040,7 +3040,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 //    sensorDir: Mirle.Hlts.Utils.HltDirection.NESW,
                 //      forkDir: Mirle.Hlts.Utils.HltDirection.None);
                 scApp.ReserveBLL.TryAddVehicleOrUpdate(virtual_vh_id, "", hlt_vh_obj.X, hlt_vh_obj.Y, hlt_vh_obj.Angle, 0,
-    sensorDir: Mirle.Hlts.Utils.HltDirection.NS,
+    sensorDir: Mirle.Hlts.Utils.HltDirection.ForwardReverse,
       forkDir: Mirle.Hlts.Utils.HltDirection.None);
                 virtual_vh_ids.Add(virtual_vh_id);
                 do

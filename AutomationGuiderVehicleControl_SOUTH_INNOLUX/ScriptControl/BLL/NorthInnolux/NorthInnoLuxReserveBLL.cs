@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace com.mirle.ibg3k0.sc.BLL
 {
-    public class NorthInnoLuxReserveBLL:ReserveBLL
+    public class NorthInnoLuxReserveBLL : ReserveBLL
     {
         NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
         private Mirle.Hlts.ReserveSection.Map.ViewModels.HltMapViewModel mapAPI { get; set; }
@@ -279,14 +279,14 @@ namespace com.mirle.ibg3k0.sc.BLL
             try
             {
 
-                    if (DebugParameter.isForcedPassReserve)
-                    {
-                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(ReserveBLL), Device: "AGV",
-                           Data: "test flag: Force pass reserve is open, will driect reply to vh pass",
-                           VehicleID: vhID);
-                        return (true, string.Empty, string.Empty, reserveInfos);
-                    }
-                
+                if (DebugParameter.isForcedPassReserve)
+                {
+                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(ReserveBLL), Device: "AGV",
+                       Data: "test flag: Force pass reserve is open, will driect reply to vh pass",
+                       VehicleID: vhID);
+                    return (true, string.Empty, string.Empty, reserveInfos);
+                }
+
 
                 //強制拒絕Reserve的要求
                 if (DebugParameter.isForcedRejectReserve)
@@ -322,7 +322,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                         break;
                     }
 
-                    Mirle.Hlts.Utils.HltDirection hltDirection = Mirle.Hlts.Utils.HltDirection.NS;
+                    Mirle.Hlts.Utils.HltDirection hltDirection = Mirle.Hlts.Utils.HltDirection.ForwardReverse;
                     //Mirle.Hlts.Utils.HltDirection hltDirection = decideReserveDirection(vh, reserve_section_id);
                     //AVEHICLE vh = scApp.VehicleBLL.cache.getVehicle(vhID);
                     //Mirle.Hlts.Utils.HltDirection hltDirection = scApp.ReserveBLL.DecideReserveDirection(scApp.SectionBLL, vh, reserve_section_id);
@@ -372,7 +372,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                 //在R2000的路段上，預約方向要帶入
                 if (IsR2000Section(reserveSectionID))
                 {
-                    return Mirle.Hlts.Utils.HltDirection.NS;
+                    return Mirle.Hlts.Utils.HltDirection.ForwardReverse;
                 }
                 else
                 {
