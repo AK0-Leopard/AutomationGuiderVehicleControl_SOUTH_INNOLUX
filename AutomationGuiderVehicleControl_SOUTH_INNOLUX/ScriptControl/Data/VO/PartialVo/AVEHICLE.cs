@@ -325,7 +325,6 @@ namespace com.mirle.ibg3k0.sc
         public virtual double DirctionAngle { get; set; }
         [JsonIgnore]
         public virtual double VehicleAngle { get; set; }
-        public virtual GuideData CurrentGuideData { get; private set; } = new GuideData();
 
         [JsonIgnore]
         public virtual List<string> Alarms { get; set; }
@@ -2026,105 +2025,6 @@ namespace com.mirle.ibg3k0.sc
             }
         }
 
-        public class GuideData
-        {
-
-            public class Section
-            {
-                public string ID;
-                public DriveDirction Dir;
-                public bool isPass { get; private set; }
-                public void setIsPassFlag()
-                {
-                    isPass = true;
-                }
-                public Section(string _id, DriveDirction _dir)
-                {
-                    ID = _id;
-                    Dir = _dir;
-                    isPass = false;
-                }
-            }
-            public List<Section> GuideSectionsStart2Form { get; private set; }
-            public List<string> GuideAddressStart2Form { get; private set; }
-            public List<Section> GuideSectionsForm2To { get; private set; }
-            public List<string> GuideAddressForm2To { get; private set; }
-            public GuideData(sc.BLL.ReserveBLL reserveBLL, List<string> giudeSectionIDs, List<string> guideAddresses)
-            {
-                GuideSectionsStart2Form = new List<Section>();
-                GuideAddressStart2Form = guideAddresses.ToList();
-                string current_guide_Addresses = string.Join(",", guideAddresses);
-                foreach (string sec_id in giudeSectionIDs)
-                {
-                    //var sec_obj = sectinoBLL.cache.GetSection(sec_id);
-                    var get_result = reserveBLL.GetHltMapSections(sec_id);
-                    if (!get_result.isExist)
-                    {
-                        continue;
-                    }
-                    string from_to_addresses = $"{SCUtility.Trim(get_result.section.StartAddressID)},{SCUtility.Trim(get_result.section.EndAddressID)}";
-
-                    DriveDirction dir = current_guide_Addresses.Contains(from_to_addresses) ?
-                                    DriveDirction.DriveDirForward : DriveDirction.DriveDirReverse;
-                    Section sec = new Section(sec_id, dir);
-                    GuideSectionsStart2Form.Add(sec);
-                }
-            }
-            public GuideData()
-            {
-                GuideSectionsStart2Form = new List<Section>();
-                GuideAddressStart2Form = new List<string>();
-            }
-
-            public void put(GuideData guideData)
-            {
-                GuideSectionsStart2Form.Clear();
-                GuideAddressStart2Form.Clear();
-                GuideSectionsStart2Form.AddRange(guideData.GuideSectionsStart2Form);
-                GuideAddressStart2Form.AddRange(guideData.GuideAddressStart2Form);
-            }
-            public void clear()
-            {
-                GuideSectionsStart2Form.Clear();
-                GuideAddressStart2Form.Clear();
-            }
-            public void refreshPassStatus(string leaveSection)
-            {
-                try
-                {
-                    if (GuideSectionsStart2Form == null) return;
-                    var sec_obj = GuideSectionsStart2Form.Where(s => SCUtility.isMatche(s.ID, leaveSection)).FirstOrDefault();
-                    if (sec_obj == null) return;
-                    int sec_index = GuideSectionsStart2Form.IndexOf(sec_obj);
-                    for (int i = 0; i <= sec_index; i++)
-                    {
-                        GuideSectionsStart2Form[i].setIsPassFlag();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    NLog.LogManager.GetCurrentClassLogger().Warn(ex, "Exception");
-                }
-            }
-            public (bool isExist, DriveDirction dir) tryGetWalkDirOnSection(string secID)
-            {
-                var sec_obj = GuideSectionsStart2Form.Where(s => SCUtility.isMatche(s.ID, secID)).FirstOrDefault();
-                if (sec_obj == null)
-                {
-                    return (false, DriveDirction.DriveDirNone);
-                }
-                return (true, sec_obj.Dir);
-            }
-            public (bool isExist, List<string> sectionIDs) tryGetGuideSectionIDs()
-            {
-                if (GuideSectionsStart2Form.Count == 0)
-                {
-                    return (false, null);
-                }
-                return (true, GuideSectionsStart2Form.Select(s => s.ID).ToList());
-            }
-
-        }
 
     }
 }

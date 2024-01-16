@@ -1154,7 +1154,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 string source_adr = cmd.SOURCE;
                 string dest_adr = cmd.DESTINATION;
                 bool has_carry = assignVH.HAS_CST == 1;
-                ActiveType active_type = scApp.CMDBLL.convertECmdType2ActiveType(cmd.CMD_TPYE);
+                ActiveType original_active_type = scApp.CMDBLL.convertECmdType2ActiveType(cmd.CMD_TPYE);
                 //List<string> need_by_pass_adr_ids = new List<string>() { byPassAdr };
                 //List<string> need_by_pass_sec_ids = new List<string>() { byPassSection };
                 List<string> need_by_pass_sec_ids = new List<string>();
@@ -1196,7 +1196,7 @@ namespace com.mirle.ibg3k0.sc.Service
                      guide_to_dest_section_ids,
                      guide_to_dest_address_ids)
                     //= FindGuideInfo(vh_current_address, source_adr, dest_adr, active_type, has_carry, need_by_pass_adr_ids);
-                    = FindGuideInfo(vh_current_address, source_adr, dest_adr, active_type, has_carry, need_by_pass_sec_ids);
+                    = FindGuideInfo(vh_current_address, source_adr, dest_adr, original_active_type, has_carry, need_by_pass_sec_ids);
                     //如果有找到路徑則確認一下段是否可以預約的到
                     if (isSuccess)
                     {
@@ -1407,7 +1407,7 @@ namespace com.mirle.ibg3k0.sc.Service
                     scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vh_id, cmd.CMD_ID, E_CMD_STATUS.Sending);
                     isSuccess = ProcSendTransferCommandToVh(cmd, assignVH, ActiveType.Override,
                      guide_start_to_from_segment_ids?.ToArray(), guide_start_to_from_section_ids?.ToArray(), guide_start_to_from_address_ids?.ToArray(),
-                     guide_to_dest_segment_ids?.ToArray(), guide_to_dest_section_ids?.ToArray(), guide_to_dest_address_ids?.ToArray());
+                     guide_to_dest_segment_ids?.ToArray(), guide_to_dest_section_ids?.ToArray(), guide_to_dest_address_ids?.ToArray(), original_active_type);
                     //4.更新命令狀態(HOST CMD)
                     if (isSuccess)
                     {
@@ -1428,12 +1428,12 @@ namespace com.mirle.ibg3k0.sc.Service
                     }
                     else
                     {
-                        BCFApplication.onWarningMsg($"doSendOverrideCommandToVh fail.vh:{vh_id}, cmd id:{cmd_id},from:{source_adr},to:{dest_adr},active type:{active_type}." +
+                        BCFApplication.onWarningMsg($"doSendOverrideCommandToVh fail.vh:{vh_id}, cmd id:{cmd_id},from:{source_adr},to:{dest_adr},active type:{original_active_type}." +
                                 $"vh current adr:{vh_current_address},start section:{vh_current_section}");
                     }
                 }
                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                   Data: $"find the override path result:{isSuccess}, cmd id:{cmd_id},from:{source_adr},to:{dest_adr},active type:{active_type}." +
+                   Data: $"find the override path result:{isSuccess}, cmd id:{cmd_id},from:{source_adr},to:{dest_adr},active type:{original_active_type}." +
                          $"vh current adr:{vh_current_address},start section:{vh_current_section}." +
                          $" by pass section:{string.Join(",", need_by_pass_sec_ids)}",
                    VehicleID: assignVH.VEHICLE_ID,
@@ -1553,8 +1553,8 @@ namespace com.mirle.ibg3k0.sc.Service
 
         private bool ProcSendTransferCommandToVh(ACMD_OHTC cmd, AVEHICLE assignVH, ActiveType activeType,
             string[] guideSegmentStartToLoad, string[] guideSectionsStartToLoad, string[] guideAddressesStartToLoad,
-            string[] guideSegmentToDest, string[] guideSectionsToDest, string[] guideAddressesToDest
-            )
+            string[] guideSegmentToDest, string[] guideSectionsToDest, string[] guideAddressesToDest,
+            ActiveType originalActiveType = ActiveType.Home)
         {
             bool isSuccess = true;
             string vh_id = assignVH.VEHICLE_ID;
@@ -1607,7 +1607,7 @@ namespace com.mirle.ibg3k0.sc.Service
                                 (cmd.VH_ID, cmd.CMD_ID, activeType, cmd.CARRIER_ID,
                                guideSegmentStartToLoad, guideSectionsStartToLoad, guideAddressesStartToLoad,
                                guideSegmentToDest, guideSectionsToDest, guideAddressesToDest,
-                                cmd.SOURCE, cmd.DESTINATION);
+                                cmd.SOURCE, cmd.DESTINATION, originalActiveType);
                             //isSuccess &= assignVH.sned_Str31(cmd.CMD_ID, activeType, cmd.CARRIER_ID, routeSections, cycleRunSections
                             //    , cmd.SOURCE, cmd.DESTINATION, out Reason);
                         }
@@ -1640,42 +1640,39 @@ namespace com.mirle.ibg3k0.sc.Service
             }
             return isSuccess;
         }
-        public bool TransferRequset(string vh_id, string cmd_id, ActiveType activeType, string cst_id,
+        public override bool TransferRequset(string vh_id, string cmd_id, ActiveType activeType, string cst_id,
             string[] guideSegmentStartToLoad, string[] guideSectionsStartToLoad, string[] guideAddressesStartToLoad,
             string[] guideSegmentToDest, string[] guideSectionsToDest, string[] guideAddressesToDest,
-            string fromAdr, string destAdr)
+            string fromAdr, string destAdr, ActiveType originalAactiveType = ActiveType.Home)
         {
             //TODO 要在加入Transfer Command的確認 scApp.CMDBLL.TransferCommandCheck(activeType,) 
             bool isSuccess = true;
             string reason = string.Empty;
             ID_131_TRANS_RESPONSE receive_gpp = null;
             AVEHICLE vh = scApp.getEQObjCacheManager().getVehicletByVHID(vh_id);
-            if (isSuccess)
+            ID_31_TRANS_REQUEST send_gpp = new ID_31_TRANS_REQUEST()
             {
-                ID_31_TRANS_REQUEST send_gpp = new ID_31_TRANS_REQUEST()
-                {
-                    CmdID = cmd_id,
-                    ActType = activeType,
-                    CSTID = cst_id ?? string.Empty,
-                    LoadAdr = fromAdr,
-                    DestinationAdr = destAdr
-                };
-                if (guideSegmentStartToLoad != null)
-                    send_gpp.GuideSegmentsStartToLoad.AddRange(guideSegmentStartToLoad);
-                if (guideSectionsStartToLoad != null)
-                    send_gpp.GuideSectionsStartToLoad.AddRange(guideSectionsStartToLoad);
-                if (guideAddressesStartToLoad != null)
-                    send_gpp.GuideAddressesStartToLoad.AddRange(guideAddressesStartToLoad);
-                if (guideSegmentToDest != null)
-                    send_gpp.GuideSegmentsToDestination.AddRange(guideSegmentToDest);
-                if (guideSectionsToDest != null)
-                    send_gpp.GuideSectionsToDestination.AddRange(guideSectionsToDest);
-                if (guideAddressesToDest != null)
-                    send_gpp.GuideAddressesToDestination.AddRange(guideAddressesToDest);
-                SCUtility.RecodeReportInfo(vh.VEHICLE_ID, 0, send_gpp);
-                isSuccess = vh.sned_Str31(send_gpp, out receive_gpp, out reason);
-                SCUtility.RecodeReportInfo(vh.VEHICLE_ID, 0, receive_gpp, isSuccess.ToString());
-            }
+                CmdID = cmd_id,
+                ActType = activeType,
+                CSTID = cst_id ?? string.Empty,
+                LoadAdr = fromAdr,
+                DestinationAdr = destAdr
+            };
+            if (guideSegmentStartToLoad != null)
+                send_gpp.GuideSegmentsStartToLoad.AddRange(guideSegmentStartToLoad);
+            if (guideSectionsStartToLoad != null)
+                send_gpp.GuideSectionsStartToLoad.AddRange(guideSectionsStartToLoad);
+            if (guideAddressesStartToLoad != null)
+                send_gpp.GuideAddressesStartToLoad.AddRange(guideAddressesStartToLoad);
+            if (guideSegmentToDest != null)
+                send_gpp.GuideSegmentsToDestination.AddRange(guideSegmentToDest);
+            if (guideSectionsToDest != null)
+                send_gpp.GuideSectionsToDestination.AddRange(guideSectionsToDest);
+            if (guideAddressesToDest != null)
+                send_gpp.GuideAddressesToDestination.AddRange(guideAddressesToDest);
+            SCUtility.RecodeReportInfo(vh.VEHICLE_ID, 0, send_gpp);
+            isSuccess = vh.sned_Str31(send_gpp, out receive_gpp, out reason);
+            SCUtility.RecodeReportInfo(vh.VEHICLE_ID, 0, receive_gpp, isSuccess.ToString());
             if (isSuccess)
             {
                 int reply_code = receive_gpp.ReplyCode;
@@ -1689,6 +1686,10 @@ namespace com.mirle.ibg3k0.sc.Service
                                                               vh_id,
                                                               cmd_id,
                                                               reason));
+                }
+                else
+                {
+                    vh.setVhGuideInfo(scApp.ReserveBLL, send_gpp, originalAactiveType);
                 }
                 vh.NotifyVhExcuteCMDStatusChange();
             }
@@ -3383,35 +3384,72 @@ namespace com.mirle.ibg3k0.sc.Service
                 //2.將該台VH 更新成Remove狀態
                 //3.將位置的資訊清空。(包含Reserve的路段、紅綠燈、Block)
                 //4.上報給MCS
+                scApp.VehicleBLL.updataVehicleRemove(vhID);
+
                 AVEHICLE vh_vo = scApp.VehicleBLL.cache.getVehicle(vhID);
 
-                if (vh_vo.isTcpIpConnect)
+                if (!vh_vo.isTcpIpConnect)
                 {
-                    string message = $"vh:{vhID} current is connection, can't excute action:remove";
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                       Data: message,
+                       Data: $"vh id:{vhID} remove success. start try release reserved control...",
                        VehicleID: vhID);
-                    return (false, message);
-                }
-                bool is_success = true;
-                is_success = is_success && scApp.VehicleBLL.updataVehicleRemove(vhID);
-                if (is_success)
-                {
+
+
                     initialVhPosition(vh_vo);
+
                     vh_vo.VechileRemove();
-                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                       Data: $"vh id:{vhID} remove success. start release reserved control...",
-                       VehicleID: vhID);
-                    scApp.ReserveBLL.RemoveAllReservedSectionsByVehicleID(vh_vo.VEHICLE_ID);
-                    ProcessAlarmReport(vh_vo, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrReset, $"vehicle cannot service");
-                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                       Data: $"vh id:{vhID} remove success. end release reserved control.",
-                       VehicleID: vhID);
+                    scApp.ReserveBLL.RemoveAllReservedSectionsByVehicleID(vhID);
+                    scApp.ReserveBLL.RemoveVehicle(vhID);
                 }
+                else
+                {
+                    if (vh_vo.isAuto)
+                    {
+                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                                                      Data: $"vh id:{vhID} remove success. 但由於是Auto狀態，不進行路權及位置處理",
+                                                                                VehicleID: vhID);
+                    }
+                    else
+                    {
+                        scApp.ReserveBLL.RemoveAllReservedSectionsByVehicleID(vhID);
+                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                                                      Data: $"vh id:{vhID} remove success. 由於是非在AutoRemote中，進行路權清除",
+                                                                                VehicleID: vhID);
+                    }
+                }
+
                 List<AMCSREPORTQUEUE> reportqueues = new List<AMCSREPORTQUEUE>();
-                is_success = is_success && scApp.ReportBLL.newReportVehicleRemoved(vh_vo.Real_ID, reportqueues);
+                scApp.ReportBLL.newReportVehicleRemoved(vh_vo.Real_ID, reportqueues);
                 scApp.ReportBLL.newSendMCSMessage(reportqueues);
                 vh_vo.NotifyVhStatusChange();
+
+
+                //if (vh_vo.isTcpIpConnect)
+                //{
+                //    string message = $"vh:{vhID} current is connection, can't excute action:remove";
+                //    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                //       Data: message,
+                //       VehicleID: vhID);
+                //    return (false, message);
+                //}
+                //bool is_success = true;
+                //is_success = is_success && scApp.VehicleBLL.updataVehicleRemove(vhID);
+                //if (is_success)
+                //{
+                //    initialVhPosition(vh_vo);
+                //    vh_vo.VechileRemove();
+                //    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                //       Data: $"vh id:{vhID} remove success. start release reserved control...",
+                //       VehicleID: vhID);
+                //    scApp.ReserveBLL.RemoveAllReservedSectionsByVehicleID(vh_vo.VEHICLE_ID);
+                //    ProcessAlarmReport(vh_vo, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrReset, $"vehicle cannot service");
+                //    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                //       Data: $"vh id:{vhID} remove success. end release reserved control.",
+                //       VehicleID: vhID);
+                //}
+                //List<AMCSREPORTQUEUE> reportqueues = new List<AMCSREPORTQUEUE>();
+                //is_success = is_success && scApp.ReportBLL.newReportVehicleRemoved(vh_vo.Real_ID, reportqueues);
+                //scApp.ReportBLL.newSendMCSMessage(reportqueues);
 
                 return (true, "");
             }

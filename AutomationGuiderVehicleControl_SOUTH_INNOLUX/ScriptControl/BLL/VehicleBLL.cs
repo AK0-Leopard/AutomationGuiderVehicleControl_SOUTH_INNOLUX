@@ -975,6 +975,19 @@ namespace com.mirle.ibg3k0.sc.BLL
             }
             foreach (AVEHICLE vh in vhs.ToList())
             {
+                if (!vh.IS_INSTALLED)
+                {
+                    vhs.Remove(vh);
+                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleBLL), Device: "OHxC",
+                       Data: $"vh id:{vh.VEHICLE_ID} no install," +
+                             $"so filter it out",
+                       VehicleID: vh.VEHICLE_ID,
+                       CarrierID: vh.CST_ID);
+                }
+            }
+
+            foreach (AVEHICLE vh in vhs.ToList())
+            {
                 if (vh.BatteryLevel == BatteryLevel.Low)
                 {
                     vhs.Remove(vh);
@@ -2321,6 +2334,18 @@ namespace com.mirle.ibg3k0.sc.BLL
                        Count();
             }
 
+            public bool IsIdle(AVEHICLE vh)
+            {
+                bool is_idle = true;
+                //1.一定要是Auto的狀態
+                is_idle &= vh.MODE_STATUS == ProtocolFormat.OHTMessage.VHModeStatus.AutoRemote;
+                //2.是處於沒有命令的狀態
+                is_idle &= vh.ACT_STATUS == ProtocolFormat.OHTMessage.VHActionStatus.NoCommand;
+                //3.而且沒有異常發生
+                is_idle &= !vh.IsError;
+                return is_idle;
+
+            }
 
 
         }

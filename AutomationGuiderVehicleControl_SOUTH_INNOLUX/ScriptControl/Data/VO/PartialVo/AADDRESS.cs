@@ -106,7 +106,7 @@ namespace com.mirle.ibg3k0.sc
                 }
                 else
                 {
-                    return IsCoupler || IsPort;
+                    return this.ADRTYPE == 4 || this.ADRTYPE == 6;//暫時先用,1:充電站 ,2:作為停車的Type,4:可避車點
                 }
                 //return IsCoupler || IsPort || (!IsSegment && IsSection);
             }

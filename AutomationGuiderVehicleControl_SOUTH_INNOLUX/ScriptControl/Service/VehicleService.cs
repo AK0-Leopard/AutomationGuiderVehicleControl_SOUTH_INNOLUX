@@ -377,11 +377,64 @@ namespace com.mirle.ibg3k0.sc.Service
                    VehicleID: vh.VEHICLE_ID);
             }
             scApp.CMDBLL.removeAlreadyPassedSection(vh.VEHICLE_ID, e.LeaveSection);
+            tryReleaseReservedSection(vh, leave_section, entry_section);
 
-            if (DebugParameter.AdvanceDriveAway)
-                Task.Run(() => tryDriveAwayInWTOIdleVh(vh));
-
+            //在位置有改變的時候，去確認即將要前往的目的地是否為單行道
+            //若是單行道，則要確認裡面是否有idle vh在裡面
+            //是的話則要將他趕出來
+            if (vh.WillPassSectionID != null && vh.WillPassSectionID.Count() > 0)
+            {
+                string currentFinalSection = vh.WillPassSectionID.Last();
+                var check_result = scApp.GuideBLL.tryGetOneDirectPathSection(currentFinalSection);
+                if (check_result.isOneDirectPathSection)
+                {
+                    List<string> section_ids = check_result.oneDirectCollection.Select(sec => sec.SEC_ID).ToList();
+                    var vhs = scApp.VehicleBLL.cache.loadVhBySectionIDs(section_ids);
+                    foreach (var in_one_direct_vh in vhs)
+                    {
+                        if (in_one_direct_vh == vh) continue;
+                        if (!scApp.VehicleBLL.cache.IsIdle(in_one_direct_vh)) continue;
+                        Task.Run(() => tryNotifyVhAvoid_New(vh.VEHICLE_ID, in_one_direct_vh.VEHICLE_ID));
+                    }
+                }
+            }
         }
+        private void tryReleaseReservedSection(AVEHICLE vh, ASECTION leave_section, ASECTION entry_section)
+        {
+            string vh_current_sec_id = SCUtility.Trim(vh.CUR_SEC_ID, true);
+            var try_get_cross_address_id = tryFindCrossAddressID(leave_section.SEC_ID, entry_section.SEC_ID);
+            if (!try_get_cross_address_id.hasFind)
+                return;
+            var related_sections = scApp.SectionBLL.cache.GetSectionsByAddress(try_get_cross_address_id.adrID);
+            var will_release_sections = related_sections.Where(sec => !SCUtility.isMatche(sec.SEC_ID, vh_current_sec_id)).ToList();
+            foreach (var section in will_release_sections)
+            {
+                scApp.ReserveBLL.RemoveManyReservedSectionsByVIDSID(vh.VEHICLE_ID, section.SEC_ID);
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"vh:{vh.VEHICLE_ID} release section {section.SEC_ID}" +
+                         $"(By cross adr:{try_get_cross_address_id.adrID},leave_section:{leave_section.SEC_ID},entry_section:{entry_section.SEC_ID}).",
+                   VehicleID: vh.VEHICLE_ID);
+            }
+        }
+        private (bool hasFind, string adrID) tryFindCrossAddressID(string secID1, string secID2)
+        {
+            ASECTION sec1 = scApp.SectionBLL.cache.GetSection(secID1);
+            ASECTION sec2 = scApp.SectionBLL.cache.GetSection(secID2);
+            if (sec1 == null || sec2 == null)
+            {
+                return (false, "");
+            }
+            List<string> address_temp = new List<string>();
+            address_temp.Add(sec1.FROM_ADR_ID);
+            address_temp.Add(sec1.TO_ADR_ID);
+            if (address_temp.Contains(sec2.FROM_ADR_ID))
+                return (true, sec2.FROM_ADR_ID);
+            if (address_temp.Contains(sec2.TO_ADR_ID))
+                return (true, sec2.TO_ADR_ID);
+            return (false, "");
+        }
+
+
         private void tryDriveAwayInWTOIdleVh(AVEHICLE movingVh)
         {
             try
@@ -1965,12 +2018,16 @@ namespace com.mirle.ibg3k0.sc.Service
                                     //if (requestVh.PredictSections.Contains(SCUtility.Trim(sec.SEC_ID)))
                                     if (passVh.WillPassSectionID.Contains(SCUtility.Trim(sec.SEC_ID)))
                                     {
-                                        //next_search_address_temp.Add((orther_end_point, sec));
-                                        next_search_address_temp.Add((orther_end_point_obj, sec));
-                                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                                           Data: $"sec id:{SCUtility.Trim(sec.SEC_ID)} is request_vh of will sections:{string.Join(",", passVh.WillPassSectionID)}.by pass it,continue find next address{orther_end_point}",
-                                           VehicleID: avoidVh.VEHICLE_ID);
-                                        continue;
+                                        if (CheckWalkDirIsSame(passVh, sec.SEC_ID, search_info.next_address.AddressID))
+                                        {
+
+                                            //next_search_address_temp.Add((orther_end_point, sec));
+                                            next_search_address_temp.Add((orther_end_point_obj, sec));
+                                            LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                                               Data: $"sec id:{SCUtility.Trim(sec.SEC_ID)} is request_vh of will sections:{string.Join(",", passVh.WillPassSectionID)}.by pass it,continue find next address{orther_end_point}",
+                                               VehicleID: avoidVh.VEHICLE_ID);
+                                            continue;
+                                        }
                                     }
                                 }
                             }
@@ -1987,16 +2044,16 @@ namespace com.mirle.ibg3k0.sc.Service
                                 continue;
                             }
                             ////找到以後嘗試去預約看看，確保該路徑是可以走的，如果不行則就繼續往下找(避免剛好是在路口的地方，導致另一台車閃不過去)
-                            bool is_one_direct = scApp.GuideBLL.isOneDirectPathSection(SCUtility.Trim(sec.SEC_ID, true));
-                            if (is_one_direct)
-                            {
-                                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                                   Data: $"sec id:{SCUtility.Trim(sec.SEC_ID)} is one direct. continue find next address{orther_end_point}..",
-                                   VehicleID: avoidVh.VEHICLE_ID);
-                                //next_search_address_temp.Add((orther_end_point, sec));
-                                next_search_address_temp.Add((orther_end_point_obj, sec));
-                                continue;
-                            }
+                            //bool is_one_direct = scApp.GuideBLL.isOneDirectPathSection(SCUtility.Trim(sec.SEC_ID, true));
+                            //if (is_one_direct)
+                            //{
+                            //    LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                            //       Data: $"sec id:{SCUtility.Trim(sec.SEC_ID)} is one direct. continue find next address{orther_end_point}..",
+                            //       VehicleID: avoidVh.VEHICLE_ID);
+                            //    //next_search_address_temp.Add((orther_end_point, sec));
+                            //    next_search_address_temp.Add((orther_end_point_obj, sec));
+                            //    continue;
+                            //}
 
                             //找到以後嘗試去預約看看，確保該路徑是可以走的，如果不行則就繼續往下找(避免剛好是在路口的地方，導致另一台車閃不過去)
                             var reserve_check_result = scApp.ReserveBLL.TryAddReservedSection(avoidVh.VEHICLE_ID, sec.SEC_ID,
@@ -2100,6 +2157,31 @@ namespace com.mirle.ibg3k0.sc.Service
                 }
             }
         }
+
+        private bool CheckWalkDirIsSame(AVEHICLE passVh, string checkSectionID, string entryAdr)
+        {
+            var try_get_sec_dir = passVh.tryGetWalkDirOnSection(checkSectionID);
+            if (!try_get_sec_dir.isExist)
+            {
+                return true;
+            }
+            var try_get_section_obl = scApp.ReserveBLL.GetHltMapSections(checkSectionID);
+            if (!try_get_section_obl.isExist)
+            {
+                return true;
+            }
+            DriveDirction will_walk_dir = SCUtility.isMatche(try_get_section_obl.section.StartAddressID, entryAdr) ?
+                                          DriveDirction.DriveDirForward : DriveDirction.DriveDirReverse;
+            if (try_get_sec_dir.dir == will_walk_dir)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private (bool isDuplicate, string duplicateAdr) checkGuideAddressIsDuplicatePass(AvoidAddress next_address, string orther_end_point)
         {
             AvoidAddress avoidAddressTemp = next_address;
@@ -2439,7 +2521,7 @@ namespace com.mirle.ibg3k0.sc.Service
             }
             return isSuccess;
         }
-        public bool TransferRequset(string vh_id, string cmd_id, ActiveType activeType, string cst_id,
+        public virtual bool TransferRequset(string vh_id, string cmd_id, ActiveType activeType, string cst_id,
             string[] guideSegmentStartToLoad, string[] guideSectionsStartToLoad, string[] guideAddressesStartToLoad,
             string[] guideSegmentToDest, string[] guideSectionsToDest, string[] guideAddressesToDest,
             string fromAdr, string destAdr, ActiveType originalAactiveType = ActiveType.Home)
@@ -3050,6 +3132,14 @@ namespace com.mirle.ibg3k0.sc.Service
                 foreach (var reserve_sec in reserveInfos)
                 {
                     string reserve_section_id = reserve_sec.ReserveSectionID;
+                    //判斷第一段路線，是否要直接下給車子，避免再要求第一段的時候，其實沒有要走但卻會被卡住的問題
+                    bool is_force_pass_first_reserve = checkIsForcePassFirstSectionReserve(vh, reserve_section_id);
+                    if (is_force_pass_first_reserve)
+                    {
+                        is_reserved_success &= true;
+                        continue;
+                    }
+
                     //DriveDirction drive_dirction = reserveInfos[0].DriveDirction;
                     //DriveDirction drive_dirction = scApp.VehicleBLL.getDrivingDirection(reserve_section_id, vh.sWillPassAddressID);
                     //HltDirection sensor_direction = HltDirection.ForwardReverse;
@@ -3132,6 +3222,36 @@ namespace com.mirle.ibg3k0.sc.Service
                    Details: $"process function:{nameof(IsReserveSuccessNew)} Exception");
                 return (false, string.Empty, string.Empty);
             }
+        }
+        private bool checkIsForcePassFirstSectionReserve(AVEHICLE vh, string reserveSectionID)
+        {
+            var vh_guide_info = vh.tryGetCurrentGuideSection();
+            if (!vh_guide_info.hasInfo)
+                return false;
+            if (vh_guide_info.currentGuideSection.Count < 2)
+            {
+                return false;
+            }
+            string first_section = vh_guide_info.currentGuideSection.FirstOrDefault();
+            if (!SCUtility.isMatche(first_section, reserveSectionID))
+            {
+                return false;
+            }
+            string secend_section = vh_guide_info.currentGuideSection[1];
+            var get_cross_address_result = tryFindCrossAddressID(first_section, secend_section);
+            if (!get_cross_address_result.hasFind)
+            {
+                return false;
+            }
+            string current_adr_id = vh.CUR_ADR_ID;
+            if (SCUtility.isMatche(get_cross_address_result.adrID, current_adr_id))
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"由於 vh:{vh.VEHICLE_ID} 位於address:{vh.CUR_ADR_ID}為 Guide Section的第一段:{first_section}於第二段:{secend_section}的交接口，因此強制放行.",
+                   VehicleID: vh.VEHICLE_ID);
+                return true;
+            }
+            return false;
         }
         private static HltDirection getSensorDirection(AVEHICLE vh, string reserve_section_id)
         {

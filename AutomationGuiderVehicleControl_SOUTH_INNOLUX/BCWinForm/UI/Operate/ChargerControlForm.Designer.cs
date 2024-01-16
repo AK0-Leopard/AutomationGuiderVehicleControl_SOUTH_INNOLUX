@@ -1064,6 +1064,7 @@
             // 
             // tb_CouplerStatus1
             // 
+            this.tb_CouplerStatus1.AcceptsReturn = true;
             this.tb_CouplerStatus1.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_CouplerStatus1.Location = new System.Drawing.Point(202, 313);
             this.tb_CouplerStatus1.Name = "tb_CouplerStatus1";
