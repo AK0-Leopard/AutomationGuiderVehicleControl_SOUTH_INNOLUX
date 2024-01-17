@@ -1289,7 +1289,7 @@ namespace com.mirle.ibg3k0.sc.BLL
             List<AVEHICLE> vhs = scApp.getEQObjCacheManager().getAllVehicle();
             //return vhs.Where(vh => vh.ACT_STATUS == VHActionStatus.NoCommand &&
             return vhs.Where(vh => vh.CUR_ADR_ID.Trim() == adrID.Trim()).
-                       SingleOrDefault();
+                       FirstOrDefault();
         }
         public bool hasVhOnAddress(string adrID)
         {

@@ -301,7 +301,7 @@ namespace com.mirle.ibg3k0.sc.Module
         {
             string vh_current_address = vh.CUR_ADR_ID;
             bool is_need_to_long_charge = vh.IsNeedToLongCharge();
-            string best_coupler_adr = findBestCoupler(vh_current_address, is_need_to_long_charge);
+            string best_coupler_adr = findBestCoupler(vh, vh_current_address, is_need_to_long_charge);
             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleChargerModule), Device: DEVICE_NAME,
                      Data: $"ask vh:{vh.VEHICLE_ID} to charging. coupler adr:{best_coupler_adr} ",
                      VehicleID: vh.VEHICLE_ID);
@@ -315,7 +315,7 @@ namespace com.mirle.ibg3k0.sc.Module
         }
 
 
-        private string findBestCoupler(string vh_current_address, bool isNeedToLongCharge)
+        private string findBestCoupler(AVEHICLE vh, string vh_current_address, bool isNeedToLongCharge)
         {
             string best_coupler_adr = string.Empty;
             //List<CouplerAddress> coupler_addresses = addressesBLL.cache.GetCouplerAddresses().ToList();
@@ -343,18 +343,45 @@ namespace com.mirle.ibg3k0.sc.Module
                 //1.確定路段是可以通的
                 if (!guideBLL.IsRoadWalkable(vh_current_address, coupler_adr))
                 {
+                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleChargerModule), Device: DEVICE_NAME,
+                             Data: $"want to ask vh:{vh.VEHICLE_ID}(cur adr:{vh_current_address}) to charging. coupler adr:{best_coupler_adr}, but is not walkable",
+                             VehicleID: vh.VEHICLE_ID);
                     continue;
                 }
                 //2.確認沒有車子在上面
                 //if (!adr.hasVh(vehicleBLL) &&
-                if (!adr.hasChargingVh(vehicleBLL) &&
-                    !adr.hasVhGoing(vehicleBLL))
+                if (adr.hasVh(vehicleBLL))
                 {
-                    best_coupler_adr = adr.ADR_ID;
-                    break;
+                    //如果有車，確認是否已經不是低水位且不會Auto Charge
+                    var on_adr_vh = vehicleBLL.getVhOnAddress(coupler_adr);
+                    if (!IsCanDriveAwayVh(on_adr_vh))
+                    {
+                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleChargerModule), Device: DEVICE_NAME,
+                                 Data: $"want to ask vh:{vh.VEHICLE_ID}(cur adr:{vh_current_address}) to charging. coupler adr:{best_coupler_adr}, has vh charging",
+                                 VehicleID: vh.VEHICLE_ID);
+                        continue;
+                    }
                 }
+                best_coupler_adr = adr.ADR_ID;
+                break;
+
+                //if (!adr.hasChargingVh(vehicleBLL) &&
+                //    !adr.hasVhGoing(vehicleBLL))
+                //{
+                //    best_coupler_adr = adr.ADR_ID;
+                //    break;
+                //}
             }
             return best_coupler_adr;
+        }
+        private bool IsCanDriveAwayVh(AVEHICLE vh)
+        {
+            if (vh.MODE_STATUS == VHModeStatus.AutoRemote &&
+                vh.BatteryLevel > BatteryLevel.Low)
+            {
+                return true;
+            }
+            return false;
         }
 
 
@@ -433,7 +460,7 @@ namespace com.mirle.ibg3k0.sc.Module
                     //Now : 00:05,Last : 00:03 +15= 00:18 => 不需要長充電
                     //if (!ChargingVh.LAST_FULLY_CHARGED_TIME.HasValue ||
                     //   DateTime.Now > ChargingVh.LAST_FULLY_CHARGED_TIME?.AddMinutes(SystemParameter.TheLongestFullyChargedIntervalTime_Mim)) 
-                    if (ChargingVh.IsNeedToLongCharge()) 
+                    if (ChargingVh.IsNeedToLongCharge())
                     {
                         if (ChargingVh.BatteryLevel == BatteryLevel.Full
                           && ChargingVh.MODE_STATUS == VHModeStatus.AutoCharging)
