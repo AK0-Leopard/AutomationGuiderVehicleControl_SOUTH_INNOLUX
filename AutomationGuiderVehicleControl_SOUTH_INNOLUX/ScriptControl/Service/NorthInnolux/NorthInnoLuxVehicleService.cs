@@ -2828,7 +2828,7 @@ namespace com.mirle.ibg3k0.sc.Service
                                     if (cmd_ohtc != null && request_vh.CanNotReserveInfo != null)
                                     {
                                         bool is_override_success = scApp.VehicleService.trydoOverrideCommandToVh
-                                            (request_vh, cmd_ohtc, request_vh.CanNotReserveInfo.ReservedSectionID);
+                                            (request_vh, cmd_ohtc, new List<string> { request_vh.CanNotReserveInfo.ReservedSectionID });
                                         if (is_override_success)
                                         {
                                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,

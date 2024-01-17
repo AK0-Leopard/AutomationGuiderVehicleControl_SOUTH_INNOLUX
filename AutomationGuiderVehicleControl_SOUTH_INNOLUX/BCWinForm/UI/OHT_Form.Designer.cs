@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -426,7 +426,6 @@
             this.cb_autoOverride.TabIndex = 12;
             this.cb_autoOverride.Text = "Auto override";
             this.cb_autoOverride.UseVisualStyleBackColor = true;
-            this.cb_autoOverride.Visible = false;
             this.cb_autoOverride.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
             this.cb_autoOverride.Click += new System.EventHandler(this.cb_autoOverride_Click);
             // 
@@ -650,10 +649,10 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.uc_StatusTreeViewer1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 28);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(315, 823);
+            this.tabPage2.Size = new System.Drawing.Size(315, 829);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Status Viewer";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -664,7 +663,7 @@
             this.uc_StatusTreeViewer1.Location = new System.Drawing.Point(3, 3);
             this.uc_StatusTreeViewer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uc_StatusTreeViewer1.Name = "uc_StatusTreeViewer1";
-            this.uc_StatusTreeViewer1.Size = new System.Drawing.Size(309, 817);
+            this.uc_StatusTreeViewer1.Size = new System.Drawing.Size(309, 823);
             this.uc_StatusTreeViewer1.TabIndex = 0;
             // 
             // pnl_Map
@@ -722,14 +721,14 @@
             this.dgv_vhStatus.AllowUserToDeleteRows = false;
             this.dgv_vhStatus.AutoGenerateColumns = false;
             this.dgv_vhStatus.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_vhStatus.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_vhStatus.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dgv_vhStatus.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_vhStatus.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.vEHICLEIDDataGridViewTextBoxColumn1,

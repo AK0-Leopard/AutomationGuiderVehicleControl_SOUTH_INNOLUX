@@ -234,12 +234,25 @@ namespace com.mirle.ibg3k0.sc.BLL
         {
             //int sec_id = 0;
             //int.TryParse(sectionID, out sec_id);
+            var vh_obj = mapAPI.GetVehicleObjectByID(vhID);
+            double original_speed = 0;
+            if (vh_obj != null)
+            {
+                original_speed = vh_obj.SpeedMmPerSecond;
+                vh_obj.SpeedMmPerSecond = 1;
+            }
             string sec_id = SCUtility.Trim(sectionID);
-
             HltResult result = mapAPI.TryAddReservedSection(vhID, sec_id, sensorDir, forkDir, isAsk);
+            if (vh_obj != null)
+            {
+                vh_obj.SpeedMmPerSecond = original_speed;
+            }
+            LogHelper.Log(logger: logger, LogLevel: NLog.LogLevel.Info, Class: nameof(ReserveBLL), Device: "AGV",
+               Data: $"vh:{vhID} Try add reserve section:{sectionID} sensor dir:{sensorDir} forkDIr:{forkDir} ,result:{result}",
+               VehicleID: vhID);
             onReserveStatusChange();
-
             return result;
+
         }
 
         public virtual HltResult RemoveAllReservedSectionsBySectionID(string sectionID)

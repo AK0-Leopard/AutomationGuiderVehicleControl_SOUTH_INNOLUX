@@ -1389,7 +1389,7 @@ namespace com.mirle.ibg3k0.sc.Service
         /// </summary>
         object reserve_lock = new object();
         //public bool doSendOverrideCommandToVh(AVEHICLE assignVH, ACMD_OHTC cmd, string byPassAdr)
-        public bool trydoOverrideCommandToVh(AVEHICLE assignVH, ACMD_OHTC cmd, string byPassSection, bool isAvoidComplete = false)
+        public bool trydoOverrideCommandToVh(AVEHICLE assignVH, ACMD_OHTC cmd, List<string> byPassSection, bool isAvoidComplete = false)
         {
             bool isSuccess = false;
             try
@@ -1405,10 +1405,24 @@ namespace com.mirle.ibg3k0.sc.Service
                 //List<string> need_by_pass_adr_ids = new List<string>() { byPassAdr };
                 //List<string> need_by_pass_sec_ids = new List<string>() { byPassSection };
                 List<string> need_by_pass_sec_ids = new List<string>();
-                if (!SCUtility.isEmpty(byPassSection))
+                //if (!SCUtility.isEmpty(byPassSection))
+                if (byPassSection != null && byPassSection.Count > 0)
                 {
-                    need_by_pass_sec_ids.Add(byPassSection);
+                    //need_by_pass_sec_ids.Add(byPassSection);
+                    need_by_pass_sec_ids.AddRange(byPassSection);
                 }
+                //List<AVEHICLE> vhs = scApp.VehicleBLL.cache.loadAllVh();
+                //List<string> vh_exist_section_ids = new List<string>();
+                //foreach (AVEHICLE v in vhs)
+                //{
+                //    if (!SCUtility.isEmpty(v.CUR_SEC_ID) &&
+                //        !SCUtility.isMatche(v.VEHICLE_ID, assignVH.VEHICLE_ID))
+                //        vh_exist_section_ids.Add(SCUtility.Trim(v.CUR_SEC_ID, true));
+                //}
+                //if (vh_exist_section_ids.Count() > 0)
+                //{
+                //    need_by_pass_sec_ids.AddRange(vh_exist_section_ids);
+                //}
                 //if (isNeedByPassSection)
                 //{
                 //    switch (scApp.BC_ID)
@@ -1609,6 +1623,7 @@ namespace com.mirle.ibg3k0.sc.Service
                     //2.建立Cmd Details
                     List<string> guide_section_ids = new List<string>();
                     List<string> guide_segment_ids = new List<string>();
+                    List<string> guide_addresses_ids = new List<string>();
 
                     if (guide_start_to_from_section_ids == null && guide_to_dest_section_ids == null)
                     {
@@ -1660,6 +1675,9 @@ namespace com.mirle.ibg3k0.sc.Service
                     //    }
                     //}
                     scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(assignVH.VEHICLE_ID, cmd.CMD_ID, E_CMD_STATUS.Sending);
+
+                    scApp.CMDBLL.setVhExcuteCmdToShow(cmd, assignVH, guide_segment_ids, guide_section_ids?.ToArray(), guide_addresses_ids?.ToArray(),
+                                                      guide_start_to_from_section_ids, guide_to_dest_section_ids);
                     isSuccess = ProcSendTransferCommandToVh(cmd, assignVH, ActiveType.Override,
                      guide_start_to_from_segment_ids?.ToArray(), guide_start_to_from_section_ids?.ToArray(), guide_start_to_from_address_ids?.ToArray(),
                      guide_to_dest_segment_ids?.ToArray(), guide_to_dest_section_ids?.ToArray(), guide_to_dest_address_ids?.ToArray(), original_active_type);
@@ -1671,8 +1689,7 @@ namespace com.mirle.ibg3k0.sc.Service
                            Data: $"Override success remove vh:{assignVH.VEHICLE_ID} all reserved section.",
                            VehicleID: assignVH.VEHICLE_ID,
                            CarrierID: assignVH.CST_ID);
-                        var result = scApp.ReserveBLL.TryAddReservedSection(assignVH.VEHICLE_ID, vh_current_section,
-                                                                  sensorDir: Mirle.Hlts.Utils.HltDirection.None);
+                        var result = scApp.ReserveBLL.TryAddReservedSection(assignVH.VEHICLE_ID, vh_current_section);
                         LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                            Data: $"Override success append vh:{assignVH.VEHICLE_ID} current section:{vh_current_section}.result:{result.ToString()}",
                            VehicleID: assignVH.VEHICLE_ID,
@@ -1686,14 +1703,15 @@ namespace com.mirle.ibg3k0.sc.Service
                         }
 
 
-                        scApp.CMDBLL.setVhExcuteCmdToShow(cmd, assignVH, guide_segment_ids, guide_section_ids?.ToArray(), guide_start_to_from_address_ids?.ToArray(),
-                                                          guide_start_to_from_section_ids, guide_to_dest_section_ids);
+                        //scApp.CMDBLL.setVhExcuteCmdToShow(cmd, assignVH, guide_segment_ids, guide_section_ids?.ToArray(), guide_start_to_from_address_ids?.ToArray(),
+                        //                                  guide_start_to_from_section_ids, guide_to_dest_section_ids);
 
 
                         assignVH.sw_speed.Restart();
                     }
                     else
                     {
+                        scApp.CMDBLL.setInitialVhExcuteCmdToShow(vh_id);
                         BCFApplication.onWarningMsg($"doSendOverrideCommandToVh fail.vh:{vh_id}, cmd id:{cmd_id},from:{source_adr},to:{dest_adr},active type:{original_active_type}." +
                                 $"vh current adr:{vh_current_address},start section:{vh_current_section}");
                     }
@@ -3529,7 +3547,7 @@ namespace com.mirle.ibg3k0.sc.Service
             if (cmd_ohtc != null && request_vh.CanNotReserveInfo != null)
             {
                 bool is_override_success = scApp.VehicleService.trydoOverrideCommandToVh
-                    (request_vh, cmd_ohtc, request_vh.CanNotReserveInfo.ReservedSectionID);
+                    (request_vh, cmd_ohtc, new List<string> { request_vh.CanNotReserveInfo.ReservedSectionID });
                 if (is_override_success)
                 {
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
@@ -5101,10 +5119,18 @@ namespace com.mirle.ibg3k0.sc.Service
 
             //Boolean resp_cmp = ITcpIpControl.sendGoogleMsg(bcfApp, tcpipAgentName, wrapper, true);
             Boolean resp_cmp = vh.sendMessage(wrapper, true);
-
             SCUtility.RecodeReportInfo(vh.VEHICLE_ID, seq_num, send_str, resp_cmp.ToString());
             vh.setVhAvoidComplete();
             recordCurrentGuideSection(vh);
+            var check_need_override = checkIsNeedOvrride(vh);
+            if (!check_need_override.isNeed)
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"Not need to override,reason:{check_need_override.reason}",
+                   VehicleID: vh.VEHICLE_ID,
+                   CarrierID: vh.CST_ID);
+                return;
+            }
 
             if (is_avoid_complete)
             {
@@ -5117,7 +5143,8 @@ namespace com.mirle.ibg3k0.sc.Service
 
                 scApp.ReserveBLL.RemoveAllReservedSectionsByVehicleID(vh.VEHICLE_ID);
 
-                bool is_success = trydoOverrideCommandToVh(vh, cmd_ohtc, "", true);
+                //bool is_success = trydoOverrideCommandToVh(vh, cmd_ohtc, "", true);
+                bool is_success = trydoOverrideCommandToVh(vh, cmd_ohtc, null, true);
                 if (is_success)
                 {
                     vh.VhAvoidInfo = null;
@@ -5136,7 +5163,41 @@ namespace com.mirle.ibg3k0.sc.Service
             }
 
         }
+        private (bool isNeed, string reason) checkIsNeedOvrride(AVEHICLE vh)
+        {
+            var cmd = scApp.CMDBLL.GetCMD_OHTCByID(vh.OHTC_CMD);
+            if (cmd == null)
+                return (false, "No command excute");
+            bool check_with_source_some = false;
+            bool has_carrier = vh.HAS_CST == 1;
+            switch (cmd.CMD_TPYE)
+            {
+                case E_CMD_TYPE.Load:
+                case E_CMD_TYPE.LoadUnload:
+                    if (!has_carrier)
+                    {
+                        check_with_source_some = true;
+                    }
+                    break;
+            }
 
+            if (check_with_source_some)
+            {
+                if (SCUtility.isMatche(cmd.SOURCE, vh.CUR_ADR_ID))
+                {
+                    return (false, $"current adr:{vh.CUR_ADR_ID} with source adr:{cmd.SOURCE} is same ,not need overide");
+                }
+                return (true, "");
+            }
+            else
+            {
+                if (SCUtility.isMatche(cmd.DESTINATION, vh.CUR_ADR_ID))
+                {
+                    return (false, $"current adr:{vh.CUR_ADR_ID} with dest. adr:{cmd.DESTINATION} is same ,not need overide");
+                }
+                return (true, "");
+            }
+        }
         #endregion Avoid Control
         #region Specially Control
         public bool changeVhStatusToAutoRemote(string vhID)

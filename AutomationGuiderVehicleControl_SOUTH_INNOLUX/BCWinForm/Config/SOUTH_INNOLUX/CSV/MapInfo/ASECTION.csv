@@ -13,6 +13,9 @@ Id,FromAddress,ToAddress,Speed, Type,PermitDirection
 10304,10014,10015,500,Horizontal,Forward
 10305,10015,10002,500,Vertical,Forward
 10401,10010,10011,1000,Horizontal,Forward
-10402,10011,10009,1000,Horizontal,Forward
-10501,10016,10008,100,Horizontal,Forward
-10502,10017,10016,100,Horizontal,Forward
+10402,10011,10018,1000,Horizontal,Forward
+10403,10018,10009,1000,Horizontal,Forward
+10501,10019,10008,400,Horizontal,Forward
+10502,10016,10019,400,Horizontal,Forward
+10503,10020,10016,400,Horizontal,Forward
+10504,10017,10020,400,Horizontal,Forward

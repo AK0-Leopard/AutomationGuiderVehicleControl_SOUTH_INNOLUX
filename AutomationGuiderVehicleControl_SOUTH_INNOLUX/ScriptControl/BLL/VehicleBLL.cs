@@ -1923,8 +1923,15 @@ namespace com.mirle.ibg3k0.sc.BLL
             double dis_speed = getSpeedValue(vh, speed, current_sec_id);
 
             //如果這次上報的x、y 為0，則繼續拿上一次地來更新
-            x_axis = x_axis == 0 ? vh.X_Axis : x_axis;
-            y_axis = y_axis == 0 ? vh.Y_Axis : y_axis;
+            //x_axis = x_axis == 0 ? vh.X_Axis : x_axis;
+            //y_axis = y_axis == 0 ? vh.Y_Axis : y_axis;
+
+            //如果這次上報的x、y 為0，則繼續拿上一次地來更新
+            if (x_axis == 0 && y_axis == 0)
+            {
+                x_axis = vh.X_Axis;
+                y_axis = vh.Y_Axis;
+            }
 
             if (SCUtility.isEmpty(current_adr_id))
             {
