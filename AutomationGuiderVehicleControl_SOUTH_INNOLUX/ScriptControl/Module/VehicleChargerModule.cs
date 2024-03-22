@@ -357,11 +357,19 @@ namespace com.mirle.ibg3k0.sc.Module
                     if (!IsCanDriveAwayVh(on_adr_vh))
                     {
                         LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleChargerModule), Device: DEVICE_NAME,
-                                 Data: $"want to ask vh:{vh.VEHICLE_ID}(cur adr:{vh_current_address}) to charging. coupler adr:{best_coupler_adr}, has vh charging",
+                                 Data: $"want to ask vh:{vh.VEHICLE_ID}(cur adr:{vh_current_address}) to charging.but coupler adr:{best_coupler_adr}, has vh charging",
                                  VehicleID: vh.VEHICLE_ID);
                         continue;
                     }
                 }
+                if (adr.hasVhGoing(vehicleBLL))
+                {
+                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleChargerModule), Device: DEVICE_NAME,
+                             Data: $"want to ask vh:{vh.VEHICLE_ID}(cur adr:{vh_current_address}) to charging.but coupler adr:{best_coupler_adr}, going",
+                             VehicleID: vh.VEHICLE_ID);
+                    continue;
+                }
+
                 best_coupler_adr = adr.ADR_ID;
                 break;
 

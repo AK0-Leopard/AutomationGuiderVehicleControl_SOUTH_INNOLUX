@@ -18,4 +18,6 @@ Id,FromAddress,ToAddress,Speed, Type,PermitDirection
 10501,10019,10008,400,Horizontal,Forward
 10502,10016,10019,400,Horizontal,Forward
 10503,10020,10016,400,Horizontal,Forward
-10504,10017,10020,400,Horizontal,Forward
+10504,10021,10020,400,Horizontal,Forward
+10505,10022,10021,400,Horizontal,Forward
+10506,10017,10022,400,Horizontal,Forward

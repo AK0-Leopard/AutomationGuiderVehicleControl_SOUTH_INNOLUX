@@ -3150,6 +3150,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 foreach (var reserve_sec in reserveInfos)
                 {
                     string reserve_section_id = reserve_sec.ReserveSectionID;
+                    DriveDirction reserve_section_dir = reserve_sec.DriveDirction;
                     //判斷第一段路線，是否要直接下給車子，避免再要求第一段的時候，其實沒有要走但卻會被卡住的問題
                     bool is_force_pass_first_reserve = checkIsForcePassFirstSectionReserve(vh, reserve_section_id);
                     if (is_force_pass_first_reserve)
@@ -3165,29 +3166,32 @@ namespace com.mirle.ibg3k0.sc.Service
 
                     //HltDirection hltDirection = decideReserveDirection(vh, reserve_section_id);
                     //HltDirection hltDirection = scApp.ReserveBLL.DecideReserveDirection(scApp.SectionBLL, vh, reserve_section_id);
-                    bool is_one_direct_path = scApp.GuideBLL.isOneDirectPathSection(reserve_section_id);
-                    if (is_one_direct_path)
+                    if (reserve_section_dir != DriveDirction.DriveDirNone) //如果是None，代表是反摺路段不會進入該section，因此不需要確認單行道邏輯
                     {
-                        List<ASECTION> one_direct_paths = scApp.GuideBLL.getOneDirectPathBySectionID(reserve_section_id);
-                        List<string> one_direct_paths_sec_ids = one_direct_paths.Select(sec => SCUtility.Trim(sec.SEC_ID, true)).ToList();
-                        if (!one_direct_paths_sec_ids.Contains(current_section_id))
+                        bool is_one_direct_path = scApp.GuideBLL.isOneDirectPathSection(reserve_section_id);
+                        if (is_one_direct_path)
                         {
-                            LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                               Data: $"section:{reserve_section_id} is one direct path, group:{string.Join(",", one_direct_paths_sec_ids)}",
-                               VehicleID: vhID);
-                            foreach (var one_dir_sec in one_direct_paths)
+                            List<ASECTION> one_direct_paths = scApp.GuideBLL.getOneDirectPathBySectionID(reserve_section_id);
+                            List<string> one_direct_paths_sec_ids = one_direct_paths.Select(sec => SCUtility.Trim(sec.SEC_ID, true)).ToList();
+                            if (!one_direct_paths_sec_ids.Contains(current_section_id))
                             {
-                                HltDirection ask_one_direct_paths_sec_sensor_direction = getSensorDirection(vh, reserve_section_id);
-                                var check_one_direct_result = scApp.ReserveBLL.TryAddReservedSection(vhID, one_dir_sec.SEC_ID,
-                                                                                sensorDir: ask_one_direct_paths_sec_sensor_direction,
-                                                                                isAsk: true);
-                                if (!check_one_direct_result.OK)
+                                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                                   Data: $"section:{reserve_section_id} is one direct path, group:{string.Join(",", one_direct_paths_sec_ids)}",
+                                   VehicleID: vhID);
+                                foreach (var one_dir_sec in one_direct_paths)
                                 {
-                                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                                       Data: $"vh:{vhID} Try add reserve section:{reserve_section_id} hlt dir:{ask_one_direct_paths_sec_sensor_direction}, it is one direct path" +
-                                             $"try to reserve section:{one_dir_sec.SEC_ID}(one of them) fail,result:{check_one_direct_result}.",
-                                       VehicleID: vhID);
-                                    return (check_one_direct_result.OK, check_one_direct_result.VehicleID, reserve_section_id);
+                                    HltDirection ask_one_direct_paths_sec_sensor_direction = getSensorDirection(vh, reserve_section_id);
+                                    var check_one_direct_result = scApp.ReserveBLL.TryAddReservedSection(vhID, one_dir_sec.SEC_ID,
+                                                                                    sensorDir: ask_one_direct_paths_sec_sensor_direction,
+                                                                                    isAsk: true);
+                                    if (!check_one_direct_result.OK)
+                                    {
+                                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                                           Data: $"vh:{vhID} Try add reserve section:{reserve_section_id} hlt dir:{ask_one_direct_paths_sec_sensor_direction}, it is one direct path" +
+                                                 $"try to reserve section:{one_dir_sec.SEC_ID}(one of them) fail,result:{check_one_direct_result}.",
+                                           VehicleID: vhID);
+                                        return (check_one_direct_result.OK, check_one_direct_result.VehicleID, reserve_section_id);
+                                    }
                                 }
                             }
                         }
