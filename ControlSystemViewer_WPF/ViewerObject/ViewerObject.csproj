@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ABE74ABB-2B58-4C51-B0DA-2E1786342223}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ViewerObject</RootNamespace>
+    <AssemblyName>ViewerObject</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.7.11\lib\net45\NLog.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="ScriptControl, Version=1.1.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ObjectConverter_OHTC_AT_S_MALASYIA\DLL\OHTC_AT_S_MALASYIA\ScriptControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Address.cs" />
+    <Compile Include="AlarmMap.cs" />
+    <Compile Include="Charger.cs" />
+    <Compile Include="Coupler.cs" />
+    <Compile Include="Customer\COMMaintenanceAlarm.cs" />
+    <Compile Include="Definition.cs" />
+    <Compile Include="AlarmModule.cs" />
+    <Compile Include="EQMap.cs" />
+    <Compile Include="HCMD_MCS.cs" />
+    <Compile Include="Label.cs" />
+    <Compile Include="LogStatus.cs" />
+    <Compile Include="LOG\MCS_COMMU_LOG.cs" />
+    <Compile Include="LOG\PLC_COMMU_LOG.cs" />
+    <Compile Include="LOG\SYSTEM_PROCESS_LOG.cs" />
+    <Compile Include="LOG\VEHICLE_COMMU_LOG.cs" />
+    <Compile Include="ParkingZoneData.cs" />
+    <Compile Include="ParkZoneMaster.cs" />
+    <Compile Include="ParkZoneDetail.cs" />
+    <Compile Include="ParkingZone.cs" />
+    <Compile Include="REPORT\Define.cs" />
+    <Compile Include="REPORT\VHIDINFO.cs" />
+    <Compile Include="REPORT\VCMD_ExportDetail.cs" />
+    <Compile Include="REPORT\VLongCharging.cs" />
+    <Compile Include="REPORT\VErrorCMD.cs" />
+    <Compile Include="REPORT\VMTBF.cs" />
+    <Compile Include="REPORT\VRealExcuteTime.cs" />
+    <Compile Include="REPORT\VSysExcuteQuality.cs" />
+    <Compile Include="REPORT\VTimeOutCMD.cs" />
+    <Compile Include="REPORT\VTransExecRate.cs" />
+    <Compile Include="REPORT\VTransExecRateDetail.cs" />
+    <Compile Include="REPORT\VUtilizationRateByStatus.cs" />
+    <Compile Include="SettingFormat.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="ProjectInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Section.cs" />
+    <Compile Include="Shelf.cs" />
+    <Compile Include="TrackSwitch.cs" />
+    <Compile Include="VALARM.cs" />
+    <Compile Include="VCMD.cs" />
+    <Compile Include="VCONSTANT.cs" />
+    <Compile Include="ViewerObjectBase.cs" />
+    <Compile Include="VLINE.cs" />
+    <Compile Include="REPORT\VMCBF.cs" />
+    <Compile Include="VSYSTEMOPERATION.cs" />
+    <Compile Include="VOPERATION.cs" />
+    <Compile Include="VPORTSTATION.cs" />
+    <Compile Include="VSEGMENT.cs" />
+    <Compile Include="VTIPMESSAGE.cs" />
+    <Compile Include="VTRANSFER.cs" />
+    <Compile Include="VUAS.cs" />
+    <Compile Include="VVEHICLE.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BasicFunction\BasicFunction.csproj">
+      <Project>{8a30147a-2553-472e-93c4-414f40054890}</Project>
+      <Name>BasicFunction</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

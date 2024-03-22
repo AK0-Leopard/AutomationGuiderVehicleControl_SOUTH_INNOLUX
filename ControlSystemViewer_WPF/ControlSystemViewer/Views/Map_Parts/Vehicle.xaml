@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.Map_Parts.Vehicle"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views.Map_Parts"
+             xmlns:vm="clr-namespace:Vehicle.ViewModel;assembly=Vehicle"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="150">
+    <UserControl.DataContext>
+        <vm:VehicleViewModel/>
+    </UserControl.DataContext>
+
+    <Viewbox x:Name="VehicleViewBox" StretchDirection="Both" Stretch="Uniform">
+        <Grid Width="150" Height="150" MouseLeftButtonDown="_MouseLeftButtonDown">
+            <Grid.ContextMenu>
+                <ContextMenu Opened="_ContextMenu_Opened">
+                    <MenuItem x:Name="mi_QUICK_VEHICLE_COMMAND" Header="{DynamicResource QUICK_VEHICLE_COMMAND}" Click="_QUICK_VEHICLE_COMMAND_Click" FontSize="16"/>
+                </ContextMenu>
+            </Grid.ContextMenu>
+            <Image Source="{Binding Img_Vehicle}" Width="133" Height="91" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,59,0,0"/>
+            <Image Source="{Binding Img_Action}" Width="52" Height="52" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,59,0,0"/>
+            <Label x:Name="lbl_VehicleNo" Content="{Binding Vehicle_No}"
+                   Width="66" Height="66" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="80,81,0,0"
+                   Background="Transparent" Foreground="WhiteSmoke" FontSize="48" FontFamily="Consolas" FontWeight="Bold"
+                   VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Image x:Name="Image_Battery" Source="{Binding Img_Battery}" Width="36" Height="56" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-89,76,0,0" Visibility="Collapsed"/>
+            <!--<Image Source="{Binding Img_Speed}" Width="66" Height="66" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-80,82,0,0"/>-->
+            <!--<Label Width="66" Height="66" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-80,82,0,0"
+                Background="Transparent" Content="{Binding Display_Value}" Foreground="WhiteSmoke" FontSize="32" FontFamily="Consolas" FontWeight="Bold"
+               VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>-->
+            <Image Source="{Binding Img_Pause}" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0"/>
+            <Image x:Name="Image_Alarm" Source="{Binding Img_Alarm}" Width="88" Height="75" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0"/>
+        </Grid>
+    </Viewbox>
+</UserControl>

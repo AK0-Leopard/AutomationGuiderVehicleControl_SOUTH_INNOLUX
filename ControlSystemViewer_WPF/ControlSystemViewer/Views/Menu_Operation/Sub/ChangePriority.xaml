@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.Menu_Operation.Sub.ChangePriority"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views.Menu_Operation.Sub"
+             xmlns:Components="clr-namespace:ControlSystemViewer.Views.Components"
+             xmlns:v="clr-namespace:ControlSystemViewer.Views.Components.ViewerButton"
+             mc:Ignorable="d" FontFamily="MicrosoftSansSerif"
+             d:DesignHeight="510" d:DesignWidth="690" Background="#f6f6f6" Foreground="White" FontSize="18">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle_Default}">
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="50"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+            <RowDefinition Height="73"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Grid.Row="2" Grid.Column="1">
+            <StackPanel Height="67" Width="270">
+                <TextBlock Style="{StaticResource Content_14px}" HorizontalAlignment="Left">Current Max. Priority Sum</TextBlock>
+                <TextBox Style="{StaticResource Textbox_None_Border}" Name="txt_CurMaxPriSum" IsReadOnly="True"></TextBox>
+            </StackPanel>
+            <StackPanel Height="67" Width="270" Margin="15,0,0,0">
+                <TextBlock Style="{StaticResource Content_14px}" HorizontalAlignment="Left">Current Min. Priority Sum</TextBlock>
+                <TextBox Style="{StaticResource Textbox_None_Border}" Name="txt_CurMinPriSum" IsReadOnly="True"></TextBox>
+            </StackPanel>
+            <Border Width="559" BorderThickness="0,1,0,0" BorderBrush="#979797"/>
+            <StackPanel Height="67" Width="270" Margin="0,12,0,0">
+                <TextBlock Style="{StaticResource Content_14px}" HorizontalAlignment="Left">MCS Command ID</TextBlock>
+                <TextBox Style="{StaticResource Textbox_None_Border}" Name="txt_McsCmdID" IsReadOnly="True"></TextBox>
+            </StackPanel>
+            <StackPanel Height="67" Width="270" Margin="15,0,0,0">
+            </StackPanel>
+            <StackPanel Height="67" Width="270">
+                <TextBlock Style="{StaticResource Content_14px}" HorizontalAlignment="Left">MCS Priority</TextBlock>
+                <TextBox Style="{StaticResource Textbox_None_Border}" Name="txt_McsPri" IsReadOnly="True"></TextBox>
+            </StackPanel>
+            <StackPanel Height="67" Width="270" Margin="15,0,0,0">
+                <TextBlock Style="{StaticResource Content_14px}" HorizontalAlignment="Left"><Run Text="Priority"/><Run Text="Sum"/></TextBlock>
+                <TextBox Style="{StaticResource Textbox_None_Border}" x:Name="num_PriSum" IsReadOnly="True"></TextBox>
+            </StackPanel>
+            <StackPanel Height="67" Width="270">
+                <TextBlock Style="{StaticResource Content_14px}" HorizontalAlignment="Left">Time Priority</TextBlock>
+                <TextBox Style="{StaticResource Textbox_None_Border}" Name="txt_TimePri" IsReadOnly="True"></TextBox>
+            </StackPanel>
+            <StackPanel Height="67" Width="270" Margin="15,0,0,0">
+                <TextBlock Style="{StaticResource Content_14px}" HorizontalAlignment="Left"><Run Text="Set Priority"/><LineBreak/><Run/></TextBlock>
+                <Components:NumericUpDown x:Name="txt_PortPri" Height="30"/>
+            </StackPanel>
+        </WrapPanel>
+        <Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="#979797">
+            <TextBlock Name="Title" Style="{StaticResource PopupTitle_20px}" Text="{DynamicResource CHANGE_PRIORITY}"/>
+        </Border>
+        <v:ViewerButton Grid.Row="3" Grid.Column="1" x:Name="btn_Confirm" VerticalAlignment="Top" IsDefault="True" Click="btn_Confirm_Click" Content="{DynamicResource CONFIRM}"  Style="{StaticResource ButtonStyle_Default}" />
+    </Grid>
+</UserControl>

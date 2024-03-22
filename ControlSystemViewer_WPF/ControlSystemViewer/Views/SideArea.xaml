@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.SideArea"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="300" FontSize="15">
+    <Grid>
+        <TabControl x:Name="TabControl" Background="Transparent">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Border Name="Panel" Height="30" BorderThickness="1" BorderBrush="Gray">
+                                    <ContentPresenter x:Name="ContentSite"
+                                                              VerticalAlignment="Center"
+                                                              HorizontalAlignment="Center"
+                                                              ContentSource="Header"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="TextElement.Foreground" Value="White"/>
+                                        <Setter TargetName="Panel" Property="BorderBrush" Value="White"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="TextElement.Foreground" Value="Gray"/>
+                                        <Setter TargetName="Panel" Property="BorderBrush" Value="Gray"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem x:Name="tab_StatusTree" Header="{DynamicResource STATUS_TREE}" Foreground="White" MinWidth="88" Height="29">
+                <local:StatusTree x:Name="StatusTree"/>
+            </TabItem>
+            <TabItem x:Name="tab_PortStatus" Header="{DynamicResource PORT_STATUS}" Foreground="White" MinWidth="88" Height="29" Visibility="Collapsed">
+                <local:PortStatus x:Name="PortStatus"/>
+            </TabItem>
+            <TabItem x:Name="tab_QuickVhCmd" Header="{DynamicResource QUICK_VEHICLE_COMMAND_SHORT}" Foreground="White" MinWidth="120" Height="29" Visibility="Hidden">
+                <local:QuickVehicleCommand x:Name="QuickVehicleCommand"/>
+            </TabItem>
+            <TabItem x:Name="tab_ShelfStatus" Header="{DynamicResource SHELF_STATUS}" Foreground="White" MinWidth="120" Height="29">
+                <local:ShelfStatus x:Name="ShelfStatus"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

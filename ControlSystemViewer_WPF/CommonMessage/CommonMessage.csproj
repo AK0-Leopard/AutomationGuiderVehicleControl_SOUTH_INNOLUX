@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="ProtocolFormat\AlarmFun.proto" />
+    <None Remove="ProtocolFormat\ControllerSettingFun.proto" />
+    <None Remove="ProtocolFormat\ManualPortFun.proto" />
+    <None Remove="ProtocolFormat\OhbcNtbcGrpcSpec.proto" />
+    <None Remove="ProtocolFormat\PortFun.proto" />
+    <None Remove="ProtocolFormat\SegFun.proto" />
+    <None Remove="ProtocolFormat\ShelfFun.proto" />
+    <None Remove="ProtocolFormat\TrackFun.proto" />
+    <None Remove="ProtocolFormat\VehicleControlFun.proto" />
+    <None Remove="ProtocolFormat\VehicleControlPublishMessage.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.19.4" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.20.1" />
+    <PackageReference Include="Grpc.Core" Version="2.46.1" />
+    <PackageReference Include="Grpc.Core.Api" Version="2.46.1" />
+    <PackageReference Include="Grpc.Tools" Version="2.46.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="ProtocolFormat\PortFun.proto" />
+    <Protobuf Include="ProtocolFormat\ManualPortFun.proto" />
+    <Protobuf Include="ProtocolFormat\OhbcNtbcGrpcSpec.proto" />
+    <Protobuf Include="ProtocolFormat\AlarmFun.proto" />
+    <Protobuf Include="ProtocolFormat\ControllerSettingFun.proto" />
+    <Protobuf Include="ProtocolFormat\SegFun.proto" />
+    <Protobuf Include="ProtocolFormat\ShelfFun.proto" />
+    <Protobuf Include="ProtocolFormat\TrackFun.proto" />
+    <Protobuf Include="ProtocolFormat\VehicleControlFun.proto" />
+    <Protobuf Include="ProtocolFormat\VehicleControlPublishMessage.proto" />
+  </ItemGroup>
+
+</Project>

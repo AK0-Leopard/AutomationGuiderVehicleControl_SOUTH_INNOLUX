@@ -1,0 +1,236 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.Menu_Operation.SystemModeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views.Menu_Operation"
+             xmlns:Components="clr-namespace:ControlSystemViewer.Views.Components"
+             mc:Ignorable="d" 
+             d:DesignHeight="736" d:DesignWidth="1600" FontFamily="MicrosoftSansSerif" FontSize="18" Foreground="#1b2338" Background="#f6f6f6">
+    <UserControl.Resources>
+        <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="False" />
+            <!--<Setter Property="FocusVisualStyle" Value="{DynamicResource CheckBoxFocusVisual}" />-->
+            <Setter Property="Height" Value="15"/>
+            <Setter Property="Width" Value="15"/>
+            <Setter Property="IsChecked" Value="{Binding IsChecked}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="17,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <!--<Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>-->
+                            <Grid Height="{TemplateBinding Height}" Width="{TemplateBinding Height}">
+                                <Rectangle x:Name="CheckBoxRectangle" Fill="White"/>
+                                <Rectangle x:Name="CheckBoxRectangleOut" Stroke="#707070" StrokeThickness="1"/>
+                                <Grid x:Name="CheckedMark" Width="15" Height="15" Visibility="Collapsed">
+                                    <Path SnapsToDevicePixels="False" StrokeThickness="2" Data="F1 M 0.468732,4.66838L 3.03345,7.95443L 7.28127,0.420569" Margin="4,2,0,0" Stroke="White"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="CheckedMark" Property="Visibility" Value="Visible"></Setter>
+                                <Setter TargetName="CheckBoxRectangle" Property="Fill" Value="#005ba8"></Setter>
+                                <Setter TargetName="CheckBoxRectangle" Property="Opacity" Value="1"></Setter>
+                                <Setter TargetName="CheckBoxRectangleOut" Property="Stroke" Value="Transparent"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TabControl}" x:Key="TabStripPlacement_Default">
+
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="BorderThickness" Value="0,6,0,0"/>
+            <Setter Property="BorderBrush" Value="#005ba8"/>
+            <Setter Property="Background" Value="#e6e6e6"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+        </Style>
+        <Style TargetType="{x:Type TabItem}" x:Key="TabItemStyle_Default">
+            <Setter Property="Margin" Value="-5,0,5,0"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="204"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border x:Name="Border">
+                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#005ba8" />
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                <Setter Property="Foreground" Value="#1b2338"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border x:Name="Border">
+                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#005ba8" />
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="white" />
+                                <Setter Property="Foreground" Value="#1b2338"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="10,4,4,7" />
+            <Setter Property="Background" Value="#bed0df"/>
+            <Setter Property="Foreground" Value="#1b2338"/>
+            <Setter Property="FontSize" Value="10.5pt"/>
+            <Setter Property="BorderBrush" Value="#e6e6e6"/>
+            <Setter Property="BorderThickness"  Value="0,0,1,1"/>
+        </Style>
+
+        <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource ColumnHeaderStyle}"/>
+            <Setter Property="BorderBrush" Value="#e6e6e6" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#e6e6e6"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#e6e6e6"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="36"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1"/>
+            <RowDefinition/>
+            <!--<RowDefinition Height="41"/>-->
+        </Grid.RowDefinitions>
+        <TabControl Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0,6,0,0" BorderBrush="#005ba8" Background="#e6e6e6" Padding="5,5,5,5">
+            <TabItem Header="System Control" Width="204" Height="35" Margin="-2,0,2,0">
+                <Grid Background="#f6f6f6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="373"/>
+                        <RowDefinition Height="293"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="867"/>
+                        <ColumnDefinition Width="289"/>
+                        <ColumnDefinition Width="289"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <!--<Components:uc_StatusControl Grid.Column="1" Grid.Row="1" x:Name="CommunicationStatus"/>
+                    <Components:uc_StatusControlC Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" x:Name="ControlStatus" Margin="0,0,0,226" Grid.RowSpan="2"/>
+                    <Components:uc_StatusControl Grid.Column="4" Grid.Row="1" x:Name="TSCStatus"/>-->
+                    <!--<Components:StatusControl Grid.Column="1" Grid.Row="1" x:Name="CommunicationStatus"/>
+                    <Components:StatusControl Grid.Column="2" Grid.Row="1" x:Name="ControlStatus"/>
+                    <Components:StatusControl Grid.Column="3" Grid.Row="1" x:Name="TSCStatus"/>-->
+                    <Components:SystemModeControl Grid.Column="1" Grid.Row="1" x:Name="SystemModeControlC1" Margin="0,6,0,0"/>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Device Status" Width="204" Height="35" Margin="5,0,-5,0">
+                <Grid Background="#f6f6f6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="145"/>
+                        <RowDefinition Height="190"/>
+                        <RowDefinition Height="145"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="13"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="13"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!--MCS Status-->
+                    <TextBlock Grid.Column="1" Grid.Row="1" Style="{StaticResource ContentTitle_18px}" Height="30" VerticalAlignment="Top" Margin="0,0,0,15" Text="MCS Status"/>
+                    <DockPanel Grid.Column="1" Grid.Row="1" Margin="0,45,0,0" Height="30" VerticalAlignment="Top">
+                        <Components:DeviceStatusSignal x:Name="uc_MCS_Status" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_Router_Status" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                    </DockPanel>
+                    <!--Vehicle Link Status-->
+                    <TextBlock Grid.Column="1" Grid.Row="2" Style="{StaticResource ContentTitle_18px}" Height="30" VerticalAlignment="Top" Margin="0,0,0,15" Text="Vehicle Link Status"/>
+                    <DockPanel Grid.Column="1" Grid.Row="2" Margin="0,45,0,0" Height="30" VerticalAlignment="Top">
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV1" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV2" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV3" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV4" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV5" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV6" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV7" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="2" Margin="0,90,0,0" Height="30" VerticalAlignment="Top">
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV8"  Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV9"  Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV10" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV11" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV12" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV13" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_AGV14" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                    </DockPanel>
+                    <!--PLC Status-->
+                    <TextBlock Grid.Column="1" Grid.Row="3" Style="{StaticResource ContentTitle_18px}" Height="30" VerticalAlignment="Top" Margin="0,0,0,15" Text="PLC Status"/>
+                    <DockPanel Grid.Column="1" Grid.Row="3" Margin="0,45,0,0" Height="30" VerticalAlignment="Top">
+                        <Components:DeviceStatusSignal x:Name="uc_PLC_Status_Charger" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_PLC_Status_Adam6050_1" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_PLC_Status_Adam6050_2" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_PLC_Status_Adam6050_3" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_PLC_Status_Adam6050_4" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_PLC_Status_Adam6050_5" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                    </DockPanel>
+
+                    <TextBlock Grid.Column="1" Grid.Row="4" Style="{StaticResource ContentTitle_18px}" Height="30" VerticalAlignment="Top" Margin="0,0,0,15" Text="AP Status"/>
+                    <DockPanel Grid.Column="1" Grid.Row="4" Margin="0,45,0,0" Height="30" VerticalAlignment="Top">
+                        <Components:DeviceStatusSignal x:Name="uc_AP_Status_AP_1" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_AP_Status_AP_2" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_AP_Status_AP_3" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_AP_Status_AP_4" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_AP_Status_AP_5" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_AP_Status_AP_6" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_AP_Status_AP_7" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                    </DockPanel>
+                    <DockPanel Grid.Column="1" Grid.Row="4" Margin="0,90,0,0" Height="30" VerticalAlignment="Top">
+                        <Components:DeviceStatusSignal x:Name="uc_AP_Status_AP_8" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_AP_Status_AP_9" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                        <Components:DeviceStatusSignal x:Name="uc_AP_Status_AP_10" Margin="0,0,10,0" HorizontalAlignment="Left"/>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <WrapPanel Grid.Row="2" Grid.Column="3" VerticalAlignment="Bottom">
+            <Button Name="btn_Close" Style="{StaticResource ButtonStyle_Default}" Click="btn_Close_Click" Margin="0,265,0,0" Content="{DynamicResource CLOSE}"/>
+        </WrapPanel>
+    </Grid>
+</UserControl>

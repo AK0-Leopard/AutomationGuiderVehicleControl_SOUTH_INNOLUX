@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.Menu_Help.About"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views.Menu_Help"
+             mc:Ignorable="d" FontFamily="MicrosoftSansSerif"
+             d:DesignHeight="400" d:DesignWidth="550" Background="#f6f6f6" Foreground="White" FontSize="18" Loaded="Window_Loaded">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="TextBlock_Default">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="#1b2338"/>
+            <Setter Property="FontFamily" Value="MicrosoftSansSerif"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Content_14px" BasedOn="{StaticResource TextBlock_Default}">
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#070022"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="PopupTitle_20px" BasedOn="{StaticResource TextBlock_Default}">
+            <Setter Property="Background" Value="#d9ecfc"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Padding" Value="0,34,0,0"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" x:Key="TextBox_Default">
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="#070022"/>
+            <Setter Property="FontFamily" Value="MicrosoftSansSerif"/>
+            <Setter Property="CharacterCasing" Value="Upper"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Width="auto" Height="auto" BorderThickness="1" BorderBrush="#adadad">
+                            <Grid x:Name="grid" Background="White">
+                                <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="75"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="75"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Name="lbl_SofwVsion_Val" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="Version 3.1.5"/>
+            <DockPanel>
+                <TextBlock Name="lbl_LineID" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="LineID" Margin="0,0,2,0"/>
+                <TextBlock Name="lbl_SofwBuildDate_Val" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="Build 2018.9.28 07:35 am"/>
+            </DockPanel>
+            <Border Height="25"/>
+            <TextBlock Name="lbl_copyright_Val1" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="© 2019 3K0 Intelligent Manufacturing Software System Div."/>
+            <TextBlock Name="lbl_copyright_Val2" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="Automation &amp; Intelligence Business Group."/>
+            <TextBlock Name="lbl_copyright_Val3" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="MIRLE Automation Corporation. All rights reserved."/>
+            <Image x:Name="img_MirleLogo" Width="231" Height="65" Margin="0,15,0,0" HorizontalAlignment="Left"/>
+        </StackPanel>
+        <Border Grid.Row="0" Grid.ColumnSpan="3" BorderThickness="0,0,0,1" BorderBrush="#979797">
+            <TextBlock Name="Title" Style="{StaticResource PopupTitle_20px}" Text="{DynamicResource WINDOW_TITLE}"/>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,13 @@
+﻿Id,PositionX,PositionY,IsWorkStation,CanLeftLoad,CanLeftUnload,CanRightLoad,CanRightUnload,IsCharger,CouplerId,ChargeDirection,IsSegmentPoint,CanSpin,PioDirection,IsTR50,InsideSectionId,OffsetX,OffsetY,OffsetTheta,VehicleHeadAngle
+20601,0,0,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0
+10602,0,801,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0
+20603,1350,0,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0
+10604,1350,801,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0
+10605,6816,801,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0
+10606,12001,801,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0
+15607,12001,1923,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0
+15608,12001,3203,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0
+20609,11227,1923,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0
+20610,11227,3203,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0
+10611,12997,3203,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0
+24612,12997,3503,True,True,False,False,False,False,None,None,True,False,Left,False,0,0,0,0,0

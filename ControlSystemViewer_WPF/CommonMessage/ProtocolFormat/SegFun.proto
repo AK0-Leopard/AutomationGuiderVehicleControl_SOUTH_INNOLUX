@@ -1,0 +1,17 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "CommonMessage.ProtocolFormat.SegFun";
+
+package greet;
+
+// The greeting service definition.
+service segmentGreeter {
+	// Sends a greeting
+	//↓
+	rpc segControl(ControlRequest) returns (ControlReply);
+	rpc sectionControl(ControlRequest) returns (ControlReply);
+
+}
+
+message ControlRequest {string id=1; bool enable=2;}
+message ControlReply{ string result=1;}

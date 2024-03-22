@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.CurrentData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views"
+             xmlns:v="clr-namespace:ControlSystemViewer.Views.CurrentDataGrid"
+             mc:Ignorable="d" 
+             d:DesignHeight="220" d:DesignWidth="1920">
+    <Grid Background="#003366" Margin="2">
+        <TabControl Margin="3,1,3,3" BorderThickness="0" Background="#005BA8">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid Name="Panel">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="Background" Value="#005BA8"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="#003366"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="{DynamicResource VEHICLE_STATUS}" Foreground="White" MinWidth="180" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <v:uc_grid_VHStatus x:Name="grid_VHStatus" Margin="1"/>
+            </TabItem> 
+            <TabItem Header="{DynamicResource TRANSFER_CMD}" Foreground="White" MinWidth="180" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <v:uc_grid_TransCMD x:Name="grid_TransCMD" Margin="1"/>
+            </TabItem>
+            <TabItem Header="{DynamicResource VEHICLE_CMD}" Foreground="White" MinWidth="180" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <v:uc_grid_VehicleCMD x:Name="grid_VehicleCMD" Margin="1"/>
+            </TabItem>
+            <TabItem Header="{DynamicResource CURRENT_ALARM}" Foreground="White" MinWidth="180" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <v:uc_grid_CurAlarm x:Name="grid_CurAlarm" Margin="1"/>
+            </TabItem>
+            <!--<TabItem Header="{DynamicResource PORT_STATUS}" Foreground="White" MinWidth="180" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <v:uc_grid_PortDef x:Name="grid_PortStatus" Margin="1"/>
+            </TabItem>-->
+            <!--<TabItem Header="{DynamicResource CASSETTE_STATUS}" Foreground="White" MinWidth="180" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <v:uc_grid_CassetteData x:Name="grid_CassetteStatus" Margin="1"/>
+            </TabItem>-->
+            <TabItem Header="{DynamicResource VEHICLE_COMMUNICATION}" Foreground="White" MinWidth="180" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <v:CommuLog_Vehicle x:Name="grid_VehicleCommu" Margin="1"/>
+            </TabItem>
+            <TabItem Header="{DynamicResource MCS_COMMUNICATION}" Foreground="White" MinWidth="180" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <v:CommuLog_MCS x:Name="grid_McsCommu" Margin="1"/>
+            </TabItem>
+            <TabItem Header="{DynamicResource PLC_COMMUNICATION}" Foreground="White" MinWidth="180" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Collapsed">
+                <v:CommuLog_PLC x:Name="grid_PlcCommu" Margin="1"/>
+            </TabItem>
+            <TabItem Header="{DynamicResource SYSTEM_PROCESS_LOG}" Foreground="White" MinWidth="180" Height="28" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <v:CommuLog_SystemProc x:Name="grid_SysProcLog" Margin="1"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</UserControl>

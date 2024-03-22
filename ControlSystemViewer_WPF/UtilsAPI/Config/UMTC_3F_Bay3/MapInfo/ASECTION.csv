@@ -1,0 +1,12 @@
+﻿Id,FromAddress,ToAddress,Speed,Type,PermitDirection
+6011,20601,10602,1000,Vertical,Forward
+6021,20603,10604,1000,Vertical,Forward
+6031,10602,10604,1000,Horizontal,Forward
+6041,10604,10605,1000,Horizontal,Forward
+6051,10605,10606,1000,Horizontal,Forward
+6061,10606,15607,1000,Vertical,Forward
+6071,15607,15608,1000,Horizontal,Forward
+6081,15607,20609,1000,Vertical,Forward
+6091,15608,20610,1000,Vertical,Forward
+6101,15608,10611,1000,Horizontal,Forward
+6111,10611,24612,1000,Vertical,Forward

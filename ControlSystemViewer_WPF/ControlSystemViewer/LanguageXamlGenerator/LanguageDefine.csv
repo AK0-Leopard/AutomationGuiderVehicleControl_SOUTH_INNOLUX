@@ -1,0 +1,150 @@
+﻿LANGUAGE_FILE,en-US,zh-TW,zh-CN
+ABOUT,About,關於,关于
+ACCOUNT_ACTIVATION,Account Activation,是否啟用,是否启用
+ACCOUNT_MANAGEMENT,Account Management,帳戶權限管理,帐户权限管理
+ADD,Add,新增,新增
+ADD_CMD,Add Command,新增命令,新增命令
+AGV_HISTORY,AGV History,AGV 車輛命令日誌,AGV 车辆命令日志
+ALARM_HISTORY,Alarm History,異常日誌,异常日志
+ALARM_STATUS,Alarm,異常狀態,异常状态
+ALARM_RATE,Alarm Rate,異常比率分析,异常比率分析
+AOV,AOV,視角,视角
+AOV_MAPCONTROL,AOV Map Control,視角控制,视角控制
+ASSIGN_VEHICLE,Assign Vehicle,指派車輛,指派车辆
+ASSIGNED,Assigned,已指派,已指派
+AUTO_LOCAL,Local,自動(本),自动(本)
+AUTO_REMOTE,Remote,自動(遠),自动(远)
+BADGE_NUMBER,Badge Number,員工編號,员工编号
+BUFFER_STATUS,Buffer Status,OHB儲位狀態,OHB储位状态
+BUILD_DATE,Build Date,系統建置時間,系统建立时间
+CANCEL,Cancel,取消,取消
+CANCEL_ABORT,Cancel/Abort,取消/中止,取消/中止
+CAR_INOUT_HISTORY,Car In/Out History,Car In/Out History,Car In/Out History
+CARRIER_ID,Carrier ID,Carrier ID,Carrier ID
+CARRIER_MAINTENANCE,Carrier Maintenance,Carrier 維護,Carrier 维护
+CASSETTE_ID,Cassette ID,Cassette ID,Cassette ID
+CASSETTE_MAINTENANCE,Cassette Maintenance,卡匣維護,卡匣维护
+CASSETTE_STATUS,Cassette Status,卡匣狀態,卡匣状态
+CHANGE,Change,變更,变更
+CHANGE_PRIORITY,Change Priority,變更優先權,变更优先权
+CHANGE_STATUS,Change Status,變更狀態,变更状态
+CLEAR,Clear,清空,清空
+CLOSE,Close,關閉,关闭
+COMMAND_TYPE,Command Type,命令類型,命令类型
+COMMUNICATION,Communication,通訊,通讯
+COMMUNICATION_LOG,Communication Log,通訊日誌,通讯日志
+CONFIRM,Confirm,確認,确认
+CONTROL_SYSTEM,Control,控制主機,控制主机
+CST,CST,卡匣,卡匣
+CURRENT_ALARM,Current Alarm,當前異常,当前异常
+DELETE,Delete,刪除,删除
+DEPARTMENT,Department,部門,部门
+DESTINATION,Destination,Destination,Destination
+DETAIL,Detail,內容,内容
+END_TIME,End Time,結束時間,结束时间
+EQ_COMMUNICATION,EQ Communication,設備通訊紀錄,设备通讯纪录
+EQPT_ID,EQPT ID,EQPT ID,EQPT ID
+EXIT,Exit,關閉,关闭
+EXPORT,Export,匯出,导出
+FAILURE,Failure,失敗,失败
+FILTER,Filter,篩選,筛选
+FORCE_FINISH,Force Finish,強制完成,强制完成
+GROUP,Group,群組,群组
+GROUP_ACCOUNT,Group Account,群組帳戶,群组帐户
+HELP,Help,協助,协助
+HIDE,Hide,隱藏,隐藏
+HOST_COMMUNICATION,Host Communication,上控通訊紀錄,上控通讯纪录
+HOST_SYSTEM,Host,上控系統,上控系统
+HOURLY_PROCESS,An hour before Transfer times,當前每小時搬送總數,当前每小时搬送总数
+IDLE,Idle,閒置,闲置
+LANGUAGE,Language,語言,语言
+LAST_1_HOURS,Last 1 hour,1小時內,1小时内
+LAST_12_HOURS,Last 12 hours,12小時內,12小时内
+LAST_2_DAYS,Last 2 days,2天內,2天内
+LAST_24_HOURS,Last 24 hours,24小時內,24小时内
+LAST_3_DAYS,Last 3 days,3天內,3天内
+LAST_30_MINS,Last 30 minutes,30分鐘內,30分钟内
+LAST_4_HOURS,Last 4 hours,4小時內,4小时内
+LOG,Log,查詢,查询
+LOGIN,Log In,使用者登入,用户登录
+LOGIN_SHORT,Log In,登入,登录
+LOGOUT,Log Out,使用者登出,用户退出
+LOGOUT_SHORT,Log Out,登出,退出
+LOT_ID,Lot ID,Lot ID,Lot ID
+MAINTENANCE,Maintenance,維護,维护
+MCS_COMMAND,MCS Command,MCS 上控命令,MCS 上控命令
+MCS_COMMUNICATION,MCS Commu,MCS通訊紀錄,MCS通讯纪录
+MCS_HISTORY,MCS History,MCS 上控通訊日誌,MCS 上控通讯日志
+MCS_QUEUE,MCS Queue,MCS Queue,MCS Queue
+MESSAGE,Message,訊息,讯息
+MODIFY,Modify,修改,修改
+MTL_MAINTENANCE,MTL Maintenance,MTL 維護,MTL 维护
+MULTI_TRANSFER_COMMAND,Multi Tranfer Command,多運輸命令,多运输命令
+OHT_CONTROL,OHT Control,車輛控制,车辆控制
+OHT_HISTORY,OHT History,OHT 車輛命令日誌,OHT 车辆命令日志
+OPERATION,Operation,操作,操作
+OPERATION_RECORD_HISTORY,Operation Record History,操作日誌,操作日志
+OPTION,Option(s),選項,选项
+PASSWORD_CHANGE,Password Change,使用者密碼變更,用户密码变更
+PERMISSION,Permission,權限,权限
+PLC_COMMUNICATION,PLC Commu,PLC通訊紀錄,PLC通讯纪录
+PLC_HISTORY,Communication History,PLC 通訊日誌,PLC 通讯日志
+PORT_CONTROL,Port Control,埠口控制,埠口控制
+PORT_MAINTENANCE,Port Maintenance,埠口維護,埠口维护
+PORT_STATUS,Port Status,埠口狀態,埠口状态
+QUERY,Query,查詢,查询
+QUICK_VEHICLE_COMMAND,Quick Vehicle Command,快捷車輛命令,快捷车辆命令
+QUICK_VEHICLE_COMMAND_SHORT,Quick Vh. Cmd.,快捷車輛命令,快捷车辆命令
+REPORT,Report,報表,报表
+RUNNING_TIME,Running Time,系統運行總時間,系统运行总时间
+SCALE_RULER_HIDE,Hide Scale Ruler,隱藏刻度,隐藏刻度
+SCALE_RULER_SHOW,Show Scale Ruler,顯示刻度,显示刻度
+SEARCH,Search,查詢,查询
+SET_DEFAULT_HEIGHT,Set Default Height,預設高度,预设高度
+SET_DEFAULT_WIDTH,Set Default Width,預設寬度,预设宽度
+SOURCE,Source,Source,Source
+SPEC_LINK,SPEC Link,操作手冊連結,操作手册连结
+START_TIME,Start Time,起始時間,起始时间
+STATISTICS,Statistics,統計數據,统计数据
+STATUS_TREE,Status Tree,狀態樹,状态树
+SUCCESS,Success,成功,成功
+SYSTEM,System,系統,系统
+SYSTEM_MODE_CONTROL,System Mode Control,系統模式操控,系统模式操控
+SYSTEM_PROCESS_LOG,System Proc Log,系統運行記錄,系统运行记录
+TASK_COMMAND_HISTORY,Task Command History,任務日誌,任务日志
+TEST_RUN,Test Run,試車,试车
+TIP_MESSAGE,Tip Message,提示訊息,提示讯息
+TIP_MESSAGE_CONFIRM,Please confirm the following message,請確認下列訊息,请确认下列讯息
+TIPMSG_CLOSE_SYSTEM_CONFIRM,Are you sure to close the system now?,是否要關閉系統?,是否要关闭系统?
+TIPMSG_EXIT,Enter your password to exit the system.,輸入密碼以關閉系統,输入密码以关闭系统
+TIPMSG_EXPORT_NO_DATA,There is no data to export => Please search first.,無資料匯出 => 請先查詢資料,无数据导出 => 请先查询数据
+TIPMSG_LOGOUT_CONFIRM,Are you sure to log out now?,是否要登出使用者?,是否要退出用户?
+TIPMSG_LOGOUT_SUCCEED,Logout Succeed.,成功登出,成功退出
+TIPMSG_QUERY_NO_DATA,There is no matching data for your query.,查無資料,查无资料
+TODAY_PROCESS,Today Transfer,當日搬送總數,当日搬送总数
+TRANSFER,Transfer,搬運,搬运
+TRANSFER_CMD,Transfer CMD,搬運命令,搬运命令
+TRANSFER_COMMAND,Transfer Command,搬運命令,搬运命令
+TRANSFER_COMMAND_HISTORY,Transfer Command History,搬運命令日誌,搬运命令日志
+TRANSFER_MANAGEMENT,Transfer Management,搬送管理,搬送管理
+USER_ACCOUNT,User Account,使用者帳戶,用户帐户
+USER_ID,User ID,使用者帳號,用户帐号
+USER_NAME,User Name,使用者名稱,用户名称
+USER_PASSWORD,Password,密碼,密码
+USER_PASSWORD_NEW,New Password,新密碼,新密码
+USER_PASSWORD_NEW2,Confirm New Password,新密碼再確認,新密码再确认
+USER_PASSWORD_OLD,Old Password,當前密碼,当前密码
+USER_PASSWORD2,Confirm Password,密碼再確認,密码再确认
+VEHICLE,Vehicle,車輛,车辆
+VEHICLE_CMD,Vehicle CMD,車輛命令,车辆命令
+VEHICLE_COMMAND,Vehicle Command,車輛命令,车辆命令
+VEHICLE_COMMAND_HISTORY,Vehicle Command History,車輛命令日誌,车辆命令日志
+VEHICLE_COMMUNICATION,Vehicle Commu,車輛通訊紀錄,车辆通讯纪录
+VEHICLE_ERROR,Error,報錯,报错
+VEHICLE_ID,Vehicle ID,車輛編號,车辆编号
+VEHICLE_MANAGEMENT,Vehicle Management,車輛管理,车辆管理
+VEHICLE_STATUS,Vehicle Status,車輛狀態,车辆状态
+VERSION,Version,版本號,版本号
+WAITING,Waiting,等待,等待
+WAITING_ASSIGNED,Waiting Assigned,等待指派,等待指派
+WINDOW_TITLE,Control System Viewer,Control System Viewer,Control System Viewer

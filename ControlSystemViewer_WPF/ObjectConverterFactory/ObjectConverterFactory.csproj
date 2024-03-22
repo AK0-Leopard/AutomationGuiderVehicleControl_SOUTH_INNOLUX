@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{31118EC5-FFCC-4DA8-9789-DC9FD1E9FB93}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ObjectConverterFactory</RootNamespace>
+    <AssemblyName>ObjectConverterFactory</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ObjectConverter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObjectConverterInterface\ObjectConverterInterface.csproj">
+      <Project>{ee5632dc-c97e-4503-8237-0331eceec416}</Project>
+      <Name>ObjectConverterInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_AGVC_ASE_K21\ObjectConverter_AGVC_ASE_K21.csproj">
+      <Project>{bfee8f0f-fb22-4c27-81ed-142e7862939c}</Project>
+      <Name>ObjectConverter_AGVC_ASE_K21</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_AGVC_AT_S\ObjectConverter_AGVC_AT_S.csproj">
+      <Project>{ad10ced3-cd0e-4aaa-b09b-a48d756830c8}</Project>
+      <Name>ObjectConverter_AGVC_AT_S</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_AGVC_AUO_600\ObjectConverter_AGVC_AUO_600.csproj">
+      <Project>{ab0cad5f-126b-4c55-9fbf-5cd620e56650}</Project>
+      <Name>ObjectConverter_AGVC_AUO_600</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_AGVC_AUO_800\ObjectConverter_AGVC_AUO_800.csproj">
+      <Project>{1264459e-62f1-450f-8631-bb84f904c34c}</Project>
+      <Name>ObjectConverter_AGVC_AUO_800</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_AGVC_NORTH_INNOLUX\ObjectConverter_AGVC_NORTH_INNOLUX.csproj">
+      <Project>{051cda06-5292-49cd-8711-6e41b2f8f60d}</Project>
+      <Name>ObjectConverter_AGVC_NORTH_INNOLUX</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_AGVC_SOUTH_INNOLUX\ObjectConverter_AGVC_SOUTH_INNOLUX.csproj">
+      <Project>{6b254aa7-e4d8-4335-91aa-72275ca8be39}</Project>
+      <Name>ObjectConverter_AGVC_SOUTH_INNOLUX</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_AGVC_UMTC\ObjectConverter_AGVC_UMTC.csproj">
+      <Project>{06e3866e-a035-4c89-b893-7086ce332cdd}</Project>
+      <Name>ObjectConverter_AGVC_UMTC</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_OHBC_ASE_K21\ObjectConverter_OHBC_ASE_K21.csproj">
+      <Project>{8b7fc8e7-4a72-4445-8b7b-3e7c6fda933f}</Project>
+      <Name>ObjectConverter_OHBC_ASE_K21</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_OHBC_ASE_K24\ObjectConverter_OHBC_ASE_K24.csproj">
+      <Project>{37d3688b-8fb4-4aa8-b82b-6de63ce1603a}</Project>
+      <Name>ObjectConverter_OHBC_ASE_K24</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_OHBC_PTI\ObjectConverter_OHBC_PTI.csproj">
+      <Project>{c80e4542-a4e7-414e-a8a5-ff356e1837ce}</Project>
+      <Name>ObjectConverter_OHBC_PTI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_OHTC_2F\ObjectConverter_OHTC_2F.csproj">
+      <Project>{2b8bf9c4-2aca-4cfd-a1d3-be21e53c64e8}</Project>
+      <Name>ObjectConverter_OHTC_2F</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_OHTC_AT_S\ObjectConverter_OHTC_AT_S.csproj">
+      <Project>{82fcf25b-3781-4dc2-9b8d-549d4030bad1}</Project>
+      <Name>ObjectConverter_OHTC_AT_S</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_OHTC_AT_S_MALASYIA\ObjectConverter_OHTC_AT_S_MALASYIA.csproj">
+      <Project>{ce10fd54-a0e1-47e2-b0e0-0803073310a6}</Project>
+      <Name>ObjectConverter_OHTC_AT_S_MALASYIA</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_OHTC_CSOT\ObjectConverter_OHTC_CSOT.csproj">
+      <Project>{b5e6d8ac-b5e9-481c-afa6-056a37b4855b}</Project>
+      <Name>ObjectConverter_OHTC_CSOT</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_OHTC_M4\ObjectConverter_OHTC_M4.csproj">
+      <Project>{e8b96b75-1144-4369-afc8-c4e22f99343e}</Project>
+      <Name>ObjectConverter_OHTC_M4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverter_STKC_ASE_K21\ObjectConverter_STKC_ASE_K21.csproj">
+      <Project>{93b8f8d6-5233-491c-81f4-acb8c4c86148}</Project>
+      <Name>ObjectConverter_STKC_ASE_K21</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

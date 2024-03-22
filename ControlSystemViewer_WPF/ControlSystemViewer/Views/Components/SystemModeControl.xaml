@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.Components.SystemModeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views.Menu_System"
+             xmlns:Components="clr-namespace:ControlSystemViewer.Views.Components"
+             mc:Ignorable="d" d:DesignWidth="840" FontFamily="MicrosoftSansSerif" FontSize="18" Foreground="#1b2338" Background="#003366" Height="380">
+
+    <Grid Margin="10,10,10,15">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0" Background="Gray">
+            <Components:StatusControl x:Name="CommunicationStatus" Margin="2,2,1,2"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="0" Background="Gray">
+            <Components:StatusControl x:Name="ControlStatus" Margin="1,2,1,2"/>
+        </Grid>
+        <Grid Grid.Column="2" Grid.Row="0" Background="Gray">
+            <Components:StatusControl x:Name="TSCStatus" Margin="1,2,2,2"/>
+        </Grid>
+        <!--<Border Grid.Row="0" Grid.ColumnSpan="5" BorderThickness="0,0,0,1" BorderBrush="#979797" x:Name="TitleB">
+            <TextBlock x:Name="tbk_Title" Style="{StaticResource PopupTitle_20px_DarkBackground}" Text="{DynamicResource SYSTEM_MODE_CONTROL}"/>
+        </Border>-->
+    </Grid>
+</UserControl>

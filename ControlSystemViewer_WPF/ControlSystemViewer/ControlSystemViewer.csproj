@@ -1,0 +1,1448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B0A315BF-DEE6-4531-A1E7-33BEDAF265B6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ControlSystemViewer</RootNamespace>
+    <AssemblyName>ControlSystemViewer</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>001.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="ClosedXML, Version=0.95.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.95.4\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="CSkin, Version=16.1.14.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\cskin.16.1.14.3\lib\net40\CSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="CsvHelper, Version=27.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.27.2.1\lib\net47\CsvHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Elasticsearch.Net, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elasticsearch.Net.7.14.1\lib\net461\Elasticsearch.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.10.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.10\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.20.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.20.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.HashCode, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.HashCode.1.0.0\lib\net461\Microsoft.Bcl.HashCode.dll</HintPath>
+    </Reference>
+    <Reference Include="MirleGO_UIFrameWork, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\UtilsAPI\DLL\MirleGO_UIFrameWork.dll</HintPath>
+    </Reference>
+    <Reference Include="NATS.Client, Version=0.11.0.0, Culture=neutral, PublicKeyToken=5b58bc7249e111a9, processorArchitecture=MSIL">
+      <HintPath>..\packages\NATS.Client.0.11.0\lib\net46\NATS.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Nest, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEST.7.14.1\lib\net461\Nest.dll</HintPath>
+    </Reference>
+    <Reference Include="Nest.7xUpgradeAssistant, Version=7.0.0.0, Culture=neutral, PublicKeyToken=96c599bbe3e70f5d, processorArchitecture=MSIL">
+      <HintPath>..\packages\NEST.7xUpgradeAssistant.7.1.0\lib\net461\Nest.7xUpgradeAssistant.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.7.11\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="ScottPlot, Version=4.1.41.0, Culture=neutral, PublicKeyToken=86698dc10387c39e, processorArchitecture=MSIL">
+      <HintPath>..\packages\ScottPlot.4.1.41\lib\net461\ScottPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="ScottPlot.WPF, Version=4.1.41.0, Culture=neutral, PublicKeyToken=e53b06131e34a3aa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ScottPlot.WPF.4.1.41\lib\net472\ScottPlot.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="STAN.Client, Version=0.3.0.0, Culture=neutral, PublicKeyToken=acccb34b49bb2d3e, processorArchitecture=MSIL">
+      <HintPath>..\packages\STAN.Client.0.3.0\lib\net46\STAN.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Stateless, Version=4.0.0.0, Culture=neutral, PublicKeyToken=93038f0927583c9a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stateless.4.2.1\lib\net45\Stateless.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Specialized, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Specialized.4.3.0\lib\net46\System.Collections.Specialized.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.4.6.1\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UtilityCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\UtilsAPI\DLL\UtilityCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="Utility_LogQuery, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>DLL\Utility_LogQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="PopupWindows\VehicleColorInfoWindow.xaml.cs">
+      <DependentUpon>VehicleColorInfoWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\AboutPopupWindow.xaml.cs">
+      <DependentUpon>AboutPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\AccountManagementPopupWindow.xaml.cs">
+      <DependentUpon>AccountManagementPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\AddCommandPopupWindow.xaml.cs">
+      <DependentUpon>AddCommandPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\AOVPopupWindow.xaml.cs">
+      <DependentUpon>AOVPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\AssignVehiclePopupWindow.xaml.cs">
+      <DependentUpon>AssignVehiclePopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\ChangePriorityPopupWindow.xaml.cs">
+      <DependentUpon>ChangePriorityPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\ChangeStatusPopupWindow.xaml.cs">
+      <DependentUpon>ChangeStatusPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\LogInPopupWindow.xaml.cs">
+      <DependentUpon>LogInPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\PasswordChangePopupWindow.xaml.cs">
+      <DependentUpon>PasswordChangePopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\QuickVehicleCommandPopupWindow.xaml.cs">
+      <DependentUpon>QuickVehicleCommandPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\ShiftCommandPopupWindow.xaml.cs">
+      <DependentUpon>ShiftCommandPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\Chart_BasePopupWindow .xaml.cs">
+      <DependentUpon>Chart_BasePopupWindow .xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\SystemModeControlPopupWindow.xaml.cs">
+      <DependentUpon>SystemModeControlPopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopupWindows\TipMessagePopupWindow.xaml.cs">
+      <DependentUpon>TipMessagePopupWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Chart\Chart_Base.xaml.cs">
+      <DependentUpon>Chart_Base.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\AngleOfView.xaml.cs">
+      <DependentUpon>AngleOfView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\AngleOfView_1.xaml.cs">
+      <DependentUpon>AngleOfView_1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\CustomLegend.xaml.cs">
+      <DependentUpon>CustomLegend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\CustomTooltip.xaml.cs">
+      <DependentUpon>CustomTooltip.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\CustomVm.cs" />
+    <Compile Include="Views\Components\DeviceStatusSignal.xaml.cs">
+      <DependentUpon>DeviceStatusSignal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\NumericUpDown.xaml.cs">
+      <DependentUpon>NumericUpDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\StatusControl.xaml.cs">
+      <DependentUpon>StatusControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\SystemModeControl.xaml.cs">
+      <DependentUpon>SystemModeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\ToggleButton.xaml.cs">
+      <DependentUpon>ToggleButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\VhSettingS4.xaml.cs">
+      <DependentUpon>VhSettingS4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\VhSettingS1.xaml.cs">
+      <DependentUpon>VhSettingS1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\VhSettingS2.xaml.cs">
+      <DependentUpon>VhSettingS2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\VhSettingS3.xaml.cs">
+      <DependentUpon>VhSettingS3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Components\ViewerButton.cs" />
+    <Compile Include="Views\CurrentData.xaml.cs">
+      <DependentUpon>CurrentData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\CommuLog_MCS.xaml.cs">
+      <DependentUpon>CommuLog_MCS.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\CommuLog_PLC.xaml.cs">
+      <DependentUpon>CommuLog_PLC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\CommuLog_SystemProc.xaml.cs">
+      <DependentUpon>CommuLog_SystemProc.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\CommuLog_Vehicle.xaml.cs">
+      <DependentUpon>CommuLog_Vehicle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\uc_grid_CarInOut.xaml.cs">
+      <DependentUpon>uc_grid_CarInOut.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\uc_grid_CassetteData.xaml.cs">
+      <DependentUpon>uc_grid_CassetteData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\uc_grid_CurAlarm.xaml.cs">
+      <DependentUpon>uc_grid_CurAlarm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\uc_grid_PortDef.xaml.cs">
+      <DependentUpon>uc_grid_PortDef.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\uc_grid_SystemLog.xaml.cs">
+      <DependentUpon>uc_grid_SystemLog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\uc_grid_TransCMD.xaml.cs">
+      <DependentUpon>uc_grid_TransCMD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\uc_grid_VehicleCMD.xaml.cs">
+      <DependentUpon>uc_grid_VehicleCMD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentDataGrid\uc_grid_VHStatus.xaml.cs">
+      <DependentUpon>uc_grid_VHStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Loading.xaml.cs">
+      <DependentUpon>Loading.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainLayout.xaml.cs">
+      <DependentUpon>MainLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Maintenance\Sub\Map_BasePZ.xaml.cs">
+      <DependentUpon>Map_BasePZ.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Maintenance\Sub\Address_PZ.xaml.cs">
+      <DependentUpon>Address_PZ.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Maintenance\Sub\Map_PZ.xaml.cs">
+      <DependentUpon>Map_PZ.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Map.xaml.cs">
+      <DependentUpon>Map.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Map_Base.xaml.cs">
+      <DependentUpon>Map_Base.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Map_Parts\Address.xaml.cs">
+      <DependentUpon>Address.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Map_Parts\Label.xaml.cs">
+      <DependentUpon>Label.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Map_Parts\Rail.xaml.cs">
+      <DependentUpon>Rail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Map_Parts\Shelf.xaml.cs">
+      <DependentUpon>Shelf.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Map_Parts\TrackSwitch.xaml.cs">
+      <DependentUpon>TrackSwitch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Map_Parts\Vehicle.xaml.cs">
+      <DependentUpon>Vehicle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Help\VehicleColorInfo.xaml.cs">
+      <DependentUpon>VehicleColorInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Help\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Log\Chart_RunDownIdle.xaml.cs">
+      <DependentUpon>Chart_RunDownIdle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Log\TransferCommandHistory.xaml.cs">
+      <DependentUpon>TransferCommandHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Log\VehicleHistory.xaml.cs">
+      <DependentUpon>VehicleHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Log\AlarmHistory.xaml.cs">
+      <DependentUpon>AlarmHistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Log\Log_Base.xaml.cs">
+      <DependentUpon>Log_Base.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Maintenance\ParkZoneManagement.xaml.cs">
+      <DependentUpon>ParkZoneManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Maintenance\Equipment_Constant.xaml.cs">
+      <DependentUpon>Equipment_Constant.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Maintenance\Maintenance_Base.xaml.cs">
+      <DependentUpon>Maintenance_Base.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Maintenance\QuickVehicleCommand.xaml.cs">
+      <DependentUpon>QuickVehicleCommand.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Maintenance\VehicleManagement.xaml.cs">
+      <DependentUpon>VehicleManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Operation\Operation_Base.xaml.cs">
+      <DependentUpon>Operation_Base.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Operation\PortManagement.xaml.cs">
+      <DependentUpon>PortManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Operation\Sub\AddCommand.xaml.cs">
+      <DependentUpon>AddCommand.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Operation\Sub\ChangePriority.xaml.cs">
+      <DependentUpon>ChangePriority.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Operation\Sub\TransferCommand.xaml.cs">
+      <DependentUpon>TransferCommand.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Operation\SystemModeControl.xaml.cs">
+      <DependentUpon>SystemModeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Operation\TransferManagement.xaml.cs">
+      <DependentUpon>TransferManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\OHTCErrorCMD.xaml.cs">
+      <DependentUpon>OHTCErrorCMD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\HIDinfohistory.xaml.cs">
+      <DependentUpon>HIDinfohistory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\AlarmProcessForm.xaml.cs">
+      <DependentUpon>AlarmProcessForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\LongCharging.xaml.cs">
+      <DependentUpon>LongCharging.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\AlarmRate.xaml.cs" />
+    <Compile Include="Views\Menu_Report\AlarmDetail.xaml.cs">
+      <DependentUpon>AlarmDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\RealExecuteTime.xaml.cs">
+      <DependentUpon>RealExecuteTime.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\StabilityByDate.xaml.cs">
+      <DependentUpon>StabilityByDate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\StabilityByStatus.xaml.cs">
+      <DependentUpon>StabilityByStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\StabilityByDuration.xaml.cs">
+      <DependentUpon>StabilityByDuration.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\IntervalMCBFByCMD.xaml.cs">
+      <DependentUpon>IntervalMCBFByCMD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\IntervalMCBF.xaml.cs">
+      <DependentUpon>IntervalMCBF.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\IntervalMTBF.xaml.cs">
+      <DependentUpon>IntervalMTBF.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\TimeOutCMD.xaml.cs">
+      <DependentUpon>TimeOutCMD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\MTTR.xaml.cs">
+      <DependentUpon>MTTR.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\Report_Base.xaml.cs" />
+    <Compile Include="Views\Menu_Report\ErrorCMD.xaml.cs">
+      <DependentUpon>ErrorCMD.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\UtilizationRateByStatus.xaml.cs">
+      <DependentUpon>UtilizationRateByStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\UtilizationRateByVehicle.xaml.cs">
+      <DependentUpon>UtilizationRateByVehicle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\UtilizationRateByPort.xaml.cs">
+      <DependentUpon>UtilizationRateByPort.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Report\UtilizationRateByHour.xaml.cs">
+      <DependentUpon>UtilizationRateByHour.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_System\AccountManagement.xaml.cs">
+      <DependentUpon>AccountManagement.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_System\PasswordChange.xaml.cs">
+      <DependentUpon>PasswordChange.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_System\SystemModeControl.xaml.cs">
+      <DependentUpon>SystemModeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PortStatus.xaml.cs">
+      <DependentUpon>PortStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QuickVehicleCommand.xaml.cs">
+      <DependentUpon>QuickVehicleCommand.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShelfStatus.xaml.cs">
+      <DependentUpon>ShelfStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SideArea.xaml.cs">
+      <DependentUpon>SideArea.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatusCST.xaml.cs">
+      <DependentUpon>StatusCST.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatusMCSQueue.xaml.cs">
+      <DependentUpon>StatusMCSQueue.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatusTree.xaml.cs">
+      <DependentUpon>StatusTree.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StatusVehicle.xaml.cs">
+      <DependentUpon>StatusVehicle.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_System\LogIn.xaml.cs">
+      <DependentUpon>LogIn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_TipMessage\TipMessage.xaml.cs">
+      <DependentUpon>TipMessage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_TipMessage\TipMessage_Data.xaml.cs">
+      <DependentUpon>TipMessage_Data.xaml</DependentUpon>
+    </Compile>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\GenericParsing.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\Microsoft.Extensions.Configuration.Binder.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\Microsoft.Extensions.Configuration.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\Microsoft.Extensions.Primitives.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\ProjectSettingManager.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\ProjectSettingManager.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\System.Text.Encodings.Web.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ProjectSettingManager\netcoreapp3.1\System.Text.Json.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Doc\SOUTH_INNOLUX AGVC Viewer Operation Manual Ver.1.2.0.docx" />
+    <None Include="Doc\SOUTH_INNOLUX AGVC Viewer Operation Manual Ver.1.2.0.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Vehicle [Auto-Charging].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Doc\AT&amp;S AGVC Viewer Operation Manual Ver.1.0.0.docx" />
+    <None Include="Doc\AT&amp;S AGVC Viewer Operation Manual Ver.1.0.0.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Doc\AT&amp;S AGVC Viewer Operation Manual Ver.1.0.1.docx" />
+    <None Include="Doc\AT&amp;S AGVC Viewer Operation Manual Ver.1.0.1.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Doc\M4 OHTC Viewer Operation Manual Ver.1.0.0.docx" />
+    <None Include="Doc\M4 OHTC Viewer Operation Manual Ver.1.0.0.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\arrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\ArrowDown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\ArrowLeft.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\ArrowRight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\ArrowUp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\unselectedArrowDown.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\unselectedArrowLeft.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\unselectedArrowRight.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\unselectedArrowUp.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LanguageXamlGenerator\LanguageDefine_SOUTH_INNOLUX.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icon_ScaleRuler.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ProjectSettingManager\readme.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Resource Include="Resources\SystemIcon\001.ico" />
+    <Resource Include="Resources\SystemIcon\002.ico" />
+    <Resource Include="Resources\SystemIcon\OHTC.ico" />
+    <Resource Include="Resources\SystemIcon\OHTC_2.ico" />
+    <Resource Include="001.ico" />
+    <Content Include="DLL\EntityFramework.SqlServer.dll" />
+    <Resource Include="Resources\SystemIcon\AGVC_1.ico" />
+    <Resource Include="Resources\SystemIcon\AGVC_2.ico" />
+    <Resource Include="Resources\SystemIcon\system.ico" />
+    <None Include="LanguageXamlGenerator\LanguageDefine.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LanguageXamlGenerator\LanguageXamlGenerator.deps.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LanguageXamlGenerator\LanguageXamlGenerator.runtimeconfig.dev.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LanguageXamlGenerator\LanguageXamlGenerator.runtimeconfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ProjectSettingManager\netcoreapp3.1\ProjectSettingManager.deps.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ProjectSettingManager\netcoreapp3.1\ProjectSettingManager.runtimeconfig.dev.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ProjectSettingManager\netcoreapp3.1\ProjectSettingManager.runtimeconfig.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\system.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Doc\AUO AGVC Viewer Operation Manual Ver.1.0.0.docx" />
+    <None Include="Doc\AUO AGVC Viewer Operation Manual Ver.1.0.0.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Doc\AUO AGVC Viewer Operation Manual Ver.1.0.1.docx" />
+    <None Include="Doc\AUO AGVC Viewer Operation Manual Ver.1.0.1.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\Mirle_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\charging.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\battery_0per.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\battery_100per.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\battery_25per.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\battery_50per.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\battery_75per.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\battery_charging_100per.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\battery_charging_25per.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\battery_charging_50per.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\battery_charging_75per.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\selected_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\selected_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\selected_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\selected_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\unselected_1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\unselected_2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\unselected_3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\AOV\unselected_4.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\SystemIcon\info1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Action [Cassette].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Action [Correcting action].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Action [Loading].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Action [Maintenance].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Action [Moving].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Action [Parked].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Action [Parking].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Action [Receive command].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Action [Unloading].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Alarm [Alert].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Alarm [Error].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Alarm [Warning].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Pause [Block].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Pause [Earthquake].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Pause [HID].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Pause [Obstructed].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Pause [Pause].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Pause [Safety].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Speed [Fast].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Speed [Medium].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Speed [Slow].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Vehicle display_V2.3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Vehicle [Auto-Local].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Vehicle [Auto-Remote].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Vehicle [Manual].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Vehicle [Power on].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\VH_Display\Vehicle [Unconnected].png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Language\SOUTH_INNOLUX\en-US.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Language\SOUTH_INNOLUX\zh-CN.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Language\SOUTH_INNOLUX\zh-TW.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Page Include="PopupWindows\VehicleColorInfoWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PopupWindows\AboutPopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindows\AccountManagementPopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindows\AddCommandPopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindows\AOVPopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindows\AssignVehiclePopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindows\ChangePriorityPopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindows\ChangeStatusPopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindows\LogInPopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindows\PasswordChangePopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindows\QuickVehicleCommandPopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindows\ShiftCommandPopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopupWindows\Chart_BasePopupWindow .xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PopupWindows\SystemModeControlPopupWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PopupWindows\TipMessagePopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Chart\Chart_Base.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\AngleOfView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\AngleOfView_1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\CustomLegend.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\CustomTooltip.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\DeviceStatusSignal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\NumericUpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\StatusControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\SystemModeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Components\ToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\VhSettingS4.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Components\VhSettingS1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\VhSettingS2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Components\VhSettingS3.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\CommuLog_MCS.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\CommuLog_PLC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\CommuLog_SystemProc.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\CommuLog_Vehicle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\uc_grid_VehicleCMD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Maintenance\Sub\Map_BasePZ.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Maintenance\Sub\Address_PZ.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Maintenance\Sub\Map_PZ.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Map_Parts\Label.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Map_Parts\Shelf.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Map_Parts\TrackSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Help\VehicleColorInfo.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Help\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Log\Chart_RunDownIdle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Log\TransferCommandHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Log\VehicleHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Log\AlarmHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Log\Log_Base.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Maintenance\ParkZoneManagement.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Maintenance\Equipment_Constant.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Maintenance\Maintenance_Base.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Maintenance\QuickVehicleCommand.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Maintenance\VehicleManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Operation\Operation_Base.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Operation\PortManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Operation\Sub\AddCommand.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Operation\Sub\ChangePriority.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Operation\Sub\TransferCommand.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Operation\SystemModeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Operation\TransferManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Report\OHTCErrorCMD.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\HIDinfohistory.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\AlarmProcessForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Report\LongCharging.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\AlarmRate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\AlarmDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\RealExecuteTime.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\StabilityByDate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\StabilityByStatus.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\StabilityByDuration.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\IntervalMCBFByCMD.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\IntervalMCBF.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\IntervalMTBF.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\TimeOutCMD.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\MTTR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Report\Report_Base.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\ErrorCMD.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\UtilizationRateByStatus.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\UtilizationRateByVehicle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\UtilizationRateByPort.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Report\UtilizationRateByHour.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_System\AccountManagement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_System\LogIn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_System\PasswordChange.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_System\SystemModeControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_TipMessage\TipMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_TipMessage\TipMessage_Data.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Resource Include="DLL\EntityFramework.SqlServer.xml" />
+    <Content Include="DLL\Utility_LogQuery.dll" />
+    <None Include="LanguageXamlGenerator\LanguageXamlGenerator.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LanguageXamlGenerator\LanguageXamlGenerator.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="LanguageXamlGenerator\readme.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Language\en-US.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Language\zh-CN.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Language\zh-TW.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\Mirle_Loading_9.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Resources\icon_zoom_default.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icon_zoom_in.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icon_zoom_out.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Views\CurrentData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\uc_grid_CarInOut.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\uc_grid_CassetteData.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\uc_grid_CurAlarm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\uc_grid_PortDef.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\uc_grid_SystemLog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\uc_grid_TransCMD.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CurrentDataGrid\uc_grid_VHStatus.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Loading.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Map.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Map_Base.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Map_Parts\Address.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Map_Parts\Rail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Map_Parts\Vehicle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PortStatus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QuickVehicleCommand.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShelfStatus.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SideArea.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatusCST.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\StatusMCSQueue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\StatusTree.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StatusVehicle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logo_AUO.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icon_Hamburger.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icon_Home.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icon_Link_OFF.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icon_Link_ON.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icon_LoginAndout.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\icon_MirleLogo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\TipMessage_Close.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\TipMessage_Error.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\TipMessage_Info.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BasicFunction\BasicFunction.csproj">
+      <Project>{8a30147a-2553-472e-93c4-414f40054890}</Project>
+      <Name>BasicFunction</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChartConverter\ChartConverter.csproj">
+      <Project>{e6463d65-2561-407b-a6af-249b1813212b}</Project>
+      <Name>ChartConverter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Loading\Loading.csproj">
+      <Project>{ab9d154d-b9ef-41d4-91ac-c6936811db7a}</Project>
+      <Name>Loading</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MainLayout\MainLayout.csproj">
+      <Project>{6fa6f347-2e82-41ff-b90f-56528b086f6a}</Project>
+      <Name>MainLayout</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MainView\MainView.csproj">
+      <Project>{9ad9c4eb-3b66-439f-831f-56e80cbbe428}</Project>
+      <Name>MainView</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Map\Map.csproj">
+      <Project>{3426b114-ae8c-4bf4-8071-4e4dc4cdb43a}</Project>
+      <Name>Map</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverterFactory\ObjectConverterFactory.csproj">
+      <Project>{31118EC5-FFCC-4DA8-9789-DC9FD1E9FB93}</Project>
+      <Name>ObjectConverterFactory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ObjectConverterInterface\ObjectConverterInterface.csproj">
+      <Project>{EE5632DC-C97E-4503-8237-0331ECEEC416}</Project>
+      <Name>ObjectConverterInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PortStatus\PortStatus.csproj">
+      <Project>{f341032a-fae5-423f-b2cd-91b933444567}</Project>
+      <Name>PortStatus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UtilsAPI\UtilsAPI.csproj">
+      <Project>{66810870-80d7-44f3-bfa0-3000eab02946}</Project>
+      <Name>UtilsAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Vehicle\Vehicle.csproj">
+      <Project>{2f39f7e0-ccb0-4d60-8871-dc2c005589d2}</Project>
+      <Name>Vehicle</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewerObject\ViewerObject.csproj">
+      <Project>{abe74abb-2b58-4c51-b0da-2e1786342223}</Project>
+      <Name>ViewerObject</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+</Project>

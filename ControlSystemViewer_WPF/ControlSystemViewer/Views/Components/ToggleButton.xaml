@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.Components.ToggleButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views.Components"
+             mc:Ignorable="d" 
+             Height="20" Width="45">
+    <Viewbox>
+        <Grid HorizontalAlignment="Left" Height="20" Margin="0" VerticalAlignment="Top" Width="45">
+            <Rectangle x:Name="Back" Fill="#FFA0A0A0" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="45" RadiusY="10" RadiusX="10" MouseLeftButtonDown="Back_MouseLeftButtonDown"/>
+            <Ellipse x:Name="Dot" Fill="White" HorizontalAlignment="Center" Height="16" VerticalAlignment="Center" Width="16" MouseLeftButtonDown="Dot_MouseLeftButtonDown"/>
+        </Grid>
+    </Viewbox>
+</UserControl>

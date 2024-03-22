@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.StatusTree"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="MyFocusVisualStyle">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="-2" StrokeThickness="1" Stroke="Red"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TreeViewItemStyle" TargetType="TreeViewItem">
+            <Setter Property="FontFamily" Value="MicrosoftSansSerif"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Focusable" Value="True"/>
+            <Setter Property="IsExpanded" Value="True"/>
+            <Setter Property="IsSelected" Value="{Binding IsInitiallySelected, Mode=TwoWay}"/>
+            <!--<Setter Property="KeyboardNavigation.AcceptsReturn" Value="True"/>-->
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Resources>
+                <!--<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="DodgerBlue"/>-->
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent"/>
+            </Style.Resources>
+        </Style>
+        <HierarchicalDataTemplate x:Key="TreeViewItemTemplate" ItemsSource="{Binding Children, Mode=OneWay}">
+            <StackPanel x:Name="pnl_Item" Orientation="Horizontal" MouseLeftButtonDown="pnl_Item_MouseLeftButtonDown">
+                <Border Width="15" Height="30"/>
+                <Label Width="30" Height="30" Background="Transparent"
+                       HorizontalContentAlignment="Center"
+                       VerticalContentAlignment="Center"
+                       Content="{Binding ObjectIcon, Mode=OneWay}" 
+                       Visibility="{Binding VisibilityIcon, Mode=OneWay}"/>
+                <Border Width="12" Height="30" Visibility="{Binding VisibilityIcon, Mode=OneWay}"/>
+                <!--<CheckBox x:Name="treeviewitem_chk" Focusable="False" IsChecked="{Binding IsChecked}" VerticalAlignment="Center"/>-->
+                <Label Content="{Binding Name, Mode=OneWay}" Foreground="{Binding NameBrush, Mode=OneWay}" Height="30" VerticalAlignment="Center" Margin="-15,0,0,0"/>
+                <Label Content=":" Foreground="{Binding NameBrush, Mode=OneWay}" Height="30" VerticalAlignment="Center"/>
+                <Label Content="{Binding Text, Mode=OneWay}" Foreground="{Binding TextBrush, Mode=OneWay}" Height="30" VerticalAlignment="Center"/>
+                <Border Width="3" Height="30"/>
+            </StackPanel>
+            <!--<HierarchicalDataTemplate.Triggers>
+                <DataTrigger Binding="{Binding IsChecked}" Value="true">
+                    <Setter TargetName="treeviewitem_chk" Property="Background" Value="#bed0df"/>
+                </DataTrigger>
+            </HierarchicalDataTemplate.Triggers>-->
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
+    <TreeView x:Name="tv_Status"
+              ItemContainerStyle="{StaticResource TreeViewItemStyle}"
+              ItemTemplate="{StaticResource TreeViewItemTemplate}"
+              Width="300"
+              ScrollViewer.CanContentScroll="True" 
+              ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+              ScrollViewer.VerticalScrollBarVisibility="Auto"
+              Background="Transparent">
+    </TreeView>
+</UserControl>

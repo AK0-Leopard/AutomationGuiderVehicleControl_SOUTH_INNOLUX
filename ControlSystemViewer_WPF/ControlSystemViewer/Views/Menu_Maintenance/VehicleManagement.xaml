@@ -1,0 +1,807 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.Menu_Maintenance.VehicleManagement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views.Menu_Maintenance"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:Components="clr-namespace:ControlSystemViewer.Views.Components"
+             mc:Ignorable="d" 
+             d:DesignWidth="1650" d:DesignHeight="750" 
+             FontFamily="MicrosoftSansSerif" FontSize="18" Foreground="#1b2338" Background="#f6f6f6">
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Background="White" BorderThickness="1,1,0,1" BorderBrush="#b2b2b2" />
+
+                <Border Grid.Column="1" Background="White" BorderThickness="0,1,1,1" BorderBrush="#b2b2b2" Cursor="Hand"/>
+                <Path x:Name="Arrow" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z" Margin="12" Stretch="Fill" Fill="#005ba8" />
+            </Grid>
+        </ControlTemplate>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Width" Value="250"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="#1b2338"/>
+            <Setter Property="FontFamily" Value="MicrosoftSansSerif"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <!-- ToggleButton 已数据绑定到 ComboBox 本身以切换 IsDropDownOpen -->
+                            <ToggleButton Grid.Column="2" Template="{DynamicResource ComboBoxToggleButton}" x:Name="ToggleButton" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"/>
+                            <ContentPresenter HorizontalAlignment="Left" Margin="3,3,23,3" x:Name="ContentSite" VerticalAlignment="Center" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" IsHitTestVisible="False"/>
+
+                            <!-- 必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它 -->
+                            <TextBox Visibility="Hidden" Template="{DynamicResource ComboBoxTextBox}" HorizontalAlignment="Left" Margin="3,3,23,3" x:Name="PART_EditableTextBox" Style="{x:Null}" VerticalAlignment="Center" Focusable="True" Background="Transparent" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+
+                            <!-- Popup 可显示 ComboBox 中的项列表。IsOpen 已数据绑定到通过 ComboBoxToggleButton 来切换的 IsDropDownOpen -->
+                            <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup" Focusable="False" AllowsTransparency="True" PopupAnimation="Slide">
+                                <Grid MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" SnapsToDevicePixels="True">
+                                    <Border x:Name="DropDownBorder" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1"/>
+                                    <ScrollViewer Margin="4,6,4,6" Style="{DynamicResource SimpleScrollViewer}" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                        <!-- StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True -->
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" Background="White"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="CheckBoxStyle" TargetType="{x:Type CheckBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true" />
+            <Setter Property="OverridesDefaultStyle" Value="False" />
+            <!--<Setter Property="FocusVisualStyle" Value="{DynamicResource CheckBoxFocusVisual}" />-->
+            <Setter Property="Height" Value="15"/>
+            <Setter Property="Width" Value="15"/>
+            <Setter Property="IsChecked" Value="{Binding IsChecked}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Margin" Value="17,0,0,0"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <!--<Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>-->
+                            <Grid Height="{TemplateBinding Height}" Width="{TemplateBinding Height}">
+                                <Rectangle x:Name="CheckBoxRectangle" Fill="White"/>
+                                <Rectangle x:Name="CheckBoxRectangleOut" Stroke="#707070" StrokeThickness="1"/>
+                                <Grid x:Name="CheckedMark" Width="15" Height="15" Visibility="Collapsed">
+                                    <Path SnapsToDevicePixels="False" StrokeThickness="2" Data="F1 M 0.468732,4.66838L 3.03345,7.95443L 7.28127,0.420569" Margin="4,2,0,0" Stroke="White"/>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="CheckedMark" Property="Visibility" Value="Visible"></Setter>
+                                <Setter TargetName="CheckBoxRectangle" Property="Fill" Value="#005ba8"></Setter>
+                                <Setter TargetName="CheckBoxRectangle" Property="Opacity" Value="1"></Setter>
+                                <Setter TargetName="CheckBoxRectangleOut" Property="Stroke" Value="Transparent"></Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type TabControl}" x:Key="TabStripPlacement_Default">
+
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="BorderThickness" Value="0,6,0,0"/>
+            <Setter Property="BorderBrush" Value="#005ba8"/>
+            <Setter Property="Background" Value="#e6e6e6"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+        </Style>
+        <Style TargetType="{x:Type TabItem}" x:Key="TabItemStyle_Default">
+            <Setter Property="Margin" Value="-5,0,5,0"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="204"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border x:Name="Border">
+                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#005ba8" />
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                <Setter Property="Foreground" Value="#1b2338"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle_Default}">
+        </Style>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border x:Name="Border">
+                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#005ba8" />
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="white" />
+                                <Setter Property="Foreground" Value="#1b2338"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="10,4,4,7" />
+            <Setter Property="Background" Value="#bed0df"/>
+            <Setter Property="Foreground" Value="#1b2338"/>
+            <Setter Property="FontSize" Value="10.5pt"/>
+            <Setter Property="BorderBrush" Value="#e6e6e6"/>
+            <Setter Property="BorderThickness"  Value="0,0,1,1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                        <Grid Name="HedearGrid" Background="#bed0df" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="BackgroundBorder" BorderThickness="0,1,1,1" BorderBrush="#e6e6e6" Grid.ColumnSpan="2" />
+                            <ContentPresenter  Margin="6,3,6,3" VerticalAlignment="Center" Grid.Column="0" />
+                            <Path x:Name="SortArrow" Visibility="Collapsed" Data="M0,0 L1,0 0.5,1 z" Stretch="Fill" 
+                            Grid.Column="1" Width="8" Height="6" Fill="#1b2338" Margin="0,0,8,0" 
+                            VerticalAlignment="Center" RenderTransformOrigin="0.5,0.4" />
+                            <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Cursor="SizeWE" Grid.Column="1" >
+                                <Thumb.Style>
+                                    <Style TargetType="{x:Type Thumb}">
+                                        <Setter Property="Width" Value="2" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                                    <Border Background="Transparent"/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Thumb.Style>
+                            </Thumb>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="SortDirection" Value="Ascending">
+                                <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="SortArrow" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="180" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="SortDirection" Value="Descending">
+                                <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource ColumnHeaderStyle}"/>
+            <Setter Property="BorderBrush" Value="#e6e6e6" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#e6e6e6"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#e6e6e6"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="36"/>
+            <ColumnDefinition Width="150"/>
+        </Grid.ColumnDefinitions>
+        <Button Grid.Column="2" x:Name="btn_Close" Content="{DynamicResource CLOSE}" Click="btn_Close_Click" VerticalAlignment="Bottom"/>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TabControl Grid.Row="1" HorizontalAlignment="Stretch" BorderThickness="0,6,0,0" BorderBrush="#005ba8" Background="#e6e6e6" Padding="0" Grid.ColumnSpan="3">
+                <TabItem Header="Vehicle Management" Width="204" Height="35" Margin="-4,0,0,0">
+                    <DockPanel Background="#eeeeee">
+                        <StackPanel Width="220" Margin="10" HorizontalAlignment="Left" Background="#FFEEEEEE">
+                            <TextBlock Style="{StaticResource ContentTitle_18px}" Background="#e0e0e0" Height="30" VerticalAlignment="Top" Text="Vehicle Link Status"/>
+                            <StackPanel Margin="0,10">
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_1" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_2" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_3" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_4" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_5" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_6" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_7" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_8" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_9" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_10" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_11" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_12" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_13" Margin="0,3"/>
+                                <Components:DeviceStatusSignal x:Name="uc_VhLk_Status_14" Margin="0,3"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <TextBlock DockPanel.Dock="Top" Margin="10" Height="30" Style="{StaticResource ContentTitle_18px}" Background="#e0e0e0" Text="Vehicle Setting"/>
+                        <Grid Margin="10,0" Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="5"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Components:VhSettingS4 x:Name="VehicleStatus"/>
+                            <Components:VhSettingS1 x:Name="CommandStatus" Grid.Column="2"/>
+                            <Components:VhSettingS2 x:Name="PauseType" Grid.Row="2"/>
+                            <Components:VhSettingS3 x:Name="VehicleCommand" Grid.Column="2" Grid.Row="2"/>
+                            <Border Grid.Row="1" Grid.ColumnSpan="3" Background="#e0e0e0"/>
+                            <Border Grid.Column="1" Grid.RowSpan="3" Background="#e0e0e0"/>
+                        </Grid>
+                    </DockPanel>
+
+                </TabItem>
+                <!--<TabItem Header="Multi Scan" Width="204" Margin="5,0,-5,0" Foreground="Black">
+                <Grid Background="#f6f6f6">
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.indigo.xaml" />
+                                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                            </ResourceDictionary.MergedDictionaries>
+                            <Style TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignDarkRadioButton}">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="10,0"/>
+                            </Style>
+                            <Style TargetType="materialdesignin:PackIcon">
+                                <Setter Property="Width" Value="30"/>
+                                <Setter Property="Height" Value="30"/>
+                            </Style>
+                            <Style TargetType="ListBox">
+                                <Setter Property="Margin" Value="10"/>
+                                <Setter Property="SelectionMode" Value="Extended"/>
+                            </Style>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition/>
+                            <RowDefinition Height="40"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <RadioButton Content="Shelf By Zone" x:Name="radByZone" IsChecked="True"/>
+                        <RadioButton Grid.Column="1" Content="Shelf By Selected" x:Name="radBySel"/>
+                        <RadioButton Grid.Row="2" Content="All Shelf" x:Name="radAll" Checked="radAll_Checked"/>
+                        <Grid Grid.Row="1" IsEnabled="{Binding IsChecked, ElementName=radByZone}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox x:Name="listbyZone"/>
+                            <ListBox x:Name="listSelZone" Grid.Column="2"/>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button Margin="10" Height="Auto" Click="Button_ZoneRight">
+                                    <materialdesignin:PackIcon Kind="ChevronRight"/>
+                                </Button>
+                                <Button Margin="10" Height="Auto" Click="Button_ZoneLeft">
+                                    <materialdesignin:PackIcon Kind="ChevronLeft"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                        <Grid Grid.Row="1" Grid.Column="1" IsEnabled="{Binding IsChecked, ElementName=radBySel}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <ListBox x:Name="listbySel"/>
+                            <ListBox x:Name="listSelShelf" Grid.Column="2"/>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button Margin="10" Height="Auto" Click="Button_ShelfRight">
+                                    <materialdesignin:PackIcon Kind="ChevronRight"/>
+                                </Button>
+                                <Button Margin="10" Height="Auto" Click="Button_ShelfLeft">
+                                    <materialdesignin:PackIcon Kind="ChevronLeft"/>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                    <StackPanel Margin="10" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Height="Auto" Click="Button_ScanStart">
+                            <StackPanel Orientation="Horizontal">
+                                <materialdesignin:PackIcon Kind="Play"/>
+                                <TextBlock VerticalAlignment="Center" Margin="10,0"><Run Text="Start"/></TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    -->
+                <!--<Button x:Name="button" Content="Reset" HorizontalAlignment="Left" Margin="1200,12,0,0" Grid.Row="1" VerticalAlignment="Top" Height="38" Click="Button_MultiScanReset" Width="112"/>-->
+                <!--
+                </Grid>
+            </TabItem>-->
+                <!--<TabItem Header="Cycle Run" Width="204" Margin="391,-84,-391,84" Foreground="Black" HorizontalAlignment="Left">
+                <Grid Background="#f6f6f6">
+                    <Grid.Resources>
+                        <ResourceDictionary>
+                            <ResourceDictionary.MergedDictionaries>
+                                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.indigo.xaml" />
+                                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+                                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                            </ResourceDictionary.MergedDictionaries>
+                            <Style TargetType="RadioButton" BasedOn="{StaticResource MaterialDesignDarkRadioButton}">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="Margin" Value="10,0"/>
+                            </Style>
+                            <Style TargetType="materialdesignin:PackIcon">
+                                <Setter Property="Width" Value="30"/>
+                                <Setter Property="Height" Value="30"/>
+                            </Style>
+                            <Style TargetType="ListBox">
+                                <Setter Property="Margin" Value="10"/>
+                                <Setter Property="SelectionMode" Value="Extended"/>
+                            </Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Margin" Value="10,0"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignOutlinedTextFieldTextBox}">
+                                <Setter Property="Margin" Value="10,0"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                            <Style TargetType="CheckBox" BasedOn="{StaticResource MaterialDesignDarkCheckBox}">
+                                <Setter Property="Margin" Value="10,0"/>
+                            </Style>
+                        </ResourceDictionary>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="60"/>
+                    </Grid.RowDefinitions>
+                    <Grid Margin="10,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Counting Mode"/>
+                            <RadioButton Content="Mins" x:Name="radCycleMins"/>
+                            <RadioButton Content="Times" x:Name="radCycleTimes"/>
+                            <RadioButton Content="Non-Stop" x:Name="radCycleNonStop" IsChecked="True"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Grid.Column="1">
+                            <TextBlock Text="Total Time"/>
+                            <TextBox materialdesignin:HintAssist.Hint="Times" MinWidth="150" x:Name="txtCycleTimes"/>
+                            <CheckBox Content="Random" IsChecked="True" x:Name="ckCycleRandom"/>
+                            <CheckBox Content="Enable" IsChecked="True" x:Name="ckCycleEnable"/>
+                        </StackPanel>
+                    </Grid>
+                    <Border Grid.Row="1" BorderBrush="Black" Margin="10" BorderThickness="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition Height="40"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <TextBlock Text="Start CST"/>
+                                <ComboBox materialdesignin:HintAssist.Hint="CST" Margin="10,0" MinWidth="300" x:Name="cbCycleCST"/>
+                            </StackPanel>
+                            <RadioButton Content="Shelf By Zone" Grid.Row="1" x:Name="radCycleByZone" IsChecked="True"/>
+                            <RadioButton Content="Shelf By Selected" Grid.Row="1" Grid.Column="1" x:Name="radCycleBySel"/>
+                            <RadioButton Content="All Shelf" Grid.Row="3" x:Name="radCycleAll" Checked="radCycleAll_Checked"/>
+                            <Grid Grid.Row="2" IsEnabled="{Binding IsChecked, ElementName=radCycleByZone}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <ListBox x:Name="listCycleByZone"/>
+                                <ListBox Grid.Column="2" x:Name="listCycleSelZone"/>
+                                <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Button Margin="10" Height="Auto" Click="Button_CycleZoneRight">
+                                        <materialdesignin:PackIcon Kind="ChevronRight"/>
+                                    </Button>
+                                    <Button Margin="10" Height="Auto" Click="Button_CycleZoneLeft">
+                                        <materialdesignin:PackIcon Kind="ChevronLeft"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                            <Grid Grid.Row="2" Grid.Column="1" IsEnabled="{Binding IsChecked,ElementName=radCycleBySel}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <ListBox x:Name="listCycleBySel"/>
+                                <ListBox Grid.Column="2" x:Name="listCycleSelShelf"/>
+                                <StackPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Button Margin="10" Height="Auto" Click="Button_CycleShelfRight">
+                                        <materialdesignin:PackIcon Kind="ChevronRight"/>
+                                    </Button>
+                                    <Button Margin="10" Height="Auto" Click="Button_CycleShelfLeft">
+                                        <materialdesignin:PackIcon Kind="ChevronLeft"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                    <StackPanel Margin="10" Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right">
+                        <Button Height="Auto" Click="Button_CycleStart">
+                            <StackPanel Orientation="Horizontal">
+                                <materialdesignin:PackIcon Kind="Play"/>
+                                <TextBlock VerticalAlignment="Center"><Run Text="Start"/></TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                    -->
+                <!--<Button x:Name="button1" Content="Reset" HorizontalAlignment="Left" Margin="1200,12,0,0" Grid.Row="2" VerticalAlignment="Top" Width="112" Height="38" Click="Button_CycleRunReset"/>-->
+                <!--
+                </Grid>
+            </TabItem>-->
+                <TabItem Header="Alarm Information" Width="204" Height="35" Margin="-4,0,0,0">
+                    <Grid Background="#f6f6f6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="87"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <DockPanel Grid.Row="0" Grid.Column="0">
+                            <Border Width="24"/>
+                            <TextBlock DockPanel.Dock="Left" Padding="0,0,10,0" TextAlignment="Center" VerticalAlignment ="Center" Foreground="#1b2338" ><Run Text="Alarm Count : "/></TextBlock>
+                            <TextBlock x:Name="txb_AlarmCnt" DockPanel.Dock="Left" Padding="0,0,10,0" TextAlignment="Center" VerticalAlignment ="Center" Foreground="#1b2338" ><Run Text="Value"/></TextBlock>
+                            <Border Width="56"/>
+
+                            <Button Name="btn_reset" Content="Alarm Reset" Click="btn_Click"/>
+                            <Border Width="auto"/>
+                        </DockPanel>
+                        <DockPanel Grid.Row="1" Grid.Column="0">
+                            <DataGrid x:Name="alarmlist" ItemsSource="{Binding}" FontSize="14" BorderThickness="0,1,0,0" BorderBrush="#e6e6e6" Margin="0,6,0,0" RowDetailsVisibilityMode="Collapsed" SelectionMode="Single" AlternationCount="2" Style="{DynamicResource DataGridStyle}"
+                                  IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" CanUserSortColumns="True">
+                                <DataGrid.CellStyle>
+                                    <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                                    <Grid Background="{TemplateBinding Background}">
+                                                        <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"></ContentPresenter>
+                                                    </Grid>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="BorderBrush" Value="Transparent"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#005BA8"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#005BA8"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.CellStyle>
+                                <DataGrid.RowStyle>
+                                    <Style TargetType="{x:Type DataGridRow}">
+                                        <Style.Triggers>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                                <Setter Property="Background" Value="White" />
+                                                <Setter Property="Foreground" Value="#1b2338" />
+                                            </Trigger>
+                                            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                                <Setter Property="Background" Value="#f2f9ff" />
+                                                <Setter Property="Foreground" Value="#1b2338" />
+                                            </Trigger>
+                                            <Trigger Property="IsSelected" Value="True">
+                                                <Setter Property="Background" Value="#005BA8"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#005BA8"/>
+                                                <Setter Property="Foreground" Value="White"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.RowStyle>
+                                <DataGrid.Columns>
+                                    <!--<DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding CLEAR_DATE_TIME}"  Width="185" Header="Create Time"/>
+                                <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding EQPT_ID}" Width="100" Header="Vehicle ID"/>
+                                <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding ALAM_CODE}" Width="100" Header="Alarm ID"/>
+                                <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding ALAM_DESC}" Width="*" Header="Description"/>
+                                <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding ALAM_LVL}" Width="100" Header="Level"/>
+                                <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding ALAM_STAT}" Width="100" Header="Alarm Type"/>
+                                -->
+                                    <DataGridTextColumn Binding="{Binding RPT_DATE_TIME}"  Width="185" Header="Create Time"/>
+                                    <DataGridTextColumn Binding="{Binding EQPT_ID}" Width="100" Header="Vehicle ID"/>
+                                    <DataGridTextColumn Binding="{Binding ALAM_CODE}" Width="100" Header="Alarm ID"/>
+                                    <DataGridTextColumn Binding="{Binding ALAM_DESC}" Width="*" Header="Description"/>
+                                    <DataGridTextColumn Binding="{Binding ALAM_LVL}" Width="100" Header="Level"/>
+                                    <DataGridTextColumn Binding="{Binding ALAM_STAT}" Width="100" Header="Alarm Type"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </DockPanel>
+                    </Grid>
+                </TabItem>
+                <!--<TabItem Header="Communication Log" Height="35" Margin="-186,0,186,0" HorizontalAlignment="Right" Width="170">
+                <Grid Background="#f6f6f6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="128"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="92"/>
+                            <RowDefinition Height="36"/>
+                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="350"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="415"/>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="415"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <WrapPanel>
+                                <DockPanel x:Name="DockPanel1" Height="46" Width="350">
+                                    <TextBlock x:Name="TitleName1" Style="{StaticResource Title_18px}" Width="100" Text="Start Time"/>
+                                    -->
+                <!--<DatePicker x:Name="StartDTCbx"></DatePicker>-->
+                <!--
+                                    <xctk:DateTimePicker x:Name="m_StartDTCbx" Format="Custom" FormatString="yyyy-MM-dd HH:mm:ss" CultureInfo="en-US" TimeFormat="Custom" TimeFormatString="HH:mm:ss" TextAlignment="Left"
+                                        Grid.Row="0" Height="30" Width="250" CurrentDateTimePart="Day"/>
+                                </DockPanel>
+                                <DockPanel x:Name="DockPanel2" Height="46" Width="350">
+                                    <TextBlock x:Name="TitleName2" Style="{StaticResource Title_18px}" Width="100" Text="End Time"/>
+                                    <xctk:DateTimePicker x:Name="m_EndDTCbx" Format="Custom" FormatString="yyyy-MM-dd HH:mm:ss" CultureInfo="en-US" TimeFormat="Custom" TimeFormatString="HH:mm:ss" TextAlignment="Left"
+                                         Grid.Row="0" Height="30" Width="250" />
+                                </DockPanel>
+                            </WrapPanel>
+                            <WrapPanel Grid.Column="2">
+                                <DockPanel x:Name="DockPanel3" Width="415" Height="46">
+                                    <TextBlock Style="{StaticResource Title_18px}" Text="MCS Command ID"/>
+                                    <TextBox x:Name="CommunLog_MCSCmdID" Style="{StaticResource TextBox_Default}"></TextBox>
+                                </DockPanel>
+                                <DockPanel x:Name="DockPanel4" Width="415" Height="46">
+                                    <TextBlock Style="{StaticResource Title_18px}" Text="Vehicle ID"/>
+                                    <TextBox x:Name="CommunLog_VhID" Style="{StaticResource TextBox_Default}"></TextBox>
+                                </DockPanel>
+                            </WrapPanel>
+                            <WrapPanel Grid.Column="4">
+                                <DockPanel x:Name="DockPanel5" Width="415" Height="46">
+                                    <TextBlock Style="{StaticResource Title_18px}" Text="Every Hour Interval"/>
+                                    <ComboBox x:Name="cb_HrsInterval" SelectionChanged="cb_HrsInterval_SelectionChanged"/>
+                                </DockPanel>
+                            </WrapPanel>
+                            <Button Grid.Column="6" Name="btn_Search" Content="Search" Margin="-34,-46,0,0" IsDefault="True" Click="btn_Search_Click"/>
+                        </Grid>
+                        <WrapPanel Grid.Row="0" Margin="-10,0,10,0">
+
+                            -->
+                <!--<DockPanel x:Name="DockPanel2" Width="350" Height="46" Margin="0,0,25,0">
+                <TextBlock x:Name="TitleName2" Style="{StaticResource Title_18px}" Width="90" Text="End Time"/>
+                <DatePicker x:Name="m_EndDTCbx"/>
+            </DockPanel>-->
+                <!--<DockPanel x:Name="DockPanel3" Width="415" Height="46" Margin="0,0,50,0">
+                <TextBlock x:Name="TitleName3" Style="{StaticResource Title_18px}" Text="Every Hour Interval"/>
+                <ComboBox x:Name="cb_HrsInterval"/>
+            </DockPanel>
+            <Button Name="btn_Search" Content="Search"/>
+            <DockPanel x:Name="DockPanel4" Width="415" Height="46" Margin="0,0,25,0">
+                <TextBlock x:Name="TitleName4" Style="{StaticResource Title_18px}" Text="TitleName"/>
+                <TextBox x:Name="TextBox4" Style="{StaticResource TextBox_Default}"></TextBox>
+            </DockPanel>
+            <DockPanel x:Name="DockPanel5" Width="350" Height="46" Margin="0,0,25,0">
+                <TextBlock x:Name="TitleName5" Style="{StaticResource Title_18px}" Width="90" Text="TitleName"/>
+                <TextBox x:Name="TextBox5" Style="{StaticResource TextBox_Default}"></TextBox>
+            </DockPanel>
+            <DockPanel x:Name="DockPanel6" Width="415" Height="46" Margin="0,0,25,0">
+                <TextBlock x:Name="TitleName6" Style="{StaticResource Title_18px}" Text="TitleName"/>
+                <TextBox x:Name="TextBox6" Style="{StaticResource TextBox_Default}"></TextBox>
+            </DockPanel>-->
+                <!--
+                        </WrapPanel>
+                        <DockPanel Grid.Row="1" Margin="10,9,0,0">
+                            <TextBlock Margin="0,0,20,0"><Hyperlink x:Name="HypL30mins"  Click="Button_Click">Last 30 minutes</Hyperlink></TextBlock>
+                            <TextBlock Margin="0,0,20,0"><Hyperlink x:Name="HypL1hours"  Click="Button_Click">Last 1 hour</Hyperlink></TextBlock>
+                            <TextBlock Margin="0,0,20,0"><Hyperlink x:Name="HypL4hours"  Click="Button_Click">Last 4 hour</Hyperlink></TextBlock>
+                            <TextBlock Margin="0,0,20,0"><Hyperlink x:Name="HypL12hours" Click="Button_Click">Last 12 hour</Hyperlink></TextBlock>
+                            <TextBlock Margin="0,0,20,0"><Hyperlink x:Name="HypL24hours" Click="Button_Click">Last 24 hour</Hyperlink></TextBlock>
+                            <TextBlock Margin="0,0,20,0"><Hyperlink x:Name="HypL2days"   Click="Button_Click">Last 2 days</Hyperlink></TextBlock>
+                            <TextBlock Margin="0,0,20,0"><Hyperlink x:Name="HypL3days"   Click="Button_Click">Last 3 days</Hyperlink></TextBlock>
+                            <Border/>
+                        </DockPanel>
+                    </Grid>
+                    <Components1:uctl_ElasticQuery_System_Process x:Name="uctl_ElasticQuery_sys_process_log" Grid.Row="1"/>
+                    -->
+                <!--<Components:uctl_ElasticQuery_System_Process x:Name="uctl_ElasticQuery_sys_process_log" Grid.Row="1"/>-->
+                <!--
+                </Grid>
+                -->
+                <!--<Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="128"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Components1:uc_TitleContent x:Name="uc_TitleContent"/>
+                    <Components1:uctl_ElasticQuery_System_Process x:Name="uctl_ElasticQuery_System_Process" Grid.Row="1"/>
+                </Grid>-->
+                <!--
+            </TabItem>-->
+            </TabControl>
+            <StackPanel Grid.Column="0" Background="Transparent" Orientation="Horizontal" Height="30" VerticalAlignment="Top">
+                <Label Name="txb_VehicleID" Content="Vehicle ID" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" Width="184"/>
+                <Border Width="20"/>
+                <ComboBox Name="combo_VehicleID" Width="196"/>
+                <Border Width="20"/>
+                <Button x:Name="btn_VhReset" Content="Vehicle Reset" Click="btn_Click" UseLayoutRounding="False"/>
+            </StackPanel>
+            <!--<Components1:uc_TitleContent x:Name="uc_TitleContent"/>
+                    <Components1:uctl_ElasticQuery_System_Process x:Name="uctl_ElasticQuery_System_Process" Grid.Row="1"/>
+                </Grid>
+            </TabItem>
+        </TabControl>-->
+            <!--<TabControl Style="{StaticResource TabStripPlacement_Default}" Grid.Column="1">
+            <TabItem Style="{StaticResource TabItemStyle_Default}" Header="Port List" Width="204" Height="35" Margin="-2,0,2,0">
+                <Grid Background="#f6f6f6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="87"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0" Grid.Column="0">
+                        <TextBlock Style="{StaticResource TextBlock_Default}" Padding="24,0,10,0" VerticalAlignment="Center" DockPanel.Dock="Left"><Run Text="Port ID"/></TextBlock>
+                        <ComboBox x:Name="cmdPortID" Width="250" Height="30" DisplayMemberPath="PORT_ID">
+                            <TextBlock>Port ID</TextBlock>
+                        </ComboBox>
+                        <TextBlock Style="{StaticResource TextBlock_Default}" Padding="77,0,10,0" VerticalAlignment ="Center" DockPanel.Dock="Left"><Run Text="Priority"/></TextBlock>
+                        <Border  Width="250" Height="30">
+                            <Tool:NumericUpDown x:Name="numPrority"/>
+                        </Border>
+                        <Border Width="50"/>
+                        <Button Content="Set"/>
+                        <Border Width="auto"/>
+                    </DockPanel>
+                    <DockPanel Grid.Row="1" Grid.Column="0">
+                        <DataGrid x:Name="allPortList" FontSize="14" BorderThickness="0,3,0,0" BorderBrush="#e6e6e6" RowDetailsVisibilityMode="Collapsed" SelectionMode="Single" AlternationCount="2" Style="{DynamicResource DataGridStyle}"
+                                  IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" SelectedCellsChanged="allPortList_SelectedCellsChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="*" Binding="{Binding PORT_TYPE}" Header="Port Type"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding PORT_ID}" Header="Port ID"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding CST_ID}" Header="CST ID"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding STATUS}" Header="Status"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding PORT_STATUS}" Header="Event Type"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding PRIORITY}" Header="Priority"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding ALARM_STATUS}" Header="Alarm Status"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding ADR_ID}" Header="Address ID"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding UP_DATE_TIME}" Header="Update Time"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Grid>
+
+            </TabItem>
+            <TabItem Style="{StaticResource TabItemStyle_Default}" Header="EQ Port List" Width="204" Height="35" Margin="5,0,-5,0">
+                <Grid Background="#f6f6f6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="87"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <DockPanel Grid.Row="0" Grid.Column="0">
+                        <TextBlock Style="{StaticResource TextBlock_Default}" Padding="24,0,10,0" VerticalAlignment="Center" DockPanel.Dock="Left"><Run Text="Port ID"/></TextBlock>
+                        <ComboBox x:Name="cmdEqPortID" Width="250" Height="30" DisplayMemberPath="PORT_ID">
+                            <TextBlock>Port ID</TextBlock>
+                        </ComboBox>
+                        <Border Width="50"/>
+                        <Button Content="Enable"/>
+                        <Border Width="5"/>
+                        <Button Content="Disable"/>
+                        <Border Width="2" Height="46" Background="#b2b2b2" Margin="5,0,5,0"/>
+                        <Button Content="Load Request"/>
+                        <Border Width="5"/>
+                        <Button Content="Unload Request"/>
+                        <Border Width="2" Height="46" Background="#b2b2b2" Margin="5,0,5,0"/>
+                        <Button Content="Wait"/>
+                        <Border Width="auto"/>
+                    </DockPanel>
+                    <DockPanel Grid.Row="1" Grid.Column="0">
+                        <DataGrid x:Name="eqPortList" FontSize="14" BorderThickness="0,3,0,0" BorderBrush="#e6e6e6" RowDetailsVisibilityMode="Collapsed" SelectionMode="Single" AlternationCount="2" Style="{DynamicResource DataGridStyle}" 
+                                   IsReadOnly="True" AutoGenerateColumns="False" CanUserAddRows="False" SelectedCellsChanged="eqPortList_SelectedCellsChanged">
+                            <DataGrid.RowStyle>
+                                <Style TargetType="{x:Type DataGridRow}">
+                                    <Style.Triggers>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                            <Setter Property="Background" Value="White" />
+                                            <Setter Property="Foreground" Value="#1b2338" />
+                                        </Trigger>
+                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                            <Setter Property="Background" Value="#f2f9ff" />
+                                            <Setter Property="Foreground" Value="#1b2338" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#bed0df"/>
+                                        </Trigger>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#bed0df"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+
+                            <DataGrid.Columns>
+                                <DataGridCheckBoxColumn Width="20" Binding="{x:Null}" ClipboardContentBinding="{x:Null}"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding PORT_ID}" Header="Port ID"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding CST_ID}" Header="CST ID"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding STATUS}" Header="Status"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding PORT_STATUS}" Header="Event Type"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding PRIORITY}" Header="Priority"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding ALARM_STATUS}" Header="Alarm Status"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding ADR_ID}" Header="Address ID"/>
+                                <DataGridTextColumn Width="*" Binding="{Binding UP_DATE_TIME}" Header="Update Time"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </DockPanel>
+                </Grid>
+            </TabItem>
+        </TabControl>-->
+        </Grid>
+    </Grid>
+</UserControl>

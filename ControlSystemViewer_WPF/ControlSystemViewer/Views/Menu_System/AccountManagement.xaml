@@ -1,0 +1,412 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.Menu_System.AccountManagement"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:v="clr-namespace:ControlSystemViewer.Views.Components.ViewerButton"
+             xmlns:local="clr-namespace:ControlSystemViewer.Views.Menu_System"
+             mc:Ignorable="d" 
+              Background="#f6f6f6" Foreground="Black"
+             FontSize="18" FontFamily="MicrosoftSansSerif" 
+             Loaded="_Loaded"
+             d:DesignHeight="700" d:DesignWidth="1100">
+    <UserControl.Resources>
+        <!-- DataGridColumnHeader style -->
+        <Style x:Key="ColumnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Foreground" Value="#1b2338"/>
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="BorderBrush" Value="#e6e6e6"/>
+            <Setter Property="BorderThickness"  Value="0,1,1,1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                        <Grid Name="HedearGrid" Background="#bed0df" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="BackgroundBorder" BorderThickness="0,1,1,1" BorderBrush="#e6e6e6" Grid.ColumnSpan="2" />
+                            <ContentPresenter  Margin="10,4,10,5" VerticalAlignment="Center" Grid.Column="0" />
+                            <Path x:Name="SortArrow" Visibility="Collapsed" Data="M0,0 L1,0 0.5,1 z" Stretch="Fill" 
+                            Grid.Column="1" Width="8" Height="6" Fill="#1b2338" Margin="0,0,8,0" 
+                            VerticalAlignment="Center" RenderTransformOrigin="0.5,0.4" />
+                            <Thumb x:Name="PART_RightHeaderGripper" HorizontalAlignment="Right" Cursor="SizeWE" Grid.Column="1" >
+                                <Thumb.Style>
+                                    <Style TargetType="{x:Type Thumb}">
+                                        <Setter Property="Width" Value="2" />
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                                    <Border Background="Transparent"/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Thumb.Style>
+                            </Thumb>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="SortDirection" Value="Ascending">
+                                <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="SortArrow" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="180" />
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                            <Trigger Property="SortDirection" Value="Descending">
+                                <Setter TargetName="SortArrow" Property="Visibility" Value="Visible" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- DataGridColumnContent style -->
+        <Style x:Key="ColumnElementStyle" TargetType="TextBlock">
+            <Setter Property="Padding" Value="10,4,4,7" />
+        </Style>
+
+        <!--<Style x:Key="ColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Bottom"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Padding" Value="10,4,4,7" />
+            <Setter Property="Background" Value="#bed0df"/>
+            <Setter Property="Foreground" Value="#1b2338"/>
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="BorderBrush" Value="#e6e6e6"/>
+            <Setter Property="BorderThickness"  Value="0,0,1,1"/>
+        </Style>-->
+        <CollectionViewSource x:Key="UserViewSource"/>
+
+        <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="ColumnHeaderStyle" Value="{DynamicResource ColumnHeaderStyle}"/>
+            <Setter Property="BorderBrush" Value="#e6e6e6" />
+            <Setter Property="HorizontalGridLinesBrush" Value="#e6e6e6"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#e6e6e6"/>
+        </Style>
+
+        <Style TargetType="{x:Type RadioButton}">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="#1b2338"/>
+            <Setter Property="FontFamily" Value="MicrosoftSansSerif"/>
+        </Style>
+        <Style TargetType="{x:Type TabControl}" x:Key="TabStripPlacement_Default">
+
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="BorderThickness" Value="0,6,0,0"/>
+            <Setter Property="BorderBrush" Value="#005ba8"/>
+            <Setter Property="Background" Value="#e6e6e6"/>
+            <Setter Property="Padding" Value="3,3,3,3"/>
+        </Style>
+        <Style TargetType="{x:Type TabItem}" x:Key="TabItemStyle_Default">
+            <Setter Property="Margin" Value="-5,0,5,0"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="204"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Border x:Name="Border">
+                            <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="10,2"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#005ba8" />
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="White" />
+                                <Setter Property="Foreground" Value="#1b2338"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="TreeViewItemStyle" TargetType="TreeViewItem">
+            <Setter Property="FontFamily" Value="MicrosoftSansSerif"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,5,0,5"/>
+            <Setter Property="IsExpanded" Value="True"/>
+            <Setter Property="IsSelected" Value="{Binding IsInitiallySelected, Mode=OneTime}" />
+            <Setter Property="KeyboardNavigation.AcceptsReturn" Value="True" />
+        </Style>
+        <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource TextBox_Default}">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource PasswordBoxStyle_Default}">
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+        <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" Background="White" BorderThickness="1,1,0,1" BorderBrush="#b2b2b2" />
+
+                <Border Grid.Column="1" Background="White" BorderThickness="0,1,1,1" BorderBrush="#b2b2b2" Cursor="Hand"/>
+                <Path x:Name="Arrow" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z" Margin="12" Stretch="Fill" Fill="#005ba8" />
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="ComboBoxTextBox" TargetType="{x:Type TextBox}">
+            <Border x:Name="PART_ContentHost" Focusable="False" Background="{TemplateBinding Background}" />
+        </ControlTemplate>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ComboBox}">
+                        <Grid>
+                            <!-- ToggleButton 已数据绑定到 ComboBox 本身以切换 IsDropDownOpen -->
+                            <ToggleButton Grid.Column="2" Template="{DynamicResource ComboBoxToggleButton}" x:Name="ToggleButton" Focusable="false" IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" ClickMode="Press"/>
+                            <ContentPresenter HorizontalAlignment="Left" Margin="3,3,23,3" x:Name="ContentSite" VerticalAlignment="Center" Content="{TemplateBinding SelectionBoxItem}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" IsHitTestVisible="False"/>
+
+                            <!-- 必须将 TextBox 命名为 PART_EditableTextBox，否则 ComboBox 将无法识别它 -->
+                            <TextBox Visibility="Hidden" Template="{DynamicResource ComboBoxTextBox}" HorizontalAlignment="Left" Margin="3,3,23,3" x:Name="PART_EditableTextBox" Style="{x:Null}" VerticalAlignment="Center" Focusable="True" Background="Transparent" IsReadOnly="{TemplateBinding IsReadOnly}"/>
+
+                            <!-- Popup 可显示 ComboBox 中的项列表。IsOpen 已数据绑定到通过 ComboBoxToggleButton 来切换的 IsDropDownOpen -->
+                            <Popup IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom" x:Name="Popup" Focusable="False" AllowsTransparency="True" PopupAnimation="Slide">
+                                <Grid MaxHeight="{TemplateBinding MaxDropDownHeight}" MinWidth="{TemplateBinding ActualWidth}" x:Name="DropDown" SnapsToDevicePixels="True">
+                                    <Border x:Name="DropDownBorder" Background="{DynamicResource WindowBackgroundBrush}" BorderBrush="{DynamicResource SolidBorderBrush}" BorderThickness="1"/>
+                                    <ScrollViewer Margin="4,6,4,6" Style="{DynamicResource SimpleScrollViewer}" SnapsToDevicePixels="True" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" CanContentScroll="True">
+                                        <!-- StackPanel 用于显示子级，方法是将 IsItemsHost 设置为 True -->
+                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" Background="White"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <HierarchicalDataTemplate x:Key="CheckBoxItemTemplate" ItemsSource="{Binding Children, Mode=OneTime}">
+            <StackPanel Orientation="Horizontal">
+                <CheckBox x:Name="treeviewitem_chk" Focusable="False" IsChecked="{Binding IsChecked}" VerticalAlignment="Center"/>
+                <ContentPresenter Content="{Binding Text, Mode=OneTime}" Margin="2,0" />
+            </StackPanel>
+            <HierarchicalDataTemplate.Triggers>
+                <DataTrigger Binding="{Binding IsChecked}" Value="true">
+                    <Setter TargetName="treeviewitem_chk" Property="Background" Value="#bed0df"/>
+                </DataTrigger>
+            </HierarchicalDataTemplate.Triggers>
+        </HierarchicalDataTemplate>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="36"/>
+            <ColumnDefinition Width="270"/>
+            <ColumnDefinition Width="36"/>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="60"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition/>
+            <RowDefinition Height="41"/>
+        </Grid.RowDefinitions>
+
+        <!--介面標題-->
+        <Border Grid.Row="0" Grid.ColumnSpan="7" BorderThickness="0,0,0,1" BorderBrush="#979797">
+            <TextBlock x:Name="tbk_Title" Style="{StaticResource PopupTitle_20px}" Padding="0,22,0,0" Text="{DynamicResource ACCOUNT_MANAGEMENT}"/>
+        </Border>
+
+        <TabControl x:Name="UserAccountManagementGrid" Style="{StaticResource TabStripPlacement_Default}" Grid.Column="1" Grid.Row="2">
+
+            <!--User Account Tab頁-->
+            <TabItem Name="TabItem_UA" Style="{StaticResource TabItemStyle_Default}" Header="{DynamicResource USER_ACCOUNT}" PreviewMouseLeftButtonUp="TabItem_PreviewMouseLeftButtonUp">
+
+                <!--User Account資料列-->
+                <DataGrid x:Name="grid_UserAcc" ItemsSource="{Binding}" Width="auto" AutoGenerateColumns="False" AlternationCount="2" Style="{DynamicResource DataGridStyle}" IsReadOnly="True" ScrollViewer.CanContentScroll="True" SelectionMode="Single" CanUserSortColumns="True">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                            <EventSetter Event="PreviewMouseUp" Handler="grid_UserAcc_cell_click"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                        <Grid Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"></ContentPresenter>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#005BA8"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Foreground" Value="#1b2338" />
+                                </Trigger>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#f2f9ff" />
+                                    <Setter Property="Foreground" Value="#1b2338" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#005BA8"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding USER_ID}" Width="95" Header="ID"/>
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding USER_NAME}" Width="135" Header="Name"/>
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding USER_GRP}" Width="100" Header="Group"/>
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding BADGE_NUMBER}" Width="95" Header="Badge No."/>
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding DISABLE_FLG}" Width="165" Header="Account Inactivated" />
+                        <DataGridTextColumn ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding DEPARTMENT}" Width="145" Header="Department" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+
+            <!--Group Account Tab頁-->
+            <TabItem Name="TabItem_GA" Style="{StaticResource TabItemStyle_Default}" Header="{DynamicResource GROUP_ACCOUNT}" Margin="5,0,-5,0" PreviewMouseLeftButtonUp="TabItem_PreviewMouseLeftButtonUp">
+
+                <!--Group Account資料列-->
+                <DataGrid  x:Name="grid_UserGroup" ItemsSource="{Binding}" AutoGenerateColumns="False" AlternationCount="2" Style="{DynamicResource DataGridStyle}" IsReadOnly="True" SelectedCellsChanged="UserGroup_SelectedCellsChanged" CanUserSortColumns="True">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell" BasedOn="{StaticResource {x:Type DataGridCell}}">
+                            <EventSetter Event="PreviewMouseUp" Handler="grid_UserGroup_cell_click"/>
+
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type DataGridCell}">
+                                        <Grid Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center"></ContentPresenter>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="BorderBrush" Value="Transparent"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#005BA8"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#005BA8"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}">
+                            <Style.Triggers>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                    <Setter Property="Background" Value="White" />
+                                    <Setter Property="Foreground" Value="#1b2338" />
+                                </Trigger>
+                                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                    <Setter Property="Background" Value="#f2f9ff" />
+                                    <Setter Property="Foreground" Value="#1b2338" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#005BA8"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#005BA8"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.RowStyle>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" ElementStyle="{StaticResource ColumnElementStyle}" Binding="{Binding USER_GRP}" Header="User Group"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+
+        <!--User Account編輯區-->
+        <StackPanel x:Name="UserAccountInfo" Grid.Row="2" Grid.Column="3" Margin="0,36,0,0">
+            <TextBlock x:Name="tbk_UserID" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="{DynamicResource USER_ID}"/>
+            <TextBox x:Name="UA_UserID"/>
+            <Border Height="15"/>
+            <TextBlock x:Name="tbk_PW" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="{DynamicResource USER_PASSWORD}"/>
+            <PasswordBox MaxLength="16" Name="UA_Password" PasswordChar="●"/>
+            <Border Height="15"/>
+            <TextBlock x:Name="tbk_PW2" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="{DynamicResource USER_PASSWORD2}"/>
+            <PasswordBox MaxLength="16" Name="UA_ConfrimPassword" PasswordChar="●"/>
+            <Border Height="15"/>
+            <TextBlock x:Name="tbk_UAGroup" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="{DynamicResource GROUP}"/>
+            <ComboBox Name="UA_Group" Height="30" FontSize="14" Background="White"/>
+            <Border Height="15"/>
+            <TextBlock x:Name="tbk_AccountActivation" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="{DynamicResource ACCOUNT_ACTIVATION}"/>
+            <WrapPanel>
+                <RadioButton x:Name="UA_AccountActivation_radbtn_Yes" Content="Yes" IsChecked="True" Height="30" VerticalContentAlignment="Center"/>
+                <Border Width="13"/>
+                <RadioButton x:Name="UA_AccountActivation_radbtn_No" Content="No" Height="30" VerticalContentAlignment="Center"/>
+            </WrapPanel>
+            <Border Height="15"/>
+            <TextBlock x:Name="tbk_UserName" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="{DynamicResource USER_NAME}"/>
+            <TextBox x:Name="UA_UserName"/>
+            <Border Height="15"/>
+            <TextBlock x:Name="tbk_Department" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="{DynamicResource DEPARTMENT}"/>
+            <TextBox x:Name="UA_Department"/>
+            <Border Height="15"/>
+            <TextBlock x:Name="tbk_BadgeNumber" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="{DynamicResource BADGE_NUMBER}"/>
+            <TextBox x:Name="UA_BadgeNumber"/>
+        </StackPanel>
+
+        <!--Group Account編輯區-->
+        <StackPanel x:Name="GroupAccountInfo" Grid.Row="2" Grid.Column="3" Margin="0,36,0,0" Visibility="Collapsed">
+            <TextBlock x:Name="tbk_GAGroup" Style="{StaticResource Content_14px}" HorizontalAlignment="Left" Text="{DynamicResource GROUP}"/>
+            <TextBox x:Name="GA_Group"/>
+            <TextBlock x:Name="tbk_Permission" Style="{StaticResource Content_14px}" HorizontalAlignment="Left">Permissions</TextBlock>
+            <TreeView x:Name="tV_Permission" Grid.Column="6" Grid.Row="2" Height="445" 
+                            ItemContainerStyle="{StaticResource TreeViewItemStyle}"
+                            ItemTemplate="{StaticResource CheckBoxItemTemplate}">
+            </TreeView>
+        </StackPanel>
+
+        <!--按鈕區-->
+        <Grid Grid.Row="2" Grid.Column="5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="33"/>
+            </Grid.RowDefinitions>
+            <StackPanel Margin="0,56,0,0">
+                <Button Name="btn_Clear" Style="{StaticResource ButtonStyle_Default}" Content="{DynamicResource CLEAR}" Click="Button_Click"/>
+                <v:ViewerButton x:Name="btn_Add" Style="{StaticResource ButtonStyle_Default}" Margin="0,25,0,0" Content="{DynamicResource ADD}" IsDefault="True" Click="Button_Click"/>
+                <v:ViewerButton x:Name="btn_Modify" Style="{StaticResource ButtonStyle_Default}" Margin="0,25,0,0" Content="{DynamicResource MODIFY}" Click="Button_Click"/>
+                <v:ViewerButton x:Name="btn_Delete" Style="{StaticResource ButtonStyle_Default}" Margin="0,25,0,0" Content="{DynamicResource DELETE}" Click="Button_Click"/>
+            </StackPanel>
+            <Button Name="btn_Close" Style="{StaticResource ButtonStyle_Default}" Grid.Row="3" Content="{DynamicResource CLOSE}" Click="Button_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>

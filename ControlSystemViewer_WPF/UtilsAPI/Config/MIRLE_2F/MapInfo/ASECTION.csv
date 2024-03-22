@@ -1,0 +1,17 @@
+Id,FromAddress,ToAddress,Speed,Type,PermitDirection
+30001,10015,10016,1000,Horizontal,Forward
+30002,10016,10003,1000,Horizontal,Forward
+30005,10003,10004,1000,Horizontal,Forward
+30006,10004,10005,1000,Horizontal,Forward
+30007,10005,10006,1000,Horizontal,Forward
+30008,10006,10007,1000,Horizontal,Forward
+30009,10007,10008,1000,Horizontal,Forward
+30101,10008,10009,1000,Horizontal,Forward
+30102,10009,10010,1000,Horizontal,Forward
+30103,10010,10011,1000,Horizontal,Forward
+30105,10011,10013,1000,Horizontal,Forward
+30106,10013,10014,1000,Horizontal,Forward
+30107,10014,10015,1000,Horizontal,Forward
+30201,10008,10017,1000,Horizontal,Forward
+30202,10017,10018,1000,Horizontal,Forward
+30203,10018,10015,1000,Horizontal,Forward

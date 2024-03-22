@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OHTC_AT_S_MALASYIAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ALARM_PROCESS">
+          <Key>
+            <PropertyRef Name="EQPT_ID" />
+            <PropertyRef Name="RPT_DATE_TIME" />
+            <PropertyRef Name="ALAM_CODE" />
+          </Key>
+          <Property Name="EQPT_ID" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="RPT_DATE_TIME" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ALAM_CODE" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="REMARK" Type="nvarchar(max)" />
+          <Property Name="CLASS" Type="int" />
+          <Property Name="ALARM_MODULE" Type="int" />
+          <Property Name="IMPORTANCE_LVL" Type="int" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'OHTC_NewMirleTongluoDemoLine.dbo.ALARM_PROCESS_DETAIL' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="ALARM_PROCESS_DETAIL">
+          <Key>
+            <PropertyRef Name="EQPT_ID" />
+            <PropertyRef Name="RPT_DATE_TIME" />
+            <PropertyRef Name="ALAM_CODE" />
+            <PropertyRef Name="ALAM_LVL" />
+            <PropertyRef Name="ALAM_STAT" />
+          </Key>
+          <Property Name="EQPT_ID" Type="char" MaxLength="15" Nullable="false" />
+          <Property Name="RPT_DATE_TIME" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ALAM_CODE" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="REMARK" Type="nvarchar(max)" />
+          <Property Name="CLASS" Type="int" />
+          <Property Name="ALARM_MODULE" Type="int" />
+          <Property Name="IMPORTANCE_LVL" Type="int" />
+          <Property Name="ALAM_LVL" Type="int" Nullable="false" />
+          <Property Name="CLEAR_DATE_TIME" Type="datetime2" Precision="7" />
+          <Property Name="VH_INSTALL_FLAG" Type="bit" />
+          <Property Name="ALAM_STAT" Type="int" Nullable="false" />
+          <Property Name="ALAM_DESC" Type="char" MaxLength="80" />
+          <Property Name="CMD_ID_1" Type="char" MaxLength="64" />
+        </EntityType>
+        <EntityContainer Name="OHTC_AT_S_MALASYIAModelStoreContainer">
+          <EntitySet Name="ALARM_PROCESS" EntityType="Self.ALARM_PROCESS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ALARM_PROCESS_DETAIL" EntityType="Self.ALARM_PROCESS_DETAIL" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ALARM_PROCESS_DETAIL].[EQPT_ID] AS [EQPT_ID], 
+    [ALARM_PROCESS_DETAIL].[RPT_DATE_TIME] AS [RPT_DATE_TIME], 
+    [ALARM_PROCESS_DETAIL].[ALAM_CODE] AS [ALAM_CODE], 
+    [ALARM_PROCESS_DETAIL].[REMARK] AS [REMARK], 
+    [ALARM_PROCESS_DETAIL].[CLASS] AS [CLASS], 
+    [ALARM_PROCESS_DETAIL].[ALARM_MODULE] AS [ALARM_MODULE], 
+    [ALARM_PROCESS_DETAIL].[IMPORTANCE_LVL] AS [IMPORTANCE_LVL], 
+    [ALARM_PROCESS_DETAIL].[ALAM_LVL] AS [ALAM_LVL], 
+    [ALARM_PROCESS_DETAIL].[CLEAR_DATE_TIME] AS [CLEAR_DATE_TIME], 
+    [ALARM_PROCESS_DETAIL].[VH_INSTALL_FLAG] AS [VH_INSTALL_FLAG], 
+    [ALARM_PROCESS_DETAIL].[ALAM_STAT] AS [ALAM_STAT], 
+    [ALARM_PROCESS_DETAIL].[ALAM_DESC] AS [ALAM_DESC], 
+    [ALARM_PROCESS_DETAIL].[CMD_ID_1] AS [CMD_ID_1]
+    FROM [dbo].[ALARM_PROCESS_DETAIL] AS [ALARM_PROCESS_DETAIL]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OHTC_AT_S_MALASYIAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="OHTC_AT_S_MALASYIAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ALARM_PROCESS" EntityType="OHTC_AT_S_MALASYIAModel.ALARM_PROCESS" />
+          <EntitySet Name="ALARM_PROCESS_DETAIL" EntityType="OHTC_AT_S_MALASYIAModel.ALARM_PROCESS_DETAIL" />
+        </EntityContainer>
+        <EntityType Name="ALARM_PROCESS">
+          <Key>
+            <PropertyRef Name="EQPT_ID" />
+            <PropertyRef Name="RPT_DATE_TIME" />
+            <PropertyRef Name="ALAM_CODE" />
+          </Key>
+          <Property Name="EQPT_ID" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="RPT_DATE_TIME" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ALAM_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="REMARK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CLASS" Type="Int32" />
+          <Property Name="ALARM_MODULE" Type="Int32" />
+          <Property Name="IMPORTANCE_LVL" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ALARM_PROCESS_DETAIL">
+          <Key>
+            <PropertyRef Name="EQPT_ID" />
+            <PropertyRef Name="RPT_DATE_TIME" />
+            <PropertyRef Name="ALAM_CODE" />
+            <PropertyRef Name="ALAM_LVL" />
+            <PropertyRef Name="ALAM_STAT" />
+          </Key>
+          <Property Name="EQPT_ID" Type="String" Nullable="false" MaxLength="15" FixedLength="true" Unicode="false" />
+          <Property Name="RPT_DATE_TIME" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ALAM_CODE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="REMARK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CLASS" Type="Int32" />
+          <Property Name="ALARM_MODULE" Type="Int32" />
+          <Property Name="IMPORTANCE_LVL" Type="Int32" />
+          <Property Name="ALAM_LVL" Type="Int32" Nullable="false" />
+          <Property Name="CLEAR_DATE_TIME" Type="DateTime" Precision="7" />
+          <Property Name="VH_INSTALL_FLAG" Type="Boolean" />
+          <Property Name="ALAM_STAT" Type="Int32" Nullable="false" />
+          <Property Name="ALAM_DESC" Type="String" MaxLength="80" FixedLength="true" Unicode="false" />
+          <Property Name="CMD_ID_1" Type="String" MaxLength="64" FixedLength="true" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OHTC_AT_S_MALASYIAModelStoreContainer" CdmEntityContainer="OHTC_AT_S_MALASYIAEntities">
+          <EntitySetMapping Name="ALARM_PROCESS">
+            <EntityTypeMapping TypeName="OHTC_AT_S_MALASYIAModel.ALARM_PROCESS">
+              <MappingFragment StoreEntitySet="ALARM_PROCESS">
+                <ScalarProperty Name="IMPORTANCE_LVL" ColumnName="IMPORTANCE_LVL" />
+                <ScalarProperty Name="ALARM_MODULE" ColumnName="ALARM_MODULE" />
+                <ScalarProperty Name="CLASS" ColumnName="CLASS" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="ALAM_CODE" ColumnName="ALAM_CODE" />
+                <ScalarProperty Name="RPT_DATE_TIME" ColumnName="RPT_DATE_TIME" />
+                <ScalarProperty Name="EQPT_ID" ColumnName="EQPT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALARM_PROCESS_DETAIL">
+            <EntityTypeMapping TypeName="OHTC_AT_S_MALASYIAModel.ALARM_PROCESS_DETAIL">
+              <MappingFragment StoreEntitySet="ALARM_PROCESS_DETAIL">
+                <ScalarProperty Name="CMD_ID_1" ColumnName="CMD_ID_1" />
+                <ScalarProperty Name="ALAM_DESC" ColumnName="ALAM_DESC" />
+                <ScalarProperty Name="ALAM_STAT" ColumnName="ALAM_STAT" />
+                <ScalarProperty Name="VH_INSTALL_FLAG" ColumnName="VH_INSTALL_FLAG" />
+                <ScalarProperty Name="CLEAR_DATE_TIME" ColumnName="CLEAR_DATE_TIME" />
+                <ScalarProperty Name="ALAM_LVL" ColumnName="ALAM_LVL" />
+                <ScalarProperty Name="IMPORTANCE_LVL" ColumnName="IMPORTANCE_LVL" />
+                <ScalarProperty Name="ALARM_MODULE" ColumnName="ALARM_MODULE" />
+                <ScalarProperty Name="CLASS" ColumnName="CLASS" />
+                <ScalarProperty Name="REMARK" ColumnName="REMARK" />
+                <ScalarProperty Name="ALAM_CODE" ColumnName="ALAM_CODE" />
+                <ScalarProperty Name="RPT_DATE_TIME" ColumnName="RPT_DATE_TIME" />
+                <ScalarProperty Name="EQPT_ID" ColumnName="EQPT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

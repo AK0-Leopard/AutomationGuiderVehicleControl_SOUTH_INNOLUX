@@ -1,0 +1,12 @@
+Id,PositionX,PositionY,VehicleHeadAngle,IsCharger,ChargeDirection,LoadUnloadDirection,PioDirection,SpecialTurn,AliasId
+20001,0,24466,90,FALSE,None,Left,Left,,STK05
+28002,0,21771,90,TRUE,Left,Left,Left,,STK05
+16003,0,18766,90,FALSE,None,None,None,,
+16004,0,12766,90,FALSE,None,None,None,,
+16005,0,6766,90,FALSE,None,None,None,,
+28006,0,2375,90,TRUE,Left,Left,Left,,LFT030
+16007,0,974,90,FALSE,None,None,None,TR50,
+20008,0,43,90,FALSE,None,Left,Left,,LFT030
+20009,8293,2039,90,FALSE,None,Right,Right,,FAAH002
+16010,8293,974,90,FALSE,None,None,None,TR50,
+20011,8293,154,90,FALSE,None,Right,Right,,FAAH001

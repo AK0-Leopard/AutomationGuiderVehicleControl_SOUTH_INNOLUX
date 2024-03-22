@@ -1,0 +1,175 @@
+{
+  "SettingItems": [
+    {
+      "Category": "System",
+      "Items": [
+        {
+          "Name": "SystemType",
+          "Value": "OHTC"
+        },
+        {
+          "Name": "DayShiftHour",
+          "Value": "7"
+        },
+        {
+          "Name": "HasCarrierType",
+          "Value": "Y"
+        }
+      ]
+    },
+    {
+      "Category": "Report",
+      "Items": [
+        {
+          "Name": "MeanTimeOverMin",
+          "Value": "12"
+        },
+        {
+          "Name": "ExportRowLimit",
+          "Value": "-1"
+        }
+      ]
+    },
+    {
+      "Category": "DB",
+      "Items": [
+        {
+          "Name": "ConnectionString",
+          "Value": "data source=db.ohxc.mirle.com.tw;initial catalog=OHTC_2FDemoLine;user id=sa;password=p@ssw0rd;MultipleActiveResultSets=True;App=EntityFramework"
+        }
+      ]
+    },
+    {
+      "Category": "WebClientManager",
+      "Items": [
+        {
+          "Name": "ControlSystemPort",
+          "Value": "3280"
+        }
+      ]
+    },
+    {
+      "Category": "MainView",
+      "Items": [
+        {
+          "Name": "CustomerLogo",
+          "Value": ""
+        }
+      ]
+    },
+    {
+      "Category": "MenuItem_System",
+      "Items": [
+        {
+          "Name": "SystemModeControl",
+          "Value": "Y"
+        }
+      ]
+    },
+    {
+      "Category": "MenuItem_Operation",
+      "Items": [
+        {
+          "Name": "SystemModeControl",
+          "Value": "N"
+        }
+      ]
+    },
+    {
+      "Category": "MainLayout",
+      "Items": [
+        {
+          "Name": "ShowSignalLight",
+          "Value": "Y"
+        },
+        {
+          "Name": "SideArea_ShowPortStatus",
+          "Value": "Y"
+        },
+        {
+          "Name": "SideArea_DefaultWidth",
+          "Value": "330"
+        },
+        {
+          "Name": "CurrentData_DefaultHeight",
+          "Value": "216"
+        }
+      ]
+    },
+    {
+      "Category": "MapBase",
+      "Items": [
+        {
+          "Name": "Type",
+          "Value": "Horizontal"
+        },
+        {
+          "Name": "ShowScaleRuler",
+          "Value": "N"
+        },
+        {
+          "Name": "ScaleRulerIcon",
+          "Value": ""
+        },
+        {
+          "Name": "AngleOfView",
+          "Value": "0"
+        }
+      ]
+    },
+    {
+      "Category": "Map",
+      "Items": [
+        {
+          "Name": "RailWidth",
+          "Value": "200"
+        },
+        {
+          "Name": "AddressWidth",
+          "Value": "200"
+        },
+        {
+          "Name": "VehicleWidth",
+          "Value": "1200"
+        },
+        {
+          "Name": "SurroundingWhiteSpaceWidth",
+          "Value": "5000"
+        },
+        {
+          "Name": "RulerTickFrequency",
+          "Value": "2000"
+        },
+        {
+          "Name": "ShowShelf",
+          "Value": "Y"
+        },
+        {
+          "Name": "ShelfWidth",
+          "Value": "400"
+        },
+        {
+          "Name": "ShelfOffset",
+          "Value": "500"
+        },
+        {
+          "Name": "ShowTrackSwitch",
+          "Value": "Y"
+        },
+        {
+          "Name": "TrackSwitchWidth",
+          "Value": "500"
+        }
+      ]
+    },
+    {
+      "Category": "AOVPopupWindow",
+      "Items": [
+        {
+          "Name": "Style",
+          "Value": "1"
+        }
+      ]
+    }
+  ]
+}

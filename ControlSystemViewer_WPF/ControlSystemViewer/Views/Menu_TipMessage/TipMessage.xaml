@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.Menu_TipMessage.TipMessage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views.Menu_TipMessage"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="1000">
+    <Grid Background="#003366">
+        <DockPanel Margin="10">
+            <Grid DockPanel.Dock="Top" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,30,0,10">
+                <WrapPanel>
+                    <Image Height="45" Width="45" x:Name="Img_TipMessage"/>
+                    <Label Width="15"/>
+                    <Label x:Name="lbl_ConfirmMsg" Content="{DynamicResource TIP_MESSAGE_CONFIRM}" Foreground="#EF8900" FontSize="26" FontWeight="Bold" FontFamily="Arial" VerticalContentAlignment="Bottom"/>
+                </WrapPanel>
+            </Grid>
+            <Grid DockPanel.Dock="Bottom" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,7,0,0">
+                <Button x:Name="btn_Close" Style="{StaticResource ButtonStyle_Default}" Content="Close" Click="Button_Close_Click"/>
+            </Grid>
+            <DockPanel>
+                <Label DockPanel.Dock="Top" x:Name="lbl_Msg" Content="{DynamicResource MESSAGE}" Background="#005BA8" FontSize="16" Foreground="White" Width="150" Height="33"
+                       HorizontalAlignment="Left" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+                <Grid Background="#EEEEEE">
+                    <local:TipMessage_Data x:Name="data"/>
+                </Grid>
+            </DockPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

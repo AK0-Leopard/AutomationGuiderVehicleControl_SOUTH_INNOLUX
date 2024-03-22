@@ -1,0 +1,31 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "CommonMessage.ProtocolFormat.ControllerSettingFun";
+
+package greet;
+
+// The greeting service definition.
+service ControllerSettingFunGreeter {
+	// Sends a greeting
+	//↓
+	//section狀態變更要求
+	rpc segControl(ControlRequest) returns (ControlReply);
+	//segment狀態變更要求
+	rpc sectionControl(ControlRequest) returns (ControlReply);
+	//charge 充電樁狀態變更要求
+	rpc ChargeSetting(ChargeSettingRequest) returns (ChargeSettingReply);
+	//Controller參數設定
+	rpc ControllerParameterSetting(ControllerParameterSettingRequest) returns (ControllerParameterSettingReply);
+	//要求停止蜂鳴器
+	rpc resetBuzzer(Empty) returns (Empty);
+}
+message Empty {} 
+
+message ControlRequest {string id=1; bool enable=2;}
+message ControlReply{ string result=1;}
+
+message ChargeSettingRequest {string chargeID = 1;uint32 couplerID = 2; bool enable=3;}
+message ChargeSettingReply {string result =1;}
+
+message ControllerParameterSettingRequest {string parameterID=1; string parameterValue=2;}
+message ControllerParameterSettingReply {string result=1;}

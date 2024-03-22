@@ -1,0 +1,11 @@
+Id,FromAddress,ToAddress,Speed,Type,PermitDirection
+0011,20001,28002,600,Vertical,Forward
+0012,28002,16003,600,Vertical,Forward
+0013,16003,16004,600,Vertical,Forward
+0014,16004,16005,600,Vertical,Forward
+0015,16005,28006,300,Vertical,Forward
+0016,28006,16007,300,Vertical,Forward
+0021,16007,20008,300,Vertical,Forward
+0031,16007,16010,600,Horizontal,Forward
+0041,20009,16010,300,Vertical,Forward
+0051,16010,20011,300,Vertical,Forward
