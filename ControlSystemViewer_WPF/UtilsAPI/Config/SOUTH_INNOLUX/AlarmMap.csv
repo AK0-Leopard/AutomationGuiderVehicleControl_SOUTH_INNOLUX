@@ -1,0 +1,2182 @@
+﻿OBJECT_ID,ALARM_ID,ALARM_LVL,ALARM_DESC,ALARM_DESC_TW,HAPPENED_REASON,SOLUSTION
+AGV,1,Warn,AlreadyHaveCmd,AlreadyHaveCmd,AGV已有命令所以不接受 AGVC 新的命令,"1.等待AGV把命令做完
+2.切到手動終止現有命令, 在切回自動重新接AGVC命令"
+AGV,2,Warn,LowPowerCharging,LowPowerCharging,AGV電量在低水位所以不接受 AGVC 的搬送命令,"1.開回充電站進行充電，然後清除異常後，確認AGVC命令，進行復歸重新上線
+2.電池百分比是否有異常
+3.AGVC百分比設定確認"
+AGV,3,Warn,LoadingOff,LoadingOff,AGV 在取貨命令結束時 Loading sensor 顯示無貨,"1.確定站點上是否有貨
+2.確認荷有sensor有照到貨物
+3.確認荷有sensor正常運作"
+AGV,4,Warn,CarrierIdReadFail,CarrierIdReadFail,AGV 讀取 CstId 失敗,"1.確定 BL-1301 位置是否可以讀取
+2.開啟 Keyence 確認裝置是否正常讀取(調整照射角度)"
+AGV,5,Warn,CarrierIdIsError,CarrierIdIsError,AGV 讀取 CstId 錯誤,"1.確定 BL-1301 位置是否可以讀取
+2.開啟 Keyence 確認裝置是否正常讀取(調整照射角度)
+3.確認 Cst 上面條碼是否損毀"
+AGV,6,Warn,MoveFinishFail,MoveFinishFail,"1.找不到車子定位
+2.移動發生偏差","1.查看Log (MoveControl)
+2.觀察SR2000是否正常運作。
+3.查看Log (扭力值,速度值)
+4.檢修輪子機構
+5.重新調整馬達 Gain 值"
+AGV,7,Warn,LoadingOn,LoadingOn,AGV 在放貨命令結束時 Loading sensor 顯示有貨,"1.確定台車上是否有貨
+2.確認荷有sensor狀態"
+AGV,8,Warn,TRUCommandExist,TRUCommandExist,放貨前Fork有上一筆命令未完成,"1.查看Log (Comm, Debug)"
+AGV,9,Warn,VehicleCannotUnload,VehicleCannotUnload,車子不在放貨位置，無法做放貨動作,"1.確認命令目的地位置是否為放貨站
+2.確認地圖圖資取貨站設定"
+AGV,10,Warn,TRUCommandExist,TRUCommandExist,取貨前Fork有上一筆命令未完成,"1.查看Log (Comm, Debug)"
+AGV,11,Warn,PositionLostWithCmd,PositionLostWithCmd,AGV不在引導路徑,"1.查看Log (Comm, Debug)
+2.確認AGVC下達路徑跟AGV所在位置必須有關連性"
+AGV,12,Warn,ChargeDirectionError,ChargeDirectionError,AGV 充電站點設定錯誤,"1.確認 Address.csv 充電站站點設定
+2.先移動到某站點上，再開回充電站，然後進行復歸重新上線。"
+AGV,13,Warn,StartChargeTimeout,StartChargeTimeout,AGV 充電命令 timeout,1.確認 PLC 交握命令
+AGV,14,Alarm,StopChargeTimeout,StopChargeTimeout,AGV 充斷電命令 timeout,1.確認 PLC 交握命令
+AGV,15,Warn,VehicleCannotload,VehicleCannotload,AGV 取放貨站點設定錯誤,"1.確認命令目的地位置是否為放貨站
+2.確認地圖圖資取貨站設定"
+AGV,16,Warn,AlreadyHaveCst,AlreadyHaveCst,AGV 車上已有 Cst 所以不能執行取貨命令,
+AGV,17,Warn,NoCstToUnload,NoCstToUnload,AGV 車上沒有 Cst 所以不能執行放貨命令,
+AGV,18,Warn,MapCheckFail,MapCheckFail,AGV 圖資異常,1.確認圖資檔案 (Address.csv & Asection.csv)
+AGV,19,Warn,IsNotTransferCannotOverride,IsNotTransferCannotOverride,AGV 在沒有命令的情況下收到 AGVC Override 命令,
+AGV,20,Warn,IsNotMoveStepCannotOverride,IsNotMoveStepCannotOverride,AGV 在不是移動命令的情況下收到 AGVC Override 命令,
+AGV,21,Warn,IsNotPauseCannotOverride,IsNotPauseCannotOverride,AGV 在不是 Pause 的情況下收到 AGVC Override 命令,
+AGV,22,Warn,OverrideUnloadAddressUnmatch,OverrideUnloadAddressUnmatch,AGV的放貨位置與AGVC 放貨位址不匹配,
+AGV,23,Warn,OverrideLoadAddressUnmatch,OverrideLoadAddressUnmatch,AGV的取貨位置與AGVC 放貨位址不匹配,
+AGV,24,Warn,OverrideToUnloadIsEmpty,OverrideToUnloadIsEmpty,AGVC路徑清單放貨段為空,
+AGV,25,Warn,OverrideToLoadIsEmpty,OverrideToLoadIsEmpty,AGVC路徑清單取貨段為空,
+AGV,26,Warn,CheckOverrideException,CheckOverrideException,AGV 異常發生在override-check,
+AGV,27,Alarm,AGV is not  on Auto Status,AGV is not  on Auto Status,"AGV W0A00 != 1
+可能原因為:
+1. 人機沒有切回自動
+2. Sensor 異常
+3. etc…","1.確認台車要處於 AGV 自動狀態
+2.W0A00必須要處於 On的狀態 (確認相關 Sensor 正常)"
+AGV,28,Warn,CarrierIdMisMatch,CarrierIdMisMatch,AGV移載ID匹配失誤,
+AGV,29,Warn,IsCarrierIdReadReplyTimeout,IsCarrierIdReadReplyTimeout,AGV讀取CST超時,"1.確認AGV車內有 CST
+2.確認 Keyence 裝置正常"
+AGV,30,Warn,VehicleHasAlarm,VehicleHasAlarm,車輛有Alram無法執行轉換命令,
+AGV,31,Warn,ManualToAutoFail,ManualToAutoFail,MoveControl狀態為非閒置狀態無法切換到自動模式。,
+AGV,32,Warn,ManualToAutoFail,ManualToAutoFail,實際位置為空，無法切換到自動模式。,
+AGV,33,Warn,IsNotTransferCannotAvoid,IsNotTransferCannotAvoid,車輛未在轉換中拒絕迴避,
+AGV,34,Warn,IsNotMoveStepCannotAvoid,IsNotMoveStepCannotAvoid,車輛不處於移動步驟，拒絕迴避。,
+AGV,35,Warn,IsNotPauseCannotAvoid,IsNotPauseCannotAvoid,車輛不會因後備拒絕而暫停行駛。,
+AGV,36,Warn,CheckAvoidException,CheckAvoidException,避免檢查中發生異常。,
+AGV,37,Alarm,AgvcCallEms,AgvcCallEms,AGVC下EMS,1.查看 AGVC 狀態 
+AGV,38,Warn,InterlockError,InterlockError,當loadunload和retry count = 0時發生互鎖錯誤。,
+AGV,39,Alarm,PositionError,PositionError,"AGV進行台車補正確認時, 如果手臂補正通知 Fail, 則會發此警告",
+AGV,40,Warn,SendWaitTimeout,SendWaitTimeout,發送等待超時,
+AGV,100000,Alarm,MoveControl Exception,MoveControl Exception,MoveControl主Thread(線)跳Exception,"1.查看Log ( Motion, MoveControl)
+2.聯絡Mirle"
+AGV,100001,Warn,Send PLC to Stop AGV,Send PLC to Stop AGV,"通知PLC斷電
+1.台車要求斷284V","1.查看Log ( Motion, MoveControl)
+2.確認 Elmo 連線是否可以正常連線, 如果不行請確認網路線及 Elmo 控制器及驅動器"
+AGV,100002,Alarm,Command out of trigger range,Command out of trigger range,"超過觸發區間
+1.送出移動命令時台車不在預定的位置","1.確認地上Barcode狀況(是否有損毀, 變形, 移動狀況發生)
+2.查看Log ( Motion, MoveControl)
+3.查看扭力值變化是否異常(旋轉軸走行軸), 並根據根據異常扭力檢修輪子"
+AGV,100100,Alarm,Move : Initail Wheel Angle Timeout,Move : Initail Wheel Angle Timeout,"Move_啟動前旋轉角度不到位
+1.旋轉輪角度不在預定位置
+2.台車輪子旋轉不順","1.查看Log ( Motion, MoveControlCsv)
+2.查看扭力值變化是否異常(旋轉軸), 並根據根據異常扭力檢修輪子"
+AGV,100101,Alarm,Move : Enable allAxis Timeout,Move : Enable allAxis Timeout,"Move_EnableTimeout
+1.ServoOn所有走行輪子timeout","1.查看Log (Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,100200,Warn,Reserve : Get Reserve with MoveControl Idle,Reserve : Get Reserve with MoveControl Idle,Reserve_在Idle下取得Reserve,
+AGV,100201,Warn,Reserve : Get Reserve position not math,Reserve : Get Reserve position not math,Reserve_取得不匹配的Reserve點,"1.查看Log(查看 Debug)
+2.聯絡Mirle"
+AGV,100202,Alarm,Reserve : Command's Reserve out of ReserveList's Range,Reserve : Command's Reserve out of ReserveList's Range,"Reserve_指令動作的ReserveIndex超過ReserveList範圍
+1.要的Reserve長度不匹配","1.查看Log(查看 Debug)
+2.聯絡Mirle"
+AGV,100300,Alarm,SlowStop : Timeout,SlowStop : Timeout,SlowStop_Timeout,"1.查看Log (Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,100400,Alarm,STurn : AGV turning too fast,STurn : AGV turning too fast,TR_入彎超速,"1.查看Log (可察看扭力值,速度值,馬達position)
+2.檢修驅動器或是輪子"
+AGV,100401,Alarm,STurn : AGV turning too slow,STurn : AGV turning too slow,TR_入彎過慢,"1.查看Log (可察看扭力值,速度值,馬達position)
+2.檢修驅動器或是輪子"
+AGV,100402,Warn,STurn : AGV turning with GroupTurn not Ready,STurn : AGV turning with GroupTurn not Ready,STurn_GT動作中,
+AGV,100403,Alarm,STurn : AGV turning with wrong path,STurn : AGV turning with wrong path,STurn_不再路徑上,"1.檢查入彎點, 出彎點 Barcode是否正常
+2.查看 Log (可察看扭力值,速度值,馬達position)
+3.檢修驅動器或是輪子"
+AGV,100404,Alarm,STurn : one of wheels turning too slow,STurn : one of wheels turning too slow,STurn_舵輪旋轉過慢,"1.檢查入彎點, 出彎點 Barcode是否正常
+2.查看 Log (可察看扭力值,速度值,馬達position)
+3.檢修驅動器或是輪子"
+AGV,100405,Alarm,STurn : stop in STurn feature distable,STurn : stop in STurn feature distable,STurn_未開啟TR中停止,"功能設定警告訊息, 請檢查設定"
+AGV,100406,Alarm,STurn : continue in STurn feature distable,STurn : continue in STurn feature distable,STurn_未開啟STurn中重新啟動,"功能設定警告訊息, 請檢查設定"
+AGV,100500,Alarm,RTurn : AGV turning too fast,RTurn : AGV turning too fast,RTurn_入彎超速,"1.查看Log (可察看扭力值,速度值,馬達position)
+2.檢修驅動器或是輪子"
+AGV,100501,Alarm,RTurn : AGV turning too slow,RTurn : AGV turning too slow,RTurn_入彎過慢,"1.查看Log (可察看扭力值,速度值,馬達position)
+2.檢修驅動器或是輪子"
+AGV,100502,Alarm,RTurn : Virtual Axis not Link,RTurn : Virtual Axis not Link,RTurn_虛擬軸沒有Link,"1.查看異常碼 ec,mf 並對照驅動器異查碼手冊"
+AGV,100503,Alarm,RTurn : Turn direction format error,RTurn : Turn direction format error,RTurn_轉向資料格式錯誤,"1.查看Log(查看 MoveControl)
+2.聯絡Mirle"
+AGV,100504,Alarm,RTurn : stop in RTurn feature distable,RTurn : stop in RTurn feature distable,RTurn_未開啟RTurn中重新啟動,"功能設定警告訊息, 請檢查設定"
+AGV,100505,Alarm,RTurn : RTurn Control timeout,RTurn : RTurn Control timeout,RTurn_流程Timeout,"1.查看Log(MoveControl)
+2.查看Log (可察看扭力值,速度值,馬達position)
+3.檢修驅動器或是輪子"
+AGV,100506,Alarm,RTurn : stop in can't continue step,RTurn : stop in can't continue step,RTurn_停止在無法再啟動步驟,"1.查看Log(MoveControl)
+2.查看Log (可察看扭力值,速度值,馬達position)
+3.檢修驅動器或是輪子"
+AGV,100507,Alarm,RTurn : continue in RTurn feature distable,RTurn : continue in RTurn feature distable,RTurn_未開啟RTurn中停止,功能設定警告訊息
+AGV,100600,Alarm,StopAndClear : Timeout,StopAndClear : Timeout,StopAndClear_Timeout,"1.查看Log(MoveControl)
+2.聯絡Mirle"
+AGV,100700,Warn,SecondCorrection : Timeout,SecondCorrection : Timeout,End_SecondCorrectionTimeout,"1.查看Log(MoveControl)
+2.聯絡Mirle"
+AGV,100701,Warn,SecondCorrection : Disable Timeout,SecondCorrection : Disable Timeout,End_DisableTimeout,功能設定警告訊息
+AGV,101000,Alarm,MoveMethod Initail Fail,MoveMethod Initail Fail,MoveMethod層_初始化失敗,"1.重新開啟程式
+2.確認 EAS2 Elmo 連線正常 (如果異常需更換 Elmo 相關元件或網路線調整)
+3. 聯絡 Mirle"
+AGV,101001,Alarm,MoveMethod Driver Command Fail,MoveMethod Driver Command Fail,MoveMethod層_DriverReturnFalse,"1.重新開啟程式
+2.確認 EAS2 Elmo 連線正常 (如果異常需更換 Elmo 相關元件或網路線調整)
+3. 聯絡 Mirle"
+AGV,101100,Alarm,MotionDriver_Elmo Initail Fail,MotionDriver_Elmo Initail Fail,"MotionDriver_Elmo初始化失敗
+1. ELMO 控制器異常","1.重新開啟程式
+2.確認 EAS2 Elmo 連線正常 (如果異常需更換 Elmo 相關元件或網路線調整)
+3. 聯絡 Mirle"
+AGV,101101,Alarm,MotionDriver_Elmo Connect Fail,MotionDriver_Elmo Connect Fail,"MotionDriver_Elmo連線失敗
+1. ELMO控制器連線失敗","1.切回手動，清除異常後，進入Jogpitch頁面使用 Reset 進行重新連線
+2.程式關閉重新開啟
+3.確認 EAS2 Elmo 連線正常 (如果異常需更換 Elmo 相關元件或網路線調整)
+4. 聯絡 Mirle"
+AGV,101102,Alarm,MotionDriver_Elmo Axis Setting format error,MotionDriver_Elmo Axis Setting format error,"MotionDriver_Elmo軸設定資料格式錯誤
+1. 程式無法正常讀取xml 設定資料
+2. 設定檔XML損毀會遺失
+","1.程式重新開啟
+2.重新取得Elmo設定檔資料再開啟程式
+3.聯絡Mirle"
+AGV,101103,Alarm,MotionDriver_Elmo Bulk Exception,MotionDriver_Elmo Bulk Exception,"MotionDriver_ElmoBulkException
+1.程式從ELMO控制器取得bulk 資料出錯","1.重新開啟程式
+2.確認 EAS2 Elmo 連線正常 (如果異常需更換 Elmo 相關元件或網路線調整)
+3. 聯絡 Mirle"
+AGV,101104,Alarm,MotionDriver_Elmo Disconnect : IPC witch controler,MotionDriver_Elmo Disconnect : IPC witch controler,"MotionDriver_Elmo斷線IPC與控制卡
+1.程式與Elmo斷線造成台車急停","1.重新開啟程式
+2.確認 EAS2 Elmo 連線正常 (如果異常需更換 Elmo 相關元件或網路線調整)
+3. 聯絡 Mirle"
+AGV,101105,Alarm,MotionDriver_Elmo Disconnect : controler witch driver,MotionDriver_Elmo Disconnect : controler witch driver,"MotionDriver_Elmo斷線控制卡與Driver
+1.程式收到ELMO控制器與驅動器斷線,造成台車急停","1.重新開啟程式
+2.確認 EAS2 Elmo 連線正常 (如果異常需更換 Elmo 相關元件或網路線調整)
+3. 聯絡 Mirle"
+AGV,101106,Warn,ElmoAlarmCode,ElmoAlarmCode,"Elmo警報代碼
+1.收到ELMO發出的異常",
+AGV,101110,Warn,MotionDriver Axis Error,MotionDriver Axis Error,"MotionDriver_Elmo軸異常
+1.有任一軸有異常就會發出","1.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,101111,Warn,MotionDriver Axis XFL Error,MotionDriver Axis XFL Error,MotionDriver_Elmo軸異常_XFL ,"1.確認ElmoDriver是否發燙, 異味, 如有請更換
+2.確認ElmoDriver燈號是否為綠燈,如不是請確認接線
+3.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+4.根據驅動器的異常碼查找相關問題"
+AGV,101112,Warn,MotionDriver Axis XFR Error,MotionDriver Axis XFR Error,MotionDriver_Elmo軸異常_XFR,"1.確認ElmoDriver是否發燙, 異味, 如有請更換
+2.確認ElmoDriver燈號是否為綠燈,如不是請確認接線
+3.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+4.根據驅動器的異常碼查找相關問題"
+AGV,101113,Warn,MotionDriver Axis XRL Error,MotionDriver Axis XRL Error,MotionDriver_Elmo軸異常_XRL,"1.確認ElmoDriver是否發燙, 異味, 如有請更換
+2.確認ElmoDriver燈號是否為綠燈,如不是請確認接線
+3.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+4.根據驅動器的異常碼查找相關問題"
+AGV,101114,Warn,MotionDriver Axis XRR Error,MotionDriver Axis XRR Error,MotionDriver_Elmo軸異常_XRR,"1.確認ElmoDriver是否發燙, 異味, 如有請更換
+2.確認ElmoDriver燈號是否為綠燈,如不是請確認接線
+3.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+4.根據驅動器的異常碼查找相關問題"
+AGV,101115,Warn,MotionDriver Axis TFL Error,MotionDriver Axis TFL Error,MotionDriver_Elmo軸異常_TFL,"1.確認ElmoDriver是否發燙, 異味, 如有請更換
+2.確認ElmoDriver燈號是否為綠燈,如不是請確認接線
+3.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+4.根據驅動器的異常碼查找相關問題"
+AGV,101116,Warn,MotionDriver Axis TFR Error,MotionDriver Axis TFR Error,MotionDriver_Elmo軸異常_TFR,"1.確認ElmoDriver是否發燙, 異味, 如有請更換
+2.確認ElmoDriver燈號是否為綠燈,如不是請確認接線
+3.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+4.根據驅動器的異常碼查找相關問題"
+AGV,101117,Warn,MotionDriver Axis TRL Error,MotionDriver Axis TRL Error,MotionDriver_Elmo軸異常_TRL,"1.確認ElmoDriver是否發燙, 異味, 如有請更換
+2.確認ElmoDriver燈號是否為綠燈,如不是請確認接線
+3.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+4.根據驅動器的異常碼查找相關問題"
+AGV,101118,Warn,MotionDriver Axis TRR Error,MotionDriver Axis TRR Error,MotionDriver_Elmo軸異常_TRR,"1.確認ElmoDriver是否發燙, 異味, 如有請更換
+2.確認ElmoDriver燈號是否為綠燈,如不是請確認接線
+3.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+4.根據驅動器的異常碼查找相關問題"
+AGV,101119,Warn,MotionDriver Axis VXFL Error,MotionDriver Axis VXFL Error,MotionDriver_Elmo軸異常_VXFL,"1.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,101120,Warn,MotionDriver Axis VXFR Error,MotionDriver Axis VXFR Error,MotionDriver_Elmo軸異常_VXFR,"1.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,101121,Warn,MotionDriver Axis VXRL Error,MotionDriver Axis VXRL Error,MotionDriver_Elmo軸異常_VXRL,"1.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,101122,Warn,MotionDriver Axis VXRR Error,MotionDriver Axis VXRR Error,MotionDriver_Elmo軸異常_VXRR,"1.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,101123,Warn,MotionDriver Axis VTFL Error,MotionDriver Axis VTFL Error,MotionDriver_Elmo軸異常_VTFL,"1.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,101124,Warn,MotionDriver Axis VTFR Error,MotionDriver Axis VTFR Error,MotionDriver_Elmo軸異常_VTFR,"1.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,101125,Warn,MotionDriver Axis VTRL Error,MotionDriver Axis VTRL Error,MotionDriver_Elmo軸異常_VTRL,"1.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,101126,Warn,MotionDriver Axis VTRR Error,MotionDriver Axis VTRR Error,MotionDriver_Elmo軸異常_VTRR,"1.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,101127,Warn,MotionDriver Axis GX Error,MotionDriver Axis GX Error,MotionDriver_Elmo軸異常_GX,"1.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,101128,Warn,MotionDriver Axis GT Error,MotionDriver Axis GT Error,MotionDriver_Elmo軸異常_GT,"1.查看Log (AlarmHistory,Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,102000,Alarm,LocateControl Initail Fail,LocateControl Initail Fail,"LocateControl初始化失敗
+1.SR2000啟動失敗","1.程式關閉重新開啟
+2.台車斷電重開進行整體復歸動作
+3.更換SR2000"
+AGV,102100,Alarm,LocateDriver_BarcodeMapSystem Initail Fail,LocateDriver_BarcodeMapSystem Initail Fail,"LocateDriver_Sr2000初始化失敗
+1.SR2000啟動失敗","1.程式關閉重新開啟
+2.台車斷電重開進行整體復歸動作
+3.更換SR2000"
+AGV,102101,Alarm,LocateDriver_BarcodeMapSystem Connect Fail,LocateDriver_BarcodeMapSystem Connect Fail,"LocateDriver_Sr2000連線失敗 
+1.SR2000啟動失敗","1.程式關閉重新開啟
+2.台車斷電重開進行整體復歸動作
+3.更換SR2000"
+AGV,102102,Warn,LocateDriver_BarcodeMapSystem data format error,LocateDriver_BarcodeMapSystem data format error,"LocateDriver_Sr2000回傳資料格式錯誤
+1.Barcode有損毀造成讀取失敗(或單純讀取失敗)
+2.CRC check error","1.找到相對應的Barcode 確認狀態, 更換或去除掉有問題的Barcode"
+AGV,102103,Warn,LocateDriver_BarcodeMapSystem LON Exception,LocateDriver_BarcodeMapSystem LON Exception,"LocateDriver_BarcodeMapSystemTriggerException
+1.SR2000 LON失敗","1.程式關閉重新開啟
+2.台車斷電重開進行整體復歸動作
+3.更換SR2000"
+AGV,102104,Warn,LocateDriver_BarcodeMapSystem Error,LocateDriver_BarcodeMapSystem Error,"LocateDriver_BarcodeMapSystemError
+1.SR2000 其他異常","1.查看異常碼 
+2.程式關閉重新開啟
+3.台車斷電重開進行整體復歸動作
+4.更換SR2000"
+AGV,102200,Alarm,LocateDriver_SLAM_Sick Initail Fail,LocateDriver_SLAM_Sick Initail Fail,"LocateDriver_SLAM_Sick初始化失敗
+1.SLAM系統啟動失敗","1.程式關閉重新開啟
+2.台車斷電重開進行整體復歸動作
+3.進到SLAM頁面查看狀況"
+AGV,102201,Alarm,LocateDriver_SLAM_Sick Connect Fail,LocateDriver_SLAM_Sick Connect Fail,"LocateDriver_SLAM_Sick連線失敗 
+1.SLAM系統連線異常","1.程式關閉重新開啟
+2.台車斷電重開進行整體復歸動作
+3.進到SLAM頁面查看狀況"
+AGV,102202,Alarm,LocateDriver_SLAM_Sick data format error,LocateDriver_SLAM_Sick data format error,"LocateDriver_SLAM_Sick資料格式錯誤 
+1.SLAM回傳資料錯誤 timeout 或是 crc check 異常","1.程式關閉重新開啟
+2.台車斷電重開進行整體復歸動作
+3.進到SLAM頁面查看狀況"
+AGV,102203,Warn,LocateDriver_SLAM_Sick wrong locate,LocateDriver_SLAM_Sick wrong locate,"LocateDriver_SLAM_Sick經度迷航 
+1.定位精度異常","1..進到SLAM頁面查看狀況，切回手動，台車進行重新定位，進行復歸後上線
+2.程式關閉重新開啟
+3.台車斷電重開進行整體復歸動作"
+AGV,103000,Warn,CreateMoveCommandList Fail,CreateMoveCommandList Fail,"命令分解失敗 
+1.路線命令分解錯誤",
+AGV,103100,Warn,Can't Override : Can't Pause now,Can't Override : Can't Pause now,拒絕Override_當下不能Pause ,
+AGV,103101,Alarm,Can't Override : Override Timeout,Can't Override : Override Timeout,拒絕Override_Timeout,"1.查看Log(查看 Debug)
+2.聯絡Mirle"
+AGV,104000,Warn,Can't Auto : MoveControl Status is not Idle,Can't Auto : MoveControl Status is not Idle,不能Auto_MoveControl不在Idle狀態,
+AGV,104001,Warn,Can't Auto : Motion Driver Disconnect,Can't Auto : Motion Driver Disconnect,不能Auto_MoveCommandControlIntailFail ,
+AGV,104002,Warn,Can't Auto : MoveCommandControl Intail Fail,Can't Auto : MoveCommandControl Intail Fail,不能Auto_MotionDriverDisconnect ,
+AGV,104003,Warn,Can't Auto : Closing program,Can't Auto : Closing program,不能Auto_程式關閉中,
+AGV,104004,Warn,Can't Auto : Axis Error,Can't Auto : Axis Error,不能Auto_有軸異常,
+AGV,104005,Warn,Can't Auto : Wait ResetAlarm Finish,Can't Auto : Wait ResetAlarm Finish,不能Auto_ResetAlarm中,
+AGV,104006,Warn,Can't Auto : JogPitch Action,Can't Auto : JogPitch Action,不能Auto_JogPitch控制中,
+AGV,104007,Warn,Can't Auto : LocateControl Intail Fail,Can't Auto : LocateControl Intail Fail,不能Auto_LocateControlIntailFail ,
+AGV,104008,Warn,Can't Auto : Locate Driver Disconnect,Can't Auto : Locate Driver Disconnect,不能Auto_LocateDriverDisconnect ,
+AGV,104009,Warn,Can't Auto : Locate Driver Error,Can't Auto : Locate Driver Error,不能Auto_LocateDriverError ,
+AGV,104010,Warn,Can't Auto : AutoAction Fail,Can't Auto : AutoAction Fail,不能Auto_AutoActionFail,
+AGV,104100,Warn,Reject Move Command : MovecmdInfo data error,Reject Move Command : MovecmdInfo data error,拒絕移動命令_資料格式錯誤 ,
+AGV,104101,Warn,Reject Move Command : Closing Program,Reject Move Command : Closing Program,拒絕移動命令_程式關閉中,
+AGV,104102,Warn,Reject Move Command : MoveControl Status is not Idle,Reject Move Command : MoveControl Status is not Idle,拒絕移動命令_MoveControl不在Idle狀態,
+AGV,104103,Warn,Reject Move Command : Charging,Reject Move Command : Charging,"拒絕移動命令_充電中
+1.充電中不能移動",等待AGV充滿電即可恢復正常
+AGV,104104,Warn,Reject Move Command : TRU isn't in home Status,Reject Move Command : TRU isn't in home Status,"拒絕移動命令_Fork不在Home點
+1. 台車未處於自動狀態",切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+AGV,104105,Warn,Reject Move Command : MoveControl driver disconnect,Reject Move Command : MoveControl driver disconnect,拒絕移動命令_MoveControl有Driver狀態不是Ready,切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+AGV,104106,Warn,Reject Move Commandmiddler : No current coordinates,Reject Move Commandmiddler : No current coordinates,"拒絕移動命令_迷航中
+1.定位異常","1.台車重新定位
+2.切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+2.觀察SLAM是否正常運作。"
+AGV,104107,Warn,Reject Move Command : Not is start position,Reject Move Command : Not is start position,拒絕移動命令_和起點座標偏差過大,"1.台車重新定位
+2.切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+2.觀察SLAM是否正常運作。"
+AGV,104108,Warn,Reject Move Command : Not is start AGV angle,Reject Move Command : Not is start AGV angle,拒絕移動命令_和起點車姿角度偏差過大,"1.台車重新定位
+2.切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+2.觀察SLAM是否正常運作。"
+AGV,104109,Warn,Reject Move Command : in cancel flow,Reject Move Command : in cancel flow,拒絕移動命令_Cancel流程中,切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+AGV,104110,Warn,Reject Move Command : in AutoRetry flow,Reject Move Command : in AutoRetry flow,拒絕移動命令_在自動重試流程中,切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+AGV,104200,Alarm,SafetyStop : TRU isn't in home Status,SafetyStop : TRU isn't in home Status,"安全保護停止_Fork不在Home點
+1.台車自動狀態訊號 Off
+2.台車未處於自動狀態","1.確認台車是否在 Auto狀態
+2.確認PLC W0A00條件是否有Sensor異常"
+AGV,104201,Alarm,SafetyStop : Charging,SafetyStop : Charging,"安全保護停止_充電中
+1.台車充電訊號On","1.確認充電機狀況(異常紀錄)
+2.確認台車充電元件相關狀況"
+AGV,104202,Alarm,SafetyStop : Excessive angular deviation,SafetyStop : Excessive angular deviation,"安全保護停止_角度偏差過大
+1.定位資料不穩
+2.走行控制偏差","1.調整確認地上鐵 Barcode，確認位置是否損毀偏移或是鐵尺 Barcode 翹起變形
+2.查看Log (可察看扭力值,速度值,馬達position)
+3.確認輪子走行8米直線偏差情況
+4.檢修驅動器或是輪子
+5.確認Elmo馬達 Gain 值參數"
+AGV,104203,Alarm,SafetyStop : Excessive section deviation,SafetyStop : Excessive section deviation,"安全保護停止_軌道偏差過大
+1.定位資料不穩
+2.走行控制偏差","1.調整確認地上鐵 Barcode，確認位置是否損毀偏移或是鐵尺 Barcode 翹起變形
+2.查看Log (可察看扭力值,速度值,馬達position)
+3.重新調整出彎入彎點
+4.確認輪子走行8米直線偏差情況
+5.檢修驅動器或是輪子
+6.確認Elmo馬達 Gain 值參數"
+AGV,104204,Alarm,SafetyStop : Too long not read barcode (turn),SafetyStop : Too long not read barcode (turn),"安全保護停止_出彎過久沒取得定位資料
+1.定位資料不穩
+2.走行控制偏差","1.調整確認地上鐵 Barcode，確認位置是否損毀偏移或是鐵尺 Barcode 翹起變形
+2.查看Log (可察看扭力值,速度值,馬達position)
+3.重新調整出彎入彎點
+4.確認輪子走行8米直線偏差情況
+5.檢修驅動器或是輪子
+6.確認Elmo馬達 Gain 值參數"
+AGV,104205,Alarm,SafetyStop : Too long not read barcode (line),SafetyStop : Too long not read barcode (line),"安全保護停止_直線過久沒取得定位資料
+1.定位資料不穩
+2.走行控制偏差","1.調整確認地上鐵 Barcode，確認位置是否損毀偏移或是鐵尺 Barcode 翹起變形
+2.查看Log (可察看扭力值,速度值,馬達position)
+3.確認輪子走行8米直線偏差情況
+4.檢修驅動器或是輪子
+5.確認Elmo馬達 Gain 值參數"
+AGV,104206,Alarm,SafetyStop : AGV Stop without reason,SafetyStop : AGV Stop without reason,安全保護停止_AGV默停,"1.查看Log(MoveControl)
+2.聯絡Mirle"
+AGV,104207,Alarm,SafetyStop : Velocity change error,SafetyStop : Velocity change error,"安全保護停止_速度變化異常
+1.速度曲線變化不符預期變化","1.查看Log (可察看扭力值,速度值,馬達position)
+2.確認輪子走行8米直線偏差情況
+3.檢修驅動器或是輪子
+4.確認Elmo馬達 Gain 值參數"
+AGV,104208,Alarm,SafetyStop : Axis error,SafetyStop : Axis error,安全保護停止_軸異常,"1.查看Log (Motion), 並根據Elmo 所提供的異常碼 ec,mf, EE[1] 查找驅動器異查碼手冊
+2.根據驅動器的異常碼查找相關問題"
+AGV,104209,Alarm,SafetyStop : LocateControl Error,SafetyStop : LocateControl Error,安全保護停止_定位Control異常,"1.調整確認地上鐵 Barcode，確認位置是否損毀偏移或是鐵尺 Barcode 翹起變形
+2.查看Log(MoveControl)
+3.聯絡Mirle"
+AGV,104210,Alarm,SafetyStop : Stop Request,SafetyStop : Stop Request,安全保護停止_人為控制,人為介入停止
+AGV,104211,Alarm,SafetyStop : Bumper Stop,SafetyStop : Bumper Stop,安全保護停止_Bumper觸發,Bumper觸發
+AGV,104212,Alarm,SafetyStop : EMO Stop,SafetyStop : EMO Stop,安全保護停止_EMO觸發,EMO觸發
+AGV,104213,Alarm,SafetyStop : Delta update value error,SafetyStop : Delta update value error,"安全保護停止_更新數值變化過大
+1.資料(Encoder,定位)數值變化異常","1.調整確認地上鐵 Barcode，確認位置是否損毀偏移或是鐵尺 Barcode 翹起變形
+2.查看Log(MoveControl)
+3.聯絡Mirle"
+AGV,104300,Warn,Can't Reset Alarm : Main Flow Exception,Can't Reset Alarm : Main Flow Exception,"無法ResetAlarm_主流程Exception
+1.程式異常",切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+AGV,104301,Warn,Can't Reset Alarm : stop in turn flow,Can't Reset Alarm : stop in turn flow,無法ResetAlarm_停在轉彎流程中,切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+AGV,104302,Warn,Can't Reset Alarm : vehicle not in section,Can't Reset Alarm : vehicle not in section,無法ResetAlarm_不在Section上,切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+AGV,104303,Warn,Can't Reset Alarm : Locate Control Error,Can't Reset Alarm : Locate Control Error,無法ResetAlarm_定位Control異常,切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+AGV,104304,Warn,Can't Reset Alarm : Motion Control Error,Can't Reset Alarm : Motion Control Error,無法ResetAlarm_MotionControl異常,切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+AGV,104400,Warn,Can't AutoReset : Special Alarm,Can't AutoReset : Special Alarm,無法自動重置_特殊警報,切回手動，清除異常後，確認AGVC命令，然後進行復歸重新上線
+AGV,104500,Alarm,Can't AutoRetry : AutoRetry Count more than config,Can't AutoRetry : AutoRetry Count more than config,無法自動重試_自動重試計數比配置更多,"1.查看Log(MoveControl)
+2.聯絡Mirle"
+AGV,104501,Alarm,Can't AutoRetry : AutoReset fail,Can't AutoRetry : AutoReset fail,無法自動重試_自動重設失敗,"1.查看Log(MoveControl)
+2.聯絡Mirle"
+AGV,104502,Alarm,Can't AutoRetry : Create Retry MoveCmdInfo fail,Can't AutoRetry : Create Retry MoveCmdInfo fail,無法自動重試_建立重試移動Cmd訊息失敗,"1.查看Log(MoveControl)
+2.聯絡Mirle"
+AGV,104600,Alarm,BeamSensor singal on Timeout,BeamSensor singal on Timeout,"BeamSensorOn_Timeout
+1.Beamsensor訊號長On沒有消除","1.確認Beamsensor裝置是否有訊號殘留狀況(調整BeamSensor距離)
+2.調整程式內牆壁設定距離"
+AGV,270001,Alarm,TRU Command Format NG,TRU Command Format NG,Fork_命令格式NG,Fork_命令格式NG
+AGV,270002,Alarm,TRU Command Read timeout,TRU Command Read timeout,Fork_命令讀取超時,1.檢查 PLC 交握訊號
+AGV,270003,Alarm,TRU Not Busy timeout,TRU Not Busy timeout,Fork_不忙錄超時,1.檢查 PLC 交握訊號
+AGV,270004,Alarm,TRU Command Executing timeout,TRU Command Executing timeout,Fork_命令執行超時,1.確認人機上PIO設定時間不能大於Local內程式設定時間
+AGV,270005,Warn,Batterys Charging Time Out,Batterys Charging Time Out,"電池充電超時
+1.超過充電設定時間",1.確認人機上充電設定timeout時間不能大於程式設定時間
+AGV,270007,Alarm,TRU Home Flag Waiting timeout,TRU Home Flag Waiting timeout,"Fork回Home等待超時
+1.在Fork命令結束等待台車自動狀態訊號ON時間太長",1.檢查 PLC W0A00 訊號及卡住原因
+AGV,280001,Warn,Meter Adam Connect Fail,Meter Adam Connect Fail,,"1. 請檢查Adam 是否異常
+2. 請確認 IPC 接頭是否異常(RS232)"
+AGV,280002,Warn,Particle Counter Connect Fail,Particle Counter Connect Fail,,1. 請檢查儀器是否正常開啟
+AGV,280003,Warn,Plc BigData Sensor Connect Fail,Plc BigData Sensor Connect Fail,,
+AGV,280004,Warn,VibrationMeter Connect Fail,VibrationMeter Connect Fail,,1. 請檢查儀器是否正常開啟
+AGV,200001,Alarm,Emergency Stop(FR Side)[X013A],Emergency Stop(FR Side)[X013A],緊急停止開關作動(FR側)[X013A],確認無人員靠近，無安全疑慮，鬆開緊急停止開關啟動(FR側)[X013A]，進行復歸操作
+AGV,200002,Alarm,Emergency Stop(FL Side)[X013C],Emergency Stop(FL Side)[X013C],緊急停止開關作動(FL側)[X013C],確認無人員靠近，無安全疑慮，鬆開緊急停止開關啟動(FL側)[X013C]，進行復歸操作
+AGV,200003,Alarm,Emergency Stop(BR Side)[X013D],Emergency Stop(BR Side)[X013D],緊急停止開關作動(BR側)[X013D],確認無人員靠近，無安全疑慮，鬆開緊急停止開關啟動(BR側)[X013D]，進行復歸操作
+AGV,200004,Alarm,Emergency Stop(BL Side)[X013F],Emergency Stop(BL Side)[X013F],緊急停止開關作動(BL側)[X013F],確認無人員靠近，無安全疑慮，鬆開緊急停止開關啟動(BL側)[X013F]，進行復歸操作
+AGV,200005,Alarm,Emergency Stop(TRUheld Touch Panel),Emergency Stop(TRUheld Touch Panel),緊急停止開關作動(小人機),確認無人員靠近，無安全疑慮，鬆開緊急停止開關(小人機)，進行復歸操作
+AGV,200006,Alarm,,,,
+AGV,200007,Alarm,,,,
+AGV,200008,Alarm,System No Power On,System No Power On,系統未啟動,請先打開翹板開關 ON 再按下綠色按鈕 START
+AGV,200009,Alarm,284V No Power On,284V No Power On,284V 電源供應器未送電,按下 RESET按鈕執行Alarm復歸操作，如果異常未清除需檢查是否有EMO或是BUMP SENSOR有作動，導致安全迴路未正常啟動，或是檢查284V電源供應是否有損壞
+AGV,200010,Alarm,IPC Not Ready,IPC Not Ready,IPC 未就緒,
+AGV,200011,Alarm,Force ELMO Servo Off form IPC,Force ELMO Servo Off form IPC, IPC 強制 ELMO 伺服關閉,檢IPC是否有下指令給ELMO伺服關閉。
+AGV,200012,Alarm,"During the AGV trek, please move the AGV to the ""iron"" BAR CODE","During the AGV trek, please move the AGV to the ""iron"" BAR CODE","AGV迷航中請移動AGV到""鐵""BAR CODE處",按下 RESET按鈕執行Alarm復歸操作，如果異常未清除需檢查284V電源是否有損壞
+AGV,200013,Alarm,,,,按下 RESET按鈕執行Alarm復歸操作，如果異常未清除需檢查電源風扇或是284V電源是否有損壞，或是供應風扇的直流電源開關未開啟，導致散熱不佳溫度異常
+AGV,200014,Alarm,Safety Relay Not Ready(EMO System),Safety Relay Not Ready(EMO System),Safety Relay Not Ready(EMO系統),
+AGV,200015,Alarm, Battery Voltage Not Enough, Battery Voltage Not Enough,電池電壓不足,請檢查電池電壓
+AGV,200016,Alarm,Walker Wheel Motor Error(FR Side),Walker Wheel Motor Error(FR Side),走行輪馬達異常(右前側),確認走行輪馬達是否異常(FR側)
+AGV,200017,Alarm,Walker Wheel Motor Error(FL Side),Walker Wheel Motor Error(FL Side),走行輪馬達異常(左前側),確認走行輪馬達是否異常(FL側)
+AGV,200018,Alarm,Walker Wheel Motor Error(BR Side),Walker Wheel Motor Error(BR Side),走行輪馬達異常(右後側),確認走行輪馬達是否異常(BR側)
+AGV,200019,Alarm,Walker Wheel Motor Error(BL Side),Walker Wheel Motor Error(BL Side),走行輪馬達異常(左後側),確認走行輪馬達是否異常(BL側)
+AGV,200020,Alarm,,,,
+AGV,200021,Alarm,,,,
+AGV,200022,Alarm,,,,
+AGV,200023,Alarm,Coupler_R Side TRUshake Signal Off In Charging,Coupler_R Side TRUshake Signal Off In Charging,Coupler_R側在充電時交握訊號Off,檢查充電樁(R側)動作是否正確或是未到位，交握通訊SENSOR安裝好或損壞導致交握訊號發送異常
+AGV,200024,Alarm,Coupler_L Side TRUshake Signal Off In Charging,Coupler_L Side TRUshake Signal Off In Charging,Coupler_L側在充電時交握訊號Off,檢查充電樁(L側)動作是否正確或是未到位，交握通訊SENSOR安裝好或損壞導致交握訊號發送異常
+AGV,200025,Alarm,,,,
+AGV,200026,Alarm,,,,
+AGV,200027,Alarm,Execute IPC Get/Put Command Time Out,Execute IPC Get/Put Command Time Out,執行IPC取放命令Time Out,檢查FORK取放動作是否正確，或是FORK命令執行時間設定過短，需要進行修改
+AGV,200028,Alarm,Vehicle Battery Voltage Too Low Error,Vehicle Battery Voltage Too Low Error,車體電池電壓過低異常,需要立即充電，如果在充電狀態下依然發生異常。需檢查是否充電有問題或是電池最小值設定過高
+AGV,200029,Alarm,Vehicle Battery Voltage Too High Error,Vehicle Battery Voltage Too High Error,車體電池電壓過高異常,如果在充電狀態下依然發生異常。需檢查是否充電有問題或是電池最大值設定過低
+AGV,200030,Alarm,Vehicle Battery Temperature Too High Error,Vehicle Battery Temperature Too High Error,車體電池溫度過高異常,需檢查風扇電源是否有損壞，或是供應風扇的電源開關未開啟，導致散熱不佳溫度異常
+AGV,200031,Alarm,BAT-Front  FAN1 Alarm ,BAT-Front  FAN1 Alarm ,車體電池風扇異常(前-1),需檢查電源風扇(前-1)是否有損壞，或是供應風扇的電源開關未開啟。
+AGV,200032,Alarm,BAT-Front  FAN2 Alarm ,BAT-Front  FAN2 Alarm ,車體電池風扇異常(前-2),需檢查電源風扇(前-2)是否有損壞，或是供應風扇的電源開關未開啟。
+AGV,200033,Alarm,BAT-Back  FAN1 Alarm ,BAT-Back  FAN1 Alarm ,車體電池風扇異常(後-1),需檢查電源風扇(後-1)是否有損壞，或是供應風扇的電源開關未開啟。
+AGV,200034,Alarm,BAT-Back  FAN2 Alarm ,BAT-Back  FAN2 Alarm ,車體電池風扇異常(後-2),需檢查電源風扇(後-2)是否有損壞，或是供應風扇的電源開關未開啟。
+AGV,200035,Alarm,Safety switch (OS32C) triggered (F side),Safety switch (OS32C) triggered (F side),安全開關(OS32C) 觸發 (F側),檢查是否安全開關(OS32C) 觸發 (F側)有作動，導致安全迴路未正常啟動
+AGV,200036,Alarm,Safety switch (OS32C) triggered (B side),Safety switch (OS32C) triggered (B side),安全開關(OS32C) 觸發 (B側),檢查是否安全開關(OS32C) 觸發 (B側)有作動，導致安全迴路未正常啟動
+AGV,200037,Alarm,Safety switch (OS32C) triggered (L side),Safety switch (OS32C) triggered (L side),安全開關(OS32C) 觸發 (L側),檢查是否安全開關(OS32C) 觸發 (L側)有作動，導致安全迴路未正常啟動
+AGV,200038,Alarm,Safety switch (OS32C) triggered (R side),Safety switch (OS32C) triggered (R side),安全開關(OS32C) 觸發 (R側),檢查是否安全開關(OS32C) 觸發 (R側)有作動，導致安全迴路未正常啟動
+AGV,200039,Alarm,,,,
+AGV,200040,Alarm,Bump Sensor Error(F side)[X0114],Bump Sensor Error(F side)[X0114],Bump Sensor異常(車頭)[X0114],確認無人碰觸到BUMP SENSOR(F側)[X0114]， 排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200041,Alarm,Bump Sensor Error(B side)[X011A],Bump Sensor Error(B side)[X011A],Bump Sensor異常(車尾)[X011A],確認無人碰觸到BUMP SENSOR(F側)[X011A]， 排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200042,Alarm,Bump Sensor Error(L side)[X0134],Bump Sensor Error(L side)[X0134],Bump Sensor異常(左側)[X0134],確認無人碰觸到BUMP SENSOR(F側)[X0134]， 排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200043,Alarm,Bump Sensor Error(R side)[X0136],Bump Sensor Error(R side)[X0136],Bump Sensor異常(右側)[X0136],確認無人碰觸到BUMP SENSOR(F側)[X0136]， 排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200044,Alarm,Bump Sensor Error(R side Door)[X0115],Bump Sensor Error(R side Door)[X0115],Bump Sensor異常(左側DOOR)[X0115],確認無人碰觸到BUMP SENSOR(L側DOOR)[X0115]， 排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200045,Alarm,Bump Sensor Error(R side Door)[X011B],Bump Sensor Error(R side Door)[X011B],Bump Sensor異常(右側DOOR)[X011B],確認無人碰觸到BUMP SENSOR(R側DOOR)[X011B]， 排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200046,Alarm,TRU Correct Function Comfirm Error - Left side,TRU Correct Function Comfirm Error - Left side,主充電站補正器確認失敗(L),確認AGV車(L側)SR-1000對位是否正確
+AGV,200047,Alarm,TRU Correct Function Comfirm Error - Left side,TRU Correct Function Comfirm Error - Left side,主充電站補正器確認失敗(R),確認AGV車(R側)SR-1000對位是否正確
+AGV,200048,Alarm,LiDAR Sensor_F Error[X107],LiDAR Sensor_F Error[X107],F Side  LiDAR 確認失敗,確認AGV車(F側) LiDAR 對位是否正確
+AGV,200049,Alarm,LiDAR Sensor_B Error[X109],LiDAR Sensor_B Error[X109],B Side  LiDAR 確認失敗,確認AGV車(B側) LiDAR 對位是否正確
+AGV,200050,Alarm,LiDAR Sensor_L Error[X127],LiDAR Sensor_L Error[X127],L Side  LiDAR 確認失敗,確認AGV車(L側) LiDAR 對位是否正確
+AGV,200051,Alarm,LiDAR Sensor_R Error[X129],LiDAR Sensor_R Error[X129],R Side  LiDAR 確認失敗,確認AGV車(R側) LiDAR 對位是否正確
+AGV,200052,Alarm,LiDAR_F Alarm[X1B0],LiDAR_F Alarm[X1B0],LiDAR_F Alarm 異常[X1B0],確認LiDAR_F 是否異常[X1B0]
+AGV,200053,Alarm,LiDAR_F Fault[X1B1],LiDAR_F Fault[X1B1],LiDAR_F Fault 失效[X1B0],確認LiDAR_F 是否失效[X1B1]
+AGV,200054,Alarm,LiDAR_B Alarm[X1B4],LiDAR_B Alarm[X1B4],LiDAR_B Alarm 異常[X1B4],確認LiDAR_B 是否異常[X1B4]
+AGV,200055,Alarm,LiDAR_B Fault[X1B5],LiDAR_B Fault[X1B5],LiDAR_B Fault 失效[X1B5],確認LiDAR_B 是否失效[X1B5]
+AGV,200056,Alarm,TRU Forward/Back Axis Servo Off,TRU Forward/Back Axis Servo Off,伸縮軸 伺服馬達未送電,檢查漏電斷路器(CP0622/CP0627)是否已開啟
+AGV,200057,Alarm,TRU Up/Down Axis Servo Off,TRU Up/Down Axis Servo Off,升降軸 伺服馬達未送電,檢查漏電斷路器(CP0602/CP0607)是否已開啟
+AGV,200058,Alarm,TRU Turn/Slide Axis Servo Off,TRU Turn/Slide Axis Servo Off,旋轉軸+移載軸 伺服馬達未送電,檢查漏電斷路器(CP0602/CP0607)是否已開啟
+AGV,200059,Alarm,Shutter Servo Off,Shutter Servo Off,拉門軸 伺服馬達未送電,檢查漏電斷路器(CP0632)是否已開啟
+AGV,200060,Alarm,TRU Slide Side Servo Off,TRU Slide Side Servo Off,走行軸 伺服馬達未送電,檢查漏電斷路器(CP0617)是否已開啟
+AGV,200061,Alarm,TRU Turn Side Servo Off,TRU Turn Side Servo Off,轉向軸 伺服馬達未送電,檢查漏電斷路器(CP0612)是否已開啟
+AGV,200062,Alarm,,,,
+AGV,200063,Alarm,,,,
+AGV,200064,Alarm,,,,
+AGV,200065,Alarm,,,,
+AGV,200066,Alarm,,,,
+AGV,200067,Alarm,,,,
+AGV,200068,Alarm,,,,
+AGV,200069,Alarm,,,,
+AGV,200070,Alarm,Get\Put logic error - Right side,Get\Put logic error - Right side,R Side  EQ 置取CST PLC邏輯錯誤,請檢查PLC (R側)取置物程式邏輯是否正確
+AGV,200071,Alarm,,,,
+AGV,200072,Alarm,Get\Put logic error - Left side,Get\Put logic error - Left side,L Side  EQ 置取CST PLC邏輯錯誤,請檢查PLC (L側)取置物程式邏輯是否正確
+AGV,200073,Alarm,,,,
+AGV,200074,Alarm,284V Power Supply 1 No Start,284V Power Supply 1 No Start,284V 電源供應器 1 未啟動,請檢查人機面板Power On是否已開啟
+AGV,200075,Alarm,284V Power Supply 2 No Start,284V Power Supply 2 No Start,284V 電源供應器 2 未啟動,請檢查人機面板Power On是否已開啟
+AGV,200076,Alarm,284V Power Supply 3 No Start,284V Power Supply 3 No Start,284V 電源供應器 3 未啟動,請檢查人機面板Power On是否已開啟
+AGV,200077,Alarm,284V Power Supply Fan 1 No Start,284V Power Supply Fan 1 No Start,284V 電源供應器 1 風扇異常,請檢查284V 電源供應器1風扇是否異常
+AGV,200078,Alarm,284V Power Supply Fan 2 No Start,284V Power Supply Fan 2 No Start,284V 電源供應器 2 風扇異常,請檢查284V 電源供應器2風扇是否異常
+AGV,200079,Alarm,284V Power Supply Fan 3 No Start,284V Power Supply Fan 3 No Start,284V 電源供應器 3 風扇異常,請檢查284V 電源供應器3風扇是否異常
+AGV,200080,Alarm,284V Power Supply 1 Over Current,284V Power Supply 1 Over Current,284V 電源供應器 1 過電流,請檢查284V 電源供應器1電流是否異常
+AGV,200081,Alarm,284V Power Supply 2 Over Current,284V Power Supply 2 Over Current,284V 電源供應器 2 過電流,請檢查284V 電源供應器1電流是否異常
+AGV,200082,Alarm,284V Power Supply 1 Over Heating,284V Power Supply 1 Over Heating,284V 電源供應器 1 過溫異常,請檢查284V 電源供應器1溫度是否異常
+AGV,200083,Alarm,284V Power Supply 2 Over Heating,284V Power Supply 2 Over Heating,284V 電源供應器 2 過溫異常,請檢查284V 電源供應器2溫度是否異常
+AGV,200084,Alarm,,,,
+AGV,200085,Alarm,,,,
+AGV,200086,Alarm,,,,
+AGV,200087,Alarm,,,,
+AGV,200088,Alarm,,,,
+AGV,200089,Alarm,,,,
+AGV,200090,Alarm,,,,
+AGV,200091,Alarm,,,,
+AGV,200092,Alarm,,,,
+AGV,200093,Alarm,,,,
+AGV,200094,Alarm,,,,
+AGV,200095,Alarm,,,,
+AGV,200096,Alarm,,,,
+AGV,200097,Alarm,,,,
+AGV,200098,Alarm,,,,
+AGV,200099,Alarm,,,,
+AGV,200100,Alarm,,,,
+AGV,200101,Alarm,,,,
+AGV,200102,Alarm,,,,
+AGV,200103,Alarm,,,,
+AGV,200104,Alarm,,,,
+AGV,200105,Alarm,,,,
+AGV,200106,Alarm,,,,
+AGV,200107,Alarm,,,,
+AGV,200108,Alarm,,,,
+AGV,200109,Alarm,,,,
+AGV,200110,Alarm,,,,
+AGV,200111,Alarm,,,,
+AGV,200112,Alarm,,,,
+AGV,200113,Alarm,,,,
+AGV,200114,Alarm,,,,
+AGV,200115,Alarm,,,,
+AGV,200116,Alarm,,,,
+AGV,200117,Alarm,,,,
+AGV,200118,Alarm,,,,
+AGV,200119,Alarm,,,,
+AGV,200120,Alarm,,,,
+AGV,200121,Alarm,,,,
+AGV,200122,Alarm,,,,
+AGV,200123,Alarm,,,,
+AGV,200124,Alarm,,,,
+AGV,200125,Alarm,,,,
+AGV,200126,Alarm,,,,
+AGV,200127,Alarm,,,,
+AGV,200128,Alarm,,,,
+AGV,200129,Alarm,,,,
+AGV,200130,Alarm,,,,
+AGV,200131,Alarm,,,,
+AGV,200132,Alarm,,,,
+AGV,200133,Alarm,,,,
+AGV,200134,Alarm,,,,
+AGV,200135,Alarm,,,,
+AGV,200136,Alarm,,,,
+AGV,200137,Alarm,,,,
+AGV,200138,Alarm,,,,
+AGV,200139,Alarm,,,,
+AGV,200140,Alarm,,,,
+AGV,200141,Alarm,,,,
+AGV,200142,Alarm,,,,
+AGV,200143,Alarm,,,,
+AGV,200144,Alarm,,,,
+AGV,200145,Alarm,,,,
+AGV,200146,Alarm,,,,
+AGV,200147,Alarm,,,,
+AGV,200148,Alarm,,,,
+AGV,200149,Alarm,,,,
+AGV,200150,Alarm,,,,
+AGV,200151,Alarm,,,,
+AGV,200152,Alarm,,,,
+AGV,200153,Alarm,,,,
+AGV,200154,Alarm,,,,
+AGV,200155,Alarm,,,,
+AGV,200156,Alarm,,,,
+AGV,200157,Alarm,,,,
+AGV,200158,Alarm,,,,
+AGV,200159,Alarm,,,,
+AGV,200160,Alarm,,,,
+AGV,200161,Alarm,,,,
+AGV,200162,Alarm,,,,
+AGV,200163,Alarm,,,,
+AGV,200164,Alarm,,,,
+AGV,200165,Alarm,,,,
+AGV,200166,Alarm,,,,
+AGV,200167,Alarm,,,,
+AGV,200168,Alarm,,,,
+AGV,200169,Alarm,,,,
+AGV,200170,Alarm,,,,
+AGV,200171,Alarm,,,,
+AGV,200172,Alarm,,,,
+AGV,200173,Alarm,,,,
+AGV,200174,Alarm,,,,
+AGV,200175,Alarm,,,,
+AGV,200176,Alarm,,,,
+AGV,200177,Alarm,,,,
+AGV,200178,Alarm,,,,
+AGV,200179,Alarm,,,,
+AGV,200180,Alarm,,,,
+AGV,200181,Alarm,,,,
+AGV,200182,Alarm,,,,
+AGV,200183,Alarm,,,,
+AGV,200184,Alarm,,,,
+AGV,200185,Alarm,,,,
+AGV,200186,Alarm,,,,
+AGV,200187,Alarm,,,,
+AGV,200188,Alarm,,,,
+AGV,200189,Alarm,,,,
+AGV,200190,Alarm,,,,
+AGV,200191,Alarm,,,,
+AGV,200192,Alarm,,,,
+AGV,200193,Alarm,,,,
+AGV,200194,Alarm,,,,
+AGV,200195,Alarm,,,,
+AGV,200196,Alarm,,,,
+AGV,200197,Alarm,,,,
+AGV,200198,Alarm,,,,
+AGV,200199,Alarm,,,,
+AGV,200200,Alarm,CST Detect Sensor Error[X01AC],CST Detect Sensor Error[X01AC],CST在席檢異常[X01AC],檢查CST在席檢[X01AC]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200201,Alarm,CST Detect Sensor Error[X0217][X021B],CST Detect Sensor Error[X0217][X021B],CST在席檢異常[X0217][X021B],檢查CST在席檢[X0217][X021B]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200202,Alarm,,,,
+AGV,200203,Alarm,,,,
+AGV,200204,Alarm,,,,
+AGV,200205,Alarm,,,,
+AGV,200206,Alarm,TRU Check Out Error[X0201][X0205],TRU Check Out Error[X0201][X0205],TRU在席檢出異常[X0201][X0205],檢查FORK在荷檢[X0201][X0205]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200207,Alarm,TRU Forward/Back Axis RLSSensor Error,TRU Forward/Back Axis RLSSensor Error,TRU伸縮軸下極限Sensor異常,手臂伸縮軸碰觸到下極限，請操作人機進入伺服單/雙軸操作畫面，執行單軸JOG操作移動離開下極限，排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200208,Alarm,TRU Forward/Back Axis FLSSensor Error,TRU Forward/Back Axis FLSSensor Error,TRU伸縮軸上極限Sensor異常,手臂伸縮軸碰觸到上極限，請操作人機進入伺服單/雙軸操作畫面，執行單軸JOG操作移動離開上極限，排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200209,Alarm,TRU Forward/Back Axis Error,TRU Forward/Back Axis Error,TRU伸縮軸伺服控制器異常,手臂伸縮軸動作時是否發生異常，請依伺服異常碼分別進行排除復歸操作
+AGV,200210,Alarm,TRU Forward/Back Axis Servo Action Time Out,TRU Forward/Back Axis Servo Action Time Out,TRU伸縮軸伺服動作Time Out,手臂伸縮軸動作時是否發生異常，檢查是否為伺服狀態異常或是Servo Time Out 時間設定過短，需要進行修改
+AGV,200211,Alarm,TRU Up/Down Axis RLS Sensor Error,TRU Up/Down Axis RLS Sensor Error,TRU升降軸下極限Sensor異常,手臂升降軸碰觸到下極限，請操作人機進入伺服單/雙軸操作畫面，執行單軸JOG操作移動離開下極限，排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200212,Alarm,TRU Up/Down Axis FLS Sensor Error,TRU Up/Down Axis FLS Sensor Error,TRU升降軸上極限Sensor異常,手臂升降軸碰觸到上極限，請操作人機進入伺服單/雙軸操作畫面，執行單軸JOG操作移動離開上極限，排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200213,Alarm,TRU Up/Down Axis Servo Error,TRU Up/Down Axis Servo Error,TRU升降軸伺服控制器異常,手臂升降軸動作時是否發生異常，請依伺服異常碼分別進行排除復歸操作
+AGV,200214,Alarm,TRU Up/Down Axis Servo Action Time Out,TRU Up/Down Axis Servo Action Time Out,TRU升降軸伺服動作Time Out,手臂升降軸動作時是否發生異常，檢查是否為伺服狀態異常或是Servo Time Out 時間設定過短，需要進行修改
+AGV,200215,Alarm,TRU Slide Axis RLS Sensor Error,TRU Slide Axis RLS Sensor Error,TRU移載軸下極限Sensor異常,手臂移載軸碰觸到下極限，請操作人機進入伺服單/雙軸操作畫面，執行單軸JOG操作移動離開下極限，排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200216,Alarm,TRU Slide Axis FLS Sensor Error,TRU Slide Axis FLS Sensor Error,TRU移載軸上極限Sensor異常,手臂移載軸碰觸到上極限，請操作人機進入伺服單/雙軸操作畫面，執行單軸JOG操作移動離開上極限，排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200217,Alarm,TRU Slide Axis Servo Error,TRU Slide Axis Servo Error,TRU移載軸伺服控制器異常,手臂移載軸動作時是否發生異常，請依伺服異常碼分別進行排除復歸操作
+AGV,200218,Alarm,TRU Slide Axis Servo Action Time Out,TRU Slide Axis Servo Action Time Out,TRU移載軸伺服動作Time Out,手臂移載軸動作時是否發生異常，檢查是否為伺服狀態異常或是Servo Time Out 時間設定過短，需要進行修改
+AGV,200219,Alarm,TRU Turn Axis RLS Sensor Error,TRU Turn Axis RLS Sensor Error,TRU旋轉軸下極限Sensor異常,手臂旋轉軸碰觸到下極限，請操作人機進入伺服單/雙軸操作畫面，執行單軸JOG操作移動離開下極限，排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200220,Alarm,TRU Turn Axis FLS Sensor Error,TRU Turn Axis FLS Sensor Error,TRU旋轉軸上極限Sensor異常,手臂旋轉軸碰觸到上極限，請操作人機進入伺服單/雙軸操作畫面，執行單軸JOG操作移動離開上極限，排除後按下 RESET按鈕執行Alarm復歸操作
+AGV,200221,Alarm,TRU Turn Axis Servo Error,TRU Turn Axis Servo Error,TRU旋轉軸伺服控制器異常,手臂旋轉軸動作時是否發生異常，請依伺服異常碼分別進行排除復歸操作
+AGV,200222,Alarm,TRU Turn Axis Servo Action Time Out,TRU Turn Axis Servo Action Time Out,TRU旋轉軸伺服動作Time Out,手臂旋轉軸動作時是否發生異常，檢查是否為伺服狀態異常或是Servo Time Out 時間設定過短，需要進行修改
+AGV,200223,Alarm,Shutter Door Servo Controller Error,Shutter Door Servo Controller Error,拉門軸 伺服控制器異常,拉門伺服軸動作時是否發生異常，請依伺服異常碼分別進行排除復歸操作
+AGV,200224,Alarm,,,,
+AGV,200225,Alarm,TRU Back End Sensor Is Not On[Dog],TRU Back End Sensor Is Not On[Dog],手臂後退端Sensor未On[近點訊號],手臂伸縮軸回原點時，原點(DOG)信號未作動，檢查SENSOR是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200226,Alarm,TRU Down End Sensor Is Not On[X0219],TRU Down End Sensor Is Not On[X0219],手臂下降端Sensor未On[X0219],手臂升降軸執行下降端呼叫，到位下降端SENSOR[X0219]信號未作動，檢查SENSOR是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200227,Alarm,TRU Rising End Sensor Is Not On[X0218],TRU Rising End Sensor Is Not On[X0218],手臂上升端Sensor未On[X0218],手臂升降軸執行上升端呼叫時，到位上升端SENSOR[X0218]信號未作動，檢查SENSOR是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200228,Alarm,TRU Turn Axis 90 Degrees Sensor Is Not On[X020A],TRU Turn Axis 90 Degrees Sensor Is Not On[X020A],旋轉軸 90度Sensor未On[X020A],手臂旋轉軸執行90度呼叫時，到位90度SENSOR[X020A]信號未作動，檢查SENSOR是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200229,Alarm,TRU Forward/Back Axis Servo Is Not In Back Position,TRU Forward/Back Axis Servo Is Not In Back Position,伸縮軸 伺服未在縮回位置,請在手動模式執行JOG操作，讓伸縮軸伺服到達縮回位置再切換成自動模式
+AGV,200230,Alarm,TRU Up/Down Axis Servo Is Not In Get CST Position,TRU Up/Down Axis Servo Is Not In Get CST Position,升降軸 伺服未在取CST位置,請在手動模式執行JOG操作，讓升降軸伺服到達取放CST位置再切換成自動模式
+AGV,200231,Alarm,TRU Slide Axis Servo Is Not In Get/Put CST Position,TRU Slide Axis Servo Is Not In Get/Put CST Position,移載軸 伺服未在取放CST位置,請在手動模式執行JOG操作，讓移載軸伺服到達取放CST位置再切換成自動模式
+AGV,200232,Alarm,TRU Turn Axis Servo Is Not In GetCST Position,TRU Turn Axis Servo Is Not In GetCST Position,旋轉軸 伺服未在取CST位置,請在手動模式執行JOG操作，讓旋轉軸伺服到達取放CST位置再切換成自動模式
+AGV,200233,Alarm,TRU Get CST Action Time Out,TRU Get CST Action Time Out,手臂取CST動作Time Out,檢查手臂取CST動作時是否發生異常，檢查是否為伺服狀態異常或是取放CST動作時間設定過短，需要進行修改
+AGV,200234,Alarm,TRU Put CST Action Time Out,TRU Put CST Action Time Out,手臂放CST動作Time Out,檢查手臂放CST動作時是否發生異常，檢查是否為伺服狀態異常或是取放CST動作時間設定過短，需要進行修改
+AGV,200235,Alarm,TRU Is Not Execute Get Cassette Action,TRU Is Not Execute Get Cassette Action,手臂未執行取Cassette的動作,手臂接收到命令卻未執行作動，檢查是否為伺服狀態異常導致FORK未伸出執行取CST作動
+AGV,200236,Alarm,TRU Is Not Execute Put Cassette Action,TRU Is Not Execute Put Cassette Action,手臂未執行放Cassette的動作,手臂接收到命令卻未執行作動，檢查是否為伺服狀態異常導致FORK未伸出執行放CST作動
+AGV,200237,Alarm,TRU Forward/Back Axis And Turn Axis Servo Home Return Time Out,TRU Forward/Back Axis And Turn Axis Servo Home Return Time Out,伸縮軸與旋轉軸 伺服原點復歸 Time Out,檢查是否為伺服狀態異常或是SENSOR未作動，以及伺服原點復歸時間設定過短，需要進行修改
+AGV,200238,Alarm,TRU Up/Down Axis Servo Home Return Time Out,TRU Up/Down Axis Servo Home Return Time Out,升降軸 伺服原點復歸 Time Out,檢查是否為伺服狀態異常或是SENSOR未作動，以及伺服原點復歸時間設定過短，需要進行修改
+AGV,200239,Alarm,TRU Slide Axis Servo Home Return Time Out,TRU Slide Axis Servo Home Return Time Out,移載軸 伺服原點復歸 Time Out,檢查是否為伺服狀態異常或是SENSOR未作動，以及伺服原點復歸時間設定過短，需要進行修改
+AGV,200240,Alarm,TRU Back To Work Home Action Time Out(Nothing),TRU Back To Work Home Action Time Out(Nothing),手臂回工作原點動作Time Out(無物時),檢查是否為伺服狀態異常或是SENSOR未作動，以及伺服原點復歸時間設定過短，需要進行修改
+AGV,200241,Alarm,TRU Back To Work Home Action Time Out(Something),TRU Back To Work Home Action Time Out(Something),手臂回工作原點動作Time Out(有物時),檢查是否為伺服狀態異常或是SENSOR未作動，以及伺服原點復歸時間設定過短，需要進行修改
+AGV,200242,Alarm,TRU GetEQ CST Action Time Out(L Side),TRU GetEQ CST Action Time Out(L Side),手臂取EQ CST動作Time Out(L側),檢查是否為伺服狀態異常或是SENSOR未作動，以及伺服原點復歸時間設定過短，需要進行修改
+AGV,200243,Alarm,TRU Put EQ CST Action Time Out(L Side),TRU Put EQ CST Action Time Out(L Side),手臂放EQ CST動作Time Out(L側),檢查是否為伺服狀態異常或是SENSOR未作動，以及伺服原點復歸時間設定過短，需要進行修改
+AGV,200244,Alarm,TRU GetEQ CST Action Time Out(R Side),TRU GetEQ CST Action Time Out(R Side),手臂取EQ CST動作Time Out(R側),檢查是否為伺服狀態異常或是SENSOR未作動，以及伺服原點復歸時間設定過短，需要進行修改
+AGV,200245,Alarm,TRU Put EQ CST Action Time Out(R Side),TRU Put EQ CST Action Time Out(R Side),手臂放EQ CST動作Time Out(R側),檢查是否為伺服狀態異常或是SENSOR未作動，以及伺服原點復歸時間設定過短，需要進行修改
+AGV,200246,Alarm,Shutter Door Fall Action Time Out(L Side),Shutter Door Fall Action Time Out(L Side),捲門下降動作Time Out(L側),檢查是否為伺服狀態異常或是SENSOR[X0133]未作動，以及Servo Time Out 時間設定過短，需要進行修改
+AGV,200247,Alarm,Shutter Door Fall Action Time Out(R Side),Shutter Door Fall Action Time Out(R Side),捲門下降動作Time Out(R側),檢查是否為伺服狀態異常或是SENSOR[X0113]未作動，以及Servo Time Out 時間設定過短，需要進行修改
+AGV,200248,Alarm,TRU Servo Off Action Time Out,TRU Servo Off Action Time Out,手臂Servo Off動作Time Out,檢查是否為伺服狀態異常或是SENSOR未作動
+AGV,200249,Alarm,TRU Servo On Action Time Out,TRU Servo On Action Time Out,手臂Servo On動作Time Out,檢查是否為伺服狀態異常或是SENSOR未作動
+AGV,200250,Alarm,Shutter Door R Side Rise Action Time Out,Shutter Door R Side Rise Action Time Out,R側捲門 上升動作Time Out,檢查是否為伺服狀態異常或是Servo Time Out 時間設定過短，需要進行修改
+AGV,200251,Alarm,Shutter Door R Side Fall Action Time Out,Shutter Door R Side Fall Action Time Out,R側捲門 下降動作Time Out,檢查是否為伺服狀態異常或是Servo Time Out 時間設定過短，需要進行修改
+AGV,200252,Alarm,TRU Fok up/down Sensor error,TRU Fok up/down Sensor error,TRU FORK 升降傾斜檢知異常,檢查升降傾斜檢知SENSOR[X021A]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200253,Alarm,"AGV Car And EQ TRUshake,T4 Time out (L Side)","AGV Car And EQ TRUshake,T4 Time out (L Side)","AGV車與EQ交握,發生T4 Time out (L側)",檢查交握信號是否有正常發送，交握通訊模組和通訊線是否有安裝好或損壞，以及T4交握時間設定過短，需要進行修改
+AGV,200254,Alarm,,,,
+AGV,200255,Alarm,Shutter Door L Side Rise Action Time Out,Shutter Door L Side Rise Action Time Out,L側捲門 上升動作Time Out,檢查是否為伺服狀態異常或是Servo Time Out 時間設定過短，需要進行修改
+AGV,200256,Alarm,Shutter Door L Side Fall Action Time Out,Shutter Door L Side Fall Action Time Out,L側捲門 下降動作Time Out,檢查是否為伺服狀態異常或是Servo Time Out 時間設定過短，需要進行修改
+AGV,200257,Alarm,TRU TRU Tilt sensor Alarm[X21A],TRU TRU Tilt sensor Alarm[X21A],TRU FORK 伸降傾斜檢知異常[X21A],檢查FORK傾斜檢知是否異常[X21A]
+AGV,200258,Alarm,"AGV Car And EQ TRUshake,T4 Time out (R Side)","AGV Car And EQ TRUshake,T4 Time out (R Side)","AGV車與EQ交握,發生T4 Time out (R側)",檢查交握信號是否有正常發送，交握通訊模組和通訊線是否有安裝好或損壞，以及T4交握時間設定過短，需要進行修改
+AGV,200259,Alarm,,,,
+AGV,200260,Alarm,"TRU Get CST,TRU Detect Sensor Detect Nothing[X0201]","TRU Get CST,TRU Detect Sensor Detect Nothing[X0201]","手臂取CST時,Fork荷有檢檢測無物[X0201]",檢查FORK在荷檢[X0201]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200261,Alarm,"TRU Get CST,TRU Detect Sensor Detect Nothing[X0205]","TRU Get CST,TRU Detect Sensor Detect Nothing[X0205]","手臂取CST時,Fork荷有檢檢測無物[X0205]",檢查FORK在荷檢[X0205]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200262,Alarm,"TRU Put CST,TRU Detect Sensor Detect Nothing[X0201]","TRU Put CST,TRU Detect Sensor Detect Nothing[X0201]","手臂放CST時,Fork荷有檢檢測無物[X0201]",檢查FORK在荷檢[X0201]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200263,Alarm,"TRU Put CST,TRU Detect Sensor Detect Nothing[X0205]","TRU Put CST,TRU Detect Sensor Detect Nothing[X0205]","手臂放CST時,Fork荷有檢檢測無物[X0205]",檢查FORK在荷檢[X0205]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200264,Alarm,"TRU Put CST,But TRU Detect Sensor Detect Something[X0201]","TRU Put CST,But TRU Detect Sensor Detect Something[X0201]","手臂放完CST時,但Fork荷有檢檢測有物[X0201]",檢查FORK在荷檢[X0201]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200265,Alarm,"TRU Put CST,But TRU Detect Sensor Detect Something[X0205]","TRU Put CST,But TRU Detect Sensor Detect Something[X0205]","手臂放完CST時,但Fork荷有檢檢測有物[X0205]",檢查FORK在荷檢[X0205]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200266,Alarm,Servo#1 Tween axis Position abnormal ,Servo#1 Tween axis Position abnormal ,Servo#1 補間位罝異常,請操作人機進入伺服單/雙軸操作畫面執行同高操作，然後再執行伺服呼叫操作如果異常未消失請檢查是否為伺服狀態異常或是手臂機構可能有問題
+AGV,200267,Alarm,Servo#2 Tween axis Position abnormal ,Servo#2 Tween axis Position abnormal ,Servo#2 補間位罝異常,請操作人機進入伺服單/雙軸操作畫面執行同高操作，然後再執行伺服呼叫操作如果異常未消失請檢查是否為伺服狀態異常或是手臂機構可能有問題
+AGV,200268,Alarm,Worng rotationof TRU Get/Put CST(L Side) ,Worng rotationof TRU Get/Put CST(L Side) ,手臂取放CST 旋轉方向錯誤(L側),檢查SENSOR[X12A6]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200269,Alarm,Worng rotationof TRU Get/Put  CST(R Side) ,Worng rotationof TRU Get/Put  CST(R Side) ,手臂取放CST 旋轉方向錯誤(R側),檢查SENSOR[X020C]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200270,Alarm,PUT Double Storag R Side abnormal,PUT Double Storag R Side abnormal,R側 置物二重格判斷異常(有物),檢查二重格檢知  (R)[X0204]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200271,Alarm,Get  Empty Retriev R Side abnormal,Get  Empty Retriev R Side abnormal,R側 取物二重格判斷異常(無物),檢查二重格檢知  (R)[X0204]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200272,Alarm,PUT Double Storag L Side abnormal,PUT Double Storag L Side abnormal,L側 置物二重格判斷異常(有物),檢查二重格檢知  (L)[X0200]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200273,Alarm,Get Empty Retriev L Side abnormal,Get Empty Retriev L Side abnormal,L側 取物二重格判斷異常(無物),檢查二重格檢知  (L)[X0200]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200274,Alarm,"Down Position,TRU TRU Sensor On ,CST ON   ","Down Position,TRU TRU Sensor On ,CST ON   ","下降端時,FORK檢與CST有無檢同時ON",檢查FORK在荷檢[X0201][X0205]和CST在席檢[X01AC]是否有損壞，或是照射角度未調整好，導致SENSOR作動異常
+AGV,200275,Alarm,Get CST From EQ Double Storag abnormal,Get CST From EQ Double Storag abnormal,"從EQ取CST時,發生二重格異常",檢查二重格是否異常
+AGV,200276,Alarm,Put CST To EQ Double Storag abnormal,Put CST To EQ Double Storag abnormal,"放CST到EQ時,發生二重格異常",檢查二重格是否異常
+AGV,200277,Alarm,"TRU (R Side) Get/Put, LiDAR Sensor_L Error[X127]","TRU (R Side) Get/Put, LiDAR Sensor_L Error[X127]",TRU 旋轉中人員設備侵入安全區域(L側),"檢查,L側Sensor檢出是否異常[X127]"
+AGV,200278,Alarm,"TRU (L Side) Get/Put, (R Side) Sensor On","TRU (L Side) Get/Put, (R Side) Sensor On",TRU 旋轉中人員設備侵入安全區域(R側),檢查R側Sensor檢出是否異常[X129]
+AGV,200279,Alarm,,,,
+AGV,200280,Alarm,EQ Ready signal Off - Left side,EQ Ready signal Off - Left side,L Side EQ I/F Ready 訊號 OFF,
+AGV,200281,Alarm,EQ Ready signal Off - Right side,EQ Ready signal Off - Right side,R Side EQ I/F Ready 訊號 OFF,
+AGV,200282,Alarm,"AGV is not Ready
+AGV is in manual state, please do home return or close the door","AGV is not Ready
+AGV is in manual state, please do home return or close the door",可能是(異常沒消(權限未登(拉門沒關,(異常消除(權限登入(拉門關閉
+AGV,200283,Alarm,Charger Error(R Side),Charger Error(R Side),充電中  主充電樁發生異常(R側),"請檢查充電時,主充電樁是否異常(R側)"
+AGV,200284,Alarm,"In Charge,Charger Sensor Error(R Side)","In Charge,Charger Sensor Error(R Side)",充電中  主充電樁檢知異常(R側),"請檢查充電時,主充電樁檢知是否異常(R側)"
+AGV,200285,Alarm,Charger Error(L Side),Charger Error(L Side),充電中  主充電樁發生異常(L側),"請檢查充電時,主充電樁是否異常(L側)"
+AGV,200286,Alarm,"In Charge,Charger Sensor Error(L Side)","In Charge,Charger Sensor Error(L Side)",充電中  主充電樁檢知異常(L側),"請檢查充電時,主充電樁檢知是否異常(L側)"
+AGV,200287,Alarm,,,,
+AGV,200288,Alarm,,,,
+AGV,200289,Alarm,"AGV has been blocked for too long, please remove the obstacles","AGV has been blocked for too long, please remove the obstacles",AGV阻擋停止時間過久請移除障礙物,"AGV阻擋停止時間過久,請移除障礙物"
+AGV,200290,Alarm,EQ Ready signal Off - Left side,EQ Ready signal Off - Left side,L Side 取放中 EQ Ready 訊號 OFF,請檢查交握訊號L Side 取放中 EQ Ready 訊號是否OFF
+AGV,200291,Alarm,EQ Ready signal Off - Right side,EQ Ready signal Off - Right side,R Side 取放中 EQ Ready 訊號 OFF,請檢查交握訊號R Side 取放中 EQ Ready 訊號是否OFF
+AGV,200292,Alarm,Charging pile is not in HP - Right side,Charging pile is not in HP - Right side,R Side  充電樁電極不在後端,請檢查R Side充電樁電極是否在後端
+AGV,200293,Alarm,Charging pile is not in HP - Left side,Charging pile is not in HP - Left side,L Side  充電樁電極不在後端,請檢查L Side充電樁電極是否在後端
+AGV,200294,Alarm,Charging system off,Charging system off,充電機  系統停止中,請檢查充電機系統是否正常
+AGV,200295,Alarm,Charging system off - with CST,Charging system off - with CST,充電機  系統停止中(有Cassette),請檢查充電機系統是否正常(CST在AGV車內)
+AGV,200296,Alarm,Charging error - Right side,Charging error - Right side,"充電中""副""充電樁發生異常(R側)","請檢查""副""充電樁是否異常(R側)"
+AGV,200297,Alarm,Charging error in unloading - Right side,Charging error in unloading - Right side,"置貨充電中""副""充電樁發生異常(R側)","請檢查""副""充電樁是否異常(R側)"
+AGV,200298,Alarm,Charging error in loading - Right side,Charging error in loading - Right side,"取貨充電中""副""充電樁發生異常(R側)","請檢查""副""充電樁是否異常(R側)"
+AGV,200299,Alarm,Charging error - Left side,Charging error - Left side,"充電中""副""充電樁發生異常(L側)","請檢查""副""充電樁是否異常(L側)"
+AGV,200300,Alarm,Charging error in unloading - Left side,Charging error in unloading - Left side,"置貨充電中""副""充電樁發生異常(L側)","請檢查""副""充電樁是否異常(L側)"
+AGV,200301,Alarm,Charging error in loading - Left side,Charging error in loading - Left side,"取貨充電中""副""充電樁發生異常(L側)","請檢查""副""充電樁是否異常(L側)"
+AGV,200302,Alarm,EQ Ready signal On - Left side,EQ Ready signal On - Left side,L Side  取放完成EQ Ready訊號ON,請檢查交握訊號L Side 取放完成 EQ Ready 訊號是否ON
+AGV,200303,Alarm,EQ Ready signal On - Right side,EQ Ready signal On - Right side,R Side  取放完成EQ Ready訊號ON,請檢查交握訊號R Side 取放完成 EQ Ready 訊號是否ON
+AGV,200304,Alarm,,,,
+AGV,200305,Alarm,,,,
+AGV,200306,Alarm,,,,
+AGV,200307,Alarm,,,,
+AGV,200308,Alarm,,,,
+AGV,200309,Alarm,,,,
+AGV,200310,Alarm,,,,
+AGV,200311,Alarm,,,,
+AGV,200312,Alarm,,,,
+AGV,200313,Alarm,,,,
+AGV,200314,Alarm,,,,
+AGV,200315,Alarm,,,,
+AGV,200316,Alarm,,,,
+AGV,200317,Alarm,,,,
+AGV,200318,Alarm,,,,
+AGV,200319,Alarm,,,,
+AGV,200320,Alarm,,,,
+AGV,200321,Alarm,,,,
+AGV,200322,Alarm,,,,
+AGV,200323,Alarm,,,,
+AGV,200324,Alarm,,,,
+AGV,200325,Alarm,,,,
+AGV,200326,Alarm,,,,
+AGV,200327,Alarm,,,,
+AGV,200328,Alarm,,,,
+AGV,200329,Alarm,,,,
+AGV,200330,Alarm,,,,
+AGV,200331,Alarm,,,,
+AGV,200332,Alarm,,,,
+AGV,200333,Alarm,,,,
+AGV,200334,Alarm,,,,
+AGV,200335,Alarm,,,,
+AGV,200336,Alarm,,,,
+AGV,200337,Alarm,,,,
+AGV,200338,Alarm,,,,
+AGV,200339,Alarm,,,,
+AGV,200340,Alarm,,,,
+AGV,200341,Alarm,,,,
+AGV,200342,Alarm,,,,
+AGV,200343,Alarm,,,,
+AGV,200344,Alarm,,,,
+AGV,200345,Alarm,,,,
+AGV,200346,Alarm,,,,
+AGV,200347,Alarm,,,,
+AGV,200348,Alarm,,,,
+AGV,200349,Alarm,,,,
+AGV,200350,Alarm,,,,
+AGV,200351,Alarm,,,,
+AGV,200352,Alarm,,,,
+AGV,200353,Alarm,,,,
+AGV,200354,Alarm,,,,
+AGV,200355,Alarm,,,,
+AGV,200356,Alarm,,,,
+AGV,200357,Alarm,,,,
+AGV,200358,Alarm,,,,
+AGV,200359,Alarm,,,,
+AGV,200360,Alarm,,,,
+AGV,200361,Alarm,,,,
+AGV,200362,Alarm,,,,
+AGV,200363,Alarm,,,,
+AGV,200364,Alarm,,,,
+AGV,200365,Alarm,,,,
+AGV,200366,Alarm,,,,
+AGV,200367,Alarm,,,,
+AGV,200368,Alarm,,,,
+AGV,200369,Alarm,,,,
+AGV,200370,Alarm,,,,
+AGV,200371,Alarm,,,,
+AGV,200372,Alarm,,,,
+AGV,200373,Alarm,,,,
+AGV,200374,Alarm,,,,
+AGV,200375,Alarm,,,,
+AGV,200376,Alarm,,,,
+AGV,200377,Alarm,,,,
+AGV,200378,Alarm,,,,
+AGV,200379,Alarm,,,,
+AGV,200380,Alarm,,,,
+AGV,200381,Alarm,,,,
+AGV,200382,Alarm,,,,
+AGV,200383,Alarm,,,,
+AGV,200384,Alarm,,,,
+AGV,200385,Alarm,,,,
+AGV,200386,Alarm,,,,
+AGV,200387,Alarm,,,,
+AGV,200388,Alarm,,,,
+AGV,200389,Alarm,,,,
+AGV,200390,Alarm,,,,
+AGV,200391,Alarm,,,,
+AGV,200392,Alarm,,,,
+AGV,200393,Alarm,,,,
+AGV,200394,Alarm,,,,
+AGV,200395,Alarm,,,,
+AGV,200396,Alarm,,,,
+AGV,200397,Alarm,,,,
+AGV,200398,Alarm,,,,
+AGV,200399,Alarm,,,,
+AGV,200400,Alarm,,,,
+AGV,200401,Alarm,,,,
+AGV,200402,Alarm,,,,
+AGV,200403,Alarm,,,,
+AGV,200404,Alarm,,,,
+AGV,200405,Alarm,,,,
+AGV,200406,Alarm,,,,
+AGV,200407,Alarm,,,,
+AGV,200408,Alarm,,,,
+AGV,200409,Alarm,,,,
+AGV,200410,Alarm,,,,
+AGV,200411,Alarm,,,,
+AGV,200412,Alarm,,,,
+AGV,200413,Alarm,,,,
+AGV,200414,Alarm,,,,
+AGV,200415,Alarm,,,,
+AGV,200416,Alarm,,,,
+AGV,200417,Alarm,,,,
+AGV,200418,Alarm,,,,
+AGV,200419,Alarm,,,,
+AGV,200420,Alarm,,,,
+AGV,200421,Alarm,,,,
+AGV,200422,Alarm,,,,
+AGV,200423,Alarm,,,,
+AGV,200424,Alarm,,,,
+AGV,200425,Alarm,,,,
+AGV,200426,Alarm,,,,
+AGV,200427,Alarm,,,,
+AGV,200428,Alarm,,,,
+AGV,200429,Alarm,,,,
+AGV,200430,Alarm,,,,
+AGV,200431,Alarm,,,,
+AGV,200432,Alarm,,,,
+AGV,200433,Alarm,,,,
+AGV,200434,Alarm,,,,
+AGV,200435,Alarm,,,,
+AGV,200436,Alarm,,,,
+AGV,200437,Alarm,,,,
+AGV,200438,Alarm,,,,
+AGV,200439,Alarm,,,,
+AGV,200440,Alarm,,,,
+AGV,200441,Alarm,,,,
+AGV,200442,Alarm,,,,
+AGV,200443,Alarm,,,,
+AGV,200444,Alarm,,,,
+AGV,200445,Alarm,,,,
+AGV,200446,Alarm,,,,
+AGV,200447,Alarm,,,,
+AGV,200448,Alarm,,,,
+AGV,200449,Alarm,,,,
+AGV,200450,Alarm,,,,
+AGV,200451,Alarm,,,,
+AGV,200452,Alarm,,,,
+AGV,200453,Alarm,,,,
+AGV,200454,Alarm,,,,
+AGV,200455,Alarm,,,,
+AGV,200456,Alarm,,,,
+AGV,200457,Alarm,,,,
+AGV,200458,Alarm,,,,
+AGV,200459,Alarm,,,,
+AGV,200460,Alarm,,,,
+AGV,200461,Alarm,,,,
+AGV,200462,Alarm,,,,
+AGV,200463,Alarm,,,,
+AGV,200464,Alarm,,,,
+AGV,200465,Alarm,,,,
+AGV,200466,Alarm,,,,
+AGV,200467,Alarm,,,,
+AGV,200468,Alarm,,,,
+AGV,200469,Alarm,,,,
+AGV,200470,Alarm,,,,
+AGV,200471,Alarm,,,,
+AGV,200472,Alarm,,,,
+AGV,200473,Alarm,,,,
+AGV,200474,Alarm,,,,
+AGV,200475,Alarm,,,,
+AGV,200476,Alarm,,,,
+AGV,200477,Alarm,,,,
+AGV,200478,Alarm,,,,
+AGV,200479,Alarm,,,,
+AGV,200480,Alarm,,,,
+AGV,200481,Alarm,,,,
+AGV,200482,Alarm,,,,
+AGV,200483,Alarm,,,,
+AGV,200484,Alarm,,,,
+AGV,200485,Alarm,,,,
+AGV,200486,Alarm,,,,
+AGV,200487,Alarm,,,,
+AGV,200488,Alarm,,,,
+AGV,200489,Alarm,,,,
+AGV,200490,Alarm,,,,
+AGV,200491,Alarm,,,,
+AGV,200492,Alarm,,,,
+AGV,200493,Alarm,,,,
+AGV,200494,Alarm,,,,
+AGV,200495,Alarm,,,,
+AGV,200496,Alarm,,,,
+AGV,200497,Alarm,,,,
+AGV,200498,Alarm,,,,
+AGV,200499,Alarm,,,,
+AGV,200500,Alarm,,,,
+AGV,200501,Alarm,,,,
+AGV,200502,Alarm,,,,
+AGV,200503,Alarm,,,,
+AGV,200504,Alarm,,,,
+AGV,200505,Alarm,,,,
+AGV,200506,Alarm,,,,
+AGV,200507,Alarm,,,,
+AGV,200508,Alarm,,,,
+AGV,200509,Alarm,,,,
+AGV,200510,Alarm,,,,
+AGV,200511,Alarm,,,,
+AGV,200512,Alarm,,,,
+AGV,200513,Alarm,,,,
+AGV,200514,Alarm,,,,
+AGV,200515,Alarm,,,,
+AGV,200516,Alarm,,,,
+AGV,200517,Alarm,,,,
+AGV,200518,Alarm,,,,
+AGV,200519,Alarm,,,,
+AGV,200520,Alarm,,,,
+AGV,200521,Alarm,,,,
+AGV,200522,Alarm,,,,
+AGV,200523,Alarm,,,,
+AGV,200524,Alarm,,,,
+AGV,200525,Alarm,,,,
+AGV,200526,Alarm,,,,
+AGV,200527,Alarm,,,,
+AGV,200528,Alarm,,,,
+AGV,200529,Alarm,,,,
+AGV,200530,Alarm,,,,
+AGV,200531,Alarm,,,,
+AGV,200532,Alarm,,,,
+AGV,200533,Alarm,,,,
+AGV,200534,Alarm,,,,
+AGV,200535,Alarm,,,,
+AGV,200536,Alarm,,,,
+AGV,200537,Alarm,,,,
+AGV,200538,Alarm,,,,
+AGV,200539,Alarm,,,,
+AGV,200540,Alarm,,,,
+AGV,200541,Alarm,,,,
+AGV,200542,Alarm,,,,
+AGV,200543,Alarm,,,,
+AGV,200544,Alarm,,,,
+AGV,200545,Alarm,,,,
+AGV,200546,Alarm,,,,
+AGV,200547,Alarm,,,,
+AGV,200548,Alarm,,,,
+AGV,200549,Alarm,,,,
+AGV,200550,Alarm,,,,
+AGV,200551,Alarm,,,,
+AGV,200552,Alarm,,,,
+AGV,200553,Alarm,,,,
+AGV,200554,Alarm,,,,
+AGV,200555,Alarm,,,,
+AGV,200556,Alarm,,,,
+AGV,200557,Alarm,,,,
+AGV,200558,Alarm,,,,
+AGV,200559,Alarm,,,,
+AGV,200560,Alarm,,,,
+AGV,200561,Alarm,,,,
+AGV,200562,Alarm,,,,
+AGV,200563,Alarm,,,,
+AGV,200564,Alarm,,,,
+AGV,200565,Alarm,,,,
+AGV,200566,Alarm,,,,
+AGV,200567,Alarm,,,,
+AGV,200568,Alarm,,,,
+AGV,200569,Alarm,,,,
+AGV,200570,Alarm,,,,
+AGV,200571,Alarm,,,,
+AGV,200572,Alarm,,,,
+AGV,200573,Alarm,,,,
+AGV,200574,Alarm,,,,
+AGV,200575,Alarm,,,,
+AGV,200576,Alarm,,,,
+AGV,200577,Alarm,,,,
+AGV,200578,Alarm,,,,
+AGV,200579,Alarm,,,,
+AGV,200580,Alarm,,,,
+AGV,200581,Alarm,,,,
+AGV,200582,Alarm,,,,
+AGV,200583,Alarm,,,,
+AGV,200584,Alarm,,,,
+AGV,200585,Alarm,,,,
+AGV,200586,Alarm,,,,
+AGV,200587,Alarm,,,,
+AGV,200588,Alarm,,,,
+AGV,200589,Alarm,,,,
+AGV,200590,Alarm,,,,
+AGV,200591,Alarm,,,,
+AGV,200592,Alarm,,,,
+AGV,200593,Alarm,,,,
+AGV,200594,Alarm,,,,
+AGV,200595,Alarm,,,,
+AGV,200596,Alarm,,,,
+AGV,200597,Alarm,,,,
+AGV,200598,Alarm,,,,
+AGV,200599,Alarm,,,,
+AGV,200600,Alarm,,,,
+AGV,200601,Alarm,,,,
+AGV,200602,Alarm,,,,
+AGV,200603,Alarm,,,,
+AGV,200604,Alarm,,,,
+AGV,200605,Alarm,,,,
+AGV,200606,Alarm,,,,
+AGV,200607,Alarm,,,,
+AGV,200608,Alarm,,,,
+AGV,200609,Alarm,,,,
+AGV,200610,Alarm,,,,
+AGV,200611,Alarm,,,,
+AGV,200612,Alarm,,,,
+AGV,200613,Alarm,,,,
+AGV,200614,Alarm,,,,
+AGV,200615,Alarm,,,,
+AGV,200616,Alarm,,,,
+AGV,200617,Alarm,,,,
+AGV,200618,Alarm,,,,
+AGV,200619,Alarm,,,,
+AGV,200620,Alarm,,,,
+AGV,200621,Alarm,,,,
+AGV,200622,Alarm,,,,
+AGV,200623,Alarm,,,,
+AGV,200624,Alarm,,,,
+AGV,200625,Alarm,,,,
+AGV,200626,Alarm,,,,
+AGV,200627,Alarm,,,,
+AGV,200628,Alarm,,,,
+AGV,200629,Alarm,,,,
+AGV,200630,Alarm,,,,
+AGV,200631,Alarm,,,,
+AGV,200632,Alarm,,,,
+AGV,200633,Alarm,,,,
+AGV,200634,Alarm,,,,
+AGV,200635,Alarm,,,,
+AGV,200636,Alarm,,,,
+AGV,200637,Alarm,,,,
+AGV,200638,Alarm,,,,
+AGV,200639,Alarm,,,,
+AGV,200640,Alarm,,,,
+AGV,200641,Alarm,,,,
+AGV,200642,Alarm,,,,
+AGV,200643,Alarm,,,,
+AGV,200644,Alarm,,,,
+AGV,200645,Alarm,,,,
+AGV,200646,Alarm,,,,
+AGV,200647,Alarm,,,,
+AGV,200648,Alarm,,,,
+AGV,200649,Alarm,,,,
+AGV,200650,Alarm,,,,
+AGV,200651,Alarm,,,,
+AGV,200652,Alarm,,,,
+AGV,200653,Alarm,,,,
+AGV,200654,Alarm,,,,
+AGV,200655,Alarm,,,,
+AGV,200656,Alarm,,,,
+AGV,200657,Alarm,,,,
+AGV,200658,Alarm,,,,
+AGV,200659,Alarm,,,,
+AGV,200660,Alarm,,,,
+AGV,200661,Alarm,,,,
+AGV,200662,Alarm,,,,
+AGV,200663,Alarm,,,,
+AGV,200664,Alarm,,,,
+AGV,200665,Alarm,,,,
+AGV,200666,Alarm,,,,
+AGV,200667,Alarm,,,,
+AGV,200668,Alarm,,,,
+AGV,200669,Alarm,,,,
+AGV,200670,Alarm,,,,
+AGV,200671,Alarm,,,,
+AGV,200672,Alarm,,,,
+AGV,200673,Alarm,,,,
+AGV,200674,Alarm,,,,
+AGV,200675,Alarm,,,,
+AGV,200676,Alarm,,,,
+AGV,200677,Alarm,,,,
+AGV,200678,Alarm,,,,
+AGV,200679,Alarm,,,,
+AGV,200680,Alarm,,,,
+AGV,200681,Alarm,,,,
+AGV,200682,Alarm,,,,
+AGV,200683,Alarm,,,,
+AGV,200684,Alarm,,,,
+AGV,200685,Alarm,,,,
+AGV,200686,Alarm,,,,
+AGV,200687,Alarm,,,,
+AGV,200688,Alarm,,,,
+AGV,200689,Alarm,,,,
+AGV,200690,Alarm,,,,
+AGV,200691,Alarm,,,,
+AGV,200692,Alarm,,,,
+AGV,200693,Alarm,,,,
+AGV,200694,Alarm,,,,
+AGV,200695,Alarm,,,,
+AGV,200696,Alarm,,,,
+AGV,200697,Alarm,,,,
+AGV,200698,Alarm,,,,
+AGV,200699,Alarm,,,,
+AGV,200700,Alarm,StopChargeTimeout,StopChargeTimeout,Stop Charge Timeout,
+AGV,200701,Alarm,VehicleIsNotInAutoMode,VehicleIsNotInAutoMode,VehicleIs Not In Auto Mode,
+AGV,200702,Alarm,AgvcCallEms,AgvcCallEms,Agv_c Call Ems,
+AGV,200703,Alarm,PositionError,PositionError,Position Error,
+AGV,200704,Alarm,MoveControl Exception,MoveControl Exception,Move Control Exception,
+AGV,200705,Alarm,Command out of trigger range,Command out of trigger range,Command out of trigger range,
+AGV,200706,Alarm,Move : Initail Wheel Angle Timeout,Move : Initail Wheel Angle Timeout,Move : Initail Wheel Angle Timeout,
+AGV,200707,Alarm,Move : Enable allAxis Timeout,Move : Enable allAxis Timeout,Move : Enable allAxis Timeout,
+AGV,200708,Alarm,Reserve : Command's Reserve out of ReserveList's Range,Reserve : Command's Reserve out of ReserveList's Range,Reserve : Command's Reserve out of ReserveList's Range,
+AGV,200709,Alarm,SlowStop : Timeout,SlowStop : Timeout,SlowStop : Timeout,
+AGV,200710,Alarm,STurn : AGV turning too fast,STurn : AGV turning too fast,STurn : AGV turning too fast,
+AGV,200711,Alarm,STurn : AGV turning too slow,STurn : AGV turning too slow,STurn : AGV turning too slow,
+AGV,200712,Alarm,STurn : AGV turning with wrong path,STurn : AGV turning with wrong path,STurn : AGV turning with wrong path,
+AGV,200713,Alarm,STurn : one of wheels turning too slow,STurn : one of wheels turning too slow,STurn : one of wheels turning too slow,
+AGV,200714,Alarm,STurn : stop in STurn feature distable,STurn : stop in STurn feature distable,STurn : stop in STurn feature distable,
+AGV,200715,Alarm,STurn : continue in STurn feature distable,STurn : continue in STurn feature distable,STurn : continue in STurn feature distable,
+AGV,200716,Alarm,RTurn : AGV turning too fast,RTurn : AGV turning too fast,RTurn : AGV turning too fast,
+AGV,200717,Alarm,RTurn : AGV turning too slow,RTurn : AGV turning too slow,RTurn : AGV turning too slow,
+AGV,200718,Alarm,RTurn : Virtual Axis not Link,RTurn : Virtual Axis not Link,RTurn : Virtual Axis not Link,
+AGV,200719,Alarm,RTurn : Turn direction format error,RTurn : Turn direction format error,RTurn : Turn direction format error,
+AGV,200720,Alarm,RTurn : stop in RTurn feature distable,RTurn : stop in RTurn feature distable,RTurn : stop in RTurn feature distable,
+AGV,200721,Alarm,RTurn : RTurn Control timeout,RTurn : RTurn Control timeout,RTurn : RTurn Control timeout,
+AGV,200722,Alarm,RTurn : stop in can't continue step,RTurn : stop in can't continue step,RTurn : stop in can't continue step,
+AGV,200723,Alarm,RTurn : continue in RTurn feature distable,RTurn : continue in RTurn feature distable,RTurn : continue in RTurn feature distable,
+AGV,200724,Alarm,StopAndClear : Timeout,StopAndClear : Timeout,StopAndClear : Timeout,
+AGV,200725,Alarm,MoveMethod Initail Fail,MoveMethod Initail Fail,MoveMethod Initail Fail,
+AGV,200726,Alarm,MoveMethod Driver Command Fail,MoveMethod Driver Command Fail,MoveMethod Driver Command Fail,
+AGV,200727,Alarm,MotionDriver_Elmo Initail Fail,MotionDriver_Elmo Initail Fail,MotionDriver_Elmo Initail Fail,
+AGV,200728,Alarm,MotionDriver_Elmo Connect Fail,MotionDriver_Elmo Connect Fail,MotionDriver_Elmo Connect Fail,
+AGV,200729,Alarm,MotionDriver_Elmo Axis Setting format error,MotionDriver_Elmo Axis Setting format error,MotionDriver_Elmo Axis Setting format error,
+AGV,200730,Alarm,MotionDriver_Elmo Bulk Exception,MotionDriver_Elmo Bulk Exception,MotionDriver_Elmo Bulk Exception,
+AGV,200731,Alarm,MotionDriver_Elmo Disconnect : IPC witch controler,MotionDriver_Elmo Disconnect : IPC witch controler,MotionDriver_Elmo Disconnect : IPC witch controler,
+AGV,200732,Alarm,MotionDriver_Elmo Disconnect : controler witch driver,MotionDriver_Elmo Disconnect : controler witch driver,MotionDriver_Elmo Disconnect : controler witch driver,
+AGV,200733,Alarm,LocateControl Initail Fail,LocateControl Initail Fail,Locate Control Initail Fail,
+AGV,200734,Alarm,LocateDriver_BarcodeMapSystem Initail Fail,LocateDriver_BarcodeMapSystem Initail Fail,Locate Driver_Barcode Map System Initail Fail,
+AGV,200735,Alarm,LocateDriver_BarcodeMapSystem Connect Fail,LocateDriver_BarcodeMapSystem Connect Fail,Locate Driver_Barcode Map System Connect Fail,
+AGV,200736,Alarm,LocateDriver_SLAM_Sick Initail Fail,LocateDriver_SLAM_Sick Initail Fail,Locate Driver_SLAM_Sick Initail Fail,
+AGV,200737,Alarm,LocateDriver_SLAM_Sick Connect Fail,LocateDriver_SLAM_Sick Connect Fail,Locate Driver_SLAM_Sick Connect Fail,
+AGV,200738,Alarm,LocateDriver_SLAM_Sick data format error,LocateDriver_SLAM_Sick data format error,Locate Driver_SLAM_Sick data format error,
+AGV,200739,Alarm,Can't Override : Override Timeout,Can't Override : Override Timeout,Can't Override : Override Timeout,
+AGV,200740,Alarm,SafetyStop : TRU isn't in home Status,SafetyStop : TRU isn't in home Status,Safety Stop : Fork isn't in home Status,
+AGV,200741,Alarm,SafetyStop : Charging,SafetyStop : Charging,Safety Stop : Charging,
+AGV,200742,Alarm,SafetyStop : Excessive angular deviation,SafetyStop : Excessive angular deviation,Safety Stop : Excessive angular deviation,
+AGV,200743,Alarm,SafetyStop : Excessive section deviation,SafetyStop : Excessive section deviation,Safety Stop : Excessive section deviation,
+AGV,200744,Alarm,SafetyStop : Too long not read barcode (turn),SafetyStop : Too long not read barcode (turn),Safety Stop : Too long not read barcode (turn),
+AGV,200745,Alarm,SafetyStop : Too long not read barcode (line),SafetyStop : Too long not read barcode (line),Safety Stop : Too long not read barcode (line),
+AGV,200746,Alarm,SafetyStop : AGV Stop without reason,SafetyStop : AGV Stop without reason,Safety Stop : AGV Stop without reason,
+AGV,200747,Alarm,SafetyStop : Velocity change error,SafetyStop : Velocity change error,Safety Stop : Velocity change error,
+AGV,200748,Alarm,SafetyStop : Axis error,SafetyStop : Axis error,Safety Stop : Axis error,
+AGV,200749,Alarm,SafetyStop : LocateControl Error,SafetyStop : LocateControl Error,Safety Stop : Locate Control Error,
+AGV,200750,Alarm,SafetyStop : Stop Request,SafetyStop : Stop Request,Safety Stop : Stop Request,
+AGV,200751,Alarm,SafetyStop : Bumper Stop,SafetyStop : Bumper Stop,Safety Stop : Bumper Stop,
+AGV,200752,Alarm,SafetyStop : EMO Stop,SafetyStop : EMO Stop,Safety Stop : EMO Stop,
+AGV,200753,Alarm,SafetyStop : Delta update value error,SafetyStop : Delta update value error,Safety Stop : Delta update value error,
+AGV,200754,Alarm,Can't AutoRetry : AutoRetry Count more than config,Can't AutoRetry : AutoRetry Count more than config,Can't Auto Retry : Auto Retry Count more than config,
+AGV,200755,Alarm,Can't AutoRetry : AutoReset fail,Can't AutoRetry : AutoReset fail,Can't Auto Retry : Auto Reset fail,
+AGV,200756,Alarm,Can't AutoRetry : Create Retry MoveCmdInfo fail,Can't AutoRetry : Create Retry MoveCmdInfo fail,Can't Auto Retry : Create Retry Move CmdInfo fail,
+AGV,200757,Alarm,BeamSensor singal on Timeout,BeamSensor singal on Timeout,Beam Sensor singal on Timeout,
+AGV,200758,Alarm,TRU Command Format NG,TRU Command Format NG,Fork Command Format NG,
+AGV,200759,Alarm,TRU Command Read timeout,TRU Command Read timeout,Fork Command Read timeout,
+AGV,200760,Alarm,TRU Not Busy timeout,TRU Not Busy timeout,Fork Not Busy timeout,
+AGV,200761,Alarm,TRU Command Executing timeout,TRU Command Executing timeout,Fork Command Executing timeout,
+AGV,200762,Alarm,TRU Home Flag Waiting timeout,TRU Home Flag Waiting timeout,Fork Home Flag Waiting timeout,
+AGV,200763,Alarm,AGV switch to Manual,AGV switch to Manual,AGV switch to Manual,
+AGV,200764,Alarm,,,,
+AGV,200765,Alarm,,,,
+AGV,200766,Alarm,,,,
+AGV,200767,Alarm,,,,
+AGV,200768,Alarm,,,,
+AGV,200769,Alarm,,,,
+AGV,200770,Alarm,,,,
+AGV,200771,Alarm,,,,
+AGV,200772,Alarm,,,,
+AGV,200773,Alarm,,,,
+AGV,200774,Alarm,,,,
+AGV,200775,Alarm,,,,
+AGV,200776,Alarm,,,,
+AGV,200777,Alarm,,,,
+AGV,200778,Alarm,,,,
+AGV,200779,Alarm,,,,
+AGV,200780,Alarm,,,,
+AGV,200781,Alarm,,,,
+AGV,200782,Alarm,,,,
+AGV,200783,Alarm,,,,
+AGV,200784,Alarm,,,,
+AGV,200785,Alarm,,,,
+AGV,200786,Alarm,,,,
+AGV,200787,Alarm,,,,
+AGV,200788,Alarm,,,,
+AGV,200789,Alarm,,,,
+AGV,200790,Alarm,,,,
+AGV,200791,Alarm,,,,
+AGV,200792,Alarm,,,,
+AGV,200793,Alarm,,,,
+AGV,200794,Alarm,,,,
+AGV,200795,Alarm,,,,
+AGV,200796,Alarm,,,,
+AGV,200797,Alarm,,,,
+AGV,200798,Alarm,,,,
+AGV,200799,Alarm,,,,
+AGV,200800,Alarm,,,,
+AGV,200801,Alarm,,,,
+AGV,200802,Alarm,,,,
+AGV,200803,Alarm,,,,
+AGV,200804,Alarm,,,,
+AGV,200805,Alarm,,,,
+AGV,200806,Alarm,,,,
+AGV,200807,Alarm,,,,
+AGV,200808,Alarm,,,,
+AGV,200809,Alarm,,,,
+AGV,200810,Alarm,,,,
+AGV,200811,Alarm,,,,
+AGV,200812,Alarm,,,,
+AGV,200813,Alarm,,,,
+AGV,200814,Alarm,,,,
+AGV,200815,Alarm,,,,
+AGV,200816,Alarm,,,,
+AGV,200817,Alarm,,,,
+AGV,200818,Alarm,,,,
+AGV,200819,Alarm,,,,
+AGV,200820,Alarm,,,,
+AGV,200821,Alarm,,,,
+AGV,200822,Alarm,,,,
+AGV,200823,Alarm,,,,
+AGV,200824,Alarm,,,,
+AGV,200825,Alarm,,,,
+AGV,200826,Alarm,,,,
+AGV,200827,Alarm,,,,
+AGV,200828,Alarm,,,,
+AGV,200829,Alarm,,,,
+AGV,200830,Alarm,,,,
+AGV,200831,Alarm,,,,
+AGV,200832,Alarm,,,,
+AGV,200833,Alarm,,,,
+AGV,200834,Alarm,,,,
+AGV,200835,Alarm,,,,
+AGV,200836,Alarm,,,,
+AGV,200837,Alarm,,,,
+AGV,200838,Alarm,,,,
+AGV,200839,Alarm,,,,
+AGV,200840,Alarm,,,,
+AGV,200841,Alarm,,,,
+AGV,200842,Alarm,,,,
+AGV,200843,Alarm,,,,
+AGV,200844,Alarm,,,,
+AGV,200845,Alarm,,,,
+AGV,200846,Alarm,,,,
+AGV,200847,Alarm,,,,
+AGV,200848,Alarm,,,,
+AGV,200849,Alarm,,,,
+AGV,200850,Alarm,,,,
+AGV,200851,Alarm,,,,
+AGV,200852,Alarm,,,,
+AGV,200853,Alarm,,,,
+AGV,200854,Alarm,,,,
+AGV,200855,Alarm,,,,
+AGV,200856,Alarm,,,,
+AGV,200857,Alarm,,,,
+AGV,200858,Alarm,,,,
+AGV,200859,Alarm,,,,
+AGV,200860,Alarm,,,,
+AGV,200861,Alarm,,,,
+AGV,200862,Alarm,,,,
+AGV,200863,Alarm,,,,
+AGV,200864,Alarm,,,,
+AGV,200865,Alarm,,,,
+AGV,200866,Alarm,,,,
+AGV,200867,Alarm,,,,
+AGV,200868,Alarm,,,,
+AGV,200869,Alarm,,,,
+AGV,200870,Alarm,,,,
+AGV,200871,Alarm,,,,
+AGV,200872,Alarm,,,,
+AGV,200873,Alarm,,,,
+AGV,200874,Alarm,,,,
+AGV,200875,Alarm,,,,
+AGV,200876,Alarm,,,,
+AGV,200877,Alarm,,,,
+AGV,200878,Alarm,,,,
+AGV,200879,Alarm,,,,
+AGV,200880,Alarm,,,,
+AGV,200881,Alarm,,,,
+AGV,200882,Alarm,,,,
+AGV,200883,Alarm,,,,
+AGV,200884,Alarm,,,,
+AGV,200885,Alarm,,,,
+AGV,200886,Alarm,,,,
+AGV,200887,Alarm,,,,
+AGV,200888,Alarm,,,,
+AGV,200889,Alarm,,,,
+AGV,200890,Alarm,,,,
+AGV,200891,Alarm,,,,
+AGV,200892,Alarm,,,,
+AGV,200893,Alarm,,,,
+AGV,200894,Alarm,,,,
+AGV,200895,Alarm,,,,
+AGV,200896,Alarm,,,,
+AGV,200897,Alarm,,,,
+AGV,200898,Alarm,,,,
+AGV,200899,Alarm,,,,
+AGV,200900,Alarm,,,,
+AGV,200901,Alarm,,,,
+AGV,200902,Alarm,,,,
+AGV,200903,Alarm,,,,
+AGV,200904,Alarm,,,,
+AGV,200905,Alarm,,,,
+AGV,200906,Alarm,,,,
+AGV,200907,Alarm,,,,
+AGV,200908,Alarm,,,,
+AGV,200909,Alarm,,,,
+AGV,200910,Alarm,,,,
+AGV,200911,Alarm,,,,
+AGV,200912,Alarm,,,,
+AGV,200913,Alarm,,,,
+AGV,200914,Alarm,,,,
+AGV,200915,Alarm,,,,
+AGV,200916,Alarm,,,,
+AGV,200917,Alarm,,,,
+AGV,200918,Alarm,,,,
+AGV,200919,Alarm,,,,
+AGV,200920,Alarm,,,,
+AGV,200921,Alarm,,,,
+AGV,200922,Alarm,,,,
+AGV,200923,Alarm,,,,
+AGV,200924,Alarm,,,,
+AGV,200925,Alarm,,,,
+AGV,200926,Alarm,,,,
+AGV,200927,Alarm,,,,
+AGV,200928,Alarm,,,,
+AGV,200929,Alarm,,,,
+AGV,200930,Alarm,,,,
+AGV,200931,Alarm,,,,
+AGV,200932,Alarm,,,,
+AGV,200933,Alarm,,,,
+AGV,200934,Alarm,,,,
+AGV,200935,Alarm,,,,
+AGV,200936,Alarm,,,,
+AGV,200937,Alarm,,,,
+AGV,200938,Alarm,,,,
+AGV,200939,Alarm,,,,
+AGV,200940,Alarm,,,,
+AGV,200941,Alarm,,,,
+AGV,200942,Alarm,,,,
+AGV,200943,Alarm,,,,
+AGV,200944,Alarm,,,,
+AGV,200945,Alarm,,,,
+AGV,200946,Alarm,,,,
+AGV,200947,Alarm,,,,
+AGV,200948,Alarm,,,,
+AGV,200949,Alarm,,,,
+AGV,200950,Alarm,,,,
+AGV,200951,Alarm,,,,
+AGV,200952,Alarm,,,,
+AGV,200953,Alarm,,,,
+AGV,200954,Alarm,,,,
+AGV,200955,Alarm,,,,
+AGV,200956,Alarm,,,,
+AGV,200957,Alarm,,,,
+AGV,200958,Alarm,,,,
+AGV,200959,Alarm,,,,
+AGV,200960,Alarm,,,,
+AGV,200961,Alarm,,,,
+AGV,200962,Alarm,,,,
+AGV,200963,Alarm,,,,
+AGV,200964,Alarm,,,,
+AGV,200965,Alarm,,,,
+AGV,200966,Alarm,,,,
+AGV,200967,Alarm,,,,
+AGV,200968,Alarm,,,,
+AGV,200969,Alarm,,,,
+AGV,200970,Alarm,,,,
+AGV,200971,Alarm,,,,
+AGV,200972,Alarm,,,,
+AGV,200973,Alarm,,,,
+AGV,200974,Alarm,,,,
+AGV,200975,Alarm,,,,
+AGV,200976,Alarm,,,,
+AGV,200977,Alarm,,,,
+AGV,200978,Alarm,,,,
+AGV,200979,Alarm,,,,
+AGV,200980,Alarm,,,,
+AGV,200981,Alarm,,,,
+AGV,200982,Alarm,,,,
+AGV,200983,Alarm,,,,
+AGV,200984,Alarm,,,,
+AGV,200985,Alarm,,,,
+AGV,200986,Alarm,,,,
+AGV,200987,Alarm,,,,
+AGV,200988,Alarm,,,,
+AGV,200989,Alarm,,,,
+AGV,200990,Alarm,,,,
+AGV,200991,Alarm,,,,
+AGV,200992,Alarm,,,,
+AGV,200993,Alarm,,,,
+AGV,200994,Alarm,,,,
+AGV,200995,Alarm,,,,
+AGV,200996,Alarm,,,,
+AGV,200997,Alarm,,,,
+AGV,200998,Alarm,,,,
+AGV,200999,Alarm,,,,
+AGV,201000,,,,,
+AGV,201001,,,,,
+AGV,201002,,,,,
+AGV,201003,,,,,
+AGV,201004,,,,,
+AGV,201005,,,,,
+AGV,201006,,,,,
+AGV,201007,,,,,
+AGV,201008,,,,,
+AGV,201009,,,,,
+AGV,201010,,,,,
+AGV,201011,,,,,
+AGV,201012,,,,,
+AGV,201013,,,,,
+AGV,201014,,,,,
+AGV,201015,,,,,
+AGV,201016,,,,,
+AGV,201017,,,,,
+AGV,201018,,,,,
+AGV,201019,,,,,
+AGV,201020,,,,,
+AGV,201021,,,,,
+AGV,201022,,,,,
+AGV,201023,,,,,
+AGV,201024,,,,,
+AGV,201025,,,,,
+AGV,201026,,,,,
+AGV,201027,,,,,
+AGV,201028,,,,,
+AGV,201029,,,,,
+AGV,201030,,,,,
+AGV,201031,,,,,
+AGV,201032,,,,,
+AGV,201033,,,,,
+AGV,201034,,,,,
+AGV,201035,,,,,
+AGV,201036,,,,,
+AGV,201037,,,,,
+AGV,201038,,,,,
+AGV,201039,,,,,
+AGV,201040,Warn,【PLC】Battery Power (Low) Latch,【PLC】Battery Power (Low) Latch,【PLC】電池電力(Low) Latch,PLC電池異常需進行更換
+AGV,201041,Warn,F Side Brake Release Button Enable,F Side Brake Release Button Enable,AGV走行輪剎車釋放按鈕啟用(車頭處),F側輪子煞車作動中，按下Brake release 按鈕解除煞車
+AGV,201042,Warn,B Side Brake Release Button Enable,B Side Brake Release Button Enable,AGV走行輪剎車釋放按鈕啟用(車尾處),B側輪子煞車作動中，按下Brake release 按鈕解除煞車
+AGV,201043,Warn,Beam Sensor Detect Something(FR Side),Beam Sensor Detect Something(FR Side),Beam Sensor偵測有物體(FR側),確認是否有物品或人員在Beam SENSOR (FR側) [X0100][X0101]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201044,Warn,Beam Sensor Detect Something(FL Side),Beam Sensor Detect Something(FL Side),Beam Sensor偵測有物體(FL側),確認是否有物品或人員在Beam SENSOR (FL側) [X0102][X0103]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201045,Warn,Beam Sensor Detect Something(FC Side),Beam Sensor Detect Something(FC Side),Beam Sensor偵測有物體(FC側),確認是否有物品或人員在Beam SENSOR (FC側) [X0104][X0105]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201046,Warn,Beam Sensor Detect Something(BR Side),Beam Sensor Detect Something(BR Side),Beam Sensor偵測有物體(BR側),確認是否有物品或人員在Beam SENSOR (BR側) [X010A][X010B]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201047,Warn,Beam Sensor Detect Something(BL Side),Beam Sensor Detect Something(BL Side),Beam Sensor偵測有物體(BL側),確認是否有物品或人員在Beam SENSOR (BL側) [X010C][X010D]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201048,Warn,Beam Sensor Detect Something(BC Side),Beam Sensor Detect Something(BC Side),Beam Sensor偵測有物體(BC側),確認是否有物品或人員在Beam SENSOR (BC側) [X010E][X010F]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201049,Warn,Force ELMO Servo Off,Force ELMO Servo Off,強制ELMO伺服Off,
+AGV,201050,Warn,Auto state AGV has Cassette without command Timeout,Auto state AGV has Cassette without command Timeout,自動狀態 AGV有 Cassette  無指令 Timeout,請檢查AGVC是否有下命令放CST
+AGV,201051,Warn,IPC Not Ready,IPC Not Ready,IPC Not Ready,檢查IPC Ready交握信號是否有正常發送，或是IPC交握通訊模組和通訊線是否有安裝好或損壞
+AGV,201052,Warn,"CST to EQ, the double grid is abnormal (L side)","CST to EQ, the double grid is abnormal (L side)","置放CST給EQ時,二重格異常(L側)",請檢查(L側)二重格檢[X200]是否正常
+AGV,201053,Warn,"CST from EQ, the double grid is abnormal (L side)","CST from EQ, the double grid is abnormal (L side)","從EQ取CST時,二重格異常(L側",請檢查(L側)二重格檢[X200]是否正常
+AGV,201054,Warn,"CST to EQ, the double grid is abnormal (R side)","CST to EQ, the double grid is abnormal (R side)","置放CST給EQ時,二重格異常(R側",請檢查(R側)二重格檢[X204]是否正常
+AGV,201055,Warn,"CST from EQ, the double grid is abnormal (R side)","CST from EQ, the double grid is abnormal (R side)","從EQ取CST時,發生二重格異常(R側",請檢查(R側)二重格[X204]是否正常
+AGV,201056,Warn,"CST from EQ, adetection sensor error","CST from EQ, adetection sensor error","從EQ取CST時,發生CST檢知異常",請檢查CST檢[X1AC]是否正常
+AGV,201057,Warn,"CST to EQ, adetection sensor error","CST to EQ, adetection sensor error","放CST給EQ時,發生CST檢知異常",請檢查CST檢[X1AC]是否正常
+AGV,201058,Warn,,,,
+AGV,201059,Warn,,,,
+AGV,201060,Warn,double grid anomaly,double grid anomaly,二重格異常,"請檢查(L/R側)二重格檢[X200,X204]是否正常"
+AGV,201061,Warn,Fork Post PIO Fail,Fork Post PIO Fail,Fork Post PIO Fail,請檢查Post PIO 訊號是否正常
+AGV,201062,Warn,Fork Busy Fail,Fork Busy Fail,Fork Busy Fail,請檢查Busy 訊號是否正常
+AGV,201063,Warn,Fork PrePIO  Fail,Fork PrePIO  Fail,Fork PrePIO  Fail,請檢查PrePIO  訊號是否正常
+AGV,201064,Warn,Fork command NG,Fork command NG,Fork command NG,請檢查FORK 指令是否正常
+AGV,201065,Warn,Double Check Sensor Pass (L Side),Double Check Sensor Pass (L Side),二重格檢知功能不使用(L側),二重格檢知  (L)[X0200]不使用，人機上可選擇使用/不使用切換
+AGV,201066,Warn,Double Check Sensor Pass (R Side),Double Check Sensor Pass (R Side),二重格檢知功能不使用(R側),二重格檢知  (R)[X0204]不使用，人機上可選擇使用/不使用切換
+AGV,201067,Warn,TRU Check Function Not Use,TRU Check Function Not Use,手臂檢知功能不使用,FORK在荷檢[X0201][X0205]不使用，人機可上選擇使用/不使用切換
+AGV,201068,Warn,Hand Sensor Check Function Not Use,Hand Sensor Check Function Not Use,手臂在席檢知功能不使用,AGV車手臂在席檢知不使用，人機上可選擇使用/不使用切換
+AGV,201069,Warn,Confirm trolley positioning function use,Confirm trolley positioning function use,確認台車定位功能使用,AGV車確認台車定位功能使用，人機上可選擇使用/不使用切換
+AGV,201070,Warn,shutters door do not use,shutters door do not use,拉門不使用,AGV車拉門不使用，人機上可選擇使用/不使用切換
+AGV,201071,Warn,Correct Mode Not Use,Correct Mode Not Use,定位補正模式(SR 1000)不使用,AGV車補正功能不使用，人機上可選擇使用/不使用切換
+AGV,201072,Warn,power saving mode enabled,power saving mode enabled,省電模式啟用中,
+AGV,201073,Warn,Forced handshake with EQ,Forced handshake with EQ,強制與EQ進行交握功能使用,
+AGV,201074,Warn,Enforce Close Bump Sensor Function,Enforce Close Bump Sensor Function,強制關閉Bump Sensor功能,關閉Bump Sensor功能，人機上可選擇使用/不使用切換
+AGV,201075,Warn,AGVC forced to end charging (R side),AGVC forced to end charging (R side),AGVC強制結束充電(R側),AGVC強制結束充電(R側)
+AGV,201076,Warn,Abnormal charging pile (R side),Abnormal charging pile (R side),充電樁異常(R側),請檢查充電樁是否異常(R側)
+AGV,201077,Warn,Abnormal detection of charging pile (R side),Abnormal detection of charging pile (R side),充電樁檢知異常(R側),請檢查充電樁是否異常(R側)
+AGV,201078,Warn,AGVC forced to end charging (L side),AGVC forced to end charging (L side),AGVC強制結束充電(L側),AGVC強制結束充電(L側)
+AGV,201079,Warn,Abnormal charging pile (L side),Abnormal charging pile (L side),充電樁異常(L側),請檢查充電樁是否異常(L側)
+AGV,201080,Warn,Abnormal detection of charging pile (L side),Abnormal detection of charging pile (L side),充電樁檢知異常(L側),請檢查充電樁是否異常(L側)
+AGV,201081,Warn,TRU Forward/Back Axis Home Return Ask On,TRU Forward/Back Axis Home Return Ask On,手臂伸縮軸原點復歸要求On,請操作人機進入伺服原點復歸操作畫面，執行伺服原點復歸操作，排除後按下 RESET按鈕執行復歸操作
+AGV,201082,Warn,TRU Up/Down Axis Home Return Ask On,TRU Up/Down Axis Home Return Ask On,手臂升降軸原點復歸要求On,請操作人機進入伺服原點復歸操作畫面，執行伺服原點復歸操作，排除後按下 RESET按鈕執行復歸操作
+AGV,201083,Warn,TRU Slide Axis Home Return Ask On,TRU Slide Axis Home Return Ask On,手臂移載軸原點復歸要求On,請操作人機進入伺服原點復歸操作畫面，執行伺服原點復歸操作，排除後按下 RESET按鈕執行復歸操作
+AGV,201084,Warn,TRU Turn Axis Home Return Ask On,TRU Turn Axis Home Return Ask On,手臂旋轉軸原點復歸要求On,請操作人機進入伺服原點復歸操作畫面，執行伺服原點復歸操作，排除後按下 RESET按鈕執行復歸操作
+AGV,201085,Warn,Battery temperature detection abnormal_F Side,Battery temperature detection abnormal_F Side,BAT 本體溫度檢知異常_F,請檢查電池溫度是否正常(F側)
+AGV,201086,Warn,Battery temperature detection abnormal_B Side,Battery temperature detection abnormal_B Side,BAT 本體溫度檢知異常_B,請檢查電池溫度是否正常(B側)
+AGV,201087,Warn,"System Has Action,Can Not Turn Manual","System Has Action,Can Not Turn Manual","系統仍有動作,無法切手動",手臂取放動作未完成，需檢查取放動作是否正常或是等待取放動做完成後，按下 RESET按鈕執行復歸操作，即可切換成手動
+AGV,201088,Warn,"System Has Error,Can Not Turn Auto","System Has Error,Can Not Turn Auto","系統有異常,無法切自動",異常動作排除後，按下 RESET按鈕執行復歸操作，即可切換成自動
+AGV,201089,Warn,"Brake Release Has Action,Can Not Turn Auto","Brake Release Has Action,Can Not Turn Auto","Brake Release有作動,無法切自動",輪子煞車作動中，按下Brake release 按鈕解除煞車，按下 RESET按鈕執行復歸操作，即可切換成自動
+AGV,201090,Warn,Beam Sensor Shielded(FR Side),Beam Sensor Shielded(FR Side),Beam Sensor屏蔽中(FR側),請了解IPC為何下達Beam Sensor(FR側)[X0100][X0101]，暫時不使用命令
+AGV,201091,Warn,Beam Sensor Shielded(BR Side),Beam Sensor Shielded(BR Side),Beam Sensor屏蔽中(BR側),請了解IPC為何下達Beam Sensor(BR側)[X010A][X010B]，暫時不使用命令
+AGV,201092,Warn,Beam Sensor Shielded(LR Side),Beam Sensor Shielded(LR Side),Beam Sensor屏蔽中(LR側),請了解IPC為何下達Beam Sensor(LR側)[X0120][X0121]，暫時不使用命令
+AGV,201093,Warn,Beam Sensor Shielded(LL Side),Beam Sensor Shielded(LL Side),Beam Sensor屏蔽中(LL側),請了解IPC為何下達Beam Sensor(LL側)[X0122][X0123]，暫時不使用命令
+AGV,201094,Warn,Beam Sensor Shielded(RR Side),Beam Sensor Shielded(RR Side),Beam Sensor屏蔽中(RR側),請了解IPC為何下達Beam Sensor(RR側)[X012A][X012B]，暫時不使用命令
+AGV,201095,Warn,Beam Sensor Shielded(RL Side),Beam Sensor Shielded(RL Side),Beam Sensor屏蔽中(RL側),請了解IPC為何下達Beam Sensor(RL側)[X012C][X012D]，暫時不使用命令
+AGV,201096,Warn,Charging timeout - Right side,Charging timeout - Right side,AGV充電超過設定時間(R側),請檢查AGV充電是否正常(R側)
+AGV,201097,Warn,Charging timeout - Left side,Charging timeout - Left side,AGV充電超過設定時間(L側),請檢查AGV充電是否正常(L側)
+AGV,201098,Warn,Corrector Read Action Time Out,Corrector Read Action Time Out,人機介面累積未觸控超時(權限已登出),請重新登入操作權限
+AGV,201099,Warn,Servo enters power saving mode,Servo enters power saving mode,Servo進入省電模式,Servo進入省電模式
+AGV,201100,Warn,EQ HO_AVBL signal off - Left side,EQ HO_AVBL signal off - Left side,"EQ HO_AVBL 訊號OFF,取消交握(L側)",請檢查EQ交握訊號EQ HO_AVBL 是否OFF(L側)
+AGV,201101,Warn,EQ HO_AVBL signal off - Right side,EQ HO_AVBL signal off - Right side,"EQ HO_AVBL 訊號OFF,取消交握(R側)",請檢查EQ交握訊號EQ HO_AVBL 是否OFF(R側)
+AGV,201102,Warn,"Ready Signal Is Not On,TRU Can Not Action(L Side)","Ready Signal Is Not On,TRU Can Not Action(L Side)",L Side 取放中 EQ Ready 訊號 OFF,EQ設備端是否有異常導致交握停止，或是交握通訊模組和通訊線是否有安裝好或損壞，
+AGV,201103,Warn,"Ready Signal Is Not On,TRU Can Not Action(R Side)","Ready Signal Is Not On,TRU Can Not Action(R Side)",R Side 取放中 EQ Ready 訊號 OFF,EQ設備端是否有異常導致交握停止，或是交握通訊模組和通訊線是否有安裝好或損壞，
+AGV,201104,Warn,Charger Station Error,Charger Station Error,Charger Station Error,檢查AGV車充電是否正常
+AGV,201105,Warn,Battery Brand Is Not Setting,Battery Brand Is Not Setting,電池廠牌未設定,請在人機設定電池廠牌
+AGV,201106,Warn,Vehicle Battery Voltage Too High Warning,Vehicle Battery Voltage Too High Warning,車體電池電壓過高警告,代表需要停止充電或是電池最大值(警告使用)設定過低
+AGV,201107,Warn,Vehicle Battery Voltage Too Low Warning,Vehicle Battery Voltage Too Low Warning,"車體電池電壓過低警告(48V警告,45V斷電)",代表需要立即充電或是電池最小值(警告使用)設定過高
+AGV,201108,Warn,IPC Stop Command Enable,IPC Stop Command Enable,IPC Stop Command 無效,不接受IPC的停止命令， 人機上可選擇使用/不使用切換
+AGV,201109,Warn,"AGV Car And EQ TRUshake,T2 Timeout (L Side)","AGV Car And EQ TRUshake,T2 Timeout (L Side)","AGV車與EQ交握,發生T2 Time out (L側)",檢查交握信號是否有正常發送，交握通訊模組和通訊線是否有安裝好或損壞，或是T2交握時間設定過短，需要進行修改
+AGV,201110,Warn,"AGV Car And EQ TRUshake,T5 Timeout (L Side)","AGV Car And EQ TRUshake,T5 Timeout (L Side)","AGV車與EQ交握,發生T5 Time out (L側)",檢查交握信號是否有正常發送，交握通訊模組和通訊線是否有安裝好或損壞，或是T5交握時間設定過短，需要進行修改
+AGV,201111,Warn,"AGV Car And EQ TRUshake,T8 Timeout (L Side)","AGV Car And EQ TRUshake,T8 Timeout (L Side)","AGV車與EQ交握,發生T8 Time out (L側)",檢查交握信號是否有正常發送，交握通訊模組和通訊線是否有安裝好或損壞，或是T8交握時間設定過短，需要進行修改
+AGV,201112,Warn,"AGV Car And EQ TRUshake,T2 Timeout (R Side)","AGV Car And EQ TRUshake,T2 Timeout (R Side)","AGV車與EQ交握,發生T2 Time out (R側)",檢查交握信號是否有正常發送，交握通訊模組和通訊線是否有安裝好或損壞，或是T2交握時間設定過短，需要進行修改
+AGV,201113,Warn,"AGV Car And EQ TRUshake,T5 Timeout (R Side)","AGV Car And EQ TRUshake,T5 Timeout (R Side)","AGV車與EQ交握,發生T5 Time out (R側)",檢查交握信號是否有正常發送，交握通訊模組和通訊線是否有安裝好或損壞，或是T5交握時間設定過短，需要進行修改
+AGV,201114,Warn,"AGV Car And EQ TRUshake,T8 Timeout (R Side)","AGV Car And EQ TRUshake,T8 Timeout (R Side)","AGV車與EQ交握,發生T8 Time out (R側)",檢查交握信號是否有正常發送，交握通訊模組和通訊線是否有安裝好或損壞，或是T8交握時間設定過短，需要進行修改
+AGV,201115,Warn,low battery voltage  warning,low battery voltage  warning,車體電池電壓過低斷電警告,請盡速充電
+AGV,201116,Warn,IPC Is Not Ask Corrector Function Confirm,IPC Is Not Ask Corrector Function Confirm,IPC未回覆補正器功能確認,沒收到IPC下達補正器功能命令，需確認與IPC的通訊是否正常
+AGV,201117,Warn,"Coupler_R Side Receive Charge Command,Sensor Off","Coupler_R Side Receive Charge Command,Sensor Off","Coupler_R側接收充電命令時,Sensor Off",請檢查X1A9訊號是否正常
+AGV,201118,Warn,"Coupler_L Side Receive Charge Command,Sensor Off","Coupler_L Side Receive Charge Command,Sensor Off","Coupler_L側接收充電命令時,Sensor Off",請檢查X1A8訊號是否正常
+AGV,201119,Warn,Master CC-Link Module Error Or Warning,Master CC-Link Module Error Or Warning,Master CC-Link模組有異常或者警告,檢查Master CC-Link模組是否有異常
+AGV,201120,Warn,Electric Meter Communication Over Time,Electric Meter Communication Over Time,電錶通訊超時,檢查電錶是否有異常，或是與電錶的通訊模組和通訊線是否有安裝好或損壞
+AGV,201121,Warn,IPC Get/Put CommanDownG(StageCode),IPC Get/Put CommanDownG(StageCode),IPC取放命令NG(StageCode),確認IPC取放命令是否正確
+AGV,201122,Warn,IPC Get/Put CommanDownG( ActionCode),IPC Get/Put CommanDownG( ActionCode),IPC取放命令NG(動作Code),確認IPC取放命令是否正確
+AGV,201123,Warn,"Stage Has CST,Can Not Execute Get Command(L Side)","Stage Has CST,Can Not Execute Get Command(L Side)","載台有CST,無法執行Get指令(L側)",車內還有CST，等待放置CST命令或是半自動強制搬除，再進行後續操作
+AGV,201124,Warn,"EQ Port No CST,Can Not Execute Get Command(L Side)","EQ Port No CST,Can Not Execute Get Command(L Side)","EQ Port無CST,無法執行Get指令(L側)",EQ設備端沒有CST，請先確認再下達取CST命令，或是選擇其他EQ有CST的進行取CST操作
+AGV,201125,Warn,"Stage Has CST,Can Not Execute Get Command(R Side)","Stage Has CST,Can Not Execute Get Command(R Side)","載台有CST,無法執行Get指令(R側)",車內還有CST，等待放置CST命令或是半自動強制搬除，再進行後續操作
+AGV,201126,Warn,"EQ Port No CST,Can Not Execute Get Command(R Side)","EQ Port No CST,Can Not Execute Get Command(R Side)","EQ Port無CST,無法執行Get指令(R側)",EQ設備端沒有CST，請先確認再下達取CST命令，或是選擇其他EQ有CST的進行取CST操作
+AGV,201127,Warn,"Stage No CST,Can Not Execute Put Command(L Side)","Stage No CST,Can Not Execute Put Command(L Side)","載台無CST,無法執行Put指令(L側)",車內沒有CST，請先執行取CST命令或是執行半自動強制取CST操作，再進行後續操作
+AGV,201128,Warn,"EQ Port Has CST,Can Not Execute Put Command(L Side)","EQ Port Has CST,Can Not Execute Put Command(L Side)","EQ Port有CST,無法執行Put指令(L側)",EQ設備端已有CST，請先排除後再下達放置CST命令，或是選擇其他EQ進行放置
+AGV,201129,Warn,"Stage No CST,Can Not Execute Put Command(R Side)","Stage No CST,Can Not Execute Put Command(R Side)","載台無CST,無法執行Put指令(R側)",車內沒有CST，請先執行取CST命令或是執行半自動強制取CST操作，再進行後續操作
+AGV,201130,Warn,"EQ Port Has CST,Can Not Execute Put Command(R Side)","EQ Port Has CST,Can Not Execute Put Command(R Side)","EQ Port有CST,無法執行Put指令(R側)",EQ設備端已有CST，請先排除後再下達放置CST命令，或是選擇其他EQ進行放置
+AGV,201131,Warn,IPC Get/Put Comman NG (Direction Code),IPC Get/Put Comman NG (Direction Code),IPC取放命令NG(方向Code),IPC取放命令NG(方向Code碼錯誤)
+AGV,201132,Warn,"Vehicle Is Not Position,Can Not Accept IPC Command","Vehicle Is Not Position,Can Not Accept IPC Command","車體未定位,無法接受IPC命令",請先等待AGV車到達定位，再下達命令
+AGV,201133,Warn,"TRU Is Not In Work Home,Can Not Accept IPC Command","TRU Is Not In Work Home,Can Not Accept IPC Command","手臂未在工作原點,無法接受IPC命令",請先操作人機切換到復歸操作頁面，操作各軸手臂回到工作原點
+AGV,201134,Warn,"Servo On/Off Status Not Complete,Can Not Accept IPC Command","Servo On/Off Status Not Complete,Can Not Accept IPC Command","Servo On/Off狀態不全,無法接受IPC命令",請先檢查手臂伺服各軸是否有異常，再進行後續操作
+AGV,201135,Warn,"IPC Command Signal Residual,Can Not Accept New Command","IPC Command Signal Residual,Can Not Accept New Command","IPC命令訊號殘留,無法接受新命令",請先執行完IPC的命令，或是上個IPC命令未執行完成先清除完操作各軸手臂回到工作原點，再進行後續操作
+AGV,201136,Warn,"TRU Action,Can Not Accept IPC Command","TRU Action,Can Not Accept IPC Command","手臂動作中,無法接受IPC命令",手臂動作中等待動作完成，再下達命令
+AGV,201137,Warn,IPC Get/Put Comman NG (Speed Code),IPC Get/Put Comman NG (Speed Code),IPC取放命令NG(速度Code),IPC取放命令NG(速度Code碼錯誤)
+AGV,201138,Warn,"System Is Not Ready,Can Not Accept IPC Command","System Is Not Ready,Can Not Accept IPC Command","系統未Ready,無法接受IPC命令",請先將異常排除，程式初始化和手臂回到工作原點，再進行後續操作
+AGV,201139,Warn,"TRU Is Manual Mode,Can Not Accept IPC Command","TRU Is Manual Mode,Can Not Accept IPC Command","手臂處於手動模式,無法接收IPC命令",請切成自動模式，等待接受IPC命令
+AGV,201140,Warn,"TRU Home Return,Can Not Accept IPC Command","TRU Home Return,Can Not Accept IPC Command","手臂原點復歸中,無法接收IPC命令",手臂原點復歸中等待動作完成，再下達命令
+AGV,201141,Warn,"Alarm Report,T1 TimeOut","Alarm Report,T1 TimeOut","Alarm回報,T1 TimeOut",Alarm回報逾時
+AGV,201142,Warn,"TRU Teaching Report,T1 TimeOut","TRU Teaching Report,T1 TimeOut","Fork Teaching回報,T1 TimeOut",Fork Teaching回報逾時
+AGV,201143,Warn,"Vehicle Teaching Report,T1 TimeOut","Vehicle Teaching Report,T1 TimeOut","Vehicle Teaching回報,T1 TimeOut",Vehicle Teaching回報預時
+AGV,201144,Warn,"TRU Alignment Teching Report,T1 TimeOut","TRU Alignment Teching Report,T1 TimeOut","Fork Alignment Teching回報,T1 TimeOut",Fork Alignment Teching回報逾時
+AGV,201145,Warn,Trun Wheel Motor Servo Off(FR Side),Trun Wheel Motor Servo Off(FR Side),旋轉輪馬達 Servo Off (右前側),檢查是否有EMO或是BUMP SENSOR有作動，導致安全迴路未正常啟動，或是284V來源端有異常
+AGV,201146,Warn,Trun Wheel Motor Servo Off(FL Side),Trun Wheel Motor Servo Off(FL Side),旋轉輪馬達 Servo Off (左前側),檢查是否有EMO或是BUMP SENSOR有作動，導致安全迴路未正常啟動，或是284V來源端有異常
+AGV,201147,Warn,Trun Wheel Motor Servo Off(BR Side),Trun Wheel Motor Servo Off(BR Side),旋轉輪馬達 Servo Off (右後側),檢查是否有EMO或是BUMP SENSOR有作動，導致安全迴路未正常啟動，或是284V來源端有異常
+AGV,201148,Warn,Trun Wheel Motor Servo Off(BL Side),Trun Wheel Motor Servo Off(BL Side),旋轉輪馬達 Servo Off (左後側),檢查是否有EMO或是BUMP SENSOR有作動，導致安全迴路未正常啟動，或是284V來源端有異常
+AGV,201149,Warn,Walker Wheel Motor Servo Off(FR Side),Walker Wheel Motor Servo Off(FR Side),走行輪馬達 Servo Off (右前側),檢查是否有EMO或是BUMP SENSOR有作動，導致安全迴路未正常啟動，或是284V來源端有異常
+AGV,201150,Warn,Walker Wheel Motor Servo Off(FL Side),Walker Wheel Motor Servo Off(FL Side),走行輪馬達 Servo Off (左前側),檢查是否有EMO或是BUMP SENSOR有作動，導致安全迴路未正常啟動，或是284V來源端有異常
+AGV,201151,Warn,Walker Wheel Motor Servo Off(BR Side),Walker Wheel Motor Servo Off(BR Side),走行輪馬達 Servo Off (右後側),檢查是否有EMO或是BUMP SENSOR有作動，導致安全迴路未正常啟動，或是284V來源端有異常
+AGV,201152,Warn,Walker Wheel Motor Servo Off(BL Side),Walker Wheel Motor Servo Off(BL Side),走行輪馬達 Servo Off (左後側),檢查是否有EMO或是BUMP SENSOR有作動，導致安全迴路未正常啟動，或是284V來源端有異常
+AGV,201153,Warn,IPC Order Car Wheel Servo Off,IPC Order Car Wheel Servo Off,IPC 下令車輪Servo Off,請確認IPC為何下達Servo Off指令
+AGV,201154,Warn,TRU Pause,TRU Pause,手臂暫停中,確認無人員靠近，無安全疑慮，人機解除暫停
+AGV,201155,Warn,TRU Decomposed Action Mode Use,TRU Decomposed Action Mode Use,手臂分解動作模式使用中,手臂半自動分解動作中，人機上選擇使用/不使用
+AGV,201156,Warn,Stage And Direction Number Are Different,Stage And Direction Number Are Different,Stage與Direction號碼不同,動作指令Stage與Direction號碼不同
+AGV,201157,Warn,,,,
+AGV,201158,Warn,,,,
+AGV,201159,Warn,,,,
+AGV,201160,Warn,TRU Correct Amount Too Much(Positive Degrees),TRU Correct Amount Too Much(Positive Degrees),"補正器""角度""補正量過大(正角度)",請確認手臂補正器角度補正量有無問題
+AGV,201161,Warn,TRU Correct Amount Too Much(Negative Degrees),TRU Correct Amount Too Much(Negative Degrees),"補正器""角度""補正量過大(負角度)",請確認手臂補正器角度補正量有無問題
+AGV,201162,Warn,TRU Correct Amount Too Much(Positive Direction)(Slide),TRU Correct Amount Too Much(Positive Direction)(Slide),"補正器""移載""補正量過大(正方向)",請確認手臂補正器手臂移載補正量有無問題
+AGV,201163,Warn,TRU Correct Amount Too Much(Negative Direction)(Slide),TRU Correct Amount Too Much(Negative Direction)(Slide),"補正器""移載""補正量過大(負方向)",請確認手臂補正器手臂移載補正量有無問題
+AGV,201164,Warn,TRU Correct Amount Too Much(Positive Direction)(FR/BK),TRU Correct Amount Too Much(Positive Direction)(FR/BK),"補正器""伸縮""補正量過大(正方向)",請確認手臂補正器手臂前後補正量有無問題
+AGV,201165,Warn,TRU Correct Amount Too Much(Negative Direction)(FR/BK),TRU Correct Amount Too Much(Negative Direction)(FR/BK),"補正器""伸縮""補正量過大(負方向)",請確認手臂補正器手臂前後補正量有無問題
+AGV,201166,Warn,Electric Meter Communication Error,Electric Meter Communication Error,電錶通訊異常,檢查電錶是否有異常，或是與電錶的通訊模組和通訊線是否有安裝好或損壞
+AGV,201167,Warn,Unload timeout - Left side,Unload timeout - Left side,手臂放EQ CST動作Time Out(L側),請檢查放置CST到EQ是否有問題(L側)
+AGV,201168,Warn,Unload timeout - Right side,Unload timeout - Right side,手臂放EQ CST動作Time Out(R側),請檢查放置CST到EQ是否有問題(R側)
+AGV,201169,Warn,Need to set the battery number,Need to set the battery number,需要設定電池編號,請確認電池編號是否輸入正確
+AGV,201170,Warn,Beam Sensor Detect Something(LR Side),Beam Sensor Detect Something(LR Side),Beam Sensor偵測有物體(LR側),確認是否有物品或人員在Beam SENSOR (LR側) [X0120][X0121]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201171,Warn,Beam Sensor Detect Something(LL Side),Beam Sensor Detect Something(LL Side),Beam Sensor偵測有物體(LL側),確認是否有物品或人員在Beam SENSOR (LL側) [X0122][X0123]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201172,Warn,Beam Sensor Detect Something(LC Side),Beam Sensor Detect Something(LC Side),Beam Sensor偵測有物體(LC側),確認是否有物品或人員在Beam SENSOR (LC側) [X0124][X0125]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201173,Warn,Beam Sensor Detect Something(RR Side),Beam Sensor Detect Something(RR Side),Beam Sensor偵測有物體(RR側),確認是否有物品或人員在Beam SENSOR (RR側) [X012A][X012B]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201174,Warn,Beam Sensor Detect Something(RL Side),Beam Sensor Detect Something(RL Side),Beam Sensor偵測有物體(RL側),確認是否有物品或人員在Beam SENSOR (RL側) [X012C][X012D]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201175,Warn,Beam Sensor Detect Something(RC Side),Beam Sensor Detect Something(RC Side),Beam Sensor偵測有物體(RC側),確認是否有物品或人員在Beam SENSOR (RC側) [X012E][X012F]感測距離內， 排除後按下 RESET按鈕執行復歸操作
+AGV,201176,Warn,Door UnBrake Warnning,Door UnBrake Warnning,拉門軸解剎車中警告,煞車解除警示，如果無須用到，可選擇關閉
+AGV,201177,Warn,Lifter UnBrake Warnning,Lifter UnBrake Warnning,升降軸解剎車中警告,煞車解除警示，如果無須用到，可選擇關閉
+AGV,201178,Warn,Turn+ TRU UnBrake Warnning,Turn+ TRU UnBrake Warnning,旋轉軸+伸縮軸解剎車中警告,煞車解除警示，如果無須用到，可選擇關閉
+AGV,201179,Warn,Transfer UnBrake Warnning,Transfer UnBrake Warnning,移載軸解剎車中警告,煞車解除警示，如果無須用到，可選擇關閉
+AGV,201180,Warn,Beam Sensor Shielded(FL Side),Beam Sensor Shielded(FL Side),Beam Sensor屏蔽中(FL側),請了解IPC為何下達Beam Sensor(FL側)[X0102][X0103]，暫時不使用命令
+AGV,201181,Warn,Beam Sensor Shielded(FC Side),Beam Sensor Shielded(FC Side),Beam Sensor屏蔽中(FC側),請了解IPC為何下達Beam Sensor(FC側)[X0104][X0105]，暫時不使用命令
+AGV,201182,Warn,Beam Sensor Shielded(BL Side),Beam Sensor Shielded(BL Side),Beam Sensor屏蔽中(BL側),請了解IPC為何下達Beam Sensor(BL側)[X010C][X010D]，暫時不使用命令
+AGV,201183,Warn,Beam Sensor Shielded(BC Side),Beam Sensor Shielded(BC Side),Beam Sensor屏蔽中(BC側),請了解IPC為何下達Beam Sensor(BC側)[X010E][X010F]，暫時不使用命令
+AGV,201184,Warn,Beam Sensor Shielded(LC Side),Beam Sensor Shielded(LC Side),Beam Sensor屏蔽中(LC側),請了解IPC為何下達Beam Sensor(LC側)[X0124][X0125]，暫時不使用命令
+AGV,201185,Warn,Beam Sensor Shielded(RC Side),Beam Sensor Shielded(RC Side),Beam Sensor屏蔽中(RC側),請了解IPC為何下達Beam Sensor(RC側)[X012E][X012F]，暫時不使用命令
+AGV,201186,Warn,Personnel and equipment enter the rotating safety area(L Side),Personnel and equipment enter the rotating safety area(L Side),人員設備進入旋轉安全區域內(L側),請確認有無人員進入FORK旋轉範圍(L側)
+AGV,201187,Warn,Personnel and equipment enter the rotating safety area(R Side),Personnel and equipment enter the rotating safety area(R Side),人員設備進入旋轉安全區域內(R側),請確認有無人員進入FORK旋轉範圍(R側)
+AGV,201188,Warn,There are obstacles forwards,There are obstacles forwards,AGV前進有阻礙物,請確認AGV前進有無阻礙物
+AGV,201189,Warn,There are obstacles backwards,There are obstacles backwards,AGV後退有阻礙物,請確認AGV後退有無阻礙物
+AGV,201190,Warn,There are obstacles at left side,There are obstacles at left side,AGV左橫移有阻礙物,請確認AGV左橫移有無阻礙物
+AGV,201191,Warn,There are obstacles at right side,There are obstacles at right side,AGV右橫移有阻礙物,請確認AGV右橫移有無阻礙物
+AGV,201192,Warn,The forward blocking stop function is invalid,The forward blocking stop function is invalid,前行阻擋停止功能已無效(不要站在車頭)轉自動請注意,前行阻擋停止功能已無效(不要站在車頭)轉自動請注意
+AGV,201193,Warn,The backward blocking stop function is invalid,The backward blocking stop function is invalid,後退阻擋停止功能已無效(不要站在車尾)轉自動請注意,後退阻擋停止功能已無效(不要站在車尾)轉自動請注意
+AGV,201194,Warn,The left side blocking stop function is invalid,The left side blocking stop function is invalid,左橫移阻擋停止功能已無效(不要站在車左)轉自動請注意,左橫移阻擋停止功能已無效(不要站在車左)轉自動請注意
+AGV,201195,Warn,The right side blocking stop function is invalid,The right side blocking stop function is invalid,右橫移阻擋停止功能已無效(不要站在車右)轉自動請注意,右橫移阻擋停止功能已無效(不要站在車右)轉自動請注意
+AGV,201196,Warn,XFL torque reaches  threshold - noCST - move front,XFL torque reaches  threshold - noCST - move front,"左前輪""走行""扭力達紀錄值(前行空車)","請確認左前輪""走行""扭力是否有有問題前行空車)"
+AGV,201197,Warn,XFR torque reaches  threshold - noCST - move front,XFR torque reaches  threshold - noCST - move front,"右前輪""走行""扭力達紀錄值(前行空車)","請確認右前輪""走行""扭力是否有有問題(前行空車)"
+AGV,201198,Warn,XRL torque reaches  threshold - noCST - move front,XRL torque reaches  threshold - noCST - move front,"左後輪""走行""扭力達紀錄值(前行空車)","請確認左後輪""走行""扭力是否有問題(前行空車)"
+AGV,201199,Warn,XRR torque reaches  threshold - noCST - move front,XRR torque reaches  threshold - noCST - move front,"右後輪""走行""扭力達紀錄值(前行空車)","請確認右後輪""走行""扭力是否有問題(前行空車)"
+AGV,201200,Warn,XFL torque reaches  threshold - noCST - move back,XFL torque reaches  threshold - noCST - move back,"左前輪""走行""扭力達紀錄值(後退空車)","請確認左前輪""走行""扭力是否有問題(後退空車)"
+AGV,201201,Warn,XFR torque reaches  threshold - noCST - move back,XFR torque reaches  threshold - noCST - move back,"右前輪""走行""扭力達紀錄值(後退空車)","請確認右前輪""走行""扭力是否有問題(後退空車)"
+AGV,201202,Warn,XRL torque reaches  threshold - noCST - move back,XRL torque reaches  threshold - noCST - move back,"左後輪""走行""扭力達紀錄值(後退空車)","請確認左後輪""走行""扭力是否有問題(後退空車)"
+AGV,201203,Warn,XRR torque reaches  threshold - noCST - move back,XRR torque reaches  threshold - noCST - move back,"右後輪""走行""扭力達紀錄值(後退空車)","請確認右後輪""走行""扭力是否有問題(後退空車)"
+AGV,201204,Warn,TFL torque reaches  threshold - noCST - move right,TFL torque reaches  threshold - noCST - move right,"左前輪""旋轉""扭力達紀錄值(右轉空車)","請確認左前輪""旋轉""扭力是否有問題(右轉空車)"
+AGV,201205,Warn,TFR torque reaches  threshold - noCST - move right,TFR torque reaches  threshold - noCST - move right,"右前輪""旋轉""扭力達紀錄值(右轉空車)","請確認右前輪""旋轉""扭力是否有問題(右轉空車)"
+AGV,201206,Warn,TRL torque reaches  threshold - noCST - move right,TRL torque reaches  threshold - noCST - move right,"左後輪""旋轉""扭力達紀錄值(右轉空車)","請確認左後輪""旋轉""扭力是否有問題(右轉空車)"
+AGV,201207,Warn,TRR torque reaches  threshold - noCST - move right,TRR torque reaches  threshold - noCST - move right,"右後輪""旋轉""扭力達紀錄值(右轉空車)","請確認右後輪""旋轉""扭力是否有問題(右轉空車)"
+AGV,201208,Warn,TFL torque reaches  threshold - noCST - move left,TFL torque reaches  threshold - noCST - move left,"左前輪""旋轉""扭力達紀錄值(左轉空車)","請確認左前輪""旋轉""扭力是否有問題(左轉空車)"
+AGV,201209,Warn,TFR torque reaches  threshold - noCST - move left,TFR torque reaches  threshold - noCST - move left,"右前輪""旋轉""扭力達紀錄值(左轉空車)","請確認右前輪""旋轉""扭力是否有問題(左轉空車)"
+AGV,201210,Warn,TRL torque reaches  threshold - noCST - move left,TRL torque reaches  threshold - noCST - move left,"左後輪""旋轉""扭力達紀錄值(左轉空車)","請確認左後輪""旋轉""扭力是否有問題(左轉空車)"
+AGV,201211,Warn,TRR torque reaches  threshold - noCST - move left,TRR torque reaches  threshold - noCST - move left,"右後輪""旋轉""扭力達紀錄值(左轉空車)","請確認右後輪""旋轉""扭力是否有問題(左轉空車)"
+AGV,201212,Warn,Correct function timeout in loading moving frontend -  Left side,Correct function timeout in loading moving frontend -  Left side,"前進方向取貨""初定""補正器讀取超時(L)",請確認前進方向取貨補正器SR1000是否正常(L側)
+AGV,201213,Warn,Correct function timeout in unloading moving frontend -  Left side,Correct function timeout in unloading moving frontend -  Left side,"前進方向放貨""初定""補正器讀取超時(L)",請確認前進方向放貨補正器SR1000是否正常(L側)
+AGV,201214,Warn,Correct function timeout in loading moving backend -  Left side,Correct function timeout in loading moving backend -  Left side,"後退方向取貨""初定""補正器讀取超時(L)",請確認後退方向取貨補正器SR1000是否正常(L側)
+AGV,201215,Warn,Correct function timeout in unloading moving backend -  Left side,Correct function timeout in unloading moving backend -  Left side,"後退方向放貨""初定""補正器讀取超時(L)",請確認後退方向放貨補正器SR1000是否正常(L側)
+AGV,201216,Warn,Correct function timeout in loading moving frontend -  Right side,Correct function timeout in loading moving frontend -  Right side,"前進方向取貨""初定""補正器讀取超時(R)",請確認前進方向取貨補正器SR1000是否正常(R側)
+AGV,201217,Warn,Correct function timeout in unloading moving frontend -  Right side,Correct function timeout in unloading moving frontend -  Right side,"前進方向放貨""初定""補正器讀取超時(R)",請確認前進方向放貨補正器SR1000是否正常(R側)
+AGV,201218,Warn,Correct function timeout in loading moving backend -  Right side,Correct function timeout in loading moving backend -  Right side,"後退方向取貨""初定""補正器讀取超時(R)",請確認後退方向取貨補正器SR1000是否正常(R側)
+AGV,201219,Warn,Correct function timeout in unloading moving backend -  Right side,Correct function timeout in unloading moving backend -  Right side,"後退方向放貨""初定""補正器讀取超時(R)",請確認後退方向放貨補正器SR1000是否正常(R側)
+AGV,201220,Warn,Correct function read timeout (L side),Correct function read timeout (L side),手動補正器讀取Time Out(L),請確認補正器SR1000是否正常(L側)
+AGV,201221,Warn,Correct function read timeout (R side),Correct function read timeout (R side),手動補正器讀取Time Out(R),請確認補正器SR1000是否正常(R側)
+AGV,201222,Warn,Correct function timeout in loading - Left side,Correct function timeout in loading - Left side,"取貨動作""貳定""補正器讀取超時(L)",請確認補正器SR1000是否正常(L側)
+AGV,201223,Warn,Correct function timeout in unloading - Left side,Correct function timeout in unloading - Left side,"放貨動作""貳定""補正器讀取超時(L)",請確認補正器SR1000是否正常(R側)
+AGV,201224,Warn,Correct function timeout in loading - Right side,Correct function timeout in loading - Right side,"取貨動作""貳定""補正器讀取超時(R)",請確認補正器SR1000是否正常(L側)
+AGV,201225,Warn,Correct function timeout in unloading - Right side,Correct function timeout in unloading - Right side,"放貨動作""貳定""補正器讀取超時(R)",請確認補正器SR1000是否正常(R側)
+AGV,201226,Warn,Correct function timeout at moving backend -  Left side,Correct function timeout at moving backend -  Left side,"MOVE""後退""方向補正器讀取超時(L)",請確認補正器SR1000是否正常(L側)
+AGV,201227,Warn,Correct function timeout at moving frontend -  Left side,Correct function timeout at moving frontend -  Left side,"MOVE""前進""方向補正器讀取超時(L)",請確認補正器SR1000是否正常(R側)
+AGV,201228,Warn,Correct function timeout at moving backend -  Right side,Correct function timeout at moving backend -  Right side,"MOVE""後退""方向補正器讀取超時(R)",請確認補正器SR1000是否正常(L側)
+AGV,201229,Warn,Correct function timeout at moving frontend -  Right side,Correct function timeout at moving frontend -  Right side,"MOVE""前進""方向補正器讀取超時(R)",請確認補正器SR1000是否正常(R側)
+AGV,201230,Warn,,,,
+AGV,201231,Warn,Vehicle BMS High Battery,Vehicle BMS High Battery,Vehicle BMS High Battery,Vehicle BMS High Battery
+AGV,201232,Warn,,,,
+AGV,201233,Warn,AGV is not in charging position - Right side,AGV is not in charging position - Right side,AGV未到達充電位置(R側),請確認AGV到充電樁位置是否有問題(R側)
+AGV,201234,Warn,AGV is not in charging position - Left side,AGV is not in charging position - Left side,AGV未到達充電位置(L側),請確認AGV到充電樁位置是否有問題(L側)
+AGV,201235,Warn,Charger is out of service - Right side,Charger is out of service - Right side,充電樁關閉中! (R側),請確認充電樁是否關閉中! (R側)
+AGV,201236,Warn,Charger is out of service - Left side,Charger is out of service - Left side,充電樁關閉中! (L側),請確認充電樁是否關閉中! (L側)
+AGV,201237,Warn,Charging - Charge error - Right side,Charging - Charge error - Right side,充電中  副充電樁發生異常(R側),請檢查副充電樁是否發生異常(R側)
+AGV,201238,Warn,Charging - Charge sensor error - Right side,Charging - Charge sensor error - Right side,充電中  副充電樁檢知異常(R側),請檢查副充電樁是否發生異常(R側)
+AGV,201239,Warn,Charging - Charge error - Left side,Charging - Charge error - Left side,充電中  副充電樁發生異常(L側),請檢查副充電樁是否發生異常(L側)
+AGV,201240,Warn,Charging - Charge sensor error - Left side,Charging - Charge sensor error - Left side,充電中  副充電樁檢知異常(L側),請檢查副充電樁是否發生異常(L側)
+AGV,201241,Warn,Charging - Charge error - Right side,Charging - Charge error - Right side,充電中  主充電樁發生異常(R側),請檢查主充電樁是否發生異常(R側)
+AGV,201242,Warn,Charging - Charge error - Left side,Charging - Charge error - Left side,充電中  主充電樁發生異常(L側),請檢查主充電樁是否發生異常(L側)
+AGV,201243,Warn,Trigger Area sensor OS32C - front  side,Trigger Area sensor OS32C - front  side,安全開關(OS32C) 觸發 (F側),請確認安全開關(OS32C) 有無觸發 (F側)
+AGV,201244,Warn,Trigger Area sensor OS32C - back side,Trigger Area sensor OS32C - back side,安全開關(OS32C) 觸發 (B側),請確認安全開關(OS32C) 有無觸發 (B側)
+AGV,201245,Warn,Trigger Area sensor OS32C - left  side,Trigger Area sensor OS32C - left  side,安全開關(OS32C) 觸發 (L側),請確認安全開關(OS32C) 有無觸發 (L側)
+AGV,201246,Warn,Trigger Area sensor OS32C - right  side,Trigger Area sensor OS32C - right  side,安全開關(OS32C) 觸發 (R側),請確認安全開關(OS32C) 有無觸發 (R側)
+AGV,201247,Warn,,,,
+AGV,201248,Warn,,,,
+AGV,201249,Warn,,,,
+AGV,201250,Warn,,,,
+AGV,201251,Warn,Correct function timeout in loading - Left side,Correct function timeout in loading - Left side,取貨動作叁定補正器讀取超時(L),請確認補正器SR1000是否正常(L側)
+AGV,201252,Warn,Correct function timeout in unloading - Left side,Correct function timeout in unloading - Left side,放貨動作叁定補正器讀取超時(L),請確認補正器SR1000是否正常(L側)
+AGV,201253,Warn,Correct function timeout in loading - Right side,Correct function timeout in loading - Right side,取貨動作叁定補正器讀取超時(R),請確認補正器SR1000是否正常(R側)
+AGV,201254,Warn,Correct function timeout in unloading - Right side,Correct function timeout in unloading - Right side,放貨動作叁定補正器讀取超時(R),請確認補正器SR1000是否正常(R側)
+AGV,201255,Warn,,,,
+AGV,201256,Warn,XFL torque reaches  threshold - CST - move front,XFL torque reaches  threshold - CST - move front,"左前輪""走行""扭力達紀錄值(前行載貨)","請確認左前輪""走行""扭力是否有有問題前行載貨)"
+AGV,201257,Warn,XFR torque reaches  threshold - CST - move front,XFR torque reaches  threshold - CST - move front,"右前輪""走行""扭力達紀錄值(前行載貨)","請確認右前輪""走行""扭力是否有有問題(前行載貨)"
+AGV,201258,Warn,XRL torque reaches  threshold - CST - move front,XRL torque reaches  threshold - CST - move front,"左後輪""走行""扭力達紀錄值(前行載貨)","請確認左後輪""走行""扭力是否有問題(前行載貨)"
+AGV,201259,Warn,XRR torque reaches  threshold - CST - move front,XRR torque reaches  threshold - CST - move front,"右後輪""走行""扭力達紀錄值(前行載貨)","請確認右後輪""走行""扭力是否有問題(前行載貨)"
+AGV,201260,Warn,XFL torque reaches  threshold - CST - move back,XFL torque reaches  threshold - CST - move back,"左前輪""走行""扭力達紀錄值(後退載貨)","請確認左前輪""走行""扭力是否有問題(後退載貨)"
+AGV,201261,Warn,XFR torque reaches  threshold - CST - move back,XFR torque reaches  threshold - CST - move back,"右前輪""走行""扭力達紀錄值(後退載貨)","請確認右前輪""走行""扭力是否有問題(後退載貨)"
+AGV,201262,Warn,XRL torque reaches  threshold - CST - move back,XRL torque reaches  threshold - CST - move back,"左後輪""走行""扭力達紀錄值(後退載貨)","請確認左後輪""走行""扭力是否有問題(後退載貨)"
+AGV,201263,Warn,XRR torque reaches  threshold - CST - move back,XRR torque reaches  threshold - CST - move back,"右後輪""走行""扭力達紀錄值(後退載貨)","請確認右後輪""走行""扭力是否有問題(後退載貨)"
+AGV,201264,Warn,TFL torque reaches  threshold - CST - move right,TFL torque reaches  threshold - CST - move right,"左前輪""旋轉""扭力達紀錄值(右轉載貨)","請確認左前輪""旋轉""扭力是否有問題(右轉載貨)"
+AGV,201265,Warn,TFR torque reaches  threshold - CST - move right,TFR torque reaches  threshold - CST - move right,"右前輪""旋轉""扭力達紀錄值(右轉載貨)","請確認右前輪""旋轉""扭力是否有問題(右轉載貨)"
+AGV,201266,Warn,TRL torque reaches  threshold - CST - move right,TRL torque reaches  threshold - CST - move right,"左後輪""旋轉""扭力達紀錄值(右轉載貨)","請確認左後輪""旋轉""扭力是否有問題(右轉載貨)"
+AGV,201267,Warn,TRR torque reaches  threshold - CST - move right,TRR torque reaches  threshold - CST - move right,"右後輪""旋轉""扭力達紀錄值(右轉載貨)","請確認右後輪""旋轉""扭力是否有問題(右轉載貨)"
+AGV,201268,Warn,TFL torque reaches  threshold - CST - move left,TFL torque reaches  threshold - CST - move left,"左前輪""旋轉""扭力達紀錄值(左轉載貨)","請確認左前輪""旋轉""扭力是否有問題(左轉載貨)"
+AGV,201269,Warn,TFR torque reaches  threshold - CST - move left,TFR torque reaches  threshold - CST - move left,"右前輪""旋轉""扭力達紀錄值(左轉載貨)","請確認右前輪""旋轉""扭力是否有問題(左轉載貨)"
+AGV,201270,Warn,TRL torque reaches  threshold - CST - move left,TRL torque reaches  threshold - CST - move left,"左後輪""旋轉""扭力達紀錄值(左轉載貨)","請確認左後輪""旋轉""扭力是否有問題(左轉載貨)"
+AGV,201271,Warn,TRR torque reaches  threshold - CST - move left,TRR torque reaches  threshold - CST - move left,"右後輪""旋轉""扭力達紀錄值(左轉載貨)","請確認右後輪""旋轉""扭力是否有問題(左轉載貨)"
+AGV,201272,Warn,,,,
+AGV,201273,Warn,,,,
+AGV,201274,Warn,,,,
+AGV,201275,Warn,,,,
+AGV,201276,Warn,,,,
+AGV,201277,Warn,,,,
+AGV,201278,Warn,,,,
+AGV,201279,Warn,,,,
+AGV,201280,Warn,,,,
+AGV,201281,Warn,,,,
+AGV,201282,Warn,,,,
+AGV,201283,Warn,,,,
+AGV,201284,Warn,,,,
+AGV,201285,Warn,,,,
+AGV,201286,Warn,,,,
+AGV,201287,Warn,,,,
+AGV,201288,Warn,,,,
+AGV,201289,Warn,,,,
+AGV,201290,Warn,,,,
+AGV,201291,Warn,,,,
+AGV,201292,Warn,,,,
+AGV,201293,Warn,,,,
+AGV,201294,Warn,,,,
+AGV,201295,Warn,,,,
+AGV,201296,Warn,,,,
+AGV,201297,Warn,,,,
+AGV,201298,Warn,,,,
+AGV,201299,Warn,,,,
+AGV,201300,Warn,,,,
+AGV,201301,Warn,,,,
+AGV,201302,Warn,,,,
+AGV,201303,Warn,,,,
+AGV,201304,Warn,,,,
+AGV,201305,Warn,,,,
+AGV,201306,Warn,,,,
+AGV,201307,Warn,,,,
+AGV,201308,Warn,,,,
+AGV,201309,Warn,,,,
+AGV,201310,Warn,,,,
+AGV,201311,Warn,,,,
+AGV,201312,Warn,,,,
+AGV,201313,Warn,,,,
+AGV,201314,Warn,,,,
+AGV,201315,Warn,,,,
+AGV,201316,Warn,,,,
+AGV,201317,Warn,,,,
+AGV,201318,Warn,,,,
+AGV,201319,Warn,,,,
+AGV,201320,Warn,,,,
+AGV,201321,Warn,,,,
+AGV,201322,Warn,,,,
+AGV,201323,Warn,,,,
+AGV,201324,Warn,,,,
+AGV,201325,Warn,,,,
+AGV,201326,Warn,,,,
+AGV,201327,Warn,,,,
+AGV,201328,Warn,,,,
+AGV,201329,Warn,,,,
+AGV,201330,Warn,,,,
+AGV,201331,Warn,,,,
+AGV,201332,Warn,,,,
+AGV,201333,Warn,,,,
+AGV,201334,Warn,,,,
+AGV,201335,Warn,,,,
+AGV,201336,Warn,,,,
+AGV,201337,Warn,,,,
+AGV,201338,Warn,,,,
+AGV,201339,Warn,,,,
+AGV,201340,Warn,,,,
+AGV,201341,Warn,,,,
+AGV,201342,Warn,,,,
+AGV,201343,Warn,,,,
+AGV,201344,Warn,,,,
+AGV,201345,Warn,,,,
+AGV,201346,Warn,,,,
+AGV,201347,Warn,,,,
+AGV,201348,Warn,,,,
+AGV,201349,Warn,,,,
+AGV,201350,Warn,,,,
+AGV,201351,Warn,,,,
+AGV,201352,Warn,,,,
+AGV,201353,Warn,,,,
+AGV,201354,Warn,,,,
+AGV,201355,Warn,,,,
+AGV,201356,Warn,,,,
+AGV,201357,Warn,,,,
+AGV,201358,Warn,,,,
+AGV,201359,Warn,,,,
+AGV,201360,Warn,,,,
+AGV,201361,Warn,,,,
+AGV,201362,Warn,,,,
+AGV,201363,Warn,,,,
+AGV,201364,Warn,,,,
+AGV,201365,Warn,,,,
+AGV,201366,Warn,,,,
+AGV,201367,Warn,,,,
+AGV,201368,Warn,,,,
+AGV,201369,Warn,,,,
+AGV,201370,Warn,,,,
+AGV,201371,Warn,,,,
+AGV,201372,Warn,,,,
+AGV,201373,Warn,,,,
+AGV,201374,Warn,,,,
+AGV,201375,Warn,,,,
+AGV,201376,Warn,,,,
+AGV,201377,Warn,,,,
+AGV,201378,Warn,,,,
+AGV,201379,Warn,,,,
+AGV,201380,Warn,,,,
+AGV,201381,Warn,,,,
+AGV,201382,Warn,,,,
+AGV,201383,Warn,,,,
+AGV,201384,Warn,,,,
+AGV,201385,Warn,,,,
+AGV,201386,Warn,,,,
+AGV,201387,Warn,,,,
+AGV,201388,Warn,,,,
+AGV,201389,Warn,,,,
+AGV,201390,Warn,,,,
+AGV,201391,Warn,,,,
+AGV,201392,Warn,,,,
+AGV,201393,Warn,,,,
+AGV,201394,Warn,,,,
+AGV,201395,Warn,,,,
+AGV,201396,Warn,,,,
+AGV,201397,Warn,,,,
+AGV,201398,Warn,,,,
+AGV,201399,Warn,,,,
+AGV,201400,Warn,,,,
+AGV,201401,Warn,,,,
+AGV,201402,Warn,,,,
+AGV,201403,Warn,,,,
+AGV,201404,Warn,,,,
+AGV,201405,Warn,,,,
+AGV,201406,Warn,,,,
+AGV,201407,Warn,,,,
+AGV,201408,Warn,,,,
+AGV,201409,Warn,,,,
+AGV,201410,Warn,,,,
+AGV,201411,Warn,,,,
+AGV,201412,Warn,,,,
+AGV,201413,Warn,,,,
+AGV,201414,Warn,,,,
+AGV,201415,Warn,,,,
+AGV,201416,Warn,,,,
+AGV,201417,Warn,,,,
+AGV,201418,Warn,,,,
+AGV,201419,Warn,,,,
+AGV,201420,Warn,,,,
+AGV,201421,Warn,,,,
+AGV,201422,Warn,,,,
+AGV,201423,Warn,,,,
+AGV,201424,Warn,,,,
+AGV,201425,Warn,,,,
+AGV,201426,Warn,,,,
+AGV,201427,Warn,,,,
+AGV,201428,Warn,,,,
+AGV,201429,Warn,,,,
+AGV,201430,Warn,,,,
+AGV,201431,Warn,,,,
+AGV,201432,Warn,,,,
+AGV,201433,Warn,,,,
+AGV,201434,Warn,,,,
+AGV,201435,Warn,,,,
+AGV,201436,Warn,,,,
+AGV,201437,Warn,,,,
+AGV,201438,Warn,,,,
+AGV,201439,Warn,,,,
+AGV,201440,Warn,,,,
+AGV,201441,Warn,,,,
+AGV,201442,Warn,,,,
+AGV,201443,Warn,,,,
+AGV,201444,Warn,,,,
+AGV,201445,Warn,,,,
+AGV,201446,Warn,,,,
+AGV,201447,Warn,,,,
+AGV,201448,Warn,,,,
+AGV,201449,Warn,,,,
+AGV,201450,Warn,,,,
+AGV,201451,Warn,,,,
+AGV,201452,Warn,,,,
+AGV,201453,Warn,,,,
+AGV,201454,Warn,,,,
+AGV,201455,Warn,,,,
+AGV,201456,Warn,,,,
+AGV,201457,Warn,,,,
+AGV,201458,Warn,,,,
+AGV,201459,Warn,,,,
+AGV,201460,Warn,,,,
+AGV,201461,Warn,,,,
+AGV,201462,Warn,,,,
+AGV,201463,Warn,,,,
+AGV,201464,Warn,,,,
+AGV,201465,Warn,,,,
+AGV,201466,Warn,,,,
+AGV,201467,Warn,,,,
+AGV,201468,Warn,,,,
+AGV,201469,Warn,,,,
+AGV,201470,Warn,,,,
+AGV,201471,Warn,,,,
+AGV,201472,Warn,,,,
+AGV,201473,Warn,,,,
+AGV,201474,Warn,,,,
+AGV,201475,Warn,,,,
+AGV,201476,Warn,,,,
+AGV,201477,Warn,,,,
+AGV,201478,Warn,,,,
+AGV,201479,Warn,,,,
+AGV,201480,Warn,,,,
+AGV,201481,Warn,,,,
+AGV,201482,Warn,,,,
+AGV,201483,Warn,,,,
+AGV,201484,Warn,,,,
+AGV,201485,Warn,,,,
+AGV,201486,Warn,,,,
+AGV,201487,Warn,,,,
+AGV,201488,Warn,,,,
+AGV,201489,Warn,,,,
+AGV,201490,Warn,,,,
+AGV,201491,Warn,,,,
+AGV,201492,Warn,,,,
+AGV,201493,Warn,,,,
+AGV,201494,Warn,,,,
+AGV,201495,Warn,,,,
+AGV,201496,Warn,,,,
+AGV,201497,Warn,,,,
+AGV,201498,Warn,,,,
+AGV,201499,Warn,,,,
+AGV,201500,Warn,,,,
+AGV,201501,Warn,,,,
+AGV,201502,Warn,,,,
+AGV,201503,Warn,,,,
+AGV,201504,Warn,,,,
+AGV,201505,Warn,,,,
+AGV,201506,Warn,,,,
+AGV,201507,Warn,,,,
+AGV,201508,Warn,,,,
+AGV,201509,Warn,,,,
+AGV,201510,Warn,,,,
+AGV,201511,Warn,,,,
+AGV,201512,Warn,,,,
+AGV,201513,Warn,,,,
+AGV,201514,Warn,,,,
+AGV,201515,Warn,,,,
+AGV,201516,Warn,,,,
+AGV,201517,Warn,,,,
+AGV,201518,Warn,,,,
+AGV,201519,Warn,,,,
+AGV,201520,Warn,,,,
+AGV,201521,Warn,,,,
+AGV,201522,Warn,,,,
+AGV,201523,Warn,,,,
+AGV,201524,Warn,,,,
+AGV,201525,Warn,,,,
+AGV,201526,Warn,,,,
+AGV,201527,Warn,,,,
+AGV,201528,Warn,,,,
+AGV,201529,Warn,,,,
+AGV,201530,Warn,,,,
+AGV,201531,Warn,,,,
+AGV,201532,Warn,,,,
+AGV,201533,Warn,,,,
+AGV,201534,Warn,,,,
+AGV,201535,Warn,,,,
+AGV,201536,Warn,,,,
+AGV,201537,Warn,,,,
+AGV,201538,Warn,,,,
+AGV,201539,Warn,,,,
+AGV,201540,Warn,,,,
+AGV,201541,Warn,,,,
+AGV,201542,Warn,,,,
+AGV,201543,Warn,,,,
+AGV,201544,Warn,,,,
+AGV,201545,Warn,,,,
+AGV,201546,Warn,,,,
+AGV,201547,Warn,,,,
+AGV,201548,Warn,,,,
+AGV,201549,Warn,,,,
+AGV,201550,Warn,,,,
+AGV,201551,Warn,,,,
+AGV,201552,Warn,,,,
+AGV,201553,Warn,,,,
+AGV,201554,Warn,,,,
+AGV,201555,Warn,,,,
+AGV,201556,Warn,,,,
+AGV,201557,Warn,,,,
+AGV,201558,Warn,,,,
+AGV,201559,Warn,,,,
+AGV,201560,Warn,,,,
+AGV,201561,Warn,,,,
+AGV,201562,Warn,,,,
+AGV,201563,Warn,,,,
+AGV,201564,Warn,,,,
+AGV,201565,Warn,,,,
+AGV,201566,Warn,,,,
+AGV,201567,Warn,,,,
+AGV,201568,Warn,,,,
+AGV,201569,Warn,,,,
+AGV,201570,Warn,,,,
+AGV,201571,Warn,,,,
+AGV,201572,Warn,,,,
+AGV,201573,Warn,,,,
+AGV,201574,Warn,,,,
+AGV,201575,Warn,,,,
+AGV,201576,Warn,,,,
+AGV,201577,Warn,,,,
+AGV,201578,Warn,,,,
+AGV,201579,Warn,,,,
+AGV,201580,Warn,,,,
+AGV,201581,Warn,,,,
+AGV,201582,Warn,,,,
+AGV,201583,Warn,,,,
+AGV,201584,Warn,,,,
+AGV,201585,Warn,,,,
+AGV,201586,Warn,,,,
+AGV,201587,Warn,,,,
+AGV,201588,Warn,,,,
+AGV,201589,Warn,,,,
+AGV,201590,Warn,,,,
+AGV,201591,Warn,,,,
+AGV,201592,Warn,,,,
+AGV,201593,Warn,,,,
+AGV,201594,Warn,,,,
+AGV,201595,Warn,,,,
+AGV,201596,Warn,,,,
+AGV,201597,Warn,,,,
+AGV,201598,Warn,,,,
+AGV,201599,Warn,,,,
+AGV,201600,Warn,,,,
+AGV,201601,Warn,,,,
+AGV,201602,Warn,,,,
+AGV,201603,Warn,,,,
+AGV,201604,Warn,,,,
+AGV,201605,Warn,,,,
+AGV,201606,Warn,,,,
+AGV,201607,Warn,,,,
+AGV,201608,Warn,,,,
+AGV,201609,Warn,,,,
+AGV,201610,Warn,,,,
+AGV,201611,Warn,,,,
+AGV,201612,Warn,,,,
+AGV,201613,Warn,,,,
+AGV,201614,Warn,,,,
+AGV,201615,Warn,,,,
+AGV,201616,Warn,,,,
+AGV,201617,Warn,,,,
+AGV,201618,Warn,,,,
+AGV,201619,Warn,,,,
+AGV,201620,Warn,,,,
+AGV,201621,Warn,,,,
+AGV,201622,Warn,,,,
+AGV,201623,Warn,,,,
+AGV,201624,Warn,,,,
+AGV,201625,Warn,,,,
+AGV,201626,Warn,,,,
+AGV,201627,Warn,,,,
+AGV,201628,Warn,,,,
+AGV,201629,Warn,,,,
+AGV,201630,Warn,,,,
+AGV,201631,Warn,,,,
+AGV,201632,Warn,,,,
+AGV,201633,Warn,,,,
+AGV,201634,Warn,,,,
+AGV,201635,Warn,,,,
+AGV,201636,Warn,,,,
+AGV,201637,Warn,,,,
+AGV,201638,Warn,,,,
+AGV,201639,Warn,,,,
+AGV,201640,Warn,,,,
+AGV,201641,Warn,,,,
+AGV,201642,Warn,,,,
+AGV,201643,Warn,,,,
+AGV,201644,Warn,,,,
+AGV,201645,Warn,,,,
+AGV,201646,Warn,,,,
+AGV,201647,Warn,,,,
+AGV,201648,Warn,,,,
+AGV,201649,Warn,,,,
+AGV,201650,Warn,,,,
+AGV,201651,Warn,,,,
+AGV,201652,Warn,,,,
+AGV,201653,Warn,,,,
+AGV,201654,Warn,,,,
+AGV,201655,Warn,,,,
+AGV,201656,Warn,,,,
+AGV,201657,Warn,,,,
+AGV,201658,Warn,,,,
+AGV,201659,Warn,,,,
+AGV,201660,Warn,,,,
+AGV,201661,Warn,,,,
+AGV,201662,Warn,,,,
+AGV,201663,Warn,,,,
+AGV,201664,Warn,,,,
+AGV,201665,Warn,,,,
+AGV,201666,Warn,,,,
+AGV,201667,Warn,,,,
+AGV,201668,Warn,,,,
+AGV,201669,Warn,,,,
+AGV,201670,Warn,,,,
+AGV,201671,Warn,,,,
+AGV,201672,Warn,,,,
+AGV,201673,Warn,,,,
+AGV,201674,Warn,,,,
+AGV,201675,Warn,,,,
+AGV,201676,Warn,,,,
+AGV,201677,Warn,,,,
+AGV,201678,Warn,,,,
+AGV,201679,Warn,,,,
+AGV,201680,Warn,,,,
+AGV,201681,Warn,,,,
+AGV,201682,Warn,,,,
+AGV,201683,Warn,,,,
+AGV,201684,Warn,,,,
+AGV,201685,Warn,,,,
+AGV,201686,Warn,,,,
+AGV,201687,Warn,,,,
+AGV,201688,Warn,,,,
+AGV,201689,Warn,,,,
+AGV,201690,Warn,,,,
+AGV,201691,Warn,,,,
+AGV,201692,Warn,,,,
+AGV,201693,Warn,,,,
+AGV,201694,Warn,,,,
+AGV,201695,Warn,,,,
+AGV,201696,Warn,,,,
+AGV,201697,Warn,,,,
+AGV,201698,Warn,,,,
+AGV,201699,Warn,,,,
+AGV,201700,Warn,AlreadyHaveCmd,AlreadyHaveCmd,,
+AGV,201701,Warn,LowPowerCharging,LowPowerCharging,,
+AGV,201702,Warn,LoadingOff,LoadingOff,,
+AGV,201703,Warn,CarrierIdReadFail,CarrierIdReadFail,,
+AGV,201704,Warn,CarrierIdIsError,CarrierIdIsError,,
+AGV,201705,Warn,MoveFinishFail,MoveFinishFail,,
+AGV,201706,Warn,LoadingOn,LoadingOn,,
+AGV,201707,Warn,TRUCommandExist,TRUCommandExist,,
+AGV,201708,Warn,VehicleCannotUnload,VehicleCannotUnload,,
+AGV,201709,Warn,TRUCommandExist,TRUCommandExist,,
+AGV,201710,Warn,PositionLostWithCmd,PositionLostWithCmd,,
+AGV,201711,Warn,ChargeDirectionError,ChargeDirectionError,,
+AGV,201712,Warn,StartChargeTimeout,StartChargeTimeout,,
+AGV,201713,Warn,VehicleCannotload,VehicleCannotload,,
+AGV,201714,Warn,AlreadyHaveCst,AlreadyHaveCst,,
+AGV,201715,Warn,NoCstToUnload,NoCstToUnload,,
+AGV,201716,Warn,MapCheckFail,MapCheckFail,,
+AGV,201717,Warn,IsNotTransferCannotOverride,IsNotTransferCannotOverride,,
+AGV,201718,Warn,IsNotMoveStepCannotOverride,IsNotMoveStepCannotOverride,,
+AGV,201719,Warn,IsNotPauseCannotOverride,IsNotPauseCannotOverride,,
+AGV,201720,Warn,OverrideUnloadAddressUnmatch,OverrideUnloadAddressUnmatch,,
+AGV,201721,Warn,OverrideLoadAddressUnmatch,OverrideLoadAddressUnmatch,,
+AGV,201722,Warn,OverrideToUnloadIsEmpty,OverrideToUnloadIsEmpty,,
+AGV,201723,Warn,OverrideToLoadIsEmpty,OverrideToLoadIsEmpty,,
+AGV,201724,Warn,CheckOverrideException,CheckOverrideException,,
+AGV,201725,Warn,CarrierIdMisMatch,CarrierIdMisMatch,,
+AGV,201726,Warn,IsCarrierIdReadReplyTimeout,IsCarrierIdReadReplyTimeout,,
+AGV,201727,Warn,VehicleHasAlarm,VehicleHasAlarm,,
+AGV,201728,Warn,ManualToAutoFail,ManualToAutoFail,,
+AGV,201729,Warn,ManualToAutoFail,ManualToAutoFail,,
+AGV,201730,Warn,IsNotTransferCannotAvoid,IsNotTransferCannotAvoid,,
+AGV,201731,Warn,IsNotMoveStepCannotAvoid,IsNotMoveStepCannotAvoid,,
+AGV,201732,Warn,IsNotPauseCannotAvoid,IsNotPauseCannotAvoid,,
+AGV,201733,Warn,CheckAvoidException,CheckAvoidException,,
+AGV,201734,Warn,InterlockError,InterlockError,,
+AGV,201735,Warn,SendWaitTimeout,SendWaitTimeout,,
+AGV,201736,Warn,Send PLC to Stop AGV,Send PLC to Stop AGV,,
+AGV,201737,Warn,Reserve : Get Reserve with MoveControl Idle,Reserve : Get Reserve with MoveControl Idle,,
+AGV,201738,Warn,Reserve : Get Reserve position not math,Reserve : Get Reserve position not math,,
+AGV,201739,Warn,STurn : AGV turning with GroupTurn not Ready,STurn : AGV turning with GroupTurn not Ready,,
+AGV,201740,Warn,SecondCorrection : Timeout,SecondCorrection : Timeout,,
+AGV,201741,Warn,SecondCorrection : Disable Timeout,SecondCorrection : Disable Timeout,,
+AGV,201742,Warn,ElmoAlarmCode,ElmoAlarmCode,,
+AGV,201743,Warn,MotionDriver Axis Error,MotionDriver Axis Error,,
+AGV,201744,Warn,MotionDriver Axis XFL Error,MotionDriver Axis XFL Error,,
+AGV,201745,Warn,MotionDriver Axis XFR Error,MotionDriver Axis XFR Error,,
+AGV,201746,Warn,MotionDriver Axis XRL Error,MotionDriver Axis XRL Error,,
+AGV,201747,Warn,MotionDriver Axis XRR Error,MotionDriver Axis XRR Error,,
+AGV,201748,Warn,MotionDriver Axis TFL Error,MotionDriver Axis TFL Error,,
+AGV,201749,Warn,MotionDriver Axis TFR Error,MotionDriver Axis TFR Error,,
+AGV,201750,Warn,MotionDriver Axis TRL Error,MotionDriver Axis TRL Error,,
+AGV,201751,Warn,MotionDriver Axis TRR Error,MotionDriver Axis TRR Error,,
+AGV,201752,Warn,MotionDriver Axis VXFL Error,MotionDriver Axis VXFL Error,,
+AGV,201753,Warn,MotionDriver Axis VXFR Error,MotionDriver Axis VXFR Error,,
+AGV,201754,Warn,MotionDriver Axis VXRL Error,MotionDriver Axis VXRL Error,,
+AGV,201755,Warn,MotionDriver Axis VXRR Error,MotionDriver Axis VXRR Error,,
+AGV,201756,Warn,MotionDriver Axis VTFL Error,MotionDriver Axis VTFL Error,,
+AGV,201757,Warn,MotionDriver Axis VTFR Error,MotionDriver Axis VTFR Error,,
+AGV,201758,Warn,MotionDriver Axis VTRL Error,MotionDriver Axis VTRL Error,,
+AGV,201759,Warn,MotionDriver Axis VTRR Error,MotionDriver Axis VTRR Error,,
+AGV,201760,Warn,MotionDriver Axis GX Error,MotionDriver Axis GX Error,,
+AGV,201761,Warn,MotionDriver Axis GT Error,MotionDriver Axis GT Error,,
+AGV,201762,Warn,LocateDriver_BarcodeMapSystem data format error,LocateDriver_BarcodeMapSystem data format error,,
+AGV,201763,Warn,LocateDriver_BarcodeMapSystem LON Exception,LocateDriver_BarcodeMapSystem LON Exception,,
+AGV,201764,Warn,LocateDriver_BarcodeMapSystem Error,LocateDriver_BarcodeMapSystem Error,,
+AGV,201765,Warn,LocateDriver_SLAM_Sick wrong locate,LocateDriver_SLAM_Sick wrong locate,,
+AGV,201766,Warn,CreateMoveCommandList Fail,CreateMoveCommandList Fail,,
+AGV,201767,Warn,Can't Override : Can't Pause now,Can't Override : Can't Pause now,,
+AGV,201768,Warn,Can't Auto : MoveControl Status is not Idle,Can't Auto : MoveControl Status is not Idle,,
+AGV,201769,Warn,Can't Auto : Motion Driver Disconnect,Can't Auto : Motion Driver Disconnect,,
+AGV,201770,Warn,Can't Auto : MoveCommandControl Intail Fail,Can't Auto : MoveCommandControl Intail Fail,,
+AGV,201771,Warn,Can't Auto : Closing program,Can't Auto : Closing program,,
+AGV,201772,Warn,Can't Auto : Axis Error,Can't Auto : Axis Error,,
+AGV,201773,Warn,Can't Auto : Wait ResetAlarm Finish,Can't Auto : Wait ResetAlarm Finish,,
+AGV,201774,Warn,Can't Auto : JogPitch Action,Can't Auto : JogPitch Action,,
+AGV,201775,Warn,Can't Auto : LocateControl Intail Fail,Can't Auto : LocateControl Intail Fail,,
+AGV,201776,Warn,Can't Auto : Locate Driver Disconnect,Can't Auto : Locate Driver Disconnect,,
+AGV,201777,Warn,Can't Auto : Locate Driver Error,Can't Auto : Locate Driver Error,,
+AGV,201778,Warn,Can't Auto : AutoAction Fail,Can't Auto : AutoAction Fail,,
+AGV,201779,Warn,Reject Move Command : MovecmdInfo data error,Reject Move Command : MovecmdInfo data error,,
+AGV,201780,Warn,Reject Move Command : Closing Program,Reject Move Command : Closing Program,,
+AGV,201781,Warn,Reject Move Command : MoveControl Status is not Idle,Reject Move Command : MoveControl Status is not Idle,,
+AGV,201782,Warn,Reject Move Command : Charging,Reject Move Command : Charging,,
+AGV,201783,Warn,Reject Move Command : TRU isn't in home Status,Reject Move Command : TRU isn't in home Status,,
+AGV,201784,Warn,Reject Move Command : MoveControl driver disconnect,Reject Move Command : MoveControl driver disconnect,,
+AGV,201785,Warn,Reject Move Commandmiddler : No current coordinates,Reject Move Commandmiddler : No current coordinates,,
+AGV,201786,Warn,Reject Move Command : Not is start position,Reject Move Command : Not is start position,,
+AGV,201787,Warn,Reject Move Command : Not is start AGV angle,Reject Move Command : Not is start AGV angle,,
+AGV,201788,Warn,Reject Move Command : in cancel flow,Reject Move Command : in cancel flow,,
+AGV,201789,Warn,Reject Move Command : in AutoRetry flow,Reject Move Command : in AutoRetry flow,,
+AGV,201790,Warn,Can't Reset Alarm : Main Flow Exception,Can't Reset Alarm : Main Flow Exception,,
+AGV,201791,Warn,Can't Reset Alarm : stop in turn flow,Can't Reset Alarm : stop in turn flow,,
+AGV,201792,Warn,Can't Reset Alarm : vehicle not in section,Can't Reset Alarm : vehicle not in section,,
+AGV,201793,Warn,Can't Reset Alarm : Locate Control Error,Can't Reset Alarm : Locate Control Error,,
+AGV,201794,Warn,Can't Reset Alarm : Motion Control Error,Can't Reset Alarm : Motion Control Error,,
+AGV,201795,Warn,Can't AutoReset : Special Alarm,Can't AutoReset : Special Alarm,,
+AGV,201796,Warn,Batterys Charging Time Out,Batterys Charging Time Out,,
+AGV,201797,Warn,Meter Adam Connect Fail,Meter Adam Connect Fail,,
+AGV,201798,Warn,Particle Counter Connect Fail,Particle Counter Connect Fail,,
+AGV,201799,Warn,Plc BigData Sensor Connect Fail,Plc BigData Sensor Connect Fail,,
+AGV,201800,Warn,VibrationMeter Connect Fail,VibrationMeter Connect Fail,,
+AGV,201801,,,,,
+AGV,201802,,,,,
+AGV,201803,,,,,
+AGV,201804,,,,,
+AGV,201805,,,,,
+AGV,201806,,,,,
+AGV,201807,,,,,

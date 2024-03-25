@@ -81,6 +81,7 @@
                         <MenuItem Header="{DynamicResource ABOUT}" Click="ABOUT_Click"/>
                         <MenuItem Header="{DynamicResource VEHICLE_COLOR_INFO}" Click="VEHICLE_COLOR_INFO_Click"/>
                         <MenuItem Header="{DynamicResource SPEC_LINK}" Click="SPEC_LINK_Click"/>
+                        <MenuItem Header="{DynamicResource TROUBLESHOOTING}" Click="TROUBLESHOOTING_Click"/>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource LANGUAGE}" Style="{StaticResource MenuItemBaseStyle}">
                         <MenuItem Header="en-US" Click="ChangeLanguage_enUS_Click"/>

@@ -388,6 +388,11 @@ namespace ControlSystemViewer.Views
 
             UtilsAPI.Tool.OpenFile.OpenFileByPathKeyword(sPath, sKeyword);
         }
+        private void TROUBLESHOOTING_Click(object sender, RoutedEventArgs e)
+        {
+            new ControlSystemViewer.PopupWindows.TroubleshootingPopupWindow().Show();
+            //new Troubleshooting().ShowDialog();
+        }
         #endregion Click Help
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

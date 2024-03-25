@@ -596,6 +596,9 @@
     <None Include="Config\AT_S_BAY2\SETTINGS.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Config\SOUTH_INNOLUX\AlarmMap.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Config\TONGLUO_DL_NEW\MapInfo\AADDRESS.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

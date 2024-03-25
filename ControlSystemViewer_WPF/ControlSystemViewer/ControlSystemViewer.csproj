@@ -210,6 +210,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PopupWindows\TroubleshootingPopupWindow.xaml.cs">
+      <DependentUpon>TroubleshootingPopupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PopupWindows\VehicleColorInfoWindow.xaml.cs">
       <DependentUpon>VehicleColorInfoWindow.xaml</DependentUpon>
     </Compile>
@@ -346,6 +349,9 @@
     </Compile>
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Menu_Help\Troubleshooting.xaml.cs">
+      <DependentUpon>Troubleshooting.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Menu_Maintenance\Sub\Map_BasePZ.xaml.cs">
       <DependentUpon>Map_BasePZ.xaml</DependentUpon>
@@ -835,6 +841,10 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Page Include="PopupWindows\TroubleshootingPopupWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="PopupWindows\VehicleColorInfoWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -970,6 +980,10 @@
     <Page Include="Views\CurrentDataGrid\uc_grid_VehicleCMD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Menu_Help\Troubleshooting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Menu_Maintenance\Sub\Map_BasePZ.xaml">
       <Generator>MSBuild:Compile</Generator>

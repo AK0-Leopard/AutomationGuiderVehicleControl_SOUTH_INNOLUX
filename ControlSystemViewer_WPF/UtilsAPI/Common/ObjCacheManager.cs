@@ -654,7 +654,9 @@ namespace com.mirle.ibg3k0.ohxc.wpf.Common
                             row.Field<string>("ALARM_ID"),
                             row.Field<string>("ALARM_LVL"),
                             row.Field<string>("ALARM_DESC"),
-                            row.Field<string>("ALARM_DESC_TW")
+                            row.Field<string>("ALARM_DESC_TW"),
+                            row.Field<string>("HAPPENED_REASON"),
+                            row.Field<string>("SOLUSTION")
                             ));
                 }
                 if (result != null) app.AlarmBLL.setMulitLanguage(true, result); // 如果AlarmMap被正式讀到且組物件完成，告訴AlarmBLL開啟多語系功能 
@@ -823,7 +825,7 @@ namespace com.mirle.ibg3k0.ohxc.wpf.Common
         public List<VCMD> GetCOMMANDs() => COMMANDs;
         public List<VTRANSFER> GetTRANSFERs() => TRANSFERs;
         //public List<ObjectRelay.CarInOutViewObj> GetHCarInOut() => HCarInOuts;
-        //public List<AlarmMap> GetAlarmMaps() => AlarmMaps;
+        public List<AlarmMap> GetAlarmMaps() => alarmMap;
         //public List<AEQPT> GetMTL1MTS1() => Eqpts.Where(c => c.EQPT_ID.Trim() == "MTS" || c.EQPT_ID.Trim() == "MTL").ToList();
         //public AEQPT GetMTLMTSByID(string station_id) => Eqpts.Where(c => c.EQPT_ID.Trim() == station_id.Trim()).FirstOrDefault();
         //public List<AEQPT> GetMTS2() => Eqpts.Where(c => c.EQPT_ID.Trim() == "MTS2").ToList();

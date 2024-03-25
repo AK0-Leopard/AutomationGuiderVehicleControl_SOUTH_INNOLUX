@@ -1,0 +1,93 @@
+﻿<UserControl x:Class="ControlSystemViewer.Views.Menu_Help.Troubleshooting"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ControlSystemViewer.Views.Menu_Help"
+             mc:Ignorable="d" FontFamily="MicrosoftSansSerif"
+             d:DesignHeight="600" d:DesignWidth="800" Background="#f6f6f6" Foreground="White" FontSize="18" Loaded="Window_Loaded">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="TextBlock_Default">
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="#1b2338"/>
+            <Setter Property="FontFamily" Value="MicrosoftSansSerif"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="Content_16px" BasedOn="{StaticResource TextBlock_Default}">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="#070022"/>
+            <Setter Property="Padding" Value="0,12,0,0"/>
+        </Style>
+        <Style TargetType="TextBlock" x:Key="PopupTitle_20px" BasedOn="{StaticResource TextBlock_Default}">
+            <Setter Property="Background" Value="#d9ecfc"/>
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="Padding" Value="0,20,0,0"/>
+        </Style>
+        <Style TargetType="{x:Type TextBox}" x:Key="TextBox_Default">
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="#070022"/>
+            <Setter Property="FontFamily" Value="MicrosoftSansSerif"/>
+            <Setter Property="Padding" Value="0,12,0,0"/>
+            <Setter Property="CharacterCasing" Value="Upper"/>
+            <Setter Property="TextAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" Width="auto" Height="auto" BorderThickness="1" BorderBrush="#adadad">
+                            <Grid x:Name="grid" Background="White">
+                                <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="330"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="2" Grid.Column="1">
+            <TextBlock Name="lbl_AlarmCode" Style="{StaticResource Content_16px}" Width="100" HorizontalAlignment="Left" Text="{DynamicResource ALARM_PROCESS_ALARM_CODE}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <TextBox Name="TB_AlarmCode"  Width="100" Style="{StaticResource TextBox_Default}" HorizontalAlignment="Left" />
+        </StackPanel>
+        <StackPanel Grid.Row="2" Grid.Column="3">
+            <Button x:Name="Search" Width="100" Height="40" HorizontalAlignment="Left" Click="Search_Click">Search</Button>
+        </StackPanel>
+        <Border Grid.Row="0" Grid.ColumnSpan="4" BorderThickness="0,0,0,1" BorderBrush="#979797">
+            <TextBlock Name="Title" Style="{StaticResource PopupTitle_20px}" Text="{DynamicResource TROUBLESHOOTING}"/>
+        </Border>
+        <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" Margin="10, 10, 10, 10">
+            <DataGrid x:Name="dgv_alarmTable" RowHeight="20" AutoGenerateColumns="False" Foreground="Black" IsReadOnly="True" MouseDoubleClick="dgv_alarmTable_MouseDoubleClick" SelectedCellsChanged="dgv_alarmTable_SelectedCellsChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Code" x:Name="dgvCol_alarmCode" Width="80" Binding="{Binding alarmID}"/>
+                    <DataGridTextColumn Header="Desc" x:Name="dgvCol_alarmDesc" Width="250" Binding="{Binding alarmDesc}"/>
+                    <DataGridTextColumn Header="Reason" x:Name="dgvCol_happendReason" Width="400" Binding="{Binding happendReason}"/>
+                    <!--<DataGridTextColumn Header="Solution" x:Name="dgvCol_solution" Width="250" Binding="{Binding solution}"/>-->
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Grid Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4">
+            <TextBlock FontSize="20" Margin="20, 10" Foreground="Black" >Solution:</TextBlock>
+            <Border BorderBrush="Black" BorderThickness="1" Margin="20, 35, 20, 10">
+                <TextBox IsReadOnly="True" TextWrapping="Wrap" Name="TB_Solution" />
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

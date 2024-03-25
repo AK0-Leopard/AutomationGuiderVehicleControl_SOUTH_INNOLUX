@@ -2,6 +2,7 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:s="clr-namespace:System;assembly=mscorlib">
     <s:String x:Key="ABOUT">關於</s:String>
+    <s:String x:Key="TROUBLESHOOTING">故障排除</s:String>
     <s:String x:Key="VEHICLE_COLOR_INFO">車子顏色資訊</s:String>
     <s:String x:Key="ACCOUNT_ACTIVATION">是否啟用</s:String>
     <s:String x:Key="ACCOUNT_MANAGEMENT">帳戶權限管理</s:String>
