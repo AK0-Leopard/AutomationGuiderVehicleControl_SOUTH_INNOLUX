@@ -353,6 +353,9 @@
     <Compile Include="Views\Menu_Help\Troubleshooting.xaml.cs">
       <DependentUpon>Troubleshooting.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Menu_Log\OperationHistory.xaml.cs">
+      <DependentUpon>OperationHistory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Menu_Maintenance\Sub\Map_BasePZ.xaml.cs">
       <DependentUpon>Map_BasePZ.xaml</DependentUpon>
     </Compile>
@@ -982,6 +985,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Menu_Help\Troubleshooting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Menu_Log\OperationHistory.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

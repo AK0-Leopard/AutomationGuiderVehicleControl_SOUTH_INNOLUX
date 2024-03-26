@@ -148,3 +148,4 @@ VERSION,Version,版本號,版本号
 WAITING,Waiting,等待,等待
 WAITING_ASSIGNED,Waiting Assigned,等待指派,等待指派
 WINDOW_TITLE,Control System Viewer,Control System Viewer,Control System Viewer
+OPERATION_HISTORY,Operation History,使用者操作,使用者操作

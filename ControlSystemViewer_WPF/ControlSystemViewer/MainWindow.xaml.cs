@@ -132,6 +132,10 @@ namespace ControlSystemViewer
                     e.Cancel = true;    //取消關閉
                     return;
                 }
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute viewer close.");
             }
             catch (Exception ex)
             {

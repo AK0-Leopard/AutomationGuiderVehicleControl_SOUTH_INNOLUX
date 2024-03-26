@@ -20,6 +20,7 @@ namespace ViewerObject
         public string BUTTON_NAME { get; set; } = "";
         public string BUTTON_CONTENT { get; set; } = "";
         public Dictionary<string, string> input = null;
-        public DateTime INSERT_TIME => Convert.ToDateTime(T_STAMP);
+        //public DateTime INSERT_TIME => Convert.ToDateTime(T_STAMP);
+        public DateTime INSERT_TIME { get; set; }
     }
 }

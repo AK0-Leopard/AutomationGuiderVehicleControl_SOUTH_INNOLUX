@@ -114,6 +114,10 @@ namespace ControlSystemViewer.Views.Menu_Operation.Sub
                     TipMessage_Type_Light.Show("", "Priority Change Succeed", BCAppConstants.INFO_MSG);
                     CloseEvent?.Invoke(this, null);
                 }
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute trnasfer cmd id:{mcs_cmd} priority change to :{priority}, is success:{isSuccess}");
             }
             catch (Exception ex)
             {

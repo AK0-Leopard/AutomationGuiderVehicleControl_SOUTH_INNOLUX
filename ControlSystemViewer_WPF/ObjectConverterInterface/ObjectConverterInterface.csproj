@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\IOperationHistoryBLL.cs" />
     <Compile Include="BLL\IParkZoneBLL.cs" />
     <Compile Include="BLL\IPLCBLL.cs" />
     <Compile Include="BLL\ICustomerObjBLL.cs" />

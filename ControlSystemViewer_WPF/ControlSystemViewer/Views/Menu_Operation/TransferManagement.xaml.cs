@@ -389,6 +389,10 @@ namespace ControlSystemViewer.Views.Menu_Operation
                 {
                     TipMessage_Type_Light_woBtn.Show("", "Cancel Abort Succeed", BCAppConstants.INFO_MSG);
                 }
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute trnasfer cmd id:{mcs_cmd} cancel/abort, is success:{isSuccess}");
             }
             catch (Exception ex)
             {
@@ -411,6 +415,10 @@ namespace ControlSystemViewer.Views.Menu_Operation
                 {
                     TipMessage_Type_Light_woBtn.Show("", "Force Finish Succeed", BCAppConstants.INFO_MSG);
                 }
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute trnasfer cmd id:{mcs_cmd} force finish, is success:{isSuccess}");
             }
             catch (Exception ex)
             {

@@ -207,6 +207,11 @@ namespace ControlSystemViewer.Views.Menu_Operation.Sub
                     TipMessage_Type_Light_woBtn.Show("", "Status Change Succeed", BCAppConstants.INFO_MSG);
                     CloseEvent?.Invoke(this, null);
                 }
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute trnasfer cmd id:{mcs_cmd} status to:{status}, is success:{isSuccess}");
+
             }
             catch (Exception ex)
             {
@@ -230,6 +235,11 @@ namespace ControlSystemViewer.Views.Menu_Operation.Sub
                     TipMessage_Type_Light_woBtn.Show("", "Assign Vehicle Succeed", BCAppConstants.INFO_MSG);
                     CloseEvent?.Invoke(this, null);
                 }
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute trnasfer cmd id:{mcs_cmd} force assign to vh:{vh_id}, is success:{isSuccess}");
+
             }
             catch (Exception ex)
             {

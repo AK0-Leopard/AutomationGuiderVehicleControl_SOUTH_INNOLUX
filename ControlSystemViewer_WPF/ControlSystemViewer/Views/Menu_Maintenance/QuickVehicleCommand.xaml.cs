@@ -308,6 +308,10 @@ namespace ControlSystemViewer.Views.Menu_Maintenance
                 {
                     TipMessage_Type_Light_woBtn.Show("", "Send command succeeded", BCAppConstants.INFO_MSG);
                 }
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute vh:{select_vh_id} send command type:{cmd_type},cst id:{carrier},source:{source} dest:{destination}, is success:{isSuccess}");
             }
             catch (Exception ex)
             {

@@ -485,14 +485,20 @@ namespace ControlSystemViewer.Views.Menu_Maintenance
         {
             try
             {
+                bool isSuccess = false;
                 if (!app.VehicleBLL.SendPauseStatusChange(vh_id, pauseType, event_type, out string result))
                 {
                     TipMessage_Type_Light.Show("Pause failed", result, BCAppConstants.INFO_MSG);
                 }
                 else
                 {
+                    isSuccess = true;
                     TipMessage_Type_Light.Show("Pause succeeded", "", BCAppConstants.INFO_MSG);
                 }
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute vh:{vh_id} pause type:{pauseType} pause event:{event_type}, is success:{isSuccess}");
             }
             catch (Exception ex)
             {
@@ -504,14 +510,21 @@ namespace ControlSystemViewer.Views.Menu_Maintenance
         {
             try
             {
+                bool isSuccess = false;
                 if (!app.VehicleBLL.SendModeStatusChange(vh_id, modeStatus, out string result))
                 {
                     TipMessage_Type_Light.Show("Change status failed", result, BCAppConstants.INFO_MSG);
                 }
                 else
                 {
+                    isSuccess = true;
                     TipMessage_Type_Light.Show("Change status succeed", "", BCAppConstants.INFO_MSG);
                 }
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute vh:{vh_id} mode change to {modeStatus}, is success:{isSuccess}");
+
             }
             catch (Exception ex)
             {
@@ -522,14 +535,22 @@ namespace ControlSystemViewer.Views.Menu_Maintenance
         {
             try
             {
+                bool isSuccess = false;
                 if (!app.VehicleBLL.SendInstallStatusChange(vh_id, isInstall, out string result))
                 {
                     TipMessage_Type_Light.Show("Change status failed", result, BCAppConstants.INFO_MSG);
                 }
                 else
                 {
+                    isSuccess = true;
                     TipMessage_Type_Light.Show("Change status succeed", "", BCAppConstants.INFO_MSG);
                 }
+                string action = isInstall ? "install" : "remove";
+
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute vh:{vh_id} to {action}, is success:{isSuccess}");
             }
             catch (Exception ex)
             {
@@ -554,6 +575,11 @@ namespace ControlSystemViewer.Views.Menu_Maintenance
                     TipMessage_Type_Light.Show("Send command succeeded", "", BCAppConstants.INFO_MSG);
                 }
                 //app.LineBLL.SendHostModeChange(e.host_mode);
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute vh:{vh_id} send command type:{cmd_type},cst id:{carrier_id},source:{source} dest:{destination}, is success:{isSuccess}");
+
             }
             catch (Exception ex)
             {
@@ -631,14 +657,21 @@ namespace ControlSystemViewer.Views.Menu_Maintenance
         {
             try
             {
+                bool isSuccess = false;
                 if (!app.VehicleBLL.SendVehicleAlarmResetRequest(vh_id, out string result))
                 {
                     TipMessage_Type_Light.Show("Send vehicle alarm reset failed", result, BCAppConstants.INFO_MSG);
                 }
                 else
                 {
+                    isSuccess = true;
                     TipMessage_Type_Light.Show("Send vehicle alarm reset succeed", "", BCAppConstants.INFO_MSG);
                 }
+                app.OperationHistoryBLL.
+                    addOperationHis(app.LoginUserID,
+                                    this.GetType().Name,
+                                    $"Excute vh:{vh_id} alarm reset, is success:{isSuccess}");
+
             }
             catch (Exception ex)
             {

@@ -88,7 +88,8 @@ namespace com.mirle.ibg3k0.sc
         }
         public bool IsActive(BLL.SegmentBLL segmentBLL)
         {
-            return segmentBLL.cache.GetSegment(this.SEG_NUM).STATUS == E_SEG_STATUS.Active;
+            //return segmentBLL.cache.GetSegment(this.SEG_NUM).STATUS == E_SEG_STATUS.Active;
+            return STATUS == E_SEG_STATUS.Active;
         }
         public void setOnSectionAddress(BLL.AddressesBLL addressesBLL)
         {

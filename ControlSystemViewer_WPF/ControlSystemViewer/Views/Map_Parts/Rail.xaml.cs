@@ -630,11 +630,19 @@ namespace ControlSystemViewer.Views.Map_Parts
 
         private async void segControl_enable(object sender, RoutedEventArgs e)
         {
-            app.ObjCacheManager.segControl(p_ID, true) ;
+            bool is_success = app.ObjCacheManager.segControl(p_ID, true);
+            app.OperationHistoryBLL.
+                addOperationHis(app.LoginUserID,
+                                this.GetType().Name,
+                                $"Excute section id:{p_ID} enable, is success:{is_success}");
         }
         private async void segControl_disable(object sender, RoutedEventArgs e)
         {
-            app.ObjCacheManager.segControl(p_ID, false);
+            bool is_success = app.ObjCacheManager.segControl(p_ID, false);
+            app.OperationHistoryBLL.
+                addOperationHis(app.LoginUserID,
+                                this.GetType().Name,
+                                $"Excute section id:{p_ID} disable, is success:{is_success}");
         }
     }
 }

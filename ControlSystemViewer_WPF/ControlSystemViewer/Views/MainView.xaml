@@ -50,6 +50,7 @@
                         <MenuItem Header="{DynamicResource ALARM_HISTORY}" Click="LOG_HISTORY_Click"/>
                         <MenuItem Header="{DynamicResource TRANSFER_COMMAND_HISTORY}" Click="LOG_HISTORY_Click"/>
                         <MenuItem Header="{DynamicResource VEHICLE_COMMAND_HISTORY}" Click="LOG_HISTORY_Click"/>
+                        <MenuItem Header="Operation History" Click="LOG_HISTORY_Click"/>
                         <MenuItem Header="{DynamicResource STATISTICS}" Click="LOG_HISTORY_Click" x:Name="MenuItem_STATISTICS" Visibility="Collapsed"/>
                     </MenuItem>
                     <MenuItem Header="{DynamicResource REPORT}" Style="{StaticResource MenuItemBaseStyle}" x:Name="MenuReport">

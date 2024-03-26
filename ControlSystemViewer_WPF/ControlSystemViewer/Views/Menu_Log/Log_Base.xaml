@@ -57,6 +57,9 @@
                 <TabItem Header="{DynamicResource VEHICLE_COMMAND_HISTORY}" Foreground="White" Width="230" MinHeight="50">
                     <local:VehicleHistory x:Name="VehicleCommandHistory" Margin="20"/>
                 </TabItem>
+                <TabItem Header="Operation History" Foreground="White" Width="230" MinHeight="50">
+                    <local:OperationHistory x:Name="OperationHistory" Margin="20"/>
+                </TabItem>
                 <TabItem Header="{DynamicResource STATISTICS}" Foreground="White" Width="230" MinHeight="50" x:Name="TabItem_STATISTICS" Visibility="Collapsed">
                     <local:Chart_RunDownIdle x:Name="Chart_RunDownIdle" Margin="20"/>
                 </TabItem>

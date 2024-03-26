@@ -114,6 +114,7 @@
     <s:String x:Key="SPEC_LINK">操作手冊連結</s:String>
     <s:String x:Key="START_TIME">起始時間</s:String>
     <s:String x:Key="STATISTICS">統計數據</s:String>
+    <s:String x:Key="OPERATION_HISTORY">使用者操作</s:String>
     <s:String x:Key="STATUS_TREE">狀態樹</s:String>
     <s:String x:Key="SUCCESS">成功</s:String>
     <s:String x:Key="SYSTEM">系統</s:String>

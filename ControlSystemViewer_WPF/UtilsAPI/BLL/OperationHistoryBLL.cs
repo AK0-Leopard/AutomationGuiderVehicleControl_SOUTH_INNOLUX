@@ -17,6 +17,21 @@ namespace UtilsAPI.BLL
         {
             app = _app;
         }
+        public List<VOPERATION> LoadOperationsByConditions(DateTime startDatetime, DateTime endDatetime)
+        {
+            List<VOPERATION> default_result = new List<VOPERATION>();
+            List<VOPERATION> result;
+            try
+            {
+                result = app.ObjCacheManager.ObjConverter.BLL.OperationHistoryBLL.LoadOperationsByConditions(startDatetime, endDatetime);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception");
+                return default_result;
+            }
+        }
 
         /// 紀錄Operation操作Log，各參數可看Summary
         /// </summary>
@@ -28,21 +43,24 @@ namespace UtilsAPI.BLL
         /// <param name="input1">紀錄資料用Dictionary，EditData時為Before資料</param>
         /// <param name="input2">只有ActionType為EditData時才會啟用的Dictionary，紀錄After資料</param>
         /// <param name="Method">Method，預設不代入由系統處理</param>
-        public void addOperationHis(string user_id, string formName, string action, string ButtonName = "",string ButtonContent ="",Dictionary<string,string> input=null, [CallerMemberName] string Method = "")
+        public void addOperationHis(string user_id, string formName, string action, string ButtonName = "", string ButtonContent = "", Dictionary<string, string> input = null, [CallerMemberName] string Method = "")
         {
             try
             {
+                DateTime now = DateTime.Now;
                 VOPERATION opLog = new VOPERATION()
                 {
-                    T_STAMP = DateTime.Now.ToString("yyyyMMddHHmmssfffff"),
+                    T_STAMP = now.ToString("yyyyMMddHHmmssfffff"),
                     USER_ID = user_id,
-                    FORM_NAME = $"{formName}-({Method})",
-                    ACTION = action,
+                    FORM_NAME = formName,
+                    ACTION = $"{action}-({ButtonContent})",
                     BUTTON_NAME = ButtonName,
-                    BUTTON_CONTENT=ButtonContent,
+                    BUTTON_CONTENT = ButtonContent,
+                    INSERT_TIME = now,
                     input = input
                 };
                 PrintOperationLog(opLog);
+                app.ObjCacheManager.ObjConverter.BLL.OperationHistoryBLL.InsertOperation(opLog);
             }
             catch (Exception ex)
             {
@@ -63,16 +81,16 @@ namespace UtilsAPI.BLL
                 sb.AppendLine(string.Format("{0}Button Content: {1}", new string(' ', 5), opLog.BUTTON_CONTENT));
                 sb.AppendLine(string.Format("{0}Action: ", new string(' ', 5)));
 
-                if(opLog.ACTION != "")
+                if (opLog.ACTION != "")
                 {
                     sb.AppendLine(string.Format("{0}         {1}", new string(' ', 5), opLog.ACTION));
                 }
-                
+
                 if (opLog.input != null && opLog.input.Count > 0)
-                {        
+                {
                     foreach (var item in opLog.input)
                     {
-                        sb.AppendLine(string.Format("{0}         {1} => {2}", new string(' ', 7), item.Key.ToString(),item.Value.ToString()));
+                        sb.AppendLine(string.Format("{0}         {1} => {2}", new string(' ', 7), item.Key.ToString(), item.Value.ToString()));
                     }
                 }
 

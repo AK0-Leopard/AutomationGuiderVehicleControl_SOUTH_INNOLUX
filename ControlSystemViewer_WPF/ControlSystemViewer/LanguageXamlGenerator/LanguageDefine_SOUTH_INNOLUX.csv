@@ -148,3 +148,4 @@ VERSION,Version,版本號,版本号
 WAITING,Waiting,等待,等待
 WAITING_ASSIGNED,Cmd. Queue,等待指派,等待指派
 WINDOW_TITLE,AGVC Viewer,AGVC Viewer,AGVC Viewer
+OPERATION_HISTORY,Operation History,使用者操作,使用者操作

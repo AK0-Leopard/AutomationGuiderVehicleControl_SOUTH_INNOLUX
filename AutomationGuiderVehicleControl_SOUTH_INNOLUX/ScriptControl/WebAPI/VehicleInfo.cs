@@ -703,6 +703,7 @@ namespace com.mirle.ibg3k0.sc.WebAPI
                 if (isSuccess)
                 {
                     var vh = scApp.VehicleBLL.getVehicleByID(vh_id);
+                    vh.VehicleUnassign();
                     vh.NotifyVhExcuteCMDStatusChange();
                 }
                 var response = (Response)(isSuccess ? "OK" : "NG");

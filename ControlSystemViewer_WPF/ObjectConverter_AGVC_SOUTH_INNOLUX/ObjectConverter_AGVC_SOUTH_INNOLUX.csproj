@@ -97,6 +97,7 @@
     <Compile Include="BLL\ConstantBLL.cs" />
     <Compile Include="BLL\CustomerBLL.cs" />
     <Compile Include="BLL\MapBLL.cs" />
+    <Compile Include="BLL\OperationHistoryBLL.cs" />
     <Compile Include="BLL\PortStationBLL.cs" />
     <Compile Include="BLL\SegmentBLL.cs" />
     <Compile Include="BLL\UserBLL.cs" />

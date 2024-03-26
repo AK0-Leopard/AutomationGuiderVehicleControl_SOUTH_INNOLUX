@@ -26,6 +26,8 @@ namespace ObjectConverterFactory
         //2022 09 26 for M4
         public IPLCBLL PLCBLL = null;
         public IParkZoneBLL ParkZoneBLL = null;
+        public IOperationHistoryBLL OperationHistoryBLL = null;
+
     }
     public class LOG
     {
@@ -142,6 +144,7 @@ namespace ObjectConverterFactory
                     BLL.SegmentBLL = new ObjectConverter_AGVC_SOUTH_INNOLUX.BLL.SegmentBLL();
                     BLL.ConstantBLL = new ObjectConverter_AGVC_SOUTH_INNOLUX.BLL.ConstantBLL(connectionString);
                     BLL.PortStationBLL = new ObjectConverter_AGVC_SOUTH_INNOLUX.BLL.PortStationBLL(connectionString);
+                    BLL.OperationHistoryBLL = new ObjectConverter_AGVC_SOUTH_INNOLUX.BLL.OperationHistoryBLL(connectionString);
                     BLL.CustomerObjBLL = new ObjectConverter_AGVC_SOUTH_INNOLUX.BLL.CustomerBLL();
                     LOG.EqLogInfo = new ObjectConverter_AGVC_SOUTH_INNOLUX.LOG.EqLogInfo();
                     LOG.HostLogInfo = new ObjectConverter_AGVC_SOUTH_INNOLUX.LOG.HostLogInfo();

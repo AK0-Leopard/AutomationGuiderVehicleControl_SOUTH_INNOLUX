@@ -1789,6 +1789,10 @@ namespace com.mirle.ibg3k0.ohxc.wpf.Common
             {
                 TipMessage_Type_Light_woBtn.Show("", "Send command succeeded", BCAppConstants.INFO_MSG);
             }
+            app.OperationHistoryBLL.
+                addOperationHis(app.LoginUserID,
+                                this.GetType().Name,
+                                $"Excute ecid:{ECID} value change to:{value}, is success:{isSuccess}");
         }
         #endregion
         #region Reset Buzzer
