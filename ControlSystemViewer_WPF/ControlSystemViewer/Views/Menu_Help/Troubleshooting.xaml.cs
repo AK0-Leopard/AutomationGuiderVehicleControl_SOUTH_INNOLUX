@@ -99,6 +99,7 @@ namespace ControlSystemViewer.Views.Menu_Help
         private void dgv_alarmTable_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             var item = dgv_alarmTable.SelectedItem as AlarmMap;
+            if (item == null) return;
             TB_Solution.Text = item.solution;
         }
     }

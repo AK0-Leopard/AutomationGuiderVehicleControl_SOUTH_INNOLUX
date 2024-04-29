@@ -115,6 +115,7 @@
             this.btn_forceReleaseAllBlock = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.cb_byPassCheckIsWalkerAbleMCSCmd = new System.Windows.Forms.CheckBox();
             this.cb_byPassCheckVhReadyExcuteCommandFlag = new System.Windows.Forms.CheckBox();
             this.cb_byPassEarthQuakeSignal = new System.Windows.Forms.CheckBox();
             this.ck_isMaunalReportFinishWhenLoadingUnloading = new System.Windows.Forms.CheckBox();
@@ -355,7 +356,7 @@
             this.btn_lighthouse_red_reset = new System.Windows.Forms.Button();
             this.btn_lighthouse_red_set = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.cb_byPassCheckIsWalkerAbleMCSCmd = new System.Windows.Forms.CheckBox();
+            this.cb_byPassCheckHasCstOnVh = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1361,6 +1362,7 @@
             // tabPage1
             // 
             this.tabPage1.AutoScroll = true;
+            this.tabPage1.Controls.Add(this.cb_byPassCheckHasCstOnVh);
             this.tabPage1.Controls.Add(this.cb_byPassCheckIsWalkerAbleMCSCmd);
             this.tabPage1.Controls.Add(this.cb_byPassCheckVhReadyExcuteCommandFlag);
             this.tabPage1.Controls.Add(this.cb_byPassEarthQuakeSignal);
@@ -1380,10 +1382,21 @@
             this.tabPage1.Text = "TcpIp Control";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // cb_byPassCheckIsWalkerAbleMCSCmd
+            // 
+            this.cb_byPassCheckIsWalkerAbleMCSCmd.AutoSize = true;
+            this.cb_byPassCheckIsWalkerAbleMCSCmd.Location = new System.Drawing.Point(1107, 682);
+            this.cb_byPassCheckIsWalkerAbleMCSCmd.Name = "cb_byPassCheckIsWalkerAbleMCSCmd";
+            this.cb_byPassCheckIsWalkerAbleMCSCmd.Size = new System.Drawing.Size(286, 26);
+            this.cb_byPassCheckIsWalkerAbleMCSCmd.TabIndex = 31;
+            this.cb_byPassCheckIsWalkerAbleMCSCmd.Text = "By pass 檢查MCS命令的路徑";
+            this.cb_byPassCheckIsWalkerAbleMCSCmd.UseVisualStyleBackColor = true;
+            this.cb_byPassCheckIsWalkerAbleMCSCmd.CheckedChanged += new System.EventHandler(this.cb_byPassCheckIsWalkerAbleMCSCmd_CheckedChanged);
+            // 
             // cb_byPassCheckVhReadyExcuteCommandFlag
             // 
             this.cb_byPassCheckVhReadyExcuteCommandFlag.AutoSize = true;
-            this.cb_byPassCheckVhReadyExcuteCommandFlag.Location = new System.Drawing.Point(1131, 650);
+            this.cb_byPassCheckVhReadyExcuteCommandFlag.Location = new System.Drawing.Point(1107, 650);
             this.cb_byPassCheckVhReadyExcuteCommandFlag.Name = "cb_byPassCheckVhReadyExcuteCommandFlag";
             this.cb_byPassCheckVhReadyExcuteCommandFlag.Size = new System.Drawing.Size(256, 26);
             this.cb_byPassCheckVhReadyExcuteCommandFlag.TabIndex = 30;
@@ -1394,7 +1407,7 @@
             // cb_byPassEarthQuakeSignal
             // 
             this.cb_byPassEarthQuakeSignal.AutoSize = true;
-            this.cb_byPassEarthQuakeSignal.Location = new System.Drawing.Point(1131, 620);
+            this.cb_byPassEarthQuakeSignal.Location = new System.Drawing.Point(1107, 620);
             this.cb_byPassEarthQuakeSignal.Name = "cb_byPassEarthQuakeSignal";
             this.cb_byPassEarthQuakeSignal.Size = new System.Drawing.Size(193, 26);
             this.cb_byPassEarthQuakeSignal.TabIndex = 29;
@@ -1617,7 +1630,7 @@
             // 
             this.cb_Cache_data_Name.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cb_Cache_data_Name.FormattingEnabled = true;
-            this.cb_Cache_data_Name.Location = new System.Drawing.Point(210, 8);
+            this.cb_Cache_data_Name.Location = new System.Drawing.Point(210, 3);
             this.cb_Cache_data_Name.Name = "cb_Cache_data_Name";
             this.cb_Cache_data_Name.Size = new System.Drawing.Size(164, 30);
             this.cb_Cache_data_Name.TabIndex = 1;
@@ -3848,16 +3861,16 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // cb_byPassCheckIsWalkerAbleMCSCmd
+            // cb_byPassCheckHasCstOnVh
             // 
-            this.cb_byPassCheckIsWalkerAbleMCSCmd.AutoSize = true;
-            this.cb_byPassCheckIsWalkerAbleMCSCmd.Location = new System.Drawing.Point(1131, 682);
-            this.cb_byPassCheckIsWalkerAbleMCSCmd.Name = "cb_byPassCheckIsWalkerAbleMCSCmd";
-            this.cb_byPassCheckIsWalkerAbleMCSCmd.Size = new System.Drawing.Size(286, 26);
-            this.cb_byPassCheckIsWalkerAbleMCSCmd.TabIndex = 31;
-            this.cb_byPassCheckIsWalkerAbleMCSCmd.Text = "By pass 檢查MCS命令的路徑";
-            this.cb_byPassCheckIsWalkerAbleMCSCmd.UseVisualStyleBackColor = true;
-            this.cb_byPassCheckIsWalkerAbleMCSCmd.CheckedChanged += new System.EventHandler(this.cb_byPassCheckIsWalkerAbleMCSCmd_CheckedChanged);
+            this.cb_byPassCheckHasCstOnVh.AutoSize = true;
+            this.cb_byPassCheckHasCstOnVh.Location = new System.Drawing.Point(1107, 714);
+            this.cb_byPassCheckHasCstOnVh.Name = "cb_byPassCheckHasCstOnVh";
+            this.cb_byPassCheckHasCstOnVh.Size = new System.Drawing.Size(337, 26);
+            this.cb_byPassCheckHasCstOnVh.TabIndex = 32;
+            this.cb_byPassCheckHasCstOnVh.Text = "By pass 檢查MCS命令車上CST存在";
+            this.cb_byPassCheckHasCstOnVh.UseVisualStyleBackColor = true;
+            this.cb_byPassCheckHasCstOnVh.CheckedChanged += new System.EventHandler(this.cb_byPassCheckHasCstOnVh_CheckedChanged);
             // 
             // DebugForm
             // 
@@ -4277,5 +4290,6 @@
         private System.Windows.Forms.Button btn_lighthouse_buzzer_set;
         private System.Windows.Forms.Button btn_lighthouse_buzzer_reset;
         private System.Windows.Forms.CheckBox cb_byPassCheckIsWalkerAbleMCSCmd;
+        private System.Windows.Forms.CheckBox cb_byPassCheckHasCstOnVh;
     }
 }

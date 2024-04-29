@@ -2208,6 +2208,7 @@ namespace com.mirle.ibg3k0.sc.App
         public static bool ByPassEarthquakeSignal = false;
         public static bool ByPassCheckVhReadyExcuteCommandFlag = false;
         public static bool ByPassCheckMCSCmdIsWalkerAble = true;
+        public static bool ByPassCheckMCSCmdIfSourceOnVhHasCst = false;
 
 
     }

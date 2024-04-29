@@ -54,7 +54,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             cb_byPassEarthQuakeSignal.Checked = DebugParameter.ByPassEarthquakeSignal;
             cb_byPassCheckVhReadyExcuteCommandFlag.Checked = DebugParameter.ByPassCheckVhReadyExcuteCommandFlag;
             cb_byPassCheckIsWalkerAbleMCSCmd.Checked = DebugParameter.ByPassCheckMCSCmdIsWalkerAble;
-
+            cb_byPassCheckHasCstOnVh.Checked = DebugParameter.ByPassCheckMCSCmdIfSourceOnVhHasCst;
 
             List<string> lstVh = new List<string>();
             lstVh.Add(string.Empty);
@@ -1664,6 +1664,11 @@ namespace com.mirle.ibg3k0.bc.winform.UI
         private void cb_byPassCheckIsWalkerAbleMCSCmd_CheckedChanged(object sender, EventArgs e)
         {
             DebugParameter.ByPassCheckMCSCmdIsWalkerAble = cb_byPassCheckIsWalkerAbleMCSCmd.Checked;
+        }
+
+        private void cb_byPassCheckHasCstOnVh_CheckedChanged(object sender, EventArgs e)
+        {
+            DebugParameter.ByPassCheckMCSCmdIfSourceOnVhHasCst = cb_byPassCheckHasCstOnVh.Checked;
         }
     }
 }

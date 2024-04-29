@@ -709,6 +709,28 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 return SECSConst.HCACK_Obj_Not_Exist;
             }
 
+            //若來源是在車上，則要檢查車子目前真的有CST
+            if(DebugParameter.ByPassCheckMCSCmdIfSourceOnVhHasCst)
+            {
+                //not thing....
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(SouthInnoluxMCSDefaultMapAction), Device: "OHxC",
+                   Data: $"by pass check mcs cmd if source on vh has cst");
+            }
+            else
+            {
+                if (scApp.VehicleBLL.cache.IsVehicleExistByRealID(source_port_or_vh_id))
+                {
+                    var vh = scApp.VehicleBLL.cache.getVehicleByRealID(source_port_or_vh_id);
+                    if (vh.HAS_CST == 0)
+                    {
+                        check_result = $"MCS command id:{command_id} - vh:{source_port_or_vh_id} has no cst on it.{Environment.NewLine}please confirm the cst on the vh.";
+                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(SouthInnoluxMCSDefaultMapAction), Device: "OHxC",
+                           Data: check_result);
+                        return SECSConst.HCACK_Obj_Not_Exist;
+                    }
+                }
+            }
+
             //如果Source是個Port才需要檢查
             if (DebugParameter.ByPassCheckMCSCmdIsWalkerAble)
             {

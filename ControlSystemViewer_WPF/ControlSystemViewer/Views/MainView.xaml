@@ -75,7 +75,7 @@
                         <MenuItem Header="HIDinfohistory" Click="REPORT_Click" x:Name="MenuItem_HIDinfohistory"/>
                         <!--<MenuItem Header="IntervalMTBF" Click="REPORT_Click"/>
                         <MenuItem Header="IntervalMCBFByCMD" Click="REPORT_Click"/>-->
-                        
+
                     </MenuItem>
                     <MenuItem Header="{DynamicResource TIP_MESSAGE}" Style="{StaticResource MenuItemBaseStyle}" Click="TIP_MESSAGE_Click"/>
                     <MenuItem Header="{DynamicResource HELP}" Style="{StaticResource MenuItemBaseStyle}">

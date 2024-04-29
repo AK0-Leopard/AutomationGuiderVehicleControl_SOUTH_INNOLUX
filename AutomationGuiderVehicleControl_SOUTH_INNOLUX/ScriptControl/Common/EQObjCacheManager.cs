@@ -225,15 +225,15 @@ namespace com.mirle.ibg3k0.sc.Common
                 var coupler_address_1 = scApp.AddressesBLL.cache.GetCouplerAddress(unit_id, CouplerNum.NumberOne);
                 var coupler_address_2 = scApp.AddressesBLL.cache.GetCouplerAddress(unit_id, CouplerNum.NumberTwo);
                 var coupler_address_3 = scApp.AddressesBLL.cache.GetCouplerAddress(unit_id, CouplerNum.NumberThree);
-                if(coupler_address_1 != null)
+                if (coupler_address_1 != null)
                 {
                     unit.ADR_ID_COUPLER_DISPLAY_ADR1 = coupler_address_1.DisplayAdrID;
                 }
-                if(coupler_address_2 != null)
+                if (coupler_address_2 != null)
                 {
                     unit.ADR_ID_COUPLER_DISPLAY_ADR2 = coupler_address_2.DisplayAdrID;
                 }
-                if(coupler_address_3 != null)
+                if (coupler_address_3 != null)
                 {
                     unit.ADR_ID_COUPLER_DISPLAY_ADR3 = coupler_address_3.DisplayAdrID;
                 }
@@ -971,7 +971,7 @@ namespace com.mirle.ibg3k0.sc.Common
             AVEHICLE vh = null;
             try
             {
-                vh = vhList.Where(e => e.Real_ID.Trim() == vhRealID.Trim()).FirstOrDefault();
+                vh = vhList.Where(e => SCUtility.isMatche(e.Real_ID, vhRealID)).FirstOrDefault();
             }
             catch (Exception ex)
             {
