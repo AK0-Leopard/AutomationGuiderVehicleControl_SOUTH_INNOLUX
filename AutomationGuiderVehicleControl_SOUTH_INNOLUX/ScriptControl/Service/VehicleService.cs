@@ -3468,17 +3468,11 @@ namespace com.mirle.ibg3k0.sc.Service
                         switch (check_can_creat_avoid_command.result)
                         {
                             case CAN_NOT_AVOID_RESULT.VehicleInLoadingUnloading:
-                                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                                   Data: $"reserved vh:{reserved_vh.VEHICLE_ID} is loading / unloading, don't excute override",
-                                   VehicleID: requestVhID);
-                                return;
                             case CAN_NOT_AVOID_RESULT.VehicleInError:
                             case CAN_NOT_AVOID_RESULT.VehicleInLongCharge:
                             case CAN_NOT_AVOID_RESULT.VehicleInObstacleStop:
                                 if (request_vh.IsReservePause)
                                 {
-                                    //如果預約不到的地方，剛好是Reserve 的Vehicle所在的地方時，就不用再對車子下Override了
-                                    var check_target_address = targetAddressIsInCanNotReserveSection(request_vh, request_vh.CanNotReserveInfo.ReservedSectionID);
 
                                     var is_reserved_vh_in_one_drive = scApp.GuideBLL.isOneDirectPathSection(SCUtility.Trim(reserved_vh.CUR_SEC_ID, true));
                                     if (is_reserved_vh_in_one_drive)
@@ -3488,11 +3482,15 @@ namespace com.mirle.ibg3k0.sc.Service
                                            VehicleID: requestVhID);
                                         return;
                                     }
-                                    if (check_target_address.isIn)
+
+                                    //如果預約不到的地方，剛好是Reserve 的Vehicle所在的地方時，就不用再對車子下Override了
+                                    //var check_target_address = targetAddressIsInCanNotReserveSection(request_vh, request_vh.CanNotReserveInfo.ReservedSectionID);
+
+                                    //if (check_target_address.isIn)
+                                    if (!IsNeedExcuteOverrideCheckFinalSection(request_vh, reservedVhID))
                                     {
                                         LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                                            Data: $"vh:{requestVhID} of can't reserve section id:{request_vh.CanNotReserveInfo.ReservedSectionID}" +
-                                                 $" is vh of target adr:{check_target_address.targetAdr} address" +
                                                  $"reserved vh:{reservedVhID} current section:{reserved_vh.CUR_SEC_ID},don't excute override",
                                            VehicleID: requestVhID);
                                         return;
@@ -3579,6 +3577,34 @@ namespace com.mirle.ibg3k0.sc.Service
             else
             {
                 return (can_not_reserve_sec.NodeAddress.Contains(to_adr), to_adr);
+            }
+        }
+
+        private bool IsNeedExcuteOverrideCheckFinalSection(AVEHICLE vh, string currentReservedVh)
+        {
+            var vh_guide_info = vh.tryGetCurrentGuideSection();
+            if (!vh_guide_info.hasInfo)
+            {
+                return false;//如果找不到GuideInfo，則就暫時不要讓他繞路了
+            }
+            string final_section = vh_guide_info.currentGuideSection.Last();
+            var result = scApp.ReserveBLL.TryAddReservedSection(vh.VEHICLE_ID, final_section,
+                                                sensorDir: HltDirection.None,
+                                                isAsk: true);
+            if (!result.OK)
+            {
+                if (SCUtility.isMatche(result.VehicleID, currentReservedVh))
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return true;
             }
         }
 
