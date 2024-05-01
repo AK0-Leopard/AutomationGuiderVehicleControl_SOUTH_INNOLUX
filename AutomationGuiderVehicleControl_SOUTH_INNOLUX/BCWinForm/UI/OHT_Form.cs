@@ -741,7 +741,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             {
                 changePredictPathByInObservation();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 logger.Error(ex, "Exception");
             }
@@ -1292,6 +1292,18 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             string hostdest = cmb_toAddress.SelectedValue as string;
             string cst_id = txt_cst_id.Text;
             (bool is_success, string check_result) result = (false, "");
+            Enum.TryParse<E_CMD_TYPE>(cbm_Action.SelectedValue.ToString(), out var cmd_type);
+            if (cmd_type == E_CMD_TYPE.Unload)
+            {
+                var vh = scApp.VehicleBLL.cache.getVehicle(cmb_Vehicle.Text);
+                if(vh == null)
+                {
+                    MessageBox.Show("No find vehile.");
+                    return;
+                }
+                hostsource = vh.Real_ID;
+            }
+
             await Task.Run(() => result = scApp.TransferService.tryToCreatManualMCSCommand(hostsource, hostdest, cst_id));
             if (result.is_success)
             {

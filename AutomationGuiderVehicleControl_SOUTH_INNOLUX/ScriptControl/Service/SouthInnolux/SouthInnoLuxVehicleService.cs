@@ -1,4 +1,5 @@
-﻿using com.mirle.ibg3k0.bcf.App;
+﻿using com.mirle.AK0.ProtocolFormat;
+using com.mirle.ibg3k0.bcf.App;
 using com.mirle.ibg3k0.bcf.Common;
 using com.mirle.ibg3k0.sc.App;
 using com.mirle.ibg3k0.sc.BLL;
@@ -9,6 +10,7 @@ using com.mirle.ibg3k0.sc.Data.VO;
 using com.mirle.ibg3k0.sc.Module;
 using com.mirle.ibg3k0.sc.ProtocolFormat.OHTMessage;
 using com.mirle.ibg3k0.sc.RouteKit;
+using DocumentFormat.OpenXml.Office.Word;
 using Google.Protobuf.Collections;
 using KingAOP;
 using Mirle.Hlts.Utils;
@@ -1127,7 +1129,19 @@ namespace com.mirle.ibg3k0.sc.Service
         {
             if (!SCUtility.isEmpty(cmd.CMD_ID_MCS))
             {
-                scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(cmd.CMD_ID_MCS);
+                //如果他是MCS Command且是Unload命令時，代表是MCS下達直接由車上放貨的，
+                //如果這時候放貨失敗的話就直接回覆MCS該筆命令執行失敗了
+                if (cmd.CMD_TPYE == E_CMD_TYPE.Unload)
+                {
+                    ACMD_MCS cmd_mcs = scApp.CMDBLL.getCMD_MCSByID(cmd.CMD_ID_MCS);
+                    scApp.CMDBLL.updateCMD_MCS_TranStatus2Complete(cmd.CMD_ID_MCS, E_TRAN_STATUS.Canceled);
+
+                    scApp.ReportBLL.newReportTransferCommandFinish(cmd_mcs, null, sc.Data.SECS.SouthInnolux.SECSConst.CMD_Result_LoadError, null);
+                }
+                else
+                {
+                    scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(cmd.CMD_ID_MCS);
+                }
             }
             //scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(cmd.CMD_ID, E_CMD_STATUS.AbnormalEndByOHT);
             //scApp.CMDBLL.updateCommand_OHTC_StatusByCmdID(vhID, cmd.CMD_ID, E_CMD_STATUS.AbnormalEndByOHT);
@@ -1571,12 +1585,85 @@ namespace com.mirle.ibg3k0.sc.Service
                         }
                     }
                 }
+                else
+                {
+                    Task.Run(() => ProcInitialEventReportWhenNoTran(eqpt));
+                }
                 replyTranEventReport(bcfApp, eventType, eqpt, seq_num);
             }
             catch (Exception ex)
             {
                 logger.Error(ex, "Exception");
             }
+        }
+
+        private void ProcInitialEventReportWhenNoTran(AVEHICLE vh)
+        {
+            try
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"when initial has cst on vh,try creat unload command...",
+                   VehicleID: vh.VEHICLE_ID,
+                   CarrierID: vh.CST_ID);
+
+                //發送43去詢問確認身上是否有貨物
+                if (!VehicleStatusRequest(vh.VEHICLE_ID, true))
+                {
+                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                       Data: $"ask id:43 fail!, don't auto creat manual command",
+                       VehicleID: vh.VEHICLE_ID,
+                       CarrierID: vh.CST_ID);
+                    return;
+                }
+                if (vh.HAS_CST == 1)
+                {
+                    //如果有貨，則要去確認該CST是否已有命令還沒結束
+                    var mcs_cmd = scApp.CMDBLL.getExcuteCMD_MCSByCarrierID(vh.CST_ID);
+                    if (mcs_cmd != null)
+                    {
+                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                           Data: $"cst id:{vh.CST_ID} has transfer cmd excute:{mcs_cmd.CMD_ID},don't auto creat manual command",
+                           VehicleID: vh.VEHICLE_ID,
+                           CarrierID: vh.CST_ID);
+                        return;
+                    }
+                    //如果沒有命令，則要去找出該顆CST之前接收到的最後一筆命令是要放到哪個Port，
+                    //在下達一筆手動Transfer Command，將CST放到該Port
+                    string last_dest = tryFindCarrierLastDest(vh.CST_ID);
+                    if (SCUtility.isEmpty(last_dest))
+                    {
+                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                           Data: $"cst id:{vh.CST_ID} has can't find last dest ,don't auto creat manual command",
+                           VehicleID: vh.VEHICLE_ID,
+                           CarrierID: vh.CST_ID);
+                        return;
+                    }
+                    var result = scApp.TransferService.tryToCreatManualMCSCommand(vh.Real_ID, last_dest, vh.CST_ID);
+                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                       Data: $"when initial auto creat manual unload command result:{result.isSuccess} ,reason:{result.checkResult}.",
+                       VehicleID: vh.VEHICLE_ID,
+                       CarrierID: vh.CST_ID);
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception");
+            }
+        }
+        private string tryFindCarrierLastDest(string cstID)
+        {
+            ACMD_MCS last_cst_tran_cmd = scApp.CMDBLL.getLastFinishCmd_MCSByCSTID(cstID, "");
+            if (last_cst_tran_cmd != null)
+            {
+                return last_cst_tran_cmd.HOSTDESTINATION;
+            }
+            //如果當前的找不到，改到歷史的去找
+            HCMD_MCS last_finish_hcmd_mcd = scApp.CMDBLL.getLastFinishHCmd_MCSByCSTID(cstID, "");
+            if (last_cst_tran_cmd != null)
+            {
+                return last_finish_hcmd_mcd.HOSTDESTINATION;
+            }
+            return "";
         }
 
         private void finishCmdForInitial(AVEHICLE eqpt, ACMD_MCS cmd_mcs, E_TRAN_STATUS finish_tran_status, string cmd_result_code)
