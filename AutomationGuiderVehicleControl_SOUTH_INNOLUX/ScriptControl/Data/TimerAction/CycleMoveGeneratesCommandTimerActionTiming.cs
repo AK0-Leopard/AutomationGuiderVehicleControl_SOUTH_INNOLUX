@@ -58,8 +58,11 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
                     if (SCUtility.isEmpty(DebugParameter.SelectedCycleRunVh)) return;
                     var selected_vh = scApp.VehicleBLL.cache.getVehicle(DebugParameter.SelectedCycleRunVh);
 
+                    if (selected_vh.MODE_STATUS == VHModeStatus.AutoRemote)
+                        scApp.VehicleService.changeVhStatusToAutoLocal(selected_vh.VEHICLE_ID);
+
                     if (!selected_vh.isTcpIpConnect ||
-                        selected_vh.MODE_STATUS != VHModeStatus.AutoRemote ||
+                        selected_vh.MODE_STATUS != VHModeStatus.AutoLocal ||
                         //scApp.CMDBLL.isCMD_OHTCQueueByVh(selected_vh.VEHICLE_ID))
                         scApp.CMDBLL.isCMD_OHTCExcuteIncludeQueueByVh(selected_vh.VEHICLE_ID))
                     {
