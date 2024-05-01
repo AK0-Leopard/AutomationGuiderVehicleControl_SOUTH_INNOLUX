@@ -3467,9 +3467,13 @@ namespace com.mirle.ibg3k0.sc.Service
 
                         switch (check_can_creat_avoid_command.result)
                         {
+                            case CAN_NOT_AVOID_RESULT.VehicleInLoadingUnloading:
+                                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                                   Data: $"reserved vh:{reserved_vh.VEHICLE_ID} is loading / unloading, don't excute override",
+                                   VehicleID: requestVhID);
+                                return;
                             case CAN_NOT_AVOID_RESULT.VehicleInError:
                             case CAN_NOT_AVOID_RESULT.VehicleInLongCharge:
-                            case CAN_NOT_AVOID_RESULT.VehicleInLoadingUnloading:
                             case CAN_NOT_AVOID_RESULT.VehicleInObstacleStop:
                                 if (request_vh.IsReservePause)
                                 {
