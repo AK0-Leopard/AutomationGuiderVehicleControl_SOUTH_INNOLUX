@@ -28,6 +28,8 @@ namespace com.mirle.ibg3k0.sc
     {
         public event EventHandler<EventArgs> LineStatusChange;
         public event EventHandler LongTimeNoCommuncation;
+        public event EventHandler UPSHasAlarmHappend;
+        public event EventHandler UPSAlarmClear;
 
         /// <summary>
         /// 最大允許跟MCS沒有通訊的時間
@@ -195,7 +197,7 @@ namespace com.mirle.ibg3k0.sc
         {
             get
             {
-                if(DebugParameter.ByPassEarthquakeSignal)
+                if (DebugParameter.ByPassEarthquakeSignal)
                 {
                     LogHelper.Log(logger: NLog.LogManager.GetCurrentClassLogger(), LogLevel: LogLevel.Info, Class: nameof(CMDBLL), Device: string.Empty,
                                   Data: $"Earth quake signal is by pass ");
@@ -227,6 +229,36 @@ namespace com.mirle.ibg3k0.sc
                     OnPropertyChanged(BCFUtility.getPropertyName(() => this.SegmentPreDisableExcuting));
                 }
             }
+        }
+
+        private bool hasUPSAlarmHappend;
+        [BaseElement(NonChangeFromOtherVO = true)]
+        public virtual bool HasUPSAlarmHappend
+        {
+            get { return hasUPSAlarmHappend; }
+            set
+            {
+                if (hasUPSAlarmHappend != value)
+                {
+                    hasUPSAlarmHappend = value;
+                    if (hasUPSAlarmHappend)
+                    {
+                        onUPSHasAlarmHappend();
+                    }
+                    else
+                    {
+                        onUPSAlarmClear();
+                    }
+                }
+            }
+        }
+        private void onUPSHasAlarmHappend()
+        {
+            UPSHasAlarmHappend?.Invoke(this, EventArgs.Empty);
+        }
+        private void onUPSAlarmClear()
+        {
+            UPSAlarmClear?.Invoke(this, EventArgs.Empty);
         }
 
         public Data.SECSDriver.IBSEMDriver getUsingMapAction()

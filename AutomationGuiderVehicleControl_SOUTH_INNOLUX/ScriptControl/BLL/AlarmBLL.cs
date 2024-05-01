@@ -40,6 +40,7 @@ namespace com.mirle.ibg3k0.sc.BLL
         public const string VEHICLE_URGENT_BATTERY_LEVEL_HAPPEND = "10003";
 
         public const string EarthquakeIsHappening = "20001";
+        public const string UPSAlarmHappening = "20002";
 
         /// <summary>
         /// The sc application
@@ -401,7 +402,7 @@ namespace com.mirle.ibg3k0.sc.BLL
                 {
                     alarmRptCondDao.deleteAllRptCond(con);
                     List<AlarmMap> alarmMaps = loadAlarmMaps();
-                    foreach(AlarmMap alarmMap in alarmMaps)
+                    foreach (AlarmMap alarmMap in alarmMaps)
                     {
                         ALARMRPTCOND cond = new ALARMRPTCOND()
                         {

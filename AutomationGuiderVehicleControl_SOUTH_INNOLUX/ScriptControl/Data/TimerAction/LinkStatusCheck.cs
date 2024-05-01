@@ -19,6 +19,7 @@ using com.mirle.ibg3k0.sc.Common;
 using com.mirle.ibg3k0.sc.Data.VO;
 using com.mirle.ibg3k0.stc.Common.SECS;
 using NLog;
+using Renci.SshNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,6 +51,8 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
         ValueWrite isAliveIndexVW = null;
         ValueRead isAliveIndexVR = null;
         ALINE line = null;
+        ConnectionInfo conInfo;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LinkStatusCheck"/> class.
         /// </summary>
@@ -73,8 +76,18 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
             //isAliveIndexVR = scApp.getBCFApplication().getReadValueEvent(SCAppConstants.EQPT_OBJECT_CATE_LINE, "VH_LINE", "OHxC_Alive_R");
             dicCommInfo = scApp.getEQObjCacheManager().CommonInfo.dicCommunactionInfo;
             line = scApp.getEQObjCacheManager().getLine();
+
+            initialUPSConInfo(scApp.UPSIp);
         }
 
+        private void initialUPSConInfo(string UPS_IP)
+        {
+            conInfo = new ConnectionInfo(UPS_IP, 22, "apc", new AuthenticationMethod[]    // ssh 的连接信息
+            {
+               // ssh 连接的用户名密码
+               new PasswordAuthenticationMethod("apc", "apc")
+            });
+        }
 
         private long syncPoint = 0;
         /// <summary>
@@ -83,6 +96,7 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
         /// <param name="obj">The object.</param>
         public override void doProcess(object obj)
         {
+            DoUPSAlarmCheck();
             if (System.Threading.Interlocked.Exchange(ref syncPoint, 1) == 0)
             {
 
@@ -110,6 +124,48 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
             //if (++excute_count % 2 == 0)
             //    Task.Run(() => doChcekPLCLinkStatus());
             //Task.Run(() => doReadPLCAlive());
+        }
+        private long upsSyncPoint = 0;
+        private void DoUPSAlarmCheck()
+        {
+            if (System.Threading.Interlocked.Exchange(ref upsSyncPoint, 1) == 0)
+            {
+                try
+                {
+                    string s_ups_alarm_count = getUPSAlarmCount();
+                    int.TryParse(s_ups_alarm_count, out int ups_alarm_count);
+                    line.HasUPSAlarmHappend = ups_alarm_count > 0;
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, "Exception");
+                }
+                finally
+                {
+                    System.Threading.Interlocked.Exchange(ref upsSyncPoint, 0);
+                }
+            }
+        }
+        private string getUPSAlarmCount()
+        {
+            string result = "None";
+            using (SshClient client = new SshClient(conInfo))   //  创建一个连接
+            {
+                client.Connect();         // 建立连接
+                var ouput = client.RunCommand("alarmcount");   // 输入需要运行的命令，并赋值给一个变量
+                var temp = ouput.Result.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                if (Equals(temp[0], "E000: Success"))
+                    result = temp[1];
+                client.Disconnect();
+            }
+            return getResult(result);
+        }
+        private string getResult(string source)
+        {
+            string result = "";
+            var temp = source.Split(':');
+            result = temp.Last();
+            return result.Trim();
         }
 
         private void InlineEfficiencyMonitor()

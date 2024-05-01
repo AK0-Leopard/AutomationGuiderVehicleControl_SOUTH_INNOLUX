@@ -67,6 +67,7 @@ namespace com.mirle.ibg3k0.sc.App
         public string EAPSecsAgentName { get { return eapSecsAgentName; } }
         public string BC_ID { get; private set; }
         public static string ServerName { get; private set; }
+        public string UPSIp { get; private set; }
 
         private static Object _lock = new Object();
         private static SCApplication application;
@@ -464,6 +465,9 @@ namespace com.mirle.ibg3k0.sc.App
 
             eapSecsAgentName = getString("EAPSecsAgentName", "");
             BC_ID = getString("BC_ID", "BC_ID");
+            UPSIp = getString("UPSIp", "172.168.9.210");
+
+
             double moveCostForward = getDouble("MoveCostForward", 1);
             double moveCostReverse = getDouble("MoveCostReverse", 1);
             string algorithm = getString("ShortestPathAlgorithm", "DIJKSTRA");

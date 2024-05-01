@@ -61,6 +61,8 @@ namespace com.mirle.ibg3k0.sc.Service
             addVirtualVehicle();
             line.LongTimeNoCommuncation += Line_LongTimeNoCommuncation;
             line.TimerActionStart();
+            line.UPSHasAlarmHappend += Line_UPSHasAlarmHappend;
+            line.UPSAlarmClear += Line_UPSAlarmClear;
             //Section 的事務處理
             List<ASECTION> sections = scApp.SectionBLL.cache.GetSections();
             foreach (ASECTION section in sections)
@@ -77,6 +79,30 @@ namespace com.mirle.ibg3k0.sc.Service
             commonInfo.addEventHandler(nameof(LineService), BCFUtility.getPropertyName(() => commonInfo.MPCTipMsgList),
              PublishTipMessageInfo);
 
+        }
+
+        private void Line_UPSAlarmClear(object sender, EventArgs e)
+        {
+            try
+            {
+                scApp.LineService.ProcessAlarmReport(line.LINE_ID, BLL.AlarmBLL.UPSAlarmHappening, ErrorStatus.ErrReset, $"UPS has alarm happend");
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception:");
+            }
+        }
+
+        private void Line_UPSHasAlarmHappend(object sender, EventArgs e)
+        {
+            try
+            {
+                scApp.LineService.ProcessAlarmReport(line.LINE_ID, BLL.AlarmBLL.UPSAlarmHappening, ErrorStatus.ErrSet, $"UPS has alarm happend");
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception:");
+            }
         }
 
         private void InitialLightAndBuzzer()
