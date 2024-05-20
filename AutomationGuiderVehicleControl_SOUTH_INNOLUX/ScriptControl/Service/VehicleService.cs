@@ -5435,14 +5435,55 @@ namespace com.mirle.ibg3k0.sc.Service
                 }
             }
         }
-        public (bool isSuccess, ASECTION section) doEnableDisableSection(string sectionID, E_PORT_STATUS port_status, [CallerMemberName] string Method = "")
+
+        /// <summary>
+        /// 目前在線的AGV，需要都是沒有命令且MCS的狀態要是Pause的才可以進行Disable的動作
+        /// </summary>
+        /// <returns></returns>
+        private (bool Ok, string reson) doDisableSectionConditionCheck(E_PORT_STATUS portStatus)
+        {
+            if (portStatus == E_PORT_STATUS.InService)
+            {
+                return (true, "");
+            }
+            if (scApp.getEQObjCacheManager().getLine().SCStats == ALINE.TSCState.AUTO)
+            {
+                return (false, "目前系統為Auto狀態，無法關閉路徑");
+            }
+            var vhs = scApp.VehicleBLL.cache.loadAllVh();
+            foreach (var v in vhs)
+            {
+                if (!v.isTcpIpConnect)
+                    continue;
+                if (v.ACT_STATUS == VHActionStatus.Commanding)
+                {
+                    return (false, $"vh:{v.VEHICLE_ID} 目前狀態為Commanding，無法關閉路徑");
+                }
+                if (scApp.CMDBLL.isCMD_OHTCExcuteIncludeQueueByVh(v.VEHICLE_ID))
+                {
+                    return (false, $"vh:{v.VEHICLE_ID} 目前尚有命令，無法關閉路徑");
+                }
+            }
+            return (true, "");
+        }
+        public (bool isSuccess, ASECTION section, string reason) doEnableDisableSection(string sectionID, E_PORT_STATUS port_status, [CallerMemberName] string Method = "")
         {
             ASECTION section = null;
+            ALINE line = scApp.getEQObjCacheManager().getLine();
+            bool is_success = false;
             try
             {
+                line.IsSectionEnableDisableProcessing = true;
+                var check_result = doDisableSectionConditionCheck(port_status);
+                if (!check_result.Ok)
+                {
+                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                       Data: $"Start enable/disable sec id:{sectionID}, Action:{port_status} call member:{Method},result:{is_success} reason:{check_result.reson}");
+                    return (false, null, check_result.reson);
+                }
+
                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                    Data: $"Start enable/disable sec id:{sectionID}, Action:{port_status} call member:{Method}....");
-                bool is_success = false;
                 using (TransactionScope tx = SCUtility.getTransactionScope())
                 {
                     using (DBConnection_EF con = DBConnection_EF.GetUContext())
@@ -5472,7 +5513,18 @@ namespace com.mirle.ibg3k0.sc.Service
             {
                 logger.Error(ex, "Exception:");
             }
-            return (section != null, section);
+            finally
+            {
+                line.IsSectionEnableDisableProcessing = false;
+            }
+            if (is_success)
+            {
+                return (true, section, "");
+            }
+            else
+            {
+                return (false, null, $"關閉路徑:{sectionID}，命令失敗");
+            }
         }
         private void oneDirectPath()
         {

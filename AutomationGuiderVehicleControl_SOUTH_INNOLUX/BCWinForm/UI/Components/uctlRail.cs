@@ -767,7 +767,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI.Components
                 }
                 else
                 {
-                    MessageBox.Show($"Section ID:{m_sSectionID} {desc} fail.");
+                    MessageBox.Show($"Section ID:{m_sSectionID} {desc} fail.reason:{ban_result.reason}");
                 }
             }
             catch (Exception ex)

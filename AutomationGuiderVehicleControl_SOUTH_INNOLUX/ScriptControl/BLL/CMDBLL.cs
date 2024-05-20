@@ -2048,6 +2048,7 @@ namespace com.mirle.ibg3k0.sc.BLL
             return count != 0;
         }
 
+
         public bool hasExcuteCMDFromToAdrIsParkInSpecifyParkZoneID(string park_zone_id, out int ready_come_to_count)
         {
             ready_come_to_count = 0;
@@ -2157,9 +2158,16 @@ namespace com.mirle.ibg3k0.sc.BLL
             {
                 try
                 {
-                    if (scApp.getEQObjCacheManager().getLine().ServiceMode
-                        != SCAppConstants.AppServiceMode.Active)
+                    var line = scApp.getEQObjCacheManager().getLine();
+                    if (line.ServiceMode != SCAppConstants.AppServiceMode.Active)
                         return;
+                    if (line.IsSectionEnableDisableProcessing)
+                    {
+                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(CMDBLL), Device: string.Empty,
+                           Data: $"line.IsSectionEnableDisableProcessing:{line.IsSectionEnableDisableProcessing},can't excute command");
+                        return;
+                    }
+
                     List<ACMD_OHTC> CMD_OHTC_Queues = scApp.CMDBLL.loadCMD_OHTCMDStatusIsQueue();
                     if (CMD_OHTC_Queues == null || CMD_OHTC_Queues.Count == 0)
                         return;

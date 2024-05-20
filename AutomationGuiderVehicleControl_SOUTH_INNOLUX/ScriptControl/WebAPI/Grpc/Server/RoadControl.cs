@@ -21,7 +21,7 @@ namespace com.mirle.ibg3k0.sc.WebAPI.Grpc.Server
             var service_status = request.Enable ? E_PORT_STATUS.InService : E_PORT_STATUS.OutOfService;
             var result = scApp.VehicleService.doEnableDisableSection
             (sc.Common.SCUtility.Trim(request.Id, true), service_status);
-            reply.Result = result.isSuccess ? "Success" : "Fail";
+            reply.Result = result.isSuccess ? "Success" : $"Fail,reason:{result.reason}";
             return Task.FromResult(reply);
         }
         //public override Task<segControlReply>  (segControlRequest request, ServerCallContext context)

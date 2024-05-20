@@ -44,7 +44,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             RefreshMapColor();
         }
 
-        private void btn_disable_Click(object sender, EventArgs e)
+        private async void btn_disable_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dgv_section.SelectedRows)
             {
@@ -54,11 +54,15 @@ namespace com.mirle.ibg3k0.bc.winform.UI
                 {
                     //segment_List[row.Index] = bcApp.SCApplication.MapBLL.PreDisableSegment(selectSeg.SEG_NUM.Trim());
                     //segment_List[row.Index] = bcApp.SCApplication.VehicleService.doEnableDisableSegment(selectSeg.SEG_ID.Trim(), E_PORT_STATUS.OutOfService);
-                    var ban_result = bcApp.SCApplication.VehicleService.doEnableDisableSection(selectsec.SEC_ID.Trim(), E_PORT_STATUS.OutOfService);
+                    var ban_result = await Task.Run(() => bcApp.SCApplication.VehicleService.doEnableDisableSection(selectsec.SEC_ID.Trim(), E_PORT_STATUS.OutOfService));
                     if (ban_result.isSuccess)
                     {
                         selectsec.DISABLE_TIME = ban_result.section.DISABLE_TIME;
                         selectsec.STATUS = ban_result.section.STATUS;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"關閉路徑失敗，\r\nreason:{ban_result.reason}");
                     }
                 }
             }
@@ -72,18 +76,22 @@ namespace com.mirle.ibg3k0.bc.winform.UI
 
         }
 
-        private void btn_enable_Click(object sender, EventArgs e)
+        private async void btn_enable_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dgv_section.SelectedRows)
             {
                 ASECTION select_sec = section_List[row.Index];
                 if (select_sec.STATUS == E_SEG_STATUS.Closed)
                 {
-                    var ban_result = bcApp.SCApplication.VehicleService.doEnableDisableSection(select_sec.SEC_ID.Trim(), E_PORT_STATUS.InService);
+                    var ban_result = await Task.Run(() => bcApp.SCApplication.VehicleService.doEnableDisableSection(select_sec.SEC_ID.Trim(), E_PORT_STATUS.InService));
                     if (ban_result.isSuccess)
                     {
                         select_sec.DISABLE_TIME = ban_result.section.DISABLE_TIME;
                         select_sec.STATUS = ban_result.section.STATUS;
+                    }
+                    else
+                    {
+                        MessageBox.Show($"開啟路徑失敗，\r\nreason:{ban_result.reason}");
                     }
                 }
             }
@@ -104,6 +112,11 @@ namespace com.mirle.ibg3k0.bc.winform.UI
                     {
                         selectSeg.DISABLE_TIME = ban_result.section.DISABLE_TIME;
                         selectSeg.STATUS = ban_result.section.STATUS;
+                    }
+                    else
+                    {
+
+                        return;
                     }
                 }
             }

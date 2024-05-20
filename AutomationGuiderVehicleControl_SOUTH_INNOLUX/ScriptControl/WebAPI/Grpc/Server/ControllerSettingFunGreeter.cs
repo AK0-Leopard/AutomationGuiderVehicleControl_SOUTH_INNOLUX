@@ -58,9 +58,9 @@ namespace com.mirle.ibg3k0.sc.WebAPI.Grpc.Server
                Data: $"Revice gRPC [{nameof(sectionControl)}] requset, section id:{request.Id} is enable:{request.Enable} ...");
             var result = scApp.VehicleService.doEnableDisableSection
             (sc.Common.SCUtility.Trim(request.Id, true), service_status);
-            reply.Result = result.isSuccess ? "Success" : "Fail";
+            reply.Result = result.isSuccess ? "Success" : $"Fail,reason:{result.reason}";
             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(ControllerSettingFun), Device: "AGVC",
-               Data: $"Revice gRPC [{nameof(sectionControl)}] requset, section id:{request.Id} is enable:{request.Enable},excute result:{result.isSuccess}");
+               Data: $"Revice gRPC [{nameof(sectionControl)}] requset, section id:{request.Id} is enable:{request.Enable},excute result:{result.isSuccess} ,reason:{result.reason}");
 
             return Task.FromResult(reply);
         }

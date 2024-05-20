@@ -534,6 +534,7 @@ namespace com.mirle.ibg3k0.sc
                 }
             }
         }
+        public bool IsSectionEnableDisableProcessing { get; set; } = false;
 
 
         #region TSC state machine
