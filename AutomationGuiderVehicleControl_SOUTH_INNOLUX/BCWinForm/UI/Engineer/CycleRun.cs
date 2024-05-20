@@ -124,10 +124,27 @@ namespace com.mirle.ibg3k0.bc.winform.UI
 
         private void cb_startCyc_CheckedChanged(object sender, EventArgs e)
         {
-            if (sc.Common.SCUtility.isEmpty(cmb_vhIDs.Text))
+            if (cb_startCyc.Checked)
             {
-                MessageBox.Show("Plase select vh.");
-                return;
+                var vh = bcApp.SCApplication.VehicleBLL.cache.getVehicle(cmb_vhIDs.Text);
+                if (vh == null)
+                {
+                    MessageBox.Show("Plase select vh.");
+                    cb_startCyc.Checked = false;
+                    return;
+                }
+                if(!vh.isTcpIpConnect)
+                {
+                    MessageBox.Show($"Plase check vh:{vh.VEHICLE_ID} is connection.");
+                    cb_startCyc.Checked = false;
+                    return;
+                }
+                if ( vh.MODE_STATUS != sc.ProtocolFormat.OHTMessage.VHModeStatus.AutoLocal)
+                {
+                    MessageBox.Show($"Plase change vh:{vh.VEHICLE_ID}, mode to auto local.");
+                    cb_startCyc.Checked = false;
+                    return;
+                }
             }
             tableLayoutPanel1.Enabled = !cb_startCyc.Checked;
             sc.App.DebugParameter.CanAutoRandomGeneratesCommand = cb_startCyc.Checked;
