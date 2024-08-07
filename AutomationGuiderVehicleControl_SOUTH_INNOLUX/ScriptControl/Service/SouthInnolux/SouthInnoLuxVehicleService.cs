@@ -3001,34 +3001,34 @@ namespace com.mirle.ibg3k0.sc.Service
             try
             {
                 AVEHICLE vh_vo = scApp.VehicleBLL.cache.getVehicle(vhID);
-                if (!vh_vo.isTcpIpConnect)
-                {
-                    string message = $"vh:{vhID} current not connection, can't excute action:Install";
-                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                       Data: message,
-                       VehicleID: vhID);
-                    return (false, message);
-                }
-                ASECTION current_section = scApp.SectionBLL.cache.GetSection(vh_vo.CUR_SEC_ID);
-                if (current_section == null)
-                {
-                    string message = $"vh:{vhID} current section:{SCUtility.Trim(vh_vo.CUR_SEC_ID, true)} is not exist, can't excute action:Install";
-                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                       Data: message,
-                       VehicleID: vhID);
-                    return (false, message);
-                }
+                //if (!vh_vo.isTcpIpConnect)
+                //{
+                //    string message = $"vh:{vhID} current not connection, can't excute action:Install";
+                //    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                //       Data: message,
+                //       VehicleID: vhID);
+                //    return (false, message);
+                //}
+                //ASECTION current_section = scApp.SectionBLL.cache.GetSection(vh_vo.CUR_SEC_ID);
+                //if (current_section == null)
+                //{
+                //    string message = $"vh:{vhID} current section:{SCUtility.Trim(vh_vo.CUR_SEC_ID, true)} is not exist, can't excute action:Install";
+                //    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                //       Data: message,
+                //       VehicleID: vhID);
+                //    return (false, message);
+                //}
 
-                var ReserveResult = askReserveSuccess(vhID, vh_vo.CUR_SEC_ID, vh_vo.CUR_ADR_ID);
-                if (!ReserveResult.isSuccess)
-                {
-                    string message = $"vh:{vhID} current section:{SCUtility.Trim(vh_vo.CUR_SEC_ID, true)} can't reserved," +
-                                     $" can't excute action:Install";
-                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                       Data: message,
-                       VehicleID: vhID);
-                    return (false, message);
-                }
+                //var ReserveResult = askReserveSuccess(vhID, vh_vo.CUR_SEC_ID, vh_vo.CUR_ADR_ID);
+                //if (!ReserveResult.isSuccess)
+                //{
+                //    string message = $"vh:{vhID} current section:{SCUtility.Trim(vh_vo.CUR_SEC_ID, true)} can't reserved," +
+                //                     $" can't excute action:Install";
+                //    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                //       Data: message,
+                //       VehicleID: vhID);
+                //    return (false, message);
+                //}
 
                 bool is_success = true;
                 is_success = is_success && scApp.VehicleBLL.updataVehicleInstall(vhID);
@@ -3036,8 +3036,12 @@ namespace com.mirle.ibg3k0.sc.Service
                 {
                     ProcessAlarmReport(vh_vo, AlarmBLL.VEHICLE_CAN_NOT_SERVICE, ErrorStatus.ErrSet, $"vehicle cannot service");
                 }
+                vh_vo.TcpAgentStart(scApp.getBCFApplication());
+
                 List<AMCSREPORTQUEUE> reportqueues = new List<AMCSREPORTQUEUE>();
                 is_success = is_success && scApp.ReportBLL.newReportVehicleInstalled(vh_vo.Real_ID, reportqueues);
+
+
                 scApp.ReportBLL.newSendMCSMessage(reportqueues);
                 vh_vo.NotifyVhStatusChange();
                 return (true, "");
@@ -3059,44 +3063,64 @@ namespace com.mirle.ibg3k0.sc.Service
                 //2.將該台VH 更新成Remove狀態
                 //3.將位置的資訊清空。(包含Reserve的路段、紅綠燈、Block)
                 //4.上報給MCS
-                scApp.VehicleBLL.updataVehicleRemove(vhID);
-
                 AVEHICLE vh_vo = scApp.VehicleBLL.cache.getVehicle(vhID);
-
-                if (!vh_vo.isTcpIpConnect)
+                if (vh_vo.isTcpIpConnect)
                 {
+                    string message = $"vh:{vhID} current is connection, can't excute action:remove";
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                       Data: $"vh id:{vhID} remove success. start try release reserved control...",
+                       Data: message,
                        VehicleID: vhID);
-
-
-                    initialVhPosition(vh_vo);
-
-                    vh_vo.VechileRemove();
-                    scApp.ReserveBLL.RemoveAllReservedSectionsByVehicleID(vhID);
-                    scApp.ReserveBLL.RemoveVehicle(vhID);
+                    return (false, message);
                 }
-                else
-                {
-                    if (vh_vo.isAuto)
-                    {
-                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                                                      Data: $"vh id:{vhID} remove success. 但由於是Auto狀態，不進行路權及位置處理",
-                                                                                VehicleID: vhID);
-                    }
-                    else
-                    {
-                        scApp.ReserveBLL.RemoveAllReservedSectionsByVehicleID(vhID);
-                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
-                                                      Data: $"vh id:{vhID} remove success. 由於是非在AutoRemote中，進行路權清除",
-                                                                                VehicleID: vhID);
-                    }
-                }
+
+
+                scApp.VehicleBLL.updataVehicleRemove(vhID);
+                vh_vo.TcpAgentStop(scApp.getBCFApplication());
+
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"vh id:{vhID} remove success. start try release reserved control...",
+                   VehicleID: vhID);
+                initialVhPosition(vh_vo);
+
+                vh_vo.VechileRemove();
+                scApp.ReserveBLL.RemoveAllReservedSectionsByVehicleID(vhID);
+                scApp.ReserveBLL.RemoveVehicle(vhID);
+
 
                 List<AMCSREPORTQUEUE> reportqueues = new List<AMCSREPORTQUEUE>();
                 scApp.ReportBLL.newReportVehicleRemoved(vh_vo.Real_ID, reportqueues);
                 scApp.ReportBLL.newSendMCSMessage(reportqueues);
                 vh_vo.NotifyVhStatusChange();
+                //if (!vh_vo.isTcpIpConnect)
+                //{
+                //    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                //       Data: $"vh id:{vhID} remove success. start try release reserved control...",
+                //       VehicleID: vhID);
+
+
+                //    initialVhPosition(vh_vo);
+
+                //    vh_vo.VechileRemove();
+                //    scApp.ReserveBLL.RemoveAllReservedSectionsByVehicleID(vhID);
+                //    scApp.ReserveBLL.RemoveVehicle(vhID);
+                //}
+                //else
+                //{
+                //    if (vh_vo.isAuto)
+                //    {
+                //        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                //                                      Data: $"vh id:{vhID} remove success. 但由於是Auto狀態，不進行路權及位置處理",
+                //                                                                VehicleID: vhID);
+                //    }
+                //    else
+                //    {
+                //        scApp.ReserveBLL.RemoveAllReservedSectionsByVehicleID(vhID);
+                //        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                //                                      Data: $"vh id:{vhID} remove success. 由於是非在AutoRemote中，進行路權清除",
+                //                                                                VehicleID: vhID);
+                //    }
+                //}
+
 
 
                 //if (vh_vo.isTcpIpConnect)

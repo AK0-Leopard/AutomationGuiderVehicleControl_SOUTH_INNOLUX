@@ -102,6 +102,16 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                         //之後要從DB得知上次的狀態，是否為Remove
                         eqpt.VehicleInstall();
 
+                        if (eqpt.IS_INSTALLED)
+                        {
+                            eqpt.TcpAgentStart(bcfApp);
+                        }
+                        else
+                        {
+                            eqpt.TcpAgentStop(bcfApp);
+                        }
+
+
                         break;
                     case BCFAppConstants.RUN_LEVEL.ONE:
                         break;

@@ -3109,6 +3109,7 @@ namespace com.mirle.ibg3k0.sc.Service
             reserveInfos.Add(info);
             return IsReserveSuccessNew(vhID, reserveInfos, isAsk: true);
         }
+
         public (bool isSuccess, string reservedVhID, string reservedSecID) IsReserveSuccessTest(string vhID, RepeatedField<ReserveInfo> reserveInfos)
         {
             return IsReserveSuccessNew(vhID, reserveInfos);
@@ -3374,7 +3375,8 @@ namespace com.mirle.ibg3k0.sc.Service
             else
             {
                 bool is_can = reservedVh.isTcpIpConnect &&
-                       (reservedVh.MODE_STATUS == VHModeStatus.AutoRemote || reservedVh.MODE_STATUS == VHModeStatus.AutoCharging) &&
+                       //(reservedVh.MODE_STATUS == VHModeStatus.AutoRemote || reservedVh.MODE_STATUS == VHModeStatus.AutoCharging) &&
+                       (reservedVh.MODE_STATUS == VHModeStatus.AutoRemote || reservedVh.MODE_STATUS == VHModeStatus.AutoCharging || reservedVh.MODE_STATUS == VHModeStatus.AutoLocal) &&
                         reservedVh.ACT_STATUS == VHActionStatus.NoCommand &&
                        !scApp.CMDBLL.isCMD_OHTCQueueByVh(reservedVh.VEHICLE_ID);
                 //&& !scApp.CMDBLL.HasCMD_MCSInQueue();
@@ -5234,20 +5236,55 @@ namespace com.mirle.ibg3k0.sc.Service
         }
         #endregion Avoid Control
         #region Specially Control
-        public bool changeVhStatusToAutoRemote(string vhID)
+        public (bool ok, string reason) changeVhStatusToAutoRemote(string vhID)
         {
+            AVEHICLE vh = scApp.getEQObjCacheManager().getVehicletByVHID(vhID);
+            if (!vh.isTcpIpConnect)
+            {
+                return (false, $"vh:{vhID} no connection, can't change to auto remote");
+            }
+
+            if (vh.MODE_STATUS == VHModeStatus.Manual)
+            {
+                return (false, $"vh:{vhID} is manual mode, can't change to auto remote");
+            }
             scApp.VehicleBLL.updataVehicleMode(vhID, VHModeStatus.AutoRemote);
-            AVEHICLE vh = scApp.getEQObjCacheManager().getVehicletByVHID(vhID);
             vh?.NotifyVhStatusChange();
-            return true;
+            vh?.ReCheckVhStatusByBatteryLevel();
+            return (true, "");
         }
-        public bool changeVhStatusToAutoLocal(string vhID)
+
+        public (bool ok, string reason) changeVhStatusToAutoLocal(string vhID)
         {
-            scApp.VehicleBLL.updataVehicleMode(vhID, VHModeStatus.AutoLocal);
             AVEHICLE vh = scApp.getEQObjCacheManager().getVehicletByVHID(vhID);
+            if (!vh.isTcpIpConnect)
+            {
+                return (false, $"vh:{vhID} no connection, can't change to auto local");
+            }
+
+            if (vh.MODE_STATUS == VHModeStatus.Manual)
+            {
+                return (false, $"vh:{vhID} is manual mode, can't change to auto local");
+            }
+            scApp.VehicleBLL.updataVehicleMode(vhID, VHModeStatus.AutoLocal);
             vh?.NotifyVhStatusChange();
-            return true;
+            vh?.ReCheckVhStatusByBatteryLevel();
+            return (true, "");
         }
+
+        public (bool ok, string reason) RecoverVhToAutoWhenChargeFinished(string vhID)
+        {
+            AVEHICLE vh = scApp.getEQObjCacheManager().getVehicletByVHID(vhID);
+            if (vh.IS_CYCLING)
+            {
+                return changeVhStatusToAutoLocal(vhID);
+            }
+            else
+            {
+                return changeVhStatusToAutoRemote(vhID);
+            }
+        }
+
         public bool changeVhStatusToAutoCharging(string vhID)
         {
             scApp.VehicleBLL.updataVehicleMode(vhID, VHModeStatus.AutoCharging);

@@ -342,7 +342,26 @@ namespace com.mirle.ibg3k0.sc.BLL
 
                     con.AVEHICLE.Attach(vh);
                     vh.MODE_STATUS = mode_status;
+                    bool is_change_cycle_flag = false;
+                    if (mode_status == VHModeStatus.AutoLocal)
+                    {
+                        vh.IS_CYCLING = true;
+                        vh.CYCLERUN_TIME = DateTime.Now;
+                        is_change_cycle_flag = true;
+                    }
+                    else if (mode_status == VHModeStatus.AutoCharging)
+                    {
+                        //不做改變
+                    }
+                    else
+                    {
+                        vh.IS_CYCLING = false;
+                        vh.CYCLERUN_TIME = null;
+                        is_change_cycle_flag = true;
+                    }
                     con.Entry(vh).Property(p => p.MODE_STATUS).IsModified = true;
+                    con.Entry(vh).Property(p => p.IS_CYCLING).IsModified = is_change_cycle_flag;
+                    con.Entry(vh).Property(p => p.CYCLERUN_TIME).IsModified = is_change_cycle_flag;
 
                     vehicleDAO.doUpdate(scApp, con, vh);
                     con.Entry(vh).State = EntityState.Detached;
@@ -489,8 +508,9 @@ namespace com.mirle.ibg3k0.sc.BLL
             VHModeStatus modeStat = default(VHModeStatus);
             if (vh_current_mode_status == VHModeStatus.AutoRemote)
             {
-                if (eqpt.MODE_STATUS == VHModeStatus.AutoLocal ||
-                    eqpt.MODE_STATUS == VHModeStatus.AutoCharging)
+                //if (eqpt.MODE_STATUS == VHModeStatus.AutoLocal ||
+                //    eqpt.MODE_STATUS == VHModeStatus.AutoCharging)
+                if (eqpt.MODE_STATUS == VHModeStatus.AutoCharging)
                 {
                     modeStat = eqpt.MODE_STATUS;
                 }
@@ -500,6 +520,10 @@ namespace com.mirle.ibg3k0.sc.BLL
                 }
                 else
                 {
+                    if (eqpt.IS_CYCLING)
+                    {
+                        vh_current_mode_status = VHModeStatus.AutoLocal;
+                    }
                     modeStat = vh_current_mode_status;
                 }
             }

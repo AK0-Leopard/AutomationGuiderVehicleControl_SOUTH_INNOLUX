@@ -218,6 +218,9 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             {
                 switch (col.Name)
                 {
+                    case "mODESTATUSDataGridViewTextBoxColumn1":
+                        col.FillWeight = 2000;
+                        break;
                     case "MCS_CMD":
                         col.FillWeight = 1200;
                         break;

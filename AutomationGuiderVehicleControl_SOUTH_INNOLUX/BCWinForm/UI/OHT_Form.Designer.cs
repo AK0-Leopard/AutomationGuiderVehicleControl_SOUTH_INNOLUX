@@ -78,27 +78,6 @@
             this.tbcList = new System.Windows.Forms.TabControl();
             this.tab_vhStatus = new System.Windows.Forms.TabPage();
             this.dgv_vhStatus = new System.Windows.Forms.DataGridView();
-            this.vEHICLEIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mODESTATUSDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aCTSTATUSDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.mCSCMDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oHTCCMDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iSPARKINGDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.pARKTIMEDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iSCYCLINGDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.cYCLERUNTIMEDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bATTERYCAPACITYDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.uPDTIMEDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LoadingInterlockErrorRetryTimes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnloadingInterlockErrorRetryTimes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CurrentVhSettingOfBattryLowLevelValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vehicleObjToShowBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tapTransferCmd = new System.Windows.Forms.TabPage();
             this.dgv_TransferCommand = new System.Windows.Forms.DataGridView();
@@ -144,6 +123,27 @@
             this.vEHICLEIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.vehicleObjToShowBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.aCMDMCSBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.vEHICLEIDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mODESTATUSDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aCTSTATUSDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mCSCMDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oHTCCMDDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iSPARKINGDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.pARKTIMEDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iSCYCLINGDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.cYCLERUNTIMEDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bATTERYCAPACITYDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uPDTIMEDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LoadingInterlockErrorRetryTimes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnloadingInterlockErrorRetryTimes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CurrentVhSettingOfBattryLowLevelValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -765,183 +765,6 @@
             this.dgv_vhStatus.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_vhStatus_CellClick);
             this.dgv_vhStatus.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dgv_vhStatus_DataError);
             // 
-            // vEHICLEIDDataGridViewTextBoxColumn1
-            // 
-            this.vEHICLEIDDataGridViewTextBoxColumn1.DataPropertyName = "VEHICLE_ID";
-            this.vEHICLEIDDataGridViewTextBoxColumn1.HeaderText = "Vh ID";
-            this.vEHICLEIDDataGridViewTextBoxColumn1.Name = "vEHICLEIDDataGridViewTextBoxColumn1";
-            this.vEHICLEIDDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.vEHICLEIDDataGridViewTextBoxColumn1.Width = 75;
-            // 
-            // mODESTATUSDataGridViewTextBoxColumn1
-            // 
-            this.mODESTATUSDataGridViewTextBoxColumn1.DataPropertyName = "MODE_STATUS";
-            this.mODESTATUSDataGridViewTextBoxColumn1.HeaderText = "Mode";
-            this.mODESTATUSDataGridViewTextBoxColumn1.Name = "mODESTATUSDataGridViewTextBoxColumn1";
-            this.mODESTATUSDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.mODESTATUSDataGridViewTextBoxColumn1.Width = 76;
-            // 
-            // aCTSTATUSDataGridViewTextBoxColumn1
-            // 
-            this.aCTSTATUSDataGridViewTextBoxColumn1.DataPropertyName = "ACT_STATUS";
-            this.aCTSTATUSDataGridViewTextBoxColumn1.HeaderText = "Action";
-            this.aCTSTATUSDataGridViewTextBoxColumn1.Name = "aCTSTATUSDataGridViewTextBoxColumn1";
-            this.aCTSTATUSDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.aCTSTATUSDataGridViewTextBoxColumn1.Width = 83;
-            // 
-            // mCSCMDDataGridViewTextBoxColumn1
-            // 
-            this.mCSCMDDataGridViewTextBoxColumn1.DataPropertyName = "MCS_CMD";
-            this.mCSCMDDataGridViewTextBoxColumn1.HeaderText = "MCS CMD";
-            this.mCSCMDDataGridViewTextBoxColumn1.Name = "mCSCMDDataGridViewTextBoxColumn1";
-            this.mCSCMDDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.mCSCMDDataGridViewTextBoxColumn1.Width = 111;
-            // 
-            // oHTCCMDDataGridViewTextBoxColumn1
-            // 
-            this.oHTCCMDDataGridViewTextBoxColumn1.DataPropertyName = "OHTC_CMD";
-            this.oHTCCMDDataGridViewTextBoxColumn1.HeaderText = "OHTC CMD";
-            this.oHTCCMDDataGridViewTextBoxColumn1.Name = "oHTCCMDDataGridViewTextBoxColumn1";
-            this.oHTCCMDDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.oHTCCMDDataGridViewTextBoxColumn1.Width = 121;
-            // 
-            // bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1
-            // 
-            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.DataPropertyName = "bLOCK_PAUSE2Show";
-            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.HeaderText = "Block pause";
-            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.Name = "bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1";
-            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.Visible = false;
-            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.Width = 110;
-            // 
-            // cMDPAUSE2ShowDataGridViewCheckBoxColumn1
-            // 
-            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.DataPropertyName = "cMD_PAUSE2Show";
-            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.HeaderText = "CMD pause";
-            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.Name = "cMDPAUSE2ShowDataGridViewCheckBoxColumn1";
-            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.Visible = false;
-            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.Width = 103;
-            // 
-            // oBSPAUSE2ShowDataGridViewCheckBoxColumn1
-            // 
-            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.DataPropertyName = "oBS_PAUSE2Show";
-            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.HeaderText = "OBS pause";
-            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.Name = "oBSPAUSE2ShowDataGridViewCheckBoxColumn1";
-            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.Visible = false;
-            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.Width = 101;
-            // 
-            // hIDPAUSE2ShowDataGridViewCheckBoxColumn1
-            // 
-            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.DataPropertyName = "hID_PAUSE2Show";
-            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.HeaderText = "HID pause";
-            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.Name = "hIDPAUSE2ShowDataGridViewCheckBoxColumn1";
-            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.Visible = false;
-            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.Width = 94;
-            // 
-            // vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1
-            // 
-            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1.DataPropertyName = "vEHICLE_ACC_DIST2Show";
-            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1.HeaderText = "ODO(km)";
-            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1.Name = "vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1";
-            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1.Width = 103;
-            // 
-            // iSPARKINGDataGridViewCheckBoxColumn1
-            // 
-            this.iSPARKINGDataGridViewCheckBoxColumn1.DataPropertyName = "IS_PARKING";
-            this.iSPARKINGDataGridViewCheckBoxColumn1.HeaderText = "Parking";
-            this.iSPARKINGDataGridViewCheckBoxColumn1.Name = "iSPARKINGDataGridViewCheckBoxColumn1";
-            this.iSPARKINGDataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.iSPARKINGDataGridViewCheckBoxColumn1.Visible = false;
-            this.iSPARKINGDataGridViewCheckBoxColumn1.Width = 74;
-            // 
-            // pARKTIMEDataGridViewTextBoxColumn1
-            // 
-            this.pARKTIMEDataGridViewTextBoxColumn1.DataPropertyName = "PARK_TIME";
-            this.pARKTIMEDataGridViewTextBoxColumn1.HeaderText = "Park time";
-            this.pARKTIMEDataGridViewTextBoxColumn1.Name = "pARKTIMEDataGridViewTextBoxColumn1";
-            this.pARKTIMEDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.pARKTIMEDataGridViewTextBoxColumn1.Visible = false;
-            this.pARKTIMEDataGridViewTextBoxColumn1.Width = 105;
-            // 
-            // iSCYCLINGDataGridViewCheckBoxColumn1
-            // 
-            this.iSCYCLINGDataGridViewCheckBoxColumn1.DataPropertyName = "IS_CYCLING";
-            this.iSCYCLINGDataGridViewCheckBoxColumn1.HeaderText = "Cycling";
-            this.iSCYCLINGDataGridViewCheckBoxColumn1.Name = "iSCYCLINGDataGridViewCheckBoxColumn1";
-            this.iSCYCLINGDataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.iSCYCLINGDataGridViewCheckBoxColumn1.Visible = false;
-            this.iSCYCLINGDataGridViewCheckBoxColumn1.Width = 73;
-            // 
-            // cYCLERUNTIMEDataGridViewTextBoxColumn1
-            // 
-            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.DataPropertyName = "CYCLERUN_TIME";
-            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.HeaderText = "Cycling time";
-            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.Name = "cYCLERUNTIMEDataGridViewTextBoxColumn1";
-            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.Visible = false;
-            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.Width = 128;
-            // 
-            // aCCSECDIST2ShowDataGridViewTextBoxColumn1
-            // 
-            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1.DataPropertyName = "ACC_SEC_DIST2Show";
-            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1.HeaderText = "Sec DIST(m)";
-            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1.Name = "aCCSECDIST2ShowDataGridViewTextBoxColumn1";
-            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1.Width = 128;
-            // 
-            // bATTERYCAPACITYDataGridViewTextBoxColumn
-            // 
-            this.bATTERYCAPACITYDataGridViewTextBoxColumn.DataPropertyName = "BATTERYCAPACITY";
-            this.bATTERYCAPACITYDataGridViewTextBoxColumn.HeaderText = "BATTERYCAPACITY";
-            this.bATTERYCAPACITYDataGridViewTextBoxColumn.Name = "bATTERYCAPACITYDataGridViewTextBoxColumn";
-            this.bATTERYCAPACITYDataGridViewTextBoxColumn.ReadOnly = true;
-            this.bATTERYCAPACITYDataGridViewTextBoxColumn.Width = 188;
-            // 
-            // uPDTIMEDataGridViewTextBoxColumn1
-            // 
-            this.uPDTIMEDataGridViewTextBoxColumn1.DataPropertyName = "UPD_TIME";
-            this.uPDTIMEDataGridViewTextBoxColumn1.HeaderText = "UPD_TIME";
-            this.uPDTIMEDataGridViewTextBoxColumn1.Name = "uPDTIMEDataGridViewTextBoxColumn1";
-            this.uPDTIMEDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.uPDTIMEDataGridViewTextBoxColumn1.Width = 116;
-            // 
-            // LoadingInterlockErrorRetryTimes
-            // 
-            this.LoadingInterlockErrorRetryTimes.DataPropertyName = "LoadingInterlockErrorRetryTimes";
-            this.LoadingInterlockErrorRetryTimes.HeaderText = "Interlock error retry times(L)";
-            this.LoadingInterlockErrorRetryTimes.Name = "LoadingInterlockErrorRetryTimes";
-            this.LoadingInterlockErrorRetryTimes.ReadOnly = true;
-            this.LoadingInterlockErrorRetryTimes.Width = 245;
-            // 
-            // UnloadingInterlockErrorRetryTimes
-            // 
-            this.UnloadingInterlockErrorRetryTimes.DataPropertyName = "UnloadingInterlockErrorRetryTimes";
-            this.UnloadingInterlockErrorRetryTimes.HeaderText = "Interlock error retry times(U)";
-            this.UnloadingInterlockErrorRetryTimes.Name = "UnloadingInterlockErrorRetryTimes";
-            this.UnloadingInterlockErrorRetryTimes.ReadOnly = true;
-            this.UnloadingInterlockErrorRetryTimes.Width = 247;
-            // 
-            // CurrentVhSettingOfBattryLowLevelValue
-            // 
-            this.CurrentVhSettingOfBattryLowLevelValue.DataPropertyName = "CurrentVhSettingOfBattryLowLevelValue";
-            this.CurrentVhSettingOfBattryLowLevelValue.HeaderText = "Battry Level(Low)";
-            this.CurrentVhSettingOfBattryLowLevelValue.Name = "CurrentVhSettingOfBattryLowLevelValue";
-            this.CurrentVhSettingOfBattryLowLevelValue.ReadOnly = true;
-            this.CurrentVhSettingOfBattryLowLevelValue.Width = 168;
-            // 
-            // Column1
-            // 
-            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Column1.HeaderText = "";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
             // vehicleObjToShowBindingSource
             // 
             this.vehicleObjToShowBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ObjectRelay.VehicleObjToShow);
@@ -1337,6 +1160,184 @@
             // aCMDMCSBindingSource
             // 
             this.aCMDMCSBindingSource.DataSource = typeof(com.mirle.ibg3k0.sc.ACMD_MCS);
+            // 
+            // vEHICLEIDDataGridViewTextBoxColumn1
+            // 
+            this.vEHICLEIDDataGridViewTextBoxColumn1.DataPropertyName = "VEHICLE_ID";
+            this.vEHICLEIDDataGridViewTextBoxColumn1.HeaderText = "Vh ID";
+            this.vEHICLEIDDataGridViewTextBoxColumn1.Name = "vEHICLEIDDataGridViewTextBoxColumn1";
+            this.vEHICLEIDDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.vEHICLEIDDataGridViewTextBoxColumn1.Width = 75;
+            // 
+            // mODESTATUSDataGridViewTextBoxColumn1
+            // 
+            this.mODESTATUSDataGridViewTextBoxColumn1.DataPropertyName = "MODE_STATUS";
+            this.mODESTATUSDataGridViewTextBoxColumn1.FillWeight = 150F;
+            this.mODESTATUSDataGridViewTextBoxColumn1.HeaderText = "Mode               ";
+            this.mODESTATUSDataGridViewTextBoxColumn1.Name = "mODESTATUSDataGridViewTextBoxColumn1";
+            this.mODESTATUSDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.mODESTATUSDataGridViewTextBoxColumn1.Width = 136;
+            // 
+            // aCTSTATUSDataGridViewTextBoxColumn1
+            // 
+            this.aCTSTATUSDataGridViewTextBoxColumn1.DataPropertyName = "ACT_STATUS";
+            this.aCTSTATUSDataGridViewTextBoxColumn1.HeaderText = "Action";
+            this.aCTSTATUSDataGridViewTextBoxColumn1.Name = "aCTSTATUSDataGridViewTextBoxColumn1";
+            this.aCTSTATUSDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.aCTSTATUSDataGridViewTextBoxColumn1.Width = 83;
+            // 
+            // mCSCMDDataGridViewTextBoxColumn1
+            // 
+            this.mCSCMDDataGridViewTextBoxColumn1.DataPropertyName = "MCS_CMD";
+            this.mCSCMDDataGridViewTextBoxColumn1.HeaderText = "MCS CMD";
+            this.mCSCMDDataGridViewTextBoxColumn1.Name = "mCSCMDDataGridViewTextBoxColumn1";
+            this.mCSCMDDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.mCSCMDDataGridViewTextBoxColumn1.Width = 111;
+            // 
+            // oHTCCMDDataGridViewTextBoxColumn1
+            // 
+            this.oHTCCMDDataGridViewTextBoxColumn1.DataPropertyName = "OHTC_CMD";
+            this.oHTCCMDDataGridViewTextBoxColumn1.HeaderText = "OHTC CMD";
+            this.oHTCCMDDataGridViewTextBoxColumn1.Name = "oHTCCMDDataGridViewTextBoxColumn1";
+            this.oHTCCMDDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.oHTCCMDDataGridViewTextBoxColumn1.Width = 121;
+            // 
+            // bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1
+            // 
+            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.DataPropertyName = "bLOCK_PAUSE2Show";
+            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.HeaderText = "Block pause";
+            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.Name = "bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1";
+            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.Visible = false;
+            this.bLOCKPAUSE2ShowDataGridViewCheckBoxColumn1.Width = 110;
+            // 
+            // cMDPAUSE2ShowDataGridViewCheckBoxColumn1
+            // 
+            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.DataPropertyName = "cMD_PAUSE2Show";
+            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.HeaderText = "CMD pause";
+            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.Name = "cMDPAUSE2ShowDataGridViewCheckBoxColumn1";
+            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.Visible = false;
+            this.cMDPAUSE2ShowDataGridViewCheckBoxColumn1.Width = 103;
+            // 
+            // oBSPAUSE2ShowDataGridViewCheckBoxColumn1
+            // 
+            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.DataPropertyName = "oBS_PAUSE2Show";
+            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.HeaderText = "OBS pause";
+            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.Name = "oBSPAUSE2ShowDataGridViewCheckBoxColumn1";
+            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.Visible = false;
+            this.oBSPAUSE2ShowDataGridViewCheckBoxColumn1.Width = 101;
+            // 
+            // hIDPAUSE2ShowDataGridViewCheckBoxColumn1
+            // 
+            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.DataPropertyName = "hID_PAUSE2Show";
+            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.HeaderText = "HID pause";
+            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.Name = "hIDPAUSE2ShowDataGridViewCheckBoxColumn1";
+            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.Visible = false;
+            this.hIDPAUSE2ShowDataGridViewCheckBoxColumn1.Width = 94;
+            // 
+            // vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1
+            // 
+            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1.DataPropertyName = "vEHICLE_ACC_DIST2Show";
+            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1.HeaderText = "ODO(km)";
+            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1.Name = "vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1";
+            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.vEHICLEACCDIST2ShowDataGridViewTextBoxColumn1.Width = 103;
+            // 
+            // iSPARKINGDataGridViewCheckBoxColumn1
+            // 
+            this.iSPARKINGDataGridViewCheckBoxColumn1.DataPropertyName = "IS_PARKING";
+            this.iSPARKINGDataGridViewCheckBoxColumn1.HeaderText = "Parking";
+            this.iSPARKINGDataGridViewCheckBoxColumn1.Name = "iSPARKINGDataGridViewCheckBoxColumn1";
+            this.iSPARKINGDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.iSPARKINGDataGridViewCheckBoxColumn1.Visible = false;
+            this.iSPARKINGDataGridViewCheckBoxColumn1.Width = 74;
+            // 
+            // pARKTIMEDataGridViewTextBoxColumn1
+            // 
+            this.pARKTIMEDataGridViewTextBoxColumn1.DataPropertyName = "PARK_TIME";
+            this.pARKTIMEDataGridViewTextBoxColumn1.HeaderText = "Park time";
+            this.pARKTIMEDataGridViewTextBoxColumn1.Name = "pARKTIMEDataGridViewTextBoxColumn1";
+            this.pARKTIMEDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.pARKTIMEDataGridViewTextBoxColumn1.Visible = false;
+            this.pARKTIMEDataGridViewTextBoxColumn1.Width = 105;
+            // 
+            // iSCYCLINGDataGridViewCheckBoxColumn1
+            // 
+            this.iSCYCLINGDataGridViewCheckBoxColumn1.DataPropertyName = "IS_CYCLING";
+            this.iSCYCLINGDataGridViewCheckBoxColumn1.HeaderText = "Cycling";
+            this.iSCYCLINGDataGridViewCheckBoxColumn1.Name = "iSCYCLINGDataGridViewCheckBoxColumn1";
+            this.iSCYCLINGDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.iSCYCLINGDataGridViewCheckBoxColumn1.Visible = false;
+            this.iSCYCLINGDataGridViewCheckBoxColumn1.Width = 73;
+            // 
+            // cYCLERUNTIMEDataGridViewTextBoxColumn1
+            // 
+            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.DataPropertyName = "CYCLERUN_TIME";
+            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.HeaderText = "Cycling time";
+            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.Name = "cYCLERUNTIMEDataGridViewTextBoxColumn1";
+            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.Visible = false;
+            this.cYCLERUNTIMEDataGridViewTextBoxColumn1.Width = 128;
+            // 
+            // aCCSECDIST2ShowDataGridViewTextBoxColumn1
+            // 
+            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1.DataPropertyName = "ACC_SEC_DIST2Show";
+            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1.HeaderText = "Sec DIST(m)";
+            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1.Name = "aCCSECDIST2ShowDataGridViewTextBoxColumn1";
+            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.aCCSECDIST2ShowDataGridViewTextBoxColumn1.Width = 128;
+            // 
+            // bATTERYCAPACITYDataGridViewTextBoxColumn
+            // 
+            this.bATTERYCAPACITYDataGridViewTextBoxColumn.DataPropertyName = "BATTERYCAPACITY";
+            this.bATTERYCAPACITYDataGridViewTextBoxColumn.HeaderText = "BATTERYCAPACITY";
+            this.bATTERYCAPACITYDataGridViewTextBoxColumn.Name = "bATTERYCAPACITYDataGridViewTextBoxColumn";
+            this.bATTERYCAPACITYDataGridViewTextBoxColumn.ReadOnly = true;
+            this.bATTERYCAPACITYDataGridViewTextBoxColumn.Width = 188;
+            // 
+            // uPDTIMEDataGridViewTextBoxColumn1
+            // 
+            this.uPDTIMEDataGridViewTextBoxColumn1.DataPropertyName = "UPD_TIME";
+            this.uPDTIMEDataGridViewTextBoxColumn1.HeaderText = "UPD_TIME";
+            this.uPDTIMEDataGridViewTextBoxColumn1.Name = "uPDTIMEDataGridViewTextBoxColumn1";
+            this.uPDTIMEDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.uPDTIMEDataGridViewTextBoxColumn1.Width = 116;
+            // 
+            // LoadingInterlockErrorRetryTimes
+            // 
+            this.LoadingInterlockErrorRetryTimes.DataPropertyName = "LoadingInterlockErrorRetryTimes";
+            this.LoadingInterlockErrorRetryTimes.HeaderText = "Interlock error retry times(L)";
+            this.LoadingInterlockErrorRetryTimes.Name = "LoadingInterlockErrorRetryTimes";
+            this.LoadingInterlockErrorRetryTimes.ReadOnly = true;
+            this.LoadingInterlockErrorRetryTimes.Width = 245;
+            // 
+            // UnloadingInterlockErrorRetryTimes
+            // 
+            this.UnloadingInterlockErrorRetryTimes.DataPropertyName = "UnloadingInterlockErrorRetryTimes";
+            this.UnloadingInterlockErrorRetryTimes.HeaderText = "Interlock error retry times(U)";
+            this.UnloadingInterlockErrorRetryTimes.Name = "UnloadingInterlockErrorRetryTimes";
+            this.UnloadingInterlockErrorRetryTimes.ReadOnly = true;
+            this.UnloadingInterlockErrorRetryTimes.Width = 247;
+            // 
+            // CurrentVhSettingOfBattryLowLevelValue
+            // 
+            this.CurrentVhSettingOfBattryLowLevelValue.DataPropertyName = "CurrentVhSettingOfBattryLowLevelValue";
+            this.CurrentVhSettingOfBattryLowLevelValue.HeaderText = "Battry Level(Low)";
+            this.CurrentVhSettingOfBattryLowLevelValue.Name = "CurrentVhSettingOfBattryLowLevelValue";
+            this.CurrentVhSettingOfBattryLowLevelValue.ReadOnly = true;
+            this.CurrentVhSettingOfBattryLowLevelValue.Width = 168;
+            // 
+            // Column1
+            // 
+            this.Column1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Column1.HeaderText = "";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Column1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
             // OHT_Form
             // 

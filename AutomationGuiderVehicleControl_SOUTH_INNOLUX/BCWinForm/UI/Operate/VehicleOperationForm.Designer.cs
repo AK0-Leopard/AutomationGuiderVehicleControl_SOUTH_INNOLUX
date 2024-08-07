@@ -47,12 +47,15 @@
             this.button6 = new System.Windows.Forms.Button();
             this.grbp_CancelAbort = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.lbl_id_cancel_cmdID_value = new System.Windows.Forms.Label();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.btn_abort = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lbl_id_cancel_cmdID_value = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cmb_vhs = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lbl_isremote_value = new System.Windows.Forms.Label();
             this.tlp_VehicleOperationBlock.SuspendLayout();
             this.grpb_VehicleInstallRemove.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -63,6 +66,7 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.grbp_CancelAbort.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlp_VehicleOperationBlock
@@ -112,6 +116,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 88F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(208, 238);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -159,7 +164,7 @@
             this.label2.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(134, 44);
+            this.label2.Size = new System.Drawing.Size(135, 44);
             this.label2.TabIndex = 0;
             this.label2.Text = "Is Installed:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -169,9 +174,9 @@
             this.lbl_isinstalled_value.AutoSize = true;
             this.lbl_isinstalled_value.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbl_isinstalled_value.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_isinstalled_value.Location = new System.Drawing.Point(143, 0);
+            this.lbl_isinstalled_value.Location = new System.Drawing.Point(144, 0);
             this.lbl_isinstalled_value.Name = "lbl_isinstalled_value";
-            this.lbl_isinstalled_value.Size = new System.Drawing.Size(56, 44);
+            this.lbl_isinstalled_value.Size = new System.Drawing.Size(55, 44);
             this.lbl_isinstalled_value.TabIndex = 1;
             this.lbl_isinstalled_value.Text = "false";
             this.lbl_isinstalled_value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -191,24 +196,26 @@
             // 
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.btn_auto_remote, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.btn_auto_local, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.btn_auto_charge, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.btn_auto_remote, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.btn_auto_local, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.btn_auto_charge, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 26);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 4;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 89F));
+            this.tableLayoutPanel3.RowCount = 5;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(208, 238);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // btn_auto_remote
             // 
             this.btn_auto_remote.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_auto_remote.Location = new System.Drawing.Point(3, 3);
+            this.btn_auto_remote.Location = new System.Drawing.Point(3, 52);
             this.btn_auto_remote.Name = "btn_auto_remote";
             this.btn_auto_remote.Size = new System.Drawing.Size(202, 43);
             this.btn_auto_remote.TabIndex = 39;
@@ -219,7 +226,7 @@
             // btn_auto_local
             // 
             this.btn_auto_local.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_auto_local.Location = new System.Drawing.Point(3, 52);
+            this.btn_auto_local.Location = new System.Drawing.Point(3, 101);
             this.btn_auto_local.Name = "btn_auto_local";
             this.btn_auto_local.Size = new System.Drawing.Size(202, 43);
             this.btn_auto_local.TabIndex = 48;
@@ -230,12 +237,13 @@
             // btn_auto_charge
             // 
             this.btn_auto_charge.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btn_auto_charge.Location = new System.Drawing.Point(3, 101);
+            this.btn_auto_charge.Location = new System.Drawing.Point(3, 150);
             this.btn_auto_charge.Name = "btn_auto_charge";
             this.btn_auto_charge.Size = new System.Drawing.Size(202, 43);
             this.btn_auto_charge.TabIndex = 49;
             this.btn_auto_charge.Text = "Auto Charge";
             this.btn_auto_charge.UseVisualStyleBackColor = true;
+            this.btn_auto_charge.Visible = false;
             this.btn_auto_charge.Click += new System.EventHandler(this.btn_auto_charge_Click);
             // 
             // grpb_speciallyOperation
@@ -318,18 +326,6 @@
             this.tableLayoutPanel6.Size = new System.Drawing.Size(208, 238);
             this.tableLayoutPanel6.TabIndex = 1;
             // 
-            // lbl_id_cancel_cmdID_value
-            // 
-            this.lbl_id_cancel_cmdID_value.AutoSize = true;
-            this.lbl_id_cancel_cmdID_value.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lbl_id_cancel_cmdID_value.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_id_cancel_cmdID_value.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_id_cancel_cmdID_value.Location = new System.Drawing.Point(3, 25);
-            this.lbl_id_cancel_cmdID_value.Name = "lbl_id_cancel_cmdID_value";
-            this.lbl_id_cancel_cmdID_value.Size = new System.Drawing.Size(202, 25);
-            this.lbl_id_cancel_cmdID_value.TabIndex = 27;
-            this.lbl_id_cancel_cmdID_value.Text = "                    ";
-            // 
             // btn_cancel
             // 
             this.btn_cancel.Location = new System.Drawing.Point(3, 53);
@@ -349,6 +345,29 @@
             this.btn_abort.Text = "Abort";
             this.btn_abort.UseVisualStyleBackColor = true;
             this.btn_abort.Click += new System.EventHandler(this.btn_abort_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(202, 25);
+            this.label3.TabIndex = 30;
+            this.label3.Text = "Command ID";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_id_cancel_cmdID_value
+            // 
+            this.lbl_id_cancel_cmdID_value.AutoSize = true;
+            this.lbl_id_cancel_cmdID_value.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_id_cancel_cmdID_value.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_id_cancel_cmdID_value.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_id_cancel_cmdID_value.Location = new System.Drawing.Point(3, 25);
+            this.lbl_id_cancel_cmdID_value.Name = "lbl_id_cancel_cmdID_value";
+            this.lbl_id_cancel_cmdID_value.Size = new System.Drawing.Size(202, 25);
+            this.lbl_id_cancel_cmdID_value.TabIndex = 27;
+            this.lbl_id_cancel_cmdID_value.Text = "                    ";
             // 
             // label1
             // 
@@ -370,16 +389,44 @@
             this.cmb_vhs.TabIndex = 1;
             this.cmb_vhs.SelectedIndexChanged += new System.EventHandler(this.cmb_vhs_SelectedIndexChanged);
             // 
-            // label3
+            // tableLayoutPanel1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(202, 25);
-            this.label3.TabIndex = 30;
-            this.label3.Text = "Command ID";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 69.80198F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30.19802F));
+            this.tableLayoutPanel1.Controls.Add(this.label4, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lbl_isremote_value, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(202, 43);
+            this.tableLayoutPanel1.TabIndex = 57;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(135, 43);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "Is Remote:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lbl_isremote_value
+            // 
+            this.lbl_isremote_value.AutoSize = true;
+            this.lbl_isremote_value.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lbl_isremote_value.Font = new System.Drawing.Font("Consolas", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_isremote_value.Location = new System.Drawing.Point(144, 0);
+            this.lbl_isremote_value.Name = "lbl_isremote_value";
+            this.lbl_isremote_value.Size = new System.Drawing.Size(55, 43);
+            this.lbl_isremote_value.TabIndex = 1;
+            this.lbl_isremote_value.Text = "false";
+            this.lbl_isremote_value.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // VehicleOperationForm
             // 
@@ -409,6 +456,8 @@
             this.grbp_CancelAbort.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -441,5 +490,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_isinstalled_value;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_isremote_value;
     }
 }

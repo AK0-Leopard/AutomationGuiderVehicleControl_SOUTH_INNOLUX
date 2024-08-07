@@ -55,6 +55,8 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             {
                 tlp_VehicleOperationBlock.Enabled = true;
                 lbl_id_cancel_cmdID_value.Text = sc.Common.SCUtility.Trim(targetVh.OHTC_CMD, true);
+                lbl_isinstalled_value.Text = targetVh.IS_INSTALLED.ToString();
+                lbl_isremote_value.Text = (!targetVh.IS_CYCLING).ToString();
             }
 
         }
@@ -117,26 +119,41 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             }
         }
 
-        private void btn_auto_remote_Click(object sender, EventArgs e)
+        private async void btn_auto_remote_Click(object sender, EventArgs e)
         {
-            asyExecuteAction(targetVh.VEHICLE_ID, bcApp.SCApplication.VehicleService.changeVhStatusToAutoRemote);
-        }
-
-        private void btn_auto_local_Click(object sender, EventArgs e)
-        {
-            asyExecuteAction(targetVh.VEHICLE_ID, bcApp.SCApplication.VehicleService.changeVhStatusToAutoLocal);
-        }
-
-        private void btn_auto_charge_Click(object sender, EventArgs e)
-        {
-            asyExecuteAction(targetVh.VEHICLE_ID, bcApp.SCApplication.VehicleService.changeVhStatusToAutoCharging);
-        }
-        private void asyExecuteAction(string vhID, Func<string, bool> act)
-        {
-            Task.Run(() =>
+            var result = await asyExecuteAction(targetVh.VEHICLE_ID, bcApp.SCApplication.VehicleService.changeVhStatusToAutoRemote);
+            if (!result.ok)
             {
-                act(vhID);
-            });
+                MessageBox.Show($"{targetVh.VEHICLE_ID} change to auto remote fail.{Environment.NewLine}" +
+                                $"result:{result.reason}");
+            }
+            lbl_isremote_value.Text = (!targetVh.IS_CYCLING).ToString();
+
+        }
+
+        private async void btn_auto_local_Click(object sender, EventArgs e)
+        {
+            var result = await asyExecuteAction(targetVh.VEHICLE_ID, bcApp.SCApplication.VehicleService.changeVhStatusToAutoLocal);
+            if (!result.ok)
+            {
+                MessageBox.Show($"{targetVh.VEHICLE_ID} change to auto local fail.{Environment.NewLine}" +
+                                $"result:{result.reason}");
+            }
+
+            lbl_isremote_value.Text = (!targetVh.IS_CYCLING).ToString();
+
+        }
+
+        private async void btn_auto_charge_Click(object sender, EventArgs e)
+        {
+
+        }
+        private Task<(bool ok, string reason)> asyExecuteAction(string vhID, Func<string, (bool ok, string reason)> act)
+        {
+            return Task.Run(() =>
+               {
+                   return act(vhID);
+               });
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)

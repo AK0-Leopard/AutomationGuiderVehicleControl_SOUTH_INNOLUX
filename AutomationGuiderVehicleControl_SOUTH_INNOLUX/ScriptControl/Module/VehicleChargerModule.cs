@@ -195,7 +195,7 @@ namespace com.mirle.ibg3k0.sc.Module
                         //       VehicleID: vh.VEHICLE_ID);
                         //}
                         //vehicleService.changeVhStatusToAutoCharging(vh.VEHICLE_ID);
-                        if (vh.MODE_STATUS == VHModeStatus.AutoRemote)
+                        if (vh.MODE_STATUS == VHModeStatus.AutoRemote || vh.MODE_STATUS == VHModeStatus.AutoLocal)
                         {
                             LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleChargerModule), Device: DEVICE_NAME,
                                Data: $"vh:{vh.VEHICLE_ID} current mode is:{vh.MODE_STATUS} change to auto charge.",
@@ -477,7 +477,8 @@ namespace com.mirle.ibg3k0.sc.Module
                                      Data: $"ask vh:{ChargingVh.VEHICLE_ID} recover to auto remmote " +
                                      $"and unban segment id:{string.Join(",", coupler_address.TrafficControlSegment)} ",
                                      VehicleID: ChargingVh.VEHICLE_ID);
-                            vehicleService.changeVhStatusToAutoRemote(ChargingVh.VEHICLE_ID);
+                            //vehicleService.changeVhStatusToAutoRemote(ChargingVh.VEHICLE_ID);
+                            vehicleService.RecoverVhToAutoWhenChargeFinished(ChargingVh.VEHICLE_ID);
                             RoadControl(ChargingVh.VEHICLE_ID, ChargingVh.CUR_ADR_ID, true);
                         }
                         else
@@ -501,7 +502,8 @@ namespace com.mirle.ibg3k0.sc.Module
                                      Data: $"ask vh:{ChargingVh.VEHICLE_ID} recover to auto remmote " +
                                      $"and unban segment id:{string.Join(",", coupler_address.TrafficControlSegment)} ",
                                      VehicleID: ChargingVh.VEHICLE_ID);
-                            vehicleService.changeVhStatusToAutoRemote(ChargingVh.VEHICLE_ID);
+                            //vehicleService.changeVhStatusToAutoRemote(ChargingVh.VEHICLE_ID);
+                            vehicleService.RecoverVhToAutoWhenChargeFinished(ChargingVh.VEHICLE_ID);
                             RoadControl(ChargingVh.VEHICLE_ID, ChargingVh.CUR_ADR_ID, true);
                         }
                         else
@@ -573,7 +575,8 @@ namespace com.mirle.ibg3k0.sc.Module
                         LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleChargerModule), Device: DEVICE_NAME,
                                  Data: $"ask vh:{vh.VEHICLE_ID} recover to auto remmote by timer",
                                  VehicleID: vh.VEHICLE_ID);
-                        vehicleService.changeVhStatusToAutoRemote(vh.VEHICLE_ID);
+                        //vehicleService.changeVhStatusToAutoRemote(vh.VEHICLE_ID);
+                        vehicleService.RecoverVhToAutoWhenChargeFinished(vh.VEHICLE_ID);
                     }
                 }
             }

@@ -547,6 +547,7 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             noticeCar = bcApp.SCApplication.getEQObjCacheManager().getVehicletByVHID(vh_id);
             lbl_id_37_cmdID_value.Text = noticeCar?.OHTC_CMD;
             lbl_install_status.Text = noticeCar?.IS_INSTALLED.ToString();
+            lbl_isRemote.Text = (!noticeCar?.IS_CYCLING).ToString();
         }
 
         private void uctl_Btn1_Click(object sender, EventArgs e)
@@ -591,11 +592,19 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             //asyExecuteAction(noticeCar.sned_S23);
         }
 
-        private void asyExecuteAction(Func<string, bool> act)
+        private Task asyExecuteAction(Func<string, bool> act)
         {
-            Task.Run(() =>
+            return Task.Run(() =>
             {
                 act(vh_id);
+            });
+        }
+        private Task<(bool ok, string reason)> asyExecuteAction(Func<string, (bool ok, string reason)> act)
+        {
+            return Task.Run(() =>
+            {
+                var result = act(vh_id);
+                return result;
             });
         }
 
@@ -1209,9 +1218,17 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             DebugParameter.BatteryCapacity = (uint)num_batteryCapacity.Value;
         }
 
-        private void btn_auto_remote_Click(object sender, EventArgs e)
+        private async void btn_auto_remote_Click(object sender, EventArgs e)
         {
-            asyExecuteAction(bcApp.SCApplication.VehicleService.changeVhStatusToAutoRemote);
+            var result = await asyExecuteAction(bcApp.SCApplication.VehicleService.changeVhStatusToAutoRemote);
+            if (!result.ok)
+            {
+                MessageBox.Show($"{vh_id} change to auto remote fail.{Environment.NewLine}" +
+                                $"result:{result.reason}");
+            }
+
+            lbl_isRemote.Text = (!noticeCar?.IS_CYCLING).ToString();
+
 
         }
 
@@ -1453,9 +1470,15 @@ namespace com.mirle.ibg3k0.bc.winform.UI
             asyExecuteAction(bcApp.SCApplication.VehicleService.changeVhStatusToAutoCharging);
         }
 
-        private void btn_auto_local_Click(object sender, EventArgs e)
+        private async void btn_auto_local_Click(object sender, EventArgs e)
         {
-            asyExecuteAction(bcApp.SCApplication.VehicleService.changeVhStatusToAutoLocal);
+            var result = await asyExecuteAction(bcApp.SCApplication.VehicleService.changeVhStatusToAutoLocal);
+            if (!result.ok)
+            {
+                MessageBox.Show($"{vh_id} change to auto local fail.{Environment.NewLine}" +
+                                $"result:{result.reason}");
+            }
+            lbl_isRemote.Text = (!noticeCar?.IS_CYCLING).ToString();
         }
 
         private async void btn_changeToRemove_Click(object sender, EventArgs e)

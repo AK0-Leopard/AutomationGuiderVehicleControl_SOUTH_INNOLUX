@@ -12,6 +12,7 @@ using com.mirle.ibg3k0.sc.Data.VO;
 using com.mirle.ibg3k0.sc.Data.VO.PartialVo;
 using com.mirle.ibg3k0.sc.ObjectRelay;
 using com.mirle.ibg3k0.sc.ProtocolFormat.OHTMessage;
+using com.mirle.iibg3k0.ttc.Common.TCPIP;
 using Google.Protobuf.Collections;
 using Newtonsoft.Json;
 using NLog;
@@ -353,6 +354,11 @@ namespace com.mirle.ibg3k0.sc
                 }
             }
         }
+        public void ReCheckVhStatusByBatteryLevel()
+        {
+            BatteryLevelChange?.Invoke(this, batterylevel);
+        }
+
         [JsonIgnore]
         //public virtual int BatteryCapacity
         //{
@@ -1092,6 +1098,17 @@ namespace com.mirle.ibg3k0.sc
         {
             return ITcpIpControl.StopWatch_DisconnectionTime(bcfApp, TcpIpAgentName).Elapsed.TotalSeconds;
         }
+        internal void TcpAgentStart(BCFApplication bcfApp)
+        {
+            bcfApp.getTcpIpAgent(TcpIpAgentName).start();
+        }
+
+        internal void TcpAgentStop(BCFApplication bcfApp)
+        {
+            bcfApp.getTcpIpAgent(TcpIpAgentName).stop();
+        }
+
+
 
         #endregion TcpIpAgentInfo
 
@@ -1949,8 +1966,6 @@ namespace com.mirle.ibg3k0.sc
                                     new LongTimeCarrierInstalledStatusChangeEventArgs(false, "");
                                 vh.onCarrierLongTimeInstalledInVh(arg);
                             }
-
-
                         }
                         checkAutoTimingIsBegins();
 
@@ -1966,7 +1981,6 @@ namespace com.mirle.ibg3k0.sc
                         {
                             vh.onLongTimeInaction(vh.OHTC_CMD);
                         }
-
                     }
                     catch (Exception ex)
                     {

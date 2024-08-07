@@ -582,24 +582,42 @@ namespace com.mirle.ibg3k0.sc.WebAPI
                 string modeStatus = Request.Query.modeStatus.Value ?? Request.Form.modeStatus.Value ?? string.Empty;
                 VHModeStatus mode_status = default(VHModeStatus);
                 isSuccess = Enum.TryParse(modeStatus, out mode_status);
+                (bool Is_ok, string reason) check_result = default((bool Is_ok, string reason));
 
                 if (isSuccess)
                 {
-
-                    if (isSuccess)
+                    switch (mode_status)
                     {
-                        isSuccess = scApp.VehicleBLL.updataVehicleMode(vh_id, mode_status);
-                        if (isSuccess)
-                        {
-                            AVEHICLE vh = scApp.getEQObjCacheManager().getVehicletByVHID(vh_id);
-                            vh?.NotifyVhStatusChange();
-                            result = "OK";
-                        }
-                        else
-                        {
-                            result = $"Update vehicle:{vh_id} mode status failed.";
-                        }
+                        case VHModeStatus.AutoRemote:
+                            check_result = scApp.VehicleService.changeVhStatusToAutoRemote(vh_id);
+                            break;
+                        case VHModeStatus.AutoLocal:
+                            check_result = scApp.VehicleService.changeVhStatusToAutoLocal(vh_id);
+                            break;
+                        default:
+                            check_result = (false, $"no supply status:{mode_status} change");
+                            break;
                     }
+                    if (check_result.Is_ok)
+                    {
+                        result = "OK";
+                    }
+                    else
+                    {
+                        result = $"Update vehicle:{vh_id} mode status failed.reason:{check_result.reason}";
+                    }
+
+                    //isSuccess = scApp.VehicleBLL.updataVehicleMode(vh_id, mode_status);
+                    //if (isSuccess)
+                    //{
+                    //    AVEHICLE vh = scApp.getEQObjCacheManager().getVehicletByVHID(vh_id);
+                    //    vh?.NotifyVhStatusChange();
+                    //    result = "OK";
+                    //}
+                    //else
+                    //{
+                    //    result = $"Update vehicle:{vh_id} mode status failed.";
+                    //}
 
                 }
                 else
@@ -630,7 +648,7 @@ namespace com.mirle.ibg3k0.sc.WebAPI
                     else
                     {
                         (bool isSuccess, string result) check_result = default((bool isSuccess, string result));
-                        if(is_change_to_installed)
+                        if (is_change_to_installed)
                         {
                             check_result = scApp.VehicleService.Install(vh.VEHICLE_ID);
                             if (check_result.isSuccess)
