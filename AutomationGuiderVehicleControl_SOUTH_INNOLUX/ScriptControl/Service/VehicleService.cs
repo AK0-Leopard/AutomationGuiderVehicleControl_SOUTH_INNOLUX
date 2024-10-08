@@ -3215,7 +3215,7 @@ namespace com.mirle.ibg3k0.sc.Service
                        VehicleID: vhID);
                     var result = scApp.ReserveBLL.TryAddReservedSection(vhID, reserve_section_id,
                                                                     sensorDir: ask_reserve_sec_sensor_direction,
-                                                                    isAsk: isAsk);
+                                                                    isAsk: true);
 
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                        Data: $"vh:{vhID} Try add reserve section:{reserve_section_id},result:{result}",
@@ -3233,6 +3233,18 @@ namespace com.mirle.ibg3k0.sc.Service
                         reserved_vh_id = result.VehicleID;
                         reserved_sec_id = reserve_section_id;
                         break;
+                    }
+                }
+                if (is_reserved_success)
+                {
+                    foreach (var reserve_sec in reserveInfos)
+                    {
+                        string reserve_section_id = reserve_sec.ReserveSectionID;
+                        Mirle.Hlts.Utils.HltDirection hltDirection = getSensorDirection(vh, reserve_section_id);
+
+                        var result = scApp.ReserveBLL.TryAddReservedSection(vhID, reserve_section_id,
+                                                                        sensorDir: hltDirection,
+                                                                        isAsk: false);
                     }
                 }
                 //return (result.OK, result.VehicleID, reserve_section_id);
