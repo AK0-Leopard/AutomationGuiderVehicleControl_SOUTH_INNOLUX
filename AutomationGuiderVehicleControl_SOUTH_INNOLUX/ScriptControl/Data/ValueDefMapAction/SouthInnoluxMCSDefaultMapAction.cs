@@ -710,7 +710,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             }
 
             //若來源是在車上，則要檢查車子目前真的有CST
-            if(DebugParameter.ByPassCheckMCSCmdIfSourceOnVhHasCst)
+            if (DebugParameter.ByPassCheckMCSCmdIfSourceOnVhHasCst)
             {
                 //not thing....
                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(SouthInnoluxMCSDefaultMapAction), Device: "OHxC",
@@ -3414,6 +3414,7 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             if (line.Host_Control_State != SCAppConstants.LineHostControlState.HostControlState.EQ_Off_line)
             {
                 //S6F11SendEquiptmentOffLine();
+                var pre_host_control_state = line.Host_Control_State;
                 scApp.LineService.OfflineWithHost();
                 if (line.Host_Control_State == SCAppConstants.LineHostControlState.HostControlState.On_Line_Remote)
                 {
@@ -3421,13 +3422,17 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 }
                 else
                 {
-                    if (SystemParameter.MCSOnlineInitialState == SCAppConstants.LineHostControlState.HostControlState.On_Line_Local)
+                    //if (SystemParameter.MCSOnlineInitialState == SCAppConstants.LineHostControlState.HostControlState.On_Line_Local)
+                    if (pre_host_control_state == SCAppConstants.LineHostControlState.HostControlState.On_Line_Remote)
                     {
-                        scApp.LineService.OnlineLocalWithHost();
+                        //scApp.LineService.OnlineLocalWithHost();
+                        scApp.LineService.OnlineRemoteWithHost();
                     }
                     else
                     {
-                        scApp.LineService.OnlineRemoteWithHost();
+                        //scApp.LineService.OnlineRemoteWithHost();
+                        scApp.LineService.OnlineLocalWithHost();
+
                     }
                 }
             }
@@ -3437,6 +3442,15 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             //S2F17SendDateAndTimeRequest();
             //...
         }
+        private SCAppConstants.LineHostControlState.HostControlState GetInitialHostControlState(SCAppConstants.LineHostControlState.HostControlState preHostControlState)
+        {
+            if (preHostControlState == SCAppConstants.LineHostControlState.HostControlState.On_Line_Remote)
+                return SCAppConstants.LineHostControlState.HostControlState.On_Line_Remote;
+            else
+                return SCAppConstants.LineHostControlState.HostControlState.On_Line_Local;
+        }
+
+
         public override bool S1F13SendEstablishCommunicationRequest()
         {
             try
