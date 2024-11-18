@@ -569,6 +569,7 @@ namespace com.mirle.ibg3k0.sc.App
             SystemParameter.setCstMaxWaitTime(getInt("CSTMaxWaitTime", 0));
             SystemParameter.setLongestFullyChargedIntervalTime(getInt("LongestFullyChargedIntervalTime", 99999));
             SystemParameter.setMaxAllowPositionNoChangeTimeWhenCommanding(getInt("MaxAllowPositionNoChangeTimeWhenCommanding", 1200_000));
+            SystemParameter.setCheckSystemStatusWhenDisabelRoad(getBoolean("CheckSystemStatusWhenDisabelRoad", false));
         }
 
         private void initialReserveSectionAPI()
@@ -1577,7 +1578,34 @@ namespace com.mirle.ibg3k0.sc.App
             }
             return rtn;
         }
-
+        public Boolean getBoolean(string key, Boolean defaultValue)
+        {
+            Boolean rtn = defaultValue;
+            try
+            {
+                string val = ConfigurationManager.AppSettings.Get(key);
+                if (val != null)  //A0.09
+                {
+                    if (BCFUtility.isMatche(val, "Y"))
+                    {
+                        rtn = true;
+                    }
+                    else
+                    {
+                        rtn = false;
+                    }
+                }
+                else
+                {
+                    return defaultValue;    //A0.09
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Warn("Get Config error[key:{0}][Exception:{1}]", key, e);
+            }
+            return rtn;
+        }
 
         public DBConnection getDBConnection()
         {
@@ -2022,6 +2050,7 @@ namespace com.mirle.ibg3k0.sc.App
         public static uint LoadingInterlockErrorMaxRetryCount { get; private set; } = 3;
         public static uint UnloadingInterlockErrorMaxRetryCount { get; private set; } = 3;
         public static long MaxAllowPositionNoChangeTimeWhenCommanding_ms { get; private set; } = 1200_000;
+        public static bool CheckSystemStatusWhenDisabelRoad { get; set; } = false;
 
         public static void setSECSConversactionTimeout(int timeout)
         {
@@ -2125,6 +2154,11 @@ namespace com.mirle.ibg3k0.sc.App
         {
             MaxAllowPositionNoChangeTimeWhenCommanding_ms = _MaxAllowPositionNoChangeTimeWhenCommanding_ms;
         }
+        public static void setCheckSystemStatusWhenDisabelRoad(bool _CheckSystemStatusWhenDisabelRoad)
+        {
+            CheckSystemStatusWhenDisabelRoad = _CheckSystemStatusWhenDisabelRoad;
+        }
+
     }
 
     public class HAProxyConnectionTest

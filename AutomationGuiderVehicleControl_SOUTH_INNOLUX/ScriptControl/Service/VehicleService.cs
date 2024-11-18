@@ -5569,6 +5569,13 @@ namespace com.mirle.ibg3k0.sc.Service
         /// <returns></returns>
         private (bool Ok, string reson) doDisableSectionConditionCheck(E_PORT_STATUS portStatus)
         {
+            if (!SystemParameter.CheckSystemStatusWhenDisabelRoad)
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"current is by pass fun:[doDisableSectionConditionCheck]");
+                return (true, "by pass agvc system status check");
+            }
+
             if (portStatus == E_PORT_STATUS.InService)
             {
                 return (true, "");
