@@ -113,10 +113,51 @@ namespace com.mirle.ibg3k0.sc.Service
                 vh.LongTimeDisconnection += Vh_LongTimeDisconnection;
                 vh.ModeStatusChange += Vh_ModeStatusChange;
                 vh.LongTimeCarrierInstalled += Vh_LongTimeCarrierInstalled;
-                vh.UrgentBatteryLevelHappend += Vh_UrgentBatteryLevelHappend; ;
+                vh.UrgentBatteryLevelHappend += Vh_UrgentBatteryLevelHappend;
+
+                vh.LongTimePositionNoChangeWhenCommanding += Vh_LongTimePositionNoChangeWhenCommanding;
+                vh.LongTimePositionNoChangeWhenCommandingFinish += Vh_LongTimePositionNoChangeWhenCommandingFinish;
+
             }
             scApp.LineService.VehicleParametersChanged += LineService_VehicleParametersChanged;
             oneDirectPath();
+        }
+
+        private void Vh_LongTimePositionNoChangeWhenCommandingFinish(object sender, EventArgs e)
+        {
+            AVEHICLE vh = sender as AVEHICLE;
+            if (vh == null) return;
+            try
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"Process vehicle long time position no chnage finish",
+                   VehicleID: vh.VEHICLE_ID,
+                   CarrierID: vh.CST_ID);
+                ProcessAlarmReport(vh, AlarmBLL.VEHICLE_LONG_TIME_INACTION, ErrorStatus.ErrReset, $"vehicle long time position no chnage when commanding");
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception");
+            }
+        }
+
+        private void Vh_LongTimePositionNoChangeWhenCommanding(object sender, EventArgs e)
+        {
+            AVEHICLE vh = sender as AVEHICLE;
+            if (vh == null) return;
+            try
+            {
+                LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                   Data: $"Process vehicle long time position no chnage",
+                   VehicleID: vh.VEHICLE_ID,
+                   CarrierID: vh.CST_ID);
+                ProcessAlarmReport(vh, AlarmBLL.VEHICLE_LONG_TIME_INACTION, ErrorStatus.ErrSet, $"vehicle long time position no chnage when commanding");
+                BCFApplication.onWarningMsg($"vehicle long time position no chnage when commanding");
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Exception");
+            }
         }
 
         private void Vh_UrgentBatteryLevelHappend(object sender, bool isUrgentBatteryLevelHappend)
@@ -3319,7 +3360,7 @@ namespace com.mirle.ibg3k0.sc.Service
             if (block_control_check_result.isBlockControlSec)
             {
                 var current_vh_section_is_in_req_block_control_check_result =
-                    scApp.getCommObjCacheManager().IsBlockControlSection( block_control_check_result.enhanceInfo.BlockID, cur_sec_id);
+                    scApp.getCommObjCacheManager().IsBlockControlSection(block_control_check_result.enhanceInfo.BlockID, cur_sec_id);
                 if (current_vh_section_is_in_req_block_control_check_result.isBlockControlSec)
                 {
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,

@@ -71,6 +71,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 vh.LongTimeDisconnection += Vh_LongTimeDisconnection;
                 vh.ModeStatusChange += Vh_ModeStatusChange;
                 vh.LongTimeCarrierInstalled += Vh_LongTimeCarrierInstalled;
+
             }
         }
         private void Vh_LongTimeCarrierInstalled(object sender, LongTimeCarrierInstalledStatusChangeEventArgs arg)

@@ -568,6 +568,7 @@ namespace com.mirle.ibg3k0.sc.App
             //bdTableWatcher = new DBTableWatcher(this);
             SystemParameter.setCstMaxWaitTime(getInt("CSTMaxWaitTime", 0));
             SystemParameter.setLongestFullyChargedIntervalTime(getInt("LongestFullyChargedIntervalTime", 99999));
+            SystemParameter.setMaxAllowPositionNoChangeTimeWhenCommanding(getInt("MaxAllowPositionNoChangeTimeWhenCommanding", 1200_000));
         }
 
         private void initialReserveSectionAPI()
@@ -2020,7 +2021,7 @@ namespace com.mirle.ibg3k0.sc.App
         public static uint AGVCLoadingInterlockErrorMaxRetryCount { get; private set; } = 0;
         public static uint LoadingInterlockErrorMaxRetryCount { get; private set; } = 3;
         public static uint UnloadingInterlockErrorMaxRetryCount { get; private set; } = 3;
-
+        public static long MaxAllowPositionNoChangeTimeWhenCommanding_ms { get; private set; } = 1200_000;
 
         public static void setSECSConversactionTimeout(int timeout)
         {
@@ -2119,6 +2120,10 @@ namespace com.mirle.ibg3k0.sc.App
         public static void setUnlodingInterlockErrorMaxRetryCount(uint unlodinginterlockErrorMaxRetryCount)
         {
             UnloadingInterlockErrorMaxRetryCount = unlodinginterlockErrorMaxRetryCount;
+        }
+        public static void setMaxAllowPositionNoChangeTimeWhenCommanding(int _MaxAllowPositionNoChangeTimeWhenCommanding_ms)
+        {
+            MaxAllowPositionNoChangeTimeWhenCommanding_ms = _MaxAllowPositionNoChangeTimeWhenCommanding_ms;
         }
     }
 

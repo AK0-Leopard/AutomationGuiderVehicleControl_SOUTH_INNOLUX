@@ -1327,15 +1327,15 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
         {
             int index = -1;
             List<ALARM> alarmList = scApp.AlarmBLL.getCurrentAlarms();
+            alarmList = alarmList.Where(a => a.ALAM_LVL != E_ALARM_LVL.Error).ToList();
             S6F11.RPTINFO.RPTITEM.VIDITEM_04 viditem_04 = new S6F11.RPTINFO.RPTITEM.VIDITEM_04();
             viditem_04.ALIDs = new string[alarmList.Count];
             foreach (ALARM alarm in alarmList)
             {
-                if (alarm.ALAM_LVL != E_ALARM_LVL.Error) continue;
+                //if (alarm.ALAM_LVL != E_ALARM_LVL.Error) continue;
                 index++;
                 viditem_04.ALIDs[index] = alarm.ALAM_CODE;
             }
-
             return viditem_04;
         }
         private S6F11.RPTINFO.RPTITEM.VIDITEM_05 buildClockVIDItem()
@@ -3442,14 +3442,6 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             //S2F17SendDateAndTimeRequest();
             //...
         }
-        private SCAppConstants.LineHostControlState.HostControlState GetInitialHostControlState(SCAppConstants.LineHostControlState.HostControlState preHostControlState)
-        {
-            if (preHostControlState == SCAppConstants.LineHostControlState.HostControlState.On_Line_Remote)
-                return SCAppConstants.LineHostControlState.HostControlState.On_Line_Remote;
-            else
-                return SCAppConstants.LineHostControlState.HostControlState.On_Line_Local;
-        }
-
 
         public override bool S1F13SendEstablishCommunicationRequest()
         {

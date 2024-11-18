@@ -107,6 +107,8 @@ namespace com.mirle.ibg3k0.sc
         public event EventHandler<VHModeStatus> ModeStatusChange;
         public event EventHandler<LongTimeCarrierInstalledStatusChangeEventArgs> LongTimeCarrierInstalled;
         public event EventHandler<bool> UrgentBatteryLevelHappend;
+        public event EventHandler LongTimePositionNoChangeWhenCommanding;
+        public event EventHandler LongTimePositionNoChangeWhenCommandingFinish;
 
         VehicleTimerAction vehicleTimer = null;
 
@@ -118,6 +120,7 @@ namespace com.mirle.ibg3k0.sc
         private Stopwatch CarrierInstalledTime;
         private Stopwatch CarrierAbnormalInstalledTime;
         private Stopwatch ChangeToAutoTotalTime;
+        private Stopwatch LastPositionChangeTimer;
 
 
         public void addAttentionReserveSection(ASECTION attentionSection)
@@ -192,6 +195,10 @@ namespace com.mirle.ibg3k0.sc
         {
             SegmentChange?.Invoke(this, new SegmentChangeEventArgs(entrySegemnt, leaveSegment));
         }
+        public void onPositionChange(double last_X_Axis, double last_Y_Axis, double current_X_Axis, double current_Y_Axis)
+        {
+            LastPositionChangeTimer.Restart();
+        }
         public void onLongTimeNoCommuncation()
         {
             LongTimeNoCommuncation?.Invoke(this, EventArgs.Empty);
@@ -216,6 +223,15 @@ namespace com.mirle.ibg3k0.sc
         {
             LongTimeCarrierInstalled?.Invoke(this, arg);
         }
+        private void onVehicleLongTimePositionNoChangeWhenCommandingFinish()
+        {
+            LongTimePositionNoChangeWhenCommandingFinish?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void onVehicleLongTimePositionNoChangeWhenCommanding()
+        {
+            LongTimePositionNoChangeWhenCommanding?.Invoke(this, EventArgs.Empty);
+        }
 
         public AVEHICLE()
         {
@@ -229,7 +245,10 @@ namespace com.mirle.ibg3k0.sc
             CarrierInstalledTime = new Stopwatch();
             CarrierAbnormalInstalledTime = new Stopwatch();
             ChangeToAutoTotalTime = new Stopwatch();
+            LastPositionChangeTimer = new Stopwatch();
+
             vehicleStatusInfo = new VehicleStatusInfo(this);
+
             initialVhErrorStateMachine();
             guideInfo = new GuideInfo(this);
 
@@ -1058,6 +1077,8 @@ namespace com.mirle.ibg3k0.sc
 
         #region TcpIpAgentInfo
         int CommunicationInterval_ms = 15000;
+        private bool isLongTimePositionNoChangeWhenCommanding;
+
         public void getAgentInfo(BCFApplication bcfApp,
             out bool IsCommunication, out bool IsConnections,
             out DateTime connTime, out TimeSpan accConnTime,
@@ -1976,11 +1997,12 @@ namespace com.mirle.ibg3k0.sc
                         {
                             vh.onLongTimeNoCommuncation();
                         }
-                        double action_time = vh.CurrentCommandExcuteTime.Elapsed.TotalSeconds;
-                        if (action_time > AVEHICLE.MAX_ALLOW_ACTION_TIME_SECOND)
-                        {
-                            vh.onLongTimeInaction(vh.OHTC_CMD);
-                        }
+                        //double action_time = vh.CurrentCommandExcuteTime.Elapsed.TotalSeconds;
+                        //if (action_time > AVEHICLE.MAX_ALLOW_ACTION_TIME_SECOND)
+                        //{
+                        //    vh.onLongTimeInaction(vh.OHTC_CMD);
+                        //}
+                        CheckLongTimePositionNoChangeWhenCommaing();
                     }
                     catch (Exception ex)
                     {
@@ -1996,7 +2018,46 @@ namespace com.mirle.ibg3k0.sc
 
                 }
             }
+            private void CheckLongTimePositionNoChangeWhenCommaing()
+            {
+                if (IsLastVhPositionChangeTimeout())
+                {
+                    if (!vh.isLongTimePositionNoChangeWhenCommanding)
+                    {
+                        vh.isLongTimePositionNoChangeWhenCommanding = true;
+                        vh.onVehicleLongTimePositionNoChangeWhenCommanding();
+                    }
+                }
+                else
+                {
+                    if (vh.isLongTimePositionNoChangeWhenCommanding)
+                    {
+                        vh.isLongTimePositionNoChangeWhenCommanding = false;
+                        vh.onVehicleLongTimePositionNoChangeWhenCommandingFinish();
+                    }
+                }
+            }
+            private bool IsLastVhPositionChangeTimeout()
+            {
+                if (!vh.isTcpIpConnect ||
+                    !vh.isAuto ||
+                    vh.IsError ||
+                    vh.ACT_STATUS != VHActionStatus.Commanding)
+                {
+                    if (vh.LastPositionChangeTimer.IsRunning)
+                        vh.LastPositionChangeTimer.Reset();
+                    return false;
+                }
 
+                if (!vh.LastPositionChangeTimer.IsRunning)
+                    vh.LastPositionChangeTimer.Restart();
+
+                if (vh.LastPositionChangeTimer.ElapsedMilliseconds > SystemParameter.MaxAllowPositionNoChangeTimeWhenCommanding_ms)
+                {
+                    return true;
+                }
+                return false;
+            }
             private void checkAutoTimingIsBegins()
             {
                 if (vh.isAuto)
@@ -2038,7 +2099,6 @@ namespace com.mirle.ibg3k0.sc
                 //}
             }
         }
-
 
     }
 }
