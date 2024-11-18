@@ -864,7 +864,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 List<string> guide_to_dest_address_ids = null;
                 int total_cost = 0;
                 //1.取得行走路徑的詳細資料
-                var has_vh_on_section_ids = GetHasVhOfSectionID();
+                var has_vh_on_section_ids = GetHasVhOfSectionID(assignVH);
                 (isSuccess, total_cost,
                  guide_start_to_from_segment_ids,
                  guide_start_to_from_section_ids,
@@ -1057,10 +1057,10 @@ namespace com.mirle.ibg3k0.sc.Service
             return isSuccess;
         }
 
-        private List<string> GetHasVhOfSectionID()
+        private List<string> GetHasVhOfSectionID(AVEHICLE assignVH)
         {
             var vhs = scApp.VehicleBLL.cache.loadAllVh();
-            vhs = vhs.Where(v => v.isTcpIpConnect && v.isAuto).ToList();
+            vhs = vhs.Where(v => v.isTcpIpConnect && v.isAuto && !SCUtility.isMatche(assignVH.VEHICLE_ID, v.VEHICLE_ID)).ToList();
             return vhs.Select(v => SCUtility.Trim(v.CUR_SEC_ID)).ToList();
         }
 

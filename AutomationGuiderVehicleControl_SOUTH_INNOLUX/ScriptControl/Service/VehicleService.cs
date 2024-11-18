@@ -3197,9 +3197,11 @@ namespace com.mirle.ibg3k0.sc.Service
                             }
                         }
                     }
+                    HltDirection ask_reserve_sec_sensor_direction = getSensorDirection(vh, reserve_section_id);
+
                     //確認ReserveEnhance的Section是否都可以預約到
                     //var reserve_enhance_check_result = IsReserveBlockSuccess(vh, reserve_section_id);
-                    var reserve_enhance_check_result = IsReserveBlockSuccessNew(vh, reserve_section_id);
+                    var reserve_enhance_check_result = IsReserveBlockSuccessNew(vh, reserve_section_id, ask_reserve_sec_sensor_direction);
                     //var reserve_enhance_check_result = IsReserveBlockSuccessNew(vh, reserve_section_id, drive_dirction);
                     if (!reserve_enhance_check_result.isSuccess)
                     {
@@ -3209,7 +3211,6 @@ namespace com.mirle.ibg3k0.sc.Service
                         return (false, reserve_enhance_check_result.reservedVhID, reserve_section_id);
                     }
 
-                    HltDirection ask_reserve_sec_sensor_direction = getSensorDirection(vh, reserve_section_id);
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                        Data: $"vh:{vhID} Try add reserve section:{reserve_section_id} hlt dir:{ask_reserve_sec_sensor_direction}...",
                        VehicleID: vhID);
@@ -3308,17 +3309,17 @@ namespace com.mirle.ibg3k0.sc.Service
             return sensor_direction;
         }
 
-        private (bool isSuccess, string reservedVhID) IsReserveBlockSuccessNew(AVEHICLE vh, string reserveSectionID)
+        private (bool isSuccess, string reservedVhID) IsReserveBlockSuccessNew(AVEHICLE vh, string reserveSectionID, HltDirection ask_reserve_sec_sensor_direction)
         {
             string vh_id = vh.VEHICLE_ID;
             string cur_sec_id = SCUtility.Trim(vh.CUR_SEC_ID, true);
             string cur_adr_id = SCUtility.Trim(vh.CUR_ADR_ID, true);
 
-            var block_control_check_result = scApp.getCommObjCacheManager().IsBlockControlSection(reserveSectionID);
+            var block_control_check_result = scApp.getCommObjCacheManager().IsWillEntryBlockControlSection(reserveSectionID, ask_reserve_sec_sensor_direction);
             if (block_control_check_result.isBlockControlSec)
             {
                 var current_vh_section_is_in_req_block_control_check_result =
-                    scApp.getCommObjCacheManager().IsBlockControlAddress(scApp.SectionBLL, block_control_check_result.enhanceInfo.BlockID, cur_adr_id);
+                    scApp.getCommObjCacheManager().IsBlockControlSection( block_control_check_result.enhanceInfo.BlockID, cur_sec_id);
                 if (current_vh_section_is_in_req_block_control_check_result.isBlockControlSec)
                 {
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
@@ -3326,7 +3327,7 @@ namespace com.mirle.ibg3k0.sc.Service
                        VehicleID: vh_id);
                     return (true, "");
                 }
-                var entry_section_info = block_control_check_result.enhanceInfo.EntrySectionInfos.FirstOrDefault();
+                var entry_section_info = block_control_check_result.enhanceInfo.EnhanceControlSections.FirstOrDefault();
                 if (entry_section_info == null)
                 {
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
@@ -3334,7 +3335,7 @@ namespace com.mirle.ibg3k0.sc.Service
                        VehicleID: vh_id);
                     return (true, "");
                 }
-                if (!IsWillEntryBlock(vh, entry_section_info.ReserveSectionID))
+                if (!IsWillEntryBlock(vh, entry_section_info))
                 {
                     LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                        Data: $"vh request block:{block_control_check_result.enhanceInfo.BlockID} no will pass entry section, direct return pass",
@@ -3352,7 +3353,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 foreach (var enhance_section in reserve_enhance_sections)
                 {
                     var check_one_direct_result = scApp.ReserveBLL.TryAddReservedSection(vh_id, enhance_section,
-                                                                    sensorDir: HltDirection.Forward,
+                                                                    sensorDir: HltDirection.None,
                                                                     isAsk: true);
                     if (!check_one_direct_result.OK)
                     {

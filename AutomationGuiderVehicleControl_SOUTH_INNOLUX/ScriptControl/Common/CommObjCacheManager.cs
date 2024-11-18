@@ -25,6 +25,7 @@ using NLog;
 using com.mirle.ibg3k0.sc.ConfigHandler;
 using com.mirle.ibg3k0.sc.Data;
 using com.mirle.ibg3k0.sc.BLL;
+using Mirle.Hlts.Utils;
 
 namespace com.mirle.ibg3k0.sc.Common
 {
@@ -319,6 +320,25 @@ namespace com.mirle.ibg3k0.sc.Common
                 .FirstOrDefault();
             return (enhance_info != null, enhance_info);
         }
+        public (bool isBlockControlSec, ReserveEnhanceInfoSection enhanceInfo) IsWillEntryBlockControlSection(string sectionID, HltDirection ask_reserve_sec_sensor_direction)
+        {
+            var enhance_info = ReserveEnhanceInfosSections.
+                Where(info => info.EntrySectionInfos.Where(i => SCUtility.isMatche(i.ReserveSectionID, sectionID) && i.DriveDirction == convertDirMatch(ask_reserve_sec_sensor_direction)).Any())
+                .FirstOrDefault();
+            return (enhance_info != null, enhance_info);
+        }
+        private ProtocolFormat.OHTMessage.DriveDirction convertDirMatch(HltDirection hltDirection)
+        {
+            switch (hltDirection)
+            {
+                case HltDirection.Forward:
+                    return ProtocolFormat.OHTMessage.DriveDirction.DriveDirForward;
+                case HltDirection.Reverse:
+                    return ProtocolFormat.OHTMessage.DriveDirction.DriveDirReverse;
+                default:
+                    return ProtocolFormat.OHTMessage.DriveDirction.DriveDirNone;
+            }
+        }
         public (bool isBlockControlSec, ReserveEnhanceInfoSection enhanceInfo) IsBlockControlSection(string blockID, string sectionID)
         {
             var enhance_info = ReserveEnhanceInfosSections.
@@ -337,6 +357,8 @@ namespace com.mirle.ibg3k0.sc.Common
         }
         private bool IsRelationTwoSection(SectionBLL sectionBLL, string[] EnhanceControlSections, string addressid)
         {
+            if (SCUtility.isMatche(addressid, "10010"))
+                return true;
             int relation_count = 0;
             foreach (var sec in EnhanceControlSections)
             {
