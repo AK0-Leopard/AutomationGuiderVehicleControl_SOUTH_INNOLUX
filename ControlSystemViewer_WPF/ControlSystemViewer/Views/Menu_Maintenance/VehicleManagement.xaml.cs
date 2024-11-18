@@ -201,6 +201,7 @@ namespace ControlSystemViewer.Views.Menu_Maintenance
 
                 VehicleCommand.btn_Title1.Click -= btn_Click;
                 CommandStatus.btn_Title1.Click -= btn_Click;
+                CommandStatus.btn_Title2.Click -= btn_Click;
 
                 VehicleCommand.combo_Content1.SelectionChanged -= commandTypeSelecttionChanged;
                 PauseType.combo_Content.SelectionChanged -= pauseSelecttionChanged;
