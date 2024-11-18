@@ -864,6 +864,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 List<string> guide_to_dest_address_ids = null;
                 int total_cost = 0;
                 //1.取得行走路徑的詳細資料
+                var has_vh_on_section_ids = GetHasVhOfSectionID();
                 (isSuccess, total_cost,
                  guide_start_to_from_segment_ids,
                  guide_start_to_from_section_ids,
@@ -872,7 +873,20 @@ namespace com.mirle.ibg3k0.sc.Service
                  guide_to_dest_section_ids,
                  guide_to_dest_address_ids)
                 //= FindGuideInfo(vh_current_address, source_adr, dest_adr, active_type, has_carry, need_by_pass_adr_ids);
-                = FindGuideInfo(vh_current_address, source_adr, dest_adr, active_type);
+                = FindGuideInfo(vh_current_address, source_adr, dest_adr, active_type, byPassSectionIDs: has_vh_on_section_ids);
+
+                if (!isSuccess)
+                {
+                    (isSuccess, total_cost,
+                     guide_start_to_from_segment_ids,
+                     guide_start_to_from_section_ids,
+                     guide_start_to_from_address_ids,
+                     guide_to_dest_segment_ids,
+                     guide_to_dest_section_ids,
+                     guide_to_dest_address_ids)
+                    //= FindGuideInfo(vh_current_address, source_adr, dest_adr, active_type, has_carry, need_by_pass_adr_ids);
+                    = FindGuideInfo(vh_current_address, source_adr, dest_adr, active_type);
+                }
 
                 if (!isSuccess)
                 {
@@ -1042,6 +1056,14 @@ namespace com.mirle.ibg3k0.sc.Service
             }
             return isSuccess;
         }
+
+        private List<string> GetHasVhOfSectionID()
+        {
+            var vhs = scApp.VehicleBLL.cache.loadAllVh();
+            vhs = vhs.Where(v => v.isTcpIpConnect && v.isAuto).ToList();
+            return vhs.Select(v => SCUtility.Trim(v.CUR_SEC_ID)).ToList();
+        }
+
         private (bool isSuccess, int total_code,
             List<string> guide_start_to_from_segment_ids, List<string> guide_start_to_from_section_ids, List<string> guide_start_to_from_address_ids,
             List<string> guide_to_dest_segment_ids, List<string> guide_to_dest_section_ids, List<string> guide_to_dest_address_ids)

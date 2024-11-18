@@ -3312,16 +3312,36 @@ namespace com.mirle.ibg3k0.sc.Service
         {
             string vh_id = vh.VEHICLE_ID;
             string cur_sec_id = SCUtility.Trim(vh.CUR_SEC_ID, true);
+            string cur_adr_id = SCUtility.Trim(vh.CUR_ADR_ID, true);
 
             var block_control_check_result = scApp.getCommObjCacheManager().IsBlockControlSection(reserveSectionID);
             if (block_control_check_result.isBlockControlSec)
             {
                 var current_vh_section_is_in_req_block_control_check_result =
-                    scApp.getCommObjCacheManager().IsBlockControlSection(block_control_check_result.enhanceInfo.BlockID, cur_sec_id);
+                    scApp.getCommObjCacheManager().IsBlockControlAddress(scApp.SectionBLL, block_control_check_result.enhanceInfo.BlockID, cur_adr_id);
                 if (current_vh_section_is_in_req_block_control_check_result.isBlockControlSec)
                 {
+                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                       Data: $"vh is in block:{block_control_check_result.enhanceInfo.BlockID} no check block function, direct return pass",
+                       VehicleID: vh_id);
                     return (true, "");
                 }
+                var entry_section_info = block_control_check_result.enhanceInfo.EntrySectionInfos.FirstOrDefault();
+                if (entry_section_info == null)
+                {
+                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                       Data: $"vh request block:{block_control_check_result.enhanceInfo.BlockID} no set entry section, direct return pass",
+                       VehicleID: vh_id);
+                    return (true, "");
+                }
+                if (!IsWillEntryBlock(vh, entry_section_info.ReserveSectionID))
+                {
+                    LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
+                       Data: $"vh request block:{block_control_check_result.enhanceInfo.BlockID} no will pass entry section, direct return pass",
+                       VehicleID: vh_id);
+                    return (true, "");
+                }
+
 
                 List<string> reserve_enhance_sections = block_control_check_result.enhanceInfo.EnhanceControlSections.ToList();
                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
@@ -3347,6 +3367,22 @@ namespace com.mirle.ibg3k0.sc.Service
 
             return (true, "");
         }
+        private bool IsWillEntryBlock(AVEHICLE vh, string blockEntrySec)
+        {
+            var try_get_current_sec = vh.tryGetCurrentGuideSection();
+            if (!try_get_current_sec.hasInfo)
+                return false;
+            foreach (string sec in try_get_current_sec.currentGuideSection)
+            {
+                if (SCUtility.isMatche(sec, blockEntrySec))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
 
         private long syncPoint_NotifyVhAvoid = 0;
         protected enum CAN_NOT_AVOID_RESULT

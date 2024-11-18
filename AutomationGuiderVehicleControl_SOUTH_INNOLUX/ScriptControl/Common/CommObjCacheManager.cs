@@ -24,6 +24,7 @@ using com.mirle.ibg3k0.sc.Data.VO;
 using NLog;
 using com.mirle.ibg3k0.sc.ConfigHandler;
 using com.mirle.ibg3k0.sc.Data;
+using com.mirle.ibg3k0.sc.BLL;
 
 namespace com.mirle.ibg3k0.sc.Common
 {
@@ -326,6 +327,33 @@ namespace com.mirle.ibg3k0.sc.Common
                 .FirstOrDefault();
             return (enhance_info != null, enhance_info);
         }
+        public (bool isBlockControlSec, ReserveEnhanceInfoSection enhanceInfo) IsBlockControlAddress(SectionBLL sectionBLL, string blockID, string address)
+        {
+            var enhance_info = ReserveEnhanceInfosSections.
+                Where(i => SCUtility.isMatche(i.BlockID, blockID) &&
+                          IsRelationTwoSection(sectionBLL, i.EnhanceControlSections, address))
+                .FirstOrDefault();
+            return (enhance_info != null, enhance_info);
+        }
+        private bool IsRelationTwoSection(SectionBLL sectionBLL, string[] EnhanceControlSections, string addressid)
+        {
+            int relation_count = 0;
+            foreach (var sec in EnhanceControlSections)
+            {
+                var sec_obj = sectionBLL.cache.GetSection(sec);
+                if (SCUtility.isMatche(sec_obj.FROM_ADR_ID, addressid) ||
+                   SCUtility.isMatche(sec_obj.TO_ADR_ID, addressid))
+                {
+                    relation_count++;
+                    if (relation_count >= 2)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public (bool isEnhanceBlock, List<ReserveEnhanceInfoSection> enhanceBlock) IsBlockEntrySection(ProtocolFormat.OHTMessage.ReserveInfo info)
         {
             var enhanceBlock = GetReserveEnhanceInfos(info);
