@@ -568,8 +568,8 @@ namespace com.mirle.ibg3k0.sc.App
             //bdTableWatcher = new DBTableWatcher(this);
             SystemParameter.setCstMaxWaitTime(getInt("CSTMaxWaitTime", 0));
             SystemParameter.setLongestFullyChargedIntervalTime(getInt("LongestFullyChargedIntervalTime", 99999));
-            SystemParameter.setMaxAllowPositionNoChangeTimeWhenCommanding(getInt("MaxAllowPositionNoChangeTimeWhenCommanding", 1200_000));
-            SystemParameter.setCheckSystemStatusWhenDisabelRoad(getBoolean("CheckSystemStatusWhenDisabelRoad", false));
+            SystemParameter.setMaxAllowPositionNoChangeTimeWhenCommanding(getInt("MaxAllowPositionNoChangeTimeWhenCommanding", 10_000));
+            SystemParameter.setCheckSystemStatusWhenDisableRoad(getBoolean("CheckSystemStatusWhenDisableRoad", false));
         }
 
         private void initialReserveSectionAPI()
@@ -2050,7 +2050,7 @@ namespace com.mirle.ibg3k0.sc.App
         public static uint LoadingInterlockErrorMaxRetryCount { get; private set; } = 3;
         public static uint UnloadingInterlockErrorMaxRetryCount { get; private set; } = 3;
         public static long MaxAllowPositionNoChangeTimeWhenCommanding_ms { get; private set; } = 1200_000;
-        public static bool CheckSystemStatusWhenDisabelRoad { get; set; } = false;
+        public static bool CheckSystemStatusWhenDisableRoad { get; set; } = false;
 
         public static void setSECSConversactionTimeout(int timeout)
         {
@@ -2154,9 +2154,9 @@ namespace com.mirle.ibg3k0.sc.App
         {
             MaxAllowPositionNoChangeTimeWhenCommanding_ms = _MaxAllowPositionNoChangeTimeWhenCommanding_ms;
         }
-        public static void setCheckSystemStatusWhenDisabelRoad(bool _CheckSystemStatusWhenDisabelRoad)
+        public static void setCheckSystemStatusWhenDisableRoad(bool _CheckSystemStatusWhenDisableRoad)
         {
-            CheckSystemStatusWhenDisabelRoad = _CheckSystemStatusWhenDisabelRoad;
+            CheckSystemStatusWhenDisableRoad = _CheckSystemStatusWhenDisableRoad;
         }
 
     }

@@ -1992,6 +1992,10 @@ namespace com.mirle.ibg3k0.sc.BLL
             double speed = report_obj.Speed;
             List<string> current_guide_address = vh.PredictAddresses?.ToList();
             DriveDirction drive_dirction = report_obj.DrivingDirection;
+
+            double last_x_axis = vh.X_Axis;
+            double last_y_axis = vh.Y_Axis;
+
             //DriveDirction drive_dirction = getDrivingDirection(current_sec_id, current_guide_address);
             //DriveDirction drive_dirction = getDrivingDirection(vh, current_sec_id);
             speed = drive_dirction == DriveDirction.DriveDirForward ? speed : -speed;
@@ -2087,6 +2091,11 @@ namespace com.mirle.ibg3k0.sc.BLL
                     {
                         vh.onSegmentChange(current_seg_id, last_seg_id);
                     }
+                    if (last_x_axis != x_axis || last_y_axis != y_axis)
+                    {
+                        vh.onPositionChange(last_x_axis, last_y_axis, x_axis, y_axis);
+                    }
+
                 }
                 //scApp.VehicleBLL.updateVheiclePosition_CacheManager(vh, current_adr_id, current_sec_id, current_seg_id, sec_dis, drive_dirction);
             }

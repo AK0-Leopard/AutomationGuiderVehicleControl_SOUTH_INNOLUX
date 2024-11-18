@@ -5569,7 +5569,7 @@ namespace com.mirle.ibg3k0.sc.Service
         /// <returns></returns>
         private (bool Ok, string reson) doDisableSectionConditionCheck(E_PORT_STATUS portStatus)
         {
-            if (!SystemParameter.CheckSystemStatusWhenDisabelRoad)
+            if (!SystemParameter.CheckSystemStatusWhenDisableRoad)
             {
                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                    Data: $"current is by pass fun:[doDisableSectionConditionCheck]");
