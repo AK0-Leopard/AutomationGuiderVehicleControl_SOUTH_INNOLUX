@@ -29,6 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Transactions;
 
 namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
@@ -721,7 +722,8 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
                 if (scApp.VehicleBLL.cache.IsVehicleExistByRealID(source_port_or_vh_id))
                 {
                     var vh = scApp.VehicleBLL.cache.getVehicleByRealID(source_port_or_vh_id);
-                    if (vh.HAS_CST == 0)
+                    //if (vh.HAS_CST == 0)
+                    if (!CheckAndWaitUpdateVhHasCst(vh))
                     {
                         check_result = $"MCS command id:{command_id} - vh:{source_port_or_vh_id} has no cst on it.{Environment.NewLine}please confirm the cst on the vh.";
                         LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(SouthInnoluxMCSDefaultMapAction), Device: "OHxC",
@@ -777,6 +779,18 @@ namespace com.mirle.ibg3k0.sc.Data.ValueDefMapAction
             }
 
             return SECSConst.HCACK_Confirm;
+        }
+
+        const int MAX_WAIT_HAS_CST_UP_TIME_MS = 5_000;
+        /// <summary>
+        /// 有發生過BCR Read Fail時，MCS下命令下來的時候，AGV尚未將是否有CST的Flag更新
+        /// 導致拒絕了該命令，所以這邊要等待一下，確保VH是否有CST
+        /// </summary>
+        /// <param name="vh"></param>
+        /// <returns></returns>
+        private bool CheckAndWaitUpdateVhHasCst(AVEHICLE vh)
+        {
+            return SpinWait.SpinUntil(() => vh.HAS_CST == 1, MAX_WAIT_HAS_CST_UP_TIME_MS);
         }
 
         private bool checkCommandID(List<S2F50.CP_U1> comminfo_check_result, string name, string value)
