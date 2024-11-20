@@ -2325,7 +2325,7 @@ namespace com.mirle.ibg3k0.sc.Service
 
             SCUtility.RecodeReportInfo(vh.VEHICLE_ID, seq_num, send_str, finish_ohxc_cmd, finish_mcs_cmd, resp_cmp.ToString());
             vh.NotifyVhExcuteCMDStatusChange();
-            vh.resetVhGuideInfo();
+            //vh.resetVhGuideInfo();
             vh.VhAvoidInfo = null;
 
             if (!SCUtility.isEmpty(cur_cst_id))
