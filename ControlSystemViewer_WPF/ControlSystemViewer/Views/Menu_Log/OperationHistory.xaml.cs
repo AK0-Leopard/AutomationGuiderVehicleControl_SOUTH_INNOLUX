@@ -75,9 +75,6 @@ namespace ControlSystemViewer.Views.Menu_Log
                 cbo_StartH.Text = "00:00";
                 cbo_EndH.Text = DateTime.Now.Hour.ToString("00") + ":" + DateTime.Now.Minute.ToString("00");
                 //build EQID list
-                var eqList = new List<string>();
-                var portList = WindownApplication.getInstance().ObjCacheManager.GetPortStations();
-                var vehicleList = WindownApplication.getInstance().ObjCacheManager.GetVEHICLEs();
 
                 //sysExcuteQualityQueryService = WindownApplication.getInstance().GetSysExcuteQualityQueryService();
                 cb_HrsInterval.MouseWheel += new MouseWheelEventHandler(cb_HrsInterval_MouseWheel);

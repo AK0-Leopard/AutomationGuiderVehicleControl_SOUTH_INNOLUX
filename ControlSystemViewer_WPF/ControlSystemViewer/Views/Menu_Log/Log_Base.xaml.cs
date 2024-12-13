@@ -74,6 +74,7 @@ namespace ControlSystemViewer.Views.Menu_Log
             AlarmHistory.StartupUI();
             VehicleCommandHistory.StartupUI();
             TransferCommandHistory.StartupUI();
+            OperationHistory.StartupUI();
 
             if (app?.ObjCacheManager.ViewerSettings?.menuItem_Log.Visible_STATISTICS ?? false)
             {
