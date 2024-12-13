@@ -1608,30 +1608,41 @@ namespace com.mirle.ibg3k0.sc.BLL
                         }
                         else
                         {
-                            if (acmd_mcs.TRANSFERSTATE < E_TRAN_STATUS.Transferring)
+                            if (isNormalFinish(completeStatus))
                             {
-                                if (isInterlockError(completeStatus))
-                                {
-                                    isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vh_id, cmd_id, ohtc_cmd_status, completeStatus);
-                                    finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
-                                }
-                                else
-                                {
-                                    isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vh_id, cmd_id, ohtc_cmd_status, completeStatus);
-                                    scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(mcs_cmd_id);
-                                }
+                                isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vh_id, cmd_id, ohtc_cmd_status, completeStatus);
+                                finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
                             }
                             else
                             {
-                                if (isNormalFinish(completeStatus) ||
-                                    isInterlockError(completeStatus))
+                                if (acmd_mcs.TRANSFERSTATE < E_TRAN_STATUS.Transferring)
                                 {
-                                    isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vh_id, cmd_id, ohtc_cmd_status, completeStatus);
-                                    finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                                    if (isInterlockError(completeStatus))
+                                    {
+                                        isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vh_id, cmd_id, ohtc_cmd_status, completeStatus);
+                                        finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                                    }
+                                    else
+                                    {
+                                        isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vh_id, cmd_id, ohtc_cmd_status, completeStatus);
+                                        scApp.CMDBLL.updateCMD_MCS_TranStatus2Queue(mcs_cmd_id);
+                                        LogHelper.Log(logger: logger, LogLevel: LogLevel.Info, Class: nameof(VehicleBLL), Device: Service.VehicleService.DEVICE_NAME_AGV,
+                                           Data: $"mcs cmd:{mcs_cmd_id} complete status:{completeStatus} and transfer state:{acmd_mcs.TRANSFERSTATE}, beging return to queue");
+                                    }
                                 }
                                 else
                                 {
-                                    //等待initial時，上報cmd finish(由於如果是VehicleAbort，客戶想要知道原本的命令是哪一筆
+                                    //if (isNormalFinish(completeStatus) ||
+                                    //    isInterlockError(completeStatus))
+                                    if (isInterlockError(completeStatus))
+                                    {
+                                        isSuccess &= scApp.CMDBLL.updateCommand_OHTC_StatusToFinishByCmdID(vh_id, cmd_id, ohtc_cmd_status, completeStatus);
+                                        finishMCSCmd(completeStatus, total_cmd_dis, mcs_cmd_id, ohtc_cmd_status, mcs_cmd_tran_status);
+                                    }
+                                    else
+                                    {
+                                        //等待initial時，上報cmd finish(由於如果是VehicleAbort，客戶想要知道原本的命令是哪一筆
+                                    }
                                 }
                             }
                         }
