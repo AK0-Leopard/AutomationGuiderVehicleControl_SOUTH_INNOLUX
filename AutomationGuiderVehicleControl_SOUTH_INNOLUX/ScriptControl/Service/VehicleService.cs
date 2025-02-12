@@ -1902,7 +1902,8 @@ namespace com.mirle.ibg3k0.sc.Service
             ASECTION avoid_vh_current_section = scApp.SectionBLL.cache.GetSection(avoidVh.CUR_SEC_ID);
             //先找出哪個Address是距離pass vh比較遠的距離，即代表是反方向
             //就可以先從那邊開始往上找
-            string first_search_adr = findTheOppositeOfAddress(pass_vh_cur_adr, avoid_vh_current_section);
+            //string first_search_adr = findTheOppositeOfAddress(pass_vh_cur_adr, avoid_vh_current_section);
+            string first_search_adr = findTheOppositeOfAddress(passVh, avoid_vh_current_section);
 
             List<string> need_by_pass_section_ids = new List<string>() { needByPassSectionID };
 
@@ -3718,7 +3719,8 @@ namespace com.mirle.ibg3k0.sc.Service
             ASECTION avoid_vh_current_section = scApp.SectionBLL.cache.GetSection(avoidVh.CUR_SEC_ID);
             //先找出哪個Address是距離pass vh比較遠的距離，即代表是反方向
             //就可以先從那邊開始往上找
-            string first_search_adr = findTheOppositeOfAddress(pass_vh_cur_adr, avoid_vh_current_section);
+            //string first_search_adr = findTheOppositeOfAddress(pass_vh_cur_adr, avoid_vh_current_section);
+            string first_search_adr = findTheOppositeOfAddress(passVh, avoid_vh_current_section);
 
             //設定開始找路的起點
             (string next_address, ASECTION source_section) first_search_section_infos = (first_search_adr, avoid_vh_current_section);
@@ -3735,6 +3737,40 @@ namespace com.mirle.ibg3k0.sc.Service
                 searchResult = tryFindAvoidAddress(passVh, avoidVh, second_search_section_infos, true);
             }
             return searchResult;
+        }
+        private string findTheOppositeOfAddress(AVEHICLE passVh, ASECTION find_avoid_vh_current_section)
+        {
+            var get_pass_vh_current_guide_sec_result = passVh.tryGetCurrentGuideSection();
+            if (!get_pass_vh_current_guide_sec_result.hasInfo)
+            {
+                return findTheOppositeOfAddress(passVh.CUR_ADR_ID, find_avoid_vh_current_section);
+            }
+            //嘗試找看看哪邊的避車比較不會有交錯的Section
+            var from_secs = scApp.SectionBLL.cache.GetSectionsByFromAddress(find_avoid_vh_current_section.FROM_ADR_ID);
+            int from_sec_cross_count = 0;
+            if (from_secs.Any())
+            {
+                from_sec_cross_count = from_secs.Where(sec => !get_pass_vh_current_guide_sec_result.currentGuideSection.Contains(SCUtility.Trim(sec.SEC_ID))).Count();
+            }
+            var to_secs = scApp.SectionBLL.cache.GetSectionsByToAddress(find_avoid_vh_current_section.TO_ADR_ID);
+            int to_sec_cross_count = 0;
+            if (to_secs.Any())
+            {
+                to_sec_cross_count = to_secs.Where(sec => !get_pass_vh_current_guide_sec_result.currentGuideSection.Contains(SCUtility.Trim(sec.SEC_ID))).Count();
+            }
+
+            if (from_sec_cross_count == to_sec_cross_count)
+                return findTheOppositeOfAddress(passVh.CUR_ADR_ID, find_avoid_vh_current_section);
+
+            if (from_sec_cross_count > to_sec_cross_count)
+            {
+                return find_avoid_vh_current_section.FROM_ADR_ID;
+            }
+            else
+            {
+                return find_avoid_vh_current_section.TO_ADR_ID;
+            }
+
         }
 
         private string findTheOppositeOfAddress(string req_vh_cur_adr, ASECTION find_avoid_vh_current_section)

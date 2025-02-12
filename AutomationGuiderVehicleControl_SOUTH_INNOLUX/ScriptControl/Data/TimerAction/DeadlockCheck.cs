@@ -384,6 +384,18 @@ namespace com.mirle.ibg3k0.sc.Data.TimerAction
             //{
             //    return 1;
             //}
+            // 先檢查車子是否在單行道
+            bool vh1InOneWay = scApp.GuideBLL.isOneDirectPathSection(SCUtility.Trim(vh1.CUR_SEC_ID, true));
+            bool vh2InOneWay = scApp.GuideBLL.isOneDirectPathSection(SCUtility.Trim(vh2.CUR_SEC_ID, true));
+
+            if (vh1InOneWay && !vh2InOneWay)
+            {
+                return 1;
+            }
+            else if (!vh1InOneWay && vh2InOneWay)
+            {
+                return -1;
+            }
 
 
             if (!SCUtility.isEmpty(vh1.MCS_CMD) && !SCUtility.isEmpty(vh2.MCS_CMD))
