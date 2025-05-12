@@ -3823,11 +3823,12 @@ namespace com.mirle.ibg3k0.sc.Service
             List<(string next_address, ASECTION source_section)> next_search_address_temp =
                 new List<(string, ASECTION)>();
 
-            List<(ASECTION notConflictSection, string entryAdr, string avoidAdr)> success_find_adr_infos =
-                    new List<(ASECTION notConflictSection, string entryAdr, string avoidAdr)>();
+            List<(ASECTION notConflictSection, string entryAdr, string avoidAdr, bool isOneDirectPath)> success_find_adr_infos =
+                    new List<(ASECTION notConflictSection, string entryAdr, string avoidAdr, bool isOneDirectPath)>();
             ASECTION not_conflict_section = null;
             string avoid_address = null;
             string orther_end_point = "";
+            bool is_one_direct_path = false;
             //string virtual_vh_id = "";
             List<string> virtual_vh_ids = new List<string>();
 
@@ -3963,8 +3964,9 @@ namespace com.mirle.ibg3k0.sc.Service
                                 LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                                    Data: $"sec id:{SCUtility.Trim(sec.SEC_ID)} is one direct. continue find next address{orther_end_point}..",
                                    VehicleID: avoidVh.VEHICLE_ID);
-                                next_search_address_temp.Add((orther_end_point, sec));
-                                continue;
+                                is_one_direct_path = true;
+                                //next_search_address_temp.Add((orther_end_point, sec));
+                                //continue;
                             }
 
                             //找到以後嘗試去預約看看，確保該路徑是可以走的，如果不行則就繼續往下找(避免剛好是在路口的地方，導致另一台車閃不過去)
@@ -4008,7 +4010,7 @@ namespace com.mirle.ibg3k0.sc.Service
                             not_conflict_section = sec;
                             avoid_address = orther_end_point;
                             //return (true, not_conflict_section, search_info.next_address, avoid_address);
-                            success_find_adr_infos.Add((not_conflict_section, search_info.next_address, avoid_address));
+                            success_find_adr_infos.Add((not_conflict_section, search_info.next_address, avoid_address, is_one_direct_path));
                         }
                     }
                     next_search_infos = next_search_address_temp.ToList();
@@ -4041,14 +4043,18 @@ namespace com.mirle.ibg3k0.sc.Service
                 }
             }
         }
-        private (ASECTION notConflictSection, string entryAdr, string avoidAdr) findRecentAvoid(AVEHICLE vh, List<(ASECTION notConflictSection, string entryAdr, string avoidAdr)> success_find_adr_infos)
+        private (ASECTION notConflictSection, string entryAdr, string avoidAdr, bool isOneDirectPath) findRecentAvoid(AVEHICLE vh, List<(ASECTION notConflictSection, string entryAdr, string avoidAdr, bool isOneDirectPath)> success_find_adr_infos)
         {
+            if (success_find_adr_infos.Count == 1)
+                return success_find_adr_infos[0];
             string current_adr = SCUtility.Trim(vh.CUR_ADR_ID, true);
             int distance = int.MaxValue;
-            (ASECTION notConflictSection, string entryAdr, string avoidAdr) recent_avoid_adr_info =
-                default((ASECTION notConflictSection, string entryAdr, string avoidAdr));
+            (ASECTION notConflictSection, string entryAdr, string avoidAdr, bool isOneDirectPath) recent_avoid_adr_info =
+                default((ASECTION notConflictSection, string entryAdr, string avoidAdr, bool isOneDirectPath));
             foreach (var avoid_info in success_find_adr_infos)
             {
+                if (avoid_info.isOneDirectPath)
+                    continue;
                 int distance_temp = scApp.GuideBLL.getGuideInfo(current_adr, avoid_info.avoidAdr).totalCost;
                 if (distance_temp < distance)
                 {
