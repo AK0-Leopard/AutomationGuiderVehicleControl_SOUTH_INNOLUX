@@ -3828,7 +3828,6 @@ namespace com.mirle.ibg3k0.sc.Service
             ASECTION not_conflict_section = null;
             string avoid_address = null;
             string orther_end_point = "";
-            bool is_one_direct_path = false;
             //string virtual_vh_id = "";
             List<string> virtual_vh_ids = new List<string>();
 
@@ -3847,6 +3846,7 @@ namespace com.mirle.ibg3k0.sc.Service
                 {
                     foreach (var search_info in next_search_infos.ToArray())
                     {
+                        bool is_one_direct_path = false;
                         LogHelper.Log(logger: logger, LogLevel: LogLevel.Debug, Class: nameof(VehicleService), Device: DEVICE_NAME_AGV,
                            Data: $"start search address:{search_info.next_address}",
                            VehicleID: avoidVh.VEHICLE_ID);
